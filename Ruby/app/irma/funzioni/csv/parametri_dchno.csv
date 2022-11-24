@@ -1,0 +1,20 @@
+GSM,ERICSSON,NW;MSC;BSC;SITE;CELL;ch_group_0,dchno_0,str([ORD_N_TCH_UL_01])
+GSM,ERICSSON,NW;MSC;BSC;SITE;CELL;ch_group_0,dchno_1,str([ORD_N_TCH_UL_02])
+GSM,ERICSSON,NW;MSC;BSC;SITE;CELL;ch_group_0,dchno_2,str([ORD_N_TCH_UL_03])
+GSM,ERICSSON,NW;MSC;BSC;SITE;CELL;ch_group_0,dchno_3,str([ORD_N_TCH_UL_04])
+GSM,ERICSSON,NW;MSC;BSC;SITE;CELL;ch_group_0,dchno_4,str([ORD_N_TCH_UL_05])
+GSM,ERICSSON,NW;MSC;BSC;SITE;CELL;ch_group_0,dchno_5,str([ORD_N_TCH_UL_06])
+GSM,ERICSSON,NW;MSC;BSC;SITE;CELL;ch_group_0,dchno_6,str([ORD_N_TCH_UL_07])
+GSM,ERICSSON,NW;MSC;BSC;SITE;CELL;ch_group_0,dchno_7,str([ORD_N_TCH_UL_08])
+GSM,ERICSSON,NW;MSC;BSC;SITE;CELL;ch_group_0,dchno_8,str([ORD_N_TCH_UL_09])
+GSM,ERICSSON,NW;MSC;BSC;SITE;CELL;ch_group_0,dchno_9,str([ORD_N_TCH_UL_10])
+GSM,ERICSSON,NW;MSC;BSC;SITE;CELL;ch_group_1,dchno_0,switch@ case [AdPR.N_NUM_CAN_EDGE] > 0 : str([AdPR.N_TCH_EDGE_1])@ case [AdPR.N_NUM_ULE_CHA] > 0 : str([ORD_N_TCH_ULE_01])@ default: [NULL]@endswitch
+GSM,ERICSSON,NW;MSC;BSC;SITE;CELL;ch_group_1,dchno_1,switch@ case [AdPR.N_NUM_CAN_EDGE] > 1 : str([AdPR.N_TCH_EDGE_2])@ case ([AdPR.N_NUM_ULE_CHA] > 0 AND [AdPR.N_NUM_CAN_EDGE] = 0 ): str([ORD_N_TCH_ULE_02])@ default: [NULL]@endswitch
+GSM,ERICSSON,NW;MSC;BSC;SITE;CELL;ch_group_1,dchno_2,switch@ case ([AdPR.N_NUM_ULE_CHA] > 0 AND [AdPR.N_NUM_CAN_EDGE] = 0 ): str([ORD_N_TCH_ULE_03])@ default: [NULL]@endswitch
+GSM,ERICSSON,NW;MSC;BSC;SITE;CELL;ch_group_1,dchno_3,switch@ case ([AdPR.N_NUM_ULE_CHA] > 0 AND [AdPR.N_NUM_CAN_EDGE] = 0 ): str([ORD_N_TCH_ULE_04])@ default: [NULL]@endswitch
+GSM,ERICSSON,NW;MSC;BSC;SITE;CELL;ch_group_1,dchno_4,switch@ case ([AdPR.N_NUM_ULE_CHA] > 0 AND [AdPR.N_NUM_CAN_EDGE] = 0 ): str([ORD_N_TCH_ULE_05])@ default: [NULL]@endswitch
+GSM,ERICSSON,NW;MSC;BSC;SITE;CELL;ch_group_1,dchno_5,switch@ case ([AdPR.N_NUM_ULE_CHA] > 0 AND [AdPR.N_NUM_CAN_EDGE] = 0 ): str([ORD_N_TCH_ULE_06])@ default: [NULL]@endswitch
+GSM,ERICSSON,NW;MSC;BSC;SITE;CELL;ch_group_1,dchno_6,switch@ case ([AdPR.N_NUM_ULE_CHA] > 0 AND [AdPR.N_NUM_CAN_EDGE] = 0 ): str([ORD_N_TCH_ULE_07])@ default: [NULL]@endswitch
+GSM,ERICSSON,NW;MSC;BSC;SITE;CELL;ch_group_1,dchno_7,switch@ case ([AdPR.N_NUM_ULE_CHA] > 0 AND [AdPR.N_NUM_CAN_EDGE] = 0 ): str([ORD_N_TCH_ULE_08])@ default: [NULL]@endswitch
+GSM,ERICSSON,NW;MSC;BSC;SITE;CELL;ch_group_1,dchno_8,switch@ case ([AdPR.N_NUM_ULE_CHA] > 0 AND [AdPR.N_NUM_CAN_EDGE] = 0 ): str([ORD_N_TCH_ULE_09])@ default: [NULL]@endswitch
+GSM,ERICSSON,NW;MSC;BSC;SITE;CELL;ch_group_1,dchno_9,switch@ case ([AdPR.N_NUM_ULE_CHA] > 0 AND [AdPR.N_NUM_CAN_EDGE] = 0 ): str([ORD_N_TCH_ULE_10])@ default: [NULL]@endswitch

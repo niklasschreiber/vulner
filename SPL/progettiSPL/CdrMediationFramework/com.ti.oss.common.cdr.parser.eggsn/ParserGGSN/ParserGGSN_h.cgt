@@ -1,0 +1,113 @@
+/* Additional includes go here */
+
+// ASN.1 parser includes
+#include <Asn1CdrGgsnR6Engine/Asn1CdrGgsnR6ParserEngine.hpp>
+#include <ParserEngine/Pdu.hpp>
+#include <ConvUtils/StopWatch.hpp>
+
+using namespace Asn1CdrGgsnR6Engine;
+using namespace ParserEngine;
+
+<%SPL::CodeGen::headerPrologue($model);%>
+
+class MY_OPERATOR : public MY_BASE_OPERATOR 
+{
+public:
+	MY_OPERATOR();
+	virtual ~MY_OPERATOR(); 
+	void allPortsReady(); 
+	void prepareToShutdown(); 
+	void process(uint32_t idx);
+	void process(Tuple & tuple, uint32_t port);
+	void process(Tuple const & tuple, uint32_t port);
+	void process(Punctuation const & punct, uint32_t port);
+
+private:
+	/*
+	 * The map contains all Stream names and their corresponding
+	 * port number.
+	 */
+	typedef std::map<std::string,int> StreamToPort_t;
+	typedef StreamToPort_t::iterator StreamToPortIterator_t;
+	StreamToPort_t STREAM_TO_PORT;
+
+	/*
+	 * The method copies the PDU content to the output tuple. If any
+	 * output tuple attribute has no corresponding field in the PDU,
+	 * then the input tuple is checked for the same.
+	 * As a result, input tuple attributes can be easily passed to the
+	 * output tuple.
+	 */
+	<% #for(my $o=0; $o < $model->getNumberOfOutputPorts(); ++$o)
+	for(my $o=0; $o < 1; ++$o)
+	{
+	%>
+	void sendPdu(const Pdu* pdu, Tuple& tuple, uint32_t port, OPort<%=$o%>Type& otuple);
+	<%
+	}
+	%>
+	/*
+	 * For each output port a corresponding output tuple and a stop
+	 * watch are available.
+	 */
+	<% for(my $o=0; $o < $model->getNumberOfOutputPorts(); ++$o)
+	{
+	%>
+	OPort<%=$o%>Type outputTuple<%=$o%>;
+	<%
+	}
+	%>
+	
+	<% #for(my $o=0; $o < $model->getNumberOfOutputPorts(); ++$o)
+	for(my $o=0; $o < 1; ++$o)
+	{
+	%>
+	StopWatch stopWatchSendOnPort<%=$o%>;
+	<%
+	}
+	%>
+	/*
+	 * The method sendPdu counts for each port the number of sent
+	 * tuples. This information is needed to generate the final
+	 * punctuation on the ports, on which tuples were sent.
+	 */
+	<% #for(my $o=0; $o < $model->getNumberOfOutputPorts(); ++$o)
+	for(my $o=0; $o < 1; ++$o)
+	{
+	%>
+	long sentOnPort<%=$o%>;
+	<%
+	}
+	%>
+	/**
+	 * Stop watch to determine time being spent to completely process
+	 * the ASN.1 file.
+	 */
+	StopWatch stopWatchProcess;
+
+	/**
+	 * Stop watch to determine time being spent to send PDU.
+	 */
+	StopWatch stopWatchSend;
+
+	/*
+	 * The parser is reponsible to read a file (using the class
+	 * Buffer), to decode the ASN.1 data and to convert the data
+	 * into Streams format.
+	 */
+	Asn1CdrGgsnR6ParserEngine *parserEngine;
+
+	/**
+	 * The timestamp, which indicates the start of the processing.
+	 */
+	std::string processingStartedAt;
+
+	/**
+	 * The timestamp, which indicates the end of the processing.
+	 */
+	std::string processingStoppedAt;  
+	
+	bool EOD;
+}; 
+
+<%SPL::CodeGen::headerEpilogue($model);%>

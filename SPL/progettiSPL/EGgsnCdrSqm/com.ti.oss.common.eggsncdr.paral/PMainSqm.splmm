@@ -1,0 +1,181 @@
+namespace com.ti.oss.common.eggsncdr.paral;
+
+// from RDirScan
+//use com.it.ibm.swg.rdirscan::RDirectoryScan;
+
+// from MediationUtils
+//use com.ti.oss.common.util.cfg::*;
+
+// from MediationFramework
+use com.ti.oss.common.event::*;
+
+// from CdrMediationFramework
+use com.ti.oss.common.cdr.parser.eggsn::*;
+use com.ti.oss.common.cdr.parser.epgw::*;
+use com.ti.oss.common.cdr.parser.esgw::*;
+
+<%
+	my $parallelLevelGgsn = 1;
+	my $parallelLevelPgw = 20;
+	my $parallelLevelSgw = 1;
+	my $testPlant = 0;
+%>
+
+composite PMainSqm
+{
+	graph
+
+		/*stream <rstring fileName, uint64 fileSize> Filenames = RDirectoryScan()
+		{
+			param
+
+				directory : getCfgParam( "COMMON_CFG_DIR", getCompileTimeValue( "mediationName" ), "SOUTH_INPUT_PATH" );
+				//pattern : ".*(?<!\\.inProgress)$";
+				pattern : "^(.*\\.(?!(inProgress|tmp)$))?[^.]*$";
+				ignoreDotFiles : true;
+				initDelay : 30.0;
+				safeInterval : 2.0;
+				recursive : true;
+				sortBy : date;
+				order : descending;
+
+			output
+
+				Filenames : fileSize = Size();
+		}*/
+
+		<%for ( my $i = 0; $i < $parallelLevelGgsn; $i++ ) {%>
+		stream<EggsnCdr> GgsnCdr<%=$i%> = Import()
+		{
+			param
+
+				applicationName : "com.ti.oss.common.eggsncdr::EGgsnCdrDirScan";
+				streamId : "Export_Cdr_GgsnDirScan<%=$i%>";
+		}
+		<%}%>
+
+		<%for ( my $i = 0; $i < 4; $i++ ) {%>
+		stream<EpgwCdr> PgwCdrA<%=$i%> = Import()
+		{
+			param
+
+				applicationName : "com.ti.oss.common.eggsncdr::EGgsnCdrDirScan";
+				streamId : "Export_Cdr_PgwDirScan<%=$i%>";
+		}
+		<%}%>
+		
+		<%for ( my $i = 4; $i < 8; $i++ ) {%>
+		stream<EpgwCdr> PgwCdrB<%=$i%> = Import()
+		{
+			param
+
+				applicationName : "com.ti.oss.common.eggsncdr::EGgsnCdrDirScan";
+				streamId : "Export_Cdr_PgwDirScan<%=$i%>";
+		}
+		<%}%>
+		
+		<%for ( my $i = 8; $i < 12; $i++ ) {%>
+		stream<EpgwCdr> PgwCdrC<%=$i%> = Import()
+		{
+			param
+
+				applicationName : "com.ti.oss.common.eggsncdr::EGgsnCdrDirScan";
+				streamId : "Export_Cdr_PgwDirScan<%=$i%>";
+		}
+		<%}%>
+		
+		<%for ( my $i = 12; $i < 16; $i++ ) {%>
+		stream<EpgwCdr> PgwCdrD<%=$i%> = Import()
+		{
+			param
+
+				applicationName : "com.ti.oss.common.eggsncdr::EGgsnCdrDirScan";
+				streamId : "Export_Cdr_PgwDirScan<%=$i%>";
+		}
+		<%}%>
+		
+		<%for ( my $i = 16; $i < $parallelLevelPgw; $i++ ) {%>
+		stream<EpgwCdr> PgwCdrE<%=$i%> = Import()
+		{
+			param
+
+				applicationName : "com.ti.oss.common.eggsncdr::EGgsnCdrDirScan";
+				streamId : "Export_Cdr_PgwDirScan<%=$i%>";
+		}
+		<%}%>
+
+		<%for ( my $i = 0; $i < $parallelLevelSgw; $i++ ) {%>
+		stream<EsgwCdr> SgwCdr<%=$i%> = Import()
+		{
+			param
+
+				applicationName : "com.ti.oss.common.eggsncdr::EGgsnCdrDirScan";
+				streamId : "Export_Cdr_SgwDirScan<%=$i%>";
+		}
+		<%}%>
+
+		// SQM
+		stream<Event e> OutEvent = EGgsnCdrSqmMediationParallel( <%for ( my $i = 0; $i < $parallelLevelGgsn; $i++ ) {%>
+			GgsnCdr<%=$i%><%if ( $i != $parallelLevelGgsn - 1 ) {
+				print ",";
+			}
+		}%>;
+		<%for ( my $i = 0; $i < 4; $i++ ) {%>
+			PgwCdrA<%=$i%><%if ( $i != 4 - 1 ) {
+				print ",";
+			}
+		}%>;
+		<%for ( my $i = 4; $i < 8; $i++ ) {%>
+			PgwCdrB<%=$i%><%if ( $i != 8 - 1 ) {
+				print ",";
+			}
+		}%>;
+		<%for ( my $i = 8; $i < 12; $i++ ) {%>
+			PgwCdrC<%=$i%><%if ( $i != 12 - 1 ) {
+				print ",";
+			}
+		}%>;
+		<%for ( my $i = 12; $i < 16; $i++ ) {%>
+			PgwCdrD<%=$i%><%if ( $i != 16 - 1 ) {
+				print ",";
+			}
+		}%>;
+		<%for ( my $i = 16; $i < $parallelLevelPgw; $i++ ) {%>
+			PgwCdrE<%=$i%><%if ( $i != $parallelLevelPgw - 1 ) {
+				print ",";
+			}
+		}%>;
+	 	<%for ( my $i = 0; $i < $parallelLevelSgw; $i++ ) {%>
+			SgwCdr<%=$i%><%if ( $i != $parallelLevelSgw - 1 ) {
+				print ",";
+			}
+		}%>
+		)
+		{
+		}
+
+		// Events
+		() as MEventHandler = EventHandler( OutEvent )
+		{
+			param
+
+				mediationId : getCompileTimeValue( "mediationName" );
+				eventFilePrefixCfgParam : "EVENT_FILE_PREFIX_SQM";
+		}
+
+	config
+
+		restartable : true;
+		relocatable : true;
+		
+		hostPool : <%if($testPlant == 1) 
+					{%>
+						P1 = ["ccmc1n2", "ccmc1n3"],
+						P2 = ["ccmc1n4", "ccmc1n9"],
+						P3 = ["ccmc1n11", "ccmc1n12"];
+					<%} else {%> 
+						P1 = ["ccmc1n2", "ccmc1n3", "ccmc1n4","ccmc1n6"],
+						P2 = ["ccmc1n5", "ccmc1n10", "ccmc1n11"],
+						P3 = ["ccmc1n12", "ccmc1n13", "ccmc1n14"];
+					<%}%>
+}

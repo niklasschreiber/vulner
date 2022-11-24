@@ -1,0 +1,580 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp");
+   ("language", "CPP");
+   ("include", "std_testcase.h");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<stddef.h>");
+   ("include", "<time.h>");
+   ("include", "<limits.h>");
+   ("include", "<string.h>");
+   ("include", "<stdint.h>");
+   ("include", "<stdint.h>");
+   ("include", "<ctype.h>");
+   ("include", "<fcntl.h>");
+   ("include", "<sys/types.h>");
+   ("include", "<sys/stat.h>");
+   ("include", "std_testcase_io.h");
+   ("include", "std_testcase.h");
+   ("include", "<windows.h>");
+   ("include", "<wincrypt.h>");
+}
+{
+   (!3, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase_io.h");
+   (!2, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h");
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp",
+   MD("RAND32()",[],"((rand()<<30) ^ (rand()<<15) ^ rand())")
+   ,(84#0,84#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp",
+   MD("RAND64()",[],"(((int64_t)rand()<<60) ^ ((int64_t)rand()<<45) ^ ((int64_t)rand()<<30) ^ ((int64_t)rand()<<15) ^ (int64_t)rand())")
+   ,(87#0,87#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   SF([extern,const,extern],int,<"CWE327_Use_Broken_Crypto__w32_DES_01">,"GLOBAL_CONST_TRUE")
+   ,(103#18,103#34,!2)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   SF([extern,const,extern],int,<"CWE327_Use_Broken_Crypto__w32_DES_01">,"GLOBAL_CONST_FALSE")
+   ,(104#18,104#35,!2)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   SF([extern,const,extern],int,<"CWE327_Use_Broken_Crypto__w32_DES_01">,"GLOBAL_CONST_FIVE")
+   ,(105#18,105#34,!2)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   SF([extern,extern],int,<"CWE327_Use_Broken_Crypto__w32_DES_01">,"globalTrue")
+   ,(110#12,110#21,!2)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   SF([extern,extern],int,<"CWE327_Use_Broken_Crypto__w32_DES_01">,"globalFalse")
+   ,(111#12,111#22,!2)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   SF([extern,extern],int,<"CWE327_Use_Broken_Crypto__w32_DES_01">,"globalFive")
+   ,(112#12,112#21,!2)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   SF([extern,extern],int,<"CWE327_Use_Broken_Crypto__w32_DES_01">,"globalArgc")
+   ,(55#12,55#21,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   SF([extern,extern],ref(ref(char)),<"CWE327_Use_Broken_Crypto__w32_DES_01">,"globalArgv")
+   ,(56#12,56#24,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   SI(<"CWE327_Use_Broken_Crypto__w32_DES_01">,
+   {[
+      {;
+      ,(1#1,250#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,250#1,!1)}
+   )
+   ,(1#1,250#1,!1)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   PT([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printLine"):unit,[(mod(ref(char),[const]):"line",(14#16,14#32,!3))],[]
+   )
+   ,(14#1,14#34,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   PT([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printWLine"):unit,[(mod(ref(wchar),[const]):"line",(16#17,16#36,!3))],[]
+   )
+   ,(16#1,16#38,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   PT([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printIntLine"):unit,[(int:"intNumber",(18#20,18#32,!3))],[]
+   )
+   ,(18#1,18#34,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   PT([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printShortLine"):unit,[(short:"shortNumber",(20#22,20#38,!3))],[]
+   )
+   ,(20#1,20#40,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   PT([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printFloatLine"):unit,[(float:"floatNumber",(22#22,22#38,!3))],[]
+   )
+   ,(22#1,22#40,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   PT([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printLongLine"):unit,[(long:"longNumber",(24#20,24#34,!3))],[]
+   )
+   ,(24#1,24#36,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   PT([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printLongLongLine"):unit,[(class((,int64_t)):"longLongIntNumber",(26#24,26#48,!3))],[]
+   )
+   ,(26#1,26#50,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   PT([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printSizeTLine"):unit,[(class((,size_t)):"sizeTNumber",(28#21,28#38,!3))],[]
+   )
+   ,(28#1,28#40,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   PT([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printHexCharLine"):unit,[(char:"charHex",(30#23,30#34,!3))],[]
+   )
+   ,(30#1,30#36,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   PT([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printWcharLine"):unit,[(wchar:"wideChar",(32#21,32#36,!3))],[]
+   )
+   ,(32#1,32#38,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   PT([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printUnsignedLine"):unit,[(uint:"unsignedNumber",(34#24,34#46,!3))],[]
+   )
+   ,(34#1,34#48,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   PT([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printHexUnsignedCharLine"):unit,[(uchar:"unsignedCharacter",(36#31,36#61,!3))],[]
+   )
+   ,(36#1,36#63,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   PT([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printDoubleLine"):unit,[(double:"doubleNumber",(38#22,38#40,!3))],[]
+   )
+   ,(38#1,38#42,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   PT([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printStructLine"):unit,[(mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]):"structTwoIntsStruct",(40#22,40#62,!3))],[]
+   )
+   ,(40#1,40#64,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   PT([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printBytesLine"):unit,[(mod(ref(uchar),[const]):"bytes",(42#21,42#47,!3)),(class((,size_t)):"numBytes",(42#50,42#64,!3))],[]
+   )
+   ,(42#1,42#66,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   PT([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"decodeHexChars"):class((,size_t)),[(ref(uchar):"bytes",(44#23,44#43,!3)),(class((,size_t)):"numBytes",(44#46,44#60,!3)),(mod(ref(char),[const]):"hex",(44#63,44#78,!3))],[]
+   )
+   ,(44#1,44#80,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   PT([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"decodeHexWChars"):class((,size_t)),[(ref(uchar):"bytes",(46#24,46#44,!3)),(class((,size_t)):"numBytes",(46#47,46#61,!3)),(mod(ref(wchar),[const]):"hex",(46#64,46#82,!3))],[]
+   )
+   ,(46#1,46#84,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   PT([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"globalReturnsTrue"):int,[],[]
+   )
+   ,(48#1,48#24,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   PT([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"globalReturnsFalse"):int,[],[]
+   )
+   ,(50#1,50#25,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   PT([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"globalReturnsTrueOrFalse"):int,[],[]
+   )
+   ,(52#1,52#31,!3)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   FN([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"CWE327_Use_Broken_Crypto__w32_DES_01_bad"):unit,[],[],
+   {[
+      {[
+         {VD("pFile",ref(class((,FILE))))
+         ,(29#14,29#19,!1)};
+         {VD("hCryptProv",class((,HCRYPTPROV)))
+         ,(30#20,30#29,!1)};
+         {VD("hKey",class((,HCRYPTKEY)))
+         ,(31#19,31#22,!1)};
+         {VD("hHash",class((,HCRYPTHASH)))
+         ,(32#20,32#24,!1)};
+         {VD("password",char,([{"100"N,int,(33#23,33#25,!1)}]))
+         ,(33#14,33#26,!1)};
+         {VD("passwordLen",class((,size_t)))
+         ,(34#16,34#26,!1)};
+         {VD("toBeDecrypted",char,([{"100"N,int,(35#28,35#30,!1)}]))
+         ,(35#14,35#31,!1)};
+         {VD("toBeDecryptedLen",class((,DWORD)),{BO(-,{SO({V("toBeDecrypted"),arr(char),(36#41,36#53,!1)}),int,(36#34,36#54,!1)},{"1"N,int,(36#56,36#56,!1)}),int,(36#34,36#56,!1)})
+         ,(36#15,36#30,!1)};
+         {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printLine"),[mod(ref(char),[const])],[{"Enter the password: "S,string,(38#19,38#40,!1)}])
+         ,(38#9,38#41,!1)};
+         {IF0({BO(==,{SC((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"fgets"),[arr(char),int,class((,"%undef"))],[{V("password"),arr(char),(39#19,39#26,!1)},{"100"N,int,(39#29,39#31,!1)},{V("stdin"),class((,"%undef")),(39#34,39#38,!1)}]),class((,"%undef")),(39#13,39#39,!1)},{CS(ref(unit),{"0"N,int,(39#44,39#47,!1)}),ref(unit),(39#44,39#47,!1)}),bool,(39#13,39#47,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printLine"),[mod(ref(char),[const])],[{"fgets() failed"S,string,(41#23,41#38,!1)}])
+               ,(41#13,41#39,!1)};
+               {{AE({AA({V("password"),arr(char),(43#13,43#20,!1)},[{"0"N,int,(43#22,43#22,!1)}]),char,(43#13,43#23,!1)},{"\0"C,char,(43#27,43#30,!1)}),char,(43#13,43#30,!1)}
+               ,(43#13,43#30,!1)}
+               ]
+            ,(40#9,44#9,!1)})
+         ,(39#9,44#9,!1)};
+         {{AE({V("passwordLen"),class((,size_t)),(47#9,47#19,!1)},{SC((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"strlen"),[arr(char)],[{V("password"),arr(char),(47#30,47#37,!1)}]),class((,"%undef")),(47#23,47#38,!1)}),class((,size_t)),(47#9,47#38,!1)}
+         ,(47#9,47#38,!1)};
+         {IF0({BO(>,{V("passwordLen"),class((,size_t)),(48#13,48#23,!1)},{"0"N,int,(48#27,48#27,!1)}),bool,(48#13,48#27,!1)},
+            {[
+               {{AE({AA({V("password"),arr(char),(50#13,50#20,!1)},[{BO(-,{V("passwordLen"),class((,size_t)),(50#22,50#32,!1)},{"1"N,int,(50#34,50#34,!1)}),class((,size_t)),(50#22,50#34,!1)}]),char,(50#13,50#35,!1)},{"\0"C,char,(50#39,50#42,!1)}),char,(50#13,50#42,!1)}
+               ,(50#13,50#42,!1)}
+               ]
+            ,(49#9,51#9,!1)})
+         ,(48#9,51#9,!1)};
+         {{AE({V("pFile"),ref(class((,FILE))),(53#9,53#13,!1)},{SC((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"fopen"),[string,string],[{"encrypted.txt"S,string,(53#23,53#37,!1)},{"rb"S,string,(53#40,53#43,!1)}]),class((,"%undef")),(53#17,53#44,!1)}),ref(class((,FILE))),(53#9,53#44,!1)}
+         ,(53#9,53#44,!1)};
+         {IF0({BO(==,{V("pFile"),ref(class((,FILE))),(54#13,54#17,!1)},{CS(ref(unit),{"0"N,int,(54#22,54#25,!1)}),ref(unit),(54#22,54#25,!1)}),bool,(54#13,54#25,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"exit"),[int],[{"1"N,int,(56#18,56#18,!1)}])
+               ,(56#13,56#19,!1)}
+               ]
+            ,(55#9,57#9,!1)})
+         ,(54#9,57#9,!1)};
+         {IF0({BO(!=,{SC((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"fread"),[arr(char),int,int,ref(class((,FILE)))],[{V("toBeDecrypted"),arr(char),(58#19,58#31,!1)},{SO(char),int,(58#34,58#45,!1)},{"100"N,int,(58#48,58#50,!1)},{V("pFile"),ref(class((,FILE))),(58#53,58#57,!1)}]),class((,"%undef")),(58#13,58#58,!1)},{"100"N,int,(58#63,58#65,!1)}),bool,(58#13,58#65,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"fclose"),[ref(class((,FILE)))],[{V("pFile"),ref(class((,FILE))),(60#20,60#24,!1)}])
+               ,(60#13,60#25,!1)};
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"exit"),[int],[{"1"N,int,(61#18,61#18,!1)}])
+               ,(61#13,61#19,!1)}
+               ]
+            ,(59#9,62#9,!1)})
+         ,(58#9,62#9,!1)};
+         {{AE({AA({V("toBeDecrypted"),arr(char),(63#9,63#21,!1)},[{"99"N,int,(63#23,63#24,!1)}]),char,(63#9,63#25,!1)},{"\0"C,char,(63#29,63#32,!1)}),char,(63#9,63#32,!1)}
+         ,(63#9,63#32,!1)};
+         {IF0({UO(!,{SC((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"CryptAcquireContext"),[ref(class((,HCRYPTPROV))),ref(unit),class((,"%undef")),class((,"%undef")),int],[{&{V("hCryptProv"),class((,HCRYPTPROV)),(65#34,65#43,!1)},ref(class((,HCRYPTPROV))),(65#33,65#43,!1)},{CS(ref(unit),{"0"N,int,(65#46,65#49,!1)}),ref(unit),(65#46,65#49,!1)},{V("MS_ENH_RSA_AES_PROV"),class((,"%undef")),(65#52,65#70,!1)},{V("PROV_RSA_AES"),class((,"%undef")),(65#73,65#84,!1)},{"0"N,int,(65#87,65#87,!1)}]),class((,"%undef")),(65#13,65#88,!1)}),class((,"%undef")),(65#12,65#88,!1)},
+            {[
+               {IF0({UO(!,{SC((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"CryptAcquireContext"),[ref(class((,HCRYPTPROV))),ref(unit),class((,"%undef")),class((,"%undef")),class((,"%undef"))],[{&{V("hCryptProv"),class((,HCRYPTPROV)),(67#38,67#47,!1)},ref(class((,HCRYPTPROV))),(67#37,67#47,!1)},{CS(ref(unit),{"0"N,int,(67#50,67#53,!1)}),ref(unit),(67#50,67#53,!1)},{V("MS_ENH_RSA_AES_PROV"),class((,"%undef")),(67#56,67#74,!1)},{V("PROV_RSA_AES"),class((,"%undef")),(67#77,67#88,!1)},{V("CRYPT_NEWKEYSET"),class((,"%undef")),(67#91,67#105,!1)}]),class((,"%undef")),(67#17,67#106,!1)}),class((,"%undef")),(67#16,67#106,!1)},
+                  {[
+                     {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printLine"),[mod(ref(char),[const])],[{"Error in acquiring cryptographic context"S,string,(69#27,69#68,!1)}])
+                     ,(69#17,69#69,!1)};
+                     {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"exit"),[int],[{"1"N,int,(70#22,70#22,!1)}])
+                     ,(70#17,70#23,!1)}
+                     ]
+                  ,(68#13,71#13,!1)})
+               ,(67#13,71#13,!1)}
+               ]
+            ,(66#9,72#9,!1)})
+         ,(65#9,72#9,!1)};
+         {IF0({UO(!,{SC((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"CryptCreateHash"),[class((,HCRYPTPROV)),class((,"%undef")),int,int,ref(class((,HCRYPTHASH)))],[{V("hCryptProv"),class((,HCRYPTPROV)),(74#29,74#38,!1)},{V("CALG_SHA_256"),class((,"%undef")),(74#41,74#52,!1)},{"0"N,int,(74#55,74#55,!1)},{"0"N,int,(74#58,74#58,!1)},{&{V("hHash"),class((,HCRYPTHASH)),(74#62,74#66,!1)},ref(class((,HCRYPTHASH))),(74#61,74#66,!1)}]),class((,"%undef")),(74#13,74#67,!1)}),class((,"%undef")),(74#12,74#67,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printLine"),[mod(ref(char),[const])],[{"Error in creating hash"S,string,(76#23,76#46,!1)}])
+               ,(76#13,76#47,!1)};
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"exit"),[int],[{"1"N,int,(77#18,77#18,!1)}])
+               ,(77#13,77#19,!1)}
+               ]
+            ,(75#9,78#9,!1)})
+         ,(74#9,78#9,!1)};
+         {IF0({UO(!,{SC((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"CryptHashData"),[class((,HCRYPTHASH)),ref(class((,BYTE))),class((,size_t)),int],[{V("hHash"),class((,HCRYPTHASH)),(80#27,80#31,!1)},{CS(ref(class((,BYTE))),{V("password"),arr(char),(80#43,80#50,!1)}),ref(class((,BYTE))),(80#34,80#50,!1)},{V("passwordLen"),class((,size_t)),(80#53,80#63,!1)},{"0"N,int,(80#66,80#66,!1)}]),class((,"%undef")),(80#13,80#67,!1)}),class((,"%undef")),(80#12,80#67,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printLine"),[mod(ref(char),[const])],[{"Error in hashing password"S,string,(82#23,82#49,!1)}])
+               ,(82#13,82#50,!1)};
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"exit"),[int],[{"1"N,int,(83#18,83#18,!1)}])
+               ,(83#13,83#19,!1)}
+               ]
+            ,(81#9,84#9,!1)})
+         ,(80#9,84#9,!1)};
+         {IF0({UO(!,{SC((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"CryptDeriveKey"),[class((,HCRYPTPROV)),class((,"%undef")),class((,HCRYPTHASH)),int,ref(class((,HCRYPTKEY)))],[{V("hCryptProv"),class((,HCRYPTPROV)),(86#28,86#37,!1)},{V("CALG_DES"),class((,"%undef")),(86#40,86#47,!1)},{V("hHash"),class((,HCRYPTHASH)),(86#50,86#54,!1)},{"0"N,int,(86#57,86#57,!1)},{&{V("hKey"),class((,HCRYPTKEY)),(86#61,86#64,!1)},ref(class((,HCRYPTKEY))),(86#60,86#64,!1)}]),class((,"%undef")),(86#13,86#65,!1)}),class((,"%undef")),(86#12,86#65,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printLine"),[mod(ref(char),[const])],[{"Error in CryptDeriveKey"S,string,(88#23,88#47,!1)}])
+               ,(88#13,88#48,!1)};
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"exit"),[int],[{"1"N,int,(89#18,89#18,!1)}])
+               ,(89#13,89#19,!1)}
+               ]
+            ,(87#9,90#9,!1)})
+         ,(86#9,90#9,!1)};
+         {IF0({UO(!,{SC((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"CryptDecrypt"),[class((,HCRYPTKEY)),int,int,int,ref(class((,BYTE))),ref(class((,DWORD)))],[{V("hKey"),class((,HCRYPTKEY)),(92#26,92#29,!1)},{"0"N,int,(92#32,92#32,!1)},{"1"N,int,(92#35,92#35,!1)},{"0"N,int,(92#38,92#38,!1)},{CS(ref(class((,BYTE))),{V("toBeDecrypted"),arr(char),(92#49,92#61,!1)}),ref(class((,BYTE))),(92#41,92#61,!1)},{&{V("toBeDecryptedLen"),class((,DWORD)),(92#65,92#80,!1)},ref(class((,DWORD))),(92#64,92#80,!1)}]),class((,"%undef")),(92#13,92#81,!1)}),class((,"%undef")),(92#12,92#81,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printLine"),[mod(ref(char),[const])],[{"Error in decryption"S,string,(94#23,94#43,!1)}])
+               ,(94#13,94#44,!1)};
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"exit"),[int],[{"1"N,int,(95#18,95#18,!1)}])
+               ,(95#13,95#19,!1)}
+               ]
+            ,(93#9,96#9,!1)})
+         ,(92#9,96#9,!1)};
+         {{AE({AA({V("toBeDecrypted"),arr(char),(98#9,98#21,!1)},[{V("toBeDecryptedLen"),class((,DWORD)),(98#23,98#38,!1)}]),char,(98#9,98#39,!1)},{"\0"C,char,(98#43,98#46,!1)}),char,(98#9,98#46,!1)}
+         ,(98#9,98#46,!1)};
+         {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printLine"),[mod(ref(char),[const])],[{V("toBeDecrypted"),arr(char),(99#19,99#31,!1)}])
+         ,(99#9,99#32,!1)};
+         {IF0({V("hKey"),class((,HCRYPTKEY)),(101#13,101#16,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"CryptDestroyKey"),[class((,HCRYPTKEY))],[{V("hKey"),class((,HCRYPTKEY)),(103#29,103#32,!1)}])
+               ,(103#13,103#33,!1)}
+               ]
+            ,(102#9,104#9,!1)})
+         ,(101#9,104#9,!1)};
+         {IF0({V("hHash"),class((,HCRYPTHASH)),(105#13,105#17,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"CryptDestroyHash"),[class((,HCRYPTHASH))],[{V("hHash"),class((,HCRYPTHASH)),(107#30,107#34,!1)}])
+               ,(107#13,107#35,!1)}
+               ]
+            ,(106#9,108#9,!1)})
+         ,(105#9,108#9,!1)};
+         {IF0({V("hCryptProv"),class((,HCRYPTPROV)),(109#13,109#22,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"CryptReleaseContext"),[class((,HCRYPTPROV)),int],[{V("hCryptProv"),class((,HCRYPTPROV)),(111#33,111#42,!1)},{"0"N,int,(111#45,111#45,!1)}])
+               ,(111#13,111#46,!1)}
+               ]
+            ,(110#9,112#9,!1)})
+         ,(109#9,112#9,!1)};
+         {IF0({V("pFile"),ref(class((,FILE))),(113#13,113#17,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"fclose"),[ref(class((,FILE)))],[{V("pFile"),ref(class((,FILE))),(115#20,115#24,!1)}])
+               ,(115#13,115#25,!1)}
+               ]
+            ,(114#9,116#9,!1)})
+         ,(113#9,116#9,!1)}
+         ]
+      ,(28#5,117#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(26#1,118#1,!1)}
+   )
+   ,(26#1,118#1,!1)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   FN([public,static],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"good1"):mod(unit,[static]),[],[],
+   {[
+      {[
+         {VD("pFile",ref(class((,FILE))))
+         ,(127#14,127#19,!1)};
+         {VD("hCryptProv",class((,HCRYPTPROV)))
+         ,(128#20,128#29,!1)};
+         {VD("hKey",class((,HCRYPTKEY)))
+         ,(129#19,129#22,!1)};
+         {VD("hHash",class((,HCRYPTHASH)))
+         ,(130#20,130#24,!1)};
+         {VD("password",char,([{"100"N,int,(131#23,131#25,!1)}]))
+         ,(131#14,131#26,!1)};
+         {VD("passwordLen",class((,size_t)))
+         ,(132#16,132#26,!1)};
+         {VD("toBeDecrypted",char,([{"100"N,int,(133#28,133#30,!1)}]))
+         ,(133#14,133#31,!1)};
+         {VD("toBeDecryptedLen",class((,DWORD)),{BO(-,{SO({V("toBeDecrypted"),arr(char),(134#41,134#53,!1)}),int,(134#34,134#54,!1)},{"1"N,int,(134#56,134#56,!1)}),int,(134#34,134#56,!1)})
+         ,(134#15,134#30,!1)};
+         {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printLine"),[mod(ref(char),[const])],[{"Enter the password: "S,string,(136#19,136#40,!1)}])
+         ,(136#9,136#41,!1)};
+         {IF0({BO(==,{SC((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"fgets"),[arr(char),int,class((,"%undef"))],[{V("password"),arr(char),(137#19,137#26,!1)},{"100"N,int,(137#29,137#31,!1)},{V("stdin"),class((,"%undef")),(137#34,137#38,!1)}]),class((,"%undef")),(137#13,137#39,!1)},{CS(ref(unit),{"0"N,int,(137#44,137#47,!1)}),ref(unit),(137#44,137#47,!1)}),bool,(137#13,137#47,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printLine"),[mod(ref(char),[const])],[{"fgets() failed"S,string,(139#23,139#38,!1)}])
+               ,(139#13,139#39,!1)};
+               {{AE({AA({V("password"),arr(char),(141#13,141#20,!1)},[{"0"N,int,(141#22,141#22,!1)}]),char,(141#13,141#23,!1)},{"\0"C,char,(141#27,141#30,!1)}),char,(141#13,141#30,!1)}
+               ,(141#13,141#30,!1)}
+               ]
+            ,(138#9,142#9,!1)})
+         ,(137#9,142#9,!1)};
+         {{AE({V("passwordLen"),class((,size_t)),(145#9,145#19,!1)},{SC((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"strlen"),[arr(char)],[{V("password"),arr(char),(145#30,145#37,!1)}]),class((,"%undef")),(145#23,145#38,!1)}),class((,size_t)),(145#9,145#38,!1)}
+         ,(145#9,145#38,!1)};
+         {IF0({BO(>,{V("passwordLen"),class((,size_t)),(146#13,146#23,!1)},{"0"N,int,(146#27,146#27,!1)}),bool,(146#13,146#27,!1)},
+            {[
+               {{AE({AA({V("password"),arr(char),(148#13,148#20,!1)},[{BO(-,{V("passwordLen"),class((,size_t)),(148#22,148#32,!1)},{"1"N,int,(148#34,148#34,!1)}),class((,size_t)),(148#22,148#34,!1)}]),char,(148#13,148#35,!1)},{"\0"C,char,(148#39,148#42,!1)}),char,(148#13,148#42,!1)}
+               ,(148#13,148#42,!1)}
+               ]
+            ,(147#9,149#9,!1)})
+         ,(146#9,149#9,!1)};
+         {{AE({V("pFile"),ref(class((,FILE))),(151#9,151#13,!1)},{SC((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"fopen"),[string,string],[{"encrypted.txt"S,string,(151#23,151#37,!1)},{"rb"S,string,(151#40,151#43,!1)}]),class((,"%undef")),(151#17,151#44,!1)}),ref(class((,FILE))),(151#9,151#44,!1)}
+         ,(151#9,151#44,!1)};
+         {IF0({BO(==,{V("pFile"),ref(class((,FILE))),(152#13,152#17,!1)},{CS(ref(unit),{"0"N,int,(152#22,152#25,!1)}),ref(unit),(152#22,152#25,!1)}),bool,(152#13,152#25,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"exit"),[int],[{"1"N,int,(154#18,154#18,!1)}])
+               ,(154#13,154#19,!1)}
+               ]
+            ,(153#9,155#9,!1)})
+         ,(152#9,155#9,!1)};
+         {IF0({BO(!=,{SC((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"fread"),[arr(char),int,int,ref(class((,FILE)))],[{V("toBeDecrypted"),arr(char),(156#19,156#31,!1)},{SO(char),int,(156#34,156#45,!1)},{"100"N,int,(156#48,156#50,!1)},{V("pFile"),ref(class((,FILE))),(156#53,156#57,!1)}]),class((,"%undef")),(156#13,156#58,!1)},{"100"N,int,(156#63,156#65,!1)}),bool,(156#13,156#65,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"fclose"),[ref(class((,FILE)))],[{V("pFile"),ref(class((,FILE))),(158#20,158#24,!1)}])
+               ,(158#13,158#25,!1)};
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"exit"),[int],[{"1"N,int,(159#18,159#18,!1)}])
+               ,(159#13,159#19,!1)}
+               ]
+            ,(157#9,160#9,!1)})
+         ,(156#9,160#9,!1)};
+         {{AE({AA({V("toBeDecrypted"),arr(char),(161#9,161#21,!1)},[{"99"N,int,(161#23,161#24,!1)}]),char,(161#9,161#25,!1)},{"\0"C,char,(161#29,161#32,!1)}),char,(161#9,161#32,!1)}
+         ,(161#9,161#32,!1)};
+         {IF0({UO(!,{SC((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"CryptAcquireContext"),[ref(class((,HCRYPTPROV))),ref(unit),class((,"%undef")),class((,"%undef")),int],[{&{V("hCryptProv"),class((,HCRYPTPROV)),(163#34,163#43,!1)},ref(class((,HCRYPTPROV))),(163#33,163#43,!1)},{CS(ref(unit),{"0"N,int,(163#46,163#49,!1)}),ref(unit),(163#46,163#49,!1)},{V("MS_ENH_RSA_AES_PROV"),class((,"%undef")),(163#52,163#70,!1)},{V("PROV_RSA_AES"),class((,"%undef")),(163#73,163#84,!1)},{"0"N,int,(163#87,163#87,!1)}]),class((,"%undef")),(163#13,163#88,!1)}),class((,"%undef")),(163#12,163#88,!1)},
+            {[
+               {IF0({UO(!,{SC((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"CryptAcquireContext"),[ref(class((,HCRYPTPROV))),ref(unit),class((,"%undef")),class((,"%undef")),class((,"%undef"))],[{&{V("hCryptProv"),class((,HCRYPTPROV)),(165#38,165#47,!1)},ref(class((,HCRYPTPROV))),(165#37,165#47,!1)},{CS(ref(unit),{"0"N,int,(165#50,165#53,!1)}),ref(unit),(165#50,165#53,!1)},{V("MS_ENH_RSA_AES_PROV"),class((,"%undef")),(165#56,165#74,!1)},{V("PROV_RSA_AES"),class((,"%undef")),(165#77,165#88,!1)},{V("CRYPT_NEWKEYSET"),class((,"%undef")),(165#91,165#105,!1)}]),class((,"%undef")),(165#17,165#106,!1)}),class((,"%undef")),(165#16,165#106,!1)},
+                  {[
+                     {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printLine"),[mod(ref(char),[const])],[{"Error in acquiring cryptographic context"S,string,(167#27,167#68,!1)}])
+                     ,(167#17,167#69,!1)};
+                     {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"exit"),[int],[{"1"N,int,(168#22,168#22,!1)}])
+                     ,(168#17,168#23,!1)}
+                     ]
+                  ,(166#13,169#13,!1)})
+               ,(165#13,169#13,!1)}
+               ]
+            ,(164#9,170#9,!1)})
+         ,(163#9,170#9,!1)};
+         {IF0({UO(!,{SC((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"CryptCreateHash"),[class((,HCRYPTPROV)),class((,"%undef")),int,int,ref(class((,HCRYPTHASH)))],[{V("hCryptProv"),class((,HCRYPTPROV)),(172#29,172#38,!1)},{V("CALG_SHA_256"),class((,"%undef")),(172#41,172#52,!1)},{"0"N,int,(172#55,172#55,!1)},{"0"N,int,(172#58,172#58,!1)},{&{V("hHash"),class((,HCRYPTHASH)),(172#62,172#66,!1)},ref(class((,HCRYPTHASH))),(172#61,172#66,!1)}]),class((,"%undef")),(172#13,172#67,!1)}),class((,"%undef")),(172#12,172#67,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printLine"),[mod(ref(char),[const])],[{"Error in creating hash"S,string,(174#23,174#46,!1)}])
+               ,(174#13,174#47,!1)};
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"exit"),[int],[{"1"N,int,(175#18,175#18,!1)}])
+               ,(175#13,175#19,!1)}
+               ]
+            ,(173#9,176#9,!1)})
+         ,(172#9,176#9,!1)};
+         {IF0({UO(!,{SC((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"CryptHashData"),[class((,HCRYPTHASH)),ref(class((,BYTE))),class((,size_t)),int],[{V("hHash"),class((,HCRYPTHASH)),(178#27,178#31,!1)},{CS(ref(class((,BYTE))),{V("password"),arr(char),(178#43,178#50,!1)}),ref(class((,BYTE))),(178#34,178#50,!1)},{V("passwordLen"),class((,size_t)),(178#53,178#63,!1)},{"0"N,int,(178#66,178#66,!1)}]),class((,"%undef")),(178#13,178#67,!1)}),class((,"%undef")),(178#12,178#67,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printLine"),[mod(ref(char),[const])],[{"Error in hashing password"S,string,(180#23,180#49,!1)}])
+               ,(180#13,180#50,!1)};
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"exit"),[int],[{"1"N,int,(181#18,181#18,!1)}])
+               ,(181#13,181#19,!1)}
+               ]
+            ,(179#9,182#9,!1)})
+         ,(178#9,182#9,!1)};
+         {IF0({UO(!,{SC((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"CryptDeriveKey"),[class((,HCRYPTPROV)),class((,"%undef")),class((,HCRYPTHASH)),int,ref(class((,HCRYPTKEY)))],[{V("hCryptProv"),class((,HCRYPTPROV)),(184#28,184#37,!1)},{V("CALG_AES_256"),class((,"%undef")),(184#40,184#51,!1)},{V("hHash"),class((,HCRYPTHASH)),(184#54,184#58,!1)},{"0"N,int,(184#61,184#61,!1)},{&{V("hKey"),class((,HCRYPTKEY)),(184#65,184#68,!1)},ref(class((,HCRYPTKEY))),(184#64,184#68,!1)}]),class((,"%undef")),(184#13,184#69,!1)}),class((,"%undef")),(184#12,184#69,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printLine"),[mod(ref(char),[const])],[{"Error in CryptDeriveKey"S,string,(186#23,186#47,!1)}])
+               ,(186#13,186#48,!1)};
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"exit"),[int],[{"1"N,int,(187#18,187#18,!1)}])
+               ,(187#13,187#19,!1)}
+               ]
+            ,(185#9,188#9,!1)})
+         ,(184#9,188#9,!1)};
+         {IF0({UO(!,{SC((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"CryptDecrypt"),[class((,HCRYPTKEY)),int,int,int,ref(class((,BYTE))),ref(class((,DWORD)))],[{V("hKey"),class((,HCRYPTKEY)),(190#26,190#29,!1)},{"0"N,int,(190#32,190#32,!1)},{"1"N,int,(190#35,190#35,!1)},{"0"N,int,(190#38,190#38,!1)},{CS(ref(class((,BYTE))),{V("toBeDecrypted"),arr(char),(190#49,190#61,!1)}),ref(class((,BYTE))),(190#41,190#61,!1)},{&{V("toBeDecryptedLen"),class((,DWORD)),(190#65,190#80,!1)},ref(class((,DWORD))),(190#64,190#80,!1)}]),class((,"%undef")),(190#13,190#81,!1)}),class((,"%undef")),(190#12,190#81,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printLine"),[mod(ref(char),[const])],[{"Error in decryption"S,string,(192#23,192#43,!1)}])
+               ,(192#13,192#44,!1)};
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"exit"),[int],[{"1"N,int,(193#18,193#18,!1)}])
+               ,(193#13,193#19,!1)}
+               ]
+            ,(191#9,194#9,!1)})
+         ,(190#9,194#9,!1)};
+         {{AE({AA({V("toBeDecrypted"),arr(char),(196#9,196#21,!1)},[{V("toBeDecryptedLen"),class((,DWORD)),(196#23,196#38,!1)}]),char,(196#9,196#39,!1)},{"\0"C,char,(196#43,196#46,!1)}),char,(196#9,196#46,!1)}
+         ,(196#9,196#46,!1)};
+         {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"printLine"),[mod(ref(char),[const])],[{V("toBeDecrypted"),arr(char),(197#19,197#31,!1)}])
+         ,(197#9,197#32,!1)};
+         {IF0({V("hKey"),class((,HCRYPTKEY)),(199#13,199#16,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"CryptDestroyKey"),[class((,HCRYPTKEY))],[{V("hKey"),class((,HCRYPTKEY)),(201#29,201#32,!1)}])
+               ,(201#13,201#33,!1)}
+               ]
+            ,(200#9,202#9,!1)})
+         ,(199#9,202#9,!1)};
+         {IF0({V("hHash"),class((,HCRYPTHASH)),(203#13,203#17,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"CryptDestroyHash"),[class((,HCRYPTHASH))],[{V("hHash"),class((,HCRYPTHASH)),(205#30,205#34,!1)}])
+               ,(205#13,205#35,!1)}
+               ]
+            ,(204#9,206#9,!1)})
+         ,(203#9,206#9,!1)};
+         {IF0({V("hCryptProv"),class((,HCRYPTPROV)),(207#13,207#22,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"CryptReleaseContext"),[class((,HCRYPTPROV)),int],[{V("hCryptProv"),class((,HCRYPTPROV)),(209#33,209#42,!1)},{"0"N,int,(209#45,209#45,!1)}])
+               ,(209#13,209#46,!1)}
+               ]
+            ,(208#9,210#9,!1)})
+         ,(207#9,210#9,!1)};
+         {IF0({V("pFile"),ref(class((,FILE))),(211#13,211#17,!1)},
+            {[
+               {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"fclose"),[ref(class((,FILE)))],[{V("pFile"),ref(class((,FILE))),(213#20,213#24,!1)}])
+               ,(213#13,213#25,!1)}
+               ]
+            ,(212#9,214#9,!1)})
+         ,(211#9,214#9,!1)}
+         ]
+      ,(126#5,215#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(124#1,216#1,!1)}
+   )
+   ,(124#1,216#1,!1)},
+
+   {"CWE327_Use_Broken_Crypto__w32_DES_01",
+   FN([public],(<"CWE327_Use_Broken_Crypto__w32_DES_01">,"CWE327_Use_Broken_Crypto__w32_DES_01_good"):unit,[],[],
+   {[
+      {PC0((<"CWE327_Use_Broken_Crypto__w32_DES_01">,"good1"),[],[])
+      ,(220#5,220#11,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(218#1,221#1,!1)}
+   )
+   ,(218#1,221#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp",
+   CL([struct],(,_twoIntsStruct),[])
+   {
+      ([public],"intOne":int,(92#9,92#14,!2));
+      ([public],"intTwo":int,(93#9,93#14,!2))
+   }
+   ,(90#1,94#16,!2)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp",
+   [
+      M("/* \n\n\n\n*/",1,(1#0,1#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*\n * \n * \n * \n * \n * \n * \n *\n * */",6,(6#0,6#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",21,(21#0,21#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",37,(37#0,37#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",42,(42#0,42#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/* \n          */",45,(45#0,45#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",52,(52#0,52#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",64,(64#0,64#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",73,(73#0,73#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",79,(79#0,79#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",85,(85#0,85#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",91,(91#0,91#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",97,(97#0,97#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",100,(100#0,100#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/* OMITBAD */",120,(120#0,120#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",135,(135#0,135#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",140,(140#0,140#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/* \n          */",143,(143#0,143#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",150,(150#0,150#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",162,(162#0,162#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",171,(171#0,171#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",177,(177#0,177#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",183,(183#0,183#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",189,(189#0,189#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",195,(195#0,195#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",198,(198#0,198#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/* OMITGOOD */",223,(223#0,223#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/* \n   \n   \n    */",225,(225#0,225#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/*  */",234,(234#0,234#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/* OMITGOOD */",240,(240#0,240#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp")),
+      M("/* OMITBAD */",245,(245#0,245#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/CWE327_Use_Broken_Crypto__w32_DES_01.cpp"))
+   ]
+   }
+]

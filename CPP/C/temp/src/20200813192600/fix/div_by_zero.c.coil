@@ -1,0 +1,96 @@
+{
+   ("encoding", "KSC5601");
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c");
+   ("language", "C");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<time.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c");
+   (!10, "1000"N);
+   (!2, "n");
+   (!3, "r");
+   (!4, "%d"S);
+   (!5, "1"N);
+   (!6, "0"N);
+   (!7, "m");
+   (!8, "100"N);
+   (!9, "%d\n"S);
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c",
+   FN([public],(<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c">,"getValue"):int,[],[],
+   {[
+      {VD(!2,int)
+      ,(7#9,7#9,!1)};
+      {VD(!3,int,{SC((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c">,"scanf"),[arr(char),ref(int)],[{!4,arr(char),(9#19,9#19,!1)},{&{V(!2),int,(9#26,9#26,!1)},ref(int),(9#25,9#25,!1)}]),top,(9#13,9#13,!1)})
+      ,(9#9,9#9,!1)};
+      {IF({BO(!=,{V(!3),int,(10#9,10#9,!1)},{!5,int,(10#14,10#14,!1)}),bool,(10#9,10#9,!1)},
+         {RE({!6,int,(11#16,11#16,!1)})
+         ,(11#9,11#9,!1)},
+         {RE({V(!2),int,(13#16,13#16,!1)})
+         ,(13#9,13#9,!1)})
+      ,(10#5,13#9,"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c")};
+      {RE0
+      ,(!)}
+      ]
+   ,(5#5,14#1,!1)}
+   )
+   ,(5#5,14#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c",
+   FN([public],(<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c">,"test1"):unit,[(!2:int,(16#16,16#16,!1))],[],
+   {[
+      {VD(!7,int,{SC((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c">,"getValue"),[],[]),int,(18#13,18#13,!1)})
+      ,(18#9,18#9,!1)};
+      {IF0({BO(&&,{BO(>,{V(!2),int,(19#9,19#9,!1)},{!6,int,(19#13,19#13,!1)}),bool,(19#9,19#9,!1)},{BO(>,{V(!7),int,(19#18,19#18,!1)},{!8,int,(19#22,19#22,!1)}),bool,(19#18,19#18,!1)}),bool,(19#9,19#9,!1)},
+         {[
+            {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c">,"printf"),[arr(char),int],[{!9,arr(char),(20#16,20#16,!1)},{BO(/,{!10,int,(20#24,20#24,!1)},{V(!7),int,(20#31,20#31,!1)}),int,(20#24,20#24,!1)}])
+            ,(20#9,20#9,!1)}
+            ]
+         ,(19#27,21#5,!1)})
+      ,(19#5,21#5,"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c")};
+      {RE0
+      ,(!)}
+      ]
+   ,(16#6,22#1,!1)}
+   )
+   ,(16#6,22#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c",
+   FN([public],(<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c">,"test2"):unit,[(!2:int,(24#16,24#16,!1))],[],
+   {[
+      {VD(!7,int,{SC((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c">,"getValue"),[],[]),int,(26#13,26#13,!1)})
+      ,(26#9,26#9,!1)};
+      {IF0({BO(&&,{BO(>,{V(!2),int,(27#9,27#9,!1)},{!6,int,(27#13,27#13,!1)}),bool,(27#9,27#9,!1)},{BO(<,{V(!7),int,(27#18,27#18,!1)},{!8,int,(27#22,27#22,!1)}),bool,(27#18,27#18,!1)}),bool,(27#9,27#9,!1)},
+         {[
+            {IF0({BO(>,{V(!7),int,(28#13,28#13,!1)},{!6,int,(28#17,28#17,!1)}),bool,(28#13,28#13,!1)},
+               {[
+                  {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c">,"printf"),[arr(char),int],[{!9,arr(char),(29#20,29#20,!1)},{BO(/,{!10,int,(29#28,29#28,!1)},{V(!7),int,(29#35,29#35,!1)}),int,(29#28,29#28,!1)}])
+                  ,(29#13,29#13,!1)}
+                  ]
+               ,(28#20,30#9,!1)})
+            ,(28#9,30#9,"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c")}
+            ]
+         ,(27#27,31#5,!1)})
+      ,(27#5,31#5,"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c")};
+      {RE0
+      ,(!)}
+      ]
+   ,(24#6,32#1,!1)}
+   )
+   ,(24#6,32#1,!1)},
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c",
+   [
+      S("// FIX improper check for unusual or exceptional conditions: check return value of scanf\n",8),
+      S("// failed to read\n",10),
+      S("// FIX division by zero: ensure m is not zero\n",28),
+      S("// Local variables:\n",34),
+      S("// compile-command: \"clang -std=c99 -pedantic -Wall -c div_by_zero-01.c \\\n// && c2coil.sh div_by_zero-01.c\"\n",35),
+      S("// End:\n",37)
+   ]
+   }
+]

@@ -1,0 +1,80 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/33.Information_Leak_Error/CWE209.cpp");
+   ("language", "CPP");
+   ("include", "<stdio.h>");
+   ("include", "<unistd.h>");
+   ("include", "<string.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/33.Information_Leak_Error/CWE209.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/33.Information_Leak_Error/CWE209.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/33.Information_Leak_Error/CWE209.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/33.Information_Leak_Error/CWE209.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/33.Information_Leak_Error/CWE209.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/33.Information_Leak_Error/CWE209.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/33.Information_Leak_Error/CWE209.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"CWE209",
+   SI(<"CWE209">,
+   {[
+      {;
+      ,(1#1,11#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,11#1,!1)}
+   )
+   ,(1#1,11#1,!1)},
+
+   {"CWE209",
+   FN([public],(<"CWE209">,"cwe209_bad"):unit,[],[],
+   {[
+      {VD("path",ref(char),{SC((<"CWE209">,"getenv"),[string],[{"MYPATH"S,string,(7#24,7#31,!1)}]),class((,"%undef")),(7#17,7#32,!1)})
+      ,(7#8,7#13,!1)};
+      {PC0((<"CWE209">,"fprintf"),[class((,"%undef")),string,ref(char)],[{V("stderr"),class((,"%undef")),(9#12,9#17,!1)},{"File not found:%s\n"S,string,(9#19,9#39,!1)},{V("path"),ref(char),(9#41,9#44,!1)}])
+      ,(9#4,9#45,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(5#1,10#1,!1)}
+   )
+   ,(5#1,10#1,!1)},
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/33.Information_Leak_Error/CWE209.cpp",
+   [
+      S("// ...\n",8)
+   ]
+   }
+]

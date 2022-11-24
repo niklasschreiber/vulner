@@ -1,0 +1,86 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/C18001.cpp");
+   ("language", "CPP");
+   ("include", "<stdio.h>");
+   ("include", "<string.h>");
+   ("include", "<memory.h>");
+   ("include", "<openssl/evp.h>");
+   ("include", "<openssl/pem.h>");
+   ("include", "<openssl/rsa.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/C18001.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/C18001.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/C18001.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/C18001.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/C18001.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/C18001.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/C18001.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C18001",
+   SI(<"C18001">,
+   {[
+      {;
+      ,(1#1,33#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,33#1,!1)}
+   )
+   ,(1#1,33#1,!1)},
+
+   {"C18001",
+   FN([public],(<"C18001">,"encryption_init"):unit,[],[],
+   {[
+      {VD("ctx",class((,EVP_CIPHER_CTX)))
+      ,(27#19,27#21,!1)};
+      {PC0((<"C18001">,"EVP_CIPHER_CTX_init"),[ref(class((,EVP_CIPHER_CTX)))],[{&{V("ctx"),class((,EVP_CIPHER_CTX)),(29#25,29#27,!1)},ref(class((,EVP_CIPHER_CTX))),(29#24,29#27,!1)}])
+      ,(29#4,29#28,!1)};
+      {PC0((<"C18001">,"EVP_EncryptInit"),[ref(class((,EVP_CIPHER_CTX))),class((,"%undef")),ref(unit),ref(unit)],[{&{V("ctx"),class((,EVP_CIPHER_CTX)),(30#21,30#23,!1)},ref(class((,EVP_CIPHER_CTX))),(30#20,30#23,!1)},{SC((<"C18001">,"EVP_des_ecb"),[],[]),class((,"%undef")),(30#26,30#38,!1)},{CS(ref(unit),{"0"N,int,(30#41,30#44,!1)}),ref(unit),(30#41,30#44,!1)},{CS(ref(unit),{"0"N,int,(30#47,30#50,!1)}),ref(unit),(30#47,30#50,!1)}])
+      ,(30#4,30#51,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(25#1,31#1,!1)}
+   )
+   ,(25#1,31#1,!1)},
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/C18001.cpp",
+   [
+      M("/**\n* \n* \n* \n* \n*\n* \n*\n*\n*\n*\n*\n*\n*\n*\n*\n*/",8,(8#0,8#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/C18001.cpp")),
+      M("/* DES usage */",30,(30#0,30#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/18.Use_Broken_Crypto/C18001.cpp"))
+   ]
+   }
+]

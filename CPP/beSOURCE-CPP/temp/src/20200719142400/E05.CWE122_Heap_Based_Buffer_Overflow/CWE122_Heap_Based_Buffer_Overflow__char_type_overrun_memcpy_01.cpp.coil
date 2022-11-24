@@ -1,0 +1,329 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp");
+   ("language", "CPP");
+   ("include", "std_testcase.h");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<stddef.h>");
+   ("include", "<time.h>");
+   ("include", "<limits.h>");
+   ("include", "<string.h>");
+   ("include", "<stdint.h>");
+   ("include", "<stdint.h>");
+   ("include", "<ctype.h>");
+   ("include", "<fcntl.h>");
+   ("include", "<sys/types.h>");
+   ("include", "<sys/stat.h>");
+   ("include", "std_testcase_io.h");
+   ("include", "std_testcase.h");
+   ("include", "<wchar.h>");
+}
+{
+   (!3, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase_io.h");
+   (!2, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h");
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp",
+   MD("RAND32()",[],"((rand()<<30) ^ (rand()<<15) ^ rand())")
+   ,(84#0,84#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp",
+   MD("RAND64()",[],"(((int64_t)rand()<<60) ^ ((int64_t)rand()<<45) ^ ((int64_t)rand()<<30) ^ ((int64_t)rand()<<15) ^ (int64_t)rand())")
+   ,(87#0,87#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   SF([extern,const,extern],int,<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"GLOBAL_CONST_TRUE")
+   ,(103#18,103#34,!2)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   SF([extern,const,extern],int,<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"GLOBAL_CONST_FALSE")
+   ,(104#18,104#35,!2)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   SF([extern,const,extern],int,<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"GLOBAL_CONST_FIVE")
+   ,(105#18,105#34,!2)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   SF([extern,extern],int,<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"globalTrue")
+   ,(110#12,110#21,!2)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   SF([extern,extern],int,<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"globalFalse")
+   ,(111#12,111#22,!2)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   SF([extern,extern],int,<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"globalFive")
+   ,(112#12,112#21,!2)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   SF([extern,extern],int,<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"globalArgc")
+   ,(55#12,55#21,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   SF([extern,extern],ref(ref(char)),<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"globalArgv")
+   ,(56#12,56#24,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   SI(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,
+   {[
+      {;
+      ,(1#1,101#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,101#1,!1)}
+   )
+   ,(1#1,101#1,!1)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printLine"):unit,[(mod(ref(char),[const]):"line",(14#16,14#32,!3))],[]
+   )
+   ,(14#1,14#34,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printWLine"):unit,[(mod(ref(wchar),[const]):"line",(16#17,16#36,!3))],[]
+   )
+   ,(16#1,16#38,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printIntLine"):unit,[(int:"intNumber",(18#20,18#32,!3))],[]
+   )
+   ,(18#1,18#34,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printShortLine"):unit,[(short:"shortNumber",(20#22,20#38,!3))],[]
+   )
+   ,(20#1,20#40,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printFloatLine"):unit,[(float:"floatNumber",(22#22,22#38,!3))],[]
+   )
+   ,(22#1,22#40,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printLongLine"):unit,[(long:"longNumber",(24#20,24#34,!3))],[]
+   )
+   ,(24#1,24#36,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printLongLongLine"):unit,[(class((,int64_t)):"longLongIntNumber",(26#24,26#48,!3))],[]
+   )
+   ,(26#1,26#50,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printSizeTLine"):unit,[(class((,size_t)):"sizeTNumber",(28#21,28#38,!3))],[]
+   )
+   ,(28#1,28#40,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printHexCharLine"):unit,[(char:"charHex",(30#23,30#34,!3))],[]
+   )
+   ,(30#1,30#36,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printWcharLine"):unit,[(wchar:"wideChar",(32#21,32#36,!3))],[]
+   )
+   ,(32#1,32#38,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printUnsignedLine"):unit,[(uint:"unsignedNumber",(34#24,34#46,!3))],[]
+   )
+   ,(34#1,34#48,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printHexUnsignedCharLine"):unit,[(uchar:"unsignedCharacter",(36#31,36#61,!3))],[]
+   )
+   ,(36#1,36#63,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printDoubleLine"):unit,[(double:"doubleNumber",(38#22,38#40,!3))],[]
+   )
+   ,(38#1,38#42,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printStructLine"):unit,[(mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]):"structTwoIntsStruct",(40#22,40#62,!3))],[]
+   )
+   ,(40#1,40#64,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printBytesLine"):unit,[(mod(ref(uchar),[const]):"bytes",(42#21,42#47,!3)),(class((,size_t)):"numBytes",(42#50,42#64,!3))],[]
+   )
+   ,(42#1,42#66,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"decodeHexChars"):class((,size_t)),[(ref(uchar):"bytes",(44#23,44#43,!3)),(class((,size_t)):"numBytes",(44#46,44#60,!3)),(mod(ref(char),[const]):"hex",(44#63,44#78,!3))],[]
+   )
+   ,(44#1,44#80,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"decodeHexWChars"):class((,size_t)),[(ref(uchar):"bytes",(46#24,46#44,!3)),(class((,size_t)):"numBytes",(46#47,46#61,!3)),(mod(ref(wchar),[const]):"hex",(46#64,46#82,!3))],[]
+   )
+   ,(46#1,46#84,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"globalReturnsTrue"):int,[],[]
+   )
+   ,(48#1,48#24,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"globalReturnsFalse"):int,[],[]
+   )
+   ,(50#1,50#25,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"globalReturnsTrueOrFalse"):int,[],[]
+   )
+   ,(52#1,52#31,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   FN([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01_bad"):unit,[],[],
+   {[
+      {[
+         {VD("structCharVoid",ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),{CS(ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),{SC((<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"malloc"),[int],[{SO(alias("charVoid",mod(record((,_charVoid)),[struct]))),int,(36#56,36#71,!1)}]),class((,"%undef")),(36#49,36#72,!1)}),ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),(36#37,36#72,!1)})
+         ,(36#18,36#33,!1)};
+         {{AE({OA({*{V("structCharVoid"),ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),(37#9,37#22,!1)},alias("charVoid",mod(record((,_charVoid)),[struct])),(37#9,37#34,!1)},"voidSecond"),ref(unit),(37#9,37#34,!1)},{CS(ref(unit),{"0123456789abcde0123"S,string,(37#46,37#66,!1)}),ref(unit),(37#38,37#66,!1)}),ref(unit),(37#9,37#66,!1)}
+         ,(37#9,37#66,!1)};
+         {PC0((<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printLine"),[mod(ref(char),[const])],[{CS(ref(char),{OA({*{V("structCharVoid"),ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),(39#27,39#40,!1)},alias("charVoid",mod(record((,_charVoid)),[struct])),(39#27,39#52,!1)},"voidSecond"),ref(unit),(39#27,39#52,!1)}),ref(char),(39#19,39#52,!1)}])
+         ,(39#9,39#53,!1)};
+         {PC0((<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"memcpy"),[arr(char),string,int],[{OA({*{V("structCharVoid"),ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),(41#16,41#29,!1)},alias("charVoid",mod(record((,_charVoid)),[struct])),(41#16,41#40,!1)},"charFirst"),arr(char),(41#16,41#40,!1)},{"0123456789abcde0123"S,string,(41#43,41#63,!1)},{SO({*{V("structCharVoid"),ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),(41#74,41#87,!1)},alias("charVoid",mod(record((,_charVoid)),[struct])),(41#73,41#87,!1)}),int,(41#66,41#88,!1)}])
+         ,(41#9,41#89,!1)};
+         {{AE({AA({OA({*{V("structCharVoid"),ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),(42#9,42#22,!1)},alias("charVoid",mod(record((,_charVoid)),[struct])),(42#9,42#33,!1)},"charFirst"),arr(char),(42#9,42#33,!1)},[{BO(-,{BO(/,{SO({OA({*{V("structCharVoid"),ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),(42#43,42#56,!1)},alias("charVoid",mod(record((,_charVoid)),[struct])),(42#43,42#67,!1)},"charFirst"),arr(char),(42#43,42#67,!1)}),int,(42#36,42#68,!1)},{SO(char),int,(42#70,42#81,!1)}),int,(42#35,42#82,!1)},{"1"N,int,(42#84,42#84,!1)}),int,(42#36,42#84,!1)}]),char,(42#9,42#85,!1)},{"\0"C,char,(42#89,42#92,!1)}),char,(42#9,42#92,!1)}
+         ,(42#9,42#92,!1)};
+         {PC0((<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printLine"),[mod(ref(char),[const])],[{CS(ref(char),{OA({*{V("structCharVoid"),ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),(43#27,43#40,!1)},alias("charVoid",mod(record((,_charVoid)),[struct])),(43#27,43#51,!1)},"charFirst"),arr(char),(43#27,43#51,!1)}),ref(char),(43#19,43#51,!1)}])
+         ,(43#9,43#52,!1)};
+         {PC0((<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printLine"),[mod(ref(char),[const])],[{CS(ref(char),{OA({*{V("structCharVoid"),ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),(44#27,44#40,!1)},alias("charVoid",mod(record((,_charVoid)),[struct])),(44#27,44#52,!1)},"voidSecond"),ref(unit),(44#27,44#52,!1)}),ref(char),(44#19,44#52,!1)}])
+         ,(44#9,44#53,!1)};
+         {PC0((<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"free"),[ref(alias("charVoid",mod(record((,_charVoid)),[struct])))],[{V("structCharVoid"),ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),(45#14,45#27,!1)}])
+         ,(45#9,45#28,!1)}
+         ]
+      ,(35#5,46#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(33#1,47#1,!1)}
+   )
+   ,(33#1,47#1,!1)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   FN([public,static],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"good1"):mod(unit,[static]),[],[],
+   {[
+      {[
+         {VD("structCharVoid",ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),{CS(ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),{SC((<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"malloc"),[int],[{SO(alias("charVoid",mod(record((,_charVoid)),[struct]))),int,(56#56,56#71,!1)}]),class((,"%undef")),(56#49,56#72,!1)}),ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),(56#37,56#72,!1)})
+         ,(56#18,56#33,!1)};
+         {{AE({OA({*{V("structCharVoid"),ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),(57#9,57#22,!1)},alias("charVoid",mod(record((,_charVoid)),[struct])),(57#9,57#34,!1)},"voidSecond"),ref(unit),(57#9,57#34,!1)},{CS(ref(unit),{"0123456789abcde0123"S,string,(57#46,57#66,!1)}),ref(unit),(57#38,57#66,!1)}),ref(unit),(57#9,57#66,!1)}
+         ,(57#9,57#66,!1)};
+         {PC0((<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printLine"),[mod(ref(char),[const])],[{CS(ref(char),{OA({*{V("structCharVoid"),ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),(59#27,59#40,!1)},alias("charVoid",mod(record((,_charVoid)),[struct])),(59#27,59#52,!1)},"voidSecond"),ref(unit),(59#27,59#52,!1)}),ref(char),(59#19,59#52,!1)}])
+         ,(59#9,59#53,!1)};
+         {PC0((<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"memcpy"),[arr(char),string,int],[{OA({*{V("structCharVoid"),ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),(61#16,61#29,!1)},alias("charVoid",mod(record((,_charVoid)),[struct])),(61#16,61#40,!1)},"charFirst"),arr(char),(61#16,61#40,!1)},{"0123456789abcde0123"S,string,(61#43,61#63,!1)},{SO({OA({*{V("structCharVoid"),ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),(61#73,61#86,!1)},alias("charVoid",mod(record((,_charVoid)),[struct])),(61#73,61#97,!1)},"charFirst"),arr(char),(61#73,61#97,!1)}),int,(61#66,61#98,!1)}])
+         ,(61#9,61#99,!1)};
+         {{AE({AA({OA({*{V("structCharVoid"),ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),(62#9,62#22,!1)},alias("charVoid",mod(record((,_charVoid)),[struct])),(62#9,62#33,!1)},"charFirst"),arr(char),(62#9,62#33,!1)},[{BO(-,{BO(/,{SO({OA({*{V("structCharVoid"),ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),(62#43,62#56,!1)},alias("charVoid",mod(record((,_charVoid)),[struct])),(62#43,62#67,!1)},"charFirst"),arr(char),(62#43,62#67,!1)}),int,(62#36,62#68,!1)},{SO(char),int,(62#70,62#81,!1)}),int,(62#35,62#82,!1)},{"1"N,int,(62#84,62#84,!1)}),int,(62#36,62#84,!1)}]),char,(62#9,62#85,!1)},{"\0"C,char,(62#89,62#92,!1)}),char,(62#9,62#92,!1)}
+         ,(62#9,62#92,!1)};
+         {PC0((<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printLine"),[mod(ref(char),[const])],[{CS(ref(char),{OA({*{V("structCharVoid"),ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),(63#27,63#40,!1)},alias("charVoid",mod(record((,_charVoid)),[struct])),(63#27,63#51,!1)},"charFirst"),arr(char),(63#27,63#51,!1)}),ref(char),(63#19,63#51,!1)}])
+         ,(63#9,63#52,!1)};
+         {PC0((<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"printLine"),[mod(ref(char),[const])],[{CS(ref(char),{OA({*{V("structCharVoid"),ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),(64#27,64#40,!1)},alias("charVoid",mod(record((,_charVoid)),[struct])),(64#27,64#52,!1)},"voidSecond"),ref(unit),(64#27,64#52,!1)}),ref(char),(64#19,64#52,!1)}])
+         ,(64#9,64#53,!1)};
+         {PC0((<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"free"),[ref(alias("charVoid",mod(record((,_charVoid)),[struct])))],[{V("structCharVoid"),ref(alias("charVoid",mod(record((,_charVoid)),[struct]))),(65#14,65#27,!1)}])
+         ,(65#9,65#28,!1)}
+         ]
+      ,(55#5,66#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(53#1,67#1,!1)}
+   )
+   ,(53#1,67#1,!1)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01",
+   FN([public],(<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01_good"):unit,[],[],
+   {[
+      {PC0((<"CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01">,"good1"),[],[])
+      ,(71#5,71#11,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(69#1,72#1,!1)}
+   )
+   ,(69#1,72#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp",
+   CL([struct],(,_twoIntsStruct),[])
+   {
+      ([public],"intOne":int,(92#9,92#14,!2));
+      ([public],"intTwo":int,(93#9,93#14,!2))
+   }
+   ,(90#1,94#16,!2)}
+
+,
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp",
+   CL([struct],(,_charVoid),[])
+   {
+      ([public],"charFirst":char,([{"16"N,int,(26#20,26#21,!1)}]),(26#10,26#22,!1));
+      ([public],"voidSecond":ref(unit),(27#10,27#21,!1));
+      ([public],"voidThird":ref(unit),(28#10,28#20,!1))
+   }
+   ,(24#1,29#11,!1)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp",
+   [
+      M("/* TEMPLATE GENERATED TESTCASE FILE\nFilename: CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.c\nLabel Definition File: CWE122_Heap_Based_Buffer_Overflow.label.xml\nTemplate File: point-flaw-01.tmpl.c\n*/",1,(1#0,1#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp")),
+      M("/*\n * @description\n * CWE: 122 Heap Based Buffer Overflow\n * Sinks: type_overrun_memcpy\n *    GoodSink: Perform the memcpy() and prevent overwriting part of the structure\n *    BadSink : Overwrite part of the structure by incorrectly using the sizeof(struct) in memcpy()\n * Flow Variant: 01 Baseline\n *\n * */",6,(6#0,6#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp")),
+      M("/* Print the initial block pointed to by structCharVoid->voidSecond */",38,(38#0,38#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp")),
+      M("/* FLAW: Use the sizeof(*structCharVoid) which will overwrite the pointer y */",40,(40#0,40#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp")),
+      M("/* null terminate the string */",42,(42#0,42#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp")),
+      M("/* OMITBAD */",49,(49#0,49#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp")),
+      M("/* Print the initial block pointed to by structCharVoid->voidSecond */",58,(58#0,58#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp")),
+      M("/* FIX: Use the sizeof(structCharVoid->charFirst) to avoid overwriting the pointer y */",60,(60#0,60#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp")),
+      M("/* null terminate the string */",62,(62#0,62#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp")),
+      M("/* OMITGOOD */",74,(74#0,74#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp")),
+      M("/* Below is the main(). It is only used when building this testcase on\n   its own for testing or for building a binary to use in testing binary\n   analysis tools. It is not used when compiling all the testcases as one\n   application, which is how source code analysis tools are tested. */",76,(76#0,76#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp")),
+      M("/* seed randomness */",85,(85#0,85#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp")),
+      M("/* OMITGOOD */",91,(91#0,91#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp")),
+      M("/* OMITBAD */",96,(96#0,96#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__char_type_overrun_memcpy_01.cpp"))
+   ]
+   }
+]

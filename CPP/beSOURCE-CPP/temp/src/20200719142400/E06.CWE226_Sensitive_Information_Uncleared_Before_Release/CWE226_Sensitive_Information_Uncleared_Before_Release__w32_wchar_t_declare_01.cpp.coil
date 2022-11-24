@@ -1,0 +1,377 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp");
+   ("language", "CPP");
+   ("include", "std_testcase.h");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<stddef.h>");
+   ("include", "<time.h>");
+   ("include", "<limits.h>");
+   ("include", "<string.h>");
+   ("include", "<stdint.h>");
+   ("include", "<stdint.h>");
+   ("include", "<ctype.h>");
+   ("include", "<fcntl.h>");
+   ("include", "<sys/types.h>");
+   ("include", "<sys/stat.h>");
+   ("include", "std_testcase_io.h");
+   ("include", "std_testcase.h");
+   ("include", "<wchar.h>");
+   ("include", "<windows.h>");
+}
+{
+   (!3, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase_io.h");
+   (!2, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h");
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp",
+   MD("RAND32()",[],"((rand()<<30) ^ (rand()<<15) ^ rand())")
+   ,(84#0,84#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp",
+   MD("RAND64()",[],"(((int64_t)rand()<<60) ^ ((int64_t)rand()<<45) ^ ((int64_t)rand()<<30) ^ ((int64_t)rand()<<15) ^ (int64_t)rand())")
+   ,(87#0,87#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   SF([extern,const,extern],int,<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"GLOBAL_CONST_TRUE")
+   ,(103#18,103#34,!2)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   SF([extern,const,extern],int,<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"GLOBAL_CONST_FALSE")
+   ,(104#18,104#35,!2)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   SF([extern,const,extern],int,<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"GLOBAL_CONST_FIVE")
+   ,(105#18,105#34,!2)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   SF([extern,extern],int,<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"globalTrue")
+   ,(110#12,110#21,!2)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   SF([extern,extern],int,<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"globalFalse")
+   ,(111#12,111#22,!2)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   SF([extern,extern],int,<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"globalFive")
+   ,(112#12,112#21,!2)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   SF([extern,extern],int,<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"globalArgc")
+   ,(55#12,55#21,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   SF([extern,extern],ref(ref(char)),<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"globalArgv")
+   ,(56#12,56#24,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   SI(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,
+   {[
+      {;
+      ,(1#1,142#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,142#1,!1)}
+   )
+   ,(1#1,142#1,!1)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   PT([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printLine"):unit,[(mod(ref(char),[const]):"line",(14#16,14#32,!3))],[]
+   )
+   ,(14#1,14#34,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   PT([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printWLine"):unit,[(mod(ref(wchar),[const]):"line",(16#17,16#36,!3))],[]
+   )
+   ,(16#1,16#38,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   PT([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printIntLine"):unit,[(int:"intNumber",(18#20,18#32,!3))],[]
+   )
+   ,(18#1,18#34,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   PT([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printShortLine"):unit,[(short:"shortNumber",(20#22,20#38,!3))],[]
+   )
+   ,(20#1,20#40,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   PT([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printFloatLine"):unit,[(float:"floatNumber",(22#22,22#38,!3))],[]
+   )
+   ,(22#1,22#40,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   PT([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printLongLine"):unit,[(long:"longNumber",(24#20,24#34,!3))],[]
+   )
+   ,(24#1,24#36,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   PT([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printLongLongLine"):unit,[(class((,int64_t)):"longLongIntNumber",(26#24,26#48,!3))],[]
+   )
+   ,(26#1,26#50,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   PT([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printSizeTLine"):unit,[(class((,size_t)):"sizeTNumber",(28#21,28#38,!3))],[]
+   )
+   ,(28#1,28#40,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   PT([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printHexCharLine"):unit,[(char:"charHex",(30#23,30#34,!3))],[]
+   )
+   ,(30#1,30#36,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   PT([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printWcharLine"):unit,[(wchar:"wideChar",(32#21,32#36,!3))],[]
+   )
+   ,(32#1,32#38,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   PT([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printUnsignedLine"):unit,[(uint:"unsignedNumber",(34#24,34#46,!3))],[]
+   )
+   ,(34#1,34#48,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   PT([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printHexUnsignedCharLine"):unit,[(uchar:"unsignedCharacter",(36#31,36#61,!3))],[]
+   )
+   ,(36#1,36#63,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   PT([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printDoubleLine"):unit,[(double:"doubleNumber",(38#22,38#40,!3))],[]
+   )
+   ,(38#1,38#42,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   PT([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printStructLine"):unit,[(mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]):"structTwoIntsStruct",(40#22,40#62,!3))],[]
+   )
+   ,(40#1,40#64,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   PT([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printBytesLine"):unit,[(mod(ref(uchar),[const]):"bytes",(42#21,42#47,!3)),(class((,size_t)):"numBytes",(42#50,42#64,!3))],[]
+   )
+   ,(42#1,42#66,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   PT([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"decodeHexChars"):class((,size_t)),[(ref(uchar):"bytes",(44#23,44#43,!3)),(class((,size_t)):"numBytes",(44#46,44#60,!3)),(mod(ref(char),[const]):"hex",(44#63,44#78,!3))],[]
+   )
+   ,(44#1,44#80,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   PT([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"decodeHexWChars"):class((,size_t)),[(ref(uchar):"bytes",(46#24,46#44,!3)),(class((,size_t)):"numBytes",(46#47,46#61,!3)),(mod(ref(wchar),[const]):"hex",(46#64,46#82,!3))],[]
+   )
+   ,(46#1,46#84,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   PT([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"globalReturnsTrue"):int,[],[]
+   )
+   ,(48#1,48#24,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   PT([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"globalReturnsFalse"):int,[],[]
+   )
+   ,(50#1,50#25,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   PT([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"globalReturnsTrueOrFalse"):int,[],[]
+   )
+   ,(52#1,52#31,!3)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   FN([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01_bad"):unit,[],[],
+   {[
+      {[
+         {VD("password",wchar,([{"100"N,int,(27#26,27#28,!1)}],[{""S,string,(27#33,27#35,!1)}]))
+         ,(27#17,27#29,!1)};
+         {VD("passwordLen",class((,size_t)),{"0"N,int,(28#30,28#30,!1)})
+         ,(28#16,28#26,!1)};
+         {VD("hUser",class((,HANDLE)))
+         ,(29#16,29#20,!1)};
+         {VD("username",ref(wchar),{"User"S,string,(30#30,30#36,!1)})
+         ,(30#17,30#26,!1)};
+         {VD("domain",ref(wchar),{"Domain"S,string,(31#28,31#36,!1)})
+         ,(31#17,31#24,!1)};
+         {IF0({BO(==,{SC((<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"fgetws"),[arr(wchar),int,class((,"%undef"))],[{V("password"),arr(wchar),(32#20,32#27,!1)},{"100"N,int,(32#30,32#32,!1)},{V("stdin"),class((,"%undef")),(32#35,32#39,!1)}]),class((,"%undef")),(32#13,32#40,!1)},{CS(ref(unit),{"0"N,int,(32#45,32#48,!1)}),ref(unit),(32#45,32#48,!1)}),bool,(32#13,32#48,!1)},
+            {[
+               {PC0((<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printLine"),[mod(ref(char),[const])],[{"fgetws() failed"S,string,(34#23,34#39,!1)}])
+               ,(34#13,34#40,!1)};
+               {{AE({AA({V("password"),arr(wchar),(36#13,36#20,!1)},[{"0"N,int,(36#22,36#22,!1)}]),wchar,(36#13,36#23,!1)},{"\0"C,char,(36#27,36#31,!1)}),wchar,(36#13,36#31,!1)}
+               ,(36#13,36#31,!1)}
+               ]
+            ,(33#9,37#9,!1)})
+         ,(32#9,37#9,!1)};
+         {{AE({V("passwordLen"),class((,size_t)),(39#9,39#19,!1)},{SC((<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"wcslen"),[arr(wchar)],[{V("password"),arr(wchar),(39#30,39#37,!1)}]),class((,"%undef")),(39#23,39#38,!1)}),class((,size_t)),(39#9,39#38,!1)}
+         ,(39#9,39#38,!1)};
+         {IF0({BO(>,{V("passwordLen"),class((,size_t)),(40#13,40#23,!1)},{"0"N,int,(40#27,40#27,!1)}),bool,(40#13,40#27,!1)},
+            {[
+               {{AE({AA({V("password"),arr(wchar),(42#13,42#20,!1)},[{BO(-,{V("passwordLen"),class((,size_t)),(42#22,42#32,!1)},{"1"N,int,(42#34,42#34,!1)}),class((,size_t)),(42#22,42#34,!1)}]),wchar,(42#13,42#35,!1)},{"\0"C,char,(42#39,42#43,!1)}),wchar,(42#13,42#43,!1)}
+               ,(42#13,42#43,!1)}
+               ]
+            ,(41#9,43#9,!1)})
+         ,(40#9,43#9,!1)};
+         {IF({BO(!=,{SC((<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"LogonUserW"),[ref(wchar),ref(wchar),arr(wchar),class((,"%undef")),class((,"%undef")),ref(class((,HANDLE)))],[{V("username"),ref(wchar),(46#21,46#28,!1)},{V("domain"),ref(wchar),(47#21,47#26,!1)},{V("password"),arr(wchar),(48#21,48#28,!1)},{V("LOGON32_LOGON_NETWORK"),class((,"%undef")),(49#21,49#41,!1)},{V("LOGON32_PROVIDER_DEFAULT"),class((,"%undef")),(50#21,50#44,!1)},{&{V("hUser"),class((,HANDLE)),(51#22,51#26,!1)},ref(class((,HANDLE))),(51#21,51#26,!1)}]),class((,"%undef")),(45#13,51#27,!1)},{"0"N,int,(51#32,51#32,!1)}),bool,(45#13,51#32,!1)},
+            {[
+               {PC0((<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printLine"),[mod(ref(char),[const])],[{"User logged in successfully."S,string,(53#23,53#52,!1)}])
+               ,(53#13,53#53,!1)};
+               {PC0((<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"CloseHandle"),[class((,HANDLE))],[{V("hUser"),class((,HANDLE)),(54#25,54#29,!1)}])
+               ,(54#13,54#30,!1)}
+               ]
+            ,(52#9,55#9,!1)},
+            {[
+               {PC0((<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printLine"),[mod(ref(char),[const])],[{"Unable to login."S,string,(58#23,58#40,!1)}])
+               ,(58#13,58#41,!1)}
+               ]
+            ,(57#9,59#9,!1)})
+         ,(45#9,59#9,!1)}
+         ]
+      ,(26#5,61#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(24#1,62#1,!1)}
+   )
+   ,(24#1,62#1,!1)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   FN([public,static],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"good1"):mod(unit,[static]),[],[],
+   {[
+      {[
+         {VD("password",wchar,([{"100"N,int,(71#26,71#28,!1)}],[{""S,string,(71#33,71#35,!1)}]))
+         ,(71#17,71#29,!1)};
+         {VD("passwordLen",class((,size_t)),{"0"N,int,(72#30,72#30,!1)})
+         ,(72#16,72#26,!1)};
+         {VD("hUser",class((,HANDLE)))
+         ,(73#16,73#20,!1)};
+         {VD("username",ref(wchar),{"User"S,string,(74#30,74#36,!1)})
+         ,(74#17,74#26,!1)};
+         {VD("domain",ref(wchar),{"Domain"S,string,(75#28,75#36,!1)})
+         ,(75#17,75#24,!1)};
+         {IF0({BO(==,{SC((<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"fgetws"),[arr(wchar),int,class((,"%undef"))],[{V("password"),arr(wchar),(76#20,76#27,!1)},{"100"N,int,(76#30,76#32,!1)},{V("stdin"),class((,"%undef")),(76#35,76#39,!1)}]),class((,"%undef")),(76#13,76#40,!1)},{CS(ref(unit),{"0"N,int,(76#45,76#48,!1)}),ref(unit),(76#45,76#48,!1)}),bool,(76#13,76#48,!1)},
+            {[
+               {PC0((<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printLine"),[mod(ref(char),[const])],[{"fgetws() failed"S,string,(78#23,78#39,!1)}])
+               ,(78#13,78#40,!1)};
+               {{AE({AA({V("password"),arr(wchar),(80#13,80#20,!1)},[{"0"N,int,(80#22,80#22,!1)}]),wchar,(80#13,80#23,!1)},{"\0"C,char,(80#27,80#31,!1)}),wchar,(80#13,80#31,!1)}
+               ,(80#13,80#31,!1)}
+               ]
+            ,(77#9,81#9,!1)})
+         ,(76#9,81#9,!1)};
+         {{AE({V("passwordLen"),class((,size_t)),(83#9,83#19,!1)},{SC((<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"wcslen"),[arr(wchar)],[{V("password"),arr(wchar),(83#30,83#37,!1)}]),class((,"%undef")),(83#23,83#38,!1)}),class((,size_t)),(83#9,83#38,!1)}
+         ,(83#9,83#38,!1)};
+         {IF0({BO(>,{V("passwordLen"),class((,size_t)),(84#13,84#23,!1)},{"0"N,int,(84#27,84#27,!1)}),bool,(84#13,84#27,!1)},
+            {[
+               {{AE({AA({V("password"),arr(wchar),(86#13,86#20,!1)},[{BO(-,{V("passwordLen"),class((,size_t)),(86#22,86#32,!1)},{"1"N,int,(86#34,86#34,!1)}),class((,size_t)),(86#22,86#34,!1)}]),wchar,(86#13,86#35,!1)},{"\0"C,char,(86#39,86#43,!1)}),wchar,(86#13,86#43,!1)}
+               ,(86#13,86#43,!1)}
+               ]
+            ,(85#9,87#9,!1)})
+         ,(84#9,87#9,!1)};
+         {IF({BO(!=,{SC((<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"LogonUserW"),[ref(wchar),ref(wchar),arr(wchar),class((,"%undef")),class((,"%undef")),ref(class((,HANDLE)))],[{V("username"),ref(wchar),(90#21,90#28,!1)},{V("domain"),ref(wchar),(91#21,91#26,!1)},{V("password"),arr(wchar),(92#21,92#28,!1)},{V("LOGON32_LOGON_NETWORK"),class((,"%undef")),(93#21,93#41,!1)},{V("LOGON32_PROVIDER_DEFAULT"),class((,"%undef")),(94#21,94#44,!1)},{&{V("hUser"),class((,HANDLE)),(95#22,95#26,!1)},ref(class((,HANDLE))),(95#21,95#26,!1)}]),class((,"%undef")),(89#13,95#27,!1)},{"0"N,int,(95#32,95#32,!1)}),bool,(89#13,95#32,!1)},
+            {[
+               {PC0((<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printLine"),[mod(ref(char),[const])],[{"User logged in successfully."S,string,(97#23,97#52,!1)}])
+               ,(97#13,97#53,!1)};
+               {PC0((<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"CloseHandle"),[class((,HANDLE))],[{V("hUser"),class((,HANDLE)),(98#25,98#29,!1)}])
+               ,(98#13,98#30,!1)}
+               ]
+            ,(96#9,99#9,!1)},
+            {[
+               {PC0((<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"printLine"),[mod(ref(char),[const])],[{"Unable to login."S,string,(102#23,102#40,!1)}])
+               ,(102#13,102#41,!1)}
+               ]
+            ,(101#9,103#9,!1)})
+         ,(89#9,103#9,!1)};
+         {{AE({V("passwordLen"),class((,size_t)),(104#9,104#19,!1)},{SC((<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"wcslen"),[arr(wchar)],[{V("password"),arr(wchar),(104#30,104#37,!1)}]),class((,"%undef")),(104#23,104#38,!1)}),class((,size_t)),(104#9,104#38,!1)}
+         ,(104#9,104#38,!1)};
+         {PC0((<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"SecureZeroMemory"),[arr(wchar),class((,size_t))],[{V("password"),arr(wchar),(106#26,106#33,!1)},{BO(*,{V("passwordLen"),class((,size_t)),(106#36,106#46,!1)},{SO(wchar),int,(106#50,106#64,!1)}),class((,size_t)),(106#36,106#64,!1)}])
+         ,(106#9,106#65,!1)}
+         ]
+      ,(70#5,107#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(68#1,108#1,!1)}
+   )
+   ,(68#1,108#1,!1)},
+
+   {"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01",
+   FN([public],(<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01_good"):unit,[],[],
+   {[
+      {PC0((<"CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01">,"good1"),[],[])
+      ,(112#5,112#11,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(110#1,113#1,!1)}
+   )
+   ,(110#1,113#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp",
+   CL([struct],(,_twoIntsStruct),[])
+   {
+      ([public],"intOne":int,(92#9,92#14,!2));
+      ([public],"intTwo":int,(93#9,93#14,!2))
+   }
+   ,(90#1,94#16,!2)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp",
+   [
+      M("/* TEMPLATE GENERATED TESTCASE FILE\nFilename: CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.c\nLabel Definition File: CWE226_Sensitive_Information_Uncleared_Before_Release__w32.label.xml\nTemplate File: point-flaw-01.tmpl.c\n*/",1,(1#0,1#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp")),
+      M("/*\n * @description\n * CWE: 226 Sensitive Information Uncleared Before Release\n * Sinks: declare\n *    GoodSink: Clear the password buffer before releasing the memory from the stack\n *    BadSink : Release password from the stack without first clearing the buffer\n * Flow Variant: 01 Baseline\n *\n * */",6,(6#0,6#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp")),
+      M("/* Restore NUL terminator if fgetws fails */",35,(35#0,35#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp")),
+      M("/* Remove the carriage return from the string that is inserted by fgetws() */",38,(38#0,38#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp")),
+      M("/* Use the password in LogonUser() to establish that it is \"sensitive\" */",44,(44#0,44#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp")),
+      M("/* FLAW: Release password from the stack without first clearing the buffer */",60,(60#0,60#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp")),
+      M("/* OMITBAD */",64,(64#0,64#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp")),
+      M("/* Restore NUL terminator if fgetws fails */",79,(79#0,79#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp")),
+      M("/* Remove the carriage return from the string that is inserted by fgetws() */",82,(82#0,82#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp")),
+      M("/* Use the password in LogonUser() to establish that it is \"sensitive\" */",88,(88#0,88#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp")),
+      M("/* FIX: Clear password prior to release from stack */",105,(105#0,105#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp")),
+      M("/* OMITGOOD */",115,(115#0,115#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp")),
+      M("/* Below is the main(). It is only used when building this testcase on\n   its own for testing or for building a binary to use in testing binary\n   analysis tools. It is not used when compiling all the testcases as one\n   application, which is how source code analysis tools are tested. */",117,(117#0,117#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp")),
+      M("/* seed randomness */",126,(126#0,126#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp")),
+      M("/* OMITGOOD */",132,(132#0,132#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp")),
+      M("/* OMITBAD */",137,(137#0,137#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E06.CWE226_Sensitive_Information_Uncleared_Before_Release/CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp"))
+   ]
+   }
+]

@@ -1,0 +1,241 @@
+/* Additional includes go here */
+
+<%
+SPL::CodeGen::implementationPrologue($model);
+my $separator = $model->getParameterByName("separator");
+$separator = $separator->getValueAt(0)->getCppExpression();
+%>
+
+#include <Misc/Util.hpp>
+
+using namespace std;
+
+// Constructor
+MY_OPERATOR::MY_OPERATOR()
+{
+    // Initialization code goes here
+}
+
+// Destructor
+MY_OPERATOR::~MY_OPERATOR() 
+{
+    // Finalization code goes here
+}
+
+// Notify port readiness
+void MY_OPERATOR::allPortsReady() 
+{
+    // Notifies that all ports are ready. No tuples should be submitted before
+    // this. Source operators can use this method to spawn threads.
+
+    /*
+      createThreads(1); // Create source thread
+    */
+}
+ 
+// Notify pending shutdown
+void MY_OPERATOR::prepareToShutdown() 
+{
+    // This is an asynchronous call
+}
+
+// Processing for source and threaded operators   
+void MY_OPERATOR::process(uint32_t idx)
+{
+    // A typical implementation will loop until shutdown
+    /*
+      while(!getPE().getShutdownRequested()) {
+          // do work ...
+      }
+    */
+}
+
+// Tuple processing for mutating ports 
+void MY_OPERATOR::process(Tuple & tuple, uint32_t port)
+{
+  	OPort0Type otuple;
+  	string output = "";
+  	string charging_id = "";
+  	bool endROP = false;
+	<%
+		for(my $o=0; $o < $model->getNumberOfInputPorts(); ++$o)
+		{
+			%>
+			if(port == <%=$o%>) {
+				IPort<%=$o%>Type const & ituple<%=$o%> = static_cast<IPort<%=$o%>Type const&>(tuple);
+			  	<%
+				my $istream = $model->getInputPortAt($o);
+					
+				foreach my $attr (@{$istream->getAttributes()})
+				{
+				
+					my $oname = $attr->getName();
+					my $otype = $attr->getSPLType();
+					
+					if ($oname eq 'nameOutputFile')
+					{%>
+						otuple.set_nameOutputFile(ituple<%=$o%>.get_nameOutputFile());
+					<%}
+					
+					elsif ($oname eq 'endRop')
+					{%>				
+						otuple.set_endROP(ituple<%=$o%>.get_endRop());  
+						if(ituple<%=$o%>.get_endRop()) {
+							endROP = true;
+							SPLAPPTRC(L_INFO, "Setting ENDROP: " << otuple.get_endROP(), "dpsop");
+						}
+					<%}
+					
+					elsif ($oname eq 'writeOn')
+					{%>				
+						otuple.set_writeOn(ituple<%=$o%>.get_writeOn());
+					<%}
+					
+					elsif ($oname eq 'user_location_information')
+					{%>				
+						
+					<%}
+					
+					elsif ($oname eq 'serving_node_address')
+					{%>				
+						
+					<%}
+					
+					elsif ($oname eq 'ggsn_address_used')
+					{%>				
+						
+					<%}
+					
+					elsif ($oname eq 'served_MSISDN')
+					{%>				
+						
+					<%}
+					
+					elsif ($oname eq 'endRopSecs')
+					{%>				
+						
+					<%}
+					
+					elsif ($oname eq 'openingTime')
+					{%>				
+						
+					<%}
+					
+					elsif ($oname eq 'startRopSecs')
+					{%>				
+						
+					<%}
+					
+					elsif ($oname eq 'timeTmp')
+					{%>				
+						
+					<%}
+					
+					elsif ($oname eq 'keyCharging')
+					{%>				
+						
+					<%}
+					
+					elsif ($oname eq 'diffUp')
+					{%>				
+						
+					<%}
+					
+					elsif ($oname eq 'diffDown')
+					{%>				
+						
+					<%}
+					
+					elsif ($oname eq 'northIf')
+					{%>				
+						otuple.set_northIf(ituple<%=$o%>.get_northIf());  
+					<%}
+					
+					elsif ($oname eq 'filePrefix')
+					{%>				
+						otuple.set_filePrefix(ituple<%=$o%>.get_filePrefix());  
+					<%}
+					
+					elsif ($oname eq 'suffix')
+					{%>				
+						otuple.set_suffix(ituple<%=$o%>.get_suffix());  
+					<%}
+
+					elsif ($otype eq 'blob')
+					{%>				
+						//SPLAPPTRC(L_INFO, "Prepare IMSI data prima " << (ituple<%=$o%>.get_<%=$oname%>() ).getData(), "dpsop");
+						//SPLAPPTRC(L_INFO, "Prepare IMSI size prima " << (ituple<%=$o%>.get_<%=$oname%>() ).getSize(), "dpsop");
+						output += Util::convertToString( ( ituple<%=$o%>.get_<%=$oname%>() ).getData(), ( ituple<%=$o%>.get_<%=$oname%>() ).getSize() ) + <%=$separator%>;
+						//SPLAPPTRC(L_INFO, "Prepare IMSI dopo " << Util::convertToString( ( ituple<%=$o%>.get_<%=$oname%>() ).getData(), ( ituple<%=$o%>.get_<%=$oname%>() ).getSize() ), "dpsop");
+					<%}
+
+					elsif ($otype eq 'rstring')
+					{
+					%>
+					
+						output += ituple<%=$o%>.get_<%=$oname%>() + <%=$separator%>;
+					
+					<%
+					}
+					else
+					{
+					%>
+						
+						output += Util::convertToString(ituple<%=$o%>.get_<%=$oname%>()) + <%=$separator%>;
+					
+					<%
+					}
+					#print STDERR "name: $oname \n";
+					#print STDERR "type: $otype \n";
+					
+					if ($oname eq 'chargingID')
+					{%>
+						//SPLAPPTRC(L_INFO, "CHARGING_ID: " << ituple<%=$o%>.get_chargingID(), "dpsop");
+						charging_id = Util::convertToString(ituple<%=$o%>.get_chargingID());
+					<%}
+				}
+			%>
+		}
+		
+		//SPLAPPTRC(L_INFO, "OUTPUT: " << output, "dpsop");
+	  	if (charging_id == "0"){
+	  		output = "";
+	  	}
+	  	if (output != "" && !endROP)
+		{
+	  		otuple.set_outputContent(output.substr(0,output.size()-1));
+	  	}else{
+	  		otuple.set_outputContent("");
+	  	}
+	  	output = "";
+	  	
+	  	//SPLAPPTRC(L_INFO, "OUTPUT_CONTENT: " << otuple.get_outputContent(), "dpsop"); 
+	  	
+		//SPLAPPTRC(L_INFO, "Prepare end rop " << ituple<%=$o%>.get_endRop(), "dpsop");
+	    submit(otuple, 0);  
+	<%
+     }
+    %>
+  
+}
+
+// Tuple processing for non-mutating ports
+void MY_OPERATOR::process(Tuple const & tuple, uint32_t port)
+{
+    // Sample submit code
+    /* 
+      OPort0Type otuple;
+      submit(otuple, 0); // submit to output port 0
+    */
+}
+
+// Punctuation processing
+void MY_OPERATOR::process(Punctuation const & punct, uint32_t port)
+{
+	if(punct == Punctuation::WindowMarker) {
+    	submit(punct,port);
+    }
+}
+
+<%SPL::CodeGen::implementationEpilogue($model);%>
+

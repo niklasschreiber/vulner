@@ -1,0 +1,6 @@
+import bg.Reservation
+
+model {
+    Iterable<Reservation> reservationList
+}
+json tmpl.reservation(reservationList)

@@ -1,0 +1,479 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp");
+   ("language", "CPP");
+   ("include", "std_testcase.h");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<stddef.h>");
+   ("include", "<time.h>");
+   ("include", "<limits.h>");
+   ("include", "<string.h>");
+   ("include", "<stdint.h>");
+   ("include", "<stdint.h>");
+   ("include", "<ctype.h>");
+   ("include", "<fcntl.h>");
+   ("include", "<sys/types.h>");
+   ("include", "<sys/stat.h>");
+   ("include", "std_testcase_io.h");
+   ("include", "std_testcase.h");
+}
+{
+   (!3, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase_io.h");
+   (!2, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h");
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp",
+   MD("RAND32()",[],"((rand()<<30) ^ (rand()<<15) ^ rand())")
+   ,(84#0,84#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp",
+   MD("RAND64()",[],"(((int64_t)rand()<<60) ^ ((int64_t)rand()<<45) ^ ((int64_t)rand()<<30) ^ ((int64_t)rand()<<15) ^ (int64_t)rand())")
+   ,(87#0,87#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   SF([extern,const,extern],int,<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"GLOBAL_CONST_TRUE")
+   ,(103#18,103#34,!2)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   SF([extern,const,extern],int,<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"GLOBAL_CONST_FALSE")
+   ,(104#18,104#35,!2)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   SF([extern,const,extern],int,<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"GLOBAL_CONST_FIVE")
+   ,(105#18,105#34,!2)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   SF([extern,extern],int,<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"globalTrue")
+   ,(110#12,110#21,!2)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   SF([extern,extern],int,<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"globalFalse")
+   ,(111#12,111#22,!2)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   SF([extern,extern],int,<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"globalFive")
+   ,(112#12,112#21,!2)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   SF([extern,extern],int,<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"globalArgc")
+   ,(55#12,55#21,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   SF([extern,extern],ref(ref(char)),<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"globalArgv")
+   ,(56#12,56#24,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   SI(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,
+   {[
+      {;
+      ,(1#1,144#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,144#1,!1)}
+   )
+   ,(1#1,144#1,!1)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printLine"):unit,[(mod(ref(char),[const]):"line",(14#16,14#32,!3))],[]
+   )
+   ,(14#1,14#34,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printWLine"):unit,[(mod(ref(wchar),[const]):"line",(16#17,16#36,!3))],[]
+   )
+   ,(16#1,16#38,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printIntLine"):unit,[(int:"intNumber",(18#20,18#32,!3))],[]
+   )
+   ,(18#1,18#34,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printShortLine"):unit,[(short:"shortNumber",(20#22,20#38,!3))],[]
+   )
+   ,(20#1,20#40,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printFloatLine"):unit,[(float:"floatNumber",(22#22,22#38,!3))],[]
+   )
+   ,(22#1,22#40,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printLongLine"):unit,[(long:"longNumber",(24#20,24#34,!3))],[]
+   )
+   ,(24#1,24#36,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printLongLongLine"):unit,[(class((,int64_t)):"longLongIntNumber",(26#24,26#48,!3))],[]
+   )
+   ,(26#1,26#50,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printSizeTLine"):unit,[(class((,size_t)):"sizeTNumber",(28#21,28#38,!3))],[]
+   )
+   ,(28#1,28#40,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printHexCharLine"):unit,[(char:"charHex",(30#23,30#34,!3))],[]
+   )
+   ,(30#1,30#36,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printWcharLine"):unit,[(wchar:"wideChar",(32#21,32#36,!3))],[]
+   )
+   ,(32#1,32#38,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printUnsignedLine"):unit,[(uint:"unsignedNumber",(34#24,34#46,!3))],[]
+   )
+   ,(34#1,34#48,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printHexUnsignedCharLine"):unit,[(uchar:"unsignedCharacter",(36#31,36#61,!3))],[]
+   )
+   ,(36#1,36#63,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printDoubleLine"):unit,[(double:"doubleNumber",(38#22,38#40,!3))],[]
+   )
+   ,(38#1,38#42,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printStructLine"):unit,[(mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]):"structTwoIntsStruct",(40#22,40#62,!3))],[]
+   )
+   ,(40#1,40#64,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printBytesLine"):unit,[(mod(ref(uchar),[const]):"bytes",(42#21,42#47,!3)),(class((,size_t)):"numBytes",(42#50,42#64,!3))],[]
+   )
+   ,(42#1,42#66,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"decodeHexChars"):class((,size_t)),[(ref(uchar):"bytes",(44#23,44#43,!3)),(class((,size_t)):"numBytes",(44#46,44#60,!3)),(mod(ref(char),[const]):"hex",(44#63,44#78,!3))],[]
+   )
+   ,(44#1,44#80,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"decodeHexWChars"):class((,size_t)),[(ref(uchar):"bytes",(46#24,46#44,!3)),(class((,size_t)):"numBytes",(46#47,46#61,!3)),(mod(ref(wchar),[const]):"hex",(46#64,46#82,!3))],[]
+   )
+   ,(46#1,46#84,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"globalReturnsTrue"):int,[],[]
+   )
+   ,(48#1,48#24,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"globalReturnsFalse"):int,[],[]
+   )
+   ,(50#1,50#25,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"globalReturnsTrueOrFalse"):int,[],[]
+   )
+   ,(52#1,52#31,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   FN([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01_bad"):unit,[],[],
+   {[
+      {VD("data",ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))))
+      ,(24#19,24#24,!1)};
+      {VD("dataUninitArray",alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),([{"10"N,int,(25#35,25#36,!1)}]))
+      ,(25#19,25#37,!1)};
+      {{AE({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(26#5,26#8,!1)},{V("dataUninitArray"),arr(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(26#12,26#26,!1)}),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(26#5,26#26,!1)}
+      ,(26#5,26#26,!1)};
+      {[
+         {VD("i",int)
+         ,(29#13,29#13,!1)};
+         {FL(L213,
+            {[
+               {{AE({V("i"),int,(30#13,30#13,!1)},{"0"N,int,(30#15,30#15,!1)}),int,(30#13,30#15,!1)}
+               ,(30#13,30#15,!1)}
+            ]
+            ,(30#9,34#9,!1)},{BO(<,{V("i"),int,(30#18,30#18,!1)},{BO(/,{"10"N,int,(30#21,30#22,!1)},{"2"N,int,(30#24,30#24,!1)}),int,(30#20,30#25,!1)}),bool,(30#18,30#25,!1)},
+            {[
+               {{IPO({V("i"),int,(30#28,30#28,!1)}),int,(30#28,30#30,!1)}
+               ,(30#28,30#30,!1)}
+            ]
+            ,(30#9,34#9,!1)},
+            {[
+               {{AE({OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(32#13,32#16,!1)},[{V("i"),int,(32#18,32#18,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(32#13,32#19,!1)},"intOne"),int,(32#13,32#26,!1)},{V("i"),int,(32#30,32#30,!1)}),int,(32#13,32#30,!1)}
+               ,(32#13,32#30,!1)};
+               {{AE({OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(33#13,33#16,!1)},[{V("i"),int,(33#18,33#18,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(33#13,33#19,!1)},"intTwo"),int,(33#13,33#26,!1)},{V("i"),int,(33#30,33#30,!1)}),int,(33#13,33#30,!1)}
+               ,(33#13,33#30,!1)}
+               ]
+            ,(31#9,34#9,!1)})
+         ,(30#9,34#9,!1)}
+         ]
+      ,(28#5,35#5,!1)};
+      {[
+         {VD("i",int)
+         ,(38#13,38#13,!1)};
+         {FL(L214,
+            {[
+               {{AE({V("i"),int,(39#13,39#13,!1)},{"0"N,int,(39#15,39#15,!1)}),int,(39#13,39#15,!1)}
+               ,(39#13,39#15,!1)}
+            ]
+            ,(39#9,43#9,!1)},{BO(<,{V("i"),int,(39#18,39#18,!1)},{"10"N,int,(39#20,39#21,!1)}),bool,(39#18,39#21,!1)},
+            {[
+               {{IPO({V("i"),int,(39#24,39#24,!1)}),int,(39#24,39#26,!1)}
+               ,(39#24,39#26,!1)}
+            ]
+            ,(39#9,43#9,!1)},
+            {[
+               {PC0((<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printIntLine"),[int],[{OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(41#26,41#29,!1)},[{V("i"),int,(41#31,41#31,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(41#26,41#32,!1)},"intOne"),int,(41#26,41#39,!1)}])
+               ,(41#13,41#40,!1)};
+               {PC0((<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printIntLine"),[int],[{OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(42#26,42#29,!1)},[{V("i"),int,(42#31,42#31,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(42#26,42#32,!1)},"intTwo"),int,(42#26,42#39,!1)}])
+               ,(42#13,42#40,!1)}
+               ]
+            ,(40#9,43#9,!1)})
+         ,(39#9,43#9,!1)}
+         ]
+      ,(37#5,44#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(22#1,45#1,!1)}
+   )
+   ,(22#1,45#1,!1)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   FN([public,static],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"goodG2B"):mod(unit,[static]),[],[],
+   {[
+      {VD("data",ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))))
+      ,(54#19,54#24,!1)};
+      {VD("dataUninitArray",alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),([{"10"N,int,(55#35,55#36,!1)}]))
+      ,(55#19,55#37,!1)};
+      {{AE({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(56#5,56#8,!1)},{V("dataUninitArray"),arr(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(56#12,56#26,!1)}),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(56#5,56#26,!1)}
+      ,(56#5,56#26,!1)};
+      {[
+         {VD("i",int)
+         ,(59#13,59#13,!1)};
+         {FL(L215,
+            {[
+               {{AE({V("i"),int,(60#13,60#13,!1)},{"0"N,int,(60#15,60#15,!1)}),int,(60#13,60#15,!1)}
+               ,(60#13,60#15,!1)}
+            ]
+            ,(60#9,64#9,!1)},{BO(<,{V("i"),int,(60#18,60#18,!1)},{"10"N,int,(60#20,60#21,!1)}),bool,(60#18,60#21,!1)},
+            {[
+               {{IPO({V("i"),int,(60#24,60#24,!1)}),int,(60#24,60#26,!1)}
+               ,(60#24,60#26,!1)}
+            ]
+            ,(60#9,64#9,!1)},
+            {[
+               {{AE({OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(62#13,62#16,!1)},[{V("i"),int,(62#18,62#18,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(62#13,62#19,!1)},"intOne"),int,(62#13,62#26,!1)},{V("i"),int,(62#30,62#30,!1)}),int,(62#13,62#30,!1)}
+               ,(62#13,62#30,!1)};
+               {{AE({OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(63#13,63#16,!1)},[{V("i"),int,(63#18,63#18,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(63#13,63#19,!1)},"intTwo"),int,(63#13,63#26,!1)},{V("i"),int,(63#30,63#30,!1)}),int,(63#13,63#30,!1)}
+               ,(63#13,63#30,!1)}
+               ]
+            ,(61#9,64#9,!1)})
+         ,(60#9,64#9,!1)}
+         ]
+      ,(58#5,65#5,!1)};
+      {[
+         {VD("i",int)
+         ,(68#13,68#13,!1)};
+         {FL(L216,
+            {[
+               {{AE({V("i"),int,(69#13,69#13,!1)},{"0"N,int,(69#15,69#15,!1)}),int,(69#13,69#15,!1)}
+               ,(69#13,69#15,!1)}
+            ]
+            ,(69#9,73#9,!1)},{BO(<,{V("i"),int,(69#18,69#18,!1)},{"10"N,int,(69#20,69#21,!1)}),bool,(69#18,69#21,!1)},
+            {[
+               {{IPO({V("i"),int,(69#24,69#24,!1)}),int,(69#24,69#26,!1)}
+               ,(69#24,69#26,!1)}
+            ]
+            ,(69#9,73#9,!1)},
+            {[
+               {PC0((<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printIntLine"),[int],[{OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(71#26,71#29,!1)},[{V("i"),int,(71#31,71#31,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(71#26,71#32,!1)},"intOne"),int,(71#26,71#39,!1)}])
+               ,(71#13,71#40,!1)};
+               {PC0((<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printIntLine"),[int],[{OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(72#26,72#29,!1)},[{V("i"),int,(72#31,72#31,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(72#26,72#32,!1)},"intTwo"),int,(72#26,72#39,!1)}])
+               ,(72#13,72#40,!1)}
+               ]
+            ,(70#9,73#9,!1)})
+         ,(69#9,73#9,!1)}
+         ]
+      ,(67#5,74#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(52#1,75#1,!1)}
+   )
+   ,(52#1,75#1,!1)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   FN([public,static],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"goodB2G"):mod(unit,[static]),[],[],
+   {[
+      {VD("data",ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))))
+      ,(80#19,80#24,!1)};
+      {VD("dataUninitArray",alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),([{"10"N,int,(81#35,81#36,!1)}]))
+      ,(81#19,81#37,!1)};
+      {{AE({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(82#5,82#8,!1)},{V("dataUninitArray"),arr(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(82#12,82#26,!1)}),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(82#5,82#26,!1)}
+      ,(82#5,82#26,!1)};
+      {[
+         {VD("i",int)
+         ,(85#13,85#13,!1)};
+         {FL(L217,
+            {[
+               {{AE({V("i"),int,(86#13,86#13,!1)},{"0"N,int,(86#15,86#15,!1)}),int,(86#13,86#15,!1)}
+               ,(86#13,86#15,!1)}
+            ]
+            ,(86#9,90#9,!1)},{BO(<,{V("i"),int,(86#18,86#18,!1)},{BO(/,{"10"N,int,(86#21,86#22,!1)},{"2"N,int,(86#24,86#24,!1)}),int,(86#20,86#25,!1)}),bool,(86#18,86#25,!1)},
+            {[
+               {{IPO({V("i"),int,(86#28,86#28,!1)}),int,(86#28,86#30,!1)}
+               ,(86#28,86#30,!1)}
+            ]
+            ,(86#9,90#9,!1)},
+            {[
+               {{AE({OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(88#13,88#16,!1)},[{V("i"),int,(88#18,88#18,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(88#13,88#19,!1)},"intOne"),int,(88#13,88#26,!1)},{V("i"),int,(88#30,88#30,!1)}),int,(88#13,88#30,!1)}
+               ,(88#13,88#30,!1)};
+               {{AE({OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(89#13,89#16,!1)},[{V("i"),int,(89#18,89#18,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(89#13,89#19,!1)},"intTwo"),int,(89#13,89#26,!1)},{V("i"),int,(89#30,89#30,!1)}),int,(89#13,89#30,!1)}
+               ,(89#13,89#30,!1)}
+               ]
+            ,(87#9,90#9,!1)})
+         ,(86#9,90#9,!1)}
+         ]
+      ,(84#5,91#5,!1)};
+      {[
+         {VD("i",int)
+         ,(94#13,94#13,!1)};
+         {FL(L218,
+            {[
+               {{AE({V("i"),int,(95#13,95#13,!1)},{"0"N,int,(95#15,95#15,!1)}),int,(95#13,95#15,!1)}
+               ,(95#13,95#15,!1)}
+            ]
+            ,(95#9,99#9,!1)},{BO(<,{V("i"),int,(95#18,95#18,!1)},{"10"N,int,(95#20,95#21,!1)}),bool,(95#18,95#21,!1)},
+            {[
+               {{IPO({V("i"),int,(95#24,95#24,!1)}),int,(95#24,95#26,!1)}
+               ,(95#24,95#26,!1)}
+            ]
+            ,(95#9,99#9,!1)},
+            {[
+               {{AE({OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(97#13,97#16,!1)},[{V("i"),int,(97#18,97#18,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(97#13,97#19,!1)},"intOne"),int,(97#13,97#26,!1)},{V("i"),int,(97#30,97#30,!1)}),int,(97#13,97#30,!1)}
+               ,(97#13,97#30,!1)};
+               {{AE({OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(98#13,98#16,!1)},[{V("i"),int,(98#18,98#18,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(98#13,98#19,!1)},"intTwo"),int,(98#13,98#26,!1)},{V("i"),int,(98#30,98#30,!1)}),int,(98#13,98#30,!1)}
+               ,(98#13,98#30,!1)}
+               ]
+            ,(96#9,99#9,!1)})
+         ,(95#9,99#9,!1)}
+         ]
+      ,(93#5,100#5,!1)};
+      {[
+         {VD("i",int)
+         ,(102#13,102#13,!1)};
+         {FL(L219,
+            {[
+               {{AE({V("i"),int,(103#13,103#13,!1)},{"0"N,int,(103#15,103#15,!1)}),int,(103#13,103#15,!1)}
+               ,(103#13,103#15,!1)}
+            ]
+            ,(103#9,107#9,!1)},{BO(<,{V("i"),int,(103#18,103#18,!1)},{"10"N,int,(103#20,103#21,!1)}),bool,(103#18,103#21,!1)},
+            {[
+               {{IPO({V("i"),int,(103#24,103#24,!1)}),int,(103#24,103#26,!1)}
+               ,(103#24,103#26,!1)}
+            ]
+            ,(103#9,107#9,!1)},
+            {[
+               {PC0((<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printIntLine"),[int],[{OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(105#26,105#29,!1)},[{V("i"),int,(105#31,105#31,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(105#26,105#32,!1)},"intOne"),int,(105#26,105#39,!1)}])
+               ,(105#13,105#40,!1)};
+               {PC0((<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"printIntLine"),[int],[{OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(106#26,106#29,!1)},[{V("i"),int,(106#31,106#31,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(106#26,106#32,!1)},"intTwo"),int,(106#26,106#39,!1)}])
+               ,(106#13,106#40,!1)}
+               ]
+            ,(104#9,107#9,!1)})
+         ,(103#9,107#9,!1)}
+         ]
+      ,(101#5,108#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(78#1,109#1,!1)}
+   )
+   ,(78#1,109#1,!1)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01",
+   FN([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01_good"):unit,[],[],
+   {[
+      {PC0((<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"goodG2B"),[],[])
+      ,(113#5,113#13,!1)};
+      {PC0((<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01">,"goodB2G"),[],[])
+      ,(114#5,114#13,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(111#1,115#1,!1)}
+   )
+   ,(111#1,115#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp",
+   CL([struct],(,_twoIntsStruct),[])
+   {
+      ([public],"intOne":int,(92#9,92#14,!2));
+      ([public],"intTwo":int,(93#9,93#14,!2))
+   }
+   ,(90#1,94#16,!2)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp",
+   [
+      M("/* TEMPLATE GENERATED TESTCASE FILE\nFilename: CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.c\nLabel Definition File: CWE457_Use_of_Uninitialized_Variable.c_array.label.xml\nTemplate File: sources-sinks-01.tmpl.c\n*/",1,(1#0,1#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp")),
+      M("/*\n * @description\n * CWE: 457 Use of Uninitialized Variable\n * BadSource: partial_init Initialize part, but not all of the array\n * GoodSource: Initialize data\n * Sinks: use\n *    GoodSink: Initialize then use data\n *    BadSink : Use data\n * Flow Variant: 01 Baseline\n *\n * */",6,(6#0,6#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp")),
+      M("/* POTENTIAL FLAW: Partially initialize data */",27,(27#0,27#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp")),
+      M("/* POTENTIAL FLAW: Use data without initializing it */",36,(36#0,36#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp")),
+      M("/* OMITBAD */",47,(47#0,47#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp")),
+      M("/* goodG2B uses the GoodSource with the BadSink */",51,(51#0,51#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp")),
+      M("/* FIX: Completely initialize data */",57,(57#0,57#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp")),
+      M("/* POTENTIAL FLAW: Use data without initializing it */",66,(66#0,66#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp")),
+      M("/* goodB2G uses the BadSource with the GoodSink */",77,(77#0,77#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp")),
+      M("/* POTENTIAL FLAW: Partially initialize data */",83,(83#0,83#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp")),
+      M("/* FIX: Ensure data is initialized before use */",92,(92#0,92#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp")),
+      M("/* OMITGOOD */",117,(117#0,117#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp")),
+      M("/* Below is the main(). It is only used when building this testcase on\n   its own for testing or for building a binary to use in testing binary\n   analysis tools. It is not used when compiling all the testcases as one\n   application, which is how source code analysis tools are tested. */",119,(119#0,119#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp")),
+      M("/* seed randomness */",128,(128#0,128#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp")),
+      M("/* OMITGOOD */",134,(134#0,134#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp")),
+      M("/* OMITBAD */",139,(139#0,139#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_partial_init_01.cpp"))
+   ]
+   }
+]

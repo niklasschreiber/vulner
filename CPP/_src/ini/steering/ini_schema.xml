@@ -1,0 +1,1160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+   <body>
+
+      <section type="common" name="EMS">
+         Event Management System parameters
+         <parameter name="EMS-OWNER" mandatory="1" default="TIM" type="char" maxlength="8">
+            EMS Owner
+         </parameter>
+         <parameter name="EMS-VERSION" mandatory="1" default="A09" type="char" maxlength="3">
+            EMS Version
+         </parameter>
+         <parameter name="EMS-APPL" mandatory="1" default="TFS" type="char" maxlength="10">
+            EMS Application Name
+         </parameter>
+         <parameter name="EMS-SUBSYSTEM" mandatory="1" default="760" type="numeric" minvalue="0" maxvalue="32767">
+            EMS Subsystem
+         </parameter>
+         <parameter name="EMS-TIME-INTERVAL" mandatory="0" default="60" type="numeric" minvalue="1" maxvalue="86400">
+            EMS Time Interval (seconds) for same event
+         </parameter>
+      </section>
+      <section type="common" name="LOG">
+         Log parameters
+         <parameter name="LOG-PATH" mandatory="1" type="folder">
+            LOG Guardian directory
+         </parameter>
+         <parameter name="LOG-DAYS" mandatory="1" default="8" type="numeric" minvalue="0" maxvalue="30">
+            LOG Days
+         </parameter>
+         <parameter name="LOG-LEVEL" mandatory="1" default="9" type="select">
+            LOG Level
+            <option value="1">
+               ERROR
+            </option>
+            <option value="5">
+               WARNING
+            </option>
+            <option value="9">
+               INFO
+            </option>
+            <option value="10">
+               DEBUG
+            </option>
+            <option value="11">
+               DEBUG2
+            </option>
+         </parameter>
+         <parameter name="LOG-OPTIONS" mandatory="1" default="7" type="select">
+            LOG Options
+            <option value="0">
+               BUFFERED-NONE
+            </option>
+            <option value="1">
+               BUFFERED-DATE
+            </option>
+            <option value="2">
+               BUFFERED-TIME
+            </option>
+            <option value="3">
+               BUFFERED-DATE-TIME
+            </option>
+            <option value="4">
+               BUFFERED-INFO
+            </option>
+            <option value="5">
+               BUFFERED-DATE-INFO
+            </option>
+            <option value="6">
+               BUFFERED-TIME-INFO
+            </option>
+            <option value="7">
+               BUFFERED-DATE-TIME-INFO
+            </option>
+            <option value="8">
+               UNBUFFERED-NONE
+            </option>
+            <option value="9">
+               UNBUFFERED-DATE
+            </option>
+            <option value="10">
+               UNBUFFERED-TIME
+            </option>
+            <option value="11">
+               UNBUFFERED-DATE-TIME
+            </option>
+            <option value="12">
+               UNBUFFERED-INFO
+            </option>
+            <option value="13">
+               UNBUFFERED-DATE-INFO
+            </option>
+            <option value="14">
+               UNBUFFERED-TIME-INFO
+            </option>
+            <option value="15">
+               UNBUFFERED-DATE-TIME-INFO
+            </option>
+         </parameter>
+      </section>
+      <section type="common" name="STAT">
+         Statistics parameters
+         <parameter name="STAT-BUMP-INTERVAL" mandatory="1" default="300" type="numeric" minvalue="300" maxvalue="900">
+            STAT Interval (seconds)
+         </parameter>
+         <parameter name="STAT-PATH" mandatory="1" type="folder">
+            STAT Guardian directory
+         </parameter>
+         <parameter name="STAT-PREFIX" mandatory="1" type="char" maxlength="2">
+            STAT Prefix
+         </parameter>
+         <parameter name="MAX-REGS" mandatory="1" type="numeric" minvalue="1" maxvalue="1024">
+            STAT Register max number
+         </parameter>
+         <parameter name="STAT-GROUP" mandatory="1" default="1010" type="numeric" minvalue="1" maxvalue="32767">
+            STAT Group
+         </parameter>
+         <parameter name="MAX-COUNTS" mandatory="1" type="numeric" minvalue="1" maxvalue="512">
+            STAT Counter max number
+         </parameter>
+      </section>
+      <section type="common" name="MANAGER">
+         Steering application parameters
+         <parameter name="TASK-ID" mandatory="1" type="numeric" minvalue="1" maxvalue="32767">
+            Steering INS task id
+         </parameter>
+         <parameter name="SERVER-CLASS" mandatory="1" type="numeric" minvalue="1" maxvalue="32767">
+            Steering INS server class
+         </parameter>
+         <parameter name="LOAD-RULES-INTERVAL" mandatory="0" default="300" type="numeric" minvalue="60" maxvalue="3600">
+            Time interval (seconds) to check steering rules
+         </parameter>
+         <parameter name="LOAD-PARAMS-INTERVAL" mandatory="0" default="300" type="numeric" minvalue="60" maxvalue="3600">
+            Time interval (seconds) to check INI file parameters
+         </parameter>
+         <parameter name="LOG-DAYS" mandatory="0" default="8" type="numeric" minvalue="0" maxvalue="30">
+            LOG Days
+         </parameter>
+         <parameter name="LOG-LEVEL" mandatory="0" default="9" type="select">
+            LOG Level
+            <option value="1">
+               ERROR
+            </option>
+            <option value="5">
+               WARNING
+            </option>
+            <option value="9">
+               INFO
+            </option>
+            <option value="10">
+               DEBUG
+            </option>
+            <option value="11">
+               DEBUG2
+            </option>
+         </parameter>
+         <parameter name="LOG-OPTIONS" mandatory="0" default="7" type="select">
+            LOG Options
+            <option value="0">
+               BUFFERED-NONE
+            </option>
+            <option value="1">
+               BUFFERED-DATE
+            </option>
+            <option value="2">
+               BUFFERED-TIME
+            </option>
+            <option value="3">
+               BUFFERED-DATE-TIME
+            </option>
+            <option value="4">
+               BUFFERED-INFO
+            </option>
+            <option value="5">
+               BUFFERED-DATE-INFO
+            </option>
+            <option value="6">
+               BUFFERED-TIME-INFO
+            </option>
+            <option value="7">
+               BUFFERED-DATE-TIME-INFO
+            </option>
+            <option value="8">
+               UNBUFFERED-NONE
+            </option>
+            <option value="9">
+               UNBUFFERED-DATE
+            </option>
+            <option value="10">
+               UNBUFFERED-TIME
+            </option>
+            <option value="11">
+               UNBUFFERED-DATE-TIME
+            </option>
+            <option value="12">
+               UNBUFFERED-INFO
+            </option>
+            <option value="13">
+               UNBUFFERED-DATE-INFO
+            </option>
+            <option value="14">
+               UNBUFFERED-TIME-INFO
+            </option>
+            <option value="15">
+               UNBUFFERED-DATE-TIME-INFO
+            </option>
+         </parameter>
+         <parameter name="LOG-TRACE" mandatory="1" type="char" maxlength="128">
+            LOG Trace string
+         </parameter>
+         <parameter name="LOAD-RULES-CPU-SHIFT" mandatory="0" default="30" type="numeric" minvalue="10" maxvalue="60">
+            Time interval (seconds) to spread rules reload between cpus
+         </parameter>
+         <parameter name="DUMP-DAILY-USER-PATH" mandatory="0" type="oss_path">
+            Daily users file
+         </parameter>
+         <parameter name="DEFAULT-IMEI-INFO" mandatory="1" type="char" maxlength="128">
+            Default Steering strategy
+         </parameter>
+         <parameter name="IMSI-PREFIX" mandatory="0" type="char" maxlength="15">
+            Substitution prefix in destination Global Title
+         </parameter>
+         <parameter name="IMSI-PREFIX-SUBST-LEN" mandatory="0" type="numeric" minvalue="1" maxvalue="15">
+            Destination Global Title digits to be replaced, default = strlen(IMSI-PREFIX)
+         </parameter>
+         <parameter name="TMIN" mandatory="0" default="21" type="numeric" minvalue="1" maxvalue="32767">
+            Max time interval (seconds) between 2 LUs of same cycle
+         </parameter>
+         <parameter name="TMAX" mandatory="0" default="900" type="numeric" minvalue="1" maxvalue="32767">
+            Max time interval (seconds) to complete LU cycle
+         </parameter>
+         <parameter name="MAX-PROCESSING-TIME" mandatory="0" default="1000" type="numeric" minvalue="1" maxvalue="10000">
+            Warning threshold for LU processing time (milliseconds)
+         </parameter>
+         <parameter name="OPEN-EIR-INTERVAL" mandatory="0" default="3600" type="numeric" minvalue="60" maxvalue="3600">
+            Time interval (seconds) to check/reopen EIR connection
+         </parameter>
+         <parameter name="RESET-TS-INTERVAL" mandatory="0" default="86400" type="numeric" minvalue="3600" maxvalue="86400">
+            Time interval (seconds) to reset allowed steering attempts
+         </parameter>
+         <parameter name="MAP3-PROCESS-NAME" mandatory="0" type="char" maxlength="16">
+            MAP3 Pathway
+         </parameter>
+         <parameter name="MAP3-CLASS-NAME" mandatory="0" type="char" maxlength="24">
+            MAP3 ServerClass
+         </parameter>
+         <parameter name="EIR-TRIGGER-SUBSYSTEM" mandatory="0" default="1500" type="numeric" minvalue="1" maxvalue="32767">
+            EIR Trigger Subsystem Component Identifier
+         </parameter>
+         <parameter name="EIR-TRIGGER-SUBSYS-ID" mandatory="0" type="numeric" minvalue="1" maxvalue="32767">
+            EIR Trigger Subsystem Id
+         </parameter>
+         <parameter name="EIR-TRIGGER-CLASS-ID" mandatory="0" type="numeric" minvalue="1" maxvalue="32767">
+            EIR Trigger Serverclass Id
+         </parameter>
+         <parameter name="WELCOME-SUBSYS-ID" mandatory="0" type="numeric" minvalue="1" maxvalue="32767">
+            Welcome Subsystem Id
+         </parameter>
+         <parameter name="WELCOME-CLASS-ID" mandatory="0" type="numeric" minvalue="1" maxvalue="32767">
+            Welcome Serverclass Id
+         </parameter>
+         <parameter name="WELCOME-SND-INTERVAL" mandatory="0" default="300" type="numeric" minvalue="60" maxvalue="3600">
+            Time interval (seconds) to trigger Welcome w/o operator change
+         </parameter>
+         <parameter name="FLAG-GRANT-FIRST-LU" mandatory="0" default="0" type="select">
+            Flag disabling steering on first received LU in country
+            <option value="0">
+               STEERING
+            </option>
+            <option value="1">
+               NOSTEERING
+            </option>
+         </parameter>
+         <parameter name="FLAG-USE-MAP3" mandatory="0" default="1" type="select">
+            Flag enabling MAP3 access (last IMEI, user type, etc)
+            <option value="0">
+               OFF
+            </option>
+            <option value="1">
+               ON
+            </option>
+         </parameter>
+         <parameter name="FLAG-USE-TRIGGER" mandatory="0" default="1" type="select">
+            Flag enabling EIR Trigger (return to Home PLMN)
+            <option value="0">
+               OFF
+            </option>
+            <option value="1">
+               ON
+            </option>
+         </parameter>
+         <parameter name="WELCOME-ENABLED" mandatory="0" default="0" type="select">
+            Flag enabling Welcome SMS service
+            <option value="0">
+               OFF
+            </option>
+            <option value="1">
+               ON
+            </option>
+         </parameter>
+         <parameter name="MAP3-PSEND-TIMEOUT" mandatory="0" default="5" type="numeric" minvalue="1" maxvalue="60">
+            MAP3 Pathsend Timeout (seconds)
+         </parameter>
+         <parameter name="MAP3-DEFAULT-USER-TYPE" mandatory="0" default="0" type="numeric" minvalue="0" maxvalue="31">
+            MAP3 Default User Type
+         </parameter>
+         <parameter name="MAP3-USER-TYPE-TABLE" mandatory="0" type="path">
+            MAP3 User Type Table
+         </parameter>
+         <parameter name="MAP3-VALIDITY-PERIOD" mandatory="0" default="86400" type="numeric" minvalue="0" maxvalue="31536000">
+            MAP3 Validity Period (seconds)
+         </parameter>
+         <parameter name="MAP3-REQUIRE-IMEI" mandatory="0" default="1" type="select">
+            MAP3 Require IMEI flag
+            <option value="0">
+               OFF
+            </option>
+            <option value="1">
+               ON
+            </option>
+         </parameter>
+      </section>
+      <section type="common" name="FILTER">
+         Pre-Steering application parameters
+         <parameter name="LOG-TRACE" mandatory="1" type="char" maxlength="128">
+            LOG Trace string
+         </parameter>
+         <parameter name="TASK-ID" mandatory="1" type="numeric" minvalue="1" maxvalue="32767">
+            Pre-steering INS task id
+         </parameter>
+         <parameter name="SERVER-CLASS" mandatory="1" type="numeric" minvalue="1" maxvalue="32767">
+            Pre-steering INS server class
+         </parameter>
+         <parameter name="LOAD-PARAMS-INTERVAL" mandatory="0" default="300" type="numeric" minvalue="60" maxvalue="3600">
+            Time interval (seconds) to check INI file parameters
+         </parameter>
+         <parameter name="LOAD-RULES-INTERVAL" mandatory="0" default="300" type="numeric" minvalue="60" maxvalue="3600">
+            Time interval (seconds) to check pre-steering rules
+         </parameter>
+         <parameter name="LOG-DAYS" mandatory="0" default="8" type="numeric" minvalue="0" maxvalue="30">
+            LOG Days
+         </parameter>
+         <parameter name="LOG-LEVEL" mandatory="0" default="9" type="select">
+            LOG Level
+            <option value="1">
+               ERROR
+            </option>
+            <option value="5">
+               WARNING
+            </option>
+            <option value="9">
+               INFO
+            </option>
+            <option value="10">
+               DEBUG
+            </option>
+            <option value="11">
+               DEBUG2
+            </option>
+         </parameter>
+         <parameter name="LOG-OPTIONS" mandatory="0" default="7" type="select">
+            LOG Options
+            <option value="0">
+               BUFFERED-NONE
+            </option>
+            <option value="1">
+               BUFFERED-DATE
+            </option>
+            <option value="2">
+               BUFFERED-TIME
+            </option>
+            <option value="3">
+               BUFFERED-DATE-TIME
+            </option>
+            <option value="4">
+               BUFFERED-INFO
+            </option>
+            <option value="5">
+               BUFFERED-DATE-INFO
+            </option>
+            <option value="6">
+               BUFFERED-TIME-INFO
+            </option>
+            <option value="7">
+               BUFFERED-DATE-TIME-INFO
+            </option>
+            <option value="8">
+               UNBUFFERED-NONE
+            </option>
+            <option value="9">
+               UNBUFFERED-DATE
+            </option>
+            <option value="10">
+               UNBUFFERED-TIME
+            </option>
+            <option value="11">
+               UNBUFFERED-DATE-TIME
+            </option>
+            <option value="12">
+               UNBUFFERED-INFO
+            </option>
+            <option value="13">
+               UNBUFFERED-DATE-INFO
+            </option>
+            <option value="14">
+               UNBUFFERED-TIME-INFO
+            </option>
+            <option value="15">
+               UNBUFFERED-DATE-TIME-INFO
+            </option>
+         </parameter>
+         <parameter name="LOAD-RULES-CPU-SHIFT" mandatory="0" default="30" type="numeric" minvalue="10" maxvalue="60">
+            Time interval (seconds) to spread rules reload between cpus
+         </parameter>
+      </section>
+      <section type="common" name="CLEANER">
+         IMSI MBE Cleaner parameters
+         <parameter name="IMSI-PREFIX-RANGES" mandatory="1" type="char" maxlength="256">
+            IMSI Prefix ranges (i.e. multiple clean processes)
+         </parameter>
+         <parameter name="DELETE-MATCHING-RECORD" mandatory="0" default="1" type="select">
+            Flag to enable deleting records
+            <option value="0">
+               COUNT
+            </option>
+            <option value="1">
+               DELETE
+            </option>
+         </parameter>
+         <parameter name="LAST-UPDATE-INTERVAL" mandatory="1" type="numeric" minvalue="1" maxvalue="2147483647">
+            Delete records with last update time older than (seconds)
+         </parameter>
+         <parameter name="WRITE-MATCHING-RECORD" mandatory="0" default="0" type="select">
+            Flag to enable writing deleted records into backup db
+            <option value="0">
+               NOWRITE
+            </option>
+            <option value="1">
+               WRITE
+            </option>
+         </parameter>
+         <parameter name="WRITE-GSM-MATCHING-PATH" mandatory="0" type="path">
+            IMSI GSM backup db
+         </parameter>
+         <parameter name="WRITE-DAT-MATCHING-PATH" mandatory="0" type="path">
+            IMSI DAT backup db
+         </parameter>
+         <parameter name="WRITE-LTE-MATCHING-PATH" mandatory="0" type="path">
+            IMSI LTE backup db
+         </parameter>
+         <parameter name="LOG-DAYS" mandatory="0" default="8" type="numeric" minvalue="0" maxvalue="30">
+            LOG Days
+         </parameter>
+         <parameter name="LOG-LEVEL" mandatory="0" default="9" type="select">
+            LOG Level
+            <option value="1">
+               ERROR
+            </option>
+            <option value="5">
+               WARNING
+            </option>
+            <option value="9">
+               INFO
+            </option>
+            <option value="10">
+               DEBUG
+            </option>
+            <option value="11">
+               DEBUG2
+            </option>
+         </parameter>
+         <parameter name="LOG-OPTIONS" mandatory="0" default="7" type="select">
+            LOG Options
+            <option value="0">
+               BUFFERED-NONE
+            </option>
+            <option value="1">
+               BUFFERED-DATE
+            </option>
+            <option value="2">
+               BUFFERED-TIME
+            </option>
+            <option value="3">
+               BUFFERED-DATE-TIME
+            </option>
+            <option value="4">
+               BUFFERED-INFO
+            </option>
+            <option value="5">
+               BUFFERED-DATE-INFO
+            </option>
+            <option value="6">
+               BUFFERED-TIME-INFO
+            </option>
+            <option value="7">
+               BUFFERED-DATE-TIME-INFO
+            </option>
+            <option value="8">
+               UNBUFFERED-NONE
+            </option>
+            <option value="9">
+               UNBUFFERED-DATE
+            </option>
+            <option value="10">
+               UNBUFFERED-TIME
+            </option>
+            <option value="11">
+               UNBUFFERED-DATE-TIME
+            </option>
+            <option value="12">
+               UNBUFFERED-INFO
+            </option>
+            <option value="13">
+               UNBUFFERED-DATE-INFO
+            </option>
+            <option value="14">
+               UNBUFFERED-TIME-INFO
+            </option>
+            <option value="15">
+               UNBUFFERED-DATE-TIME-INFO
+            </option>
+         </parameter>
+         <parameter name="LOG-TRACE-STEP" mandatory="0" default="100000" type="numeric" minvalue="1" maxvalue="1000000">
+            LOG Trace progress step
+         </parameter>
+      </section>
+      <section type="common" name="TRIGGER">
+         EIR (Home PLMN) Trigger application parameters
+         <parameter name="LOG-DAYS" mandatory="0" default="8" type="numeric" minvalue="0" maxvalue="30">
+            LOG Days
+         </parameter>
+         <parameter name="LOG-LEVEL" mandatory="0" default="9" type="select">
+            LOG Level
+            <option value="1">
+               ERROR
+            </option>
+            <option value="5">
+               WARNING
+            </option>
+            <option value="9">
+               INFO
+            </option>
+            <option value="10">
+               DEBUG
+            </option>
+            <option value="11">
+               DEBUG2
+            </option>
+         </parameter>
+         <parameter name="LOG-OPTIONS" mandatory="0" default="7" type="select">
+            LOG Options
+            <option value="0">
+               BUFFERED-NONE
+            </option>
+            <option value="1">
+               BUFFERED-DATE
+            </option>
+            <option value="2">
+               BUFFERED-TIME
+            </option>
+            <option value="3">
+               BUFFERED-DATE-TIME
+            </option>
+            <option value="4">
+               BUFFERED-INFO
+            </option>
+            <option value="5">
+               BUFFERED-DATE-INFO
+            </option>
+            <option value="6">
+               BUFFERED-TIME-INFO
+            </option>
+            <option value="7">
+               BUFFERED-DATE-TIME-INFO
+            </option>
+            <option value="8">
+               UNBUFFERED-NONE
+            </option>
+            <option value="9">
+               UNBUFFERED-DATE
+            </option>
+            <option value="10">
+               UNBUFFERED-TIME
+            </option>
+            <option value="11">
+               UNBUFFERED-DATE-TIME
+            </option>
+            <option value="12">
+               UNBUFFERED-INFO
+            </option>
+            <option value="13">
+               UNBUFFERED-DATE-INFO
+            </option>
+            <option value="14">
+               UNBUFFERED-TIME-INFO
+            </option>
+            <option value="15">
+               UNBUFFERED-DATE-TIME-INFO
+            </option>
+         </parameter>
+      </section>
+      <section type="common" name="COPY">
+         DB Copy application (A08 to A09 structures) parameters
+         <parameter name="DB-OLD-COUNTRIES-PATH" mandatory="1" type="path">
+            Old (A08.xx) countries db path
+         </parameter>
+         <parameter name="DB-OLD-OPER-PATH" mandatory="1" type="path">
+            Old (A08.xx) operators db path
+         </parameter>
+         <parameter name="DB-OLD-THRESHOLDS-PATH" mandatory="1" type="path">
+            Old (A08.xx) steering rules db path
+         </parameter>
+         <parameter name="DB-OLD-PSRULES-PATH" mandatory="1" type="path">
+            Old (A08.xx) pre-steering rules db path
+         </parameter>
+         <parameter name="DB-OLD-OPERGT-PATH" mandatory="1" type="path">
+            Old (A08.xx) operator global titles db path
+         </parameter>
+         <parameter name="DB-OLD-NOSTD-TAC-PATH" mandatory="1" type="path">
+            Old (A08.xx) not standard tac db path
+         </parameter>
+      </section>
+      <section type="variable" name="MONITOR">
+         DB Monitor application parameters
+      </section>
+      <section type="common" name="LOGGER">
+         IMSI MBE Content Log application paremeters
+         <parameter name="LOG-DAYS" mandatory="1" default="8" type="numeric" minvalue="0" maxvalue="30">
+            LOG Days
+         </parameter>
+         <parameter name="LOG-LEVEL" mandatory="1" default="9" type="select">
+            LOG Level
+            <option value="1">
+               ERROR
+            </option>
+            <option value="5">
+               WARNING
+            </option>
+            <option value="9">
+               INFO
+            </option>
+            <option value="10">
+               DEBUG
+            </option>
+            <option value="11">
+               DEBUG2
+            </option>
+         </parameter>
+         <parameter name="LOG-OPTIONS" mandatory="1" default="7" type="select">
+            LOG Options
+            <option value="0">
+               BUFFERED-NONE
+            </option>
+            <option value="1">
+               BUFFERED-DATE
+            </option>
+            <option value="2">
+               BUFFERED-TIME
+            </option>
+            <option value="3">
+               BUFFERED-DATE-TIME
+            </option>
+            <option value="4">
+               BUFFERED-INFO
+            </option>
+            <option value="5">
+               BUFFERED-DATE-INFO
+            </option>
+            <option value="6">
+               BUFFERED-TIME-INFO
+            </option>
+            <option value="7">
+               BUFFERED-DATE-TIME-INFO
+            </option>
+            <option value="8">
+               UNBUFFERED-NONE
+            </option>
+            <option value="9">
+               UNBUFFERED-DATE
+            </option>
+            <option value="10">
+               UNBUFFERED-TIME
+            </option>
+            <option value="11">
+               UNBUFFERED-DATE-TIME
+            </option>
+            <option value="12">
+               UNBUFFERED-INFO
+            </option>
+            <option value="13">
+               UNBUFFERED-DATE-INFO
+            </option>
+            <option value="14">
+               UNBUFFERED-TIME-INFO
+            </option>
+            <option value="15">
+               UNBUFFERED-DATE-TIME-INFO
+            </option>
+         </parameter>
+         <parameter name="LOG-TRACE-STEP" mandatory="1" default="10000" type="numeric" minvalue="1" maxvalue="1000000">
+            LOG Trace progress step
+         </parameter>
+         <parameter name="IMSI-PREFIX-RANGES" mandatory="1" type="char" maxlength="256">
+            IMSI Prefix ranges (i.e. multiple log processes)
+         </parameter>
+      </section>
+      <section type="common" name="DUMP">
+         DB Dump parameters (country, oper, threshold)
+         <parameter name="OPER-FILE-PATH" mandatory="1" type="char" maxlength="64">
+            Operators dump file path
+         </parameter>
+         <parameter name="COUNTRIES-FILE-PATH" mandatory="1" type="char" maxlength="64">
+            Countries dump file path
+         </parameter>
+         <parameter name="THRESHOLDS-FILE-PATH" mandatory="1" type="char" maxlength="64">
+            Thresholds dump file path
+         </parameter>
+         <parameter name="LOG-LEVEL" mandatory="0" default="9" type="select">
+            LOG Level
+            <option value="1">
+               ERROR
+            </option>
+            <option value="5">
+               WARNING
+            </option>
+            <option value="9">
+               INFO
+            </option>
+            <option value="10">
+               DEBUG
+            </option>
+            <option value="11">
+               DEBUG2
+            </option>
+         </parameter>
+         <parameter name="LOG-OPTIONS" mandatory="0" default="7" type="select">
+            LOG Options
+            <option value="0">
+               BUFFERED-NONE
+            </option>
+            <option value="1">
+               BUFFERED-DATE
+            </option>
+            <option value="2">
+               BUFFERED-TIME
+            </option>
+            <option value="3">
+               BUFFERED-DATE-TIME
+            </option>
+            <option value="4">
+               BUFFERED-INFO
+            </option>
+            <option value="5">
+               BUFFERED-DATE-INFO
+            </option>
+            <option value="6">
+               BUFFERED-TIME-INFO
+            </option>
+            <option value="7">
+               BUFFERED-DATE-TIME-INFO
+            </option>
+            <option value="8">
+               UNBUFFERED-NONE
+            </option>
+            <option value="9">
+               UNBUFFERED-DATE
+            </option>
+            <option value="10">
+               UNBUFFERED-TIME
+            </option>
+            <option value="11">
+               UNBUFFERED-DATE-TIME
+            </option>
+            <option value="12">
+               UNBUFFERED-INFO
+            </option>
+            <option value="13">
+               UNBUFFERED-DATE-INFO
+            </option>
+            <option value="14">
+               UNBUFFERED-TIME-INFO
+            </option>
+            <option value="15">
+               UNBUFFERED-DATE-TIME-INFO
+            </option>
+         </parameter>
+         <parameter name="LOG-DAYS" mandatory="0" default="8" type="numeric" minvalue="0" maxvalue="30">
+            LOG Days
+         </parameter>
+         <parameter name="RESET-COUNTERS" mandatory="0" default="1" type="select">
+            Flag to enable resetting granted LU counters
+            <option value="0">
+               NORESET
+            </option>
+            <option value="1">
+               RESET
+            </option>
+         </parameter>
+      </section>
+      <section type="common" name="GENERIC">
+         Generic parameters (e.g. DB paths)
+         <parameter name="DB-LOC-THRESHOLDS-PATH" mandatory="1" type="path">
+            Local Steering Rules db (i.e. Thresholds)
+         </parameter>
+         <parameter name="DB-LOC-COUNTRIES-PATH" mandatory="1" type="path">
+            Local Countries db
+         </parameter>
+         <parameter name="DB-LOC-OPER-PATH" mandatory="1" type="char" maxlength="9999">
+            Local Operators db
+         </parameter>
+         <parameter name="DB-LOC-OPERGT-PATH" mandatory="1" type="path">
+            Local Operator Global Titles db
+         </parameter>
+         <parameter name="DB-LOC-NOSTD-TAC-PATH" mandatory="1" type="path">
+            Local Not Standard TAC db
+         </parameter>
+         <parameter name="DB-LOC-PSRULES-PATH" mandatory="1" type="path">
+            Local PreSteering Rules db (e.g. Operators black list)
+         </parameter>
+         <parameter name="DB-REM-PSRULES-PATH" mandatory="1" type="path">
+            Remote PreSteering Rules db (e.g. Operators black list)
+         </parameter>
+         <parameter name="DB-REM-THRESHOLDS-PATH" mandatory="1" type="path">
+            Remote Steering Rules db (i.e. Thresholds)
+         </parameter>
+         <parameter name="DB-REM-COUNTRIES-PATH" mandatory="1" type="path">
+            Remote Countries db
+         </parameter>
+         <parameter name="DB-REM-OPER-PATH" mandatory="1" type="path">
+            Remote Operators db
+         </parameter>
+         <parameter name="DB-REM-OPERGT-PATH" mandatory="1" type="path">
+            Remote Operator Global Titles db
+         </parameter>
+         <parameter name="DB-REM-NOSTD-TAC-PATH" mandatory="1" type="path">
+            Remote Not Standard TAC db
+         </parameter>
+         <parameter name="IMSI-GSM-MBE-PATH" mandatory="1" type="path">
+            IMSI GSM Users db
+         </parameter>
+         <parameter name="IMSI-DAT-MBE-PATH" mandatory="1" type="path">
+            IMSI DAT Users db (i.e. EDGE, GPRS, HSDP)
+         </parameter>
+         <parameter name="IMSI-LTE-MBE-PATH" mandatory="1" type="path">
+            IMSI LTE Users db
+         </parameter>
+         <parameter name="MBE-NOWAIT-TIMEOUT" mandatory="0" default="2" type="numeric" minvalue="1" maxvalue="10">
+            Memory Based Enscribe timeout (seconds) for nowait use
+         </parameter>
+         <parameter name="APPLYST" mandatory="1" type="oss_path">
+            Holds last steering configuration reload
+         </parameter>
+         <parameter name="APPLYPS" mandatory="1" type="oss_path">
+            Holds last pre-steering configuration reload
+         </parameter>
+         <parameter name="CAR-TABLE-OSS" mandatory="1" type="oss_path">
+            Operator characteristics definition file
+         </parameter>
+         <parameter name="BLBO-ARP-MBE-PATH" mandatory="0" type="path">
+            Black List LBO and/or ARP Users db
+         </parameter>
+         <parameter name="ROAMING-EU-IF4-PATH" mandatory="0" type="path">
+            ARP IF4 Notifications queue
+         </parameter>
+      </section>
+      <section type="common" name="ALIGN">
+         Thresholds granted LU counters synchronization
+         <parameter name="ALIGN-THRESHOLDS-INTERVAL" mandatory="0" default="300" type="numeric" minvalue="60" maxvalue="3600">
+            Synchronization interval (seconds)
+         </parameter>
+         <parameter name="LOG-LEVEL" mandatory="0" default="9" type="select">
+            LOG Level
+            <option value="1">
+               ERROR
+            </option>
+            <option value="5">
+               WARNING
+            </option>
+            <option value="9">
+               INFO
+            </option>
+            <option value="10">
+               DEBUG
+            </option>
+            <option value="11">
+               DEBUG2
+            </option>
+         </parameter>
+         <parameter name="LOG-OPTIONS" mandatory="0" default="7" type="select">
+            LOG Options
+            <option value="0">
+               BUFFERED-NONE
+            </option>
+            <option value="1">
+               BUFFERED-DATE
+            </option>
+            <option value="2">
+               BUFFERED-TIME
+            </option>
+            <option value="3">
+               BUFFERED-DATE-TIME
+            </option>
+            <option value="4">
+               BUFFERED-INFO
+            </option>
+            <option value="5">
+               BUFFERED-DATE-INFO
+            </option>
+            <option value="6">
+               BUFFERED-TIME-INFO
+            </option>
+            <option value="7">
+               BUFFERED-DATE-TIME-INFO
+            </option>
+            <option value="8">
+               UNBUFFERED-NONE
+            </option>
+            <option value="9">
+               UNBUFFERED-DATE
+            </option>
+            <option value="10">
+               UNBUFFERED-TIME
+            </option>
+            <option value="11">
+               UNBUFFERED-DATE-TIME
+            </option>
+            <option value="12">
+               UNBUFFERED-INFO
+            </option>
+            <option value="13">
+               UNBUFFERED-DATE-INFO
+            </option>
+            <option value="14">
+               UNBUFFERED-TIME-INFO
+            </option>
+            <option value="15">
+               UNBUFFERED-DATE-TIME-INFO
+            </option>
+         </parameter>
+         <parameter name="LOG-DAYS" mandatory="0" default="8" type="numeric" minvalue="0" maxvalue="30">
+            LOG Days
+         </parameter>
+      </section>
+      <section type="common" name="GTT">
+         GTT parameters
+         <parameter name="TASK-ID" mandatory="1" type="numeric" minvalue="1" maxvalue="32767">
+            GTT INS task id
+         </parameter>
+         <parameter name="SERVER-CLASS" mandatory="1" type="numeric" minvalue="1" maxvalue="32767">
+            GTT INS server class
+         </parameter>
+         <parameter name="MGT" mandatory="1" type="path">
+            GTT Mobile Global Titles db
+         </parameter>
+         <parameter name="MGT-BY-RANGE" mandatory="1" default="0" type="select">
+            GTT flag enabling MGT by range management
+            <option value="0">
+               PREFIX
+            </option>
+            <option value="1">
+               RANGE
+            </option>
+         </parameter>
+         <parameter name="SSN-TYPES" mandatory="1" type="char" maxlength="255">
+            GTT SSN Types
+         </parameter>
+         <parameter name="PROCESS" mandatory="1" type="char" maxlength="6">
+            GTT Web Command Server process name
+         </parameter>
+         <parameter name="COMMANDS" mandatory="1" type="char" maxlength="255">
+            GTT Web commands
+         </parameter>
+         <parameter name="PC-FORMATS" mandatory="1" type="char" maxlength="255">
+            GTT Point Code Formats
+         </parameter>
+         <parameter name="NETWORK-NODES" mandatory="1" type="path">
+            GTT Network Nodes db
+         </parameter>
+         <parameter name="LOG-DAYS" mandatory="1" default="8" type="numeric" minvalue="0" maxvalue="30">
+            LOG Days
+         </parameter>
+         <parameter name="LOG-LEVEL" mandatory="1" default="9" type="select">
+            LOG Level
+            <option value="1">
+               ERROR
+            </option>
+            <option value="5">
+               WARNING
+            </option>
+            <option value="9">
+               INFO
+            </option>
+            <option value="10">
+               DEBUG
+            </option>
+            <option value="11">
+               DEBUG2
+            </option>
+         </parameter>
+         <parameter name="START-DELAY" mandatory="1" default="1" type="numeric" minvalue="1" maxvalue="10">
+            GTT Start Delay (seconds)
+         </parameter>
+         <parameter name="STAT-TIMEOUT" mandatory="1" default="5" type="numeric" minvalue="5" maxvalue="15">
+            GTT Statistics Interval (minutes)
+         </parameter>
+         <parameter name="STAT-GROUP" mandatory="1" default="38" type="numeric" minvalue="1" maxvalue="32767">
+            GTT Statistics Group
+         </parameter>
+         <parameter name="STAT-REGSET" mandatory="1" default="GTTS-STAT" type="char" maxlength="15">
+            GTT Statistics Register Set
+         </parameter>
+         <parameter name="STAT-MAXREGS" mandatory="1" default="100" type="numeric" minvalue="1" maxvalue="1024">
+            GTT Statistics Max Register number
+         </parameter>
+         <parameter name="LOG-PREFIX" mandatory="0" type="char" maxlength="6">
+            LOG Prefix (instead of default process name)
+         </parameter>
+      </section>
+      <section type="common" name="RX-DEFINE">
+         Needed by GTT Server Application
+         <parameter name="RX-SWITCH" mandatory="1" default="MTS_STD" type="char" maxlength="8">
+            GTT IPC input mode
+         </parameter>
+      </section>
+      <section type="common" name="SKELETON">
+         Needed by GTT Server Application
+         <parameter name="OUTTERM" mandatory="1" default=" " type="char" maxlength="8">
+            GTT Skeleton parameter
+         </parameter>
+         <parameter name="EXECENV" mandatory="1" default="INS" type="char" maxlength="8">
+            GTT Skeleton parameter
+         </parameter>
+      </section>
+      <section type="common" name="WEB">
+         Web parameters
+         <parameter name="LOG-PREFIX" mandatory="0" default="web" type="char" maxlength="6">
+            Log prefix
+         </parameter>
+         <parameter name="LOG-DAYS" mandatory="0" default="8" type="numeric" minvalue="0" maxvalue="30">
+            LOG Days
+         </parameter>
+         <parameter name="LOG-OPTIONS" mandatory="0" default="7" type="select">
+            LOG Options
+            <option value="0">
+               BUFFERED-NONE
+            </option>
+            <option value="1">
+               BUFFERED-DATE
+            </option>
+            <option value="2">
+               BUFFERED-TIME
+            </option>
+            <option value="3">
+               BUFFERED-DATE-TIME
+            </option>
+            <option value="4">
+               BUFFERED-INFO
+            </option>
+            <option value="5">
+               BUFFERED-DATE-INFO
+            </option>
+            <option value="6">
+               BUFFERED-TIME-INFO
+            </option>
+            <option value="7">
+               BUFFERED-DATE-TIME-INFO
+            </option>
+            <option value="8">
+               UNBUFFERED-NONE
+            </option>
+            <option value="9">
+               UNBUFFERED-DATE
+            </option>
+            <option value="10">
+               UNBUFFERED-TIME
+            </option>
+            <option value="11">
+               UNBUFFERED-DATE-TIME
+            </option>
+            <option value="12">
+               UNBUFFERED-INFO
+            </option>
+            <option value="13">
+               UNBUFFERED-DATE-INFO
+            </option>
+            <option value="14">
+               UNBUFFERED-TIME-INFO
+            </option>
+            <option value="15">
+               UNBUFFERED-DATE-TIME-INFO
+            </option>
+         </parameter>
+         <parameter name="LOG-LEVEL" mandatory="0" default="9" type="select">
+            LOG Level
+            <option value="1">
+               ERROR
+            </option>
+            <option value="5">
+               WARNING
+            </option>
+            <option value="9">
+               INFO
+            </option>
+            <option value="10">
+               DEBUG
+            </option>
+            <option value="11">
+               DEBUG2
+            </option>
+         </parameter>
+         <parameter name="HEX-DEFAULT-USER-TYPES" mandatory="0" default="FFFFFFFF" type="char" maxlength="8">
+            Enabled user types mask in steering rules definition
+         </parameter>
+      </section>
+      <section type="common" name="EURIF4">
+         EU Roaming IF4 Interface (optional)
+         <parameter name="EMS-APPL" mandatory="1" default="TFS" type="char" maxlength="10">
+            EMS Application Name
+         </parameter>
+         <parameter name="LOG-LEVEL" mandatory="1" default="9" type="select">
+            LOG Level
+            <option value="1">
+               ERROR
+            </option>
+            <option value="5">
+               WARNING
+            </option>
+            <option value="9">
+               INFO
+            </option>
+            <option value="10">
+               DEBUG
+            </option>
+            <option value="11">
+               DEBUG2
+            </option>
+         </parameter>
+         <parameter name="SSL-GATEWAY-SRV-CLS" mandatory="1" type="char" maxlength="24">
+            SSL Gateway Serverclass
+         </parameter>
+         <parameter name="SSL-GATEWAY-PATHCOM" mandatory="1" type="char" maxlength="16">
+            SSL Gateway Pathway
+         </parameter>
+         <parameter name="IMSI-RANGES" mandatory="1" type="char" maxlength="256">
+            IMSI Prefix ranges (i.e. multiple processes)
+         </parameter>
+         <parameter name="LOG-PREFIX" mandatory="1" type="char" maxlength="6">
+            LOG Prefix (instead of default process name)
+         </parameter>
+      </section>
+      <section type="common" name="GW-HTTPS">
+         EU Roaming IF4 SSL Gateway (optional)
+         <parameter name="START-IDX" mandatory="1" type="numeric" minvalue="1" maxvalue="512">
+            Statistics First Counter Position
+         </parameter>
+         <parameter name="EMS-APPL" mandatory="1" default="TFS" type="char" maxlength="10">
+            EMS Application Name
+         </parameter>
+      </section>
+   </body>

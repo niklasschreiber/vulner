@@ -1,0 +1,459 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp");
+   ("language", "CPP");
+   ("include", "std_testcase.h");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<stddef.h>");
+   ("include", "<time.h>");
+   ("include", "<limits.h>");
+   ("include", "<string.h>");
+   ("include", "<stdint.h>");
+   ("include", "<stdint.h>");
+   ("include", "<ctype.h>");
+   ("include", "<fcntl.h>");
+   ("include", "<sys/types.h>");
+   ("include", "<sys/stat.h>");
+   ("include", "std_testcase_io.h");
+   ("include", "std_testcase.h");
+   ("include", "<pthread.h>");
+   ("include", "std_thread.h");
+}
+{
+   (!4, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.h");
+   (!3, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase_io.h");
+   (!2, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h");
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp",
+   MD("RAND32()",[],"((rand()<<30) ^ (rand()<<15) ^ rand())")
+   ,(84#0,84#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp",
+   MD("RAND64()",[],"(((int64_t)rand()<<60) ^ ((int64_t)rand()<<45) ^ ((int64_t)rand()<<30) ^ ((int64_t)rand()<<15) ^ (int64_t)rand())")
+   ,(87#0,87#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"std_thread",
+   SF([extern,const,extern],int,<"std_thread">,"GLOBAL_CONST_TRUE")
+   ,(103#18,103#34,!2)},
+
+   {"std_thread",
+   SF([extern,const,extern],int,<"std_thread">,"GLOBAL_CONST_FALSE")
+   ,(104#18,104#35,!2)},
+
+   {"std_thread",
+   SF([extern,const,extern],int,<"std_thread">,"GLOBAL_CONST_FIVE")
+   ,(105#18,105#34,!2)},
+
+   {"std_thread",
+   SF([extern,extern],int,<"std_thread">,"globalTrue")
+   ,(110#12,110#21,!2)},
+
+   {"std_thread",
+   SF([extern,extern],int,<"std_thread">,"globalFalse")
+   ,(111#12,111#22,!2)},
+
+   {"std_thread",
+   SF([extern,extern],int,<"std_thread">,"globalFive")
+   ,(112#12,112#21,!2)},
+
+   {"std_thread",
+   SF([extern,extern],int,<"std_thread">,"globalArgc")
+   ,(55#12,55#21,!3)},
+
+   {"std_thread",
+   SF([extern,extern],ref(ref(char)),<"std_thread">,"globalArgv")
+   ,(56#12,56#24,!3)},
+
+   {"std_thread",
+   SI(<"std_thread">,
+   {[
+      {;
+      ,(1#1,213#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,213#1,!1)}
+   )
+   ,(1#1,213#1,!1)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"printLine"):unit,[(mod(ref(char),[const]):"line",(14#16,14#32,!3))],[]
+   )
+   ,(14#1,14#34,!3)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"printWLine"):unit,[(mod(ref(wchar),[const]):"line",(16#17,16#36,!3))],[]
+   )
+   ,(16#1,16#38,!3)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"printIntLine"):unit,[(int:"intNumber",(18#20,18#32,!3))],[]
+   )
+   ,(18#1,18#34,!3)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"printShortLine"):unit,[(short:"shortNumber",(20#22,20#38,!3))],[]
+   )
+   ,(20#1,20#40,!3)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"printFloatLine"):unit,[(float:"floatNumber",(22#22,22#38,!3))],[]
+   )
+   ,(22#1,22#40,!3)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"printLongLine"):unit,[(long:"longNumber",(24#20,24#34,!3))],[]
+   )
+   ,(24#1,24#36,!3)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"printLongLongLine"):unit,[(class((,int64_t)):"longLongIntNumber",(26#24,26#48,!3))],[]
+   )
+   ,(26#1,26#50,!3)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"printSizeTLine"):unit,[(class((,size_t)):"sizeTNumber",(28#21,28#38,!3))],[]
+   )
+   ,(28#1,28#40,!3)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"printHexCharLine"):unit,[(char:"charHex",(30#23,30#34,!3))],[]
+   )
+   ,(30#1,30#36,!3)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"printWcharLine"):unit,[(wchar:"wideChar",(32#21,32#36,!3))],[]
+   )
+   ,(32#1,32#38,!3)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"printUnsignedLine"):unit,[(uint:"unsignedNumber",(34#24,34#46,!3))],[]
+   )
+   ,(34#1,34#48,!3)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"printHexUnsignedCharLine"):unit,[(uchar:"unsignedCharacter",(36#31,36#61,!3))],[]
+   )
+   ,(36#1,36#63,!3)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"printDoubleLine"):unit,[(double:"doubleNumber",(38#22,38#40,!3))],[]
+   )
+   ,(38#1,38#42,!3)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"printStructLine"):unit,[(mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]):"structTwoIntsStruct",(40#22,40#62,!3))],[]
+   )
+   ,(40#1,40#64,!3)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"printBytesLine"):unit,[(mod(ref(uchar),[const]):"bytes",(42#21,42#47,!3)),(class((,size_t)):"numBytes",(42#50,42#64,!3))],[]
+   )
+   ,(42#1,42#66,!3)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"decodeHexChars"):class((,size_t)),[(ref(uchar):"bytes",(44#23,44#43,!3)),(class((,size_t)):"numBytes",(44#46,44#60,!3)),(mod(ref(char),[const]):"hex",(44#63,44#78,!3))],[]
+   )
+   ,(44#1,44#80,!3)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"decodeHexWChars"):class((,size_t)),[(ref(uchar):"bytes",(46#24,46#44,!3)),(class((,size_t)):"numBytes",(46#47,46#61,!3)),(mod(ref(wchar),[const]):"hex",(46#64,46#82,!3))],[]
+   )
+   ,(46#1,46#84,!3)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"globalReturnsTrue"):int,[],[]
+   )
+   ,(48#1,48#24,!3)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"globalReturnsFalse"):int,[],[]
+   )
+   ,(50#1,50#25,!3)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"globalReturnsTrueOrFalse"):int,[],[]
+   )
+   ,(52#1,52#31,!3)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"stdThreadCreate"):int,[(alias("stdThreadRoutine",unit):"start",(14#21,14#42,!4)),(ref(unit):"args",(14#45,14#54,!4)),(ref(alias("stdThread",ref(mod(class((,_stdThread)),[struct])))):"thread",(14#57,14#73,!4))],[]
+   )
+   ,(14#1,14#75,!4)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"stdThreadJoin"):int,[(alias("stdThread",ref(mod(class((,_stdThread)),[struct]))):"thread",(15#19,15#34,!4))],[]
+   )
+   ,(15#1,15#36,!4)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"stdThreadDestroy"):int,[(alias("stdThread",ref(mod(class((,_stdThread)),[struct]))):"thread",(16#22,16#37,!4))],[]
+   )
+   ,(16#1,16#39,!4)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"stdThreadLockCreate"):int,[(ref(alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct])))):"lock",(18#25,18#43,!4))],[]
+   )
+   ,(18#1,18#45,!4)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"stdThreadLockAcquire"):unit,[(alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))):"lock",(19#27,19#44,!4))],[]
+   )
+   ,(19#1,19#46,!4)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"stdThreadLockRelease"):unit,[(alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))):"lock",(20#27,20#44,!4))],[]
+   )
+   ,(20#1,20#46,!4)},
+
+   {"std_thread",
+   PT([public],(<"std_thread">,"stdThreadLockDestroy"):unit,[(alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))):"lock",(21#27,21#44,!4))],[]
+   )
+   ,(21#1,21#46,!4)},
+
+   {"std_thread",
+   FN([public,static],(<"std_thread">,"internal_start"):mod(ref(unit),[static]),[("args":ref(unit),(30#29,30#38,!1))],[],
+   {[
+      {VD("thread",alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),{CS(alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),{V("args"),ref(unit),(33#35,33#38,!1)}),alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(33#24,33#38,!1)})
+      ,(33#15,33#20,!1)};
+      {PC0((<"std_thread">,"pthread_exit"),[ref(unit)],[{CS(ref(unit),{"0"N,int,(42#18,42#21,!1)}),ref(unit),(42#18,42#21,!1)}])
+      ,(42#5,42#22,!1)};
+      {RE({CS(ref(unit),{"0"N,int,(44#12,44#15,!1)}),ref(unit),(44#12,44#15,!1)})
+      ,(44#5,44#16,!1)}
+      ]
+   ,(30#1,46#1,!1)}
+   )
+   ,(30#1,46#1,!1)},
+
+   {"std_thread",
+   FN([public],(<"std_thread">,"stdThreadCreate"):int,[("start":alias("stdThreadRoutine",unit),(48#21,48#42,!1)),("args":ref(unit),(48#45,48#54,!1)),("thread":ref(alias("stdThread",ref(mod(class((,_stdThread)),[struct])))),(48#57,48#73,!1))],[],
+   {[
+      {VD("handle",class((,pthread_t)))
+      ,(53#15,53#20,!1)};
+      {VD("my_thread",alias("stdThread",ref(mod(class((,_stdThread)),[struct]))))
+      ,(55#15,55#23,!1)};
+      {{AE({*{V("thread"),ref(alias("stdThread",ref(mod(class((,_stdThread)),[struct])))),(57#6,57#11,!1)},alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(57#5,57#11,!1)},{CS(ref(unit),{"0"N,int,(57#15,57#18,!1)}),ref(unit),(57#15,57#18,!1)}),alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(57#5,57#18,!1)}
+      ,(57#5,57#18,!1)};
+      {{AE({V("my_thread"),alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(59#5,59#13,!1)},{CS(alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),{SC((<"std_thread">,"malloc"),[int],[{SO({*{V("my_thread"),alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(59#43,59#51,!1)},alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(59#42,59#51,!1)}),int,(59#35,59#52,!1)}]),class((,"%undef")),(59#28,59#53,!1)}),alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(59#17,59#53,!1)}),alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(59#5,59#53,!1)}
+      ,(59#5,59#53,!1)};
+      {IF0({BO(==,{V("my_thread"),alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(60#9,60#17,!1)},{CS(ref(unit),{"0"N,int,(60#22,60#25,!1)}),ref(unit),(60#22,60#25,!1)}),bool,(60#9,60#25,!1)},
+         {[
+            {RE({"0"N,int,(61#16,61#16,!1)})
+            ,(61#9,61#17,!1)}
+            ]
+         ,(60#28,62#5,!1)})
+      ,(60#5,62#5,!1)};
+      {{AE({OA({*{V("my_thread"),alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(64#5,64#13,!1)},alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(64#5,64#20,!1)},"start"),alias("stdThreadRoutine",unit),(64#5,64#20,!1)},{V("start"),alias("stdThreadRoutine",unit),(64#24,64#28,!1)}),alias("stdThreadRoutine",unit),(64#5,64#28,!1)}
+      ,(64#5,64#28,!1)};
+      {{AE({OA({*{V("my_thread"),alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(65#5,65#13,!1)},alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(65#5,65#19,!1)},"args"),ref(unit),(65#5,65#19,!1)},{V("args"),ref(unit),(65#23,65#26,!1)}),ref(unit),(65#5,65#26,!1)}
+      ,(65#5,65#26,!1)};
+      {IF0({BO(!=,{"0"N,int,(74#9,74#9,!1)},{SC((<"std_thread">,"pthread_create"),[ref(class((,pthread_t))),ref(unit),unit,alias("stdThread",ref(mod(class((,_stdThread)),[struct])))],[{&{V("handle"),class((,pthread_t)),(74#30,74#35,!1)},ref(class((,pthread_t))),(74#29,74#35,!1)},{CS(ref(unit),{"0"N,int,(74#38,74#41,!1)}),ref(unit),(74#38,74#41,!1)},{F((<"std_thread">,internal_start)),unit,(74#44,74#57,!1)},{V("my_thread"),alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(74#60,74#68,!1)}]),class((,"%undef")),(74#14,74#69,!1)}),bool,(74#9,74#69,!1)},
+         {[
+            {PC0((<"std_thread">,"free"),[alias("stdThread",ref(mod(class((,_stdThread)),[struct])))],[{V("my_thread"),alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(75#14,75#22,!1)}])
+            ,(75#9,75#23,!1)};
+            {RE({"0"N,int,(76#16,76#16,!1)})
+            ,(76#9,76#17,!1)}
+            ]
+         ,(74#72,77#5,!1)})
+      ,(74#5,77#5,!1)};
+      {{AE({OA({*{V("my_thread"),alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(84#5,84#13,!1)},alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(84#5,84#21,!1)},"handle"),class((,pthread_t)),(84#5,84#21,!1)},{V("handle"),class((,pthread_t)),(84#25,84#30,!1)}),class((,pthread_t)),(84#5,84#30,!1)}
+      ,(84#5,84#30,!1)};
+      {{AE({*{V("thread"),ref(alias("stdThread",ref(mod(class((,_stdThread)),[struct])))),(86#6,86#11,!1)},alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(86#5,86#11,!1)},{V("my_thread"),alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(86#15,86#23,!1)}),alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(86#5,86#23,!1)}
+      ,(86#5,86#23,!1)};
+      {RE({"1"N,int,(88#12,88#12,!1)})
+      ,(88#5,88#13,!1)}
+      ]
+   ,(48#1,89#1,!1)}
+   )
+   ,(48#1,89#1,!1)},
+
+   {"std_thread",
+   FN([public],(<"std_thread">,"stdThreadJoin"):int,[("thread":alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(91#19,91#34,!1))],[],
+   {[
+      {VD("dummy",ref(unit))
+      ,(99#10,99#15,!1)};
+      {IF0({BO(!=,{"0"N,int,(100#9,100#9,!1)},{SC((<"std_thread">,"pthread_join"),[class((,pthread_t)),ref(ref(unit))],[{OA({*{V("thread"),alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(100#27,100#32,!1)},alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(100#27,100#40,!1)},"handle"),class((,pthread_t)),(100#27,100#40,!1)},{&{V("dummy"),ref(unit),(100#44,100#48,!1)},ref(ref(unit)),(100#43,100#48,!1)}]),class((,"%undef")),(100#14,100#49,!1)}),bool,(100#9,100#49,!1)},
+         {[
+            {RE({"0"N,int,(100#59,100#59,!1)})
+            ,(100#52,100#60,!1)}
+            ]
+         ,(100#5,100#60,!1)})
+      ,(100#5,100#60,!1)};
+      {RE({"1"N,int,(103#12,103#12,!1)})
+      ,(103#5,103#13,!1)}
+      ]
+   ,(91#1,104#1,!1)}
+   )
+   ,(91#1,104#1,!1)},
+
+   {"std_thread",
+   FN([public],(<"std_thread">,"stdThreadDestroy"):int,[("thread":alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(106#22,106#37,!1))],[],
+   {[
+      {PC0((<"std_thread">,"free"),[alias("stdThread",ref(mod(class((,_stdThread)),[struct])))],[{V("thread"),alias("stdThread",ref(mod(class((,_stdThread)),[struct]))),(112#10,112#15,!1)}])
+      ,(112#5,112#16,!1)};
+      {RE({"1"N,int,(114#12,114#12,!1)})
+      ,(114#5,114#13,!1)}
+      ]
+   ,(106#1,115#1,!1)}
+   )
+   ,(106#1,115#1,!1)},
+
+   {"std_thread",
+   FN([public],(<"std_thread">,"stdThreadLockCreate"):int,[("lock":ref(alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct])))),(133#25,133#43,!1))],[],
+   {[
+      {VD("my_lock",alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),{CS(ref(unit),{"0"N,int,(135#29,135#32,!1)}),ref(unit),(135#29,135#32,!1)})
+      ,(135#19,135#25,!1)};
+      {{AE({*{V("lock"),ref(alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct])))),(137#6,137#9,!1)},alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(137#5,137#9,!1)},{CS(ref(unit),{"0"N,int,(137#13,137#16,!1)}),ref(unit),(137#13,137#16,!1)}),alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(137#5,137#16,!1)}
+      ,(137#5,137#16,!1)};
+      {{AE({V("my_lock"),alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(139#5,139#11,!1)},{CS(alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),{SC((<"std_thread">,"malloc"),[int],[{SO({*{V("my_lock"),alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(139#45,139#51,!1)},alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(139#44,139#51,!1)}),int,(139#37,139#52,!1)}]),class((,"%undef")),(139#30,139#53,!1)}),alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(139#15,139#53,!1)}),alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(139#5,139#53,!1)}
+      ,(139#5,139#53,!1)};
+      {IF0({BO(==,{V("my_lock"),alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(140#9,140#15,!1)},{CS(ref(unit),{"0"N,int,(140#20,140#23,!1)}),ref(unit),(140#20,140#23,!1)}),bool,(140#9,140#23,!1)},
+         {[
+            {RE({"0"N,int,(140#33,140#33,!1)})
+            ,(140#26,140#34,!1)}
+            ]
+         ,(140#5,140#34,!1)})
+      ,(140#5,140#34,!1)};
+      {IF0({BO(!=,{"0"N,int,(150#9,150#9,!1)},{SC((<"std_thread">,"pthread_mutex_init"),[ref(class((,pthread_mutex_t))),ref(unit)],[{&{OA({*{V("my_lock"),alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(150#34,150#40,!1)},alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(150#34,150#47,!1)},"mutex"),class((,pthread_mutex_t)),(150#34,150#47,!1)},ref(class((,pthread_mutex_t))),(150#33,150#47,!1)},{CS(ref(unit),{"0"N,int,(150#50,150#53,!1)}),ref(unit),(150#50,150#53,!1)}]),class((,"%undef")),(150#14,150#54,!1)}),bool,(150#9,150#54,!1)},
+         {[
+            {PC0((<"std_thread">,"free"),[ref(alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))))],[{V("lock"),ref(alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct])))),(151#14,151#17,!1)}])
+            ,(151#9,151#18,!1)};
+            {RE({"0"N,int,(152#16,152#16,!1)})
+            ,(152#9,152#17,!1)}
+            ]
+         ,(150#57,153#5,!1)})
+      ,(150#5,153#5,!1)};
+      {{AE({*{V("lock"),ref(alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct])))),(156#6,156#9,!1)},alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(156#5,156#9,!1)},{V("my_lock"),alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(156#13,156#19,!1)}),alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(156#5,156#19,!1)}
+      ,(156#5,156#19,!1)};
+      {RE({"1"N,int,(158#12,158#12,!1)})
+      ,(158#5,158#13,!1)}
+      ]
+   ,(133#1,159#1,!1)}
+   )
+   ,(133#1,159#1,!1)},
+
+   {"std_thread",
+   FN([public],(<"std_thread">,"stdThreadLockAcquire"):unit,[("lock":alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(161#27,161#44,!1))],[],
+   {[
+      {PC0((<"std_thread">,"pthread_mutex_lock"),[ref(class((,pthread_mutex_t)))],[{&{OA({*{V("lock"),alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(184#25,184#28,!1)},alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(184#25,184#35,!1)},"mutex"),class((,pthread_mutex_t)),(184#25,184#35,!1)},ref(class((,pthread_mutex_t))),(184#24,184#35,!1)}])
+      ,(184#5,184#36,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(161#1,186#1,!1)}
+   )
+   ,(161#1,186#1,!1)},
+
+   {"std_thread",
+   FN([public],(<"std_thread">,"stdThreadLockRelease"):unit,[("lock":alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(188#27,188#44,!1))],[],
+   {[
+      {PC0((<"std_thread">,"pthread_mutex_unlock"),[ref(class((,pthread_mutex_t)))],[{&{OA({*{V("lock"),alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(196#27,196#30,!1)},alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(196#27,196#37,!1)},"mutex"),class((,pthread_mutex_t)),(196#27,196#37,!1)},ref(class((,pthread_mutex_t))),(196#26,196#37,!1)}])
+      ,(196#5,196#38,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(188#1,198#1,!1)}
+   )
+   ,(188#1,198#1,!1)},
+
+   {"std_thread",
+   FN([public],(<"std_thread">,"stdThreadLockDestroy"):unit,[("lock":alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(200#27,200#44,!1))],[],
+   {[
+      {PC0((<"std_thread">,"pthread_mutex_destroy"),[ref(class((,pthread_mutex_t)))],[{&{OA({*{V("lock"),alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(205#28,205#31,!1)},alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(205#28,205#38,!1)},"mutex"),class((,pthread_mutex_t)),(205#28,205#38,!1)},ref(class((,pthread_mutex_t))),(205#27,205#38,!1)}])
+      ,(205#5,205#39,!1)};
+      {PC0((<"std_thread">,"free"),[alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct])))],[{V("lock"),alias("stdThreadLock",ref(mod(class((,_stdThreadLock)),[struct]))),(207#10,207#13,!1)}])
+      ,(207#5,207#14,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(200#1,208#1,!1)}
+   )
+   ,(200#1,208#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp",
+   CL([struct],(,_twoIntsStruct),[])
+   {
+      ([public],"intOne":int,(92#9,92#14,!2));
+      ([public],"intTwo":int,(93#9,93#14,!2))
+   }
+   ,(90#1,94#16,!2)}
+
+,
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp",
+   CL([struct],(,_stdThread),[])
+   {
+      ([public],"handle":class((,pthread_t)),(17#15,17#20,!1));
+      ([public],"start":alias("stdThreadRoutine",unit),(19#22,19#26,!1));
+      ([public],"args":ref(unit),(20#10,20#14,!1))
+   }
+   ,(13#1,21#2,!1)}
+
+,
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp",
+   CL([struct],(,_stdThreadLock),[])
+   {
+      ([public],"mutex":class((,pthread_mutex_t)),(125#21,125#25,!1))
+   }
+   ,(121#1,127#2,!1)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp",
+   [
+      M("/* windows.h needs to be the top-most header usually */",2,(2#0,2#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp")),
+      M("/* dead code, but return to avoid warnings */",39,(39#0,39#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp")),
+      M("/* dead code, but return to avoid warnings */",43,(43#0,43#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp")),
+      M("/* clearly, you cannot access _stdThread.handle from within the thread\n     * itself, because initialization of this field is not synchronized w.r.t.\n     * multiple threads\n     */",80,(80#0,80#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp")),
+      M("/* end extern \"C\" */",118,(118#0,118#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp")),
+      M("/* pthread_mutex's and CRITICAL_SECTIONS differ\n     *\n     * CRITICAL_SECTION's are recursive, meaning a thread can acquire a\n     * CRITICAL_SECTION multiple times, so long as it then releases it\n     * the same number of times.\n     *\n     * pthread_mutex's seem to be undefined with regards to recursion,\n     * meaning that acquiring the same mutex twice leads to undefined\n     * behavior (it could deadlock, crash, act recursively, who knows)\n     *\n     * Therefore, we will define multiple acquisitions of a lock in a\n     * single thread as \"undefined\" behavior, thereby allowing us to\n     * ignore the platform compatibility issues here.\n     */",163,(163#0,163#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp")),
+      M("/* may throw an exception in Windows 2000 but documentation says to let\n     * it terminate the process (i.e., don't handle it)\n     */",179,(179#0,179#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp")),
+      M("/* see comments in stdThreadLockAcquire with regards to lock\n     * recursion */",190,(190#0,190#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp")),
+      M("/* end extern \"C\" */",211,(211#0,211#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_thread.cpp"))
+   ]
+   }
+]

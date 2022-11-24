@@ -1,0 +1,43 @@
+namespace com.ti.oss.common.cdr.file;
+
+use com.ibm.streamsx.file::* ;
+use  com.ti.oss.common.pm.util.time::*;
+use  com.ti.oss.common.cdr.util::*;
+
+
+public composite RenameFile(input stream<rstring filename> I)
+{
+	graph
+
+		() as RenameFile = Custom(I)
+		{
+			logic
+				state :
+				{
+					mutable rstring fname = "" ;
+				}
+
+				onTuple I :
+				{
+					mutable int32 error = 0;
+
+					if (fname != I.filename)
+					{
+						appTrc(Trace.info, "RENAME FILE");
+
+						if( exists(I.filename))
+						{
+							mutable rstring filenamenew = getPathFile(I.filename)+"/GGSN_CDR_"+getUtilTimeStampForOut()+".csv";
+							error = rename(I.filename,filenamenew);
+
+							if (error != 0)
+							{
+								appTrc(Trace.error, "RenameFile - Could not rename file \"" +
+									I.filename + "\" into \"" + filenamenew + "\"" +
+									strerror(error)) ;
+							}
+						}
+					}
+				}
+		}
+}

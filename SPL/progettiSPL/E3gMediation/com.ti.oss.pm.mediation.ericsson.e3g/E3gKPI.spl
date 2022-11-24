@@ -1,0 +1,190 @@
+namespace com.ti.oss.pm.mediation.ericsson.e3g ;
+
+use com.ti.oss.common.pm.kpi::* ;
+use com.ti.oss.common.pm.kpi.aggregator::* ;
+use com.ti.oss.common.pm.kpi.handler::* ;
+use com.ti.oss.common.pm.kpi.util::*;
+use com.ti.oss.common.pm.kpi.ztcp::*;
+
+use com.ti.oss.common.util.cfg::*;
+
+use com.ti.oss.common.types::* ;
+use com.ti.oss.common.alarm::* ;
+use com.ti.oss.common.event::* ;
+use com.ti.oss.common.pm.parser::* ;
+
+use com.ti.oss.common.cdr.util.cfg::* ;
+
+use com.ti.ztcp::ZTCPClient ;
+
+composite E3gKPI( input stream<MeasHeader mHeader, MeasData mData> Ericcson3GImportedStream ) {
+
+	param
+		expression<rstring> $appId : getCompileTimeValue("appId") ;
+		expression<int32> $threadedPorts : (int32) getCompileTimeValue("threadedPorts") ;		
+		expression<rstring> $commonEnv : "COMMON_CFG_DIR" ;
+		expression<rstring> $vendorsMapCfgParam : "VENDORS_MAP" ;
+		expression<rstring> $mocsMapCfgParam : "MOCS_MAP" ;
+		expression<rstring> $bscMocsMapCfgParam : "BSC_MOCS_MAP" ;
+		expression<rstring> $bscAggregationMapCfgParam : "BSC_AGGREGATION_MAP" ;
+		expression<rstring> $rncMocsMapCfgParam : "RNC_MOCS_MAP" ;
+		expression<rstring> $rncAggregationMapCfgParam : "RNC_AGGREGATION_MAP" ;
+		expression<rstring> $tacMocsMapCfgParam : "TAC_MOCS_MAP" ;
+		expression<rstring> $tacAggregationMapCfgParam : "TAC_AGGREGATION_MAP" ;
+		expression<rstring> $topologyFileNameCfgParam : "TOPOLOGY_FILENAME" ;
+		expression<rstring> $topologyIndexColumnCfgParam : "TOPOLOGY_INDEX_COLUMN" ;
+		expression<rstring> $topologyOutputColumnCfgParam : "TOPOLOGY_OUTPUT_COLUMN" ;
+		expression<rstring> $aggregationRulesCfgParam : "AGGREGATION_RULES" ;
+				
+	graph
+
+        @parallel(width = (int32) getSubmissionTimeValue("kpiWidth") )
+		( stream<rstring parKey, rstring mediationId, rstring vendor, rstring moc, rstring fdn, MeasHeader mHeader, MeasData mData> E3GStream;
+		  stream<rstring parKey, rstring mediationId, rstring vendor, rstring moc, rstring fdn, rstring neId, int32 complete, MeasHeader mHeader, MeasData mData> EKQIRNCStream ) as Ericcson3GRouter = Custom( Ericcson3GImportedStream as I )
+		{
+			logic
+				state :
+				{
+					list<rstring> aggregationRules = tokenize( getCfgParam( $commonEnv, $appId, $aggregationRulesCfgParam ), ",", false ) ;
+				
+					rstring mocsMap = getCfgParam( $commonEnv, $appId, $mocsMapCfgParam ) ;
+					rstring vendorsMap = getCfgParam( $commonEnv, $appId, $vendorsMapCfgParam ) ;					
+					rstring rncMocsMap = getCfgParam($commonEnv, $appId, $rncMocsMapCfgParam) ;
+					rstring rncAggregationMap = getCfgParam($commonEnv, $appId, $rncAggregationMapCfgParam) ;
+					
+					mutable map<rstring, rstring> mocs = {} ;
+					mutable map<rstring, rstring> vendors = {} ;
+					mutable map<rstring, rstring> rncMocs = {} ;
+					mutable map<rstring, rstring> rncAggregation = {} ;
+
+					boolean mocsOk = fillMapFromCsv( mocs, mocsMap, ";", "=" ) ;
+					boolean vendorsOk = fillMapFromCsv( vendors, vendorsMap, ";", "=" ) ;
+					boolean rncMocsOk = fillMapFromCsv( rncMocs, rncMocsMap, ";", "=" ) ;
+					boolean rncAggregationOk = fillMapFromCsv( rncAggregation, rncAggregationMap, ";", "=" ) ;
+
+					mutable map<rstring, rstring> rncTopologyMap = { } ;
+					mutable map<rstring, int32> rncCountMap = { } ;
+															
+					boolean rncTopologyOk = loadTopology( $commonEnv, $appId, $topologyFileNameCfgParam, $topologyIndexColumnCfgParam, $topologyOutputColumnCfgParam, rncAggregation[ "e3g" ], rncTopologyMap ) ;
+					
+					boolean rncFilteredOK = filterTopology( rncMocs[ "e3g" ], rncTopologyMap, rncCountMap ) ;
+					
+					mutable rstring fdn = "" ;
+					mutable rstring key = "" ;
+					
+					mutable rstring ropStartTime = "" ;
+				}
+				
+				onTuple I :
+				{					
+					if ( has( mocs, "e3g" ) )
+					{
+						fdn = mData.fdn ;
+						key = mData.fdn ;
+
+						// Manage external cells
+						int32 idx = findFirst( mData.fdn, "/GsmRelation" ) ;						
+						if( idx > 1 )
+						{
+							appTrc( Trace.trace, "Manage Gsm Relation \"" + substring( mData.fdn, idx+1, length(mData.fdn) )  + "\" for \"" + fdn  + "\"") ;
+							
+							fillRelationsParallelParams( "GsmRelation", fdn, key ) ;
+
+							// Mark node to be aggregated at export time with special characters 
+							fdn = substring( fdn, 0, idx ) + "/***" + substring( fdn, idx, length( fdn ) ) ;
+						} else
+						{
+							fillParallelParams( mocs[ "e3g" ], fdn, key ) ;
+						}
+						
+						submit({ parKey = key, mediationId = "e3g", vendor = vendors[ "e3g" ], moc = mocs[ "e3g" ], fdn = fdn, mHeader = I.mHeader, mData = I.mData }, E3GStream) ;
+
+						if ( has( aggregationRules, "RNC" ) && has( rncMocs, "e3g" ) )
+						{
+							// Check for ROP increment
+							if ( mHeader.startTime > ropStartTime )
+							{
+								// Store new ROP timestamp
+								ropStartTime = mHeader.startTime ;
+
+			            		// Check if Naming Lookup mapping csv is changed
+								if( isCdrProvCfgChanged( "TOPOLOGY_MAPPING" ) )
+								{
+									appTrc(Trace.info, "Reload updated Naming Lookup mapping file") ;
+		
+									reloadCdrProvCfg( "TOPOLOGY_MAPPING" ) ;
+								
+									loadTopology( $commonEnv, $appId, $topologyFileNameCfgParam, $topologyIndexColumnCfgParam, $topologyOutputColumnCfgParam, rncAggregation[ "e3g" ], rncTopologyMap ) ;
+									
+									filterTopology( rncMocs[ "e3g" ], rncTopologyMap, rncCountMap ) ;
+								}
+							}
+
+							if ( has( rncTopologyMap, fdn ) )
+							{
+								rstring neId = rncTopologyMap[ fdn ] ;
+								
+								submit({ parKey = neId, mediationId = "e3g" + "-RNC", vendor = vendors[ "e3g" ], moc = rncMocs[ "e3g" ], fdn = fdn, neId = neId, complete = rncCountMap[ neId ], mHeader = I.mHeader, mData = I.mData }, EKQIRNCStream) ;
+							}
+						}
+					}
+				}
+		}
+
+        @parallel(width = (int32) getSubmissionTimeValue("kpiWidth"), partitionBy = [ { port = E3GStream, attributes = [ parKey ] } ])
+        (stream<KPIExchangeRecord> E3GKPI ; stream<Event e> E3GEvent) as Ericsson3GHandler = KPIHandler( E3GStream )
+        {
+        	param
+        		appId : $appId ;
+        }
+
+        @parallel(width = (int32) getSubmissionTimeValue("kpiWidth"), partitionBy = [ { port = EKQIRNCStream, attributes = [ parKey ] } ])
+        (stream<KPIExchangeRecord> EKQIRNCKPI ; stream<Event e> EKQIRNCEvent) as KQIEricsson3GHandler = KQIHandler( EKQIRNCStream )
+        {
+        	param
+        		appId : $appId ;
+        }
+
+        () as KpiSender =  KPISender( E3GKPI, EKQIRNCKPI )
+        {
+		    param
+				serviceGroupCfgParam : "KPI_SERVICE_GROUP";    
+		        serviceNameCfgParam : "KPI_SERVICE_NAME";
+        }
+
+        () as ESender =  EventSender( E3GEvent, EKQIRNCEvent )
+        {
+		    param
+               serviceGroupCfgParam : "EVENT_SERVICE_GROUP";    
+               serviceNameCfgParam : "EVENT_SERVICE_NAME";
+        }
+
+		(stream<rstring eventCorrelationId,rstring ropEvent,rstring neId,rstring emId, FileTrailer trailer> OTrailer ;
+			stream<Alarm alarm> KPIAlarm) as kpiExport = E3gKPIExport( E3GKPI, EKQIRNCKPI  )
+		{
+		}
+
+		(stream<Alarm alarm> KPIFileExportAlarm;stream<Event e> KFEOutEvent) as OKPIFileExport =
+			KPIFileExport( OTrailer  )
+		{
+			param
+				appId : getCompileTimeValue("appId") ;
+		}
+
+		() as MAlarmHandler = AlarmHandler( KPIAlarm, KPIFileExportAlarm as OAlarm )
+		{
+			param
+				mediationId : getCompileTimeValue("appId") ;
+		}
+		
+		() as MEventHandler = EventHandler ( E3GEvent, EKQIRNCEvent, KFEOutEvent )
+        {
+          param
+            mediationId: getCompileTimeValue("appId") ;
+        }
+        
+		config 
+			restartable : true;
+			relocatable : true;
+
+}

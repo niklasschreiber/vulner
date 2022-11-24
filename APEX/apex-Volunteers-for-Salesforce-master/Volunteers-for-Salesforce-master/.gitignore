@@ -1,0 +1,18 @@
+.appcloud
+.appcloud/.project
+.python-version
+.settings
+.sfdx
+/browser_tests
+/test_results.xml
+build.properties
+salesforce.schema
+src/layouts/Global-Global Layout.layout
+src/profiles/Customer Community Login User.profile
+src/profiles/Customer Community User.profile
+src/profiles/Partner Community Login User.profile
+src/profiles/Partner Community User.profile
+src/workflows/User.workflow
+**/.sfdx/
+**/.vscode/
+.cci

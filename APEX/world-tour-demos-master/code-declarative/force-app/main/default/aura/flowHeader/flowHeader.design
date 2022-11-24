@@ -1,0 +1,5 @@
+<design:component label="Flow Header with Progress">
+    <design:attribute name="stageName" label="Stage Name"/>
+    <design:attribute name="stageIndex" label="Stage Index"/>
+    <design:attribute name="stageCount" label="Stage Count"/>
+</design:component>

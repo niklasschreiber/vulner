@@ -1,0 +1,49 @@
+{
+   ("encoding", "KSC5601");
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/ret_stack.c");
+   ("language", "C");
+   ("include", "<stdlib.h>");
+   ("include", "<stdio.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/ret_stack.c");
+   (!2, "x");
+   (!3, "5"N);
+   (!4, "p");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/ret_stack.c",
+   FN([public],(<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/ret_stack.c">,"test1"):ref(int),[],[],
+   {[
+      {VD(!2,int,{!3,int,(6#13,6#13,!1)})
+      ,(6#9,6#9,!1)};
+      {RE({&{V(!2),int,(8#13,8#13,!1)},ref(int),(8#12,8#12,!1)})
+      ,(8#5,8#5,!1)}
+      ]
+   ,(4#6,9#1,!1)}
+   )
+   ,(4#6,9#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/ret_stack.c",
+   FN([public],(<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/ret_stack.c">,"test2"):ref(int),[],[],
+   {[
+      {VD(!2,int,{!3,int,(13#13,13#13,!1)})
+      ,(13#9,13#9,!1)};
+      {VD(!4,ref(int),{&{V(!2),int,(14#15,14#15,!1)},ref(int),(14#14,14#14,!1)})
+      ,(14#10,14#10,!1)};
+      {RE({V(!4),ref(int),(16#12,16#12,!1)})
+      ,(16#5,16#5,!1)}
+      ]
+   ,(11#6,17#1,!1)}
+   )
+   ,(11#6,17#1,!1)},
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/ret_stack.c",
+   [
+      S("// Local variables:\n",19),
+      S("// compile-command: \"clang -pedantic -Wall -c ret_stack-01.c \\\n// && c2coil.sh ret_stack-01.c\"\n",20),
+      S("// End:\n",22)
+   ]
+   }
+]

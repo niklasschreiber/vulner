@@ -1,0 +1,99 @@
+namespace com.ti.oss.common.cdr.evalROP;
+
+use com.ibm.streamsx.file::* ;
+use com.ti.oss.common.cdr.parser.eggsn::* ;
+use com.ti.oss.common.cdr.types::* ;
+use com.ti.oss.common.cdr.util::* ;
+use com.ti.oss.common.cdr.util.cfg::* ;
+use com.ti.oss.common.event::* ;
+use com.ti.oss.common.types::* ;
+use com.ti.oss.common.util.cfg::* ;
+use com.ti.oss.common.util.time::*;
+
+<%
+	my $parallelSQM = 16;
+%>
+
+type BroadTacLteT = map<rstring, BroadTacLte>;
+
+public composite AggregateTac (input stream<BroadTacLte> ITac; output stream<CsvWrite> OTac)
+{
+	param
+		expression<rstring> $mediationName ;
+			
+	graph
+	
+		(stream<CsvWrite> OTac) = Custom(ITac as I)
+		{
+		logic state:
+			{
+				mutable int32 countAggr = 0;
+				mutable BroadTacLteT BroadTacLteAggr ;
+				rstring mediationName = $mediationName;
+				mutable CsvWrite csv = {};
+			} 
+		
+			onTuple I : 
+			{   
+				if (I.endROP)
+				{	
+					countAggr++;
+				}
+				else
+				{
+					mutable rstring key = I.tac;
+					if(has(BroadTacLteAggr, key) == true)
+					{
+						BroadTacLteAggr[key].downlink_tac_lte = BroadTacLteAggr[key].downlink_tac_lte + I.downlink_tac_lte;
+						BroadTacLteAggr[key].uplink_tac_lte = BroadTacLteAggr[key].uplink_tac_lte + I.uplink_tac_lte;
+					}
+					else
+					{
+						mutable BroadTacLte BroadTacLteTmp = {};
+						swap(BroadTacLteTmp.tac,I.tac);
+						swap(BroadTacLteTmp.start_time,I.start_time);
+						swap(BroadTacLteTmp.end_time,I.end_time);
+						swap(BroadTacLteTmp.downlink_tac_lte,I.downlink_tac_lte);
+						swap(BroadTacLteTmp.uplink_tac_lte,I.uplink_tac_lte);
+						swap(BroadTacLteTmp.nameOutputFile,I.nameOutputFile);
+						swap(BroadTacLteTmp.endROP,I.endROP);
+						swap(BroadTacLteTmp.filePrefix,I.filePrefix);
+						swap(BroadTacLteTmp.suffix,I.suffix);
+						swap(BroadTacLteTmp.endRopSecs,I.endRopSecs);
+						swap(BroadTacLteTmp.startRopSecs,I.startRopSecs);
+						
+						insertM(BroadTacLteAggr, key, BroadTacLteTmp) ;								
+					}
+					
+				}
+				
+				if(countAggr == 16)
+				{
+					for(rstring key in BroadTacLteAggr)
+					{
+						csv.nameOutputFile = BroadTacLteAggr[key].nameOutputFile;
+						csv.endROP = false;
+						csv.filePrefix = BroadTacLteAggr[key].filePrefix;
+						csv.suffix = BroadTacLteAggr[key].suffix;
+						
+						if (BroadTacLteAggr[key].tac != "")
+						{
+							csv.outputContent = BroadTacLteAggr[key].tac+";"+BroadTacLteAggr[key].start_time+";"+BroadTacLteAggr[key].end_time+";"+(rstring)BroadTacLteAggr[key].downlink_tac_lte+";"+(rstring)BroadTacLteAggr[key].uplink_tac_lte;
+						}else{
+							csv.outputContent = "";
+						}
+						
+						submit(csv, OTac);
+					}	
+					
+					countAggr = 0;
+					clearM(BroadTacLteAggr);
+					
+					csv.nameOutputFile = I.nameOutputFile;
+					csv.outputContent = "";
+					csv.endROP = true;
+					submit(csv, OTac);
+				}		
+	        }	
+	     }	
+}

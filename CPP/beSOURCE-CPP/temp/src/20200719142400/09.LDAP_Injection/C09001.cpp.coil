@@ -1,0 +1,87 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/09.LDAP_Injection/C09001.cpp");
+   ("language", "CPP");
+   ("include", "<stdio.h>");
+   ("include", "<ldap.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/09.LDAP_Injection/C09001.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/09.LDAP_Injection/C09001.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/09.LDAP_Injection/C09001.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/09.LDAP_Injection/C09001.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/09.LDAP_Injection/C09001.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/09.LDAP_Injection/C09001.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/09.LDAP_Injection/C09001.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C09001",
+   SI(<"C09001">,
+   {[
+      {;
+      ,(1#1,21#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,21#1,!1)}
+   )
+   ,(1#1,21#1,!1)},
+
+   {"C09001",
+   FN([public],(<"C09001">,"cwe90_bad"):int,[],[],
+   {[
+      {VD("filter",ref(char),{SC((<"C09001">,"getenv"),[string],[{"filter_string"S,string,(13#25,13#39,!1)}]),class((,"%undef")),(13#18,13#40,!1)})
+      ,(13#7,13#14,!1)};
+      {VD("rc",int)
+      ,(14#7,14#8,!1)};
+      {VD("ld",ref(class((,LDAP))),{CS(ref(unit),{"0"N,int,(15#14,15#17,!1)}),ref(unit),(15#14,15#17,!1)})
+      ,(15#8,15#10,!1)};
+      {VD("result",ref(class((,LDAPMessage))))
+      ,(16#14,16#21,!1)};
+      {{AE({V("rc"),int,(19#3,19#4,!1)},{SC((<"C09001">,"ldap_search_ext_s"),[ref(class((,LDAP))),string,class((,"%undef")),ref(char),ref(unit),int,ref(unit),ref(unit),class((,"%undef")),class((,"%undef")),ref(ref(class((,LDAPMessage))))],[{V("ld"),ref(class((,LDAP))),(19#27,19#28,!1)},{""S,string,(19#31,19#32,!1)},{V("LDAP_SCOPE_BASE"),class((,"%undef")),(19#35,19#49,!1)},{V("filter"),ref(char),(19#52,19#57,!1)},{CS(ref(unit),{"0"N,int,(19#60,19#63,!1)}),ref(unit),(19#60,19#63,!1)},{"0"N,int,(19#66,19#66,!1)},{CS(ref(unit),{"0"N,int,(19#69,19#72,!1)}),ref(unit),(19#69,19#72,!1)},{CS(ref(unit),{"0"N,int,(19#75,19#78,!1)}),ref(unit),(19#75,19#78,!1)},{V("LDAP_NO_LIMIT"),class((,"%undef")),(19#81,19#93,!1)},{V("LDAP_NO_LIMIT"),class((,"%undef")),(19#96,19#108,!1)},{&{V("result"),ref(class((,LDAPMessage))),(19#112,19#117,!1)},ref(ref(class((,LDAPMessage)))),(19#111,19#117,!1)}]),class((,"%undef")),(19#8,19#118,!1)}),int,(19#3,19#118,!1)}
+      ,(19#3,19#118,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(11#1,20#1,!1)}
+   )
+   ,(11#1,20#1,!1)},
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/09.LDAP_Injection/C09001.cpp",
+   [
+      M("/*\n * \n * \n */",4,(4#0,4#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/09.LDAP_Injection/C09001.cpp")),
+      M("// \n",12,(12#0,12#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/09.LDAP_Injection/C09001.cpp")),
+      M("//\n",18,(18#0,18#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/09.LDAP_Injection/C09001.cpp"))
+   ]
+   }
+]

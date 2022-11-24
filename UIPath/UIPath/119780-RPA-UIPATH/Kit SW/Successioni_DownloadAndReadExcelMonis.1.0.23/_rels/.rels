@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Type="http://schemas.microsoft.com/packaging/2010/07/manifest" Target="/Successioni_DownloadAndReadExcelMonis.nuspec" Id="Re09ee565b37749a5" />
+  <Relationship Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="/package/services/metadata/core-properties/a2d558ab8824431d8ffa1530867b4439.psmdcp" Id="R48127996742240b9" />
+</Relationships>

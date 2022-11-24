@@ -1,0 +1,172 @@
+namespace com.ti.oss.pm.mediation.ericsson.e3g.utils ;
+
+/*
+ * Import ext namespaces
+ */
+use com.ibm.streamsx.file::* ;
+
+//Mediation Framework
+use com.ti.oss.common.event::* ;
+use com.ti.oss.common.pm.util::* ;
+use com.ti.oss.common.pm.parser.xml3gpp::* ;
+
+// Mediation utils
+use com.ti.oss.common.pm.util::* ;
+use com.ti.oss.common.util.cfg::* ;
+
+public composite ETransformerSchemaBased(input stream<RawDataHeader rHeader,
+	RawDataBlock rBlock> InRawData ; output OutMeasDataBlock, OutSchemaEvent)
+{
+	param
+		expression<rstring> $mediationId ;
+		expression<rstring> $commonEnv : "COMMON_CFG_DIR" ;
+		expression<rstring> $eventsListCfgParam : "EVENT_TYPE_LIST" ;
+		expression<rstring> $dnPrefix ;
+		expression<rstring> $mtPrefix : "" ;
+	graph
+		(stream<MeasHeader mHeader, MeasData mData> OutMeasDataBlock ;
+			stream<Event e> OutSchemaEvent) = Custom(InRawData as I)
+		{
+			logic
+				state :
+				{
+				// Local objects
+					mutable MeasHeader measHeader = { } ;
+					mutable rstring inFileName = "" ;
+					mutable rstring measInfoId = "" ;
+
+					//Adaptation Memory Structure
+					mutable rstring prefixMeasurementType ;
+					mutable map<int32, boolean> eventTable = getEventTable($commonEnv,
+						$mediationId, $eventsListCfgParam) ;
+				}
+
+				onTuple InRawData : {
+
+				//type MeasHeader = tuple<FileHeader fileHeader, rstring startTime, rstring interval, rstring endTime> ;
+				//type MeasData = tuple<rstring fdn, list<Dimension> dimensions, map<rstring, MeasType> measTypes> ;
+
+				// Create the header only for the first tuple of the file
+				if(rHeader.fileHeader.fName != inFileName) {
+				//Set measHeader.fileHeader
+				inFileName = rHeader.fileHeader.fName ;
+
+				// Set measInfoId
+				//measInfoId = currentMeasInfoId ;
+				measHeader.fileHeader.eventCorrelationId =
+					rHeader.fileHeader.eventCorrelationId ;
+					//appTrc(Trace.trace, "measHeader.fileHeader.eventCorrelationId = " + (rstring)measHeader.fileHeader.eventCorrelationId) ;
+				measHeader.fileHeader.sessionBeginTime = rHeader.fileHeader.sessionBeginTime
+					;
+					//appTrc(Trace.trace, "measHeader.fileHeader.sessionBeginTime = " + (rstring) measHeader.fileHeader.sessionBeginTime) ;
+				measHeader.fileHeader.fName = rHeader.fileHeader.fName ;
+					measHeader.fileHeader.rop = rHeader.fileHeader.rop ;
+					measHeader.fileHeader.emId = rHeader.fileHeader.emId ;
+					measHeader.fileHeader.neId = rHeader.fileHeader.neId ;
+
+
+
+
+				///// ARACRI 2017-02-16 modifica data inizio e fine a partire dal nome file  /////////////////////////
+				// Set the startTime  measHeader.startTime  = 2017-01-25T05:15:00+00:00
+				// filename = A20170612.1430+0200-1445+0200_SubNetwork=tokomc,SubNetwork=RTO30U,MeContext=RTO30U_statsfile.xml
+				
+				mutable list<rstring> arrayFname = tokenize (rHeader.fileHeader.fName , "/"
+					, false ) ; mutable rstring appodate = substring (arrayFname [ size (
+					arrayFname ) - 1 ] , 1 , 8 ) ;
+				//appTrc(Trace.trace, "appodate = " +(rstring) appodate) ;
+				mutable rstring appostartTime = substring(arrayFname [ size(arrayFname) - 1
+					], 10, 9) ;
+				//appTrc(Trace.trace, "appostartTime = " +(rstring) appostartTime) ;
+				mutable rstring appoendTime = substring(arrayFname [ size(arrayFname) - 1
+					], 20, 9) ;
+				//appTrc(Trace.trace, "appoendTime = " +(rstring) appoendTime) ;
+
+				//appodate = 20170125
+				//appostartTime = 0615+0100
+				//appoendTime = 0630+0100
+				//measHeader.startTime = rHeader.cbt ;
+
+				measHeader.startTime = substring(appodate, 0, 4) + "-" + substring(appodate,
+					4, 2) + "-" + substring(appodate, 6, 2) + "T" + substring(appostartTime, 0, 2)+":"+substring(appostartTime, 2, 2)+":00+"+substring(appostartTime, 5, 2)+":"+substring(appostartTime, 7, 2);
+				//appTrc(Trace.trace, "appodate 1 = " +(rstring) measHeader.startTime) ;
+
+				//Set the endTime : format YYYYMMDDHH24MISS 
+				//measHeader.endTime =omesTS2TS(rBblock.mts);
+				// GAS(2014-05-28): now we forward the endTime as received in the raw file, meaning in OMeS format.
+				//measHeader.endTime = rBlock.mts ;
+				//measHeader.endTime  = 2017-01-25T05:30:00+00:00
+				
+				measHeader.endTime = substring(appodate, 0, 4) + "-" + substring(appodate,
+					4, 2) + "-" + substring(appodate, 6, 2) + "T" + substring(appoendTime, 0, 2)+":"+substring(appoendTime, 2, 2)+":00+"+substring(appoendTime, 5, 2)+":"+substring(appoendTime, 7, 2);
+				appTrc(Trace.trace, "appodate 2 = " +(rstring) measHeader.endTime) ;
+
+				///// ARACRI 2017-02-16 FINE ////////////////////////////
+				
+				
+				
+				//Set the Interval (GP)
+				measHeader.interval = getOMeSInterval(rBlock.gp, rHeader.fileHeader.fName) ;
+				
+				appTrc(Trace.trace, "Created measHeader=\"" +(rstring) measHeader + "\"") ;
+			}
+
+			//Get Counter and Measurement type prefix
+			prefixMeasurementType = $mtPrefix ;
+
+			// Check for a valid measInfoId
+
+			// Create the MeasObjec to add to the table
+			mutable MeasData measObj = { } ;
+
+			// Set the RDN  mHeader, MeasData mData
+			measObj.fdn = $dnPrefix + "/" + getRDN ( I.rBlock.neDn , I.rBlock.moid ) ;
+				mutable MeasType mt = { } ;
+
+				//Set MeasTypes
+			mt.msTypeName =(length ( $mtPrefix ) > 0 ) ? $mtPrefix +
+				getMeasTypeName(measObj.fdn ) : getMeasTypeName (measObj.fdn ) ;
+
+				//appTrc(Trace.trace, "msTypeName=\"" +(rstring) mt.msTypeName +	"\"") ;
+
+
+			//Set Counters
+			for ( int32 i in range (rBlock.cTable ) )
+			{
+				RawCounterTableEntry entry = rBlock.cTable [ i ] ;
+				insertM(mt.cTable, entry.cName, entry.cValue) ;
+			}
+
+			// Add the mt object to the list of measTypes
+			insertM (measObj.measTypes , mt.msTypeName , mt ) ;
+
+			// Submit the measBlock 
+			appTrc (Trace.trace , "Submitting measObj =" + ( rstring ) measObj ) ; submit
+				({
+				mHeader = measHeader , mData = measObj
+			} , OutMeasDataBlock ) ; } onPunct InRawData : { if ( currentPunct ( ) ==
+				Sys . WindowMarker ) {
+				// Submit event tuple
+			mutable Event event = { } ; event . eventType = 140 ; event . resultCode = 0
+				; event . rawFile = filename ( measHeader . fileHeader . fName ) ; event .
+				eventCorrelationId = measHeader . fileHeader . eventCorrelationId ; event .
+				rop = measHeader . fileHeader . rop ; event . emId = measHeader .
+				fileHeader . emId ; event . neId = measHeader . fileHeader . neId ; event .
+				eventText = "The raw file has been transformed" ; boolean eventEnabled =
+				mkEvent ( event , measHeader . fileHeader . sessionBeginTime , eventTable )
+				; if ( eventEnabled ) submit ( { e = event } , OutSchemaEvent ) ;
+
+				// Send punctuation
+			submit ( Sys . WindowMarker , OutMeasDataBlock ) ; appTrc ( Trace . trace ,
+				"Sending onpunct from ETransformerSchemaBased" ) ;
+				// Check if eventTable has to be reloaded.
+			mutable map < int32 , boolean > tmpEventTable = { } ; if ( reloadEventTable (
+				$eventsListCfgParam , tmpEventTable ) > 0 ) { swap ( tmpEventTable ,
+				eventTable ) ; }
+
+				// Debug traces
+			appTrc ( Trace . info , "The file \"" + inFileName +
+				"\" has been transformed." ) ;
+
+				// clear the state
+			inFileName = "" ; } } } }

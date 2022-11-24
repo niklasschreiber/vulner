@@ -1,0 +1,104 @@
+* Data Definition Language Global Title translation *
+
+?SECTION GTT-IMPIANTI-RECORD
+   DEF GTT-IMPIANTI-KEY.
+      10 POINT_CODE_FORMAT                TYPE BINARY 16.
+      10 POINT_CODE                       TYPE BINARY 16.
+   END.
+
+   DEF GTT-IMPIANTI-ALTKEY1.
+      10 GT                               TYPE CHARACTER 16.
+   END.
+
+   DEF GTT-IMPIANTI-REC.
+      05 PrimaryKey                       TYPE GTT-IMPIANTI-KEY.
+      05 AltKey1                          TYPE GTT-IMPIANTI-ALTKEY1.
+      05 SSN_1                            TYPE BINARY 16.
+      05 SSN_2                            TYPE BINARY 16.
+      05 SSN_3                            TYPE BINARY 16.
+      05 SSN_4                            TYPE BINARY 16.
+      05 SSN_5                            TYPE BINARY 16.
+      05 DES_SHORT_ENTITY                 TYPE CHARACTER 8.
+      05 DES_ENTITY                       TYPE CHARACTER 30.
+      05 LAST_UPDATE                      TYPE BINARY 64.
+      05 INSERT_TS                        TYPE BINARY 64.
+      05 FILLER                           TYPE CHARACTER 30.
+  END.
+
+RECORD GTT-IMPIANTI-RECORD.
+       FILE IS "GTTBBASE.IMPIANTI"
+       KEY-SEQUENCED
+       BLOCK 4096
+       EXT (100, 100)
+       BUFFERED
+       MAXEXTENTS 10
+       .
+       DEF      IS GTT-IMPIANTI-REC.
+       KEY      IS PrimaryKey.
+       KEY 1    IS AltKey1.
+  END.
+
+
+?SECTION GTT-MGT-RECORD
+   DEF GTT-MGT-KEY.
+      10 MGT                              TYPE CHARACTER 16.
+   END.
+
+   DEF GTT-MGT-ALTKEY1.
+      10 POINT_CODE_FORMAT                TYPE BINARY 16.
+      10 POINT_CODE                       TYPE BINARY 16.
+   END.
+
+   DEF GTT-MGT-REC.
+      05 PrimaryKey                       TYPE GTT-MGT-KEY.
+      05 AltKey1                          TYPE GTT-MGT-ALTKEY1.
+      05 LAST_UPDATE_TS                   TYPE BINARY 64.
+      05 INSERT_TS                        TYPE BINARY 64.
+      05 FILLER                           TYPE CHARACTER 10.
+  END.
+
+RECORD GTT-MGT-RECORD.
+       FILE IS "GTTBBASE.MGT"
+       KEY-SEQUENCED
+       BLOCK 4096
+       EXT (100, 100)
+       BUFFERED
+       MAXEXTENTS 10
+       .
+       DEF      IS GTT-MGT-REC.
+       KEY      IS PrimaryKey.
+       KEY 1    IS AltKey1.
+  END.
+
+?SECTION GTT-MGTR-RECORD
+   DEF GTT-MGTR-KEY.
+      10 MGT                              TYPE CHARACTER 16.
+   END.
+
+   DEF GTT-MGTR-ALTKEY1.
+      10 POINT_CODE_FORMAT                TYPE BINARY 16.
+      10 POINT_CODE                       TYPE BINARY 16.
+   END.
+
+   DEF GTT-MGTR-REC.
+      05 PrimaryKey                       TYPE GTT-MGTR-KEY.
+      05 MGT_END                          TYPE CHARACTER 16.
+      05 MGT_LENGTH                       TYPE BINARY 16.
+      05 AltKey1                          TYPE GTT-MGTR-ALTKEY1.
+      05 LAST_UPDATE_TS                   TYPE BINARY 64.
+      05 INSERT_TS                        TYPE BINARY 64.
+      05 FILLER                           TYPE CHARACTER 10.
+  END.
+
+RECORD GTT-MGTR-RECORD.
+       FILE IS "GTTBBASE.MGTR"
+       KEY-SEQUENCED
+       BLOCK 4096
+       EXT (100, 100)
+       BUFFERED
+       MAXEXTENTS 10
+       .
+       DEF      IS GTT-MGTR-REC.
+       KEY      IS PrimaryKey.
+       KEY 1    IS AltKey1.
+  END.

@@ -1,0 +1,1 @@
+"D:\_SRC\SPL\SPL-samples-master\QuickStart\EventDetectionV2\spl\EventDetection.spl" 

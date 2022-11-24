@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectID>-1</ProjectID>
+  <Name>CPP</Name>
+  <Desc />
+  <Path>D:\_OpenSource\SRA\CIVETTA\CPP\CPP</Path>
+  <Platform>CSP Enterprise</Platform>
+  <LangCode>5123</LangCode>
+  <LangName>C++</LangName>
+  <Encoding>KSC5601</Encoding>
+  <RuleSetID>145123</RuleSetID>
+  <RuleSetName>C++ OWASP Top 10 2017</RuleSetName>
+  <AnalyzeMode>LOCAL</AnalyzeMode>
+  <AnalyzeTypeID />
+  <TargetSrcDir />
+  <TargetSrcFile />
+  <TargetExtentions>*.cpp;*.h;*.hpp;*.cc;*.inl</TargetExtentions>
+  <JavaBinPath />
+  <JVMOptions>-Xms256m -Xmx512m</JVMOptions>
+  <CodeMRIOptions>sasp.thread=1</CodeMRIOptions>
+  <IsKeepFilterFiles>true</IsKeepFilterFiles>
+  <LogPath>.log</LogPath>
+  <FilterPath>.filter</FilterPath>
+  <DataPath>.data</DataPath>
+  <DataFileName>data.db</DataFileName>
+  <DataBackup>true</DataBackup>
+  <SrcPath>src</SrcPath>
+  <LibPath>lib</LibPath>
+  <CREATE_DT>20210125184909</CREATE_DT>
+  <CheckSourceChange>true</CheckSourceChange>
+  <AutoUpdate>false</AutoUpdate>
+  <InitialAnalysis>true</InitialAnalysis>
+  <SkipMetric>true</SkipMetric>
+  <BuiltInHeaders>
+    <Path />
+  </BuiltInHeaders>
+  <SystemHeaders>
+    <Path />
+  </SystemHeaders>
+  <AnalyzerOptions>
+    <Option name="coil-trans-scope" value="NO SYSTEM HEADER" />
+    <Option name="auto-delete-temp-files" value="True" />
+    <Option name="reference-header-path" value="" />
+    <Option name="include-header-file" value="" />
+    <Option name="include-c-header-file" value="" />
+    <Option name="include-header" value="" />
+    <Option name="user-cpp-option" value="-dD" />
+    <Option name="cpp-program-path" value="[cpp]" />
+  </AnalyzerOptions>
+</ProjectTemplate>

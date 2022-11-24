@@ -1,0 +1,619 @@
+namespace com.ti.oss.common.cdr.sqm ;
+
+use com.ibm.streamsx.file::* ;
+use com.ti.oss.common.cdr.parser.eggsn::* ;
+use com.ti.oss.common.cdr.types::* ;
+use com.ti.oss.common.cdr.util::* ;
+use com.ti.oss.common.cdr.util.cfg::* ;
+use com.ti.oss.common.event::* ;
+use com.ti.oss.common.types::* ;
+use com.ti.oss.common.util.cfg::* ;
+use com.ti.oss.common.util.time::*;
+
+type SqmMvno = map<rstring, BroadMvnoSgw>;
+type SqmMvnoNode = map<rstring, SqmMvno>;
+
+type SqmMvnoAggrOp = map<rstring, BroadMvnoAggrOpSgw>;
+type SqmMvnoNodeAggrOp = map<rstring, SqmMvnoAggrOp>;
+
+public composite BroadBandMvno(input stream<AggregateSqmSchemaSgw> eggsn; 
+	output stream<BroadMvnoSgw> outKpiMvno, stream<BroadMvnoAggrOpSgw> outKpiMvnoAggrOp, OutEventKpiMvno, stream<CDRCounters> OutCounters)
+{
+	param
+		expression<rstring> $tmpOutFilePrefix ;
+		expression<rstring> $tmpOutFilePrefixAggrOp ;
+		expression<rstring> $tmpOutFileSuffix ;
+		expression<rstring> $mediationName ;
+	
+	graph
+		
+		(stream<BroadMvnoSgw> outKpiMvno as O ; stream<BroadMvnoAggrOpSgw> outKpiMvnoAggrOp as OA ;stream<Event e> OutEventKpiMvno as OE; stream<CDRCounters> OutCounters) = Custom(eggsn)
+		{
+			logic
+				state :
+				{
+					rstring tmpOutFilePrefix = $tmpOutFilePrefix;
+					rstring tmpOutFilePrefixAggrOp = $tmpOutFilePrefixAggrOp;
+					rstring tmpOutFileSuffix = $tmpOutFileSuffix;
+					rstring mediationName = $mediationName;
+					
+					mutable float64 startROPstate = 0 ;
+					mutable float64 endROPstate = 0 ;
+					mutable float64 startROPold = 0 ;
+					mutable float64 endROPold = 0 ;
+					boolean flagMediationCfg = loadMediationCfg(mediationName) ;
+					mutable rstring nameOutputFilestate ;
+					mutable rstring nameOutputFileOld ;
+					mutable rstring nameOutputFilestateAO ;
+					mutable rstring nameOutputFileOldAO ;
+					mutable rstring path = getCfgParam("COMMON_CFG_DIR",mediationName,"SQM_MVNO_OUTPUT_PATH");
+					mutable rstring filePrefix = getCfgParam("COMMON_CFG_DIR",mediationName,"FILE_PREFIX_MVNO");
+					mutable rstring pathAggrOp = getCfgParam("COMMON_CFG_DIR",mediationName,"SQM_MVNO_AGGR_OP_OUTPUT_PATH");
+					mutable rstring filePrefixAggrOp = getCfgParam("COMMON_CFG_DIR",mediationName,"FILE_PREFIX_MVNO_AGGR_OP");
+					mutable rstring fileSuffix = getCfgParam("COMMON_CFG_DIR",mediationName,"FILE_SUFFIX");
+					mutable int32 interval = (int32)getCfgParam("COMMON_CFG_DIR",mediationName,"ROP_INTERVAL_SQM");
+					mutable rstring monitored_apn_ni = getCfgParam("COMMON_CFG_DIR", mediationName, "MONITORED_APN_NI") ;
+					mutable boolean flagMonitoredApnNi = loadCdrProvCfg("MONITOREDAPNNI", monitored_apn_ni,(uint32)0, ",") ; //FOLDER
+					mutable rstring sgsn_ip_name = getCfgParam("COMMON_CFG_DIR",mediationName,"SGSN_IP_NAME");
+					mutable boolean flagSgsnIpName = loadCdrProvCfg("SGSNIPNAME",sgsn_ip_name, (uint32)1,",");//SGSNADDRESS
+					mutable rstring listOperator = getCfgParam("COMMON_CFG_DIR",mediationName,"OPERATOR_MVNO");
+					mutable list<rstring> operL = tokenize(listOperator, ",", true);
+					mutable SqmMvno CDRforMvno ;
+					mutable SqmMvnoNode SqmMvnoSgw ;
+					mutable SqmMvnoNode SqmMvnoNodePrec ;
+					mutable SqmMvnoAggrOp CDRforMvnoAggrOp ;
+					mutable SqmMvnoNodeAggrOp SqmMvnoAggrOpSgw ;
+					mutable SqmMvnoNodeAggrOp SqmMvnoAggrOpNodePrec ;
+					mutable BroadMvnoAggrOpSgw BroadMvnoNotFound;
+					mutable SqmMvnoAggrOp CDRforMvnoAggrOpNotFound ;
+					mutable FileHeader fh = { } ;
+					
+					mutable O emptyEndRopTuple = initEmptyEndRopTupleMvno();
+					mutable OA emptyEndRopTupleAggrOp = initEmptyEndRopTupleMvnoAggrOp();
+					mutable OE oetuple = (OE){};
+					
+					mutable SqmMvno cdrApp = {};
+					mutable SqmMvnoAggrOp cdrAppAggrOp = {};
+					
+					// Conta i CDR corretti per questo KPI
+					mutable uint64 cdrtot = 0ul;
+					mutable uint64 cdrtotold = 0ul;
+					
+					// Conta i CDR scartati per il filtro impostato
+					mutable uint64 cdrexclude1 = 0ul;
+					mutable uint64 cdrexclude1old = 0ul;
+					
+					// Conta i CDR scartati esterni al ROP
+					mutable uint64 cdrexclude2 = 0ul;
+					mutable uint64 cdrexclude2old = 0ul;
+				}
+
+				onTuple eggsn :
+				{
+					if (eggsn.endROP)
+					{
+						interval = checkConfiguration(mediationName,"ROP_INTERVAL_SQM",interval);
+						path = checkConfiguration(mediationName,"SQM_MVNO_OUTPUT_PATH",path);
+						filePrefix = checkConfiguration(mediationName,"FILE_PREFIX_MVNO",filePrefix);
+						fileSuffix = checkConfiguration(mediationName,"FILE_SUFFIX",fileSuffix);
+						pathAggrOp = checkConfiguration(mediationName,"SQM_MVNO_AGGR_OP_OUTPUT_PATH",pathAggrOp);
+						filePrefixAggrOp = checkConfiguration(mediationName,"FILE_PREFIX_MVNO_AGGR_OP",filePrefixAggrOp);
+						listOperator = checkConfiguration(mediationName, "OPERATOR_MVNO", listOperator);
+						operL = tokenize(listOperator, ",", true);
+						
+						if (isCdrProvCfgChanged("MONITOREDAPNNI"))
+						{
+							reloadCdrProvCfg("MONITOREDAPNNI");
+						}
+						if (isCdrProvCfgChanged("SGSNIPNAME"))
+						{
+							reloadCdrProvCfg("SGSNIPNAME");
+						}
+				
+						swap(SqmMvnoSgw,SqmMvnoNodePrec);
+						swap(SqmMvnoAggrOpSgw,SqmMvnoAggrOpNodePrec);
+						swap(cdrtot, cdrtotold);
+						cdrtot = 0ul;
+						swap(cdrexclude1, cdrexclude1old);
+						cdrexclude1 = 0ul;
+						swap(cdrexclude2, cdrexclude2old);
+						cdrexclude2 = 0ul;
+						
+						clearM(SqmMvnoSgw);
+						clearM(SqmMvnoAggrOpSgw);
+						startROPold = startROPstate;
+						endROPold = endROPstate;
+						startROPstate = eggsn.startRopSecs;
+						endROPstate = eggsn.endRopSecs;
+						nameOutputFileOld = nameOutputFilestate;
+						nameOutputFileOldAO = nameOutputFilestateAO;
+						
+						nameOutputFilestate = path + tmpOutFilePrefix +(rstring) eggsn.endRopSecs + tmpOutFileSuffix ;
+						nameOutputFilestateAO = pathAggrOp + tmpOutFilePrefixAggrOp +(rstring) eggsn.endRopSecs + tmpOutFileSuffix ;
+					}
+					
+					if(startROPstate == (float64)0 || endROPstate == (float64)0)
+					{
+						startROPstate = eggsn.startRopSecs;
+						endROPstate = eggsn.endRopSecs;
+					}
+					
+					if(nameOutputFilestate == "")
+					{
+						nameOutputFilestate = path + tmpOutFilePrefix +(rstring) eggsn.endRopSecs + tmpOutFileSuffix ;
+						nameOutputFilestateAO = pathAggrOp + tmpOutFilePrefixAggrOp +(rstring) eggsn.endRopSecs + tmpOutFileSuffix ;
+					}					
+					
+					if (eggsn.write_prev)
+					{	
+						if (eggsn.exclude_node == "")
+						{
+							mutable rstring filename_tmp = "";
+							mutable rstring central_val="";
+							
+							if(size(SqmMvnoNodePrec) != 0)
+							{
+								mutable list<rstring> keysTmp = [];
+                   				for(rstring key in SqmMvnoNodePrec) 
+								{
+									appendM(keysTmp, key);
+								}
+								for(rstring key in keysTmp)
+								{
+									swap(cdrApp, SqmMvnoNodePrec[key]);
+									for(rstring keyCdr in cdrApp) 
+									{
+										submit(cdrApp[keyCdr], outKpiMvno);
+				                    }
+				                    central_val = central_val + key + ";";	
+								}
+								
+								filename_tmp = nameOutputFileOld;
+								emptyEndRopTuple.nameOutputFile = nameOutputFileOld;
+								submit(emptyEndRopTuple, outKpiMvno);									
+							}
+							else
+							{
+								filename_tmp = nameOutputFileOld;
+								emptyEndRopTuple.nameOutputFile = nameOutputFileOld;
+								submit(emptyEndRopTuple, outKpiMvno);
+							}
+							
+							
+							for (int32 k in range(operL))
+							{
+	       						BroadMvnoNotFound.nameOutputFile = nameOutputFileOldAO; 
+								BroadMvnoNotFound.filePrefix = filePrefixAggrOp;
+								BroadMvnoNotFound.suffix = fileSuffix;	
+							    BroadMvnoNotFound.mvno_name = operL[k];
+								BroadMvnoNotFound.start_time = getUtilConvert((rstring)startROPold); 
+								BroadMvnoNotFound.end_time = getUtilConvert((rstring)endROPold);
+								BroadMvnoNotFound.mvno_bb_4g_downlink_uplink_nazionale = (int64)-1;
+									
+								insertM(CDRforMvnoAggrOpNotFound, operL[k], BroadMvnoNotFound) ;
+								
+								for(rstring key in CDRforMvnoAggrOpNotFound)
+								{
+									submit(CDRforMvnoAggrOpNotFound[key], outKpiMvnoAggrOp);
+								}
+								
+								clearM(CDRforMvnoAggrOpNotFound);
+							}
+							
+							if(size(SqmMvnoAggrOpNodePrec) != 0)
+							{
+								mutable list<rstring> keysTmp = [];
+                   				for(rstring key in SqmMvnoAggrOpNodePrec) 
+								{
+									appendM(keysTmp, key);
+								}
+								for(rstring key in keysTmp)
+								{
+									swap(cdrAppAggrOp, SqmMvnoAggrOpNodePrec[key]);
+									for(rstring keyCdr in cdrAppAggrOp) 
+									{
+										submit(cdrAppAggrOp[keyCdr], outKpiMvnoAggrOp);
+				                    }
+				                    central_val = central_val + key + ";";	
+								}
+								
+								emptyEndRopTupleAggrOp.nameOutputFile = nameOutputFileOldAO;
+								submit(emptyEndRopTupleAggrOp, outKpiMvnoAggrOp);									
+							}
+							else
+							{
+								emptyEndRopTupleAggrOp.nameOutputFile = nameOutputFileOldAO;
+								submit(emptyEndRopTupleAggrOp, outKpiMvnoAggrOp);
+							}
+							
+							mutable rstring sr = "";
+							mutable rstring er = "";
+							if(startROPold != (float64)0 && endROPold != (float64)0)
+							{
+								sr = getUtilConvert((rstring)startROPold);
+								er = getUtilConvert((rstring)endROPold);
+							}
+							else
+							{
+								sr = "0";
+								er = "0";
+							}
+							submit({kpi = "MvnoSgw", ROP = sr + "-" + er, cdrtot = cdrtotold, cdrexclude1 = cdrexclude1old, cdrexclude2 = cdrexclude2old}, OutCounters);
+							
+							//clear statistics
+							//cdrtotrattypeold = 0ul;
+							cdrtotold = 0ul;
+							cdrexclude1old = 0ul;
+							cdrexclude2old = 0ul;
+							
+							clearM(SqmMvnoNodePrec);
+							clearM(SqmMvnoAggrOpNodePrec);
+							clearM(cdrApp);
+							clearM(cdrAppAggrOp);
+							startROPold = (float64)0;
+							endROPold = (float64)0;
+							nameOutputFileOld = "";
+							nameOutputFileOldAO = "";
+							oetuple.e.eventType = 190 ;
+							oetuple.e.resultCode = 0 ;
+							oetuple.e.rawFile = filename_tmp ;
+							swap(oetuple.e.eventCorrelationId, fh.eventCorrelationId);
+		                    swap(oetuple.e.rop, fh.rop);
+		                    swap(oetuple.e.emId, fh.emId);
+		                    swap(oetuple.e.neId, fh.neId);
+							oetuple.e.eventText = "End write_prev close file " + filename_tmp + " for node: "+ central_val;
+							boolean eventEnabled = mkEvent(oetuple.e, fh.sessionBeginTime) ;
+							if(eventEnabled) submit(oetuple, OutEventKpiMvno) ;
+						}
+						else
+						{
+							if(has(SqmMvnoNodePrec, eggsn.exclude_node) == true)
+							{
+								removeM(SqmMvnoNodePrec, eggsn.exclude_node) ;
+							}
+						}
+					}
+					else if(!eggsn.endROP)
+					{
+						fh = eggsn.fHeader;
+													
+						mutable rstring apnNI = "";
+						mutable rstring datetmp = "20"+(rstring)substring(eggsn.cdrSchema.recordOpeningTime,0,12);
+			            timestamp ts = toTimestamp(Sys.YYYYMMDDhhmmss,datetmp);
+			            mutable float64 endTimeCDRfloat = getSeconds(ts) + (int64)eggsn.cdrSchema.duration;
+			            
+			            if (size(eggsn.cdrSchema.servingNodeAddress)>0)
+						{							
+							mutable rstring sgsnName = ""; 	
+							sgsnName = getSgsnName(eggsn.cdrSchema.servingNodeAddress[0],flagSgsnIpName);
+							
+							if (sgsnName!= "")
+							{			            
+					            if (eggsn.cdrSchema.rATType == 6)
+					            {
+						            if (substring(eggsn.cdrSchema.servedIMSI,0,5) == "22207")
+									{
+										apnNI = "noverca";
+									}
+									else if (substring(eggsn.cdrSchema.servedIMSI,0,5) == "22242")
+									{
+										apnNI = "enel";
+									}
+									else if (substring(eggsn.cdrSchema.servedIMSI,0,5) == "22244")
+									{
+										apnNI = "mundio";
+									}
+									else if (substring(eggsn.cdrSchema.servedIMSI,0,5) == "22208")
+									{
+										apnNI = "fastweb";
+									}
+									else if (substring(eggsn.cdrSchema.servedIMSI,0,6) == "222491")
+									{
+										apnNI = "welcome";
+									}
+									else if (getApnNi(cleanApn(eggsn.cdrSchema.apn),flagMonitoredApnNi)!=""  && substring(eggsn.cdrSchema.servedIMSI,0,3)=="222")
+									{
+										apnNI = getApnNi(cleanApn(eggsn.cdrSchema.apn),flagMonitoredApnNi);
+									}
+									
+									if (apnNI != "")
+									{
+										mutable int32 i = findFirst(operL, apnNI, 0);
+			        					if (i!=-1)
+						        		{
+						        			removeM(operL,i);
+						        		}										
+										
+										mutable rstring centralName = eggsn.cdrSchema.nodeId; 
+										mutable rstring key = sgsnName + apnNI;
+										
+										if((endTimeCDRfloat >= eggsn.startRopSecsOld) && (endTimeCDRfloat < eggsn.endRopSecsOld))
+										{
+											cdrtotold++;
+											if(has(SqmMvnoNodePrec, centralName) == true)
+					                		{
+					                			addCdrMvno(eggsn, SqmMvnoNodePrec[centralName], SqmMvnoAggrOpNodePrec[centralName], key, nameOutputFileOld, nameOutputFileOldAO, sgsnName, apnNI, filePrefix, filePrefixAggrOp, fileSuffix, eggsn.startRopSecsOld, eggsn.endRopSecsOld) ;
+					                		}
+					                		else
+					                		{
+					                			addCdrMvno(eggsn, CDRforMvno, CDRforMvnoAggrOp, key, nameOutputFileOld, nameOutputFileOldAO, sgsnName, apnNI, filePrefix, filePrefixAggrOp, fileSuffix, eggsn.startRopSecsOld, eggsn.endRopSecsOld) ;
+					                			insertM(SqmMvnoNodePrec, centralName, CDRforMvno) ;
+					                			insertM(SqmMvnoAggrOpNodePrec, centralName, CDRforMvnoAggrOp) ;
+					                		}
+										}
+										else if((endTimeCDRfloat >= eggsn.startRopSecs) && (endTimeCDRfloat < eggsn.endRopSecs))
+										{
+											cdrtot++;
+											if(has(SqmMvnoSgw, centralName) == true)
+					                		{
+					                			addCdrMvno(eggsn,SqmMvnoSgw[centralName],SqmMvnoAggrOpSgw[centralName],key,nameOutputFilestate,nameOutputFilestateAO,sgsnName, apnNI,filePrefix,filePrefixAggrOp,fileSuffix,eggsn.startRopSecs,eggsn.endRopSecs);
+					                		}
+					                		else
+					                		{
+					                			addCdrMvno(eggsn, CDRforMvno, CDRforMvnoAggrOp, key, nameOutputFilestate, nameOutputFilestateAO, sgsnName, apnNI, filePrefix, filePrefixAggrOp, fileSuffix, eggsn.startRopSecs, eggsn.endRopSecs);
+					                			insertM(SqmMvnoSgw, centralName, CDRforMvno) ;
+												insertM(SqmMvnoAggrOpSgw, centralName, CDRforMvnoAggrOp) ;
+					                		}
+					                	}
+				                		else
+										{
+											//exclude CDR fuori ROP
+											cdrexclude2++;
+										}
+										
+										clearM(cdrApp);
+										clearM(cdrAppAggrOp);
+										clearM(CDRforMvno);
+										clearM(CDRforMvnoAggrOp);
+									}
+									else 
+									{
+										if((endTimeCDRfloat >= eggsn.startRopSecs) && (endTimeCDRfloat < eggsn.endRopSecs))
+										{
+											//exclude Filtro CDR in ROP
+											cdrexclude1++;
+										}
+										else
+										{
+											//exclude Filtro CDR fuori ROP
+											cdrexclude1old++;
+										}
+									}
+								}
+								else 
+								{
+									if((endTimeCDRfloat >= eggsn.startRopSecs) && (endTimeCDRfloat < eggsn.endRopSecs))
+									{
+										//exclude Filtro CDR in ROP
+										cdrexclude1++;
+									}
+									else
+									{
+										//exclude Filtro CDR fuori ROP
+										cdrexclude1old++;
+									}
+								}
+							
+							}
+							else
+							{
+								if((endTimeCDRfloat >= eggsn.startRopSecs) && (endTimeCDRfloat < eggsn.endRopSecs))
+								{
+									//exclude Filtro CDR in ROP
+									cdrexclude1++;
+								}
+								else
+								{
+									//exclude Filtro CDR fuori ROP
+									cdrexclude1old++;
+								}
+							}
+						}
+						else
+						{
+							if((endTimeCDRfloat >= eggsn.startRopSecs) && (endTimeCDRfloat < eggsn.endRopSecs))
+							{
+								//exclude Filtro CDR in ROP
+								cdrexclude1++;
+							}
+							else
+							{
+								//exclude Filtro CDR fuori ROP
+								cdrexclude1old++;
+							}
+						}
+					}
+			}
+								
+			onPunct eggsn :
+			{
+				if(currentPunct() == Sys.WindowMarker)
+				{
+					
+					oetuple.e.eventType = 200 ;
+					oetuple.e.resultCode = 0 ;
+					oetuple.e.rawFile = filename(fh.fName) ;
+					swap(oetuple.e.eventCorrelationId, fh.eventCorrelationId);
+                    swap(oetuple.e.rop, fh.rop);
+                    swap(oetuple.e.emId, fh.emId);
+                    swap(oetuple.e.neId, fh.neId);
+					oetuple.e.eventText = "End Mvno BroadBand Sgw SQM";
+					boolean eventEnabled = mkEvent(oetuple.e, fh.sessionBeginTime) ;
+					if(eventEnabled) submit(oetuple, OutEventKpiMvno) ;
+					
+					submit(Sys.WindowMarker, OutEventKpiMvno) ;
+				}
+
+			}
+			
+			config
+				threadedPort: queue(eggsn, Sys.Wait, 1000000);
+
+		}
+		
+//		(stream<CsvWrite> outCsv8) = Custom(outKpiMvno)
+//		{
+//			logic
+//				state:
+//				{
+//					mutable rstring naming_lookup = getCfgParam("COMMON_CFG_DIR", $mediationName, "NAMING_LOOKUP"); 
+//					mutable boolean flagNamingLookup = loadCdrProvCfg("NAMINGLOOKUP", naming_lookup,(uint32) 3, ";") ;
+//					mutable CsvWrite csv = { } ;
+//				}
+//				onTuple outKpiMvno :
+//				{
+//					swap(csv.nameOutputFile, outKpiMvno.nameOutputFile) ;
+//					swap(csv.endROP, outKpiMvno.endROP) ;
+//					swap(csv.filePrefix, outKpiMvno.filePrefix) ;
+//					swap(csv.suffix, outKpiMvno.suffix) ;
+//					
+//					mutable rstring sqmDn = "";
+//					if (outKpiMvno.sgsn_dn != "")
+//					{
+//						sqmDn = getSqmDn(outKpiMvno.sgsn_dn,flagNamingLookup);
+//					}
+//					
+//					if (sqmDn != "")
+//					{
+//						csv.outputContent = sqmDn + ";" + "OPERATOR-"+outKpiMvno.mvno_name + ";" +
+//						outKpiMvno.start_time + ";" +
+//						outKpiMvno.end_time + ";" +(rstring)
+//						outKpiMvno.mvno_bb_4g_downlink_uplink ;
+//					}else{
+//						csv.outputContent = "";
+//					}
+//					
+//					submit(csv, outCsv8) ;
+//				}
+//				
+//			onPunct outKpiMvno :
+//			{
+//				if(currentPunct() == Sys.WindowMarker) {
+//					submit(Sys.WindowMarker,outCsv8);
+//				}
+//			}
+//		}
+	}
+
+
+void countCdrsMvno(AggregateSqmSchemaSgw eggsn1, mutable BroadMvnoSgw aggrSQMtmp) 
+{
+	for(int32 i in range(eggsn1.cdrSchema.datavolumeFBCDownlink))
+	{
+		aggrSQMtmp.mvno_bb_4g_downlink_uplink = aggrSQMtmp.mvno_bb_4g_downlink_uplink + (int64)eggsn1.cdrSchema.datavolumeFBCDownlink[i];
+	}
+	
+	for(int32 i in range(eggsn1.cdrSchema.datavolumeFBCUplink))
+	{
+		aggrSQMtmp.mvno_bb_4g_downlink_uplink = aggrSQMtmp.mvno_bb_4g_downlink_uplink + (int64)eggsn1.cdrSchema.datavolumeFBCUplink[i];
+	}
+}
+
+void countCdrsMvnoAO(AggregateSqmSchemaSgw eggsn1, mutable BroadMvnoAggrOpSgw aggrSQMAOtmp) 
+{
+	for(int32 i in range(eggsn1.cdrSchema.datavolumeFBCDownlink))
+	{
+		aggrSQMAOtmp.mvno_bb_4g_downlink_uplink_nazionale = aggrSQMAOtmp.mvno_bb_4g_downlink_uplink_nazionale + (int64)eggsn1.cdrSchema.datavolumeFBCDownlink[i];
+	}
+	
+	for(int32 i in range(eggsn1.cdrSchema.datavolumeFBCUplink))
+	{
+		aggrSQMAOtmp.mvno_bb_4g_downlink_uplink_nazionale = aggrSQMAOtmp.mvno_bb_4g_downlink_uplink_nazionale + (int64)eggsn1.cdrSchema.datavolumeFBCUplink[i];
+	}
+}
+
+
+void addCdrMvno(AggregateSqmSchemaSgw eggsn, mutable SqmMvno cdr, mutable SqmMvnoAggrOp cdrAO, rstring key, rstring nameOutputFile, rstring nameOutputFileAO, rstring sgsnName, rstring apnNI, rstring filePrefix, rstring filePrefixAO, rstring fileSuffix, float64 startROP, float64 endROP)
+{
+	mutable BroadMvnoSgw firstEntry = {};
+	mutable BroadMvnoSgw existEntry = {};
+	
+	if(has(cdr, key) == false) 
+    {   
+    	firstEntry.nameOutputFile = nameOutputFile;
+		firstEntry.filePrefix = filePrefix;
+		firstEntry.suffix = fileSuffix;
+    	
+    	firstEntry.sgsn_dn = sgsnName;
+    	firstEntry.mvno_name = apnNI;
+		firstEntry.start_time = getUtilConvert((rstring)startROP); 
+		firstEntry.end_time = getUtilConvert((rstring)endROP);
+		countCdrsMvno(eggsn, firstEntry) ;
+		insertM(cdr, key, firstEntry) ;
+    }  
+    else 
+    {     
+     	existEntry = cdr[key];
+     	
+     	countCdrsMvno(eggsn, existEntry) ;
+ 					
+ 		removeM (cdr, key);
+	    insertM( cdr, key, existEntry);
+    }
+    
+    
+    mutable BroadMvnoAggrOpSgw firstEntryAO = {};
+	mutable BroadMvnoAggrOpSgw existEntryAO = {};
+	
+	if(has(cdrAO, apnNI) == false) 
+    {   
+    	firstEntryAO.nameOutputFile = nameOutputFileAO;
+		firstEntryAO.filePrefix = filePrefixAO;
+		firstEntryAO.suffix = fileSuffix;
+    	
+    	firstEntryAO.mvno_name = apnNI;
+		firstEntryAO.start_time = getUtilConvert((rstring)startROP); 
+		firstEntryAO.end_time = getUtilConvert((rstring)endROP);
+		countCdrsMvnoAO(eggsn, firstEntryAO) ;
+		insertM(cdrAO, apnNI, firstEntryAO) ;
+    }  
+    else 
+    {     
+     	existEntryAO = cdrAO[apnNI];
+     	
+     	countCdrsMvnoAO(eggsn, existEntryAO) ;
+ 					
+ 		removeM (cdrAO, apnNI);
+	    insertM( cdrAO, apnNI, existEntryAO);
+    }
+    
+}
+
+
+rstring getApnNi(rstring apn, boolean flagMonitoredApnNi)
+{
+	mutable list<rstring> tmpOutParamMap = [];
+	mutable rstring apnNi="";
+	if (flagMonitoredApnNi)
+	{
+		if ( getCdrProvRecord("MONITOREDAPNNI", apn, tmpOutParamMap ) )
+		{   
+			apnNi = tmpOutParamMap[1];
+		}
+	}
+	else
+	{
+		appTrc(Trace.error, "File MONITORED_APN_NI.csv non caricato correttamente ");
+	}
+	
+	return apnNi;
+}
+
+
+BroadMvnoSgw initEmptyEndRopTupleMvno() 
+{
+	mutable BroadMvnoSgw result = {};
+	
+	result.endROP = true;
+	
+	return result;
+}
+
+BroadMvnoAggrOpSgw initEmptyEndRopTupleMvnoAggrOp() 
+{
+	mutable BroadMvnoAggrOpSgw result = {};
+	
+	result.endROP = true;
+	
+	return result;
+}

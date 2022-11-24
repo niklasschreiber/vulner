@@ -1,0 +1,80 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/01.SQL_Injection/C01001.cpp");
+   ("language", "CPP");
+   ("include", "<stdlib.h>");
+   ("include", "<sql.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/01.SQL_Injection/C01001.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/01.SQL_Injection/C01001.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/01.SQL_Injection/C01001.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/01.SQL_Injection/C01001.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/01.SQL_Injection/C01001.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/01.SQL_Injection/C01001.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/01.SQL_Injection/C01001.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C01001",
+   SI(<"C01001">,
+   {[
+      {;
+      ,(1#1,28#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,28#1,!1)}
+   )
+   ,(1#1,28#1,!1)},
+
+   {"C01001",
+   FN([public],(<"C01001">,"f"):unit,[("sqlh":class((,SQLHSTMT)),(24#8,24#20,!1))],[],
+   {[
+      {VD("query",ref(char),{SC((<"C01001">,"getenv"),[string],[{"query_string"S,string,(25#30,25#43,!1)}]),class((,"%undef")),(25#23,25#44,!1)})
+      ,(25#14,25#19,!1)};
+      {PC0((<"C01001">,"SQLExecDirect"),[class((,SQLHSTMT)),ref(char),class((,"%undef"))],[{V("sqlh"),class((,SQLHSTMT)),(26#23,26#26,!1)},{V("query"),ref(char),(26#29,26#33,!1)},{V("SQL_NTS"),class((,"%undef")),(26#36,26#42,!1)}])
+      ,(26#9,26#43,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(24#1,27#1,!1)}
+   )
+   ,(24#1,27#1,!1)},
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/01.SQL_Injection/C01001.cpp",
+   [
+      S("//\n",1),
+      M("/**\n* \n* \n* \n* \n*\n*   \n*\n*\n*\n*\n* \n*\n*   \n* \n*/",6,(6#0,6#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/01.SQL_Injection/C01001.cpp"))
+   ]
+   }
+]

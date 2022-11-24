@@ -1,0 +1,105 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/37.Improper_Resource_Shutdown/C37001.cpp");
+   ("language", "CPP");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<fcntl.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/37.Improper_Resource_Shutdown/C37001.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/37.Improper_Resource_Shutdown/C37001.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/37.Improper_Resource_Shutdown/C37001.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/37.Improper_Resource_Shutdown/C37001.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/37.Improper_Resource_Shutdown/C37001.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/37.Improper_Resource_Shutdown/C37001.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/37.Improper_Resource_Shutdown/C37001.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C37001",
+   SI(<"C37001">,
+   {[
+      {;
+      ,(1#1,53#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,53#1,!1)}
+   )
+   ,(1#1,53#1,!1)},
+
+   {"C37001",
+   FN([public],(<"C37001">,"no_release"):int,[("a":int,(29#16,29#20,!1))],[],
+   {[
+      {VD("p",ref(int))
+      ,(31#9,31#10,!1)};
+      {{AE({V("p"),ref(int),(33#9,33#9,!1)},{CS(ref(int),{SC((<"C37001">,"malloc"),[int],[{SO(int),int,(33#27,33#37,!1)}]),class((,"%undef")),(33#20,33#38,!1)}),ref(int),(33#13,33#38,!1)}),ref(int),(33#9,33#38,!1)}
+      ,(33#9,33#38,!1)};
+      {RE({"0"N,int,(37#16,37#16,!1)})
+      ,(37#9,37#17,!1)}
+      ]
+   ,(29#1,38#1,!1)}
+   )
+   ,(29#1,38#1,!1)},
+
+   {"C37001",
+   FN([public],(<"C37001">,"partially_no_release"):int,[("control":int,(40#26,40#36,!1))],[],
+   {[
+      {VD("p",ref(int))
+      ,(42#9,42#10,!1)};
+      {{AE({V("p"),ref(int),(44#5,44#5,!1)},{CS(ref(int),{SC((<"C37001">,"calloc"),[int,int],[{"10"N,int,(44#23,44#24,!1)},{SO(int),int,(44#27,44#37,!1)}]),class((,"%undef")),(44#16,44#38,!1)}),ref(int),(44#9,44#38,!1)}),ref(int),(44#5,44#38,!1)}
+      ,(44#5,44#38,!1)};
+      {IF0({BO(>,{V("control"),int,(47#9,47#15,!1)},{"0"N,int,(47#19,47#19,!1)}),bool,(47#9,47#19,!1)},
+         {[
+            {PC0((<"C37001">,"free"),[ref(int)],[{V("p"),ref(int),(48#14,48#14,!1)}])
+            ,(48#9,48#15,!1)}
+            ]
+         ,(47#22,49#9,!1)})
+      ,(47#5,49#9,!1)};
+      {RE({"0"N,int,(51#12,51#12,!1)})
+      ,(51#5,51#13,!1)}
+      ]
+   ,(40#1,52#1,!1)}
+   )
+   ,(40#1,52#1,!1)},
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/37.Improper_Resource_Shutdown/C37001.cpp",
+   [
+      M("/**\n* \n* \n* \n* \n*\n* \n*\n*\n*\n*\n*\n*\n*\n*\n*\n*\n*\n*\n*\n*\n*\n*/",5,(5#0,5#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/37.Improper_Resource_Shutdown/C37001.cpp")),
+      M("/*  */",33,(33#0,33#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/37.Improper_Resource_Shutdown/C37001.cpp")),
+      M("//\n",35,(35#0,35#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/37.Improper_Resource_Shutdown/C37001.cpp")),
+      M("/*  */",44,(44#0,44#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/37.Improper_Resource_Shutdown/C37001.cpp")),
+      M("//\n",46,(46#0,46#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/37.Improper_Resource_Shutdown/C37001.cpp"))
+   ]
+   }
+]

@@ -1,0 +1,87 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/32.Uncontrolled_Recursion/C32001.cpp");
+   ("language", "CPP");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/32.Uncontrolled_Recursion/C32001.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/32.Uncontrolled_Recursion/C32001.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/32.Uncontrolled_Recursion/C32001.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/32.Uncontrolled_Recursion/C32001.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/32.Uncontrolled_Recursion/C32001.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/32.Uncontrolled_Recursion/C32001.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/32.Uncontrolled_Recursion/C32001.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C32001",
+   SI(<"C32001">,
+   {[
+      {;
+      ,(1#1,26#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,26#1,!1)}
+   )
+   ,(1#1,26#1,!1)},
+
+   {"C32001",
+   FN([public],(<"C32001">,"recursive_func"):int,[("":class((,n)),(17#20,17#20,!1))],[],
+   {[
+      {VD("ret",int,{"0"N,int,(18#17,18#17,!1)})
+      ,(18#13,18#15,!1)};
+      {IF({AE({V("ret"),int,(20#12,20#14,!1)},{BO(<,{BO(*,{V("n"),class((,"%undef")),(20#16,20#16,!1)},{SC((<"C32001">,"recursive_func"),[undef("unknown")],[{BO(-,{V("n"),class((,"%undef")),(20#33,20#33,!1)},{"1"N,int,(20#35,20#35,!1)}),undef("unknown"),(20#33,20#35,!1)}]),int,(20#18,20#36,!1)}),undef("unknown"),(20#16,20#36,!1)},{"0"N,int,(20#38,20#38,!1)}),bool,(20#16,20#38,!1)}),int,(20#12,20#38,!1)},
+         {[
+            {{AE({V("ret"),int,(20#43,20#45,!1)},{UO(-,{"1"N,int,(20#50,20#50,!1)}),int,(20#49,20#50,!1)}),int,(20#43,20#50,!1)}
+            ,(20#43,20#50,!1)}
+            ]
+         ,(20#41,20#53,!1)},
+         {[
+            {{AE({V("ret"),int,(21#16,21#18,!1)},{"1"N,int,(21#20,21#20,!1)}),int,(21#16,21#20,!1)}
+            ,(21#16,21#20,!1)}
+            ]
+         ,(21#14,21#23,!1)})
+      ,(20#9,21#23,!1)};
+      {RE({V("ret"),int,(24#12,24#14,!1)})
+      ,(24#5,24#15,!1)}
+      ]
+   ,(17#1,25#1,!1)}
+   )
+   ,(17#1,25#1,!1)},
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/32.Uncontrolled_Recursion/C32001.cpp",
+   [
+      M("/**\n* \n* \n* \n* \n*\n* \n* \n*\n*\n* \n* \n*   \n*\n*/",1,(1#0,1#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/32.Uncontrolled_Recursion/C32001.cpp"))
+   ]
+   }
+]

@@ -1,0 +1,550 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="Main"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="rowDataTable" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="VapNumber" Type="OutArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>Main_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="click su Vap interno e Blocco sblocco" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="lastRow" />
+      <Variable x:TypeArguments="x:Boolean" Name="popCheckBS" />
+      <Variable x:TypeArguments="x:Boolean" Name="EsitoPopCheckBS" />
+      <Variable x:TypeArguments="x:Boolean" Name="popupNumOda" />
+      <Variable x:TypeArguments="x:Boolean" Name="popPaginaVap" />
+      <Variable x:TypeArguments="x:Boolean" Name="popUpNumVap" />
+      <Variable x:TypeArguments="x:Boolean" Name="popVapIntEnd" />
+      <Variable x:TypeArguments="x:Boolean" Name="BoolBloccoSblocco" />
+      <Variable x:TypeArguments="x:String" Name="PopUpError" />
+    </Sequence.Variables>
+    <ui:UiElementExists DisplayName="Element Exists &quot;Blocco/Sblocco&quot;" Exists="[BoolBloccoSblocco]" sap2010:WorkflowViewState.IdRef="UiElementExists_8">
+      <ui:UiElementExists.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="96fe12d8915bad523827b5dd43d38242" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl aaname='Creazione VAP da ODA/BC' tag='DIV' /&gt;" TimeoutMS="5000" WaitForReady="INTERACTIVE" />
+      </ui:UiElementExists.Target>
+    </ui:UiElementExists>
+    <If Condition="[BoolBloccoSblocco]" sap2010:WorkflowViewState.IdRef="If_7">
+      <If.Then>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Blocco Sblocco'" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition Position="Center">
+              <ui:CursorPosition.OffsetX>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetX>
+              <ui:CursorPosition.OffsetY>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetY>
+            </ui:CursorPosition>
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="e0a8a1c6d92f7e4d969e8f42ac3d863b" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl aaname='Blocco - Sblocco VAP' tag='DIV' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+      </If.Then>
+      <If.Else>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_8">
+          <ui:Click DelayBefore="{x:Null}" ClickType="CLICK_SINGLE" DelayMS="1000" DisplayName="Click 'Vap Interno'" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+            <ui:Click.CursorPosition>
+              <ui:CursorPosition Position="Center">
+                <ui:CursorPosition.OffsetX>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:CursorPosition.OffsetX>
+                <ui:CursorPosition.OffsetY>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:CursorPosition.OffsetY>
+              </ui:CursorPosition>
+            </ui:Click.CursorPosition>
+            <ui:Click.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="2d95a1898622e437579d63d9c53b87b1" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl aaname='VAP Interno' idx='1' tag='DIV' /&gt;" WaitForReady="INTERACTIVE" />
+            </ui:Click.Target>
+          </ui:Click>
+          <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Blocco Sblocco'" sap2010:WorkflowViewState.IdRef="Click_13" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+            <ui:Click.CursorPosition>
+              <ui:CursorPosition Position="Center">
+                <ui:CursorPosition.OffsetX>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:CursorPosition.OffsetX>
+                <ui:CursorPosition.OffsetY>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:CursorPosition.OffsetY>
+              </ui:CursorPosition>
+            </ui:Click.CursorPosition>
+            <ui:Click.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="e0a8a1c6d92f7e4d969e8f42ac3d863b" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl aaname='Blocco - Sblocco VAP' tag='DIV' /&gt;" WaitForReady="INTERACTIVE" />
+            </ui:Click.Target>
+          </ui:Click>
+        </Sequence>
+      </If.Else>
+    </If>
+    <ui:UiElementExists DisplayName="Element Exists 'controlla pagina di blocco sblocco se è stata caricata'" Exists="[popupNumOda]" sap2010:WorkflowViewState.IdRef="UiElementExists_3">
+      <ui:UiElementExists.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="25c296e14f2541b0fcf31ea6c1fe431b" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl id='label_f*_widget_control_FiltroRicercaVAP_numeroODA' tag='LABEL' /&gt;" TimeoutMS="40000" WaitForReady="INTERACTIVE" />
+      </ui:UiElementExists.Target>
+    </ui:UiElementExists>
+    <If Condition="[popupNumOda=true]" sap2010:WorkflowViewState.IdRef="If_3">
+      <If.Then>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'clicco nel campo Numero ODA/BC'" sap2010:WorkflowViewState.IdRef="Click_4" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition Position="Center">
+              <ui:CursorPosition.OffsetX>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetX>
+              <ui:CursorPosition.OffsetY>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetY>
+            </ui:CursorPosition>
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="a9ca52185dc99c3a15a50bbdc37d176b" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl id='f*_widget_control_FiltroRicercaVAP_numeroODA' tag='INPUT' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+      </If.Then>
+      <If.Else>
+        <Throw Exception="[new System.Exception(&quot;Pagina blocco sblocco non caricata&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_1" />
+      </If.Else>
+    </If>
+    <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into 'Inserimento RDA'" EmptyField="True" sap2010:WorkflowViewState.IdRef="TypeInto_1" SendWindowMessages="False" SimulateType="False" Text="[rowDataTable.Item(&quot;Rda&quot;).ToString]">
+      <ui:TypeInto.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="bb4f55542aa4ed877a97266b4239449e" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl id='f*_widget_control_FiltroRicercaVAP_numeroODA' tag='INPUT' /&gt;" WaitForReady="INTERACTIVE" />
+      </ui:TypeInto.Target>
+    </ui:TypeInto>
+    <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Clicco pulsante Cerca'" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+      <ui:Click.CursorPosition>
+        <ui:CursorPosition Position="Center">
+          <ui:CursorPosition.OffsetX>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetX>
+          <ui:CursorPosition.OffsetY>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetY>
+        </ui:CursorPosition>
+      </ui:Click.CursorPosition>
+      <ui:Click.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="fd2933a767e271def8b138f4d272abb6" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl id='f*_widget_control_cerca' tag='BUTTON' /&gt;" WaitForReady="INTERACTIVE" />
+      </ui:Click.Target>
+    </ui:Click>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" UnSafe="False" WorkflowFileName="PopUp.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <OutArgument x:TypeArguments="x:String" x:Key="OutputMessage">[PopUpError]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+      <sap2010:WorkflowViewState.IdRef>InvokeWorkflowFile_1</sap2010:WorkflowViewState.IdRef>
+    </ui:InvokeWorkflowFile>
+    <If Condition="[PopUpError=&quot;&quot;]">
+      <If.Else>
+        <Throw Exception="[new BusinessRuleException(&quot;ID 2&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_7" />
+      </If.Else>
+      <sap2010:WorkflowViewState.IdRef>If_8</sap2010:WorkflowViewState.IdRef>
+    </If>
+    <ui:UiElementExists DisplayName="Element Exists 'Controlla se carica Pagina Numero Vap Interno'" Exists="[popPaginaVap]" sap2010:WorkflowViewState.IdRef="UiElementExists_4">
+      <ui:UiElementExists.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="e1100c358b8e78aa63c7e6f55f237778" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl id='label_f*_widget_control_RisultatiRicercaVAP_numeroVAP' tag='A' /&gt;" TimeoutMS="10000" WaitForReady="INTERACTIVE" />
+      </ui:UiElementExists.Target>
+    </ui:UiElementExists>
+    <If Condition="[popPaginaVap=true]" sap2010:WorkflowViewState.IdRef="If_4">
+      <If.Else>
+        <Throw Exception="[new System.Exception(&quot;Tabella Vap interno, per ricerca ultimo elemento della colonna Vap interno, non caricata&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_2" />
+      </If.Else>
+    </If>
+    <Sequence DisplayName="Data Scraping per estrazione vap interno più recente" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="sd:DataTable" Default="[New System.Data.DataTable]" Name="ExtractDataTable" />
+      </Sequence.Variables>
+      <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'PosteItal Page'" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="e38d0824c7ac3dcd9a1a4e6e38c9dd9c" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;">
+        <ui:BrowserScope.Body>
+          <ActivityAction x:TypeArguments="x:Object">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_2">
+              <ui:ExtractData NextLinkSelector="{x:Null}" ContinueOnError="True" DataTable="[ExtractDataTable]" DelayBetweenPagesMS="300" DisplayName="Extract Structured Data 'Estraggo vap interno più recente'" ExtractMetadata="&lt;extract-table get_columns_name='1' get_empty_columns='1' /&gt;" sap2010:WorkflowViewState.IdRef="ExtractData_1" MaxNumberOfResults="100">
+                <ui:ExtractData.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="08a29c3334d5b5025f81e0976007ec56" Selector="&lt;webctrl tag='TABLE' /&gt;" WaitForReady="COMPLETE" />
+                </ui:ExtractData.Target>
+              </ui:ExtractData>
+              <Assign DisplayName="assegno l'ultimo valore della colonna Numero Vap interno alla variabile lastrow" sap2010:WorkflowViewState.IdRef="Assign_1">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[lastRow]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[ExtractDataTable.Rows(ExtractDataTable.Rows.Count-1)(0).ToString]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </ActivityAction>
+        </ui:BrowserScope.Body>
+      </ui:BrowserScope>
+    </Sequence>
+    <Delay Duration="00:00:07" sap2010:WorkflowViewState.IdRef="Delay_1" />
+    <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'clicco su Blocco- Sblocco Vap dal menù a tendina Vap interno'" sap2010:WorkflowViewState.IdRef="Click_6" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+      <ui:Click.CursorPosition>
+        <ui:CursorPosition Position="Center">
+          <ui:CursorPosition.OffsetX>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetX>
+          <ui:CursorPosition.OffsetY>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetY>
+        </ui:CursorPosition>
+      </ui:Click.CursorPosition>
+      <ui:Click.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="5361db66f0ef250cdb2a2d1955af42cf" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl aaname='Blocco - Sblocco VAP' tag='DIV' /&gt;" WaitForReady="INTERACTIVE" />
+      </ui:Click.Target>
+    </ui:Click>
+    <ui:UiElementExists DisplayName="Element Exists 'controlla se Ritorna alla pagina  Blocco Sblocco VAP'" Exists="[popUpNumVap]" sap2010:WorkflowViewState.IdRef="UiElementExists_5">
+      <ui:UiElementExists.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="d26abeefe4be5cbd0223edc636367133" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl id='label_f*_widget_control_FiltroRicercaVAP_numeroVAP' tag='LABEL' /&gt;" TimeoutMS="10000" WaitForReady="INTERACTIVE" />
+      </ui:UiElementExists.Target>
+    </ui:UiElementExists>
+    <If Condition="[popUpNumVap=true]" sap2010:WorkflowViewState.IdRef="If_5">
+      <If.Then>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'clicco nel campo editabile Numero Vap interno'" sap2010:WorkflowViewState.IdRef="Click_7" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition Position="Center">
+              <ui:CursorPosition.OffsetX>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetX>
+              <ui:CursorPosition.OffsetY>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetY>
+            </ui:CursorPosition>
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="b5ef04826a0184e197c2fec011213669" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl id='f*_widget_control_FiltroRicercaVAP_numeroVAP' tag='INPUT' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+      </If.Then>
+      <If.Else>
+        <Throw Exception="[new system.Exception(&quot;Ritorno a pagina di blocco sblocco non riuscito&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_3" />
+      </If.Else>
+    </If>
+    <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into 'valorizzo il campo numero vap interno'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_2" SendWindowMessages="False" SimulateType="False" Text="[lastRow]">
+      <ui:TypeInto.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="b5ef04826a0184e197c2fec011213669" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl id='f*_widget_control_FiltroRicercaVAP_numeroVAP' tag='INPUT' /&gt;" WaitForReady="INTERACTIVE" />
+      </ui:TypeInto.Target>
+    </ui:TypeInto>
+    <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'clicco sul pulsante cerca'" sap2010:WorkflowViewState.IdRef="Click_8" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+      <ui:Click.CursorPosition>
+        <ui:CursorPosition Position="Center">
+          <ui:CursorPosition.OffsetX>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetX>
+          <ui:CursorPosition.OffsetY>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetY>
+        </ui:CursorPosition>
+      </ui:Click.CursorPosition>
+      <ui:Click.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="fd2933a767e271def8b138f4d272abb6" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl id='f*_widget_control_cerca' tag='BUTTON' /&gt;" WaitForReady="INTERACTIVE" />
+      </ui:Click.Target>
+    </ui:Click>
+    <ui:UiElementExists DisplayName="Element Exists 'Controlla di aver caricato la pagina di ricerca del Vap interno'" Exists="[popVapIntEnd]" sap2010:WorkflowViewState.IdRef="UiElementExists_6">
+      <ui:UiElementExists.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="e1100c358b8e78aa63c7e6f55f237778" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl id='label_f*_widget_control_RisultatiRicercaVAP_numeroVAP' tag='A' /&gt;" TimeoutMS="3000" WaitForReady="INTERACTIVE" />
+      </ui:UiElementExists.Target>
+    </ui:UiElementExists>
+    <If Condition="[popVapIntEnd=true]" sap2010:WorkflowViewState.IdRef="If_6">
+      <If.Then>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'clicco su Crea Vap di Blocco/Sblocco'" sap2010:WorkflowViewState.IdRef="Click_5" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition Position="Center">
+              <ui:CursorPosition.OffsetX>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetX>
+              <ui:CursorPosition.OffsetY>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetY>
+            </ui:CursorPosition>
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="cd8ec2bd1445fb98b503f8a4221a1813" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl id='f*_widget_control_creaVAPdiBloccoSblocco' tag='BUTTON' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+      </If.Then>
+      <If.Else>
+        <Throw Exception="[new system.Exception(&quot;Pagina di ricerca vap interno non caricata&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_4" />
+      </If.Else>
+    </If>
+    <ui:UiElementExists DisplayName="Element Exists 'Controlla se esiste il popup di conferma blocco / sblocco'" Exists="[popCheckBS]" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+      <ui:UiElementExists.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="e78002032de1c3e1cdd0e5c6876bfebf" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl idx='1' parentid='f*_tf_dlg_outer_pane_confermaCreaVAPdiBloccoSblocco' tag='TABLE' /&gt;&lt;webctrl idx='1' tableCol='2' tag='TD' /&gt;" TimeoutMS="3000" WaitForReady="INTERACTIVE" />
+      </ui:UiElementExists.Target>
+    </ui:UiElementExists>
+    <If Condition="[popCheckBS=true]" DisplayName="If- Controlla la presenza del popup di conferma del blocco sblocco" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Clicco su ok all'interno del popup di conferma'" sap2010:WorkflowViewState.IdRef="Click_10" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition Position="Center">
+              <ui:CursorPosition.OffsetX>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetX>
+              <ui:CursorPosition.OffsetY>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetY>
+            </ui:CursorPosition>
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="338684b7aab40e5d1f766c8b42d5673c" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl aaname='Ok' parentid='f*_pane_confermaCreaVAPdiBloccoSblocco' tag='BUTTON' type='button' /&gt;" WaitForReady="INTERACTIVE" />
+          </ui:Click.Target>
+        </ui:Click>
+      </If.Then>
+      <If.Else>
+        <Throw Exception="[new system.Exception(&quot;Pop di conferma blocco sblocco non presente&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_5" />
+      </If.Else>
+    </If>
+    <ui:UiElementExists DisplayName="Element Exists 'Popup Esito copia vap di blocco sblocco'" Exists="[EsitoPopCheckBS]" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
+      <ui:UiElementExists.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="6ee3e13f4aefd753caf171093f9ff229" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl idx='1' tag='TABLE' /&gt;&lt;webctrl idx='1' tableCol='2' tag='TD' /&gt;" TimeoutMS="3000" WaitForReady="INTERACTIVE" />
+      </ui:UiElementExists.Target>
+    </ui:UiElementExists>
+    <If Condition="[EsitoPopCheckBS=true]" DisplayName="If- Controllo sulla presenza del  popup di Esito copia Vap di  Sblocco blocco " sap2010:WorkflowViewState.IdRef="If_2">
+      <If.Then>
+        <Sequence DisplayName="Screen Scraping del popup Esito copia Vap di  Sblocco blocco Confermato " sap2010:WorkflowViewState.IdRef="Sequence_7">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="ui:GenericValue" Name="DivFControlMessag" />
+            <Variable x:TypeArguments="s:String[]" Name="parts" />
+          </Sequence.Variables>
+          <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'PosteItal Page'" sap2010:WorkflowViewState.IdRef="BrowserScope_3" InformativeScreenshot="641f7729455140dcd426cc581ee3a596" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;">
+            <ui:BrowserScope.Body>
+              <ActivityAction x:TypeArguments="x:Object">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                  <ui:GetFullText DisplayName="Get Full Text 'scrape del messaggio testuale'" sap2010:WorkflowViewState.IdRef="GetFullText_2" IgnoreHidden="False">
+                    <ui:GetFullText.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="35bacd76051e78a2e6f06f6e5afa881d" Selector="&lt;webctrl id='f*_control_messaggio' tag='DIV' /&gt;" WaitForReady="COMPLETE" />
+                    </ui:GetFullText.Target>
+                    <ui:GetFullText.Text>
+                      <OutArgument x:TypeArguments="ui:GenericValue">[DivFControlMessag]</OutArgument>
+                    </ui:GetFullText.Text>
+                  </ui:GetFullText>
+                </Sequence>
+              </ActivityAction>
+            </ui:BrowserScope.Body>
+          </ui:BrowserScope>
+          <Assign DisplayName="splitto il risultato testuale del popup dello screen scraping" sap2010:WorkflowViewState.IdRef="Assign_3">
+            <Assign.To>
+              <OutArgument x:TypeArguments="s:String[]">[parts]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="s:String[]">[DivFControlMessag.Split(" "c)]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign sap2010:WorkflowViewState.IdRef="Assign_4">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[VapNumber]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[parts(14)]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'clicco nel popup di conferma  Ok'" sap2010:WorkflowViewState.IdRef="Click_9" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+            <ui:Click.CursorPosition>
+              <ui:CursorPosition Position="Center">
+                <ui:CursorPosition.OffsetX>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:CursorPosition.OffsetX>
+                <ui:CursorPosition.OffsetY>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:CursorPosition.OffsetY>
+              </ui:CursorPosition>
+            </ui:Click.CursorPosition>
+            <ui:Click.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="378c7c710005303e1fb9cec559940e24" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl parentid='f*_pane_esitoCopiaVAPdiBloccoSblocco' tag='BUTTON' type='button' /&gt;" WaitForReady="INTERACTIVE" />
+            </ui:Click.Target>
+          </ui:Click>
+          <ui:UiElementExists Exists="{x:Null}" DisplayName="Element Exists 'Controlla se ha caricato l'ultima pagina di sblocco'" sap2010:WorkflowViewState.IdRef="UiElementExists_7">
+            <ui:UiElementExists.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="e641798aa5ca781008ee663ed33e2b0d" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl id='label_f*_widget_control_caseListaODA_numeroODA' tag='A' /&gt;" TimeoutMS="40000" WaitForReady="INTERACTIVE" />
+            </ui:UiElementExists.Target>
+          </ui:UiElementExists>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Throw Exception="[new system.Exception(&quot;Blocco Sblocco non confermato&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_6" />
+      </If.Else>
+    </If>
+    <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Clicco su modifica'" sap2010:WorkflowViewState.IdRef="Click_12" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+      <ui:Click.CursorPosition>
+        <ui:CursorPosition Position="Center">
+          <ui:CursorPosition.OffsetX>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetX>
+          <ui:CursorPosition.OffsetY>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetY>
+        </ui:CursorPosition>
+      </ui:Click.CursorPosition>
+      <ui:Click.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="b90bd6a8d632a907ee757a5e0241f910" Selector="&lt;html app='chrome.exe' title='Poste Italiane - BPM Ciclo Passivo' /&gt;&lt;webctrl id='f*_widget_control_modifica' tag='BUTTON' /&gt;" WaitForReady="INTERACTIVE" />
+      </ui:Click.Target>
+    </ui:Click>
+    <sads:DebugSymbol.Symbol>d2hDOlxVc2Vyc1xhemFkbWluXERvY3VtZW50c1xVaVBhdGhcUHJvZ2V0dG8xX0NvbnN1bWF0b3JlQ29kYV9CUE1fdjlcUG9zdGVfSXRhbGlhbmVcU2Jsb2Njb1ZhcEludGVybm8ueGFtbH9LA8EDDgIBAVcFWxoDAZIBXAWQAQoDAYcBkQEFlQEaAwGCAZYBBasBCgIBe6wBBbABEwIBeLEBBb8BEAIBdsABBcUBHQIBcsYBBcsBCgIBbcwBBdABGgIBaNEBBdUBCgIBY9YBBfIBEAIBUvMBBfMBTAIBUPQBBYICEAIBToMCBYcCGgIBSYgCBZ0CCgIBQp4CBaICEwIBPqMCBbECEAIBPLICBbYCGgIBN7cCBcwCCgIBMM0CBdECGgIBK9ICBecCCgIBJOgCBewCGgIBH+0CBbADCgIBBLEDBb8DEAIBAlmDAVmLAgMBlgFZlgJZnAIDAZUBV1hXbQMBkwFcE1woAwGIAV4JbBQDAZABbwmOARQDAYoBkwGDAZMBpAIDAYYBkwGvApMBtgIDAYUBkQF2kQGFAQMBgwGWAROWAScCAXyYAQmmARQDAYABqQEJqQGPAQIBfq4BmAGuAbMCAgF6rAGgAqwBzwICAXm9AZgBvQGfAgIBd8IBR8IBUwIBdMABesABhgECAXPGARPGAS4CAW7IAQnIAXYCAXDOAYMBzgGjAgIBbM4BrgLOAbUCAgFrzAFtzAF9AgFp0QET0QEoAgFk0wEJ0wHFAQIBZtgBOtgBVwIBU9oBB/EBGQIBVPMBFfMBHwIBUYACmAGAAp0CAgFPhQKDAYUCpAICAU2FAq8ChQK2AgIBTIMCdIMCgwECAUqIAhOIAicCAUOKAgmYAhQCAUebAgmbApwBAgFFoAKYAaACswICAUGeArcCngLCAgIBP68CmAGvAp8CAgE9tAKDAbQCowICATu0Aq4CtAK0AgIBOrICf7ICjwECATi3AhO3AigCATG5AgnHAhQCATXKAgnKApcBAgEzzwKDAc8C4gICAS/PAu0CzwLzAgIBLs0Cec0ChwECASzSAhPSAiYCASXUAgniAhQCASnlAgnlApgBAgEn6gKDAeoCowICASPqAq4C6gK0AgIBIugCZ+gCegIBIO0CE+0CKwIBBe8CCasDFAIBCa4DCa4DigECAQe9A5gBvQOiAgIBA2qcAWqhAgMBkQFwC34WAwGNAX8LjQEWAwGLAaQBnAGkAbcCAwGBAakBGqkBYgIBf8gBGsgBSQIBcdMBGtMBmAECAWfaAaIC2gHuAgIBYuABDe4BGAIBVZYCnAGWArcCAgFImwIamwJvAgFGxQKcAcUCtAICATbKAhrKAmoCATTgApwB4ALSAgIBKuUCGuUCawIBKPQCC4YDHQIBGIcDC44DFAIBFI8DC5YDFAIBD5cDC6UDFgIBDaYDC6oDIAIBCq4DGq4DXQIBCHyeAXyiAgMBjwFwTXBTAwGOAYsBngGLAaMCAwGMAeEBD+UBIAIBWuYBD+0BGAIBVvQCpgL0AvICAgEe+gIRgwMcAgEZjAM4jANXAgEXiQM5iQNAAgEVlAM2lANBAgESkQM3kQNCAgEQowOeAaMDxgICAQ6oA4kBqAOiAgIBDKgDrQKoA7QCAgEL4QHsAuEB8QICAWHjAaIB4wHBAQIBYOEBhQHhAYoBAgFf4QFL4QFRAgFe4QFc4QFwAgFc4QHkAeEBqAICAVvrATrrAXwCAVnoATvoAUQCAVf7AhOCAyQCARr9AqYB/QLdAQIBHYADRoADWQIBGw==</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="UiElementExists_8" sap:VirtualizedContainerService.HintSize="675,106" />
+      <sap2010:ViewStateData Id="Click_2" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Click_1" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Click_13" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="336,376">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_7" sap:VirtualizedContainerService.HintSize="675,524" />
+      <sap2010:ViewStateData Id="UiElementExists_3" sap:VirtualizedContainerService.HintSize="675,106" />
+      <sap2010:ViewStateData Id="Click_4" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Throw_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="675,254" />
+      <sap2010:ViewStateData Id="TypeInto_1" sap:VirtualizedContainerService.HintSize="675,134" />
+      <sap2010:ViewStateData Id="Click_3" sap:VirtualizedContainerService.HintSize="675,106" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_1" sap:VirtualizedContainerService.HintSize="675,87" />
+      <sap2010:ViewStateData Id="Throw_7" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_8" sap:VirtualizedContainerService.HintSize="675,208" />
+      <sap2010:ViewStateData Id="UiElementExists_4" sap:VirtualizedContainerService.HintSize="675,106" />
+      <sap2010:ViewStateData Id="Throw_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_4" sap:VirtualizedContainerService.HintSize="675,208" />
+      <sap2010:ViewStateData Id="ExtractData_1" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="336,330">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="BrowserScope_1" sap:VirtualizedContainerService.HintSize="414,476" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="675,600">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_1" sap:VirtualizedContainerService.HintSize="675,22" />
+      <sap2010:ViewStateData Id="Click_6" sap:VirtualizedContainerService.HintSize="675,106" />
+      <sap2010:ViewStateData Id="UiElementExists_5" sap:VirtualizedContainerService.HintSize="675,106" />
+      <sap2010:ViewStateData Id="Click_7" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Throw_3" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="675,254" />
+      <sap2010:ViewStateData Id="TypeInto_2" sap:VirtualizedContainerService.HintSize="675,134" />
+      <sap2010:ViewStateData Id="Click_8" sap:VirtualizedContainerService.HintSize="675,106" />
+      <sap2010:ViewStateData Id="UiElementExists_6" sap:VirtualizedContainerService.HintSize="675,106" />
+      <sap2010:ViewStateData Id="Click_5" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Throw_4" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="675,254" />
+      <sap2010:ViewStateData Id="UiElementExists_1" sap:VirtualizedContainerService.HintSize="675,106" />
+      <sap2010:ViewStateData Id="Click_10" sap:VirtualizedContainerService.HintSize="314,106">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Throw_5" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="675,254" />
+      <sap2010:ViewStateData Id="UiElementExists_2" sap:VirtualizedContainerService.HintSize="675,106" />
+      <sap2010:ViewStateData Id="GetFullText_2" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="336,230">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="BrowserScope_3" sap:VirtualizedContainerService.HintSize="414,376" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="414,60" />
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="414,60" />
+      <sap2010:ViewStateData Id="Click_9" sap:VirtualizedContainerService.HintSize="414,106" />
+      <sap2010:ViewStateData Id="UiElementExists_7" sap:VirtualizedContainerService.HintSize="414,106" />
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="436,992">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Throw_6" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="675,1140" />
+      <sap2010:ViewStateData Id="Click_12" sap:VirtualizedContainerService.HintSize="675,106" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="697,6283">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Main_1" sap:VirtualizedContainerService.HintSize="737,6363" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

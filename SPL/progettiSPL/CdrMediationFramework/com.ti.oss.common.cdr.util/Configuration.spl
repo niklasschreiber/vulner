@@ -1,0 +1,43 @@
+namespace com.ti.oss.common.cdr.util;
+
+// MediationUtils
+use com.ti.oss.common.util.cfg::*;
+
+
+public boolean isConfigurationChanged( rstring medname )
+{
+	if ( isMediationCfgChanged() )
+	{
+		return true;
+	}
+
+	return false;
+}
+
+stateful public int32 checkConfiguration( rstring medname, rstring key, mutable int32 interval )
+{
+	mutable int32 newInterval;
+
+	if ( isMediationCfgChanged() )
+	{
+		reloadMediationCfg();
+	}
+
+	newInterval = (int32) getCfgParam( "COMMON_CFG_DIR", medname, key );
+
+	return newInterval;
+}
+
+stateful public rstring checkConfiguration( rstring medname, rstring key, mutable rstring interval )
+{
+	mutable rstring newInterval;
+
+	if ( isMediationCfgChanged() )
+	{
+		reloadMediationCfg();
+	}
+
+	newInterval = getCfgParam( "COMMON_CFG_DIR", medname, key );
+
+	return newInterval;
+}

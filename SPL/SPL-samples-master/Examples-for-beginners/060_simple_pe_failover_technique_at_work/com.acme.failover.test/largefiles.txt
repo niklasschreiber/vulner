@@ -1,0 +1,1 @@
+"D:\_SRC\SPL\SPL-samples-master\Examples-for-beginners\060_simple_pe_failover_technique_at_work\com.acme.failover.test\simple_pe_failover_technique_at_work.splmm" 

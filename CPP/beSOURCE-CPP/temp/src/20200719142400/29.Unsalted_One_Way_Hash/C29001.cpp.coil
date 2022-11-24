@@ -1,0 +1,344 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/29.Unsalted_One_Way_Hash/C29001.cpp");
+   ("language", "CPP");
+   ("include", "std_testcase.h");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<stddef.h>");
+   ("include", "<time.h>");
+   ("include", "<limits.h>");
+   ("include", "<string.h>");
+   ("include", "<stdint.h>");
+   ("include", "<stdint.h>");
+   ("include", "<ctype.h>");
+   ("include", "<fcntl.h>");
+   ("include", "<sys/types.h>");
+   ("include", "<sys/stat.h>");
+   ("include", "std_testcase_io.h");
+   ("include", "std_testcase.h");
+   ("include", "<crypt.h>");
+}
+{
+   (!3, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase_io.h");
+   (!2, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h");
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/29.Unsalted_One_Way_Hash/C29001.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/29.Unsalted_One_Way_Hash/C29001.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/29.Unsalted_One_Way_Hash/C29001.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/29.Unsalted_One_Way_Hash/C29001.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/29.Unsalted_One_Way_Hash/C29001.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/29.Unsalted_One_Way_Hash/C29001.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/29.Unsalted_One_Way_Hash/C29001.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/29.Unsalted_One_Way_Hash/C29001.cpp",
+   MD("RAND32()",[],"((rand()<<30) ^ (rand()<<15) ^ rand())")
+   ,(84#0,84#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/29.Unsalted_One_Way_Hash/C29001.cpp",
+   MD("RAND64()",[],"(((int64_t)rand()<<60) ^ ((int64_t)rand()<<45) ^ ((int64_t)rand()<<30) ^ ((int64_t)rand()<<15) ^ (int64_t)rand())")
+   ,(87#0,87#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"C29001",
+   SF([extern,const,extern],int,<"C29001">,"GLOBAL_CONST_TRUE")
+   ,(103#18,103#34,!2)},
+
+   {"C29001",
+   SF([extern,const,extern],int,<"C29001">,"GLOBAL_CONST_FALSE")
+   ,(104#18,104#35,!2)},
+
+   {"C29001",
+   SF([extern,const,extern],int,<"C29001">,"GLOBAL_CONST_FIVE")
+   ,(105#18,105#34,!2)},
+
+   {"C29001",
+   SF([extern,extern],int,<"C29001">,"globalTrue")
+   ,(110#12,110#21,!2)},
+
+   {"C29001",
+   SF([extern,extern],int,<"C29001">,"globalFalse")
+   ,(111#12,111#22,!2)},
+
+   {"C29001",
+   SF([extern,extern],int,<"C29001">,"globalFive")
+   ,(112#12,112#21,!2)},
+
+   {"C29001",
+   SF([extern,extern],int,<"C29001">,"globalArgc")
+   ,(55#12,55#21,!3)},
+
+   {"C29001",
+   SF([extern,extern],ref(ref(char)),<"C29001">,"globalArgv")
+   ,(56#12,56#24,!3)},
+
+   {"C29001",
+   SI(<"C29001">,
+   {[
+      {;
+      ,(1#1,81#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,81#1,!1)}
+   )
+   ,(1#1,81#1,!1)},
+
+   {"C29001",
+   PT([public],(<"C29001">,"printLine"):unit,[(mod(ref(char),[const]):"line",(14#16,14#32,!3))],[]
+   )
+   ,(14#1,14#34,!3)},
+
+   {"C29001",
+   PT([public],(<"C29001">,"printWLine"):unit,[(mod(ref(wchar),[const]):"line",(16#17,16#36,!3))],[]
+   )
+   ,(16#1,16#38,!3)},
+
+   {"C29001",
+   PT([public],(<"C29001">,"printIntLine"):unit,[(int:"intNumber",(18#20,18#32,!3))],[]
+   )
+   ,(18#1,18#34,!3)},
+
+   {"C29001",
+   PT([public],(<"C29001">,"printShortLine"):unit,[(short:"shortNumber",(20#22,20#38,!3))],[]
+   )
+   ,(20#1,20#40,!3)},
+
+   {"C29001",
+   PT([public],(<"C29001">,"printFloatLine"):unit,[(float:"floatNumber",(22#22,22#38,!3))],[]
+   )
+   ,(22#1,22#40,!3)},
+
+   {"C29001",
+   PT([public],(<"C29001">,"printLongLine"):unit,[(long:"longNumber",(24#20,24#34,!3))],[]
+   )
+   ,(24#1,24#36,!3)},
+
+   {"C29001",
+   PT([public],(<"C29001">,"printLongLongLine"):unit,[(class((,int64_t)):"longLongIntNumber",(26#24,26#48,!3))],[]
+   )
+   ,(26#1,26#50,!3)},
+
+   {"C29001",
+   PT([public],(<"C29001">,"printSizeTLine"):unit,[(class((,size_t)):"sizeTNumber",(28#21,28#38,!3))],[]
+   )
+   ,(28#1,28#40,!3)},
+
+   {"C29001",
+   PT([public],(<"C29001">,"printHexCharLine"):unit,[(char:"charHex",(30#23,30#34,!3))],[]
+   )
+   ,(30#1,30#36,!3)},
+
+   {"C29001",
+   PT([public],(<"C29001">,"printWcharLine"):unit,[(wchar:"wideChar",(32#21,32#36,!3))],[]
+   )
+   ,(32#1,32#38,!3)},
+
+   {"C29001",
+   PT([public],(<"C29001">,"printUnsignedLine"):unit,[(uint:"unsignedNumber",(34#24,34#46,!3))],[]
+   )
+   ,(34#1,34#48,!3)},
+
+   {"C29001",
+   PT([public],(<"C29001">,"printHexUnsignedCharLine"):unit,[(uchar:"unsignedCharacter",(36#31,36#61,!3))],[]
+   )
+   ,(36#1,36#63,!3)},
+
+   {"C29001",
+   PT([public],(<"C29001">,"printDoubleLine"):unit,[(double:"doubleNumber",(38#22,38#40,!3))],[]
+   )
+   ,(38#1,38#42,!3)},
+
+   {"C29001",
+   PT([public],(<"C29001">,"printStructLine"):unit,[(mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]):"structTwoIntsStruct",(40#22,40#62,!3))],[]
+   )
+   ,(40#1,40#64,!3)},
+
+   {"C29001",
+   PT([public],(<"C29001">,"printBytesLine"):unit,[(mod(ref(uchar),[const]):"bytes",(42#21,42#47,!3)),(class((,size_t)):"numBytes",(42#50,42#64,!3))],[]
+   )
+   ,(42#1,42#66,!3)},
+
+   {"C29001",
+   PT([public],(<"C29001">,"decodeHexChars"):class((,size_t)),[(ref(uchar):"bytes",(44#23,44#43,!3)),(class((,size_t)):"numBytes",(44#46,44#60,!3)),(mod(ref(char),[const]):"hex",(44#63,44#78,!3))],[]
+   )
+   ,(44#1,44#80,!3)},
+
+   {"C29001",
+   PT([public],(<"C29001">,"decodeHexWChars"):class((,size_t)),[(ref(uchar):"bytes",(46#24,46#44,!3)),(class((,size_t)):"numBytes",(46#47,46#61,!3)),(mod(ref(wchar),[const]):"hex",(46#64,46#82,!3))],[]
+   )
+   ,(46#1,46#84,!3)},
+
+   {"C29001",
+   PT([public],(<"C29001">,"globalReturnsTrue"):int,[],[]
+   )
+   ,(48#1,48#24,!3)},
+
+   {"C29001",
+   PT([public],(<"C29001">,"globalReturnsFalse"):int,[],[]
+   )
+   ,(50#1,50#25,!3)},
+
+   {"C29001",
+   PT([public],(<"C29001">,"globalReturnsTrueOrFalse"):int,[],[]
+   )
+   ,(52#1,52#31,!3)},
+
+   {"C29001",
+   FN([public],(<"C29001">,"cwe759_bad"):unit,[],[],
+   {[
+      {VD("data",ref(char))
+      ,(28#10,28#15,!1)};
+      {VD("data_buf",char,([{"100"N,int,(29#19,29#21,!1)}],[{""S,string,(29#26,29#27,!1)}]))
+      ,(29#10,29#22,!1)};
+      {{AE({V("data"),ref(char),(30#5,30#8,!1)},{V("data_buf"),arr(char),(30#12,30#19,!1)}),ref(char),(30#5,30#19,!1)}
+      ,(30#5,30#19,!1)};
+      {[
+         {VD("recv_rv",int)
+         ,(36#13,36#19,!1)};
+         {VD("s_in",mod(class((,sockaddr_in)),[struct]))
+         ,(37#28,37#31,!1)};
+         {VD("replace",ref(char))
+         ,(38#14,38#21,!1)};
+         {VD("connect_socket",int,{UO(-,{"1"N,int,(39#31,39#31,!1)}),int,(39#30,39#31,!1)})
+         ,(39#13,39#26,!1)};
+         {VD("data_len",class((,size_t)),{SC((<"C29001">,"strlen"),[ref(char)],[{V("data"),ref(char),(40#34,40#37,!1)}]),class((,"%undef")),(40#27,40#38,!1)})
+         ,(40#16,40#23,!1)};
+         {DW(L9,
+            {[
+               {{AE({V("connect_socket"),int,(47#13,47#26,!1)},{SC((<"C29001">,"socket"),[class((,"%undef")),class((,"%undef")),class((,"%undef"))],[{V("AF_INET"),class((,"%undef")),(47#37,47#43,!1)},{V("SOCK_STREAM"),class((,"%undef")),(47#46,47#56,!1)},{V("IPPROTO_TCP"),class((,"%undef")),(47#59,47#69,!1)}]),class((,"%undef")),(47#30,47#70,!1)}),int,(47#13,47#70,!1)}
+               ,(47#13,47#70,!1)};
+               {IF0({BO(==,{V("connect_socket"),int,(48#17,48#30,!1)},{UO(-,{"1"N,int,(48#36,48#36,!1)}),int,(48#35,48#36,!1)}),bool,(48#17,48#36,!1)},
+                  {[
+                     {BR @ 
+                     ,(48#39,48#44,!1)}
+                     ]
+                  ,(48#13,48#44,!1)})
+               ,(48#13,48#44,!1)};
+               {PC0((<"C29001">,"memset"),[ref(mod(class((,sockaddr_in)),[struct])),int,int],[{&{V("s_in"),mod(class((,sockaddr_in)),[struct]),(49#21,49#24,!1)},ref(mod(class((,sockaddr_in)),[struct])),(49#20,49#24,!1)},{"0"N,int,(49#27,49#27,!1)},{SO({V("s_in"),mod(class((,sockaddr_in)),[struct]),(49#37,49#40,!1)}),int,(49#30,49#41,!1)}])
+               ,(49#13,49#42,!1)};
+               {{AE({OA({V("s_in"),mod(class((,sockaddr_in)),[struct]),(50#13,50#16,!1)},"sin_family"),class((,"%undef")),(50#13,50#27,!1)},{V("AF_INET"),class((,"%undef")),(50#31,50#37,!1)}),class((,"%undef")),(50#13,50#37,!1)}
+               ,(50#13,50#37,!1)};
+               {{AE({OA({OA({V("s_in"),mod(class((,sockaddr_in)),[struct]),(51#13,51#16,!1)},"sin_addr"),class((,"%undef")),(51#13,51#25,!1)},"s_addr"),class((,"%undef")),(51#13,51#32,!1)},{SC((<"C29001">,"inet_addr"),[string],[{"127.0.0.1"S,string,(51#46,51#56,!1)}]),class((,"%undef")),(51#36,51#57,!1)}),class((,"%undef")),(51#13,51#57,!1)}
+               ,(51#13,51#57,!1)};
+               {{AE({OA({V("s_in"),mod(class((,sockaddr_in)),[struct]),(52#13,52#16,!1)},"sin_port"),class((,"%undef")),(52#13,52#25,!1)},{SC((<"C29001">,"htons"),[int],[{"27015"N,int,(52#35,52#39,!1)}]),class((,"%undef")),(52#29,52#40,!1)}),class((,"%undef")),(52#13,52#40,!1)}
+               ,(52#13,52#40,!1)};
+               {IF0({BO(==,{SC((<"C29001">,"connect"),[int,ref(mod(class((,sockaddr)),[struct])),int],[{V("connect_socket"),int,(53#25,53#38,!1)},{CS(ref(mod(class((,sockaddr)),[struct])),{&{V("s_in"),mod(class((,sockaddr_in)),[struct]),(53#60,53#63,!1)},ref(mod(class((,sockaddr_in)),[struct])),(53#59,53#63,!1)}),ref(mod(class((,sockaddr)),[struct])),(53#41,53#63,!1)},{SO({V("s_in"),mod(class((,sockaddr_in)),[struct]),(53#73,53#76,!1)}),int,(53#66,53#77,!1)}]),class((,"%undef")),(53#17,53#78,!1)},{UO(-,{"1"N,int,(53#84,53#84,!1)}),int,(53#83,53#84,!1)}),bool,(53#17,53#84,!1)},
+                  {[
+                     {BR @ 
+                     ,(53#87,53#92,!1)}
+                     ]
+                  ,(53#13,53#92,!1)})
+               ,(53#13,53#92,!1)};
+               {{AE({V("recv_rv"),int,(56#13,56#19,!1)},{SC((<"C29001">,"recv"),[int,ref(char),int,int],[{V("connect_socket"),int,(56#28,56#41,!1)},{BO(+,{CS(ref(char),{V("data"),ref(char),(56#52,56#55,!1)}),ref(char),(56#44,56#55,!1)},{V("data_len"),class((,size_t)),(56#57,56#64,!1)}),ref(char),(56#44,56#64,!1)},{CS(int,{BO(-,{BO(-,{"100"N,int,(56#73,56#75,!1)},{V("data_len"),class((,size_t)),(56#77,56#84,!1)}),int,(56#73,56#84,!1)},{"1"N,int,(56#86,56#86,!1)}),int,(56#72,56#87,!1)}),int,(56#67,56#87,!1)},{"0"N,int,(56#90,56#90,!1)}]),class((,"%undef")),(56#23,56#91,!1)}),int,(56#13,56#91,!1)}
+               ,(56#13,56#91,!1)};
+               {IF0({BO(||,{BO(==,{V("recv_rv"),int,(57#17,57#23,!1)},{UO(-,{"1"N,int,(57#29,57#29,!1)}),int,(57#28,57#29,!1)}),bool,(57#17,57#29,!1)},{BO(==,{V("recv_rv"),int,(57#34,57#40,!1)},{"0"N,int,(57#45,57#45,!1)}),bool,(57#34,57#45,!1)}),bool,(57#17,57#45,!1)},
+                  {[
+                     {BR @ 
+                     ,(57#48,57#53,!1)}
+                     ]
+                  ,(57#13,57#53,!1)})
+               ,(57#13,57#53,!1)};
+               {{AE({AA({V("data"),ref(char),(59#13,59#16,!1)},[{V("recv_rv"),int,(59#18,59#24,!1)}]),char,(59#13,59#25,!1)},{"\0"C,char,(59#29,59#32,!1)}),char,(59#13,59#32,!1)}
+               ,(59#13,59#32,!1)};
+               {{AE({V("replace"),ref(char),(61#13,61#19,!1)},{SC((<"C29001">,"strchr"),[ref(char),char],[{V("data"),ref(char),(61#30,61#33,!1)},{"\r"C,char,(61#36,61#39,!1)}]),class((,"%undef")),(61#23,61#40,!1)}),ref(char),(61#13,61#40,!1)}
+               ,(61#13,61#40,!1)};
+               {IF0({V("replace"),ref(char),(62#17,62#23,!1)},
+                  {[
+                     {{AE({*{V("replace"),ref(char),(62#27,62#33,!1)},char,(62#26,62#33,!1)},{"\0"C,char,(62#37,62#40,!1)}),char,(62#26,62#40,!1)}
+                     ,(62#26,62#40,!1)}
+                     ]
+                  ,(62#13,62#41,!1)})
+               ,(62#13,62#41,!1)};
+               {{AE({V("replace"),ref(char),(63#13,63#19,!1)},{SC((<"C29001">,"strchr"),[ref(char),char],[{V("data"),ref(char),(63#30,63#33,!1)},{"\n"C,char,(63#36,63#39,!1)}]),class((,"%undef")),(63#23,63#40,!1)}),ref(char),(63#13,63#40,!1)}
+               ,(63#13,63#40,!1)};
+               {IF0({V("replace"),ref(char),(64#17,64#23,!1)},
+                  {[
+                     {{AE({*{V("replace"),ref(char),(64#27,64#33,!1)},char,(64#26,64#33,!1)},{"\0"C,char,(64#37,64#40,!1)}),char,(64#26,64#40,!1)}
+                     ,(64#26,64#40,!1)}
+                     ]
+                  ,(64#13,64#41,!1)})
+               ,(64#13,64#41,!1)}
+               ]
+            ,(42#9,65#9,!1)},
+            {"0"N,int,(66#16,66#16,!1)})
+         ,(41#9,66#18,!1)};
+         {IF0({BO(!=,{V("connect_socket"),int,(67#13,67#26,!1)},{UO(-,{"1"N,int,(67#32,67#32,!1)}),int,(67#31,67#32,!1)}),bool,(67#13,67#32,!1)},
+            {[
+               {PC0((<"C29001">,"close"),[int],[{V("connect_socket"),int,(67#41,67#54,!1)}])
+               ,(67#35,67#55,!1)}
+               ]
+            ,(67#9,67#56,!1)})
+         ,(67#9,67#56,!1)}
+         ]
+      ,(31#5,71#5,!1)};
+      {[
+         {VD("p_enc",ref(char),{CS(ref(unit),{"0"N,int,(74#24,74#27,!1)}),ref(unit),(74#24,74#27,!1)})
+         ,(74#14,74#20,!1)};
+         {{AE({V("p_enc"),ref(char),(76#9,76#13,!1)},{SC((<"C29001">,"crypt"),[ref(char)],[{V("data"),ref(char),(76#23,76#26,!1)}]),class((,"%undef")),(76#17,76#27,!1)}),ref(char),(76#9,76#27,!1)}
+         ,(76#9,76#27,!1)};
+         {PC0((<"C29001">,"printLine"),[mod(ref(char),[const])],[{V("p_enc"),ref(char),(77#19,77#23,!1)}])
+         ,(77#9,77#24,!1)}
+         ]
+      ,(73#5,78#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(26#1,80#1,!1)}
+   )
+   ,(26#1,80#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/29.Unsalted_One_Way_Hash/C29001.cpp",
+   CL([struct],(,_twoIntsStruct),[])
+   {
+      ([public],"intOne":int,(92#9,92#14,!2));
+      ([public],"intTwo":int,(93#9,93#14,!2))
+   }
+   ,(90#1,94#16,!2)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/29.Unsalted_One_Way_Hash/C29001.cpp",
+   [
+      M("/* include ws2_32.lib when linking */",7,(7#0,7#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/29.Unsalted_One_Way_Hash/C29001.cpp")),
+      M("/* NOT _WIN32 */",10,(10#0,10#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/29.Unsalted_One_Way_Hash/C29001.cpp")),
+      M("/* \n              */",54,(54#0,54#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/29.Unsalted_One_Way_Hash/C29001.cpp")),
+      M("/*  */",58,(58#0,58#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/29.Unsalted_One_Way_Hash/C29001.cpp")),
+      M("/*  */",60,(60#0,60#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/29.Unsalted_One_Way_Hash/C29001.cpp")),
+      M("/*  */",75,(75#0,75#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/29.Unsalted_One_Way_Hash/C29001.cpp"))
+   ]
+   }
+]

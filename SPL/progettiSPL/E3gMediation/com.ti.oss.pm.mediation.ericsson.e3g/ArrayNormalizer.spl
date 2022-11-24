@@ -1,0 +1,245 @@
+namespace com.ti.oss.pm.mediation.ericsson.e3g ;
+
+/*
+ * Import ext namespaces
+ */
+use com.ibm.streamsx.file::* ;
+use com.ti.oss.common.pm.util::* ;
+use com.ti.oss.common.event::* ;
+use com.ti.oss.pm.mediation.ericsson.e3g.utils::* ;
+use com.ti.oss.common.pm.parser.cfg::* ;
+use com.ti.oss.common.pm.parser.util::* ;
+use com.ti.oss.common.util.cfg::* ;
+//use com.ti.oss.common.pm.parser.xml3gpp.ericsson::* ;
+use com.ti.oss.common.alarm::* ;
+
+public composite ArrayNormalizer(input stream<MeasHeader mHeader,
+	MeasData mData, boolean eof> DefragMeasDataBlock, stream<NormClasses Classes,
+	RelMeasInfoIdClass RelMeasInfoClass, RelClassIdDimension RelClassDimension,
+	RelMeasinfoIdCounter RelMeasinfoCounter,
+	RelCounterMeasinfoId RelCounterMeasinfo, NormClasses ClassDN>
+	AdaptationLoader_out1 ; output ArrayNormMeasDataBlock, ArrayNormalizerEvent)
+{
+	param
+		expression<rstring> $mediationId ;
+		expression<rstring> $commonEnv : "COMMON_CFG_DIR" ;
+		expression<rstring> $eventsListCfgParam : "EVENT_TYPE_LIST" ;
+		expression<rstring> $activateNormalizer : getCfgParam("COMMON_CFG_DIR",
+			"e3g", "ACTIVATE_NORMALIZER_FLAG") ;
+		expression<rstring> $activateDisplayTuples : getCfgParam("COMMON_CFG_DIR",
+			"e3g", "ACTIVATE_DISPLAY_TUPLE") ;
+	graph
+		(stream<MeasHeader mHeader, MeasData mData, boolean eof>
+			ArrayNormMeasDataBlock ; stream<Event e> ArrayNormalizerEvent) =
+			Custom(DefragMeasDataBlock as DMB ; AdaptationLoader_out1)
+		{
+			logic
+				state :
+				{
+				//Adaptation Memory Structure
+					mutable NormClasses memoryClasses ;
+					mutable NormClasses memoryClassDN ;
+					mutable RelMeasInfoIdClass memoryRelMeasInfoIdClass ;
+					mutable RelClassIdDimension memoryRelClassIdDimension ;
+					mutable RelMeasinfoIdCounter memoryRelMeasinfoIdCounter ;
+					mutable RelCounterMeasinfoId memoryRelCounterMeasinfo ;
+
+					// Local objects
+					//mutable ArrayNormMeasDataBlock cMdBlock = { } ;
+					mutable rstring value = "" ;
+					mutable map<int32, boolean> eventTable = getEventTable($commonEnv,
+						$mediationId, $eventsListCfgParam) ;
+					mutable rstring activateNormFlag = $activateNormalizer ;
+					mutable rstring activateDisplayTuplesFlag = $activateDisplayTuples ;
+				}
+
+				onTuple AdaptationLoader_out1 :
+				{
+					memoryClasses = Classes ;
+					memoryClassDN = ClassDN ;
+					memoryRelMeasInfoIdClass = RelMeasInfoClass ;
+					memoryRelClassIdDimension = RelClassDimension ;
+					memoryRelMeasinfoIdCounter = RelMeasinfoCounter ;
+					memoryRelCounterMeasinfo = RelCounterMeasinfo ;
+				}
+
+				onTuple DMB :
+				{
+					if(DMB.eof)
+					{
+						submit(DMB, ArrayNormMeasDataBlock) ;
+
+						// Submit event tuple
+						mutable Event event = { } ;
+						event.eventType = 140 ;
+						event.resultCode = 0 ;
+						event.rawFile = filename(DMB.mHeader.fileHeader.fName) ;
+						event.eventCorrelationId = DMB.mHeader.fileHeader.eventCorrelationId ;
+						event.rop = DMB.mHeader.fileHeader.rop ;
+						event.emId = DMB.mHeader.fileHeader.emId ;
+						event.neId = DMB.mHeader.fileHeader.neId ;
+						event.eventText = "The raw file has been normalized" ;
+						boolean eventEnabled = mkEvent(event,
+							DMB.mHeader.fileHeader.sessionBeginTime, eventTable) ;
+						if(eventEnabled) submit({ e = event }, ArrayNormalizerEvent) ;
+
+						// Send punctuation
+						submit(Sys . WindowMarker, ArrayNormMeasDataBlock) ;
+
+						// Debug traces
+						appTrc(Trace . debug, "ArrayNormalizer - The file \"" + DMB .
+						mHeader . fileHeader . fName + "\" has been normalized.") ;
+					}
+
+					else if(activateNormFlag == "true")
+					{
+					//swap(DMB, cMdBlock) ;
+
+					/**normalizza array compressi.
+						 * 
+						 * per ogni measType 
+						 * verificare se è oggetto di normalizzazione (se è contenuto nella lista "denormMt")
+						 * se lo è:
+						 * per ogni contatore
+						 * verificare se è oggetto di normalizzazione (se è contenuto nella lista "denormCounters")
+						 * in tal caso normalizzare, riportando il valore del contatore al formato "array" considerando anche
+						 * le posizioni con valore nullo.
+						 * 
+						 */
+						for(rstring MT in DMB.mData.measTypes)
+						{
+							if(has(memoryRelMeasinfoIdCounter, MT))
+							{
+								for(rstring CT in DMB.mData.measTypes [ MT ].cTable)
+								{
+									if(has(memoryRelMeasinfoIdCounter [ MT ], CT))
+									{
+										if(!(findFirst(DMB.mData.measTypes [ MT ].cTable [ CT ], ",") == -
+											1))
+										{
+											value = normalize(DMB.mData.measTypes [ MT ].cTable [ CT ], CT) ;
+											if(value == "")
+											{
+											// Submit event tuple
+												mutable Event event = { } ;
+												event.eventType = 140 ;
+												event.resultCode = 9 ;
+												event.rawFile = filename(DMB.mHeader.fileHeader.fName) ;
+												event.eventCorrelationId =
+													DMB.mHeader.fileHeader.eventCorrelationId ;
+												event.rop = DMB.mHeader.fileHeader.rop ;
+												event.emId = DMB.mHeader.fileHeader.emId ;
+												event.neId = DMB.mHeader.fileHeader.neId ;
+												event.eventText = "ArrayNormalizer - the counter is alphanumeric: "
+													+ MT + " - "+ CT + " - " + DMB.mData.measTypes [ MT ].cTable [ CT ] + " - rejected." ;
+												boolean eventEnabled = mkEvent(event,
+													DMB.mHeader.fileHeader.sessionBeginTime, eventTable) ;
+												if(eventEnabled) submit({ e = event }, ArrayNormalizerEvent) ;
+
+												// Debug traces
+												appTrc(Trace . debug,
+													"ArrayNormalizer - the counter is alphanumeric: "+ MT + " - " + CT
+													+ " - " + DMB.mData.measTypes [ MT ].cTable [ CT ] + " - rejected.") ;
+											}
+
+										}
+
+										else
+										{
+											value = DMB.mData.measTypes [ MT ].cTable [ CT ] ;
+										}
+
+										insertM(DMB.mData.measTypes [ MT ].cTable, CT, value) ;
+										//appTrc(Trace.debug, " Counter  cMdBlock " +(rstring) CT + " - value " + cMdBlock.mData.measTypes [ MT ].cTable[ CT ]) ;
+
+									}
+
+								}
+
+							}
+
+						}
+
+						submit(DMB, ArrayNormMeasDataBlock) ;
+						//	displayTuple(cMdBlock.mHeader, cMdBlock.mData,
+						//		activateDisplayTuplesFlag) ;
+
+					}
+
+					else
+					{
+						submit(DefragMeasDataBlock, ArrayNormMeasDataBlock) ;
+					}
+
+					//displayTuple( ArrayNormMeasDataBlock.mHeader,  ArrayNormMeasDataBlock.mData, activateDisplayTuplesFlag);
+
+				}
+
+			}
+
+	}
+
+	public rstring normalize(rstring contatoreDenormalizzato,
+		rstring nomeContatore)
+	{
+	/**
+		 * mutable list<int32> appoArray = tokenize(contatoreDenormalizzato, ",", false) ;
+		 * 
+		 * commentato perchè va in errore se nel contatore c'è erroneamente una stringa
+		 * 2017-03-07
+		 * 
+		 */
+		mutable list<rstring> appoArray = tokenize(contatoreDenormalizzato, ",",
+			false) ;
+		mutable rstring contatoreNormalizzato = "" ;
+		mutable int32 indicePrecedente = 0 ;
+		appTrc(Trace.debug, "NORM Cont " + nomeContatore + " - " +
+			contatoreDenormalizzato + " - range(0,size(appoArray),1) = " +(rstring)
+			range(0, size(appoArray), 1)) ;
+		mutable boolean numeric = true ;
+		for(int32 j in range(0, size(appoArray), 1))
+		{
+			if(j > 0)
+			{
+				appTrc(Trace.debug, "NORMALIZZO Contatore... " + nomeContatore + " - " +
+					contatoreDenormalizzato) ;
+				if(fmod((float32) j,(float32) 2) ==(float32) 0)
+				{
+					mutable list<rstring> matchResults = [];
+					matchResults= regexMatchPerl(appoArray [ j ],"[a-zA-Z]");
+					if(size(matchResults)>0)
+					{
+						numeric = false ;
+					}
+
+					contatoreNormalizzato = contatoreNormalizzato + appoArray [ j ] ;
+					appTrc(Trace.debug, "indice PARI,  " + nomeContatore + " - " +
+						contatoreNormalizzato) ;
+				}
+
+				else
+				{
+					for(int32 i in range((int32) appoArray [ j ] - indicePrecedente))
+					{
+						contatoreNormalizzato = contatoreNormalizzato + "," ;
+						appTrc(Trace.debug, "indice DISPARI,  " +(rstring) i + nomeContatore +
+							" - " + contatoreNormalizzato) ;
+					}
+
+					indicePrecedente =(int32) appoArray [ j ] ;
+				}
+
+			}
+
+		}
+
+		if(!numeric)
+		{
+			contatoreNormalizzato = "" ;
+		}
+
+		appTrc(Trace.debug, "FINALE,  " + nomeContatore + " - " +
+			contatoreNormalizzato) ;
+		appTrc(Trace.debug, "####################################################") ;
+		return contatoreNormalizzato ;
+	}

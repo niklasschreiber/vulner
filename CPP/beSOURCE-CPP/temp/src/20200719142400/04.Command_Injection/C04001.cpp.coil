@@ -1,0 +1,89 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/04.Command_Injection/C04001.cpp");
+   ("language", "CPP");
+   ("include", "<stdio.h>");
+   ("include", "<unistd.h>");
+   ("include", "<limits.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/04.Command_Injection/C04001.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/04.Command_Injection/C04001.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/04.Command_Injection/C04001.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/04.Command_Injection/C04001.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/04.Command_Injection/C04001.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/04.Command_Injection/C04001.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/04.Command_Injection/C04001.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C04001",
+   SI(<"C04001">,
+   {[
+      {;
+      ,(1#1,20#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,20#1,!1)}
+   )
+   ,(1#1,20#1,!1)},
+
+   {"C04001",
+   FN([public],(<"C04001">,"main"):int,[("argc":int,(5#10,5#17,!1)),("argv":ref(ref(char)),(5#20,5#30,!1))],[],
+   {[
+      {VD("arg",char,([{"80"N,int,(6#12,6#13,!1)}]))
+      ,(6#8,6#14,!1)};
+      {VD("cat",char,([{"0"N,int,(7#16,7#21,!1)}],[{"cat "S,string,(7#16,7#21,!1)}]))
+      ,(7#8,7#12,!1)};
+      {VD("command",ref(char))
+      ,(8#8,8#15,!1)};
+      {VD("commandLength",class((,size_t)))
+      ,(9#10,9#22,!1)};
+      {PC0((<"C04001">,"fgets"),[arr(char),int,class((,"%undef"))],[{V("arg"),arr(char),(11#9,11#11,!1)},{"80"N,int,(11#13,11#14,!1)},{V("stdin"),class((,"%undef")),(11#16,11#20,!1)}])
+      ,(11#3,11#21,!1)};
+      {{AE({V("commandLength"),class((,size_t)),(12#3,12#15,!1)},{BO(+,{BO(+,{SC((<"C04001">,"strlen"),[arr(char)],[{V("cat"),arr(char),(12#26,12#28,!1)}]),class((,"%undef")),(12#19,12#29,!1)},{SC((<"C04001">,"strlen"),[arr(char)],[{V("arg"),arr(char),(12#40,12#42,!1)}]),class((,"%undef")),(12#33,12#43,!1)}),undef("unknown"),(12#19,12#43,!1)},{"1"N,int,(12#47,12#47,!1)}),undef("unknown"),(12#19,12#47,!1)}),class((,size_t)),(12#3,12#47,!1)}
+      ,(12#3,12#47,!1)};
+      {{AE({V("command"),ref(char),(13#3,13#9,!1)},{CS(ref(char),{SC((<"C04001">,"malloc"),[class((,size_t))],[{V("commandLength"),class((,size_t)),(13#29,13#41,!1)}]),class((,"%undef")),(13#22,13#42,!1)}),ref(char),(13#13,13#42,!1)}),ref(char),(13#3,13#42,!1)}
+      ,(13#3,13#42,!1)};
+      {PC0((<"C04001">,"strncpy"),[ref(char),arr(char),class((,size_t))],[{V("command"),ref(char),(14#11,14#17,!1)},{V("cat"),arr(char),(14#20,14#22,!1)},{V("commandLength"),class((,size_t)),(14#25,14#37,!1)}])
+      ,(14#3,14#38,!1)};
+      {PC0((<"C04001">,"strncat"),[ref(char),ref(char),class((,size_t))],[{V("command"),ref(char),(15#11,15#17,!1)},{AA({V("argv"),ref(ref(char)),(15#20,15#23,!1)},[{"1"N,int,(15#25,15#25,!1)}]),ref(char),(15#20,15#26,!1)},{BO(-,{V("commandLength"),class((,size_t)),(15#30,15#42,!1)},{SC((<"C04001">,"strlen"),[arr(char)],[{V("cat"),arr(char),(15#53,15#55,!1)}]),class((,"%undef")),(15#46,15#56,!1)}),class((,size_t)),(15#29,15#57,!1)}])
+      ,(15#3,15#59,!1)};
+      {PC0((<"C04001">,"system"),[ref(char)],[{V("command"),ref(char),(17#10,17#16,!1)}])
+      ,(17#3,17#17,!1)};
+      {RE({"0"N,int,(18#10,18#12,!1)})
+      ,(18#3,18#13,!1)}
+      ]
+   ,(5#1,19#1,!1)}
+   )
+   ,(5#1,19#1,!1)}
+]

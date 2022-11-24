@@ -1,0 +1,16 @@
+<config>
+    <mysql>
+        <host>localhost</host>
+        <user>root</user>
+        <passwd>mysecretpassword</passwd>
+        <db>write-math</db>
+    </mysql>
+    <other>
+        <preprocessing_queue>
+            <li>preprocessing.scale_and_center</li>
+            <li>preprocessing.dot_reduction</li>
+            <li>preprocessing.connect_lines</li>
+        </preprocessing_queue>
+        <use_anonymous value="true" />
+    </other>
+</config>

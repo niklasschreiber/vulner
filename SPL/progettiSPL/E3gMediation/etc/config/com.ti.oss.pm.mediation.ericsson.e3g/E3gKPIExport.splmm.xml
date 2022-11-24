@@ -1,0 +1,96 @@
+<?xml version="1.0" ?>
+<i:Spltosplmm
+  xmlns:i="http://www.ibm.com/xmlns/prod/streams/spl/splmmindex">
+    <i:verbatim splStart="0" splEnd="373" mmStart="0"/>
+    <i:verbatim splStart="374" splEnd="715" mmStart="478"/>
+    <i:verbatim splStart="716" splEnd="950" mmStart="878"/>
+    <i:generated splStart="951" splEnd="969" mmStart="1113" mmEnd="1119"/>
+    <i:verbatim splStart="970" splEnd="973" mmStart="1120"/>
+    <i:generated splStart="974" splEnd="974" mmStart="1160" mmEnd="1169"/>
+    <i:verbatim splStart="975" splEnd="1209" mmStart="878"/>
+    <i:generated splStart="1210" splEnd="1224" mmStart="1113" mmEnd="1119"/>
+    <i:verbatim splStart="1225" splEnd="1228" mmStart="1120"/>
+    <i:generated splStart="1229" splEnd="1229" mmStart="1160" mmEnd="1169"/>
+    <i:verbatim splStart="1230" splEnd="1464" mmStart="878"/>
+    <i:generated splStart="1465" splEnd="1472" mmStart="1113" mmEnd="1119"/>
+    <i:verbatim splStart="1473" splEnd="1476" mmStart="1120"/>
+    <i:generated splStart="1477" splEnd="1477" mmStart="1160" mmEnd="1169"/>
+    <i:verbatim splStart="1478" splEnd="1712" mmStart="878"/>
+    <i:generated splStart="1713" splEnd="1728" mmStart="1113" mmEnd="1119"/>
+    <i:verbatim splStart="1729" splEnd="1732" mmStart="1120"/>
+    <i:verbatim splStart="1733" splEnd="2322" mmStart="1182"/>
+    <i:verbatim splStart="2323" splEnd="2376" mmStart="1815"/>
+    <i:generated splStart="2377" splEnd="2395" mmStart="1869" mmEnd="1875"/>
+    <i:verbatim splStart="2396" splEnd="2435" mmStart="1876"/>
+    <i:generated splStart="2436" splEnd="2454" mmStart="1916" mmEnd="1922"/>
+    <i:verbatim splStart="2455" splEnd="2708" mmStart="1923"/>
+    <i:generated splStart="2709" splEnd="2727" mmStart="2177" mmEnd="2183"/>
+    <i:verbatim splStart="2728" splEnd="2753" mmStart="2184"/>
+    <i:verbatim splStart="2754" splEnd="2807" mmStart="1815"/>
+    <i:generated splStart="2808" splEnd="2822" mmStart="1869" mmEnd="1875"/>
+    <i:verbatim splStart="2823" splEnd="2862" mmStart="1876"/>
+    <i:generated splStart="2863" splEnd="2877" mmStart="1916" mmEnd="1922"/>
+    <i:verbatim splStart="2878" splEnd="3131" mmStart="1923"/>
+    <i:generated splStart="3132" splEnd="3146" mmStart="2177" mmEnd="2183"/>
+    <i:verbatim splStart="3147" splEnd="3172" mmStart="2184"/>
+    <i:verbatim splStart="3173" splEnd="3226" mmStart="1815"/>
+    <i:generated splStart="3227" splEnd="3234" mmStart="1869" mmEnd="1875"/>
+    <i:verbatim splStart="3235" splEnd="3274" mmStart="1876"/>
+    <i:generated splStart="3275" splEnd="3282" mmStart="1916" mmEnd="1922"/>
+    <i:verbatim splStart="3283" splEnd="3536" mmStart="1923"/>
+    <i:generated splStart="3537" splEnd="3544" mmStart="2177" mmEnd="2183"/>
+    <i:verbatim splStart="3545" splEnd="3570" mmStart="2184"/>
+    <i:verbatim splStart="3571" splEnd="3624" mmStart="1815"/>
+    <i:generated splStart="3625" splEnd="3640" mmStart="1869" mmEnd="1875"/>
+    <i:verbatim splStart="3641" splEnd="3680" mmStart="1876"/>
+    <i:generated splStart="3681" splEnd="3696" mmStart="1916" mmEnd="1922"/>
+    <i:verbatim splStart="3697" splEnd="3950" mmStart="1923"/>
+    <i:generated splStart="3951" splEnd="3966" mmStart="2177" mmEnd="2183"/>
+    <i:verbatim splStart="3967" splEnd="3992" mmStart="2184"/>
+    <i:verbatim splStart="3993" splEnd="4013" mmStart="2228"/>
+    <i:verbatim splStart="4014" splEnd="4164" mmStart="2286"/>
+    <i:generated splStart="4165" splEnd="4183" mmStart="2437" mmEnd="2443"/>
+    <i:verbatim splStart="4184" splEnd="4193" mmStart="2444"/>
+    <i:generated splStart="4194" splEnd="4212" mmStart="2454" mmEnd="2460"/>
+    <i:verbatim splStart="4213" splEnd="4241" mmStart="2461"/>
+    <i:generated splStart="4242" splEnd="4260" mmStart="2490" mmEnd="2496"/>
+    <i:verbatim splStart="4261" splEnd="4331" mmStart="2497"/>
+    <i:verbatim splStart="4332" splEnd="4482" mmStart="2286"/>
+    <i:generated splStart="4483" splEnd="4497" mmStart="2437" mmEnd="2443"/>
+    <i:verbatim splStart="4498" splEnd="4507" mmStart="2444"/>
+    <i:generated splStart="4508" splEnd="4522" mmStart="2454" mmEnd="2460"/>
+    <i:verbatim splStart="4523" splEnd="4551" mmStart="2461"/>
+    <i:generated splStart="4552" splEnd="4566" mmStart="2490" mmEnd="2496"/>
+    <i:verbatim splStart="4567" splEnd="4637" mmStart="2497"/>
+    <i:verbatim splStart="4638" splEnd="4788" mmStart="2286"/>
+    <i:generated splStart="4789" splEnd="4796" mmStart="2437" mmEnd="2443"/>
+    <i:verbatim splStart="4797" splEnd="4806" mmStart="2444"/>
+    <i:generated splStart="4807" splEnd="4814" mmStart="2454" mmEnd="2460"/>
+    <i:verbatim splStart="4815" splEnd="4843" mmStart="2461"/>
+    <i:generated splStart="4844" splEnd="4851" mmStart="2490" mmEnd="2496"/>
+    <i:verbatim splStart="4852" splEnd="4922" mmStart="2497"/>
+    <i:verbatim splStart="4923" splEnd="5073" mmStart="2286"/>
+    <i:generated splStart="5074" splEnd="5089" mmStart="2437" mmEnd="2443"/>
+    <i:verbatim splStart="5090" splEnd="5099" mmStart="2444"/>
+    <i:generated splStart="5100" splEnd="5115" mmStart="2454" mmEnd="2460"/>
+    <i:verbatim splStart="5116" splEnd="5144" mmStart="2461"/>
+    <i:generated splStart="5145" splEnd="5160" mmStart="2490" mmEnd="2496"/>
+    <i:verbatim splStart="5161" splEnd="5231" mmStart="2497"/>
+    <i:verbatim splStart="5232" splEnd="5418" mmStart="2580"/>
+    <i:verbatim splStart="5419" splEnd="5423" mmStart="2829"/>
+    <i:generated splStart="5424" splEnd="5442" mmStart="2834" mmEnd="2840"/>
+    <i:verbatim splStart="5443" splEnd="5451" mmStart="2841"/>
+    <i:generated splStart="5452" splEnd="5452" mmStart="2887" mmEnd="2896"/>
+    <i:verbatim splStart="5453" splEnd="5457" mmStart="2829"/>
+    <i:generated splStart="5458" splEnd="5472" mmStart="2834" mmEnd="2840"/>
+    <i:verbatim splStart="5473" splEnd="5481" mmStart="2841"/>
+    <i:generated splStart="5482" splEnd="5482" mmStart="2887" mmEnd="2896"/>
+    <i:verbatim splStart="5483" splEnd="5487" mmStart="2829"/>
+    <i:generated splStart="5488" splEnd="5495" mmStart="2834" mmEnd="2840"/>
+    <i:verbatim splStart="5496" splEnd="5504" mmStart="2841"/>
+    <i:generated splStart="5505" splEnd="5505" mmStart="2887" mmEnd="2896"/>
+    <i:verbatim splStart="5506" splEnd="5510" mmStart="2829"/>
+    <i:generated splStart="5511" splEnd="5526" mmStart="2834" mmEnd="2840"/>
+    <i:verbatim splStart="5527" splEnd="5535" mmStart="2841"/>
+    <i:verbatim splStart="5536" splEnd="5608" mmStart="2911"/>
+</i:Spltosplmm>

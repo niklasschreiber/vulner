@@ -1,0 +1,87 @@
+namespace com.ti.oss.common.cdr.parser.esgw;
+
+// from MediationUtils
+use com.ti.oss.common.util.cfg::*;
+
+// from CdrMediationUtils
+use com.ti.oss.common.cdr.util.cfg::*;
+
+// from MediationFramework
+use com.ti.oss.common.types::*;
+use com.ti.oss.common.event::*;
+
+// from CdrMediationFramework
+use com.ti.oss.common.cdr.parser.eggsn::*;
+use com.ti.oss.common.cdr.parser.epgw::*;
+use com.ti.oss.common.cdr.parser.esgw::*;
+use com.ti.oss.common.cdr.types::*;
+use com.ti.oss.common.cdr.util::*;
+
+
+public composite ParserSGWEnrich(
+	input
+
+		stream<EsgwCdr> SgwCdr;
+
+	output
+
+		stream<FileHeader h, FileTrailer t> OTrailer, OutEventEnrichSGW
+)
+{
+	param
+		expression <rstring> $mediationName;
+	
+	graph
+
+		(stream<FileHeader h, FileTrailer t> OTrailer as OT; stream<Event e> OutEventEnrichSGW) = Custom( SgwCdr as IEsgw )
+		{
+			logic
+				state :
+				{
+					mutable FileHeader tmpFileHeader;
+					mutable IEsgw lastTuple = {};
+					mutable rstring pathNodeId = getCfgParam("COMMON_CFG_DIR",$mediationName,"BACKUP_INPUT_PATH");
+					mutable OT ottuple = (OT){};
+				}
+
+				onTuple IEsgw :
+				{					
+					if(IEsgw.endOfData) 
+					{
+		                mutable rstring pathB = pathNodeId + getNodeIdFromPath(IEsgw.fName);
+		                ottuple.t.exportFile = pathB + "/" + rmSuffixFromFn(IEsgw.fName, ".ber");
+		                
+		                ottuple.h.fName = IEsgw.fName;
+						ottuple.h.eventCorrelationId = IEsgw.eventCorrelationId;
+						ottuple.h.sessionBeginTime = IEsgw.sessionBeginTime;
+						ottuple.h.rop = IEsgw.rop;
+						ottuple.h.emId = IEsgw.emId;
+						ottuple.h.neId = IEsgw.neId;
+						
+						swap(ottuple.t.outFile, IEsgw.fName);
+		                
+		                submit(ottuple, OTrailer);						
+					}
+				}				
+		}
+	
+}
+
+rstring getNomeCentrale(rstring nodeId, rstring emm_rete, boolean flagEmmRete)
+{
+	mutable list<rstring> tmpOutParamMapEMMRETE = [];
+	mutable rstring nomeCentrale="";
+	if (flagEmmRete)
+	{
+		if ( getCdrProvRecord("EMMRETE", nodeId, tmpOutParamMapEMMRETE ) )
+		{   
+			nomeCentrale = tmpOutParamMapEMMRETE[1];//IMPIANTO
+		}
+	}
+	else
+	{
+		appTrc(Trace.error, "File EMM_RETE.csv non caricato correttamente ");
+	}
+	
+	return nomeCentrale;
+}

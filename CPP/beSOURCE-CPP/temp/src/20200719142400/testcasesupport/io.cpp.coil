@@ -1,0 +1,759 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp");
+   ("language", "CPP");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "std_testcase.h");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<stddef.h>");
+   ("include", "<time.h>");
+   ("include", "<limits.h>");
+   ("include", "<string.h>");
+   ("include", "<stdint.h>");
+   ("include", "<stdint.h>");
+   ("include", "<ctype.h>");
+   ("include", "<fcntl.h>");
+   ("include", "<sys/types.h>");
+   ("include", "<sys/stat.h>");
+   ("include", "std_testcase_io.h");
+   ("include", "std_testcase.h");
+   ("include", "<wchar.h>");
+}
+{
+   (!3, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase_io.h");
+   (!2, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h");
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp",
+   MD("RAND32()",[],"((rand()<<30) ^ (rand()<<15) ^ rand())")
+   ,(84#0,84#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp",
+   MD("RAND64()",[],"(((int64_t)rand()<<60) ^ ((int64_t)rand()<<45) ^ ((int64_t)rand()<<30) ^ ((int64_t)rand()<<15) ^ (int64_t)rand())")
+   ,(87#0,87#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"io",
+   SF([extern,const,extern],int,<"io">,"GLOBAL_CONST_TRUE")
+   ,(103#18,103#34,!2)},
+
+   {"io",
+   SF([extern,const,extern],int,<"io">,"GLOBAL_CONST_FALSE")
+   ,(104#18,104#35,!2)},
+
+   {"io",
+   SF([extern,const,extern],int,<"io">,"GLOBAL_CONST_FIVE")
+   ,(105#18,105#34,!2)},
+
+   {"io",
+   SF([extern,extern],int,<"io">,"globalTrue")
+   ,(110#12,110#21,!2)},
+
+   {"io",
+   SF([extern,extern],int,<"io">,"globalFalse")
+   ,(111#12,111#22,!2)},
+
+   {"io",
+   SF([extern,extern],int,<"io">,"globalFive")
+   ,(112#12,112#21,!2)},
+
+   {"io",
+   SF([extern,extern],int,<"io">,"globalArgc")
+   ,(55#12,55#21,!3)},
+
+   {"io",
+   SF([extern,extern],ref(ref(char)),<"io">,"globalArgv")
+   ,(56#12,56#24,!3)},
+
+   {"io",
+   SF([const],int,<"io">,"GLOBAL_CONST_TRUE",{"1"N,int,(164#31,164#31,!1)})
+   ,(164#11,164#27,!1)},
+
+   {"io",
+   SF([const],int,<"io">,"GLOBAL_CONST_FALSE",{"0"N,int,(165#32,165#32,!1)})
+   ,(165#11,165#28,!1)},
+
+   {"io",
+   SF([const],int,<"io">,"GLOBAL_CONST_FIVE",{"5"N,int,(166#31,166#31,!1)})
+   ,(166#11,166#27,!1)},
+
+   {"io",
+   SF([],int,<"io">,"globalTrue",{"1"N,int,(171#18,171#18,!1)})
+   ,(171#5,171#14,!1)},
+
+   {"io",
+   SF([],int,<"io">,"globalFalse",{"0"N,int,(172#19,172#19,!1)})
+   ,(172#5,172#15,!1)},
+
+   {"io",
+   SF([],int,<"io">,"globalFive",{"5"N,int,(173#18,173#18,!1)})
+   ,(173#5,173#14,!1)},
+
+   {"io",
+   SF([],int,<"io">,"globalArgc",{"0"N,int,(204#18,204#18,!1)})
+   ,(204#5,204#14,!1)},
+
+   {"io",
+   SF([],ref(ref(char)),<"io">,"globalArgv",{CS(ref(unit),{"0"N,int,(205#21,205#24,!1)}),ref(unit),(205#21,205#24,!1)})
+   ,(205#5,205#17,!1)},
+
+   {"io",
+   SI(<"io">,
+   {[
+      {;
+      ,(1#1,210#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,210#1,!1)}
+   )
+   ,(1#1,210#1,!1)},
+
+   {"io",
+   PT([public],(<"io">,"printLine"):unit,[(mod(ref(char),[const]):"line",(14#16,14#32,!3))],[]
+   )
+   ,(14#1,14#34,!3)},
+
+   {"io",
+   PT([public],(<"io">,"printWLine"):unit,[(mod(ref(wchar),[const]):"line",(16#17,16#36,!3))],[]
+   )
+   ,(16#1,16#38,!3)},
+
+   {"io",
+   PT([public],(<"io">,"printIntLine"):unit,[(int:"intNumber",(18#20,18#32,!3))],[]
+   )
+   ,(18#1,18#34,!3)},
+
+   {"io",
+   PT([public],(<"io">,"printShortLine"):unit,[(short:"shortNumber",(20#22,20#38,!3))],[]
+   )
+   ,(20#1,20#40,!3)},
+
+   {"io",
+   PT([public],(<"io">,"printFloatLine"):unit,[(float:"floatNumber",(22#22,22#38,!3))],[]
+   )
+   ,(22#1,22#40,!3)},
+
+   {"io",
+   PT([public],(<"io">,"printLongLine"):unit,[(long:"longNumber",(24#20,24#34,!3))],[]
+   )
+   ,(24#1,24#36,!3)},
+
+   {"io",
+   PT([public],(<"io">,"printLongLongLine"):unit,[(class((,int64_t)):"longLongIntNumber",(26#24,26#48,!3))],[]
+   )
+   ,(26#1,26#50,!3)},
+
+   {"io",
+   PT([public],(<"io">,"printSizeTLine"):unit,[(class((,size_t)):"sizeTNumber",(28#21,28#38,!3))],[]
+   )
+   ,(28#1,28#40,!3)},
+
+   {"io",
+   PT([public],(<"io">,"printHexCharLine"):unit,[(char:"charHex",(30#23,30#34,!3))],[]
+   )
+   ,(30#1,30#36,!3)},
+
+   {"io",
+   PT([public],(<"io">,"printWcharLine"):unit,[(wchar:"wideChar",(32#21,32#36,!3))],[]
+   )
+   ,(32#1,32#38,!3)},
+
+   {"io",
+   PT([public],(<"io">,"printUnsignedLine"):unit,[(uint:"unsignedNumber",(34#24,34#46,!3))],[]
+   )
+   ,(34#1,34#48,!3)},
+
+   {"io",
+   PT([public],(<"io">,"printHexUnsignedCharLine"):unit,[(uchar:"unsignedCharacter",(36#31,36#61,!3))],[]
+   )
+   ,(36#1,36#63,!3)},
+
+   {"io",
+   PT([public],(<"io">,"printDoubleLine"):unit,[(double:"doubleNumber",(38#22,38#40,!3))],[]
+   )
+   ,(38#1,38#42,!3)},
+
+   {"io",
+   PT([public],(<"io">,"printStructLine"):unit,[(mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]):"structTwoIntsStruct",(40#22,40#62,!3))],[]
+   )
+   ,(40#1,40#64,!3)},
+
+   {"io",
+   PT([public],(<"io">,"printBytesLine"):unit,[(mod(ref(uchar),[const]):"bytes",(42#21,42#47,!3)),(class((,size_t)):"numBytes",(42#50,42#64,!3))],[]
+   )
+   ,(42#1,42#66,!3)},
+
+   {"io",
+   PT([public],(<"io">,"decodeHexChars"):class((,size_t)),[(ref(uchar):"bytes",(44#23,44#43,!3)),(class((,size_t)):"numBytes",(44#46,44#60,!3)),(mod(ref(char),[const]):"hex",(44#63,44#78,!3))],[]
+   )
+   ,(44#1,44#80,!3)},
+
+   {"io",
+   PT([public],(<"io">,"decodeHexWChars"):class((,size_t)),[(ref(uchar):"bytes",(46#24,46#44,!3)),(class((,size_t)):"numBytes",(46#47,46#61,!3)),(mod(ref(wchar),[const]):"hex",(46#64,46#82,!3))],[]
+   )
+   ,(46#1,46#84,!3)},
+
+   {"io",
+   PT([public],(<"io">,"globalReturnsTrue"):int,[],[]
+   )
+   ,(48#1,48#24,!3)},
+
+   {"io",
+   PT([public],(<"io">,"globalReturnsFalse"):int,[],[]
+   )
+   ,(50#1,50#25,!3)},
+
+   {"io",
+   PT([public],(<"io">,"globalReturnsTrueOrFalse"):int,[],[]
+   )
+   ,(52#1,52#31,!3)},
+
+   {"io",
+   FN([public],(<"io">,"printLine"):unit,[("line":mod(ref(char),[const]),(9#17,9#33,!1))],[],
+   {[
+      {IF0({BO(!=,{V("line"),mod(ref(char),[const]),(11#8,11#11,!1)},{CS(ref(unit),{"0"N,int,(11#16,11#19,!1)}),ref(unit),(11#16,11#19,!1)}),bool,(11#8,11#19,!1)},
+         {[
+            {PC0((<"io">,"printf"),[string,mod(ref(char),[const])],[{"%s\n"S,string,(13#16,13#21,!1)},{V("line"),mod(ref(char),[const]),(13#24,13#27,!1)}])
+            ,(13#9,13#28,!1)}
+            ]
+         ,(12#5,14#5,!1)})
+      ,(11#5,14#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(9#1,15#1,!1)}
+   )
+   ,(9#1,15#1,!1)},
+
+   {"io",
+   FN([public],(<"io">,"printWLine"):unit,[("line":mod(ref(wchar),[const]),(17#18,17#37,!1))],[],
+   {[
+      {IF0({BO(!=,{V("line"),mod(ref(wchar),[const]),(19#8,19#11,!1)},{CS(ref(unit),{"0"N,int,(19#16,19#19,!1)}),ref(unit),(19#16,19#19,!1)}),bool,(19#8,19#19,!1)},
+         {[
+            {PC0((<"io">,"wprintf"),[string,mod(ref(wchar),[const])],[{"%ls\n"S,string,(21#17,21#24,!1)},{V("line"),mod(ref(wchar),[const]),(21#27,21#30,!1)}])
+            ,(21#9,21#31,!1)}
+            ]
+         ,(20#5,22#5,!1)})
+      ,(19#5,22#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(17#1,23#1,!1)}
+   )
+   ,(17#1,23#1,!1)},
+
+   {"io",
+   FN([public],(<"io">,"printIntLine"):unit,[("intNumber":int,(25#20,25#32,!1))],[],
+   {[
+      {PC0((<"io">,"printf"),[string,int],[{"%d\n"S,string,(27#12,27#17,!1)},{V("intNumber"),int,(27#20,27#28,!1)}])
+      ,(27#5,27#29,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(25#1,28#1,!1)}
+   )
+   ,(25#1,28#1,!1)},
+
+   {"io",
+   FN([public],(<"io">,"printShortLine"):unit,[("shortNumber":short,(30#22,30#38,!1))],[],
+   {[
+      {PC0((<"io">,"printf"),[string,short],[{"%hd\n"S,string,(32#12,32#18,!1)},{V("shortNumber"),short,(32#21,32#31,!1)}])
+      ,(32#5,32#32,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(30#1,33#1,!1)}
+   )
+   ,(30#1,33#1,!1)},
+
+   {"io",
+   FN([public],(<"io">,"printFloatLine"):unit,[("floatNumber":float,(35#22,35#38,!1))],[],
+   {[
+      {PC0((<"io">,"printf"),[string,float],[{"%f\n"S,string,(37#12,37#17,!1)},{V("floatNumber"),float,(37#20,37#30,!1)}])
+      ,(37#5,37#31,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(35#1,38#1,!1)}
+   )
+   ,(35#1,38#1,!1)},
+
+   {"io",
+   FN([public],(<"io">,"printLongLine"):unit,[("longNumber":long,(40#21,40#35,!1))],[],
+   {[
+      {PC0((<"io">,"printf"),[string,long],[{"%ld\n"S,string,(42#12,42#18,!1)},{V("longNumber"),long,(42#21,42#30,!1)}])
+      ,(42#5,42#31,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(40#1,43#1,!1)}
+   )
+   ,(40#1,43#1,!1)},
+
+   {"io",
+   FN([public],(<"io">,"printLongLongLine"):unit,[("longLongIntNumber":class((,int64_t)),(45#25,45#49,!1))],[],
+   {[
+      {PC0((<"io">,"printf"),[string,class((,int64_t))],[{"%lld\n"S,string,(47#12,47#19,!1)},{V("longLongIntNumber"),class((,int64_t)),(47#22,47#38,!1)}])
+      ,(47#5,47#39,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(45#1,48#1,!1)}
+   )
+   ,(45#1,48#1,!1)},
+
+   {"io",
+   FN([public],(<"io">,"printSizeTLine"):unit,[("sizeTNumber":class((,size_t)),(50#22,50#39,!1))],[],
+   {[
+      {PC0((<"io">,"printf"),[string,class((,size_t))],[{"%ud\n"S,string,(52#12,52#18,!1)},{V("sizeTNumber"),class((,size_t)),(52#21,52#31,!1)}])
+      ,(52#5,52#32,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(50#1,53#1,!1)}
+   )
+   ,(50#1,53#1,!1)},
+
+   {"io",
+   FN([public],(<"io">,"printHexCharLine"):unit,[("charHex":char,(55#24,55#35,!1))],[],
+   {[
+      {PC0((<"io">,"printf"),[string,char],[{"%02x\n"S,string,(57#12,57#19,!1)},{V("charHex"),char,(57#22,57#28,!1)}])
+      ,(57#5,57#29,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(55#1,58#1,!1)}
+   )
+   ,(55#1,58#1,!1)},
+
+   {"io",
+   FN([public],(<"io">,"printWcharLine"):unit,[("wideChar":wchar,(60#21,60#36,!1))],[],
+   {[
+      {VD("s",wchar,([{"2"N,int,(64#15,64#15,!1)}]))
+      ,(64#13,64#16,!1)};
+      {{AE({AA({V("s"),arr(wchar),(65#9,65#9,!1)},[{"0"N,int,(65#11,65#11,!1)}]),wchar,(65#9,65#12,!1)},{V("wideChar"),wchar,(65#16,65#23,!1)}),wchar,(65#9,65#23,!1)}
+      ,(65#9,65#23,!1)};
+      {{AE({AA({V("s"),arr(wchar),(66#9,66#9,!1)},[{"1"N,int,(66#11,66#11,!1)}]),wchar,(66#9,66#12,!1)},{"\0"C,char,(66#16,66#20,!1)}),wchar,(66#9,66#20,!1)}
+      ,(66#9,66#20,!1)};
+      {PC0((<"io">,"printf"),[string,arr(wchar)],[{"%ls\n"S,string,(67#12,67#18,!1)},{V("s"),arr(wchar),(67#21,67#21,!1)}])
+      ,(67#5,67#22,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(60#1,68#1,!1)}
+   )
+   ,(60#1,68#1,!1)},
+
+   {"io",
+   FN([public],(<"io">,"printUnsignedLine"):unit,[("unsignedNumber":uint,(70#24,70#46,!1))],[],
+   {[
+      {PC0((<"io">,"printf"),[string,uint],[{"%u\n"S,string,(72#12,72#17,!1)},{V("unsignedNumber"),uint,(72#20,72#33,!1)}])
+      ,(72#5,72#34,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(70#1,73#1,!1)}
+   )
+   ,(70#1,73#1,!1)},
+
+   {"io",
+   FN([public],(<"io">,"printHexUnsignedCharLine"):unit,[("unsignedCharacter":uchar,(75#31,75#61,!1))],[],
+   {[
+      {PC0((<"io">,"printf"),[string,uchar],[{"%02x\n"S,string,(77#12,77#19,!1)},{V("unsignedCharacter"),uchar,(77#22,77#38,!1)}])
+      ,(77#5,77#39,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(75#1,78#1,!1)}
+   )
+   ,(75#1,78#1,!1)},
+
+   {"io",
+   FN([public],(<"io">,"printDoubleLine"):unit,[("doubleNumber":double,(80#22,80#40,!1))],[],
+   {[
+      {PC0((<"io">,"printf"),[string,double],[{"%g\n"S,string,(82#12,82#17,!1)},{V("doubleNumber"),double,(82#20,82#31,!1)}])
+      ,(82#5,82#32,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(80#1,83#1,!1)}
+   )
+   ,(80#1,83#1,!1)},
+
+   {"io",
+   FN([public],(<"io">,"printStructLine"):unit,[("structTwoIntsStruct":mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]),(85#23,85#63,!1))],[],
+   {[
+      {PC0((<"io">,"printf"),[string,int,int],[{"%d -- %d\n"S,string,(87#12,87#23,!1)},{OA({*{V("structTwoIntsStruct"),mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]),(87#26,87#44,!1)},ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(87#26,87#52,!1)},"intOne"),int,(87#26,87#52,!1)},{OA({*{V("structTwoIntsStruct"),mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]),(87#55,87#73,!1)},ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(87#55,87#81,!1)},"intTwo"),int,(87#55,87#81,!1)}])
+      ,(87#5,87#82,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(85#1,88#1,!1)}
+   )
+   ,(85#1,88#1,!1)},
+
+   {"io",
+   FN([public],(<"io">,"printBytesLine"):unit,[("bytes":mod(ref(uchar),[const]),(90#21,90#47,!1)),("numBytes":class((,size_t)),(90#50,90#64,!1))],[],
+   {[
+      {VD("i",class((,size_t)))
+      ,(92#12,92#12,!1)};
+      {FL(L153,
+         {[
+            {{AE({V("i"),class((,size_t)),(93#10,93#10,!1)},{"0"N,int,(93#14,93#14,!1)}),class((,size_t)),(93#10,93#14,!1)}
+            ,(93#10,93#14,!1)}
+         ]
+         ,(93#5,96#5,!1)},{BO(<,{V("i"),class((,size_t)),(93#17,93#17,!1)},{V("numBytes"),class((,size_t)),(93#21,93#28,!1)}),bool,(93#17,93#28,!1)},
+         {[
+            {{IPR({V("i"),class((,size_t)),(93#33,93#33,!1)}),class((,size_t)),(93#31,93#33,!1)}
+            ,(93#31,93#33,!1)}
+         ]
+         ,(93#5,96#5,!1)},
+         {[
+            {PC0((<"io">,"printf"),[string,ref(uchar)],[{"%02x"S,string,(95#16,95#21,!1)},{AA({V("bytes"),mod(ref(uchar),[const]),(95#24,95#28,!1)},[{V("i"),class((,size_t)),(95#30,95#30,!1)}]),ref(uchar),(95#24,95#31,!1)}])
+            ,(95#9,95#32,!1)}
+            ]
+         ,(94#5,96#5,!1)})
+      ,(93#5,96#5,!1)};
+      {PC0((<"io">,"puts"),[string],[{""S,string,(97#10,97#11,!1)}])
+      ,(97#5,97#12,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(90#1,98#1,!1)}
+   )
+   ,(90#1,98#1,!1)},
+
+   {"io",
+   FN([public],(<"io">,"decodeHexChars"):class((,size_t)),[("bytes":ref(uchar),(103#23,103#43,!1)),("numBytes":class((,size_t)),(103#46,103#60,!1)),("hex":mod(ref(char),[const]),(103#63,103#78,!1))],[],
+   {[
+      {VD("numWritten",class((,size_t)),{"0"N,int,(105#25,105#25,!1)})
+      ,(105#12,105#21,!1)};
+      {WL(L154,{BO(&&,{BO(<,{V("numWritten"),class((,size_t)),(111#12,111#21,!1)},{V("numBytes"),class((,size_t)),(111#25,111#32,!1)}),bool,(111#12,111#32,!1)},{BO(&&,{SC((<"io">,"isxdigit"),[ref(char)],[{AA({V("hex"),mod(ref(char),[const]),(111#46,111#48,!1)},[{BO(*,{"2"N,int,(111#50,111#50,!1)},{V("numWritten"),class((,size_t)),(111#54,111#63,!1)}),int,(111#50,111#63,!1)}]),ref(char),(111#46,111#64,!1)}]),class((,"%undef")),(111#37,111#65,!1)},{SC((<"io">,"isxdigit"),[ref(char)],[{AA({V("hex"),mod(ref(char),[const]),(111#79,111#81,!1)},[{BO(+,{BO(*,{"2"N,int,(111#83,111#83,!1)},{V("numWritten"),class((,size_t)),(111#87,111#96,!1)}),int,(111#83,111#96,!1)},{"1"N,int,(111#100,111#100,!1)}),int,(111#83,111#100,!1)}]),ref(char),(111#79,111#101,!1)}]),class((,"%undef")),(111#70,111#102,!1)}),bool,(111#37,111#102,!1)}),bool,(111#12,111#102,!1)},
+         {[
+            {VD("byte",int)
+            ,(113#13,113#16,!1)};
+            {PC0((<"io">,"sscanf"),[ref(ref(char)),string,ref(int)],[{&{AA({V("hex"),mod(ref(char),[const]),(114#17,114#19,!1)},[{BO(*,{"2"N,int,(114#21,114#21,!1)},{V("numWritten"),class((,size_t)),(114#25,114#34,!1)}),int,(114#21,114#34,!1)}]),ref(char),(114#17,114#35,!1)},ref(ref(char)),(114#16,114#35,!1)},{"%02x"S,string,(114#38,114#43,!1)},{&{V("byte"),int,(114#47,114#50,!1)},ref(int),(114#46,114#50,!1)}])
+            ,(114#9,114#51,!1)};
+            {{AE({AA({V("bytes"),ref(uchar),(115#9,115#13,!1)},[{V("numWritten"),class((,size_t)),(115#15,115#24,!1)}]),uchar,(115#9,115#25,!1)},{CS(uchar,{V("byte"),int,(115#45,115#48,!1)}),uchar,(115#29,115#48,!1)}),uchar,(115#9,115#48,!1)}
+            ,(115#9,115#48,!1)};
+            {{IPR({V("numWritten"),class((,size_t)),(116#11,116#20,!1)}),class((,size_t)),(116#9,116#20,!1)}
+            ,(116#9,116#20,!1)}
+            ]
+         ,(112#5,117#5,!1)})
+      ,(111#5,117#5,!1)};
+      {RE({V("numWritten"),class((,size_t)),(119#12,119#21,!1)})
+      ,(119#5,119#22,!1)}
+      ]
+   ,(103#1,120#1,!1)}
+   )
+   ,(103#1,120#1,!1)},
+
+   {"io",
+   FN([public],(<"io">,"decodeHexWChars"):class((,size_t)),[("bytes":ref(uchar),(125#25,125#45,!1)),("numBytes":class((,size_t)),(125#48,125#62,!1)),("hex":mod(ref(wchar),[const]),(125#65,125#83,!1))],[],
+   {[
+      {VD("numWritten",class((,size_t)),{"0"N,int,(127#25,127#25,!1)})
+      ,(127#12,127#21,!1)};
+      {WL(L155,{BO(&&,{BO(<,{V("numWritten"),class((,size_t)),(133#12,133#21,!1)},{V("numBytes"),class((,size_t)),(133#25,133#32,!1)}),bool,(133#12,133#32,!1)},{BO(&&,{SC((<"io">,"iswxdigit"),[ref(wchar)],[{AA({V("hex"),mod(ref(wchar),[const]),(133#47,133#49,!1)},[{BO(*,{"2"N,int,(133#51,133#51,!1)},{V("numWritten"),class((,size_t)),(133#55,133#64,!1)}),int,(133#51,133#64,!1)}]),ref(wchar),(133#47,133#65,!1)}]),class((,"%undef")),(133#37,133#66,!1)},{SC((<"io">,"iswxdigit"),[ref(wchar)],[{AA({V("hex"),mod(ref(wchar),[const]),(133#81,133#83,!1)},[{BO(+,{BO(*,{"2"N,int,(133#85,133#85,!1)},{V("numWritten"),class((,size_t)),(133#89,133#98,!1)}),int,(133#85,133#98,!1)},{"1"N,int,(133#102,133#102,!1)}),int,(133#85,133#102,!1)}]),ref(wchar),(133#81,133#103,!1)}]),class((,"%undef")),(133#71,133#104,!1)}),bool,(133#37,133#104,!1)}),bool,(133#12,133#104,!1)},
+         {[
+            {VD("byte",int)
+            ,(135#13,135#16,!1)};
+            {PC0((<"io">,"swscanf"),[ref(ref(wchar)),string,ref(int)],[{&{AA({V("hex"),mod(ref(wchar),[const]),(136#18,136#20,!1)},[{BO(*,{"2"N,int,(136#22,136#22,!1)},{V("numWritten"),class((,size_t)),(136#26,136#35,!1)}),int,(136#22,136#35,!1)}]),ref(wchar),(136#18,136#36,!1)},ref(ref(wchar)),(136#17,136#36,!1)},{"%02x"S,string,(136#39,136#45,!1)},{&{V("byte"),int,(136#49,136#52,!1)},ref(int),(136#48,136#52,!1)}])
+            ,(136#9,136#53,!1)};
+            {{AE({AA({V("bytes"),ref(uchar),(137#9,137#13,!1)},[{V("numWritten"),class((,size_t)),(137#15,137#24,!1)}]),uchar,(137#9,137#25,!1)},{CS(uchar,{V("byte"),int,(137#45,137#48,!1)}),uchar,(137#29,137#48,!1)}),uchar,(137#9,137#48,!1)}
+            ,(137#9,137#48,!1)};
+            {{IPR({V("numWritten"),class((,size_t)),(138#11,138#20,!1)}),class((,size_t)),(138#9,138#20,!1)}
+            ,(138#9,138#20,!1)}
+            ]
+         ,(134#5,139#5,!1)})
+      ,(133#5,139#5,!1)};
+      {RE({V("numWritten"),class((,size_t)),(141#12,141#21,!1)})
+      ,(141#5,141#22,!1)}
+      ]
+   ,(125#2,142#1,!1)}
+   )
+   ,(125#2,142#1,!1)},
+
+   {"io",
+   FN([public],(<"io">,"globalReturnsTrue"):int,[],[],
+   {[
+      {RE({"1"N,int,(148#12,148#12,!1)})
+      ,(148#5,148#13,!1)}
+      ]
+   ,(146#1,149#1,!1)}
+   )
+   ,(146#1,149#1,!1)},
+
+   {"io",
+   FN([public],(<"io">,"globalReturnsFalse"):int,[],[],
+   {[
+      {RE({"0"N,int,(153#12,153#12,!1)})
+      ,(153#5,153#13,!1)}
+      ]
+   ,(151#1,154#1,!1)}
+   )
+   ,(151#1,154#1,!1)},
+
+   {"io",
+   FN([public],(<"io">,"globalReturnsTrueOrFalse"):int,[],[],
+   {[
+      {RE({BO(%,{SC((<"io">,"rand"),[],[]),class((,"%undef")),(158#13,158#18,!1)},{"2"N,int,(158#22,158#22,!1)}),undef("unknown"),(158#12,158#23,!1)})
+      ,(158#5,158#24,!1)}
+      ]
+   ,(156#1,159#1,!1)}
+   )
+   ,(156#1,159#1,!1)},
+
+   {"io",
+   FN([public],(<"io">,"good1"):unit,[],[],
+   {[
+      {RE0
+      ,(?)}
+      ]
+   ,(177#1,177#16,!1)}
+   )
+   ,(177#1,177#16,!1)},
+
+   {"io",
+   FN([public],(<"io">,"good2"):unit,[],[],
+   {[
+      {RE0
+      ,(?)}
+      ]
+   ,(178#1,178#16,!1)}
+   )
+   ,(178#1,178#16,!1)},
+
+   {"io",
+   FN([public],(<"io">,"good3"):unit,[],[],
+   {[
+      {RE0
+      ,(?)}
+      ]
+   ,(179#1,179#16,!1)}
+   )
+   ,(179#1,179#16,!1)},
+
+   {"io",
+   FN([public],(<"io">,"good4"):unit,[],[],
+   {[
+      {RE0
+      ,(?)}
+      ]
+   ,(180#1,180#16,!1)}
+   )
+   ,(180#1,180#16,!1)},
+
+   {"io",
+   FN([public],(<"io">,"good5"):unit,[],[],
+   {[
+      {RE0
+      ,(?)}
+      ]
+   ,(181#1,181#16,!1)}
+   )
+   ,(181#1,181#16,!1)},
+
+   {"io",
+   FN([public],(<"io">,"good6"):unit,[],[],
+   {[
+      {RE0
+      ,(?)}
+      ]
+   ,(182#1,182#16,!1)}
+   )
+   ,(182#1,182#16,!1)},
+
+   {"io",
+   FN([public],(<"io">,"good7"):unit,[],[],
+   {[
+      {RE0
+      ,(?)}
+      ]
+   ,(183#1,183#16,!1)}
+   )
+   ,(183#1,183#16,!1)},
+
+   {"io",
+   FN([public],(<"io">,"good8"):unit,[],[],
+   {[
+      {RE0
+      ,(?)}
+      ]
+   ,(184#1,184#16,!1)}
+   )
+   ,(184#1,184#16,!1)},
+
+   {"io",
+   FN([public],(<"io">,"good9"):unit,[],[],
+   {[
+      {RE0
+      ,(?)}
+      ]
+   ,(185#1,185#16,!1)}
+   )
+   ,(185#1,185#16,!1)},
+
+   {"io",
+   FN([public],(<"io">,"bad1"):unit,[],[],
+   {[
+      {RE0
+      ,(?)}
+      ]
+   ,(188#1,188#15,!1)}
+   )
+   ,(188#1,188#15,!1)},
+
+   {"io",
+   FN([public],(<"io">,"bad2"):unit,[],[],
+   {[
+      {RE0
+      ,(?)}
+      ]
+   ,(189#1,189#15,!1)}
+   )
+   ,(189#1,189#15,!1)},
+
+   {"io",
+   FN([public],(<"io">,"bad3"):unit,[],[],
+   {[
+      {RE0
+      ,(?)}
+      ]
+   ,(190#1,190#15,!1)}
+   )
+   ,(190#1,190#15,!1)},
+
+   {"io",
+   FN([public],(<"io">,"bad4"):unit,[],[],
+   {[
+      {RE0
+      ,(?)}
+      ]
+   ,(191#1,191#15,!1)}
+   )
+   ,(191#1,191#15,!1)},
+
+   {"io",
+   FN([public],(<"io">,"bad5"):unit,[],[],
+   {[
+      {RE0
+      ,(?)}
+      ]
+   ,(192#1,192#15,!1)}
+   )
+   ,(192#1,192#15,!1)},
+
+   {"io",
+   FN([public],(<"io">,"bad6"):unit,[],[],
+   {[
+      {RE0
+      ,(?)}
+      ]
+   ,(193#1,193#15,!1)}
+   )
+   ,(193#1,193#15,!1)},
+
+   {"io",
+   FN([public],(<"io">,"bad7"):unit,[],[],
+   {[
+      {RE0
+      ,(?)}
+      ]
+   ,(194#1,194#15,!1)}
+   )
+   ,(194#1,194#15,!1)},
+
+   {"io",
+   FN([public],(<"io">,"bad8"):unit,[],[],
+   {[
+      {RE0
+      ,(?)}
+      ]
+   ,(195#1,195#15,!1)}
+   )
+   ,(195#1,195#15,!1)},
+
+   {"io",
+   FN([public],(<"io">,"bad9"):unit,[],[],
+   {[
+      {RE0
+      ,(?)}
+      ]
+   ,(196#1,196#15,!1)}
+   )
+   ,(196#1,196#15,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp",
+   CL([struct],(,_twoIntsStruct),[])
+   {
+      ([public],"intOne":int,(92#9,92#14,!2));
+      ([public],"intTwo":int,(93#9,93#14,!2))
+   }
+   ,(90#1,94#16,!2)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp",
+   [
+      M("/* ISO standard dictates wchar_t can be ref'd only with %ls, so we must make a\n     * string to print a wchar */",62,(62#0,62#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp")),
+      M("/* output newline */",97,(97#0,97#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp")),
+      M("/* Decode a string of hex characters into the bytes they represent.  The second\n * parameter specifies the length of the output buffer.  The number of bytes\n * actually written to the output buffer is returned. */",100,(100#0,100#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp")),
+      M("/* We can't sscanf directly into the byte array since %02x expects a pointer to int,\n     * not a pointer to unsigned char.  Also, since we expect an unbroken string of hex\n     * characters, we check for that before calling sscanf; otherwise we would get a\n     * framing error if there's whitespace in the input string. */",107,(107#0,107#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp")),
+      M("/* Decode a string of hex characters into the bytes they represent.  The second\n * parameter specifies the length of the output buffer.  The number of bytes\n * actually written to the output buffer is returned. */",122,(122#0,122#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp")),
+      M("/* We can't swscanf directly into the byte array since %02x expects a pointer to int,\n     * not a pointer to unsigned char.  Also, since we expect an unbroken string of hex\n     * characters, we check for that before calling swscanf; otherwise we would get a\n     * framing error if there's whitespace in the input string. */",129,(129#0,129#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp")),
+      M("/* The two functions always return 1 or 0, so a tool should be able to \n   identify that uses of these functions will always return these values */",144,(144#0,144#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp")),
+      M("/* The variables below are declared \"const\", so a tool should\n   be able to identify that reads of these will always return their \n   initialized values. */",161,(161#0,161#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp")),
+      M("/* true */",164,(164#0,164#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp")),
+      M("/* false */",165,(165#0,165#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp")),
+      M("/* The variables below are not defined as \"const\", but are never\n   assigned any other value, so a tool should be able to identify that\n   reads of these will always return their initialized values. */",168,(168#0,168#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp")),
+      M("/* true */",171,(171#0,171#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp")),
+      M("/* false */",172,(172#0,172#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp")),
+      M("/* define a bunch of these as empty functions so that if a test case forgets\n   to make their's statically scoped, we'll get a linker error */",175,(175#0,175#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp")),
+      M("/* shouldn't be used, but just in case */",187,(187#0,187#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp")),
+      M("/* define global argc and argv */",198,(198#0,198#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/io.cpp"))
+   ]
+   }
+]

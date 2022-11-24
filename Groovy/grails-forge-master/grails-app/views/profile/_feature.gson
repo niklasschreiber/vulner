@@ -1,0 +1,11 @@
+import appgenerator.profile.Feature
+import groovy.transform.Field
+
+@Field Feature feature
+
+json {
+    required feature.required
+    defaultFeature feature.defaultFeature
+    description feature.description
+    name feature.name
+}

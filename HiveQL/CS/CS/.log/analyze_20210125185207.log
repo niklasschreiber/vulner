@@ -1,0 +1,53 @@
+[info] [SourceCollector] start collect
+[info] [Collector] check remote files...
+[trac] [Collector]    remote dir: /BPLG
+[trac] [Collector]    remote dir: /CS
+[trac] [Collector]    remote dir: /BPLG/Archiving
+[trac] [Collector]    remote dir: /CS/.data
+[trac] [Collector]    remote dir: /CS/.filter
+[trac] [Collector]    remote dir: /CS/.log
+[trac] [Collector]    remote dir: /CS/lib
+[trac] [Collector]    remote dir: /CS/src
+[trac] [Collector]    remote dir: /BPLG/Authentication
+[trac] [Collector]    remote dir: /BPLG/bin
+[trac] [Collector]    remote dir: /BPLG/Configuration
+[trac] [Collector]    remote dir: /BPLG/CryptoService
+[trac] [Collector]    remote dir: /BPLG/Data
+[trac] [Collector]    remote dir: /BPLG/Database
+[trac] [Collector]    remote dir: /BPLG/DataTrasformationServices
+[trac] [Collector]    remote dir: /BPLG/ExternalDLL
+[trac] [Collector]    remote dir: /BPLG/Formatting
+[trac] [Collector]    remote dir: /BPLG/FTP
+[trac] [Collector]    remote dir: /BPLG/FTPS
+[trac] [Collector]    remote dir: /BPLG/Internazionalizzazione
+[trac] [Collector]    remote dir: /BPLG/IO
+[trac] [Collector]    remote dir: /BPLG/Logging
+[trac] [Collector]    remote dir: /BPLG/Menu
+[trac] [Collector]    remote dir: /BPLG/obj
+[trac] [Collector]    remote dir: /BPLG/Organigramma
+[trac] [Collector]    remote dir: /BPLG/Properties
+[trac] [Collector]    remote dir: /BPLG/Reference
+[trac] [Collector]    remote dir: /BPLG/Reporting
+[trac] [Collector]    remote dir: /BPLG/Security
+[trac] [Collector]    remote dir: /BPLG/Service References
+[trac] [Collector]    remote dir: /BPLG/SharpSSH-1.1.1.11.bin
+[trac] [Collector]    remote dir: /BPLG/Utility
+[trac] [Collector]    remote dir: /BPLG/Validation
+[trac] [Collector]    remote dir: /BPLG/ViewState
+[trac] [Collector]    remote dir: /BPLG/Web
+[trac] [Collector]    remote dir: /BPLG/Web References
+[trac] [Collector]    remote dir: /BPLG/Zip
+[trac] [Collector]    remote dir: /BPLG/bin/Debug
+[trac] [Collector]    remote dir: /BPLG/bin/Release
+[trac] [Collector]    remote dir: /BPLG/obj/Debug
+[trac] [Collector]    remote dir: /BPLG/obj/Release
+[trac] [Collector]    remote dir: /BPLG/Web References/ConnectionManager
+[trac] [Collector]    remote dir: /BPLG/obj/Debug/TempPE
+[trac] [Collector]    remote dir: /BPLG/obj/Release/TempPE
+[info] [Collector] id=20210125185200(2001), from=D:/_OpenSource/SRA/CIVETTA/CS, target files=123
+[info] [Collector] new=123, change=0, remove=0
+[info] [Collector] copy new files...
+[info] [Collector] copy end.
+[info] [SourceCollector] end collect (time=1542ms)
+[info] working time: 1721ms
+[info] CLI end...

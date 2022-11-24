@@ -1,0 +1,103 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/24.Hard_Coded_Cryptographic_Key/C24001.cpp");
+   ("language", "CPP");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/24.Hard_Coded_Cryptographic_Key/C24001.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/24.Hard_Coded_Cryptographic_Key/C24001.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/24.Hard_Coded_Cryptographic_Key/C24001.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/24.Hard_Coded_Cryptographic_Key/C24001.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/24.Hard_Coded_Cryptographic_Key/C24001.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/24.Hard_Coded_Cryptographic_Key/C24001.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/24.Hard_Coded_Cryptographic_Key/C24001.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C24001",
+   SF([extern,extern],ref(char),<"C24001">,"salt")
+   ,(8#13,8#17,!1)},
+
+   {"C24001",
+   SI(<"C24001">,
+   {[
+      {;
+      ,(1#1,37#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,37#1,!1)}
+   )
+   ,(1#1,37#1,!1)},
+
+   {"C24001",
+   FN([public],(<"C24001">,"cwe321_bad"):int,[("user":ref(char),(12#16,12#25,!1)),("passwd":ref(char),(12#28,12#39,!1))],[],
+   {[
+      {VD("server",ref(char),{"DBserver"S,string,(14#20,14#29,!1)})
+      ,(14#10,14#16,!1)};
+      {VD("cpasswd",ref(char))
+      ,(15#10,15#17,!1)};
+      {VD("henv",class((,SQLHENV)))
+      ,(16#13,16#16,!1)};
+      {VD("hdbc",class((,SQLHDBC)))
+      ,(17#13,17#16,!1)};
+      {PC0((<"C24001">,"SQLAllocHandle"),[class((,"%undef")),class((,"%undef")),ref(class((,SQLHENV)))],[{V("SQL_HANDLE_ENV"),class((,"%undef")),(19#20,19#33,!1)},{V("SQL_NULL_HANDLE"),class((,"%undef")),(19#36,19#50,!1)},{&{V("henv"),class((,SQLHENV)),(19#54,19#57,!1)},ref(class((,SQLHENV))),(19#53,19#57,!1)}])
+      ,(19#5,19#58,!1)};
+      {PC0((<"C24001">,"SQLAllocHandle"),[class((,"%undef")),class((,SQLHENV)),ref(class((,SQLHDBC)))],[{V("SQL_HANDLE_DBC"),class((,"%undef")),(20#20,20#33,!1)},{V("henv"),class((,SQLHENV)),(20#36,20#39,!1)},{&{V("hdbc"),class((,SQLHDBC)),(20#43,20#46,!1)},ref(class((,SQLHDBC))),(20#42,20#46,!1)}])
+      ,(20#5,20#47,!1)};
+      {{AE({V("cpasswd"),ref(char),(22#5,22#11,!1)},{SC((<"C24001">,"crypt"),[ref(char),mod(ref(char),[extern])],[{V("passwd"),ref(char),(22#21,22#26,!1)},{CA(<"C24001">,"salt"),mod(ref(char),[extern]),(22#29,22#32,!1)}]),class((,"%undef")),(22#15,22#33,!1)}),ref(char),(22#5,22#33,!1)}
+      ,(22#5,22#33,!1)};
+      {IF0({BO(!=,{SC((<"C24001">,"strcmp"),[ref(char),string],[{V("cpasswd"),ref(char),(23#16,23#22,!1)},{"68af404b513073582b6c63e6b"S,string,(23#25,23#51,!1)}]),class((,"%undef")),(23#9,23#52,!1)},{"0"N,int,(23#57,23#57,!1)}),bool,(23#9,23#57,!1)},
+         {[
+            {PC0((<"C24001">,"printf"),[string],[{"Incorrect password\n"S,string,(24#16,24#37,!1)}])
+            ,(24#9,24#38,!1)};
+            {RE({UO(-,{"1"N,int,(25#17,25#17,!1)}),int,(25#16,25#17,!1)})
+            ,(25#9,25#18,!1)}
+            ]
+         ,(23#60,26#5,!1)})
+      ,(23#5,26#5,!1)};
+      {PC0((<"C24001">,"SQLConnect"),[class((,SQLHDBC)),ref(class((,SQLCHAR))),alias("SQLSMALLINT",int),ref(class((,SQLCHAR))),alias("SQLSMALLINT",int),ref(class((,SQLCHAR))),alias("SQLSMALLINT",int)],[{V("hdbc"),class((,SQLHDBC)),(28#16,28#19,!1)},{CS(ref(class((,SQLCHAR))),{V("server"),ref(char),(29#27,29#32,!1)}),ref(class((,SQLCHAR))),(29#16,29#32,!1)},{CS(alias("SQLSMALLINT",int),{SC((<"C24001">,"strlen"),[ref(char)],[{V("server"),ref(char),(30#37,30#42,!1)}]),class((,"%undef")),(30#30,30#43,!1)}),alias("SQLSMALLINT",int),(30#16,30#43,!1)},{CS(ref(class((,SQLCHAR))),{V("user"),ref(char),(31#27,31#30,!1)}),ref(class((,SQLCHAR))),(31#16,31#30,!1)},{CS(alias("SQLSMALLINT",int),{SC((<"C24001">,"strlen"),[ref(char)],[{V("user"),ref(char),(32#37,32#40,!1)}]),class((,"%undef")),(32#30,32#41,!1)}),alias("SQLSMALLINT",int),(32#16,32#41,!1)},{CS(ref(class((,SQLCHAR))),{V("passwd"),ref(char),(33#27,33#32,!1)}),ref(class((,SQLCHAR))),(33#16,33#32,!1)},{CS(alias("SQLSMALLINT",int),{SC((<"C24001">,"strlen"),[ref(char)],[{V("passwd"),ref(char),(34#37,34#42,!1)}]),class((,"%undef")),(34#30,34#43,!1)}),alias("SQLSMALLINT",int),(34#16,34#43,!1)}])
+      ,(28#5,34#47,!1)};
+      {RE({"0"N,int,(35#12,35#12,!1)})
+      ,(35#5,35#13,!1)}
+      ]
+   ,(12#1,36#1,!1)}
+   )
+   ,(12#1,36#1,!1)},
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/24.Hard_Coded_Cryptographic_Key/C24001.cpp",
+   [
+      M("/*\n * \n *\n * \n * \n */",1,(1#0,1#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/24.Hard_Coded_Cryptographic_Key/C24001.cpp")),
+      M("/*  */",23,(23#0,23#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/24.Hard_Coded_Cryptographic_Key/C24001.cpp"))
+   ]
+   }
+]

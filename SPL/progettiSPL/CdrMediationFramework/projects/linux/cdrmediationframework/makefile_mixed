@@ -1,0 +1,22 @@
+#---------------------------------------------------------------------
+#
+# File:         makefile
+# Project:      
+# Component:    
+# Description:  UNIX makefile for the application
+# Version:      1
+#
+# Author:       Antonino Di Guardo
+# Date:         04/10/2013
+# Last Update:  
+# Copyright(c): GFM Integration 2013
+#
+#---------------------------------------------------------------------
+
+
+###############################################################################
+#
+# Application makefile
+#
+###############################################################################
+include template/makefile_application_mixed

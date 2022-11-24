@@ -1,0 +1,1479 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>Dictionary object- ZPUNTIVENDITA</title>
+<style type="text/css">
+  th{text-align:left}
+  .cell{
+     font-family:"Courier New", Courier, monospace;
+     color:#000;
+     font-size:12px;
+     background-color:#F2F4F7;
+  }
+  .cell td { border: thin solid #ccc; }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+  <table class="outerTable">
+    <tr>
+      <td><h2>Table: ZPUNTIVENDITA</h2>
+  <h3>Description: </h3></td>
+    </tr>
+    <tr>
+      <td><!--This is where our main table begins  -->
+<table class="innerTable">
+<tr>
+  <th>Row</th>
+  <th>Field name</th>
+  <th>Position</th>
+  <th>Key</th>
+  <th>Data element</th>
+  <th>Domain</th>
+  <th>Datatype</th>
+  <th>Length</th>
+  <th>Lowercase</th>
+  <th>Domain text</th>
+</tr>
+<tr class="cell">
+  <td> 1</td>
+  <td>CLIENT</td>
+  <td>1</td>
+  <td>X</td>
+  <td>MANDT</td>
+  <td>MANDT</td>
+  <td>CLNT</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Mandante</td>
+</tr>
+<tr class="cell">
+  <td> 2</td>
+  <td>OBJECT_ID</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>CRMT_OBJECT_GUID</td>
+  <td>SYSUUID</td>
+  <td>RAW</td>
+  <td>16</td>
+  <td>&nbsp;</td>
+  <td>GUID di un oggetto ordine CRM</td>
+</tr>
+<tr class="cell">
+  <td> 3</td>
+  <td>PARENT_ID</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>CRMT_OBJECT_GUID</td>
+  <td>SYSUUID</td>
+  <td>RAW</td>
+  <td>16</td>
+  <td>&nbsp;</td>
+  <td>GUID di un oggetto ordine CRM</td>
+</tr>
+<tr class="cell">
+  <td> 4</td>
+  <td>RECORD_ID</td>
+  <td>2</td>
+  <td>X</td>
+  <td>AXT_RECORD_ID</td>
+  <td>SYSUUID</td>
+  <td>RAW</td>
+  <td>16</td>
+  <td>&nbsp;</td>
+  <td>ID record</td>
+</tr>
+<tr class="cell">
+  <td> 5</td>
+  <td>ZZMAIL</td>
+  <td>31</td>
+  <td>&nbsp;</td>
+  <td>AD_SMTPADR</td>
+  <td>AD_SMTPADR</td>
+  <td>CHAR</td>
+  <td>241</td>
+  <td>X</td>
+  <td>Indirizzo e-mail</td>
+</tr>
+<tr class="cell">
+  <td> 6</td>
+  <td>ZZNR_POSPI_PTOP</td>
+  <td>62</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td> 7</td>
+  <td>ZZNR_POSTR_PTOP</td>
+  <td>63</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td> 8</td>
+  <td>ZZNR_POSTR_SELF</td>
+  <td>36</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td> 9</td>
+  <td>ZZNR_PP_ADSL_OLD</td>
+  <td>49</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>10</td>
+  <td>ZZNR_PP_ALTR_OLD</td>
+  <td>53</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>11</td>
+  <td>ZZNR_PP_CORD_OLD</td>
+  <td>50</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>12</td>
+  <td>ZZNR_PP_GPRS_OLD</td>
+  <td>52</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>13</td>
+  <td>ZZNR_PP_PPAD_OLD</td>
+  <td>51</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>14</td>
+  <td>ZZNR_PP_PTOP_OLD</td>
+  <td>65</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>15</td>
+  <td>ZZNR_PP_STD_OLD</td>
+  <td>48</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>16</td>
+  <td>ZZNR_PP_VIRT_OLD</td>
+  <td>75</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>17</td>
+  <td>ZZNR_PT_ADSL_OLD</td>
+  <td>55</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>18</td>
+  <td>ZZNR_PT_ALTR_OLD</td>
+  <td>59</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>19</td>
+  <td>ZZNR_PT_CORD_OLD</td>
+  <td>56</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>20</td>
+  <td>ZZNR_PT_GPRS_OLD</td>
+  <td>58</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>21</td>
+  <td>ZZNR_PT_PPAD_OLD</td>
+  <td>57</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>22</td>
+  <td>ZZNR_PT_PTOP_OLD</td>
+  <td>66</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>23</td>
+  <td>ZZNR_PT_SELF_OLD</td>
+  <td>60</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>24</td>
+  <td>ZZNR_PT_STD_OLD</td>
+  <td>54</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>25</td>
+  <td>ZZNR_PT_VIRT_OLD</td>
+  <td>83</td>
+  <td>&nbsp;</td>
+  <td>ZZNR_PT_VIRT_OLD</td>
+  <td>NUMC3</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>NUMERO TERMINALI VPOS OLD DI TERZI</td>
+</tr>
+<tr class="cell">
+  <td>26</td>
+  <td>ZZZCAP</td>
+  <td>24</td>
+  <td>&nbsp;</td>
+  <td>AD_PSTCD1</td>
+  <td>CHAR10</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Codice di avviamento postale della città</td>
+</tr>
+<tr class="cell">
+  <td>27</td>
+  <td>ZZZCELLULARE</td>
+  <td>29</td>
+  <td>&nbsp;</td>
+  <td>AD_TLNMBR</td>
+  <td>CHAR30</td>
+  <td>CHAR</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>Numero di telefono: prefisso + numero</td>
+</tr>
+<tr class="cell">
+  <td>28</td>
+  <td>ZZZCIVICO</td>
+  <td>23</td>
+  <td>&nbsp;</td>
+  <td>AD_HSNM1</td>
+  <td>TEXT10</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>X</td>
+  <td>Numero civico</td>
+</tr>
+<tr class="cell">
+  <td>29</td>
+  <td>ZZZDATA_CESS</td>
+  <td>35</td>
+  <td>&nbsp;</td>
+  <td>DATS</td>
+  <td>DATS</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Campo del tipo DATS</td>
+</tr>
+<tr class="cell">
+  <td>30</td>
+  <td>ZZZDATA_SOSP</td>
+  <td>34</td>
+  <td>&nbsp;</td>
+  <td>DATS</td>
+  <td>DATS</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Campo del tipo DATS</td>
+</tr>
+<tr class="cell">
+  <td>31</td>
+  <td>ZZZFAX</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>AD_FXNMBR</td>
+  <td>CHAR30</td>
+  <td>CHAR</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>Numero fax: prefisso + numero</td>
+</tr>
+<tr class="cell">
+  <td>32</td>
+  <td>ZZZINDIRIZZO</td>
+  <td>22</td>
+  <td>&nbsp;</td>
+  <td>AD_STREET</td>
+  <td>TEXT60</td>
+  <td>CHAR</td>
+  <td>60</td>
+  <td>X</td>
+  <td>Via</td>
+</tr>
+<tr class="cell">
+  <td>33</td>
+  <td>ZZZLOCALITA</td>
+  <td>25</td>
+  <td>&nbsp;</td>
+  <td>AD_CITY1</td>
+  <td>TEXT40</td>
+  <td>CHAR</td>
+  <td>40</td>
+  <td>X</td>
+  <td>Località</td>
+</tr>
+<tr class="cell">
+  <td>34</td>
+  <td>ZZZNR_MPOS</td>
+  <td>68</td>
+  <td>&nbsp;</td>
+  <td>ZZZNR_MPOS</td>
+  <td>ZNUMC_3</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Full Acquiring - MPOS</td>
+</tr>
+<tr class="cell">
+  <td>35</td>
+  <td>ZZZNR_MPOS_OLD</td>
+  <td>69</td>
+  <td>&nbsp;</td>
+  <td>ZZZNR_MPOS_OLD</td>
+  <td>ZNUMC_3</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Full Acquiring - ZZZNR_MPOS_OLD</td>
+</tr>
+<tr class="cell">
+  <td>36</td>
+  <td>ZZZNR_POSPI_ADSL</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>37</td>
+  <td>ZZZNR_POSPI_ALTR</td>
+  <td>12</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>38</td>
+  <td>ZZZNR_POSPI_CORD</td>
+  <td>9</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>39</td>
+  <td>ZZZNR_POSPI_GPRS</td>
+  <td>11</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>40</td>
+  <td>ZZZNR_POSPI_PPAD</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>41</td>
+  <td>ZZZNR_POSPI_STD</td>
+  <td>7</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>42</td>
+  <td>ZZZNR_POSPI_VIRT</td>
+  <td>74</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>43</td>
+  <td>ZZZNR_POSTR_ADSL</td>
+  <td>14</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>44</td>
+  <td>ZZZNR_POSTR_ALTR</td>
+  <td>18</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>45</td>
+  <td>ZZZNR_POSTR_CORD</td>
+  <td>15</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>46</td>
+  <td>ZZZNR_POSTR_GPRS</td>
+  <td>17</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>47</td>
+  <td>ZZZNR_POSTR_PPAD</td>
+  <td>16</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>48</td>
+  <td>ZZZNR_POSTR_STD</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>ZNR_POS</td>
+  <td>ZNR_POS</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati nr_pos</td>
+</tr>
+<tr class="cell">
+  <td>49</td>
+  <td>ZZZNR_POSTR_VIRT</td>
+  <td>82</td>
+  <td>&nbsp;</td>
+  <td>ZZZNR_POSTR_VIRT</td>
+  <td>NUMC3</td>
+  <td>NUMC</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Numero Terminali VPOS di terzi</td>
+</tr>
+<tr class="cell">
+  <td>50</td>
+  <td>ZZZPAESE</td>
+  <td>27</td>
+  <td>&nbsp;</td>
+  <td>LAND1</td>
+  <td>LAND1</td>
+  <td>CHAR</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Codice paese</td>
+</tr>
+<tr class="cell">
+  <td>51</td>
+  <td>ZZZPAGOBANCOMAT</td>
+  <td>20</td>
+  <td>&nbsp;</td>
+  <td>CHAR1</td>
+  <td>CHAR1</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Indicatore a una posizione</td>
+</tr>
+<tr class="cell">
+  <td>52</td>
+  <td>ZZZPEC</td>
+  <td>32</td>
+  <td>&nbsp;</td>
+  <td>AD_SMTPADR</td>
+  <td>AD_SMTPADR</td>
+  <td>CHAR</td>
+  <td>241</td>
+  <td>X</td>
+  <td>Indirizzo e-mail</td>
+</tr>
+<tr class="cell">
+  <td>53</td>
+  <td>ZZZPOSTAMAT</td>
+  <td>21</td>
+  <td>&nbsp;</td>
+  <td>CHAR1</td>
+  <td>CHAR1</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Indicatore a una posizione</td>
+</tr>
+<tr class="cell">
+  <td>54</td>
+  <td>ZZZPOSTEPAY</td>
+  <td>71</td>
+  <td>&nbsp;</td>
+  <td>ZZZPOSTEPAY</td>
+  <td>ZZZPOSTEPAY</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Elemento dati postepay</td>
+</tr>
+<tr class="cell">
+  <td>55</td>
+  <td>ZZZPROVINCIA</td>
+  <td>26</td>
+  <td>&nbsp;</td>
+  <td>REGIO</td>
+  <td>REGIO</td>
+  <td>CHAR</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Regione (stato federale, stato federato, provincia, contea)</td>
+</tr>
+<tr class="cell">
+  <td>56</td>
+  <td>ZZZSHOP_ID</td>
+  <td>5</td>
+  <td>&nbsp;</td>
+  <td>ZSHOP_ID</td>
+  <td>ZSHOP_ID</td>
+  <td>CHAR</td>
+  <td>15</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati Shop ID</td>
+</tr>
+<tr class="cell">
+  <td>57</td>
+  <td>ZZZSHOP_INSEGNA</td>
+  <td>6</td>
+  <td>&nbsp;</td>
+  <td>ZSHOP_INSEGNA</td>
+  <td>ZSHOP_INSEGNA</td>
+  <td>CHAR</td>
+  <td>40</td>
+  <td>&nbsp;</td>
+  <td>Elemento dati Shop Insegna</td>
+</tr>
+<tr class="cell">
+  <td>58</td>
+  <td>ZZZTELEFONO</td>
+  <td>28</td>
+  <td>&nbsp;</td>
+  <td>AD_TLNMBR</td>
+  <td>CHAR30</td>
+  <td>CHAR</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>Numero di telefono: prefisso + numero</td>
+</tr>
+<tr class="cell">
+  <td>59</td>
+  <td>ZZZVISA_MAESTRO</td>
+  <td>19</td>
+  <td>&nbsp;</td>
+  <td>CHAR1</td>
+  <td>CHAR1</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Indicatore a una posizione</td>
+</tr>
+<tr class="cell">
+  <td>60</td>
+  <td>ZZZZATECO</td>
+  <td>33</td>
+  <td>&nbsp;</td>
+  <td>BU_IND_SECTOR</td>
+  <td>BU_INDSECTOR</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>S. ind.</td>
+</tr>
+<tr class="cell">
+  <td>61</td>
+  <td>ZZZZ_MOTIVAZIONE</td>
+  <td>61</td>
+  <td>&nbsp;</td>
+  <td>ZZ_MOTIVAZIONE</td>
+  <td>CHAR50</td>
+  <td>CHAR</td>
+  <td>50</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati Motivazione</td>
+</tr>
+<tr class="cell">
+  <td>62</td>
+  <td>ZZZ_BLOCIBAN_ACC</td>
+  <td>44</td>
+  <td>&nbsp;</td>
+  <td>FLAG</td>
+  <td>FLAG</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Indicatore generale</td>
+</tr>
+<tr class="cell">
+  <td>63</td>
+  <td>ZZZ_CARDONFILE</td>
+  <td>89</td>
+  <td>&nbsp;</td>
+  <td>ZDTEL0000QL</td>
+  <td>AXT_BOOLEAN</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Card on File</td>
+</tr>
+<tr class="cell">
+  <td>64</td>
+  <td>ZZZ_CC_INTERNAZ</td>
+  <td>78</td>
+  <td>&nbsp;</td>
+  <td>FLAG</td>
+  <td>FLAG</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Indicatore generale</td>
+</tr>
+<tr class="cell">
+  <td>65</td>
+  <td>ZZZ_CC_INT_OLD</td>
+  <td>85</td>
+  <td>&nbsp;</td>
+  <td>ZZZ_CC_INT_OLD</td>
+  <td>FLAG</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>CIRCUITI INTERNAZIONALI OLD</td>
+</tr>
+<tr class="cell">
+  <td>66</td>
+  <td>ZZZ_COD_NEGOZIO</td>
+  <td>94</td>
+  <td>&nbsp;</td>
+  <td>ZZZ_COD_NEGOZIO</td>
+  <td>CHAR18</td>
+  <td>CHAR</td>
+  <td>18</td>
+  <td>&nbsp;</td>
+  <td>Codice Negozio</td>
+</tr>
+<tr class="cell">
+  <td>67</td>
+  <td>ZZZ_COD_PV_EXT</td>
+  <td>87</td>
+  <td>&nbsp;</td>
+  <td>ZZZ_COD_PV_EXT</td>
+  <td>CHAR18</td>
+  <td>CHAR</td>
+  <td>18</td>
+  <td>&nbsp;</td>
+  <td>Codice esterno PV</td>
+</tr>
+<tr class="cell">
+  <td>68</td>
+  <td>ZZZ_CONFIG_ECOMM</td>
+  <td>91</td>
+  <td>&nbsp;</td>
+  <td>ZDTEL0000QN</td>
+  <td>ZDTEL0000QN</td>
+  <td>CHAR</td>
+  <td>2</td>
+  <td>&nbsp;</td>
+  <td>Config. Prod. E-com.</td>
+</tr>
+<tr class="cell">
+  <td>69</td>
+  <td>ZZZ_DISTRETTO</td>
+  <td>95</td>
+  <td>&nbsp;</td>
+  <td>ZDE_DISTRETTO</td>
+  <td>NUMC</td>
+  <td>NUMC</td>
+  <td>5</td>
+  <td>&nbsp;</td>
+  <td>Distretto punto vendita</td>
+</tr>
+<tr class="cell">
+  <td>70</td>
+  <td>ZZZ_FRE_ACC</td>
+  <td>38</td>
+  <td>&nbsp;</td>
+  <td>ZZ_FRE_ACC</td>
+  <td>ZZ_FRE_ACC</td>
+  <td>CHAR</td>
+  <td>2</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati Frequenza Accredito</td>
+</tr>
+<tr class="cell">
+  <td>71</td>
+  <td>ZZZ_FRE_ADD</td>
+  <td>37</td>
+  <td>&nbsp;</td>
+  <td>ZZ_FRE_ADD</td>
+  <td>ZZ_FRE_ADD</td>
+  <td>CHAR</td>
+  <td>2</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati Frequenza Addebito</td>
+</tr>
+<tr class="cell">
+  <td>72</td>
+  <td>ZZZ_IBAN_ACC</td>
+  <td>39</td>
+  <td>&nbsp;</td>
+  <td>ZEEW_DATAELEMENT1310</td>
+  <td>&nbsp;</td>
+  <td>CHAR</td>
+  <td>27</td>
+  <td>&nbsp;</td>
+  <td>Codice IBAN</td>
+</tr>
+<tr class="cell">
+  <td>73</td>
+  <td>ZZZ_INTEST_ACC</td>
+  <td>92</td>
+  <td>&nbsp;</td>
+  <td>ZZZ_INTEST_ACC</td>
+  <td>CHAR70</td>
+  <td>CHAR</td>
+  <td>70</td>
+  <td>&nbsp;</td>
+  <td>Intestatario Conto di Accredito</td>
+</tr>
+<tr class="cell">
+  <td>74</td>
+  <td>ZZZ_INTEST_ADD</td>
+  <td>93</td>
+  <td>&nbsp;</td>
+  <td>ZZZ_INTEST_ADD</td>
+  <td>CHAR70</td>
+  <td>CHAR</td>
+  <td>70</td>
+  <td>&nbsp;</td>
+  <td>Intestatario Conto di Addebito</td>
+</tr>
+<tr class="cell">
+  <td>75</td>
+  <td>ZZZ_MASTERPASS</td>
+  <td>79</td>
+  <td>&nbsp;</td>
+  <td>FLAG</td>
+  <td>FLAG</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Indicatore generale</td>
+</tr>
+<tr class="cell">
+  <td>76</td>
+  <td>ZZZ_MAST_OLD</td>
+  <td>86</td>
+  <td>&nbsp;</td>
+  <td>ZZZ_MAST_OLD</td>
+  <td>FLAG</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>ABILITA MASTERPASS OLD</td>
+</tr>
+<tr class="cell">
+  <td>77</td>
+  <td>ZZZ_MOD_PAG</td>
+  <td>45</td>
+  <td>&nbsp;</td>
+  <td>ZMOD_PAG</td>
+  <td>ZMOD_PAG</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Data element Modalità di Pagamento</td>
+</tr>
+<tr class="cell">
+  <td>78</td>
+  <td>ZZZ_MOD_SERVER</td>
+  <td>80</td>
+  <td>&nbsp;</td>
+  <td>ZDE_MOD_SERVER</td>
+  <td>ZDD_MOD_SERVER</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Data elemeny ZDD_MOD_SERVER</td>
+</tr>
+<tr class="cell">
+  <td>79</td>
+  <td>ZZZ_MOTO</td>
+  <td>90</td>
+  <td>&nbsp;</td>
+  <td>ZDTEL0000QM</td>
+  <td>AXT_BOOLEAN</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Mo.To.</td>
+</tr>
+<tr class="cell">
+  <td>80</td>
+  <td>ZZZ_PERC_SCONTO</td>
+  <td>96</td>
+  <td>&nbsp;</td>
+  <td>ZDE_PERC_SCONTO</td>
+  <td>BF_PRZ32</td>
+  <td>DEC</td>
+  <td>5</td>
+  <td>&nbsp;</td>
+  <td>Percentuale di sconto Codice</td>
+</tr>
+<tr class="cell">
+  <td>81</td>
+  <td>ZZZ_RAC</td>
+  <td>70</td>
+  <td>&nbsp;</td>
+  <td>ZCA_RAC</td>
+  <td>CHAR100</td>
+  <td>CHAR</td>
+  <td>100</td>
+  <td>&nbsp;</td>
+  <td>Elemento dati Codice RAC</td>
+</tr>
+<tr class="cell">
+  <td>82</td>
+  <td>ZZZ_RECURRING</td>
+  <td>88</td>
+  <td>&nbsp;</td>
+  <td>ZDTEL0000QK</td>
+  <td>AXT_BOOLEAN</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Pagamenti ricorrenti</td>
+</tr>
+<tr class="cell">
+  <td>83</td>
+  <td>ZZZ_REG_MCWEB</td>
+  <td>81</td>
+  <td>&nbsp;</td>
+  <td>FLAG</td>
+  <td>FLAG</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Indicatore generale</td>
+</tr>
+<tr class="cell">
+  <td>84</td>
+  <td>ZZZ_REND_CART</td>
+  <td>64</td>
+  <td>&nbsp;</td>
+  <td>FLAG</td>
+  <td>FLAG</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Indicatore generale</td>
+</tr>
+<tr class="cell">
+  <td>85</td>
+  <td>ZZZ_STR_REG_ACC</td>
+  <td>77</td>
+  <td>&nbsp;</td>
+  <td>ZZ_STRUM_REGOLAMENTO</td>
+  <td>ZCHAR_2</td>
+  <td>CHAR</td>
+  <td>2</td>
+  <td>&nbsp;</td>
+  <td>Full Acquiring - Tipologia Strumento Regolamento</td>
+</tr>
+<tr class="cell">
+  <td>86</td>
+  <td>ZZZ_STR_REG_ADD</td>
+  <td>76</td>
+  <td>&nbsp;</td>
+  <td>ZZ_STRUM_REGOLAMENTO</td>
+  <td>ZCHAR_2</td>
+  <td>CHAR</td>
+  <td>2</td>
+  <td>&nbsp;</td>
+  <td>Full Acquiring - Tipologia Strumento Regolamento</td>
+</tr>
+<tr class="cell">
+  <td>87</td>
+  <td>ZZZ_SWIFT_ACC</td>
+  <td>42</td>
+  <td>&nbsp;</td>
+  <td>ZCODICE_SWIFT</td>
+  <td>ZCODICE_SWIFT</td>
+  <td>CHAR</td>
+  <td>11</td>
+  <td>&nbsp;</td>
+  <td>Data Element Codice Swift</td>
+</tr>
+<tr class="cell">
+  <td>88</td>
+  <td>ZZZ_SWIFT_ADD</td>
+  <td>41</td>
+  <td>&nbsp;</td>
+  <td>ZCODICE_SWIFT</td>
+  <td>ZCODICE_SWIFT</td>
+  <td>CHAR</td>
+  <td>11</td>
+  <td>&nbsp;</td>
+  <td>Data Element Codice Swift</td>
+</tr>
+<tr class="cell">
+  <td>89</td>
+  <td>ZZZ_VIRT_SECUR</td>
+  <td>84</td>
+  <td>&nbsp;</td>
+  <td>ZZZ_VIRT_SECUR</td>
+  <td>ZZZ_VIRT_SECUR</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Tipo transazione virtuale securizzata</td>
+</tr>
+<tr class="cell">
+  <td>90</td>
+  <td>ZZZ_VP_GEST_TERM</td>
+  <td>73</td>
+  <td>&nbsp;</td>
+  <td>ZZZ_VP_GEST_TERM</td>
+  <td>ZZZ_VP_GEST_TERM</td>
+  <td>CHAR</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Elemento dati Gestione Terminali</td>
+</tr>
+<tr class="cell">
+  <td>91</td>
+  <td>ZZZ_VP_URL</td>
+  <td>72</td>
+  <td>&nbsp;</td>
+  <td>ZZZ_VP_URL</td>
+  <td>ZZZ_VP_URL</td>
+  <td>CHAR</td>
+  <td>100</td>
+  <td>&nbsp;</td>
+  <td>Elemnto dati URL sito puntovendita</td>
+</tr>
+<tr class="cell">
+  <td>92</td>
+  <td>ZZ_ATECO_OLD</td>
+  <td>67</td>
+  <td>&nbsp;</td>
+  <td>BU_IND_SECTOR</td>
+  <td>BU_INDSECTOR</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>S. ind.</td>
+</tr>
+<tr class="cell">
+  <td>93</td>
+  <td>ZZ_BLOCIBAN_ADD</td>
+  <td>43</td>
+  <td>&nbsp;</td>
+  <td>FLAG</td>
+  <td>FLAG</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Indicatore generale</td>
+</tr>
+<tr class="cell">
+  <td>94</td>
+  <td>ZZ_CHIAMATA</td>
+  <td>46</td>
+  <td>&nbsp;</td>
+  <td>Z_CHIAMATA_PV</td>
+  <td>Z_CHIAMATA_PV</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Elemento Dati Chiamata Punto Vendita</td>
+</tr>
+<tr class="cell">
+  <td>95</td>
+  <td>ZZ_ESITO</td>
+  <td>47</td>
+  <td>&nbsp;</td>
+  <td>Z_ESITO_PV</td>
+  <td>Z_ESITO_PV</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Elemento dati Edito Punto Vendita</td>
+</tr>
+<tr class="cell">
+  <td>96</td>
+  <td>ZZ_IBAN_ADD</td>
+  <td>40</td>
+  <td>&nbsp;</td>
+  <td>ZEEW_DATAELEMENT1310</td>
+  <td>&nbsp;</td>
+  <td>CHAR</td>
+  <td>27</td>
+  <td>&nbsp;</td>
+  <td>Codice IBAN</td>
+</tr>
+      </table>
+     </td>
+   </tr>
+<br/>
+  <table class="outerTable">
+    <tr>
+      <td><h2>Fixed Domain Values </h2>
+    </tr>
+    <tr>
+      <td><!--This is where our main table begins  -->
+<table class="innerTable">
+<tr>
+  <th>Domain Name</th>
+  <th>Value Low</th>
+  <th>Value High</th>
+  <th>Text</th>
+</tr>
+<tr class="cell">
+  <td>ZZZPOSTEPAY</td>
+  <td>X</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>ZZZPOSTEPAY</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>FLAG</td>
+  <td>X</td>
+  <td>&nbsp;</td>
+  <td>Flag set. Event has occurred.</td>
+</tr>
+<tr class="cell">
+  <td>FLAG</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>Flag is Not Set</td>
+</tr>
+<tr class="cell">
+  <td>AXT_BOOLEAN</td>
+  <td>X</td>
+  <td>&nbsp;</td>
+  <td>True</td>
+</tr>
+<tr class="cell">
+  <td>AXT_BOOLEAN</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>False</td>
+</tr>
+<tr class="cell">
+  <td>FLAG</td>
+  <td>X</td>
+  <td>&nbsp;</td>
+  <td>Flag set. Event has occurred.</td>
+</tr>
+<tr class="cell">
+  <td>FLAG</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>Flag is Not Set</td>
+</tr>
+<tr class="cell">
+  <td>FLAG</td>
+  <td>X</td>
+  <td>&nbsp;</td>
+  <td>Flag set. Event has occurred.</td>
+</tr>
+<tr class="cell">
+  <td>FLAG</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>Flag is Not Set</td>
+</tr>
+<tr class="cell">
+  <td>ZZ_FRE_ACC</td>
+  <td>01</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>ZZ_FRE_ADD</td>
+  <td>01</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>ZZ_FRE_ADD</td>
+  <td>02</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>FLAG</td>
+  <td>X</td>
+  <td>&nbsp;</td>
+  <td>Flag set. Event has occurred.</td>
+</tr>
+<tr class="cell">
+  <td>FLAG</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>Flag is Not Set</td>
+</tr>
+<tr class="cell">
+  <td>FLAG</td>
+  <td>X</td>
+  <td>&nbsp;</td>
+  <td>Flag set. Event has occurred.</td>
+</tr>
+<tr class="cell">
+  <td>FLAG</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>Flag is Not Set</td>
+</tr>
+<tr class="cell">
+  <td>ZMOD_PAG</td>
+  <td>N</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>ZMOD_PAG</td>
+  <td>G</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>ZDD_MOD_SERVER</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>ZDD_MOD_SERVER</td>
+  <td>2</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>AXT_BOOLEAN</td>
+  <td>X</td>
+  <td>&nbsp;</td>
+  <td>True</td>
+</tr>
+<tr class="cell">
+  <td>AXT_BOOLEAN</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>False</td>
+</tr>
+<tr class="cell">
+  <td>AXT_BOOLEAN</td>
+  <td>X</td>
+  <td>&nbsp;</td>
+  <td>True</td>
+</tr>
+<tr class="cell">
+  <td>AXT_BOOLEAN</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>False</td>
+</tr>
+<tr class="cell">
+  <td>FLAG</td>
+  <td>X</td>
+  <td>&nbsp;</td>
+  <td>Flag set. Event has occurred.</td>
+</tr>
+<tr class="cell">
+  <td>FLAG</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>Flag is Not Set</td>
+</tr>
+<tr class="cell">
+  <td>FLAG</td>
+  <td>X</td>
+  <td>&nbsp;</td>
+  <td>Flag set. Event has occurred.</td>
+</tr>
+<tr class="cell">
+  <td>FLAG</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>Flag is Not Set</td>
+</tr>
+<tr class="cell">
+  <td>ZCHAR_2</td>
+  <td>01</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>ZCHAR_2</td>
+  <td>02</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>ZCHAR_2</td>
+  <td>03</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>ZCHAR_2</td>
+  <td>01</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>ZCHAR_2</td>
+  <td>02</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>ZCHAR_2</td>
+  <td>03</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>ZZZ_VIRT_SECUR</td>
+  <td>6</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>ZZZ_VIRT_SECUR</td>
+  <td>7</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>FLAG</td>
+  <td>X</td>
+  <td>&nbsp;</td>
+  <td>Flag set. Event has occurred.</td>
+</tr>
+<tr class="cell">
+  <td>FLAG</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>Flag is Not Set</td>
+</tr>
+      </table>
+     </td>
+   </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2020. Sap Release 740</td>
+   </tr>
+</table>
+</body>
+</html>

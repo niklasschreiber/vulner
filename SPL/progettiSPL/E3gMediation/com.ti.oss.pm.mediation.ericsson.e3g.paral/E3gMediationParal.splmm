@@ -1,0 +1,440 @@
+namespace com.ti.oss.pm.mediation.ericsson.e3g.paral ;
+
+<%
+	use Cwd;
+	
+	my $paralNormLe;
+	my $paralEnrich;
+	my $paralArNormLe;
+	
+	my $cfgFile = cwd($0) . "/perl_params.cfg";
+	open my $cfgFh, "<", $cfgFile or die "Could not open the input file: " . $cfgFile;
+	
+	while(my $line = <$cfgFh>) {
+		my @ar = split("=", $line);
+		if($ar[0] =~ "paralArNormLe") {
+			$paralArNormLe = $ar[1];
+		}
+		elsif($ar[0] =~ "paralNormLe") {
+			$paralNormLe = $ar[1];
+		}
+		elsif($ar[0] =~ "paralEnrich") {
+			$paralEnrich = $ar[1];
+		}
+	}
+	close $cfgFh;
+%>
+
+/*
+ * Import ext namespaces
+ */
+use com.ibm.streamsx.file::* ;
+use com.ti.oss.common.event::* ;
+use com.ti.oss.common.alarm::* ;
+use com.ti.oss.common.types::* ;
+use com.ti.oss.common.pm.process::* ;
+use com.ti.oss.common.writer::* ;
+use com.ti.oss.common.pm.writer.omes::* ;
+use com.ti.oss.common.pm.parser.xml3gpp::* ;
+use com.ti.oss.common.pm.parser.cfg::* ;
+use com.ti.oss.common.pm.parser.util::* ;
+use com.ti.oss.pm.mediation.ericsson.e3g::*;
+
+//For router messaging
+use com.ti.oss.common.pm.hdfs::* ;
+use com.ti.oss.common.messaging.kafka::* ;
+use com.ti.oss.common.messaging.router::* ;
+
+use com.ti.oss.pm.mediation.ericsson.e3g.utils::*;
+
+public composite E3gMediationParal(input stream<rstring fName> PolledFile ; output
+	OutEvent, OAlarm, DataToExport)
+{
+
+   type 
+       FReaderT = FileHeader, tuple<blob rawBlock>;
+ 
+	graph
+
+	//************************** INIZIO ADAPTATION  ****************************
+		(stream<ClassType> AdaptationParser_out) as Parser = AdaptationParser()
+		{
+			param
+				mediationId : getCompileTimeValue("mediationId") ;
+				
+				//partitionColocation for Adaptation
+
+			config
+				placement : partitionColocation("AdaptationParser" + (rstring)getChannel()) ;
+		}
+
+		(stream<NormClasses Classes, RelMeasInfoIdClass RelMeasInfoClass,
+			RelClassIdDimension RelClassDimension,
+			RelMeasinfoIdCounter RelMeasinfoCounter,
+			RelCounterMeasinfoId RelCounterMeasinfo> AdaptationLoader_out) as Loader =
+			AdaptationNormalizer(AdaptationParser_out as I)
+		{
+		//partitionColocation for Adaptation
+
+			config
+				placement : partitionColocation("AdaptationParser" + (rstring)getChannel()) ;
+		}
+
+		(stream<NormClasses Classes, RelMeasInfoIdClass RelMeasInfoClass,
+			RelClassIdDimension RelClassDimension,
+			RelMeasinfoIdCounter RelMeasinfoCounter,
+			RelCounterMeasinfoId RelCounterMeasinfo, NormClasses ClassDN>
+			AdaptationLoader_out1) as Loader_out1 =
+			ClassDNNormalizer(AdaptationLoader_out)
+		{
+		//partitionColocation for Adaptation
+
+			config
+				placement : partitionColocation("AdaptationParser" + (rstring)getChannel()) ;
+		}
+
+		//************************* FINE ADAPTATION ******************************
+		
+		/*
+		 * Scopo del composite CheckFileFormat: 
+		 * 
+		 * - Lettura del file di PM in input a blocchi di 8192u 
+		 * - Identifica se il formato del file :Schema based oppure DTD.
+		 * 
+		 */
+		//(stream<FReaderT> OFReaderDTD ;stream<FReaderT> OFReaderXMLSchema ; stream<rstring fName, int32 e> OutEoF) as
+		(stream<FReaderT> OFReaderDTD ;stream<FReaderT> OFReaderXMLSchema;stream<Event e> PolledEvent) as
+			FReader = CheckFileFormat(PolledFile as I)
+			{
+			param
+				mediationId : getCompileTimeValue("mediationId") ;
+			}
+		
+		/*
+		 * Ramo DTD 
+		 *   
+		 */
+		
+		(stream<RawDataHeader rHeader, RawDataBlock rBblock> PRawDataBlock ;
+			stream<Event e> ParserEventOut) as E3gNewDCheckParser =
+			DCheckParserDTDWithEof(OFReaderDTD as I)
+		{
+			param
+				mediationId : getCompileTimeValue("mediationId") ;
+			
+			config				
+				placement : partitionColocation(getCompileTimeValue("mediationId") + "-parser" +(rstring) getChannel()) ;
+		}
+		
+		(stream<MeasHeader mHeader, MeasData mData> TransformedMeasDataBlock ;
+			stream<Event e> TransformEvent) as E3gNewTransformer =
+			ETransformerDTDBased(PRawDataBlock as I)
+		{
+			param
+				mediationId : getCompileTimeValue("mediationId") ;
+				dnPrefix : "Network-TI" ;
+				mtPrefix : "m" ;
+		}
+		
+		
+		
+		/*
+		 * Ramo Schema Based 
+		 *   
+		 */
+
+		(stream<RawDataHeader rHeader, RawDataBlock rBlock> OutRawData ;stream<Event e> OutDCPSEvent) as E3gNewDCheckSchemaParser =
+			DCheckParserSchemaWithEof(OFReaderXMLSchema as I)
+		{
+			param
+				mediationId : getCompileTimeValue("mediationId") ;
+			
+			config				
+				placement : partitionColocation(getCompileTimeValue("mediationId") + "-parser" +(rstring) getChannel()) ;
+		}
+		
+		
+				
+		(stream<MeasHeader mHeader, MeasData mData> OutMeasDataBlock ;
+			stream<Event e>  OutSchemaEvent) as E3gNewSchemaTransformer =
+			ETransformerSchemaBased(OutRawData as I)
+		{
+			param
+				mediationId : getCompileTimeValue("mediationId") ;
+				dnPrefix : "Network-TI" ;
+				mtPrefix : "m" ;
+
+		}
+		
+			
+		//************************** INIZIO ARRAY NORMALIZER *******************************
+		
+
+		stream<MeasHeader mHeader, MeasData mData, boolean eof> EOF = Custom(TransformedMeasDataBlock as I;OutMeasDataBlock as J)
+		{
+       		logic state : 
+       		{
+       			mutable EOF eofTuple = {};
+       			mutable boolean fileIsChanged = true;
+       			
+       			mutable EOF eofSchemaTuple = {};
+       			mutable boolean fileSchemaIsChanged = true;
+       			mutable rstring filenameI="";
+       			mutable rstring filenameJ="";
+       		}
+       		onTuple I :
+       		{
+       			if(fileIsChanged) 
+       			{
+       				eofTuple.mHeader = I.mHeader;
+       				filenameI=I.mHeader.fileHeader.fName;
+       				fileIsChanged = false;
+       			}
+       			submit({mHeader = I.mHeader, mData = I.mData, eof = false}, EOF);
+       		}
+       		onPunct I : 
+       		{
+       			eofTuple.eof = true;
+       			submit(eofTuple, EOF);
+       			appTrc(Trace.trace, "Sending eof = true on file : " + filenameI) ;
+       			appTrc(Trace.trace, "Sending eof = reading tuple eof : " + eofTuple.mHeader.fileHeader.fName) ;
+       			fileIsChanged = true;
+       			
+       			if(currentPunct() == Sys.WindowMarker) {
+       				submit(Sys.WindowMarker, EOF);
+       			}
+       		}
+       		
+       		//Doppia gestione per i due formati files.
+       		
+			onTuple J :
+       		{
+       			if(fileSchemaIsChanged) 
+       			{
+       				eofSchemaTuple.mHeader = J.mHeader;
+       				filenameJ=J.mHeader.fileHeader.fName;
+       				fileSchemaIsChanged = false;
+       			}
+       			submit({mHeader = J.mHeader, mData = J.mData, eof = false}, EOF);
+       		}
+       		onPunct J : 
+       		{
+       			eofSchemaTuple.eof = true;
+       			submit(eofSchemaTuple, EOF);
+       			appTrc(Trace.trace, "Sending eof = true on schema file : " + filenameJ) ;
+      			appTrc(Trace.trace, "Sending eof = reading schema tuple eof : " + eofSchemaTuple.mHeader.fileHeader.fName) ;
+       			fileSchemaIsChanged = true;
+       			
+       			if(currentPunct() == Sys.WindowMarker) {
+       				submit(Sys.WindowMarker, EOF);
+    				
+       			}
+       		}       		
+       		config
+				placement: partitionColocation(getCompileTimeValue("mediationId") + "E3gEof" + (rstring)getChannel());
+       }
+       
+       (
+       	<%for(my $i = 0; $i < $paralArNormLe; $i++) {%>
+       		stream<MeasHeader mHeader, MeasData mData, boolean eof> SplitWithEof<%=$i%>
+       		<%if($i < $paralArNormLe - 1) {print ";";}%>
+       	<%}%>
+       ) as SplitWithEofCust = SplitWithEof(EOF as I)
+       {
+       		config
+				placement: partitionColocation(getCompileTimeValue("mediationId") + "E3gEof" + (rstring)getChannel());
+       }
+		
+	<%for(my $i = 0; $i < $paralArNormLe; $i++) {%>	
+		(stream<MeasHeader mHeader, MeasData mData, boolean eof> ArrayNormMeasDataBlock<%=$i%> ;
+			stream<Event e> ArrayNormalizerEvent<%=$i%>) as E3GArrayNormalizer<%=$i%> =
+			ArrayNormalizer(SplitWithEof<%=$i%> as I1; AdaptationLoader_out1 as I2)
+		{
+			param
+				mediationId : getCompileTimeValue("mediationId") ;
+			
+		}
+	<%}%>
+	
+	<%for(my $i = 0; $i < $paralArNormLe; $i++) {%>
+	(
+       	<%for(my $j = 0; $j < $paralNormLe; $j++) {%>
+       	
+       		stream<MeasHeader mHeader, MeasData mData, boolean eof> SplitWithEofNorm<%=$i%>_<%=$j%>
+       		<%if($j < $paralNormLe - 1) {print ";";}%>
+       	<%}%>
+       ) as SplitWithEofNorm<%=$i%> = SplitWithEofNorm(ArrayNormMeasDataBlock<%=$i%> as I)
+       {
+       		
+       
+       }
+       <%}%>
+
+	<%for(my $i = 0; $i < $paralArNormLe; $i++) {%>
+		<%for(my $j = 0; $j < $paralNormLe; $j++) {%>
+		(stream<MeasHeader mHeader, MeasData mData, boolean eof> NormMeasDataBlock<%=$i%>_<%=$j%> ;
+			stream<Event e> NormalizerEvent<%=$i%>_<%=$j%>) as E3gNewNormalizer<%=$i%>_<%=$j%> =
+			NormalizerWithEof(SplitWithEofNorm<%=$i%>_<%=$j%> as I)
+		{
+			param
+				keepEmptyValues : true;
+			config
+				placement : partitionColocation(getCompileTimeValue("mediationId") + "NormalizerWithEofE3G" + (rstring)<%=$i%> + "_" + (rstring)<%=$j%> + "_" + (rstring)getChannel());
+			
+		}
+		<%}%>
+	<%}%>
+		
+		
+		(
+			<%for(my $j = 0; $j < $paralEnrich; $j++) {%> 
+			stream<MeasHeader mHeader, MeasData mData> EofMerger<%=$j%>
+			<%if($j<$paralEnrich - 1) {print ";";}%>
+			<%}%>
+		) = Merger(
+			<%for(my $i = 0; $i < $paralArNormLe; $i++) {%> 
+				<%for(my $j = 0; $j < $paralNormLe; $j++) {%> 	
+					NormMeasDataBlock<%=$i%>_<%=$j%>
+					<%if($j < $paralNormLe - 1){ print ",";}%>
+				<%}%> 
+				<%if($i < $paralArNormLe - 1){ print ",";}%>
+			<%}%> 
+			as I
+		)
+		{
+			config
+				placement: partitionColocation(getCompileTimeValue("mediationId") + "ElteMerger" + (rstring)getChannel()) ;
+		}
+
+		//************************* FINE ARRAY NORMALIZER ********************************
+		
+		/* Da decommentare		*/
+		
+	
+		
+		
+  		<%for(my $j = 0; $j < $paralEnrich; $j++) {%>
+	 	(stream<Event e> MessagingRouterEvent<%=$j%> ) as E3gNewMessagingRouter<%=$j%>  =
+			MessagingRouter(EofMerger<%=$j%>  as J)
+			{
+			param
+				mediationId : getCompileTimeValue("mediationId") ;
+				perlParam : (rstring) <%=$j%> ;
+				vendor : "Ericsson" ;
+				domain : "3G" ;
+				
+		}
+		<%}%>
+		 
+  		
+
+		// Export forwarder
+		stream <MeasHeader mHeader, MeasData mData> DataToExport 
+			= Custom(
+			<%for(my $j = 0; $j < $paralEnrich; $j++) {%>
+				EofMerger<%=$j%>
+				<%if($j < $paralEnrich - 1) { print ",";}%>
+			<%}%>
+			 as I)
+		{
+			logic
+				onTuple I :
+				{
+					submit(I, DataToExport) ;
+				}
+
+				onPunct I :
+				{
+				// Forward punctuation
+					if(currentPunct() == Sys.WindowMarker)
+					{
+						submit(Sys.WindowMarker, DataToExport) ;
+					}
+				}
+				config 
+					threadedPort: queue(I, Sys.Wait, 100000);
+		}
+				
+				
+		<%for(my $i = 0; $i < $paralEnrich; $i++) {%>
+		(
+			stream<Event e> EnrichEvent<%=$i%>;
+			stream<Alarm alarm> EnrichAlarm<%=$i%>;
+			stream<Event e> OWEvent<%=$i%> ; 
+			stream<Alarm alarm> OWAlarm<%=$i%> ;
+			stream<Event e> FileExportEvent<%=$i%>;
+			stream<Alarm alarm> FileExportAlarm<%=$i%>
+		) as E3gNewEnricher<%=$i%> = EnricherWithWriter(EofMerger<%=$i%> as I)
+		{
+		}
+		<%}%>
+
+
+		(stream<Event e> OutEvent) as EventForwarder = Custom(ParserEventOut,
+			TransformEvent, 
+			<%for(my $i = 0; $i < $paralArNormLe; $i++) {%>
+			 ArrayNormalizerEvent<%=$i%>,
+			<%for(my $j = 0; $j < $paralNormLe; $j++) {%>
+			NormalizerEvent<%=$i%>_<%=$j%>, 
+			<%}%>
+			<%}%>
+			<%for(my $j = 0; $j < $paralEnrich; $j++) {%>
+			EnrichEvent<%=$j%>, OWEvent<%=$j%>, FileExportEvent<%=$j%>,MessagingRouterEvent<%=$j%>,
+			<%}%>
+			OutDCPSEvent,
+			OutSchemaEvent,
+			PolledEvent
+			//,AdaptedEvent
+			//Da decommentare 
+			
+					as I)
+		{
+			logic
+				onTuple I :
+				{
+					submit(I, OutEvent) ;
+				}
+
+				onPunct I :
+				{
+				// Forward punctuation
+					if(currentPunct() == Sys.FinalMarker)
+					{
+						appTrc(Trace.debug,
+							"EventForwarder - forwarding FinalMarker punctuation...") ;
+						submit(Sys.FinalMarker, OutEvent) ;
+					}
+
+				}
+
+		}
+
+		(stream<Alarm alarm> OAlarm) as AlarmForwarder = Custom(
+			<%for(my $j = 0; $j < $paralEnrich; $j++) {%>
+			EnrichAlarm<%=$j%>, OWAlarm<%=$j%>, FileExportAlarm<%=$j%>
+			<%if($j < $paralEnrich - 1) { print ",";}%>
+			<%}%>
+			 as A)
+		{
+			logic
+				onTuple A :
+				{
+					submit(A, OAlarm) ;
+				}
+
+				onPunct A :
+				{
+				// Forward punctuation
+					if(currentPunct() == Sys.FinalMarker)
+					{
+						appTrc(Trace.debug,
+							"AlarmForwarder - forwarding FinalMarker punctuation...") ;
+						submit(Sys.FinalMarker, OAlarm) ;
+					}
+
+				}
+
+		}
+		
+		
+}

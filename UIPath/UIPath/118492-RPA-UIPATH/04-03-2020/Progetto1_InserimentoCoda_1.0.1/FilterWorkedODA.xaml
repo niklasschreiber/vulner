@@ -1,0 +1,440 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="FilterWorkedODA"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="tracciatoDaFiltrare" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="tracciatoFiltrato" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="ConnectionString" Type="InArgument(x:String)" />
+    <x:Property Name="tableName" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>FilterWorkedODA_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Database</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Database</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="FilterWorkedODA" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="ui:DatabaseConnection" Name="stringConnectionDB_RpaDbPosteIt" />
+      <Variable x:TypeArguments="x:String" Name="queryFilterODAOK" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[New List(Of String)]" Name="queryFields" />
+      <Variable x:TypeArguments="x:Int32" Name="indexDT" />
+      <Variable x:TypeArguments="x:String" Name="queryFieldsToString" />
+      <Variable x:TypeArguments="sd:DataTable" Default="[New DataTable()]" Name="queryFilterODADataTable" />
+      <Variable x:TypeArguments="sd:DataTable" Default="[New DataTable()]" Name="tempFiltered" />
+      <Variable x:TypeArguments="x:String" Name="tableString" />
+      <Variable x:TypeArguments="x:String" Name="tableStringFiltered" />
+      <Variable x:TypeArguments="x:Int32" Name="indexFilter" />
+    </Sequence.Variables>
+    <ui:DatabaseConnect sap2010:Annotation.AnnotationText="Apertura della connessione verso il DB Access" DatabaseConnection="[stringConnectionDB_RpaDbPosteIt]" DisplayName="Connect to DB RpaDbPosteIt" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="System.Data.OleDb" ConnectionString="[ConnectionString]" />
+    <Assign sap2010:Annotation.AnnotationText="Creazione di una tabella temporanea, che è una copia della tabella ottenuta dal tracciato in Input.&#xA;Andremo a lavorare su questa tabella temporanea." DisplayName="Assign - tempFiltered" sap2010:WorkflowViewState.IdRef="Assign_7">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataTable">[tempFiltered]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataTable">[tracciatoDaFiltrare]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap2010:Annotation.AnnotationText="Lista di stringhe che conterrà i nomi dei campi presenti sia nel tracciato CSV che nella tabella target sul DB." DisplayName="Assign - queryFields" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="scg:List(x:String)">[queryFields]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="scg:List(x:String)">[New List(Of String)]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap2010:Annotation.AnnotationText="Creazione e valorizzazione dell'indice che mi servirà per poter ciclare su ogni colonna mantenendomi fermo sulla stessa riga e aggiornare gli altri campo nel DB." DisplayName="Assign - indexDT" sap2010:WorkflowViewState.IdRef="Assign_3">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Int32">[indexDT]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Int32">0</InArgument>
+      </Assign.Value>
+    </Assign>
+    <While sap2010:Annotation.AnnotationText="Presa la singola riga della DataTable &quot;tracciatoCSV&quot;, andremo sulla singola colonna per aggiornare i dati della entry creata in precendenza tramite la INSERT su DB. Il ciclio funzionerà finché l'indice &quot;indexDT&quot; sarà minore del numero di colonne." DisplayName="While - Ciclo sulla singola riga" sap2010:WorkflowViewState.IdRef="While_1">
+      <While.Variables>
+        <Variable x:TypeArguments="x:String" Name="queryUpdate" />
+      </While.Variables>
+      <While.Condition>[indexDT &lt; tracciatoDaFiltrare.Columns.Count]</While.Condition>
+      <Sequence DisplayName="Memorizzazione dei valori dei singoli campi in una lista" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="x:String" Name="field" />
+          <Variable x:TypeArguments="x:String" Name="value" />
+        </Sequence.Variables>
+        <Assign sap2010:Annotation.AnnotationText="Memorizzo il nome della colonna attuale, della DataTable, corrispondente ad un campo della tabella target sul DB." DisplayName="Assign - field" sap2010:WorkflowViewState.IdRef="Assign_4">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[field]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">[tracciatoDaFiltrare.Columns(indexDT).ToString]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <If Condition="[field.Contains(&quot;ODA\BdC&quot;)]" sap2010:WorkflowViewState.IdRef="If_1">
+          <If.Then>
+            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_5">
+              <ui:Comment sap2010:WorkflowViewState.IdRef="Comment_1" Text="// Da tracciato riceviamo il seguente campo &quot;ODA\BdC&quot;. Sul DB in Access il carattere &quot;\&quot; crea problemi sulla sintassi delle query e di conseguenza siamo costretti a toglierlo. Sul DB la colonna corrispondente avrà come nome &quot;ODABdC&quot;" />
+              <Assign sap2010:Annotation.AnnotationText="" DisplayName="Assign - field" sap2010:WorkflowViewState.IdRef="Assign_11">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[field]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[field.Replace(field,"ODABdC")]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </If.Then>
+        </If>
+        <AddToCollection x:TypeArguments="x:String" Collection="[queryFields]" DisplayName="Add To Collection - Aggiungo Field" sap2010:WorkflowViewState.IdRef="AddToCollection`1_1" Item="[field]" />
+        <Assign sap2010:Annotation.AnnotationText="Ciclo While per aggiornare tutti i campi presenti su una singola riga.&#xA;&#xA;Trovandoci all'interno di un ciclo While è necessario incrementare la variabile di ciclo manualmente." DisplayName="Assign - Incremento dell'indice" sap2010:WorkflowViewState.IdRef="Assign_5">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Int32">[indexDT]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Int32">[indexDT + 1]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Sequence>
+    </While>
+    <WriteLine sap2010:Annotation.AnnotationText="Check per Data Validation" DisplayName="Write Line - Lista dei campi" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[&quot;Campi della query: &quot;+ vbCrLf +String.Join(&quot;,&quot;,queryFields).ToString]" />
+    <Assign sap2010:Annotation.AnnotationText="Conversione della lista in stringa unica, i cui valore sono separati dalla virgola. (il primo alias del primo campo è stato inserito direttamente nella query)" DisplayName="Assign - queryFieldsToString" sap2010:WorkflowViewState.IdRef="Assign_6">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[queryFieldsToString]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[String.Join(",i.",queryFields).ToString]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:CommentOut DisplayName="Comment Out" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_6">
+          <Assign sap2010:Annotation.AnnotationText="Aggiunta degli apici iniziali e finali per poter lanciare la query sul DB in maniera corretta." DisplayName="Assign - queryFieldsToString" sap2010:WorkflowViewState.IdRef="Assign_10">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[queryFieldsToString]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">["'"+queryFieldsToString+"'"]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </Sequence>
+      </ui:CommentOut.Body>
+    </ui:CommentOut>
+    <Assign sap2010:Annotation.AnnotationText="Creazione delle query in formato stringa così da poterla tracciare e controllare in caso di eccezioni sulla sintassi. La query è una SELECT che recupera dal DB tutti gli RDA NON ri-lavorabili (flag reworkable=0 nella tabella di flowbranch)" DisplayName="Assign - queryFilterODAOK" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[queryFilterODAOK]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">["SELECT i."+queryFieldsToString+" FROM "+tableName+" i, Map_Rpa_Process_Flowbranch f WHERE i.idMapProcessFlowbranch=f.id and f.reworkable=0 "]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <WriteLine sap2010:Annotation.AnnotationText="Check per Data Validation" DisplayName="Write Line - queryFilterODAOK" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[queryFilterODAOK]" />
+    <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Esecuzione della query verso il DB. In questo modo andiamo a costruire una DataTable con il risultato della SELECT." CommandType="Text" DataTable="[queryFilterODADataTable]" DisplayName="Execute queryFilterODAOK" ExistingDbConnection="[stringConnectionDB_RpaDbPosteIt]" sap2010:WorkflowViewState.IdRef="ExecuteQuery_1" Sql="[queryFilterODAOK]">
+      <ui:ExecuteQuery.Parameters>
+        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+      </ui:ExecuteQuery.Parameters>
+    </ui:ExecuteQuery>
+    <ui:ForEachRow CurrentIndex="[indexFilter]" DataTable="[queryFilterODADataTable]" DisplayName="For Each Row - Estrazione degli RDA in Stato OK" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="sd:DataRow[]" Default="[New DataRow(){}]" Name="arrayOfDataRow" />
+            </Sequence.Variables>
+            <WriteLine sap2010:Annotation.AnnotationText="Check per Data Validation" DisplayName="Write Line - Current RDA sulla DataTable" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="[&quot;Current RDA: &quot;+row(&quot;ODABdC&quot;).ToString]" />
+            <Assign sap2010:Annotation.AnnotationText="Creazione di un array che conterrà tutte le righe della tabella, recuperata dal tracciato, il cui valore di RDA è uguale a quello recuperato dal DB." DisplayName="Assign - arrayOfDataRow" sap2010:WorkflowViewState.IdRef="Assign_8">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataRow[]">[arrayOfDataRow]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataRow[]">[tempFiltered.Select("[ODA\BdC]="+row("ODABdC").ToString)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:ForEach x:TypeArguments="sd:DataRow" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Cicliamo sull'array costruito in precedenza per poter eliminare dalla DataTable le righe relative agli RDA che sul DB risultano essere in stato OK." DisplayName="For Each - Ciclo sull'Array di DataRow" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[arrayOfDataRow]">
+              <ui:ForEach.Body>
+                <ActivityAction x:TypeArguments="sd:DataRow">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="item" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                    <ui:InvokeCode ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Rimozione delle righe dalla DataTable" Code="tempFiltered.Rows.Remove(item)" DisplayName="Invoke Code - Remove Rows" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+                      <ui:InvokeCode.Arguments>
+                        <InArgument x:TypeArguments="sd:DataTable" x:Key="tempFiltered">[tempFiltered]</InArgument>
+                        <InArgument x:TypeArguments="sd:DataRow" x:Key="item">[item]</InArgument>
+                      </ui:InvokeCode.Arguments>
+                    </ui:InvokeCode>
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEach.Body>
+            </ui:ForEach>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+    </ui:ForEachRow>
+    <Assign sap2010:Annotation.AnnotationText="Passiamo in Output la tabella filtrata in maniera corretta." DisplayName="Assign - tracciatoFiltrato" sap2010:WorkflowViewState.IdRef="Assign_9">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataTable">[tracciatoFiltrato]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataTable">[tempFiltered]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <sads:DebugSymbol.Symbol>d21DOlxVc2Vyc1xhemFkbWluXERvY3VtZW50c1xVaVBhdGhcUHJvZ2V0dG8xX0luc2VyaW1lbnRvQ29kYV92M1xQcm9nZXR0bzFfSW5zZXJpbWVudG9Db2RhXEZpbHRlcldvcmtlZE9EQS54YW1sRk8D9wEOAgEBUz5TVQIBBFY4VksCAQNXOFdLAgECXAVcyAICAWBdBWQOAgFbZQVsDgIBV20FdA4CAVN1BaABDQIBN6EBBaEBiwICATWiAQWpAQ4CATCqAQW3ARUCAS+4AQW/AQ4CASnAAQXAAcQBAgEmwQEFxQEXAgEfxgEF7QEVAgEK7gEF9QEOAgEFXIwCXJ8CAgFlXLECXMUCAgFjXH5coQECAWFiNGJJAgFeXzVfQwIBXGo6ak8CAVpnO2dIAgFYci9yMAIBVm8wbzkCAVR6B58BEgIBOXkYeUgCATihAawBoQGIAgIBNqcBMKcBWQIBM6QBMaQBRgIBMb0BML0BvwECASy6ATG6AUMCASrAAa0BwAHBAQIBJ8EB0wLBAfYCAgEkwQH7AcEBlgICASLBAawDwQHAAwIBIMYBIcYBMAIBHcYBO8YBVgIBG8wBC+oBFgIBC/MBNPMBQgIBCPABNfABSAIBBn8JhgESAgFPhwEJlQEOAgFElgEJlgHIAQIBP5cBCZ4BEgIBOs4BQM4BUwIBDNABDdABgQICARnRAQ3YARYCARXZAQ3pARoCAQ2EATSEAWMCAVKBATWBATwCAVCHAReHAT4CAUWJAQ2TARgCAUeWAUCWAU8CAUKWAbwBlgHFAQIBQJwBM5wBQAIBPZkBNJkBPQIBO9ABwAHQAf4BAgEa1gE81gF2AgEY0wE90wFNAgEW2QHwAtkBggMCARTfARPmAR4CAQ6KAQ+KAdcCAgFOiwEPkgEYAgFI4AEV5QElAgEPkAE6kAFZAgFLjQE7jQFCAgFJ4gFZ4gFnAgES4wFP4wFVAgEQ</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="DatabaseConnect_1" sap:VirtualizedContainerService.HintSize="512,86">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="512,147">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="512,117">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="512,147">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="464,132">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Comment_1" sap:VirtualizedContainerService.HintSize="314,150" />
+      <sap2010:ViewStateData Id="Assign_11" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="336,401">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="464,549" />
+      <sap2010:ViewStateData Id="AddToCollection`1_1" sap:VirtualizedContainerService.HintSize="464,22" />
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="464,162">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="486,1109">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="While_1" sap:VirtualizedContainerService.HintSize="512,1324">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WriteLine_1" sap:VirtualizedContainerService.HintSize="512,88">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="512,147">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_10" sap:VirtualizedContainerService.HintSize="242,117">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="264,241">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CommentOut_1" sap:VirtualizedContainerService.HintSize="512,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="512,177">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WriteLine_2" sap:VirtualizedContainerService.HintSize="512,88">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ExecuteQuery_1" sap:VirtualizedContainerService.HintSize="512,145">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WriteLine_3" sap:VirtualizedContainerService.HintSize="352,88">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="352,132">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeCode_1" sap:VirtualizedContainerService.HintSize="314,191">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="336,315">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="352,506">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="374,930">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_1" sap:VirtualizedContainerService.HintSize="512,1078" />
+      <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="512,102">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="534,4301">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FilterWorkedODA_1" sap:VirtualizedContainerService.HintSize="574,4381" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

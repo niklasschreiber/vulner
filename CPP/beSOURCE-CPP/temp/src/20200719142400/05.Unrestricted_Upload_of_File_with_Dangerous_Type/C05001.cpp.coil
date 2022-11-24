@@ -1,0 +1,202 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/05.Unrestricted_Upload_of_File_with_Dangerous_Type/C05001.cpp");
+   ("language", "CPP");
+   ("include", "<stdio.h>");
+   ("include", "<string.h>");
+   ("include", "<unistd.h>");
+   ("include", "<fcntl.h>");
+   ("include", "<sys/stat.h>");
+   ("include", "cgic.h");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/05.Unrestricted_Upload_of_File_with_Dangerous_Type/C05001.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/05.Unrestricted_Upload_of_File_with_Dangerous_Type/C05001.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/05.Unrestricted_Upload_of_File_with_Dangerous_Type/C05001.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/05.Unrestricted_Upload_of_File_with_Dangerous_Type/C05001.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/05.Unrestricted_Upload_of_File_with_Dangerous_Type/C05001.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/05.Unrestricted_Upload_of_File_with_Dangerous_Type/C05001.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/05.Unrestricted_Upload_of_File_with_Dangerous_Type/C05001.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C05001",
+   SI(<"C05001">,
+   {[
+      {;
+      ,(1#1,68#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,68#1,!1)}
+   )
+   ,(1#1,68#1,!1)},
+
+   {"C05001",
+   FN([public],(<"C05001">,"cwe434"):int,[("":unit,(9#12,9#15,!1))],[],
+   {[
+      {VD("file",class((,cgiFilePtr)))
+      ,(10#16,10#19,!1)};
+      {VD("targetFile",int)
+      ,(11#9,11#18,!1)};
+      {VD("mode",class((,mode_t)))
+      ,(12#12,12#15,!1)};
+      {VD("name",char,([{"128"N,int,(13#15,13#17,!1)}]))
+      ,(13#10,13#18,!1)};
+      {VD("fileNameOnServer",char,([{"64"N,int,(14#27,14#28,!1)}]))
+      ,(14#10,14#29,!1)};
+      {VD("contentType",char,([{"1024"N,int,(15#22,15#25,!1)}]))
+      ,(15#10,15#26,!1)};
+      {VD("buffer",char,([{"1024"N,int,(16#17,16#20,!1)}]))
+      ,(16#10,16#21,!1)};
+      {VD("tmpStr",ref(char),{CS(ref(unit),{"0"N,int,(17#18,17#21,!1)}),ref(unit),(17#18,17#21,!1)})
+      ,(17#10,17#16,!1)};
+      {VD("size",int)
+      ,(18#9,18#12,!1)};
+      {VD("got",int)
+      ,(19#9,19#11,!1)};
+      {VD("t",int)
+      ,(19#13,19#13,!1)};
+      {PC0((<"C05001">,"cgiHeaderContentType"),[string],[{"text/html"S,string,(20#26,20#36,!1)}])
+      ,(20#5,20#37,!1)};
+      {IF0({BO(!=,{SC((<"C05001">,"cgiFormFileName"),[string,arr(char),int],[{"file"S,string,(22#25,22#30,!1)},{V("name"),arr(char),(22#33,22#36,!1)},{SO({V("name"),arr(char),(22#46,22#49,!1)}),int,(22#39,22#50,!1)}]),class((,"%undef")),(22#9,22#51,!1)},{V("cgiFormSuccess"),class((,"%undef")),(22#55,22#68,!1)}),bool,(22#9,22#68,!1)},
+         {[
+            {PC0((<"C05001">,"fprintf"),[class((,"%undef")),string],[{V("stderr"),class((,"%undef")),(23#17,23#22,!1)},{"could not retrieve filename\n"S,string,(23#24,23#54,!1)}])
+            ,(23#9,23#55,!1)};
+            {GO @ "FAIL"
+            ,(24#9,24#18,!1)}
+            ]
+         ,(22#71,25#5,!1)})
+      ,(22#5,25#5,!1)};
+      {PC0((<"C05001">,"cgiFormFileSize"),[string,ref(int)],[{"file"S,string,(26#21,26#26,!1)},{&{V("size"),int,(26#30,26#33,!1)},ref(int),(26#29,26#33,!1)}])
+      ,(26#5,26#34,!1)};
+      {PC0((<"C05001">,"cgiFormFileContentType"),[string,arr(char),int],[{"file"S,string,(28#28,28#33,!1)},{V("contentType"),arr(char),(28#36,28#46,!1)},{SO({V("contentType"),arr(char),(28#56,28#66,!1)}),int,(28#49,28#67,!1)}])
+      ,(28#5,28#68,!1)};
+      {IF0({BO(!=,{SC((<"C05001">,"cgiFormFileOpen"),[string,ref(class((,cgiFilePtr)))],[{"file"S,string,(30#25,30#30,!1)},{&{V("file"),class((,cgiFilePtr)),(30#34,30#37,!1)},ref(class((,cgiFilePtr))),(30#33,30#37,!1)}]),class((,"%undef")),(30#9,30#38,!1)},{V("cgiFormSuccess"),class((,"%undef")),(30#43,30#56,!1)}),bool,(30#9,30#56,!1)},
+         {[
+            {PC0((<"C05001">,"fprintf"),[class((,"%undef")),string],[{V("stderr"),class((,"%undef")),(31#17,31#22,!1)},{"could not open the file\n"S,string,(31#24,31#50,!1)}])
+            ,(31#9,31#51,!1)};
+            {GO @ "FAIL"
+            ,(32#9,32#18,!1)}
+            ]
+         ,(30#59,33#5,!1)})
+      ,(30#5,33#5,!1)};
+      {{AE({V("t"),int,(34#5,34#5,!1)},{UO(-,{"1"N,int,(34#8,34#8,!1)}),int,(34#7,34#8,!1)}),int,(34#5,34#8,!1)}
+      ,(34#5,34#8,!1)};
+      {WL(L0,{"1"N,int,(36#11,36#11,!1)},
+         {[
+            {{AE({V("tmpStr"),ref(char),(37#9,37#14,!1)},{SC((<"C05001">,"strstr"),[ref(char),string],[{BO(+,{BO(+,{V("name"),arr(char),(37#23,37#26,!1)},{V("t"),int,(37#28,37#28,!1)}),ref(char),(37#23,37#28,!1)},{"1"N,int,(37#30,37#30,!1)}),ref(char),(37#23,37#30,!1)},{"\\"S,string,(37#32,37#35,!1)}]),class((,"%undef")),(37#16,37#36,!1)}),ref(char),(37#9,37#36,!1)}
+            ,(37#9,37#36,!1)};
+            {IF0({BO(==,{CS(ref(unit),{"0"N,int,(38#12,38#15,!1)}),ref(unit),(38#12,38#15,!1)},{V("tmpStr"),ref(char),(38#18,38#23,!1)}),bool,(38#12,38#23,!1)},
+               {[
+                  {{AE({V("tmpStr"),ref(char),(39#9,39#14,!1)},{SC((<"C05001">,"strstr"),[ref(char),string],[{BO(+,{BO(+,{V("name"),arr(char),(39#23,39#26,!1)},{V("t"),int,(39#28,39#28,!1)}),ref(char),(39#23,39#28,!1)},{"1"N,int,(39#30,39#30,!1)}),ref(char),(39#23,39#30,!1)},{"/"S,string,(39#32,39#34,!1)}]),class((,"%undef")),(39#16,39#35,!1)}),ref(char),(39#9,39#35,!1)}
+                  ,(39#9,39#35,!1)}
+                  ]
+               ,(38#9,39#36,!1)})
+            ,(38#9,39#36,!1)};
+            {IF({BO(!=,{CS(ref(unit),{"0"N,int,(40#12,40#15,!1)}),ref(unit),(40#12,40#15,!1)},{V("tmpStr"),ref(char),(40#18,40#23,!1)}),bool,(40#12,40#23,!1)},
+               {[
+                  {{AE({V("t"),int,(41#13,41#13,!1)},{CS(int,{BO(-,{V("tmpStr"),ref(char),(41#21,41#26,!1)},{V("name"),arr(char),(41#28,41#31,!1)}),long,(41#20,41#32,!1)}),int,(41#15,41#32,!1)}),int,(41#13,41#32,!1)}
+                  ,(41#13,41#32,!1)}
+                  ]
+               ,(40#9,43#18,!1)},
+               {[
+                  {BR @ 
+                  ,(43#13,43#18,!1)}
+                  ]
+               ,(40#9,43#18,!1)})
+            ,(40#9,43#18,!1)}
+            ]
+         ,(36#13,44#5,!1)})
+      ,(36#5,44#5,!1)};
+      {PC0((<"C05001">,"strcpy"),[arr(char),ref(char)],[{V("fileNameOnServer"),arr(char),(45#12,45#27,!1)},{BO(+,{BO(+,{V("name"),arr(char),(45#29,45#32,!1)},{V("t"),int,(45#34,45#34,!1)}),ref(char),(45#29,45#34,!1)},{"1"N,int,(45#36,45#36,!1)}),ref(char),(45#29,45#36,!1)}])
+      ,(45#5,45#37,!1)};
+      {{AE({V("mode"),class((,mode_t)),(46#5,46#8,!1)},{BO(|,{V("S_IRWXU"),class((,"%undef")),(46#10,46#16,!1)},{BO(|,{V("S_IRGRP"),class((,"%undef")),(46#18,46#24,!1)},{V("S_IROTH"),class((,"%undef")),(46#26,46#32,!1)}),bool,(46#18,46#32,!1)}),bool,(46#10,46#32,!1)}),class((,mode_t)),(46#5,46#32,!1)}
+      ,(46#5,46#32,!1)};
+      {{AE({V("targetFile"),int,(48#5,48#14,!1)},{SC((<"C05001">,"open"),[arr(char),bool,class((,mode_t))],[{V("fileNameOnServer"),arr(char),(48#24,48#39,!1)},{BO(|,{V("O_RDWR"),class((,"%undef")),(48#41,48#46,!1)},{BO(|,{V("O_CREAT"),class((,"%undef")),(48#48,48#54,!1)},{BO(|,{V("O_TRUNC"),class((,"%undef")),(48#56,48#62,!1)},{V("O_APPEND"),class((,"%undef")),(48#64,48#71,!1)}),bool,(48#56,48#71,!1)}),bool,(48#48,48#71,!1)}),bool,(48#41,48#71,!1)},{V("mode"),class((,mode_t)),(48#73,48#76,!1)}]),class((,"%undef")),(48#18,48#77,!1)}),int,(48#5,48#77,!1)}
+      ,(48#5,48#77,!1)};
+      {IF0({BO(<,{V("targetFile"),int,(49#8,49#17,!1)},{"0"N,int,(49#19,49#19,!1)}),bool,(49#8,49#19,!1)},
+         {[
+            {PC0((<"C05001">,"fprintf"),[class((,"%undef")),string,arr(char)],[{V("stderr"),class((,"%undef")),(50#17,50#22,!1)},{"could not create the new file,%s\n"S,string,(50#24,50#59,!1)},{V("fileNameOnServer"),arr(char),(50#61,50#76,!1)}])
+            ,(50#9,50#77,!1)};
+            {GO @ "FAIL"
+            ,(51#9,51#18,!1)}
+            ]
+         ,(49#21,52#5,!1)})
+      ,(49#5,52#5,!1)};
+      {WL(L1,{BO(==,{SC((<"C05001">,"cgiFormFileRead"),[class((,cgiFilePtr)),arr(char),int,ref(int)],[{V("file"),class((,cgiFilePtr)),(54#28,54#31,!1)},{V("buffer"),arr(char),(54#34,54#39,!1)},{"1024"N,int,(54#42,54#45,!1)},{&{V("got"),int,(54#49,54#51,!1)},ref(int),(54#48,54#51,!1)}]),class((,"%undef")),(54#12,54#52,!1)},{V("cgiFormSuccess"),class((,"%undef")),(54#56,54#69,!1)}),bool,(54#12,54#69,!1)},
+         {[
+            {IF0({BO(>,{V("got"),int,(55#12,55#14,!1)},{"0"N,int,(55#16,55#16,!1)}),bool,(55#12,55#16,!1)},
+               {[
+                  {PC0((<"C05001">,"write"),[int,arr(char),int],[{V("targetFile"),int,(56#19,56#28,!1)},{V("buffer"),arr(char),(56#30,56#35,!1)},{V("got"),int,(56#37,56#39,!1)}])
+                  ,(56#13,56#40,!1)}
+                  ]
+               ,(55#9,56#41,!1)})
+            ,(55#9,56#41,!1)}
+            ]
+         ,(54#71,57#5,!1)})
+      ,(54#5,57#5,!1)};
+      {PC0((<"C05001">,"cgiFormFileClose"),[class((,cgiFilePtr))],[{V("file"),class((,cgiFilePtr)),(58#22,58#25,!1)}])
+      ,(58#5,58#26,!1)};
+      {PC0((<"C05001">,"close"),[int],[{V("targetFile"),int,(59#11,59#20,!1)}])
+      ,(59#5,59#21,!1)};
+      {GO @ "END"
+      ,(60#5,60#13,!1)};
+      {@ "FAIL"
+      ,(61#1,62#39,!1)};
+      {PC0((<"C05001">,"fprintf"),[class((,"%undef")),string],[{V("stderr"),class((,"%undef")),(62#13,62#18,!1)},{"Failed to upload"S,string,(62#20,62#37,!1)}])
+      ,(62#5,62#38,!1)};
+      {RE({"1"N,int,(63#12,63#12,!1)})
+      ,(63#5,63#13,!1)};
+      {@ "END"
+      ,(64#1,65#61,!1)};
+      {PC0((<"C05001">,"printf"),[string,arr(char)],[{"File \"%s\" has been uploaded"S,string,(65#12,65#42,!1)},{V("fileNameOnServer"),arr(char),(65#44,65#59,!1)}])
+      ,(65#5,65#60,!1)};
+      {RE({"0"N,int,(66#12,66#12,!1)})
+      ,(66#5,66#13,!1)}
+      ]
+   ,(9#1,67#1,!1)}
+   )
+   ,(9#1,67#1,!1)},
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/05.Unrestricted_Upload_of_File_with_Dangerous_Type/C05001.cpp",
+   [
+      S("//now retrieve the value of the \"file\" attribute, it should be the file path on the client machine\n",21),
+      S("//now get the file type which is not used in this example\n",27),
+      S("//For now, the file is uploaded to the system's temporary folder, usually \"/tmp\". We should open the file. Notice that the tmp file has a different name to the real file, so we could not use path \"/tmp/userfilename\" to get the it.\n",29),
+      S("//Now we extract the real file name from the \"local\" file path\n",35),
+      S("//if \"\\\\\" is not path separator, try \"/\"\n",39),
+      S("//For simplicity, we will copy the file to the current folder (the same folder as the cgi file). So, now we will first create a new file with a call to \"open\". \n",47),
+      S("//Read the content from the tmp file, and write it into the newly created file.\n",53)
+   ]
+   }
+]

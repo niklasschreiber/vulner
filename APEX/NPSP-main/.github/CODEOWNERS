@@ -1,0 +1,21 @@
+
+# Python
+*.py                  @SalesforceFoundation/release-engineering-reviewers
+
+# CumulusCI
+/cumulusci.yml        @SalesforceFoundation/release-engineering-reviewers
+/tasks/               @SalesforceFoundation/release-engineering-reviewers
+
+# Heroku CI
+/Gemfile.lock         @SalesforceFoundation/release-engineering-reviewers
+/app.json             @SalesforceFoundation/release-engineering-reviewers
+/requirements.txt     @SalesforceFoundation/release-engineering-reviewers
+/runtime.txt          @SalesforceFoundation/release-engineering-reviewers
+
+# GitHub Actions
+.github/workflows/    @SalesforceFoundation/release-engineering-reviewers
+
+# NPSP Special Folders
+/unpackaged/config/core_instrumentation_mock_classes/        @force2b
+/unpackaged/config/crlp_testing/                             @force2b
+/force-app/main/instrumentation/                             @force2b

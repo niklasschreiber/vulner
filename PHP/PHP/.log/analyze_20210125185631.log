@@ -1,0 +1,15 @@
+[info] [SourceCollector] start collect
+[info] [Collector] check remote files...
+[trac] [Collector]    remote dir: /PHP
+[trac] [Collector]    remote dir: /PHP/.data
+[trac] [Collector]    remote dir: /PHP/.filter
+[trac] [Collector]    remote dir: /PHP/.log
+[trac] [Collector]    remote dir: /PHP/lib
+[trac] [Collector]    remote dir: /PHP/src
+[info] [Collector] id=20210125185600(2001), from=D:/_OpenSource/SRA/CIVETTA/PHP, target files=1
+[info] [Collector] new=1, change=0, remove=0
+[info] [Collector] copy new files...
+[info] [Collector] copy end.
+[info] [SourceCollector] end collect (time=1226ms)
+[info] working time: 1409ms
+[info] CLI end...

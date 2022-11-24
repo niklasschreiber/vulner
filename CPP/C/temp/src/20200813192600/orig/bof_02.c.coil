@@ -1,0 +1,51 @@
+{
+   ("encoding", "KSC5601");
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_02.c");
+   ("language", "C");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<string.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_02.c");
+   (!2, "buf");
+   (!3, "str");
+   (!4, "5"N);
+   (!5, "10"N);
+   (!6, "1"N);
+   (!7, "arr");
+   (!8, "0x00"N);
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_02.c",
+   FN([public],(<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_02.c">,"test1_aux"):ref(char),[(!2:ref(int),(5#22,5#22,!1))],[],
+   {[
+      {VD(!3,ref(char),{SC((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_02.c">,"malloc"),[int],[{!4,int,(7#24,7#24,!1)}]),top,(7#17,7#17,!1)})
+      ,(7#11,7#11,!1)};
+      {{AE({AA({V(!2),ref(int),(8#5,8#5,!1)},[{!5,int,(8#9,8#9,!1)}]),int,(8#5,8#5,!1)},{!6,int,(8#15,8#15,!1)}),int,(8#5,8#5,!1)}
+      ,(8#5,8#16,!1)};
+      {RE({V(!3),ref(char),(9#12,9#12,!1)})
+      ,(9#5,9#5,!1)}
+      ]
+   ,(5#7,10#1,!1)}
+   )
+   ,(5#7,10#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_02.c",
+   FN([public],(<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_02.c">,"test1"):unit,[],[],
+   {[
+      {VD(!7,int,([{!5,int,(14#13,14#13,!1)}]))
+      ,(14#9,14#9,!1)};
+      {VD(!2,ref(char))
+      ,(15#11,15#11,!1)};
+      {{AE({V(!2),ref(char),(16#5,16#5,!1)},{SC((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_02.c">,"test1_aux"),[ref(int)],[{V(!7),arr(int),(16#21,16#21,!1)}]),ref(char),(16#11,16#11,!1)}),ref(char),(16#5,16#5,!1)}
+      ,(16#5,16#25,!1)};
+      {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_02.c">,"memset"),[ref(char),int,int],[{V(!2),ref(char),(17#12,17#12,!1)},{!8,int,(17#17,17#17,!1)},{!5,int,(17#23,17#23,!1)}])
+      ,(17#5,17#5,!1)};
+      {RE0
+      ,(!)}
+      ]
+   ,(12#6,18#1,!1)}
+   )
+   ,(12#6,18#1,!1)}
+]

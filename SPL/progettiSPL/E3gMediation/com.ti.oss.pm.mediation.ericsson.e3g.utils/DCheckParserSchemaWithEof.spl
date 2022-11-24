@@ -1,0 +1,334 @@
+namespace com.ti.oss.pm.mediation.ericsson.e3g.utils;
+
+
+/*
+ * Import SPL namespaces
+ */
+use spl.XML::* ;
+use com.ibm.streamsx.file::* ;
+
+/*
+ * Import local namespaces
+ */
+use com.ti.oss.common.types::* ;
+use com.ti.oss.common.event::* ;
+//use com.ti.oss.common.pm.parser::* ;
+use com.ti.oss.common.util.cfg::* ;
+use com.ti.oss.common.pm.util.writer.cfg::* ;
+use com.ti.oss.common.pm.parser.xml3gpp::* ;
+
+
+
+/** 
+ * The Duplicates Check Parser Schema (DCheckSchemaParser) operator is in charge to parse the 3GPP XML schema files and
+ * check for duplicated moids (potential duplicates) during the parsing operation.
+ */ 
+
+public composite DCheckParserSchemaWithEof(input OFReaderXMLSchema; output OutRawData,OutDCPSEvent)
+{
+	param
+		expression <rstring> $mediationId;
+        expression <rstring> $commonEnv : "COMMON_CFG_DIR";
+        expression <rstring> $eventsListCfgParam : "EVENT_TYPE_LIST";
+
+    type 
+       FReaderT = FileHeader, tuple<blob rawBlock>;
+       MParserT = FileHeader, tuple<rstring moid>;
+       DHandlerT = FileHeader, tuple<map<rstring, int32> dTable>;
+       
+      	    
+	    //Struttura dell'header
+	    static MeasFileHeaderT = tuple<FileHeader fileHeader, rstring vendorName, rstring dnPrefix, rstring localDn, rstring elementType,rstring collectionBeginTime> ;
+		
+		// Tupla che rappresenta un singolo blocco di misure
+		static MeasBlockT = tuple<rstring userLabel, rstring localDn, rstring measInfoId, rstring granPeriodDuration, rstring granPeriodEndTime,
+								  rstring repPeriodDuration, rstring measObjLdn, list<MtType> measTypes, list<MvValues> measValues> ; 
+		static MeasFileHeaderType = tuple<FileHeader fileHeader, map<rstring, rstring> fhAttrs, FileSenderType fileSender, MeasCollecType measCollec> ;
+		static FileSenderType = tuple<map<rstring, rstring> fsAttrs> ;
+		static MeasCollecType = tuple<map<rstring, rstring> mcAttrs> ;
+		static MeasDataType = tuple<ManagedElementType managedElement, list<MeasInfoType> measInfo> ;
+		static ManagedElementType = tuple<map<rstring, rstring> mngElAttrs> ;
+		static MeasInfoType = tuple<map<rstring, rstring> measInfoIdAttrs, GranPeriodType granPeriod, RepPeriodType repPeriod, list<MtType> measType, //list<rstring> measTypes,
+									list<MvType> measValue> ;
+		static GranPeriodType = tuple<map<rstring, rstring> gpAttrs> ;
+		static RepPeriodType = tuple<map<rstring, rstring> rpAttrs> ;
+		static MtType = tuple<map<rstring, rstring> mtAttrs, rstring mtName> ;
+		static MvType = tuple<map<rstring, rstring> mvAttrs, list<MvValues> mvValues> ;
+		static MvValues = tuple<map<rstring, rstring> mvAttrs, rstring mvValue> ;	
+		
+		
+		
+	graph
+	
+		
+		 (stream<MeasFileHeaderType> MeasFileHeaderPOut ; stream<MeasDataType> MeasDataPOut) = XMLParse(OFReaderXMLSchema as InRawBlock)
+	    	{
+	    		param
+	    			trigger : "/measCollecFile/fileHeader", "/measCollecFile/measData" ;
+	    			parsing : permissive ; // log and ignore errors
+					xmlInput : rawBlock ;
+	
+	    		output
+					MeasFileHeaderPOut : fileHeader =
+					{
+						eventCorrelationId = InRawBlock.eventCorrelationId, 
+						sessionBeginTime = InRawBlock.sessionBeginTime, 
+						fName = InRawBlock.fName, 
+						rop = InRawBlock.rop, 
+						emId = InRawBlock.emId, 
+						neId = InRawBlock.neId
+					}, fhAttrs = 
+						XPathMap("@*"), 
+						fileSender = XPath("fileSender", { fsAttrs = XPathMap("@*") }), 
+						measCollec = XPath("measCollec", { mcAttrs = XPathMap("@*")	}) ; // *trigger: /measCollecFile/fileHeader
+					
+	    			MeasDataPOut : managedElement = XPath("managedElement", { mngElAttrs = XPathMap("@*") }),
+	    				measInfo = XPathList("measInfo", { measInfoIdAttrs = XPathMap("@*"),
+	    				granPeriod = XPath("granPeriod", { gpAttrs = XPathMap("@*") }),
+	    				repPeriod = XPath("repPeriod", { rpAttrs = XPathMap("@*") }),
+	    				measType = XPathList("measType", { mtAttrs = XPathMap("@*"), mtName = XPath("text()") }),
+	    				measValue = XPathList("measValue", { mvAttrs = XPathMap("@*"), 
+	    				mvValues = XPathList("r", { mvAttrs = XPathMap("@*"), mvValue = XPath("text()") }) }) }) ; // *trigger: /measCollecFile/measData
+	    	}
+	
+
+		(stream<MeasFileHeaderT> MeasHeader ; stream<MeasBlockT> MeasBlock) as ToMeasBlock 
+		= Custom(MeasFileHeaderPOut ; MeasDataPOut)
+		{
+			logic
+				onTuple MeasFileHeaderPOut :
+				{
+					
+					// Debug traces 
+					//appTrc(Trace.trace, "Parsed header \"" +(rstring) MeasFileHeaderPOut + "\"...") ;
+					 
+					mutable MeasFileHeaderT measHeader = { } ;
+					measHeader.fileHeader = fileHeader ;
+					measHeader.vendorName = getAttributeVal(fhAttrs, "vendorName") ;
+					measHeader.dnPrefix = getAttributeVal(fhAttrs, "dnPrefix") ;
+					measHeader.localDn = getAttributeVal(fileSender.fsAttrs, "localDn") ;
+					measHeader.elementType = getAttributeVal(fileSender.fsAttrs, "elementType") ;
+					measHeader.collectionBeginTime = getAttributeVal(measCollec.mcAttrs, "beginTime") ;
+					submit(measHeader, MeasHeader) ;
+						
+					// Debug traces 
+					appTrc(Trace.trace, "Parsed header \"" +(rstring) measHeader + "\"...") ;
+				}
+
+				onTuple MeasDataPOut :
+				{
+					appTrc(Trace.trace, "Received MeasDataPOut=\"" +(rstring) MeasDataPOut + "\"") ;
+					
+					mutable MeasBlockT measBlock = { } ;
+					measBlock.userLabel = getAttributeVal(managedElement.mngElAttrs, "userLabel") ;
+					//appTrc(Trace.trace, "userLabel=\"" +(rstring) measBlock.userLabel + "\"") ;
+					measBlock.localDn = getAttributeVal(managedElement.mngElAttrs, "localDn") ;
+					//appTrc(Trace.trace, "localDn=\"" +(rstring) measBlock.localDn + "\"") ;
+					
+					for(int32 i in range(measInfo))
+					{
+
+						MeasInfoType mi = measInfo [ i ] ;
+						measBlock.measInfoId = getAttributeVal(mi.measInfoIdAttrs, "measInfoId") ;
+						//appTrc(Trace.trace, "measInfoId=\"" +(rstring) measBlock.measInfoId + "\"") ;
+						
+						measBlock.granPeriodDuration = getAttributeVal(mi.granPeriod.gpAttrs, "duration") ;
+						//appTrc(Trace.trace, "duration=\"" +(rstring) measBlock.granPeriodDuration + "\"") ;
+						
+						measBlock.granPeriodEndTime = getAttributeVal(mi.granPeriod.gpAttrs, "endTime") ;
+						//appTrc(Trace.trace, "endTime=\"" +(rstring) measBlock.granPeriodEndTime + "\"") ;
+						
+						measBlock.repPeriodDuration = getAttributeVal(mi.repPeriod.rpAttrs, "duration") ;
+						//appTrc(Trace.trace, "duration=\"" +(rstring) measBlock.repPeriodDuration + "\"") ;
+						
+						measBlock.measTypes = mi.measType ;
+						
+						for(int32 j in range(mi.measValue))
+						{
+							measBlock.measObjLdn = getAttributeVal(mi.measValue [ j ].mvAttrs, "measObjLdn") ;
+							//appTrc(Trace.trace, "measObjLdn=\"" +(rstring) measBlock.measObjLdn + "\"") ;
+							
+							measBlock.measValues = mi.measValue [ j ].mvValues ;
+							//appTrc(Trace.trace, "measValues=\"" +(rstring) measBlock.measValues + "\"") ;
+							
+							// Submit the tuple
+							appTrc(Trace.trace, "Submitting MeasBlock = \"" +(rstring) measBlock + "\"...") ;
+							submit(measBlock, MeasBlock) ;
+						}
+
+					}
+
+					
+				}
+
+				onPunct MeasDataPOut :
+				{
+					if(currentPunct() == Sys.WindowMarker)
+					{
+						// Send punctuation
+						submit(Sys.WindowMarker, MeasBlock) ;
+					}
+
+				}
+
+		}
+			
+		/*
+		 * Prima fase di trasformazione delle informazioni ricavate dal parser di tipo schema.
+		 *  
+		 * Input:
+		 *    MeasFileHeaderT = tuple< FileHeader fileHeader, rstring vendorName, rstring dnPrefix, rstring localDn,rstring elementType, 
+		 *                             rstring collectionBeginTime >;
+		 *    MeasBlockT = tuple< rstring userLabel, rstring localDn, rstring measInfoId, rstring granPeriodDuration, 
+		 *                        rstring granPeriodEndTime, rstring repPeriodDuration, rstring measObjLdn, rstring measTypesCsvList,  
+		 *                        rstring measResultsCsvList>;
+		 * 
+		 * Output:
+		 *    RawDataHeader = tuple<FileHeader fileHeader, rstring vName, rstring sName, rstring sType, rstring cbt> 
+		 * 
+		 *    RawDataBlock = tuple<rstring neUn, rstring neDn, rstring measInfoId, rstring mts, rstring gp, rstring moid, 
+		 *                         list <RawCounterTableEntry> cTable>
+		 *    RawCounterTableEntry = tuple<rstring cName, rstring cValue>
+		 */
+		 
+		(stream<RawDataHeader rHeader, RawDataBlock rBlock> OutRawData ; stream<Event e> OutDCPSEvent) as ToRawDataBlock = 
+		Custom(MeasHeader ; MeasBlock)
+		{
+			logic
+				state :
+				{
+					// Local objects (checkpoint? After meeting with IBM on application failover)
+					mutable MeasFileHeaderT rawMeasFileHeader ;
+					mutable map<int32, boolean> eventTable = getEventTable($commonEnv, $mediationId, $eventsListCfgParam) ;
+				}
+
+				onTuple MeasHeader :
+				{
+					// Copy the input header into temporary structure header
+					rawMeasFileHeader = MeasHeader ;
+				}
+
+				onTuple MeasBlock :
+				{
+					// Create the rawDataHeader to submit
+					mutable RawDataHeader rawDataHeader = { } ;
+					
+					rawDataHeader.fileHeader = rawMeasFileHeader.fileHeader ;
+					rawDataHeader.vName = rawMeasFileHeader.vendorName ;
+
+					// According to 3GPP 32.435.10, in schema based sName  
+					// should be equal to fileHeader.dnPrefix + "," + fileSender.localDn
+					// NOTE: localDn  can be empty.
+					
+					rawDataHeader.sName = rawMeasFileHeader.dnPrefix; //+ "," + rawMeasFileHeader.localDn ;
+					rawDataHeader.sType = rawMeasFileHeader.elementType ;
+					rawDataHeader.cbt = rawMeasFileHeader.collectionBeginTime ;
+
+					// Create the rawDataBlock to submit
+					mutable RawDataBlock rawDataBlock = { } ;
+					rawDataBlock.neUn = userLabel ;
+
+					// According to 3GPP 32.435.10
+
+					//rawDataBlock.neDn = rawMeasFileHeader.dnPrefix + "," + localDn ; //localDn is optional
+					rawDataBlock.neDn = rawMeasFileHeader.dnPrefix;
+					rawDataBlock.measInfoId = measInfoId ;
+					rawDataBlock.mts = granPeriodEndTime ;
+					rawDataBlock.gp = granPeriodDuration ;
+					rawDataBlock.moid = measObjLdn ;
+
+					//
+					// Make the cTable
+					//
+					mutable map<rstring, RawCounterTableEntry> entriesMap = {} ;
+					
+					for ( MtType mt in measTypes )
+					{
+						rstring p = mt.mtAttrs[ "p" ] ;
+						
+						if ( !has(entriesMap, p) )
+						{
+							mutable RawCounterTableEntry entry = { } ;
+							entry.cName = mt.mtName ;	//measTypes [ mt.mtName ] ;
+							entry.cValue = "" ;
+							insertM( entriesMap, p, entry ) ;
+						}
+					}	
+
+					for ( MvValues mv in measValues )
+					{
+						rstring p = mv.mvAttrs[ "p" ] ;
+						
+						if ( has(entriesMap, p) )
+						{
+							entriesMap[ p ].cValue = mv.mvValue ;
+						} else
+						{
+							// Submit event tuple
+							mutable Event event = { } ;
+							event.eventType = 130 ;
+							event.resultCode = 5 ;
+							event.rawFile = filename(rawMeasFileHeader.fileHeader.fName) ;
+							event.eventCorrelationId = rawMeasFileHeader.fileHeader.eventCorrelationId ;
+							event.rop = rawMeasFileHeader.fileHeader.rop ;
+							event.emId = rawMeasFileHeader.fileHeader.emId ;
+							event.neId = rawMeasFileHeader.fileHeader.neId ;
+							event.eventText = "Discarded malformed value in position " + p + " with measObjLdn " + measObjLdn ;
+							boolean eventEnabled = mkEvent(event, rawMeasFileHeader.fileHeader.sessionBeginTime) ;
+							if(eventEnabled) submit({ e = event }, OutDCPSEvent) ;
+						}						
+					}	
+					
+					for ( rstring p in entriesMap )
+					{
+						if ( entriesMap[ p ].cValue != "" )
+						{
+							appendM( rawDataBlock.cTable, entriesMap[ p ] ) ;
+						}
+					}
+
+					// Submit the tuple 
+					appTrc(Trace.trace, "Submitting RawDataHeader=\"" +(rstring) rawDataHeader + "\"" + "RawDataBlock=\"" +(rstring) rawDataBlock + "\"...") ;
+					submit({ rHeader = rawDataHeader, rBlock = rawDataBlock }, OutRawData) ;
+
+					// Create the list of counters
+					clearM(rawDataBlock.cTable) ;
+
+				}
+
+				onPunct MeasBlock :
+				{
+					if(currentPunct() == Sys.WindowMarker)
+					{
+						// Submit event tuple
+						mutable Event event = { } ;
+						event.eventType = 130 ;
+						event.resultCode = 0 ;
+						event.rawFile = filename(rawMeasFileHeader.fileHeader.fName) ;
+						event.eventCorrelationId = rawMeasFileHeader.fileHeader.eventCorrelationId ;
+						event.rop = rawMeasFileHeader.fileHeader.rop ;
+						event.emId = rawMeasFileHeader.fileHeader.emId ;
+						event.neId = rawMeasFileHeader.fileHeader.neId ;
+						event.eventText = "The raw file has been parsed" ;
+						boolean eventEnabled = mkEvent(event, rawMeasFileHeader.fileHeader.sessionBeginTime, eventTable) ;
+						if(eventEnabled) submit({ e = event }, OutDCPSEvent) ;
+
+						// Send punctuation
+						submit(Sys.WindowMarker, OutRawData) ;
+
+						// Check if eventTable has to be reloaded.
+						mutable map<int32, boolean> tmpEventTable = { } ;
+						if(reloadEventTable($eventsListCfgParam, tmpEventTable) > 0)
+						{
+							swap(eventTable, tmpEventTable) ;
+						}
+
+						// Debug traces
+						appTrc(Trace.trace, "The file \"" + rawMeasFileHeader.fileHeader.fName + "\" has been parsed.") ;
+					}
+
+				}
+
+			}
+
+}

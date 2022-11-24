@@ -1,0 +1,91 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/31.TOC_TOU/C31001.cpp");
+   ("language", "CPP");
+   ("include", "<stdio.h>");
+   ("include", "<unistd.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/31.TOC_TOU/C31001.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/31.TOC_TOU/C31001.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/31.TOC_TOU/C31001.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/31.TOC_TOU/C31001.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/31.TOC_TOU/C31001.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/31.TOC_TOU/C31001.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/31.TOC_TOU/C31001.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C31001",
+   SI(<"C31001">,
+   {[
+      {;
+      ,(1#1,31#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,31#1,!1)}
+   )
+   ,(1#1,31#1,!1)},
+
+   {"C31001",
+   FN([public],(<"C31001">,"file_operation"):unit,[("file":ref(char),(21#21,21#30,!1))],[],
+   {[
+      {VD("f",ref(class((,FILE))))
+      ,(22#7,22#9,!1)};
+      {IF({UO(!,{SC((<"C31001">,"access"),[ref(char),class((,"%undef"))],[{V("file"),ref(char),(23#14,23#17,!1)},{V("W_OK"),class((,"%undef")),(23#19,23#22,!1)}]),class((,"%undef")),(23#7,23#23,!1)}),class((,"%undef")),(23#6,23#23,!1)},
+         {[
+            {{AE({V("f"),ref(class((,FILE))),(24#5,24#5,!1)},{SC((<"C31001">,"fopen"),[ref(char),string],[{V("file"),ref(char),(24#15,24#18,!1)},{"w+"S,string,(24#20,24#23,!1)}]),class((,"%undef")),(24#9,24#24,!1)}),ref(class((,FILE))),(24#5,24#24,!1)}
+            ,(24#5,24#24,!1)};
+            {PC0((<"C31001">,"operate"),[ref(class((,FILE)))],[{V("f"),ref(class((,FILE))),(25#13,25#13,!1)}])
+            ,(25#5,25#14,!1)}
+            ]
+         ,(23#26,26#4,!1)},
+         {[
+            {PC0((<"C31001">,"fprintf"),[class((,"%undef")),string,ref(char)],[{V("stderr"),class((,"%undef")),(28#13,28#18,!1)},{"Unable to open file %s.\n"S,string,(28#20,28#46,!1)},{V("file"),ref(char),(28#48,28#51,!1)}])
+            ,(28#5,28#52,!1)}
+            ]
+         ,(27#8,29#3,!1)})
+      ,(23#3,29#3,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(21#1,30#1,!1)}
+   )
+   ,(21#1,30#1,!1)},
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/31.TOC_TOU/C31001.cpp",
+   [
+      M("/**\n* \n* \n* \n* \n*\n* \n* \n* \n*\n*\n* \n* \n*\n*\n*/",4,(4#0,4#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/31.TOC_TOU/C31001.cpp"))
+   ]
+   }
+]

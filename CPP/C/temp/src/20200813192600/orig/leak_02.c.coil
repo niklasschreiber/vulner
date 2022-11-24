@@ -1,0 +1,131 @@
+{
+   ("encoding", "KSC5601");
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c");
+   ("language", "C");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c");
+   (!10, "10"N);
+   (!11, "t");
+   (!12, "xx");
+   (!13, "yy");
+   (!14, "ys");
+   (!15, "ttt");
+   (!16, "5"N);
+   (!17, "malloc"S);
+   (!2, "0"N);
+   (!3, "x");
+   (!4, "1"N);
+   (!5, "xs");
+   (!6, "2"N);
+   (!7, "3"N);
+   (!8, "tt");
+   (!9, "arr");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c",
+   SF([public],int,<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c">,"glob",{!2,int,(4#12,4#12,!1)})
+   ,(4#5,4#5,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c",
+   FN([public],(<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c">,"inc"):unit,[(!3:ref(int),(12#15,12#15,!1))],[],
+   {[
+      {{AE({*{V(!3),ref(int),(14#6,14#6,!1)},int,(14#5,14#5,!1)},{BO(+,{*{V(!3),ref(int),(14#11,14#11,!1)},int,(14#10,14#10,!1)},{!4,int,(14#15,14#15,!1)}),int,(14#10,14#10,!1)}),int,(14#5,14#5,!1)}
+      ,(14#5,14#16,!1)};
+      {RE0
+      ,(!)}
+      ]
+   ,(12#6,15#1,!1)}
+   )
+   ,(12#6,15#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c",
+   FN([public],(<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c">,"leak_test_02"):int,[],[],
+   {[
+      {VD(!5,int,([{!2,int,(19#18,19#18,!1)}],[{!4,int,(19#27,19#27,!1)},{!6,int,(19#30,19#30,!1)},{!7,int,(19#33,19#33,!1)}]))
+      ,(19#18,19#18,!1)};
+      {VD(!8,record((,test)),([{!6,int,(20#21,20#21,!1)}]))
+      ,(20#18,20#18,!1)};
+      {VD(!9,int,([{!10,int,(21#22,21#22,!1)}]))
+      ,(21#18,21#18,!1)};
+      {VD(!11,ref(record((,test))))
+      ,(22#18,22#18,!1)};
+      {VD(!12,int)
+      ,(23#18,23#18,!1)};
+      {VD(!13,int)
+      ,(23#22,23#22,!1)};
+      {VD(!14,ref(int))
+      ,(24#18,24#18,!1)};
+      {VD(!15,record((,test)))
+      ,(25#18,25#18,!1)};
+      {{AE({OA({V(!15),record((,test)),(27#5,27#5,!1)},"val"),int,(27#5,27#5,!1)},{!16,int,(27#15,27#15,!1)}),int,(27#5,27#5,!1)}
+      ,(27#5,27#16,!1)};
+      {IF0({BO(==,{AE({V(!11),ref(record((,test))),(29#10,29#10,!1)},{SC((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c">,"malloc"),[int],[{SO(record((,test))),int,(29#21,29#21,!1)}]),top,(29#14,29#14,!1)}),ref(record((,test))),(29#9,29#9,!1)},{!2,int,(29#46,29#46,!1)}),bool,(29#9,29#9,!1)},
+         {[
+            {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c">,"perror"),[arr(char)],[{!17,arr(char),(30#16,30#16,!1)}])
+            ,(30#9,30#9,!1)};
+            {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c">,"exit"),[int],[{!6,int,(31#14,31#14,!1)}])
+            ,(31#9,31#9,!1)}
+            ]
+         ,(29#52,32#5,!1)})
+      ,(29#5,32#5,"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c")};
+      {{AE({V(!12),int,(34#5,34#5,!1)},{AE({V(!13),int,(34#10,34#10,!1)},{!4,int,(34#15,34#15,!1)}),int,(34#10,34#10,!1)}),int,(34#5,34#5,!1)}
+      ,(34#5,34#16,!1)};
+      {IF0({SC((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c">,"rand"),[],[]),top,(35#9,35#9,!1)},
+         {{AE({*{V(!14),ref(int),(35#18,35#18,!1)},int,(35#17,35#17,!1)},{BO(||,{BO(&&,{V(!12),int,(35#24,35#24,!1)},{V(!13),int,(35#30,35#30,!1)}),int,(35#23,35#23,!1)},{AA({V(!5),arr(int),(35#37,35#37,!1)},[{!2,int,(35#40,35#40,!1)}]),int,(35#37,35#37,!1)}),int,(35#23,35#23,!1)}),int,(35#17,35#17,!1)}
+         ,(35#17,35#42,!1)})
+      ,(35#5,35#42,"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c")};
+      {{AE({OA({*{V(!11),ref(record((,test))),(37#5,37#5,!1)},record((,test)),(37#5,37#5,!1)},"val"),int,(37#5,37#5,!1)},{OA({V(!15),record((,test)),(37#14,37#14,!1)},"val"),int,(37#14,37#14,!1)}),int,(37#5,37#5,!1)}
+      ,(37#5,37#21,!1)};
+      {IF0({BO(==,{AE({V(!14),ref(int),(39#10,39#10,!1)},{SC((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c">,"malloc"),[int],[{SO(int),int,(39#22,39#22,!1)}]),top,(39#15,39#15,!1)}),ref(int),(39#9,39#9,!1)},{!2,int,(39#39,39#39,!1)}),bool,(39#9,39#9,!1)},
+         {[
+            {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c">,"perror"),[arr(char)],[{!17,arr(char),(40#16,40#16,!1)}])
+            ,(40#9,40#9,!1)};
+            {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c">,"exit"),[int],[{!7,int,(41#14,41#14,!1)}])
+            ,(41#9,41#9,!1)}
+            ]
+         ,(39#45,42#5,!1)})
+      ,(39#5,42#5,"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c")};
+      {{AE({*{V(!14),ref(int),(44#6,44#6,!1)},int,(44#5,44#5,!1)},{V(!13),int,(44#11,44#11,!1)}),int,(44#5,44#5,!1)}
+      ,(44#5,44#13,!1)};
+      {{AE({AA({V(!9),arr(int),(45#5,45#5,!1)},[{!2,int,(45#9,45#9,!1)}]),int,(45#5,45#5,!1)},{!4,int,(45#14,45#14,!1)}),int,(45#5,45#5,!1)}
+      ,(45#5,45#15,!1)};
+      {{AE({OA({*{V(!11),ref(record((,test))),(46#5,46#5,!1)},record((,test)),(46#5,46#5,!1)},"val"),int,(46#5,46#5,!1)},{BO(+,{AA({V(!9),arr(int),(46#14,46#14,!1)},[{!2,int,(46#18,46#18,!1)}]),int,(46#14,46#14,!1)},{*{V(!14),ref(int),(46#24,46#24,!1)},int,(46#23,46#23,!1)}),int,(46#14,46#14,!1)}),int,(46#5,46#5,!1)}
+      ,(46#5,46#26,!1)};
+      {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c">,"free"),[ref(record((,test)))],[{V(!11),ref(record((,test))),(48#10,48#10,!1)}])
+      ,(48#5,48#5,!1)};
+      {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c">,"inc"),[ref(int)],[{V(!14),ref(int),(50#9,50#9,!1)}])
+      ,(50#5,50#5,!1)};
+      {{AE({V(!12),int,(51#5,51#5,!1)},{BO(+,{*{&{V(!12),int,(51#13,51#13,!1)},ref(int),(51#11,51#11,!1)},int,(51#10,51#10,!1)},{!4,int,(51#19,51#19,!1)}),int,(51#10,51#10,!1)}),int,(51#5,51#5,!1)}
+      ,(51#5,51#20,!1)};
+      {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c">,"free"),[ref(int)],[{V(!14),ref(int),(53#10,53#10,!1)}])
+      ,(53#5,53#5,!1)};
+      {RE0
+      ,(!)}
+      ]
+   ,(17#5,54#1,!1)}
+   )
+   ,(17#5,54#1,!1)}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c",
+   CL([struct],(,test),[])
+   {
+      ([public],"val":int,(8#9,8#9,!1));
+      ([public],"arr":int,([{!10,int,(9#13,9#13,!1)}]),(9#9,9#9,!1))
+   }
+   ,(6#8,6#8,!1)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c",
+   [
+      S("// ys is not initialized yet.\n",35),
+      S("// leakage\n",41)
+   ]
+   }
+]

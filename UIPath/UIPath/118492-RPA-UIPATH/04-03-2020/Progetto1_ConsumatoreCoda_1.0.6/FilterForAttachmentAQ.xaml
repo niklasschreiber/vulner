@@ -1,0 +1,436 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="Main"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="DT1" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="Path" Type="InArgument(x:String)" />
+    <x:Property Name="Tab_transcodifica" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="BoolKoSendMail" Type="InArgument(x:Boolean)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>Main_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Invio EMail1_3" sap2010:WorkflowViewState.IdRef="Sequence_3">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="passwd" />
+      <Variable x:TypeArguments="x:String" Default="Buongiorno, &#xA;in allegato la tabella dei VAP lavorati in data odierna.&#xA;Questo messaggio parte da una casella automatica, si prega quindi di non rispondere.&#xA;Cordiali saluti" Name="messaggio_VAP_Lavorati" />
+      <Variable x:TypeArguments="x:Int32" Name="CheckCounter" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtBuild" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtMaster" />
+      <Variable x:TypeArguments="x:String" Default="Buongiorno, &#xD;&#xA;in allegato la tabella dei VAP scartati in data odierna.&#xD;&#xA;Questo messaggio parte da una casella automatica, si prega quindi di non rispondere.&#xD;&#xA;Cordiali saluti" Name="messaggio_VAP_KoLavorati" />
+      <Variable x:TypeArguments="x:String" Name="prova" />
+    </Sequence.Variables>
+    <ui:GetPassword DisplayName="Get Password" sap2010:WorkflowViewState.IdRef="GetPassword_5" ProtectedPassword="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAelTNNqnW3EqdaShkG0FPbQAAAAACAAAAAAAQZgAAAAEAACAAAABgOpNS3/hPZVmWlC9rhtlcH7uYb28CLVg5uymLUOm/BwAAAAAOgAAAAAIAACAAAAAvEAvon76DpMU2yB/XJwXEYfafiYi5q1XlgcVLGHI2cxAAAABmolIF/KQyjRanaDMZo1kIQAAAAIMtju1eofagYJpmNc6yeat5CSYWx5hq8NNQaAyG7nHXkkbJEs/reVLtHVhXtf1BEAxRAgCLBkg4R4z/IbWZbMM=" Result="[passwd]" />
+    <ui:CommentOut DisplayName="Comment Out" sap2010:WorkflowViewState.IdRef="CommentOut_7">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_14">
+          <ui:ReadCsvFile Encoding="{x:Null}" DataTable="[DT1]" Delimitator="Semicolon" DisplayName="Legge il tracciato  CSV" FilePath="[Tracciato]" sap2010:WorkflowViewState.IdRef="ReadCsvFile_2" />
+        </Sequence>
+      </ui:CommentOut.Body>
+    </ui:CommentOut>
+    <ui:BuildDataTable DataTable="[dtBuild]" DisplayName="Build Data Table" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;AccordoQuadroSap&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+    <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[DT1]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{row(&quot;accordoQuadroSap&quot;).ToString}]" DataTable="[dtBuild]" DisplayName="Add Data Row" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+    </ui:ForEachRow>
+    <ui:RemoveDuplicateRows DataTable="[dtBuild]" DisplayName="Remove Duplicate Rows" sap2010:WorkflowViewState.IdRef="RemoveDuplicateRows_1" OutputDataTable="[dtMaster]" />
+    <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dtMaster]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_6">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="sd:DataTable" Name="dtTEMP" />
+              <Variable x:TypeArguments="sd:DataTable" Name="dtEmail" />
+              <Variable x:TypeArguments="x:String" Name="sTMP" />
+              <Variable x:TypeArguments="ui:GenericValue" Name="sDestinatari" />
+              <Variable x:TypeArguments="x:Boolean" Name="pathOk" />
+              <Variable x:TypeArguments="x:Int32" Name="Index" />
+            </Sequence.Variables>
+            <WriteLine DisplayName="Write Line" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[row(0).ToString]" />
+            <Assign sap2010:WorkflowViewState.IdRef="Assign_6">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[dtTEMP]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable">[DT1.Select("[accordoQuadroSap]='"+row(0).ToString+"'").CopyToDataTable]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:CommentOut DisplayName="Comment Out" sap2010:WorkflowViewState.IdRef="CommentOut_8">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                  <ui:FilterDataTable DataTable="[DT1]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap2010:WorkflowViewState.IdRef="FilterDataTable_2" OutputDataTable="[dtTEMP]" SelectColumnsMode="Keep">
+                    <ui:FilterDataTable.Filters>
+                      <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                        <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                          <ui:FilterOperationArgument.Column>
+                            <InArgument x:TypeArguments="x:String">["accordoQuadroSap"]</InArgument>
+                          </ui:FilterOperationArgument.Column>
+                          <ui:FilterOperationArgument.Operand>
+                            <InArgument x:TypeArguments="x:String">[row(0).ToString]</InArgument>
+                          </ui:FilterOperationArgument.Operand>
+                        </ui:FilterOperationArgument>
+                      </scg:List>
+                    </ui:FilterDataTable.Filters>
+                    <ui:FilterDataTable.SelectColumns>
+                      <scg:List x:TypeArguments="InArgument" Capacity="4">
+                        <x:Null />
+                      </scg:List>
+                    </ui:FilterDataTable.SelectColumns>
+                  </ui:FilterDataTable>
+                </Sequence>
+              </ui:CommentOut.Body>
+            </ui:CommentOut>
+            <ui:PathExists DisplayName="Path Exists" Exists="[pathOk]" sap2010:WorkflowViewState.IdRef="PathExists_2" Path="[Path]" PathType="Folder" />
+            <ui:CommentOut DisplayName="Comment Out" sap2010:WorkflowViewState.IdRef="CommentOut_6">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                  <ui:WriteCsvFile Encoding="{x:Null}" AddHeaders="True" DataTable="[dtTEMP]" Delimitator="Semicolon" DisplayName="Write CSV" FilePath="[Path +&quot;VAP Lavorati_&quot;+ row(0).ToString +&quot;_&quot;+ now.ToString(&quot;ddMMyyyy&quot;) + &quot;.csv&quot;]" sap2010:WorkflowViewState.IdRef="WriteCsvFile_2" />
+                </Sequence>
+              </ui:CommentOut.Body>
+            </ui:CommentOut>
+            <If Condition="[pathOk=true AND dtTEMP.Rows.Count&gt;0]" sap2010:WorkflowViewState.IdRef="If_4">
+              <If.Then>
+                <If Condition="[BoolKoSendMail]" sap2010:WorkflowViewState.IdRef="If_8">
+                  <If.Then>
+                    <ui:WriteRange AddHeaders="True" DataTable="[dtTEMP]" DisplayName="Write Range" sap2010:WorkflowViewState.IdRef="WriteRange_3" SheetName="Sheet1" WorkbookPath="[Path +&quot;VAP Scartati_&quot;+ row(0).ToString +&quot;_&quot;+ now.ToString(&quot;ddMMyyyy&quot;) + &quot;.xlsx&quot;]">
+                      <ui:WriteRange.StartingCell>
+                        <InArgument x:TypeArguments="x:String">
+                          <Literal x:TypeArguments="x:String" Value="" />
+                        </InArgument>
+                      </ui:WriteRange.StartingCell>
+                    </ui:WriteRange>
+                  </If.Then>
+                  <If.Else>
+                    <ui:WriteRange AddHeaders="True" DataTable="[dtTEMP]" DisplayName="Write Range" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" WorkbookPath="[Path +&quot;VAP Lavorati_&quot;+ row(0).ToString +&quot;_&quot;+ now.ToString(&quot;ddMMyyyy&quot;) + &quot;.xlsx&quot;]">
+                      <ui:WriteRange.StartingCell>
+                        <InArgument x:TypeArguments="x:String">
+                          <Literal x:TypeArguments="x:String" Value="" />
+                        </InArgument>
+                      </ui:WriteRange.StartingCell>
+                    </ui:WriteRange>
+                  </If.Else>
+                </If>
+              </If.Then>
+              <If.Else>
+                <Throw Exception="[new System.Exception(&quot;Il path non esiste&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_3" />
+              </If.Else>
+            </If>
+            <Assign sap2010:WorkflowViewState.IdRef="Assign_7">
+              <Assign.To>
+                <OutArgument x:TypeArguments="sd:DataTable">[dtEmail]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="sd:DataTable">[Tab_transcodifica.Select("[accordoQuadro]='"+row(0).ToString+"'").CopyToDataTable]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:CommentOut DisplayName="Comment Out" sap2010:WorkflowViewState.IdRef="CommentOut_9">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                  <ui:FilterDataTable DataTable="[Tab_transcodifica]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap2010:WorkflowViewState.IdRef="FilterDataTable_3" OutputDataTable="[dtEmail]" SelectColumnsMode="Keep">
+                    <ui:FilterDataTable.Filters>
+                      <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                        <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                          <ui:FilterOperationArgument.Column>
+                            <InArgument x:TypeArguments="x:String">["accordoQuadro"]</InArgument>
+                          </ui:FilterOperationArgument.Column>
+                          <ui:FilterOperationArgument.Operand>
+                            <InArgument x:TypeArguments="x:String">[row(0).ToString]</InArgument>
+                          </ui:FilterOperationArgument.Operand>
+                        </ui:FilterOperationArgument>
+                      </scg:List>
+                    </ui:FilterDataTable.Filters>
+                    <ui:FilterDataTable.SelectColumns>
+                      <scg:List x:TypeArguments="InArgument" Capacity="4">
+                        <x:Null />
+                      </scg:List>
+                    </ui:FilterDataTable.SelectColumns>
+                  </ui:FilterDataTable>
+                </Sequence>
+              </ui:CommentOut.Body>
+            </ui:CommentOut>
+            <ui:OutputDataTable DataTable="[dtEmail]" DisplayName="Output Data Table" sap2010:WorkflowViewState.IdRef="OutputDataTable_1" Text="[sTMP]" />
+            <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
+              <Assign.To>
+                <OutArgument x:TypeArguments="ui:GenericValue">[sDestinatari]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="ui:GenericValue">[String.Empty]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:ForEachRow CurrentIndex="[Index]" DataTable="[dtEmail]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_4">
+              <ui:ForEachRow.Body>
+                <ActivityAction x:TypeArguments="sd:DataRow">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="rowemail" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                    <If Condition="[Index &lt; dtEmail.Rows.Count -1]" sap2010:WorkflowViewState.IdRef="If_6">
+                      <If.Then>
+                        <Assign sap2010:WorkflowViewState.IdRef="Assign_3">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="ui:GenericValue">[sDestinatari]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="ui:GenericValue">[sDestinatari + rowemail("email").ToString + ";"]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </If.Then>
+                      <If.Else>
+                        <Assign sap2010:WorkflowViewState.IdRef="Assign_5">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="ui:GenericValue">[sDestinatari]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="ui:GenericValue">[sDestinatari + rowemail("email").ToString]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </If.Else>
+                    </If>
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEachRow.Body>
+            </ui:ForEachRow>
+            <If Condition="[BoolKoSendMail]" sap2010:WorkflowViewState.IdRef="If_7">
+              <If.Then>
+                <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[messaggio_VAP_KoLavorati]" DisplayName="Send SMTP Mail Message" Email="robot1.poste@gmail.com" EnableSSL="True" sap2010:WorkflowViewState.IdRef="SendMail_4" IsBodyHtml="False" Password="[passwd]" Port="465" SecureConnection="Auto" Server="smtp.gmail.com" Subject="[&quot;VAP Scartati_&quot;+ now.ToString(&quot;ddMMyyyy&quot;)]" To="[sDestinatari]">
+                  <ui:SendMail.Files>
+                    <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+                      <InArgument x:TypeArguments="x:String">[Path +"VAP Scartati_"+ row(0).ToString +"_"+ now.ToString("ddMMyyyy") + ".xlsx"]</InArgument>
+                    </scg:List>
+                  </ui:SendMail.Files>
+                </ui:SendMail>
+              </If.Then>
+              <If.Else>
+                <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[messaggio_VAP_Lavorati]" DisplayName="Send SMTP Mail Message" Email="robot1.poste@gmail.com" EnableSSL="True" sap2010:WorkflowViewState.IdRef="SendMail_3" IsBodyHtml="False" Password="[passwd]" Port="465" SecureConnection="Auto" Server="smtp.gmail.com" Subject="[&quot;VAP Lavorati_&quot;+ row(0).ToString +&quot;_&quot;+ now.ToString(&quot;ddMMyyyy&quot;)]" To="[sDestinatari]">
+                  <ui:SendMail.Files>
+                    <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+                      <InArgument x:TypeArguments="x:String">[Path +"VAP Lavorati_"+ row(0).ToString +"_"+ now.ToString("ddMMyyyy") + ".xlsx"]</InArgument>
+                    </scg:List>
+                  </ui:SendMail.Files>
+                </ui:SendMail>
+              </If.Else>
+            </If>
+            <Assign sap2010:WorkflowViewState.IdRef="Assign_4">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[CheckCounter]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32" xml:space="preserve">[CheckCounter  +1]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <If Condition="[CheckCounter&gt;0]" sap2010:WorkflowViewState.IdRef="If_5">
+              <If.Then>
+                <If Condition="[BoolKoSendMail]" sap2010:WorkflowViewState.IdRef="If_9">
+                  <If.Then>
+                    <ui:Delete ContinueOnError="{x:Null}" sap2010:WorkflowViewState.IdRef="Delete_3" Path="[Path +&quot;VAP Scartati_&quot;+ row(0).ToString +&quot;_&quot;+ now.ToString(&quot;ddMMyyyy&quot;) + &quot;.xlsx&quot;]" />
+                  </If.Then>
+                  <If.Else>
+                    <ui:Delete ContinueOnError="{x:Null}" sap2010:WorkflowViewState.IdRef="Delete_2" Path="[Path +&quot;VAP Lavorati_&quot;+ row(0).ToString +&quot;_&quot;+ now.ToString(&quot;ddMMyyyy&quot;) + &quot;.xlsx&quot;]" />
+                  </If.Else>
+                </If>
+              </If.Then>
+              <If.Else>
+                <Throw Exception="[new System.Exception(&quot;L'email: &quot;+&quot;VAP Lavorati_&quot; + row(&quot;EQ&quot;).ToString+&quot;_&quot;+ DateTime.Today.ToString(&quot;dd-MM-yyyy&quot;) + &quot;.xlsx&quot; + &quot;non è stata inviata&quot;)]" sap2010:WorkflowViewState.IdRef="Throw_4" />
+              </If.Else>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+    </ui:ForEachRow>
+    <sads:DebugSymbol.Symbol>d1xDOlxVc2Vyc1xhemFkbWluXERlc2t0b3BcUHJvZ2V0dG8gMSAtICBJbW1vYmlsaWFyZVxQb3N0ZV9JdGFsaWFuZVxGaWx0ZXJGb3JBdHRhY2htZW50QVEueGFtbGRMA7sCDgIBAU80T+wBAgEDUzRT+wECAQJWBVa9AwMBgQFXBV0VAwGAAV4FXqkLAgF9XwVqFQIBdWsFa64BAgFwbAW5AhUCAQRWsANWugMDAYIBXiJeLQIBfl82Xz0CAXtlC2cWAgF2a58Ba6sBAgFzaydrMgIBcWw2bEICAW5yC7YCFgIBBWYNZssBAgF3ew17egIBbHwNgwEWAgFohAENnAEdAgFnnQENnQGZAQIBYp4BDaQBHQIBYaUBDb8BEgIBTsABDccBFgIBSsgBDeABHQIBSeEBDeEBmwECAUTiAQ3pARYCAUDqAQ2KAh0CATCLAg2eAhICARefAg2mAhYCARKnAg21AhICAQZmc2Z+AgF5ZjhmaAIBeHtke3cCAW2BATyBAYQBAgFrfj1+RQIBaZ0BPZ0BRwIBZZ0BfJ0BhAECAWOlARulAUUCAU+nARG6ARYCAVK9ARG9AYcBAgFQxQE8xQGPAQIBTcIBPcIBRgIBS+EBkAHhAZgBAgFH4QEr4QE2AgFF5wE/5wFNAgFD5AFA5AFOAgFB6gEp6gEyAgE+6gE96gFIAgE88AEThwIeAgExiwIbiwItAgEYjQIRkwIfAgEllgIRnAIfAgEaoQI4oQJGAgETpwIbpwIwAgEHqQIRsAIWAgELswIRswKsAgIBCacBH6cBMQIBU6kBFa8BJQIBW7IBFbgBJQIBVb0BIr0BWgIBUfEBFYYCGgIBMo0C2gONAuoDAgEvkAI+kAKPAQIBLo0CjAGNAqgBAgEsjQKVA40C1gMCASuNAtQBjQLsAQIBKo0C1wKNAtwCAgEpjQL8Ao0CjAMCASiNAscCjQLRAgIBJpYC+AOWAogEAgEkmQI+mQKPAQIBI5YCjAGWAqYBAgEhlgKTA5YC9AMCASCWAtIBlgLqAQIBH5YC1QKWAtoCAgEelgL6ApYCigMCAR2WAsUClgLPAgIBG6kCH6kCMQIBDKsCFasC6QECARCuAhWuAukBAgEOswIiswL/AQIBCqwBG6wBSgIBYKkBQKkBSgIBXqkBngGpAaYBAgFdqQG0AakBrwICAVy1ARu1AUoCAVqyAUCyAUoCAViyAZ4BsgGmAQIBV7IBtAGyAa8CAgFW8QEj8QFHAgEz8wEZ+gEiAgE4/QEZhAIiAgE0qwJrqwLmAQIBEa4Ca64C5gECAQ/4AUv4AXwCATv1AUz1AVoCATmCAkuCAnYCATf/AUz/AVoCATU=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="GetPassword_5" sap:VirtualizedContainerService.HintSize="930,22" />
+      <sap2010:ViewStateData Id="ReadCsvFile_2" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Sequence_14" sap:VirtualizedContainerService.HintSize="336,183">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CommentOut_7" sap:VirtualizedContainerService.HintSize="930,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="BuildDataTable_1" sap:VirtualizedContainerService.HintSize="930,59" />
+      <sap2010:ViewStateData Id="AddDataRow_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="222,146">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_2" sap:VirtualizedContainerService.HintSize="930,294" />
+      <sap2010:ViewStateData Id="RemoveDuplicateRows_1" sap:VirtualizedContainerService.HintSize="930,22" />
+      <sap2010:ViewStateData Id="WriteLine_2" sap:VirtualizedContainerService.HintSize="878,61" />
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="878,60" />
+      <sap2010:ViewStateData Id="FilterDataTable_2" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Sequence_15" sap:VirtualizedContainerService.HintSize="336,183">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CommentOut_8" sap:VirtualizedContainerService.HintSize="878,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="PathExists_2" sap:VirtualizedContainerService.HintSize="878,89" />
+      <sap2010:ViewStateData Id="WriteCsvFile_2" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Sequence_13" sap:VirtualizedContainerService.HintSize="336,211">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CommentOut_6" sap:VirtualizedContainerService.HintSize="878,289" />
+      <sap2010:ViewStateData Id="WriteRange_3" sap:VirtualizedContainerService.HintSize="314,115" />
+      <sap2010:ViewStateData Id="WriteRange_1" sap:VirtualizedContainerService.HintSize="314,115" />
+      <sap2010:ViewStateData Id="If_8" sap:VirtualizedContainerService.HintSize="653,263" />
+      <sap2010:ViewStateData Id="Throw_3" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_4" sap:VirtualizedContainerService.HintSize="878,411" />
+      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="878,60" />
+      <sap2010:ViewStateData Id="FilterDataTable_3" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Sequence_16" sap:VirtualizedContainerService.HintSize="336,183">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CommentOut_9" sap:VirtualizedContainerService.HintSize="878,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="OutputDataTable_1" sap:VirtualizedContainerService.HintSize="878,22" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="878,60" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="509,208" />
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="531,332">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_4" sap:VirtualizedContainerService.HintSize="878,480" />
+      <sap2010:ViewStateData Id="SendMail_4" sap:VirtualizedContainerService.HintSize="314,145" />
+      <sap2010:ViewStateData Id="SendMail_3" sap:VirtualizedContainerService.HintSize="314,145" />
+      <sap2010:ViewStateData Id="If_7" sap:VirtualizedContainerService.HintSize="878,293" />
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="878,60" />
+      <sap2010:ViewStateData Id="Delete_3" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Delete_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_9" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="Throw_4" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="878,356" />
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="900,2987">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_3" sap:VirtualizedContainerService.HintSize="930,3135" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="952,3907">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Main_1" sap:VirtualizedContainerService.HintSize="992,3987" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

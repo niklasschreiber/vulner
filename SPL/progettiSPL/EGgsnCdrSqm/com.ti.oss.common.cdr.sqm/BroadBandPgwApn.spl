@@ -1,0 +1,446 @@
+namespace com.ti.oss.common.cdr.sqm ;
+
+use com.ibm.streamsx.file::* ;
+use com.ti.oss.common.cdr.parser.eggsn::* ;
+use com.ti.oss.common.cdr.types::* ;
+use com.ti.oss.common.cdr.util::* ;
+use com.ti.oss.common.cdr.util.cfg::* ;
+use com.ti.oss.common.event::* ;
+use com.ti.oss.common.types::* ;
+use com.ti.oss.common.util.cfg::* ;
+use com.ti.oss.common.util.time::*;
+
+type SqmBroadPgwApn = map<rstring, BroadPgwApn>;
+type SqmBroadPgwApnNode = map<rstring, SqmBroadPgwApn>;
+
+public composite BroadBandPgwApn(input stream<AggregateSqmSchema> eggsn, stream<rstring centrale,rstring apn> C; 
+	output stream<BroadPgwApn> outKpiPgwApn, OutEventKpiPgwApn, stream<CDRCounters> OutCounters)
+{
+	param
+		expression<rstring> $tmpOutFilePrefix ;
+		expression<rstring> $tmpOutFileSuffix ;
+		expression<rstring> $mediationName ;
+	
+	graph
+		(stream<BroadPgwApn> outKpiPgwApn as O ; stream<Event e> OutEventKpiPgwApn as OE; stream<CDRCounters> OutCounters) = Custom(eggsn; C)
+		{
+			logic
+				state :
+				{
+					rstring tmpOutFilePrefix = $tmpOutFilePrefix;
+					rstring tmpOutFileSuffix = $tmpOutFileSuffix;
+					rstring mediationName = $mediationName;
+					
+					mutable float64 startROPstate = 0 ;
+					mutable float64 endROPstate = 0 ;
+					mutable float64 startROPold = 0 ;
+					mutable float64 endROPold = 0 ;
+					boolean flagMediationCfg = loadMediationCfg(mediationName) ;
+					mutable rstring nameOutputFilestate ;
+					mutable rstring nameOutputFileOld ;
+					mutable rstring path = getCfgParam("COMMON_CFG_DIR",mediationName,"SQM_PGW_APN_OUTPUT_PATH");
+					mutable rstring filePrefix = getCfgParam("COMMON_CFG_DIR",mediationName,"FILE_PREFIX_PGW_APN");
+					mutable rstring fileSuffix = getCfgParam("COMMON_CFG_DIR",mediationName,"FILE_SUFFIX");
+					mutable rstring apn_list = getCfgParam("COMMON_CFG_DIR", mediationName, "APN_LIST_LTE");
+					mutable int32 interval = (int32)getCfgParam("COMMON_CFG_DIR",mediationName,"ROP_INTERVAL_SQM");
+					mutable SqmBroadPgwApn CDRforBroadPgwApn ;
+					mutable SqmBroadPgwApnNode SqmBroadPgwNodeT ;
+					mutable SqmBroadPgwApnNode SqmBroadPgwNodePrec ;
+					mutable FileHeader fh = { } ;
+					
+					mutable set<rstring> listApn;
+					mutable list<rstring> listCentrale;
+					
+					mutable O emptyEndRopTuple = initEmptyEndRopTupleApnLTE();
+					mutable OE oetuple = (OE){};
+					
+					mutable SqmBroadPgwApn cdrApp = {};
+					
+//					// Conta tutti CDR per rATType
+//					mutable uint64 cdrtotrattype = 0ul;
+//					mutable uint64 cdrtotrattypeold = 0ul;
+//					
+					// Conta i CDR corretti per questo KPI
+					mutable uint64 cdrtot = 0ul;
+					mutable uint64 cdrtotold = 0ul;
+					
+					// Conta i CDR scartati per il filtro impostato
+					mutable uint64 cdrexclude1 = 0ul;
+					mutable uint64 cdrexclude1old = 0ul;
+					
+					// Conta i CDR scartati esterni al ROP
+					mutable uint64 cdrexclude2 = 0ul;
+					mutable uint64 cdrexclude2old = 0ul;
+				}
+
+				
+				onTuple C:
+				{
+					if (C.centrale == "CENTRALE")
+					{
+						clearM(listCentrale);
+						clearM(listApn);
+					}else{
+						appendM(listCentrale, C.centrale);
+						insertM(listApn, C.apn);
+					}
+				}
+				
+				
+				onTuple eggsn :
+				{
+					if (eggsn.endROP)
+					{
+						interval = checkConfiguration(mediationName,"ROP_INTERVAL_SQM",interval);
+						path = checkConfiguration(mediationName,"SQM_PGW_APN_OUTPUT_PATH",path);
+						filePrefix = checkConfiguration(mediationName,"FILE_PREFIX_PGW_APN",filePrefix);
+						fileSuffix = checkConfiguration(mediationName,"FILE_SUFFIX",fileSuffix);
+						apn_list = checkConfiguration(mediationName,"APN_LIST_LTE",apn_list);
+				
+						swap(SqmBroadPgwNodeT,SqmBroadPgwNodePrec);
+						swap(cdrtot, cdrtotold);
+						cdrtot = 0ul;
+						swap(cdrexclude1, cdrexclude1old);
+						cdrexclude1 = 0ul;
+						swap(cdrexclude2, cdrexclude2old);
+						cdrexclude2 = 0ul;
+//						swap(cdrtotrattype, cdrtotrattypeold);
+//						cdrtotrattype = 0ul;
+//						
+						clearM(SqmBroadPgwNodeT);
+						startROPold = startROPstate;
+						endROPold = endROPstate;
+						startROPstate = eggsn.startRopSecs;
+						endROPstate = eggsn.endRopSecs;
+						nameOutputFileOld = nameOutputFilestate;
+						
+						nameOutputFilestate = path + tmpOutFilePrefix +(rstring) eggsn.endRopSecs + tmpOutFileSuffix ;
+						
+						mutable BroadPgwApn entry = {};
+						entry.nameOutputFile = nameOutputFilestate ;
+						entry.filePrefix = filePrefix ;
+						entry.suffix = fileSuffix ;
+				    	entry.start_time = getUtilConvert((rstring)startROPstate); 
+						entry.end_time = getUtilConvert((rstring)endROPstate);
+						entry.downlink_4g = (int64)0;
+						entry.uplink_4g = (int64)0;
+						
+						for (int32 k in range(listCentrale))
+						{	
+							entry.ggsn_dn = listCentrale[k];
+							for (rstring elem in listApn)
+							{
+								entry.apn_name = elem;
+								insertM(CDRforBroadPgwApn,elem,entry);
+							}
+							insertM(SqmBroadPgwNodeT,listCentrale[k],CDRforBroadPgwApn);
+							
+							clearM(CDRforBroadPgwApn);
+						}
+					}
+					
+					if(startROPstate == (float64)0 || endROPstate == (float64)0)
+					{
+						startROPstate = eggsn.startRopSecs;
+						endROPstate = eggsn.endRopSecs;
+					}
+					
+					if(nameOutputFilestate == "")
+					{
+						nameOutputFilestate = path + tmpOutFilePrefix +(rstring) eggsn.endRopSecs + tmpOutFileSuffix ;
+					}
+					
+					if(eggsn.endROP)
+					{
+						nameOutputFilestate = path + tmpOutFilePrefix +(rstring) eggsn.endRopSecs + tmpOutFileSuffix ;
+					}					
+					
+					if (eggsn.write_prev)
+					{	
+						if (eggsn.exclude_node == "")
+						{
+							mutable rstring filename_tmp = "";
+							mutable rstring central_val="";
+							
+							if(size(SqmBroadPgwNodePrec) != 0)
+							{
+								mutable list<rstring> keysTmp = [];
+                   				for(rstring key in SqmBroadPgwNodePrec) 
+								{
+									appendM(keysTmp, key);
+								}
+								for(rstring key in keysTmp)
+								{
+									swap(cdrApp, SqmBroadPgwNodePrec[key]);
+									for(rstring keyCdr in cdrApp) 
+									{
+										submit(cdrApp[keyCdr], outKpiPgwApn);
+				                    }
+				                    central_val = central_val + key + ";";	
+								}
+								
+								filename_tmp = nameOutputFileOld;
+								emptyEndRopTuple.nameOutputFile = nameOutputFileOld;
+								submit(emptyEndRopTuple, outKpiPgwApn);									
+							}
+							else
+							{
+								filename_tmp = nameOutputFileOld;
+								emptyEndRopTuple.nameOutputFile = nameOutputFileOld;
+								submit(emptyEndRopTuple, outKpiPgwApn);
+							}
+							
+							mutable rstring sr = "";
+							mutable rstring er = "";
+							if(startROPold != (float64)0 && endROPold != (float64)0)
+							{
+								sr = getUtilConvert((rstring)startROPold);
+								er = getUtilConvert((rstring)endROPold);
+							}
+							else
+							{
+								sr = "0";
+								er = "0";
+							}
+							submit({kpi = "BroadBandPgwApn", ROP = sr + "-" + er, cdrtot = cdrtotold, cdrexclude1 = cdrexclude1old, cdrexclude2 = cdrexclude2old}, OutCounters);
+							
+							//clear statistics
+							//cdrtotrattypeold = 0ul;
+							cdrtotold = 0ul;
+							cdrexclude1old = 0ul;
+							cdrexclude2old = 0ul;
+							
+							clearM(SqmBroadPgwNodePrec);
+							clearM(cdrApp);
+							startROPold = (float64)0;
+							endROPold = (float64)0;
+							nameOutputFileOld = "";
+							oetuple.e.eventType = 190 ;
+							oetuple.e.resultCode = 0 ;
+							oetuple.e.rawFile = filename_tmp ;
+							swap(oetuple.e.eventCorrelationId, fh.eventCorrelationId);
+		                    swap(oetuple.e.rop, fh.rop);
+		                    swap(oetuple.e.emId, fh.emId);
+		                    swap(oetuple.e.neId, fh.neId);
+							oetuple.e.eventText = "End write_prev close file " + filename_tmp + " for node: "+ central_val;
+							boolean eventEnabled = mkEvent(oetuple.e, fh.sessionBeginTime) ;
+							if(eventEnabled) submit(oetuple, OutEventKpiPgwApn) ;
+						}
+						else
+						{
+							if(has(SqmBroadPgwNodePrec, eggsn.exclude_node) == true)
+							{
+								removeM(SqmBroadPgwNodePrec, eggsn.exclude_node) ;
+							}
+						}
+					}
+					else if(!eggsn.endROP)
+					{
+						fh = eggsn.fHeader;
+						
+						if(eggsn.cdrSchema.rATType==6)
+						{
+							//cdrtotrattype++;
+							
+							mutable rstring datetmp = "20"+(rstring)substring(eggsn.cdrSchema.recordOpeningTime,0,12);
+				            timestamp ts = toTimestamp(Sys.YYYYMMDDhhmmss,datetmp);
+				            mutable float64 endTimeCDRfloat = getSeconds(ts) + (int64)eggsn.cdrSchema.duration;	
+				                
+							mutable list<rstring> apnL = tokenize(apn_list, ",", true);
+							mutable boolean apn_in = false ;
+							mutable rstring apnClean = cleanApn(eggsn.cdrSchema.apn);
+							for(int32 k in range(apnL))
+							{
+								if(apnL[k] == apnClean)
+								{
+									apn_in = true ;
+									break ;
+								}
+							}
+		
+							if(apn_in)
+							{
+								mutable rstring centralName = eggsn.cdrSchema.nodeId; 
+								mutable rstring key = cleanApn(eggsn.cdrSchema.apn);
+								
+								if((endTimeCDRfloat >= eggsn.startRopSecsOld) && (endTimeCDRfloat < eggsn.endRopSecsOld))
+		                		{
+		                			cdrtotold++;
+			                		if(has(SqmBroadPgwNodePrec, centralName) == true)
+			                		{
+			                			addCdrPGWAPN(eggsn,SqmBroadPgwNodePrec[centralName],key,nameOutputFileOld,centralName,filePrefix,fileSuffix,eggsn.startRopSecsOld,eggsn.endRopSecsOld);	
+			                		}
+			                		else
+			                		{
+			                			addCdrPGWAPN(eggsn,CDRforBroadPgwApn,key,nameOutputFileOld,centralName,filePrefix,fileSuffix,eggsn.startRopSecsOld,eggsn.endRopSecsOld);
+			                			insertM(SqmBroadPgwNodePrec, centralName, CDRforBroadPgwApn) ;
+			                		}
+			                		
+		                		}
+		                		else if((endTimeCDRfloat >= eggsn.startRopSecs) && (endTimeCDRfloat < eggsn.endRopSecs))
+		                		{
+		                			cdrtot++;
+		                			if(has(SqmBroadPgwNodeT, centralName) == true)
+				                	{
+				                		addCdrPGWAPN(eggsn,SqmBroadPgwNodeT[centralName],key,nameOutputFilestate,centralName,filePrefix,fileSuffix,eggsn.startRopSecs,eggsn.endRopSecs);
+				                	}
+				                	else
+				                	{
+				                		addCdrPGWAPN(eggsn,CDRforBroadPgwApn,key,nameOutputFilestate,centralName,filePrefix,fileSuffix,eggsn.startRopSecs,eggsn.endRopSecs);
+										insertM(SqmBroadPgwNodeT, centralName, CDRforBroadPgwApn) ;
+				                	}
+		                		}
+		                		else
+								{
+									//exclude CDR fuori ROP
+									cdrexclude2++;
+								}
+								
+								clearM(cdrApp);
+								clearM(CDRforBroadPgwApn);
+							}
+							else 
+							{	
+								if((endTimeCDRfloat >= eggsn.startRopSecs) && (endTimeCDRfloat < eggsn.endRopSecs))
+								{
+									//exclude Filtro CDR in ROP
+									cdrexclude1++;
+								}
+								else
+								{
+									//exclude Filtro CDR fuori ROP
+									cdrexclude1old++;
+								}
+							}
+						}
+					}
+			}
+								
+			onPunct eggsn :
+			{
+				if(currentPunct() == Sys.WindowMarker)
+				{
+					
+					oetuple.e.eventType = 200 ;
+					oetuple.e.resultCode = 0 ;
+					oetuple.e.rawFile = filename(fh.fName) ;
+					swap(oetuple.e.eventCorrelationId, fh.eventCorrelationId);
+                    swap(oetuple.e.rop, fh.rop);
+                    swap(oetuple.e.emId, fh.emId);
+                    swap(oetuple.e.neId, fh.neId);
+					oetuple.e.eventText = "End Broadband Pgw Apn SQM";
+					boolean eventEnabled = mkEvent(oetuple.e, fh.sessionBeginTime) ;
+					if(eventEnabled) submit(oetuple, OutEventKpiPgwApn) ;
+					
+					submit(Sys.WindowMarker, OutEventKpiPgwApn) ;
+				}
+
+			}
+			
+			config
+				threadedPort: queue(eggsn, Sys.Wait, 1000000);
+
+		}
+
+	
+//		(stream<CsvWrite> outCsv) = Custom(outKpiPgwApn)
+//		{
+//			logic
+//				state:
+//				{
+//					mutable rstring naming_lookup = getCfgParam("COMMON_CFG_DIR", $mediationName, "NAMING_LOOKUP"); 
+//					mutable boolean flagNamingLookup = loadCdrProvCfg("NAMINGLOOKUP", naming_lookup,(uint32) 3, ";") ;
+//					mutable CsvWrite csv = {};
+//				}	
+//				
+//				onTuple outKpiPgwApn: 
+//				{
+//					if (outKpiPgwApn.endROP)
+//					{
+//						if (isCdrProvCfgChanged("NAMINGLOOKUP"))
+//						{
+//							reloadCdrProvCfg("NAMINGLOOKUP");
+//						}
+//					}
+//					
+//					swap(csv.nameOutputFile, outKpiPgwApn.nameOutputFile);
+//					swap(csv.endROP, outKpiPgwApn.endROP);
+//					swap(csv.filePrefix, outKpiPgwApn.filePrefix);
+//					swap(csv.suffix, outKpiPgwApn.suffix);
+//					
+//					mutable rstring sqmDn = "";
+//					if (outKpiPgwApn.ggsn_dn != "")
+//					{
+//						sqmDn = getSqmDn(outKpiPgwApn.ggsn_dn,flagNamingLookup);
+//					}
+//					if (sqmDn != "")
+//					{
+//						csv.outputContent = sqmDn+";"+"APN-"+outKpiPgwApn.apn_name+";"+outKpiPgwApn.start_time+";"+outKpiPgwApn.end_time+";"+(rstring)outKpiPgwApn.downlink_4g+";"+(rstring)outKpiPgwApn.uplink_4g;
+//					}else{
+//						csv.outputContent = "";
+//					}
+//					
+//				
+//					submit(csv, outCsv);
+//				} 
+//				
+//				onPunct outKpiPgwApn :
+//				{
+//					if(currentPunct() == Sys.WindowMarker) {
+//						submit(Sys.WindowMarker,outCsv);
+//					}
+//				}
+//		}
+	}
+
+
+void countCdrsAPNLTE(AggregateSqmSchema eggsn1, mutable BroadPgwApn aggrSQMtmp) 
+{
+	for(int32 i in range(eggsn1.cdrSchema.datavolumeFBCDownlink))
+	{
+		aggrSQMtmp.downlink_4g = aggrSQMtmp.downlink_4g + (int64)eggsn1.cdrSchema.datavolumeFBCDownlink[i];
+	}
+	for(int32 i in range(eggsn1.cdrSchema.datavolumeFBCUplink))
+	{
+		aggrSQMtmp.uplink_4g = aggrSQMtmp.uplink_4g + (int64)eggsn1.cdrSchema.datavolumeFBCUplink[i];
+	}
+}
+
+void addCdrPGWAPN(AggregateSqmSchema eggsn, mutable SqmBroadPgwApn cdr, rstring key, rstring nameOutputFile, rstring centralName, rstring filePrefix, rstring fileSuffix, float64 startROP, float64 endROP)
+{
+	mutable BroadPgwApn firstEntry = {};
+	mutable BroadPgwApn existEntry = {};
+	
+	if(has(cdr, key) == false) 
+    {   
+    	firstEntry.nameOutputFile = nameOutputFile; 
+		firstEntry.filePrefix = filePrefix;
+		firstEntry.suffix = fileSuffix;									
+										
+    	firstEntry.ggsn_dn = centralName;
+		firstEntry.apn_name = cleanApn(eggsn.cdrSchema.apn);
+		firstEntry.start_time = getUtilConvert((rstring)startROP); 
+		firstEntry.end_time = getUtilConvert((rstring)endROP);
+		countCdrsAPNLTE(eggsn, firstEntry) ;
+		insertM(cdr, key, firstEntry) ;
+    }  
+    else 
+    {     
+     	existEntry = cdr[key];
+     	
+     	countCdrsAPNLTE(eggsn, existEntry) ;
+ 					
+ 		removeM (cdr, key);
+	    insertM( cdr, key, existEntry);
+    }
+}
+
+
+BroadPgwApn initEmptyEndRopTupleApnLTE() 
+{
+	mutable BroadPgwApn result = {};
+	
+	result.endROP = true;
+	
+	return result;
+}

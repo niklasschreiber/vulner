@@ -1,0 +1,8 @@
+C:\Users\Luigi\Documents\Visual Studio 2010\Projects\CivettaNet\CivettaNet\bin\CivettaNet.dll
+C:\Users\Luigi\Documents\Visual Studio 2010\Projects\CivettaNet\CivettaNet\bin\CivettaNet.pdb
+C:\Users\Luigi\Documents\Visual Studio 2010\Projects\CivettaNet\CivettaNet\bin\CivettaNet.xml
+C:\Users\Luigi\Documents\Visual Studio 2010\Projects\CivettaNet\CivettaNet\obj\Debug\CivettaNet.Resources.resources
+C:\Users\Luigi\Documents\Visual Studio 2010\Projects\CivettaNet\CivettaNet\obj\Debug\CivettaNet.vbproj.GenerateResource.Cache
+C:\Users\Luigi\Documents\Visual Studio 2010\Projects\CivettaNet\CivettaNet\obj\Debug\CivettaNet.dll
+C:\Users\Luigi\Documents\Visual Studio 2010\Projects\CivettaNet\CivettaNet\obj\Debug\CivettaNet.xml
+C:\Users\Luigi\Documents\Visual Studio 2010\Projects\CivettaNet\CivettaNet\obj\Debug\CivettaNet.pdb

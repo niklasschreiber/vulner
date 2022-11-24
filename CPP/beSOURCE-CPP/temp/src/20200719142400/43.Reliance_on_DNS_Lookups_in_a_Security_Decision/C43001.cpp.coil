@@ -1,0 +1,106 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/43.Reliance_on_DNS_Lookups_in_a_Security_Decision/C43001.cpp");
+   ("language", "CPP");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<string.h>");
+   ("include", "<netdb.h>");
+   ("include", "<sys/socket.h>");
+   ("include", "<netinet/in.h>");
+   ("include", "<arpa/inet.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/43.Reliance_on_DNS_Lookups_in_a_Security_Decision/C43001.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/43.Reliance_on_DNS_Lookups_in_a_Security_Decision/C43001.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/43.Reliance_on_DNS_Lookups_in_a_Security_Decision/C43001.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/43.Reliance_on_DNS_Lookups_in_a_Security_Decision/C43001.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/43.Reliance_on_DNS_Lookups_in_a_Security_Decision/C43001.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/43.Reliance_on_DNS_Lookups_in_a_Security_Decision/C43001.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/43.Reliance_on_DNS_Lookups_in_a_Security_Decision/C43001.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C43001",
+   SI(<"C43001">,
+   {[
+      {;
+      ,(1#1,27#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,27#1,!1)}
+   )
+   ,(1#1,27#1,!1)},
+
+   {"C43001",
+   FN([public],(<"C43001">,"decision"):int,[("ip_addr_string":ref(char),(13#14,13#33,!1))],[],
+   {[
+      {VD("hp",ref(mod(class((,hostent)),[struct])))
+      ,(15#20,15#22,!1)};
+      {VD("myaddr",mod(class((,in_addr)),[struct]))
+      ,(16#20,16#25,!1)};
+      {VD("tHost",ref(char),{"trustme.trusty.com"S,string,(17#19,17#38,!1)})
+      ,(17#10,17#15,!1)};
+      {{AE({OA({V("myaddr"),mod(class((,in_addr)),[struct]),(18#5,18#10,!1)},"s_addr"),class((,"%undef")),(18#5,18#17,!1)},{SC((<"C43001">,"inet_addr"),[ref(char)],[{V("ip_addr_string"),ref(char),(18#31,18#44,!1)}]),class((,"%undef")),(18#21,18#45,!1)}),class((,"%undef")),(18#5,18#45,!1)}
+      ,(18#5,18#45,!1)};
+      {{AE({V("hp"),ref(mod(class((,hostent)),[struct])),(20#5,20#6,!1)},{CS(ref(mod(class((,hostent)),[struct])),{SC((<"C43001">,"gethostbyaddr"),[ref(char),int,class((,"%undef"))],[{CS(ref(char),{&{V("myaddr"),mod(class((,in_addr)),[struct]),(20#51,20#56,!1)},ref(mod(class((,in_addr)),[struct])),(20#50,20#56,!1)}),ref(char),(20#42,20#56,!1)},{SO(mod(class((,in_addr)),[struct])),int,(20#59,20#80,!1)},{V("AF_INET"),class((,"%undef")),(20#83,20#89,!1)}]),class((,"%undef")),(20#28,20#90,!1)}),ref(mod(class((,hostent)),[struct])),(20#10,20#90,!1)}),ref(mod(class((,hostent)),[struct])),(20#5,20#90,!1)}
+      ,(20#5,20#90,!1)};
+      {IF({BO(&&,{V("hp"),ref(mod(class((,hostent)),[struct])),(21#9,21#10,!1)},{UO(!,{SC((<"C43001">,"strncmp"),[class((,"%undef")),ref(char),int],[{OA({*{V("hp"),ref(mod(class((,hostent)),[struct])),(21#24,21#25,!1)},mod(class((,hostent)),[struct]),(21#24,21#33,!1)},"h_name"),class((,"%undef")),(21#24,21#33,!1)},{V("tHost"),ref(char),(21#36,21#40,!1)},{SO({V("tHost"),ref(char),(21#50,21#54,!1)}),int,(21#43,21#55,!1)}]),class((,"%undef")),(21#16,21#56,!1)}),class((,"%undef")),(21#15,21#56,!1)}),bool,(21#9,21#56,!1)},
+         {[
+            {RE({"1"N,int,(22#17,22#17,!1)})
+            ,(22#10,22#18,!1)}
+            ]
+         ,(21#5,24#18,!1)},
+         {[
+            {RE({"0"N,int,(24#17,24#17,!1)})
+            ,(24#10,24#18,!1)}
+            ]
+         ,(21#5,24#18,!1)})
+      ,(21#5,24#18,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(13#1,25#1,!1)}
+   )
+   ,(13#1,25#1,!1)},
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/43.Reliance_on_DNS_Lookups_in_a_Security_Decision/C43001.cpp",
+   [
+      S("//\n",1),
+      S("// \n",2),
+      S("//\n",3),
+      S("//  \n",22),
+      S("// \n",24)
+   ]
+   }
+]

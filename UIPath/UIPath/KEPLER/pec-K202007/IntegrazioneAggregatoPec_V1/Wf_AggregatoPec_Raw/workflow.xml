@@ -1,0 +1,73 @@
+<workflow-app name="aggregatopec_raw" xmlns="uri:oozie:workflow:0.2">
+<start to="aggregato_hive_script"/> 
+    <action name="aggregato_hive_script">
+        <hive2 xmlns="uri:oozie:hive2-action:0.1">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+		<configuration>
+			<property>
+			  <name>mapred.job.queue.name</name>
+			  <value>databreach</value>
+			</property>
+			<property>
+			  <name>oozie.launcher.mapred.job.queue.name</name>
+			  <value>databreach</value>
+			</property>
+		 </configuration>
+			<jdbc-url>${hiveJdbc}</jdbc-url>
+			<password>${passwordHive}</password>
+            <script>/user/oozie/WorkflowShellWorkspace/Wf_AggregatoPec_Raw/aggregatopec_raw.sql</script>
+        </hive2>
+        <ok to="aggregato-node"/>
+        <error to="kill"/>
+    </action>
+	<action name="aggregato-node">
+        <sqoop xmlns="uri:oozie:sqoop-action:0.2">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <configuration>
+                <property>
+                    <name>mapred.job.queue.name</name>
+                    <value>${queueName}</value>
+                </property>
+            </configuration>
+            <command>export --connect jdbc:oracle:thin:@${dbServer} --username ${dbUsername} --password ${dbPassword} --table T_PEC_AGG_TIME --input-fields-terminated-by "|"  --export-dir /kepler/export/PEC/AggregatoPecTime </command>
+        </sqoop>
+        <ok to="pec-node_call_stored"/>
+        <error to="kill"/>
+    </action>
+	<action name="pec-node_call_stored">
+        <sqoop xmlns="uri:oozie:sqoop-action:0.2">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <configuration>
+                <property>
+                    <name>mapred.job.queue.name</name>
+                    <value>${queueName}</value>
+                </property>
+            </configuration>
+			<arg>eval</arg>
+			<arg>--connect</arg>
+			<arg>jdbc:oracle:thin:@${dbServer}</arg>
+			<arg>--username</arg>
+			<arg>${dbUsername}</arg>
+			<arg>--password</arg>
+			<arg>${dbPassword}</arg>
+			<arg>--query</arg>
+			<arg>BEGIN SP_PROCESS_PEC(); END;</arg>
+        </sqoop>
+        <ok to="clear_all"/>
+        <error to="kill"/>
+    </action>
+    <action name="clear_all">
+        <fs>
+			  <delete path='${nameNode}/kepler/export/PEC/AggregatoPecTime/*'/> 
+        </fs>
+        <ok to="end"/>
+		<error to="kill"/>
+    </action>
+    <kill name="kill">
+        <message>Action failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
+    </kill>
+    <end name="end"/>
+</workflow-app>

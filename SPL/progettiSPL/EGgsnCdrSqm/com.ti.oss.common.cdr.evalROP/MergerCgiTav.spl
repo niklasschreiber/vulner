@@ -1,0 +1,62 @@
+namespace com.ti.oss.common.cdr.evalROP;
+
+use com.ti.oss.common.cdr.types::*;
+use com.ti.oss.common.util.cfg::* ;
+
+public composite MergerCgiTav (input stream<rstring ratType, rstring cgiTav, rstring ROP, boolean endROP> In; output stream<tuple<rstring content>, tuple<rstring fileName>> Out)
+{
+	param
+		expression<rstring> $mediationName;
+		expression<int32> $parall;
+	
+	graph
+		stream<tuple<rstring content>, tuple<rstring fileName>> Out = Custom(In as I)
+		{
+			logic state :
+			{
+				// Mediation parallelism degree
+				int32 parall = $parall;
+				
+				// Data structure to store per-KPI statistics
+				mutable set<rstring> listCgiTav;
+				
+				// Mediation name from the compile time value
+				rstring mediationName = $mediationName;
+				
+				// Output file path (events directory)
+				mutable rstring path = getCfgParam("COMMON_CFG_DIR",mediationName,"EVENT_DIR");
+				
+				// Output file name
+				mutable rstring fName = path + "/cgitav_";
+				
+				mutable int32 count = 0;
+			}
+			onTuple I : 
+			{
+				// If ROP is defined and the ROP is changed, update the fName state variable
+				if(I.endROP)
+				{
+					count++;
+					if (count == parall)
+					{
+						fName = regexReplacePerl(I.ROP,"/","-",true);	
+						fName = regexReplacePerl(fName," ","_",true);
+						fName = path + "/cgitav_" + fName + ".csv";
+						
+						for (rstring elem in listCgiTav)
+						{
+							submit ({content = elem, fileName = fName}, Out);
+						}
+							 
+						clearM(listCgiTav);
+						count = 0;
+					}
+				}
+				else
+				{
+					insertM(listCgiTav, I.ratType+";"+I.cgiTav);
+				}	
+			}
+		
+		}
+}

@@ -1,0 +1,11 @@
+import bg.Reservation
+
+model {
+    Reservation reservation
+}
+json {
+    if (reservation.id % 2 == 0) {
+        id reservation.id
+    }
+    name  reservation.reservationName
+}

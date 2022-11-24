@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+   <body>
+
+      <section type="common" name="EVT">
+         Event Management System parameters
+         <parameter name="SSID-OWNER" mandatory="1" default="TIM" type="char" maxlength="8">
+            EMS Owner
+         </parameter>
+         <parameter name="SSID-NUMBER" mandatory="1" default="1520" type="numeric" minvalue="0" maxvalue="32767">
+            EMS Subsystem
+         </parameter>
+         <parameter name="SSID-VERSION" mandatory="1" default="A09" type="char" maxlength="3">
+            EMS Version
+         </parameter>
+         <parameter name="NBR-ALERT-MSG" mandatory="0" default="1" type="numeric" minvalue="1" maxvalue="1024">
+            EMS Alert Messages for time interval
+         </parameter>
+         <parameter name="INTERVAL-ALERT-MSG-TIME" mandatory="0" default="300" type="numeric" minvalue="1" maxvalue="86400">
+            EMS Time Interval (seconds) for same event
+         </parameter>
+      </section>
+      <section type="common" name="LOG">
+         Log parameters
+         <parameter name="TRACE-LEVEL" mandatory="0" default="9" type="select">
+            LOG Level
+            <option value="1">
+               ERROR
+            </option>
+            <option value="5">
+               WARNING
+            </option>
+            <option value="9">
+               INFO
+            </option>
+            <option value="10">
+               DEBUG
+            </option>
+            <option value="11">
+               DEBUG2
+            </option>
+         </parameter>
+         <parameter name="PATH-LOG" mandatory="1" type="folder">
+            LOG Guardian directory
+         </parameter>
+         <parameter name="NUM-DAYS-OF-LOG" mandatory="0" default="3" type="numeric" minvalue="0" maxvalue="30">
+            LOG Days
+         </parameter>
+         <parameter name="LOG-PREFIX-NAME" mandatory="0" type="char" maxlength="4">
+            LOG Prefix
+         </parameter>
+         <parameter name="TRACE-STRING" mandatory="0" type="char" maxlength="128">
+            LOG Trace string
+         </parameter>
+      </section>
+      <section type="common" name="STAT">
+         Statistics parameters
+         <parameter name="TIMEOUT-BUMP" mandatory="0" default="5" type="numeric" minvalue="1" maxvalue="15">
+            STAT Interval (minutes)
+         </parameter>
+         <parameter name="NBR-MAX-REG" mandatory="1" type="numeric" minvalue="1" maxvalue="1024">
+            STAT Register max number
+         </parameter>
+         <parameter name="GROUP" mandatory="1" default="1010" type="numeric" minvalue="1" maxvalue="32767">
+            STAT Group
+         </parameter>
+      </section>
+      <section type="common" name="DIAMETER">
+         Diameter parameters
+         <parameter name="DIAMETER-PLATFORM-ID" mandatory="0" default="0" type="numeric" minvalue="0" maxvalue="255">
+            Diameter Platform Id
+         </parameter>
+         <parameter name="DIAMETER-APPLICATION-ID" mandatory="0" default="16777251" type="numeric" minvalue="16777000" maxvalue="16777999">
+            Diameter Application Id
+         </parameter>
+         <parameter name="OWN-FQDN" mandatory="1" type="char" maxlength="254">
+            Diameter Own FQDN
+         </parameter>
+         <parameter name="OWN-REALM" mandatory="1" type="char" maxlength="254">
+            Diameter Own Realm
+         </parameter>
+         <parameter name="OWN-URI" mandatory="1" type="char" maxlength="254">
+            Diameter Own URI
+         </parameter>
+         <parameter name="OWN-VENDOR-ID" mandatory="1" type="numeric" minvalue="0" maxvalue="2147483647">
+            Diameter Own Vendor Id
+         </parameter>
+         <parameter name="OWN-PRODUCT-NAME" mandatory="1" type="char" maxlength="255">
+            Diameter Own Product Name
+         </parameter>
+         <parameter name="FQDN-REDIRECT-HOST-1" mandatory="0" type="char" maxlength="255">
+            FQDN Redirect Host #1
+         </parameter>
+         <parameter name="FQDN-REDIRECT-HOST-2" mandatory="0" type="char" maxlength="255">
+            FQDN Redirect Host #2
+         </parameter>
+         <parameter name="FQDN-REDIRECT-HOST-3" mandatory="0" type="char" maxlength="255">
+            FQDN Redirect Host #3
+         </parameter>
+         <parameter name="FQDN-REDIRECT-HOST-4" mandatory="0" type="char" maxlength="255">
+            FQDN Redirect Host #4
+         </parameter>
+         <parameter name="FQDN-REDIRECT-HOST-5" mandatory="0" type="char" maxlength="255">
+            FQDN Redirect Host #5
+         </parameter>
+         <parameter name="FQDN-REDIRECT-HOST-6" mandatory="0" type="char" maxlength="255">
+            FQDN Redirect Host #6
+         </parameter>
+         <parameter name="FQDN-REDIRECT-HOST-7" mandatory="0" type="char" maxlength="255">
+            FQDN Redirect Host #7
+         </parameter>
+         <parameter name="FQDN-REDIRECT-HOST-8" mandatory="0" type="char" maxlength="255">
+            FQDN Redirect Host #8
+         </parameter>
+         <parameter name="FQDN-REDIRECT-HOST-9" mandatory="0" type="char" maxlength="255">
+            FQDN Redirect Host #9
+         </parameter>
+         <parameter name="FQDN-REDIRECT-HOST-10" mandatory="0" type="char" maxlength="255">
+            FQDN Redirect Host #10
+         </parameter>
+         <parameter name="MAX-FQDN-REDIRECT-HOST-ENTRIES" mandatory="1" type="numeric" minvalue="0" maxvalue="10">
+            Diameter Max FQDN Redirect Host Entries
+         </parameter>
+      </section>
+      <section type="common" name="CTX">
+         LTE Context parameters
+         <parameter name="TASKID-TFS-LTE" mandatory="1" type="numeric" minvalue="1" maxvalue="32767">
+            LTE INS task id for timeout event
+         </parameter>
+         <parameter name="SRVCLASS-TFS-LTE" mandatory="1" type="numeric" minvalue="1" maxvalue="32767">
+            LTE INS server class for timeout event
+         </parameter>
+         <parameter name="CTX-TIMEOUT" mandatory="0" default="60" type="numeric" minvalue="1" maxvalue="60">
+            LTE Timeout (seconds) for steering layer IPC
+         </parameter>
+      </section>
+      <section type="common" name="TFS-MGR">
+         Steering layer parameters
+         <parameter name="MTS-TID-SVRC-TFS-MGR" mandatory="1" type="char" maxlength="11">
+            Steering layer INS task id and server class
+         </parameter>
+      </section>
+      <section type="common" name="TFS-TRANSLATOR-DBASE">
+         LTE IMSI based redirection parameters
+         <parameter name="PATH-IMSI-DBASE" mandatory="1" default=" " type="path">
+            IMSI based redirection database (to be released)
+         </parameter>
+         <parameter name="PATH-HSS-DBASE" mandatory="1" default=" " type="path">
+            HSS database (to be released)
+         </parameter>
+      </section>
+   </body>

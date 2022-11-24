@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="Configuration_Manager" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="Configuration_Manager" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="Configuration_Manager">
+      <s:element name="GetConnectionString">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ApplicationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DatabaseName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConnectionStringResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetConnectionStringResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNavigationString">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PlaceHolder" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNavigationStringResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNavigationStringResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetConnectionStringSoapIn">
+    <wsdl:part name="parameters" element="tns:GetConnectionString" />
+  </wsdl:message>
+  <wsdl:message name="GetConnectionStringSoapOut">
+    <wsdl:part name="parameters" element="tns:GetConnectionStringResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNavigationStringSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNavigationString" />
+  </wsdl:message>
+  <wsdl:message name="GetNavigationStringSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNavigationStringResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Configuration_ManagerSoap">
+    <wsdl:operation name="GetConnectionString">
+      <wsdl:input message="tns:GetConnectionStringSoapIn" />
+      <wsdl:output message="tns:GetConnectionStringSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNavigationString">
+      <wsdl:input message="tns:GetNavigationStringSoapIn" />
+      <wsdl:output message="tns:GetNavigationStringSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Configuration_ManagerSoap" type="tns:Configuration_ManagerSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetConnectionString">
+      <soap:operation soapAction="Configuration_Manager/GetConnectionString" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNavigationString">
+      <soap:operation soapAction="Configuration_Manager/GetNavigationString" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Configuration_ManagerSoap12" type="tns:Configuration_ManagerSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetConnectionString">
+      <soap12:operation soapAction="Configuration_Manager/GetConnectionString" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNavigationString">
+      <soap12:operation soapAction="Configuration_Manager/GetNavigationString" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Configuration_Manager">
+    <wsdl:port name="Configuration_ManagerSoap" binding="tns:Configuration_ManagerSoap">
+      <soap:address location="http://localhost:35574/Configuration_Manager.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Configuration_ManagerSoap12" binding="tns:Configuration_ManagerSoap12">
+      <soap12:address location="http://localhost:35574/Configuration_Manager.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

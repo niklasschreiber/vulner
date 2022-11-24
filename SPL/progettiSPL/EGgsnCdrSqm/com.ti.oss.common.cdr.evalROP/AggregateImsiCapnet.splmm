@@ -1,0 +1,107 @@
+namespace com.ti.oss.common.cdr.evalROP;
+
+use com.ibm.streamsx.file::* ;
+use com.ti.oss.common.cdr.parser.eggsn::* ;
+use com.ti.oss.common.cdr.types::* ;
+use com.ti.oss.common.cdr.util::* ;
+use com.ti.oss.common.cdr.util.cfg::* ;
+use com.ti.oss.common.event::* ;
+use com.ti.oss.common.types::* ;
+use com.ti.oss.common.util.cfg::* ;
+use com.ti.oss.common.util.time::*;
+
+<%
+	my $parallelSQM = 16;
+%>
+
+type BroadImsiCapnetT = map<rstring, BroadImsiCapnet>;
+
+public composite AggregateImsiCapnet (input stream<BroadImsiCapnet> IImsi; output stream<CsvWrite> OImsi)
+{
+	param
+		expression<rstring> $mediationName ;
+			
+	graph
+	
+		(stream<CsvWrite> OImsi) = Custom(IImsi as I)
+		{
+		logic state:
+		{
+			mutable int32 countAggr = 0;
+			mutable BroadImsiCapnetT ImsiAggr ;
+			rstring mediationName = $mediationName;
+			mutable CsvWrite csv = {};
+		} 
+	
+		onTuple I : 
+		{   
+			if (I.endROP)
+			{	
+				countAggr++;
+			}
+			else
+			{
+				mutable rstring key = I.ggsn_dn;
+				if(has(ImsiAggr, key) == true)
+				{
+					ImsiAggr[key].imsi_lte_dl_somma_volume = ImsiAggr[key].imsi_lte_dl_somma_volume + I.imsi_lte_dl_somma_volume;
+					ImsiAggr[key].imsi_lte_ul_somma_volume = ImsiAggr[key].imsi_lte_ul_somma_volume + I.imsi_lte_ul_somma_volume;
+					ImsiAggr[key].imsi_bb_dl_somma_volume = ImsiAggr[key].imsi_bb_dl_somma_volume + I.imsi_bb_dl_somma_volume;
+					ImsiAggr[key].imsi_bb_ul_somma_volume = ImsiAggr[key].imsi_bb_ul_somma_volume + I.imsi_bb_ul_somma_volume;
+				}
+				else
+				{
+					mutable BroadImsiCapnet BroadImsiTmp = {};
+					swap(BroadImsiTmp.ggsn_dn,I.ggsn_dn);
+					swap(BroadImsiTmp.start_time,I.start_time);
+					swap(BroadImsiTmp.end_time,I.end_time);
+					swap(BroadImsiTmp.imsi_lte_dl_somma_volume,I.imsi_lte_dl_somma_volume);
+					swap(BroadImsiTmp.imsi_lte_ul_somma_volume,I.imsi_lte_ul_somma_volume);
+					swap(BroadImsiTmp.imsi_bb_dl_somma_volume,I.imsi_bb_dl_somma_volume);
+					swap(BroadImsiTmp.imsi_bb_ul_somma_volume,I.imsi_bb_ul_somma_volume);
+					swap(BroadImsiTmp.nameOutputFile,I.nameOutputFile);
+					swap(BroadImsiTmp.endROP,I.endROP);
+					swap(BroadImsiTmp.filePrefix,I.filePrefix);
+					swap(BroadImsiTmp.suffix,I.suffix);
+					swap(BroadImsiTmp.endRopSecs,I.endRopSecs);
+					swap(BroadImsiTmp.startRopSecs,I.startRopSecs);		
+					
+					insertM(ImsiAggr, key, BroadImsiTmp) ;							
+				}
+				
+			}
+			
+			if(countAggr == 16)
+			{
+				for(rstring key in ImsiAggr)
+				{	
+					csv.nameOutputFile = ImsiAggr[key].nameOutputFile;
+					csv.endROP = false;
+					csv.filePrefix = ImsiAggr[key].filePrefix;
+					csv.suffix = ImsiAggr[key].suffix;
+					
+					if (ImsiAggr[key].ggsn_dn != "")
+					{
+						csv.outputContent = "PLMN-PLMN/CAPNET-"+ImsiAggr[key].ggsn_dn+";"+ImsiAggr[key].start_time+";"+ImsiAggr[key].end_time+";"+
+											(rstring)ImsiAggr[key].imsi_lte_dl_somma_volume+";"+
+											(rstring)ImsiAggr[key].imsi_lte_ul_somma_volume+";"+
+											(rstring)ImsiAggr[key].imsi_bb_dl_somma_volume+";"+
+											(rstring)ImsiAggr[key].imsi_bb_ul_somma_volume;
+					}else{
+						csv.outputContent = "";
+					}
+				
+					submit(csv, OImsi);
+				}	
+				
+				countAggr = 0;
+				clearM(ImsiAggr);
+				
+				csv.nameOutputFile = I.nameOutputFile;
+				csv.outputContent = "";
+				csv.endROP = true;
+				submit(csv, OImsi);
+			}		
+        }	
+     }	
+}

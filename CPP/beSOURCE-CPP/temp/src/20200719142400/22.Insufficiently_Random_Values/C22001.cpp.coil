@@ -1,0 +1,115 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/22.Insufficiently_Random_Values/C22001.cpp");
+   ("language", "CPP");
+   ("include", "<stdafx.h>");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<time.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/22.Insufficiently_Random_Values/C22001.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/22.Insufficiently_Random_Values/C22001.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/22.Insufficiently_Random_Values/C22001.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/22.Insufficiently_Random_Values/C22001.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/22.Insufficiently_Random_Values/C22001.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/22.Insufficiently_Random_Values/C22001.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/22.Insufficiently_Random_Values/C22001.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C22001",
+   SI(<"C22001">,
+   {[
+      {;
+      ,(1#1,35#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,35#1,!1)}
+   )
+   ,(1#1,35#1,!1)},
+
+   {"C22001",
+   FN([public],(<"C22001">,"cwe330_bad"):int,[("":unit,(6#16,6#19,!1))],[],
+   {[
+      {VD("count",int,{"0"N,int,(8#17,8#17,!1)})
+      ,(8#9,8#13,!1)};
+      {VD("temp",int)
+      ,(9#9,9#12,!1)};
+      {PC0((<"C22001">,"printf"),[string,string,string],[{"\n%s\n%s\n"S,string,(11#12,11#23,!1)},{"Some randomly distributed integers will be printed."S,string,(12#9,12#61,!1)},{"How many do you want to see? "S,string,(13#9,13#39,!1)}])
+      ,(11#5,13#40,!1)};
+      {PC0((<"C22001">,"srand"),[int],[{"100"N,int,(16#16,16#18,!1)}])
+      ,(16#9,16#20,!1)};
+      {WL(L7,{"1"N,int,(17#17,17#17,!1)},
+         {[
+            {IF0({BO(==,{BO(%,{V("count"),int,(19#14,19#18,!1)},{"6"N,int,(19#22,19#22,!1)}),int,(19#14,19#22,!1)},{"0"N,int,(19#27,19#27,!1)}),bool,(19#14,19#27,!1)},
+               {[
+                  {PC0((<"C22001">,"printf"),[string,string],[{"%s"S,string,(19#37,19#40,!1)},{"\n"S,string,(19#43,19#46,!1)}])
+                  ,(19#30,19#47,!1)}
+                  ]
+               ,(19#9,19#48,!1)})
+            ,(19#9,19#48,!1)};
+            {{AE({V("temp"),int,(21#9,21#12,!1)},{BO(%,{SC((<"C22001">,"rand"),[],[]),class((,"%undef")),(21#16,21#21,!1)},{"101"N,int,(21#23,21#25,!1)}),undef("unknown"),(21#16,21#25,!1)}),int,(21#9,21#25,!1)}
+            ,(21#9,21#25,!1)};
+            {IF({BO(!=,{V("temp"),int,(23#13,23#16,!1)},{"100"N,int,(23#21,23#23,!1)}),bool,(23#13,23#23,!1)},
+               {[
+                  {{IPO({V("count"),int,(24#13,24#17,!1)}),int,(24#13,24#19,!1)}
+                  ,(24#13,24#19,!1)}
+                  ]
+               ,(23#9,26#30,!1)},
+               {[
+                  {BR @ 
+                  ,(26#25,26#30,!1)}
+                  ]
+               ,(23#9,26#30,!1)})
+            ,(23#9,26#30,!1)};
+            {PC0((<"C22001">,"printf"),[string,int],[{"%5d"S,string,(28#16,28#20,!1)},{V("temp"),int,(28#24,28#27,!1)}])
+            ,(28#9,28#29,!1)}
+            ]
+         ,(18#5,29#5,!1)})
+      ,(17#9,29#5,!1)};
+      {PC0((<"C22001">,"printf"),[string,int],[{"\nCount: %d \n"S,string,(31#12,31#27,!1)},{V("count"),int,(31#31,31#35,!1)}])
+      ,(31#5,31#37,!1)};
+      {RE({"0"N,int,(33#12,33#12,!1)})
+      ,(33#5,33#13,!1)}
+      ]
+   ,(6#1,34#1,!1)}
+   )
+   ,(6#1,34#1,!1)},
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/22.Insufficiently_Random_Values/C22001.cpp",
+   [
+      M("/*  */",15,(15#0,15#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/22.Insufficiently_Random_Values/C22001.cpp"))
+   ]
+   }
+]

@@ -1,0 +1,52 @@
+#---------------------------------------------------------------------
+#
+# File:         component_integrate.script
+# Project:      
+# Component:    
+# Description:  Integration script for component
+# Version:      1
+#
+# Author:       Antonino Di Guardo
+# Date:         05/10/2013
+# Last Update:  
+# Copyright(c): GFM Integration 2013
+#
+#---------------------------------------------------------------------
+
+
+###############################################################################
+#
+# Application common parameters
+#
+###############################################################################
+include ../application.info
+include ../template/application.info
+
+
+###############################################################################
+#
+# Component parameters
+#
+###############################################################################
+include component.info
+
+
+###############################################################################
+#
+# Target rules (explicit rules)
+#
+###############################################################################
+
+#######################################
+# External target rules
+#
+# Target usable by the users.
+# Targets that the user normally passes
+# as parameter to the 'make' command
+#######################################
+.PHONY: integrate unintegrate
+
+integrate:
+	-@cp -f * $(INTEGRATE_MAKE_DIR)/
+
+unintegrate:

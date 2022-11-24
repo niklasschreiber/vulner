@@ -1,0 +1,325 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp");
+   ("language", "CPP");
+   ("include", "std_testcase.h");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<stddef.h>");
+   ("include", "<time.h>");
+   ("include", "<limits.h>");
+   ("include", "<string.h>");
+   ("include", "<stdint.h>");
+   ("include", "<stdint.h>");
+   ("include", "<ctype.h>");
+   ("include", "<fcntl.h>");
+   ("include", "<sys/types.h>");
+   ("include", "<sys/stat.h>");
+   ("include", "std_testcase_io.h");
+   ("include", "std_testcase.h");
+   ("include", "<wchar.h>");
+}
+{
+   (!3, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase_io.h");
+   (!2, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h");
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp",
+   MD("RAND32()",[],"((rand()<<30) ^ (rand()<<15) ^ rand())")
+   ,(84#0,84#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp",
+   MD("RAND64()",[],"(((int64_t)rand()<<60) ^ ((int64_t)rand()<<45) ^ ((int64_t)rand()<<30) ^ ((int64_t)rand()<<15) ^ (int64_t)rand())")
+   ,(87#0,87#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   SF([extern,const,extern],int,<"CWE415_Double_Free__malloc_free_int64_t_01">,"GLOBAL_CONST_TRUE")
+   ,(103#18,103#34,!2)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   SF([extern,const,extern],int,<"CWE415_Double_Free__malloc_free_int64_t_01">,"GLOBAL_CONST_FALSE")
+   ,(104#18,104#35,!2)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   SF([extern,const,extern],int,<"CWE415_Double_Free__malloc_free_int64_t_01">,"GLOBAL_CONST_FIVE")
+   ,(105#18,105#34,!2)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   SF([extern,extern],int,<"CWE415_Double_Free__malloc_free_int64_t_01">,"globalTrue")
+   ,(110#12,110#21,!2)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   SF([extern,extern],int,<"CWE415_Double_Free__malloc_free_int64_t_01">,"globalFalse")
+   ,(111#12,111#22,!2)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   SF([extern,extern],int,<"CWE415_Double_Free__malloc_free_int64_t_01">,"globalFive")
+   ,(112#12,112#21,!2)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   SF([extern,extern],int,<"CWE415_Double_Free__malloc_free_int64_t_01">,"globalArgc")
+   ,(55#12,55#21,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   SF([extern,extern],ref(ref(char)),<"CWE415_Double_Free__malloc_free_int64_t_01">,"globalArgv")
+   ,(56#12,56#24,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   SI(<"CWE415_Double_Free__malloc_free_int64_t_01">,
+   {[
+      {;
+      ,(1#1,99#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,99#1,!1)}
+   )
+   ,(1#1,99#1,!1)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   PT([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"printLine"):unit,[(mod(ref(char),[const]):"line",(14#16,14#32,!3))],[]
+   )
+   ,(14#1,14#34,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   PT([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"printWLine"):unit,[(mod(ref(wchar),[const]):"line",(16#17,16#36,!3))],[]
+   )
+   ,(16#1,16#38,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   PT([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"printIntLine"):unit,[(int:"intNumber",(18#20,18#32,!3))],[]
+   )
+   ,(18#1,18#34,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   PT([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"printShortLine"):unit,[(short:"shortNumber",(20#22,20#38,!3))],[]
+   )
+   ,(20#1,20#40,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   PT([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"printFloatLine"):unit,[(float:"floatNumber",(22#22,22#38,!3))],[]
+   )
+   ,(22#1,22#40,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   PT([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"printLongLine"):unit,[(long:"longNumber",(24#20,24#34,!3))],[]
+   )
+   ,(24#1,24#36,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   PT([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"printLongLongLine"):unit,[(class((,int64_t)):"longLongIntNumber",(26#24,26#48,!3))],[]
+   )
+   ,(26#1,26#50,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   PT([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"printSizeTLine"):unit,[(class((,size_t)):"sizeTNumber",(28#21,28#38,!3))],[]
+   )
+   ,(28#1,28#40,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   PT([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"printHexCharLine"):unit,[(char:"charHex",(30#23,30#34,!3))],[]
+   )
+   ,(30#1,30#36,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   PT([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"printWcharLine"):unit,[(wchar:"wideChar",(32#21,32#36,!3))],[]
+   )
+   ,(32#1,32#38,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   PT([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"printUnsignedLine"):unit,[(uint:"unsignedNumber",(34#24,34#46,!3))],[]
+   )
+   ,(34#1,34#48,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   PT([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"printHexUnsignedCharLine"):unit,[(uchar:"unsignedCharacter",(36#31,36#61,!3))],[]
+   )
+   ,(36#1,36#63,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   PT([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"printDoubleLine"):unit,[(double:"doubleNumber",(38#22,38#40,!3))],[]
+   )
+   ,(38#1,38#42,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   PT([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"printStructLine"):unit,[(mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]):"structTwoIntsStruct",(40#22,40#62,!3))],[]
+   )
+   ,(40#1,40#64,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   PT([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"printBytesLine"):unit,[(mod(ref(uchar),[const]):"bytes",(42#21,42#47,!3)),(class((,size_t)):"numBytes",(42#50,42#64,!3))],[]
+   )
+   ,(42#1,42#66,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   PT([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"decodeHexChars"):class((,size_t)),[(ref(uchar):"bytes",(44#23,44#43,!3)),(class((,size_t)):"numBytes",(44#46,44#60,!3)),(mod(ref(char),[const]):"hex",(44#63,44#78,!3))],[]
+   )
+   ,(44#1,44#80,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   PT([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"decodeHexWChars"):class((,size_t)),[(ref(uchar):"bytes",(46#24,46#44,!3)),(class((,size_t)):"numBytes",(46#47,46#61,!3)),(mod(ref(wchar),[const]):"hex",(46#64,46#82,!3))],[]
+   )
+   ,(46#1,46#84,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   PT([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"globalReturnsTrue"):int,[],[]
+   )
+   ,(48#1,48#24,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   PT([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"globalReturnsFalse"):int,[],[]
+   )
+   ,(50#1,50#25,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   PT([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"globalReturnsTrueOrFalse"):int,[],[]
+   )
+   ,(52#1,52#31,!3)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   FN([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"CWE415_Double_Free__malloc_free_int64_t_01_bad"):unit,[],[],
+   {[
+      {VD("data",ref(class((,int64_t))))
+      ,(26#13,26#18,!1)};
+      {{AE({V("data"),ref(class((,int64_t))),(28#5,28#8,!1)},{CS(ref(unit),{"0"N,int,(28#12,28#15,!1)}),ref(unit),(28#12,28#15,!1)}),ref(class((,int64_t))),(28#5,28#15,!1)}
+      ,(28#5,28#15,!1)};
+      {{AE({V("data"),ref(class((,int64_t))),(29#5,29#8,!1)},{CS(ref(class((,int64_t))),{SC((<"CWE415_Double_Free__malloc_free_int64_t_01">,"malloc"),[int],[{BO(*,{"100"N,int,(29#30,29#32,!1)},{SO(class((,int64_t))),int,(29#34,29#48,!1)}),int,(29#30,29#48,!1)}]),class((,"%undef")),(29#23,29#49,!1)}),ref(class((,int64_t))),(29#12,29#49,!1)}),ref(class((,int64_t))),(29#5,29#49,!1)}
+      ,(29#5,29#49,!1)};
+      {PC0((<"CWE415_Double_Free__malloc_free_int64_t_01">,"free"),[ref(class((,int64_t)))],[{V("data"),ref(class((,int64_t))),(31#10,31#13,!1)}])
+      ,(31#5,31#14,!1)};
+      {PC0((<"CWE415_Double_Free__malloc_free_int64_t_01">,"free"),[ref(class((,int64_t)))],[{V("data"),ref(class((,int64_t))),(33#10,33#13,!1)}])
+      ,(33#5,33#14,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(24#1,34#1,!1)}
+   )
+   ,(24#1,34#1,!1)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   FN([public,static],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"goodG2B"):mod(unit,[static]),[],[],
+   {[
+      {VD("data",ref(class((,int64_t))))
+      ,(43#13,43#18,!1)};
+      {{AE({V("data"),ref(class((,int64_t))),(45#5,45#8,!1)},{CS(ref(unit),{"0"N,int,(45#12,45#15,!1)}),ref(unit),(45#12,45#15,!1)}),ref(class((,int64_t))),(45#5,45#15,!1)}
+      ,(45#5,45#15,!1)};
+      {{AE({V("data"),ref(class((,int64_t))),(46#5,46#8,!1)},{CS(ref(class((,int64_t))),{SC((<"CWE415_Double_Free__malloc_free_int64_t_01">,"malloc"),[int],[{BO(*,{"100"N,int,(46#30,46#32,!1)},{SO(class((,int64_t))),int,(46#34,46#48,!1)}),int,(46#30,46#48,!1)}]),class((,"%undef")),(46#23,46#49,!1)}),ref(class((,int64_t))),(46#12,46#49,!1)}),ref(class((,int64_t))),(46#5,46#49,!1)}
+      ,(46#5,46#49,!1)};
+      {PC0((<"CWE415_Double_Free__malloc_free_int64_t_01">,"free"),[ref(class((,int64_t)))],[{V("data"),ref(class((,int64_t))),(49#10,49#13,!1)}])
+      ,(49#5,49#14,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(41#1,50#1,!1)}
+   )
+   ,(41#1,50#1,!1)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   FN([public,static],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"goodB2G"):mod(unit,[static]),[],[],
+   {[
+      {VD("data",ref(class((,int64_t))))
+      ,(55#13,55#18,!1)};
+      {{AE({V("data"),ref(class((,int64_t))),(57#5,57#8,!1)},{CS(ref(unit),{"0"N,int,(57#12,57#15,!1)}),ref(unit),(57#12,57#15,!1)}),ref(class((,int64_t))),(57#5,57#15,!1)}
+      ,(57#5,57#15,!1)};
+      {{AE({V("data"),ref(class((,int64_t))),(58#5,58#8,!1)},{CS(ref(class((,int64_t))),{SC((<"CWE415_Double_Free__malloc_free_int64_t_01">,"malloc"),[int],[{BO(*,{"100"N,int,(58#30,58#32,!1)},{SO(class((,int64_t))),int,(58#34,58#48,!1)}),int,(58#30,58#48,!1)}]),class((,"%undef")),(58#23,58#49,!1)}),ref(class((,int64_t))),(58#12,58#49,!1)}),ref(class((,int64_t))),(58#5,58#49,!1)}
+      ,(58#5,58#49,!1)};
+      {PC0((<"CWE415_Double_Free__malloc_free_int64_t_01">,"free"),[ref(class((,int64_t)))],[{V("data"),ref(class((,int64_t))),(60#10,60#13,!1)}])
+      ,(60#5,60#14,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(53#1,64#1,!1)}
+   )
+   ,(53#1,64#1,!1)},
+
+   {"CWE415_Double_Free__malloc_free_int64_t_01",
+   FN([public],(<"CWE415_Double_Free__malloc_free_int64_t_01">,"CWE415_Double_Free__malloc_free_int64_t_01_good"):unit,[],[],
+   {[
+      {PC0((<"CWE415_Double_Free__malloc_free_int64_t_01">,"goodG2B"),[],[])
+      ,(68#5,68#13,!1)};
+      {PC0((<"CWE415_Double_Free__malloc_free_int64_t_01">,"goodB2G"),[],[])
+      ,(69#5,69#13,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(66#1,70#1,!1)}
+   )
+   ,(66#1,70#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp",
+   CL([struct],(,_twoIntsStruct),[])
+   {
+      ([public],"intOne":int,(92#9,92#14,!2));
+      ([public],"intTwo":int,(93#9,93#14,!2))
+   }
+   ,(90#1,94#16,!2)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp",
+   [
+      M("/* TEMPLATE GENERATED TESTCASE FILE\nFilename: CWE415_Double_Free__malloc_free_int64_t_01.c\nLabel Definition File: CWE415_Double_Free__malloc_free.label.xml\nTemplate File: sources-sinks-01.tmpl.c\n*/",1,(1#0,1#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp")),
+      M("/*\n * @description\n * CWE: 415 Double Free\n * BadSource:  Allocate data using malloc() and Deallocate data using free()\n * GoodSource: Allocate data using malloc()\n * Sinks:\n *    GoodSink: do nothing\n *    BadSink : Deallocate data using free()\n * Flow Variant: 01 Baseline\n *\n * */",6,(6#0,6#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp")),
+      M("/* Initialize data */",27,(27#0,27#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp")),
+      M("/* POTENTIAL FLAW: Free data in the source - the bad sink frees data as well */",30,(30#0,30#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp")),
+      M("/* POTENTIAL FLAW: Possibly freeing memory twice */",32,(32#0,32#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp")),
+      M("/* OMITBAD */",36,(36#0,36#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp")),
+      M("/* goodG2B uses the GoodSource with the BadSink */",40,(40#0,40#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp")),
+      M("/* Initialize data */",44,(44#0,44#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp")),
+      M("/* FIX: Do NOT free data in the source - the bad sink frees data */",47,(47#0,47#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp")),
+      M("/* POTENTIAL FLAW: Possibly freeing memory twice */",48,(48#0,48#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp")),
+      M("/* goodB2G uses the BadSource with the GoodSink */",52,(52#0,52#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp")),
+      M("/* Initialize data */",56,(56#0,56#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp")),
+      M("/* POTENTIAL FLAW: Free data in the source - the bad sink frees data as well */",59,(59#0,59#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp")),
+      M("/* do nothing */",61,(61#0,61#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp")),
+      M("/* FIX: Don't attempt to free the memory */",62,(62#0,62#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp")),
+      M("/* empty statement needed for some flow variants */",63,(63#0,63#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp")),
+      M("/* OMITGOOD */",72,(72#0,72#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp")),
+      M("/* Below is the main(). It is only used when building this testcase on\n   its own for testing or for building a binary to use in testing binary\n   analysis tools. It is not used when compiling all the testcases as one\n   application, which is how source code analysis tools are tested. */",74,(74#0,74#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp")),
+      M("/* seed randomness */",83,(83#0,83#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp")),
+      M("/* OMITGOOD */",89,(89#0,89#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp")),
+      M("/* OMITBAD */",94,(94#0,94#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E17.CWE415_Double_Free/CWE415_Double_Free__malloc_free_int64_t_01.cpp"))
+   ]
+   }
+]

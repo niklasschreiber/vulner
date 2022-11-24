@@ -1,0 +1,131 @@
+namespace com.ti.oss.common.cdr.file;
+
+use com.ti.oss.common.types::*;
+use com.ibm.streamsx.file::*;
+use com.ti.oss.common.event::*;
+use com.ti.oss.common.cdr.util::*;
+
+public composite FileExportCdrSgsn(input stream<FileHeader h, FileTrailer t> ISAI, stream<FileHeader h, FileTrailer t> ISQM;output OutEvent)
+{
+	type
+		HeaderTrailer = FileHeader h, FileTrailer t, int32 count;
+		
+	graph
+		
+        stream<FileHeader h, FileTrailer t> OJoin = Custom(ISAI; ISQM)
+        {
+           logic
+           
+             state :
+             {
+                mutable map<rstring, HeaderTrailer> InputFilesMap;		
+             }
+           
+           	 onTuple ISAI : 
+	   		 {
+	   			if(!has(InputFilesMap, ISAI.h.fName)) {
+	   				mutable HeaderTrailer tmp = {};
+	   				tmp = {h = ISAI.h, t = ISAI.t, count = 1};
+	   				insertM(InputFilesMap, ISAI.h.fName, tmp);
+	   			} 
+	   			else {
+	   				InputFilesMap[ISAI.h.fName].count++;
+	   				if(InputFilesMap[ISAI.h.fName].count >= 2) {
+		   				submit({h = InputFilesMap[ISAI.h.fName].h, t = InputFilesMap[ISAI.h.fName].t}, OJoin);
+		   				removeM(InputFilesMap, ISAI.h.fName);
+		   			}
+	   		 	}
+	   		 }  
+           	
+           	 onTuple ISQM : 
+	   		 {
+	   			if(!has(InputFilesMap, ISQM.h.fName)) {
+	   				mutable HeaderTrailer tmp = {};
+	   				tmp = {h = ISQM.h, t = ISQM.t, count = 1};
+	   				insertM(InputFilesMap, ISQM.h.fName, tmp);
+	   			} 
+	   			else {
+	   				InputFilesMap[ISQM.h.fName].count++;
+	   				if(InputFilesMap[ISQM.h.fName].count >= 2) {
+		   				submit({h = InputFilesMap[ISQM.h.fName].h, t = InputFilesMap[ISQM.h.fName].t}, OJoin);
+		   				removeM(InputFilesMap, ISQM.h.fName);
+		   			}
+	   			}
+	   		 }  
+        }
+        
+        (stream<Event e> OutEvent) as MoveFile = Custom(OJoin)	
+        {
+           logic
+           
+             state :
+             {
+                mutable FileHeader fHeader = {};					
+             }
+           
+             onTuple OJoin:
+             {
+                if(fHeader != OJoin.h) fHeader = OJoin.h;
+                                
+             	mutable int32 error = 0;
+             	
+             	rstring pathname = getPathFile(OJoin.t.exportFile);
+             	if(!exists(pathname)) {
+	            	int32 error = createDirectory(pathname);
+                    if(error!=0) {
+                     appTrc(Trace.error, "FileExportCdr - Can not create directory \"" + pathname + 
+                                         "\". Please, verify user rights - Error is \"" + strerror(error) + "\"");                     
+                   }
+           	    }
+             	
+             	if(!exists(OJoin.t.exportFile))
+             	{
+             	  error = rename(OJoin.t.outFile, OJoin.t.exportFile);  
+             	}
+             	
+             	if(error!=0) 
+             	{
+             	   appTrc(Trace.error, "FileExport - Could not rename file \"" + OJoin.t.outFile + "\" into \"" + OJoin.t.exportFile + "\"" + strerror(error));
+             	} 
+             	else
+             	{
+             	   // Write event
+             	   mutable Event event = {};
+             	   event.eventType = 200;
+                   event.resultCode = 0;
+                   event.rawFile = filename(h.fName);
+                   event.eventCorrelationId = h.eventCorrelationId;
+                   event.rop = h.rop;
+                   event.emId = h.emId;
+                   event.neId = h.neId;
+                  
+                   event.eventText = "File exported : "+ OJoin.t.exportFile;
+                   boolean eventEnabled = mkEvent( event, h.sessionBeginTime );
+                   
+                   if(eventEnabled) 
+                   		submit ({e=event}, OutEvent);                                                     
+             	} 
+             }
+             
+             onPunct OJoin: 
+             {
+  				 if (currentPunct() == Sys.WindowMarker)
+  				 {
+					  // Prepare the event to submit 
+					  mutable Event event = {};		
+					  event.eventType = 210;
+					  event.resultCode = 0;
+					  event.rawFile = filename(fHeader.fName);
+					  event.eventCorrelationId = fHeader.eventCorrelationId;
+					  event.rop = fHeader.rop;
+					  event.emId = fHeader.emId;
+					  event.neId = fHeader.neId;
+					  event.eventText = "Row file processing completed";
+      				  boolean eventEnabled = mkEvent( event, fHeader.sessionBeginTime );
+      				  if(eventEnabled) submit ({e=event}, OutEvent);
+      
+    				  submit(Sys.WindowMarker, OutEvent);	
+   				}	
+             }
+        }       
+}

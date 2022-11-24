@@ -1,0 +1,1 @@
+"D:\_SRC\BUGGYCODE\GO\scc-master\vendor\golang.org\x\text\internal\number\tables.go" 

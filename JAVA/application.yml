@@ -1,0 +1,7 @@
+ibm:
+  mq:
+    queueManager: qm1
+    channel: dev.ORDERS
+    connName: localhost(14)
+    user: admin
+    password: passw0rd

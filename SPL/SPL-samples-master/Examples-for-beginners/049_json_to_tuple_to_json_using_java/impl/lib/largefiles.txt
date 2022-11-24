@@ -1,0 +1,1 @@
+"D:\_SRC\SPL\SPL-samples-master\Examples-for-beginners\049_json_to_tuple_to_json_using_java\impl\lib\com.ibm.streamsx.json.jar" 

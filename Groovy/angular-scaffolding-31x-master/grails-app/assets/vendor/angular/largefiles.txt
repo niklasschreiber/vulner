@@ -1,0 +1,1 @@
+"D:\_SRC\BUGGYCODE\Groovy\angular-scaffolding-31x-master\grails-app\assets\vendor\angular\angular.js" 

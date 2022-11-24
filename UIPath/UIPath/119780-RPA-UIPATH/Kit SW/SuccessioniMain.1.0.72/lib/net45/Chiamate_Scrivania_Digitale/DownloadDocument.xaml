@@ -1,0 +1,250 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="DownloadDocument"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:SuccessioniLibrary_v01;assembly=SuccessioniLibrary_v01"
+ xmlns:s1="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="DocumentoDaScaricare" Type="InArgument(s:Documento)" />
+    <x:Property Name="PathFile" Type="OutArgument(x:String)" />
+    <x:Property Name="Esito" Type="OutArgument(s:Errore)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>DownloadDocument_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>SuccessioniLibrary</x:String>
+      <x:String>System.Net</x:String>
+      <x:String>RestSharp</x:String>
+      <x:String>SuccessioniLibrary_v01</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>SuccessioniLibrary</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>RestSharp</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>SuccessioniLibrary_v01</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="DownloadDocument" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="Json" />
+      <Variable x:TypeArguments="x:Boolean" Name="FileExist" />
+      <Variable x:TypeArguments="x:String" Name="user" />
+      <Variable x:TypeArguments="x:String" Name="psw" />
+      <Variable x:TypeArguments="x:String" Name="restResponse" />
+      <Variable x:TypeArguments="x:String" Name="ErrorMessage" />
+      <Variable x:TypeArguments="x:Int64" Name="codiceRitorno" />
+    </Sequence.Variables>
+    <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:Errore">[Esito]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:Errore">[New Errore]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[Json]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">["{""idCase"":"+DocumentoDaScaricare.IdCase.ToString+",""idDocument"":"+DocumentoDaScaricare.DocumentId.ToString+"}"]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GetUtenzaScrivania workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Chiamate_Scrivania_Digitale\GetUtenzaScrivania.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="config">[Config]</InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="user">[user]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="password">[psw]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <TryCatch DisplayName="Try Catch" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Try>
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="ServicePointManager.SecurityProtocol = DirectCast(3072, SecurityProtocolType)&#xD;&#xA;Dim request As New RestRequest(resource, Method.Post)&#xD;&#xA;Dim client As New RestClient()&#xD;&#xA;client.PreAuthenticate = True&#xD;&#xA;client.BaseUrl = New Uri(host)&#xD;&#xA;Dim bytes() As Byte = System.Text.Encoding.UTF8.GetBytes(String.Format(&quot;{0}:{1}&quot;,User,Password))&#xD;&#xA;Dim base64 As String = Convert.ToBase64String(bytes)&#xD;&#xA;client.AddDefaultHeader(&quot;Authorization&quot;, &quot;Basic &quot; &amp; base64)&#xD;&#xA;client.AddDefaultHeader(&quot;Content-Type&quot;,&quot;application/json&quot;)&#xD;&#xA;client.AddDefaultHeader(&quot;Accept-Encoding&quot;,&quot;gzip,deflate&quot;)&#xD;&#xA;request.RequestFormat = DataFormat.Json&#xD;&#xA;request.AddParameter(&quot;application/json&quot;,Json, ParameterType.RequestBody)&#xD;&#xA;Dim myRestResponse As IRestResponse = New RestResponse()&#xD;&#xA;myRestResponse = client.Execute(request)&#xD;&#xA;Dim bytesFile As Byte() = myRestResponse.RawBytes&#xD;&#xA;PathFile = downloadPath + nomeFile&#xD;&#xA;File.WriteAllbytes(PathFile,bytesFile)" DisplayName="Invoke Code - Scarica File Da SD" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+          <ui:InvokeCode.Arguments>
+            <InArgument x:TypeArguments="x:String" x:Key="resource">[Config("RESOURCE_GET_DOCUMENTI").ToString]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="host">[Config("HOST_APPIAN").ToString]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="User">[user]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="Password">[psw]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="Json">[Json]</InArgument>
+            <OutArgument x:TypeArguments="x:String" x:Key="PathFile">[PathFile]</OutArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="nomeFile">[DocumentoDaScaricare.NomeFile]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="downloadPath">[Config("DOWNLOAD_PATH").ToString]</InArgument>
+            <OutArgument x:TypeArguments="x:String" x:Key="RestResponse">[restResponse]</OutArgument>
+            <OutArgument x:TypeArguments="x:String" x:Key="ErrorMessage">[ErrorMessage]</OutArgument>
+            <OutArgument x:TypeArguments="x:Int64" x:Key="codiceRitorno">[codiceRitorno]</OutArgument>
+          </ui:InvokeCode.Arguments>
+        </ui:InvokeCode>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s1:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <ActivityAction x:TypeArguments="s1:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s1:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_3">
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_6">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Int32">[Esito.CodiceErrore]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Int32">4</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_7">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[Esito.Sorgente]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">SD</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_8">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[Esito.Descrizione]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">["Errore nello scarico del file: " + exception.Message + " " + exception.StackTrace]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+    <ui:PathExists DisplayName="Path Exists" Exists="[FileExist]" sap2010:WorkflowViewState.IdRef="PathExists_1" Path="[PathFile]" PathType="File" />
+    <If Condition="[FileExist]" DisplayName="If - File Scaricato Correttamente?" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Else>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Assign sap2010:WorkflowViewState.IdRef="Assign_3">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Int32">[Esito.CodiceErrore]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Int32">4</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign sap2010:WorkflowViewState.IdRef="Assign_4">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[Esito.Sorgente]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">SD</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign sap2010:WorkflowViewState.IdRef="Assign_5">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[Esito.Descrizione]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">Errore nello scarico del file</InArgument>
+            </Assign.Value>
+          </Assign>
+        </Sequence>
+      </If.Else>
+    </If>
+    <sads:DebugSymbol.Symbol>d4MBQzpcVXNlcnNcVFNUX0NPTExSUEEyOFxEZXNrdG9wXFN1Y2Nlc3Npb25pIFJlbGVhc2VcUmVsZWFzZVxVaVBhdGhcU3VjY2Vzc2lvbmlNYWluXENoaWFtYXRlX1Njcml2YW5pYV9EaWdpdGFsZVxEb3dubG9hZERvY3VtZW50LnhhbWwyUwPKAQ4CAQFdBWQOAgFDZQVsDgIBP20Fcx0CATd0BakBEAIBFKoBBaoBlgECAQ+rAQXIAQoCAQJiMGI8AgFGXzFfOAIBRGowaqUBAgFCZzFnNwIBQHA+cEQCAT1xQnFHAgE7b1lvYQIBOW2/AW30AQIBOHYJhAEZAgEhjAENpQEYAgEVqgE1qgFCAgESqgF3qgGDAQIBEKsBE6sBIAIBA60BCcYBFAIBBX5FfmQCATaCAUqCAVkCATR6QXpHAgEyeEV4cAIBMIEBSoEBWAIBLoABSoABWAIBLHlBeWECASp7RXtKAgEof0l/awIBJnxBfEcCASR9Rn1QAgEijQEPlAEYAgEelQEPnAEYAgEbnQEPpAEYAgEWrgELtQEUAgEMtgELvQEUAgEJvgELxQEUAgEGkgE5kgE6AgEgjwE6jwFOAgEfmgE6mgE8AgEdlwE7lwFLAgEcogE6ogGOAQIBGJ8BO58BTgIBF7MBNbMBNgIBDrABNrABSgIBDbsBNrsBOAIBC7gBN7gBRwIBCsMBNsMBUwIBCMABN8ABSgIBBw==</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_1" sap:VirtualizedContainerService.HintSize="464,87" />
+      <sap2010:ViewStateData Id="InvokeCode_1" sap:VirtualizedContainerService.HintSize="314,164" />
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="264,381">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Catch`1_1" sap:VirtualizedContainerService.HintSize="404,21">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="464,391" />
+      <sap2010:ViewStateData Id="PathExists_1" sap:VirtualizedContainerService.HintSize="464,89" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="264,384">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="464,532" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="486,1543">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="DownloadDocument_1" sap:VirtualizedContainerService.HintSize="526,1623" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

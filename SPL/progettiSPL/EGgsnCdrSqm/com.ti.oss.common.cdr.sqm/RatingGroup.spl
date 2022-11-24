@@ -1,0 +1,263 @@
+namespace com.ti.oss.common.cdr.sqm ;
+
+use com.ibm.streamsx.file::* ;
+use com.ti.oss.common.cdr.parser.eggsn::* ;
+use com.ti.oss.common.cdr.types::* ;
+use com.ti.oss.common.cdr.util::* ;
+use com.ti.oss.common.cdr.util.cfg::* ;
+use com.ti.oss.common.event::* ;
+use com.ti.oss.common.types::* ;
+use com.ti.oss.common.util.cfg::* ;
+use com.ti.oss.common.util.time::*;
+
+type SqmRatingGroup = map<rstring, RatingG>;
+
+public composite RatingGroup(input stream<AggregateSqmSchema> eggsn; 
+	output stream<RatingG> outKpi1, OutEventKpi1)
+{
+	param
+		expression<rstring> $tmpOutFilePrefix ;
+		expression<rstring> $tmpOutFileSuffix ;
+		expression<rstring> $mediationName ;
+	
+	graph
+		(stream<RatingG> outKpi1 as O ; stream<Event e> OutEventKpi1 as OE) = Custom(eggsn)
+		{
+			logic
+				state :
+				{
+					rstring tmpOutFilePrefix = $tmpOutFilePrefix;
+					rstring tmpOutFileSuffix = $tmpOutFileSuffix;
+					rstring mediationName = $mediationName;
+					
+					mutable float64 startROPstate = 0 ;
+					mutable float64 endROPstate = 0 ;
+					mutable float64 startROPold = 0 ;
+					mutable float64 endROPold = 0 ;
+					boolean flagMediationCfg = loadMediationCfg(mediationName) ;
+					mutable rstring nameOutputFilestate ;
+					mutable rstring nameOutputFileOld ;
+					mutable rstring path = getCfgParam("COMMON_CFG_DIR",mediationName,"SQM_RATING_GROUP_OUTPUT_PATH");
+					mutable rstring filePrefix = getCfgParam("COMMON_CFG_DIR",mediationName,"FILE_PREFIX_RATING_GROUP");
+					mutable rstring fileSuffix = getCfgParam("COMMON_CFG_DIR",mediationName,"FILE_SUFFIX");
+					mutable int32 interval = (int32)getCfgParam("COMMON_CFG_DIR",mediationName,"ROP_INTERVAL_SQM");
+					mutable SqmRatingGroup CDRforRatingGroup ;
+					mutable SqmRatingGroup CDRforRatingGroupPrec ;
+					mutable SqmRatingGroup CDRforRatingG;
+					mutable FileHeader fh = { } ;
+					
+					mutable O emptyEndRopTuple = initEmptyEndRopTupleRatingGroup();
+					mutable OE oetuple = (OE){};
+				}
+
+				onTuple eggsn :
+				{					
+					if (eggsn.endROP)
+					{
+						interval = checkConfiguration(mediationName,"ROP_INTERVAL_SQM",interval);
+						path = checkConfiguration(mediationName,"SQM_RATING_GROUP_OUTPUT_PATH",path);
+						filePrefix = checkConfiguration(mediationName,"FILE_PREFIX_RATING_GROUP",filePrefix);
+						fileSuffix = checkConfiguration(mediationName,"FILE_SUFFIX",fileSuffix);
+						
+						swap(CDRforRatingGroup,CDRforRatingGroupPrec);
+						
+						clearM(CDRforRatingGroup);
+						
+						startROPold = startROPstate;
+						endROPold = endROPstate;
+						startROPstate = eggsn.startRopSecs;
+						endROPstate = eggsn.endRopSecs;
+						nameOutputFileOld = nameOutputFilestate;
+					}
+					
+					if(startROPstate == (float64)0 || endROPstate == (float64)0)
+					{
+						startROPstate = eggsn.startRopSecs;
+						endROPstate = eggsn.endRopSecs;
+					}
+					
+					if(nameOutputFilestate == "")
+					{
+						nameOutputFilestate = path + tmpOutFilePrefix +(rstring) eggsn.endRopSecs + tmpOutFileSuffix ;
+					}
+					
+					if(eggsn.endROP)
+					{
+						nameOutputFilestate = path + tmpOutFilePrefix +(rstring) eggsn.endRopSecs + tmpOutFileSuffix ;
+					}					
+					
+					if (eggsn.write_prev)
+					{
+						if (eggsn.exclude_node == "")
+						{
+							mutable rstring filename_tmp = "";
+							
+							if(size(CDRforRatingGroupPrec) != 0)
+							{
+								aggregateRating(CDRforRatingGroupPrec, CDRforRatingG);
+								
+								for(rstring key in CDRforRatingG)
+								{
+									submit(CDRforRatingG[key], outKpi1);
+								}
+								
+								filename_tmp = nameOutputFileOld;
+								emptyEndRopTuple.nameOutputFile = nameOutputFileOld;
+								submit(emptyEndRopTuple, outKpi1);									
+							}
+							else
+							{
+								filename_tmp = nameOutputFileOld;
+								emptyEndRopTuple.nameOutputFile = nameOutputFileOld;
+								submit(emptyEndRopTuple, outKpi1);
+							}
+														
+							clearM(CDRforRatingGroupPrec);
+							clearM(CDRforRatingG);
+							
+							startROPold = (float64)0;
+							endROPold = (float64)0;
+							nameOutputFileOld = "";
+							oetuple.e.eventType = 190 ;
+							oetuple.e.resultCode = 0 ;
+							oetuple.e.rawFile = filename_tmp ;
+							swap(oetuple.e.eventCorrelationId, fh.eventCorrelationId);
+		                    swap(oetuple.e.rop, fh.rop);
+		                    swap(oetuple.e.emId, fh.emId);
+		                    swap(oetuple.e.neId, fh.neId);
+							oetuple.e.eventText = "End write_prev close file " + filename_tmp;
+							boolean eventEnabled = mkEvent(oetuple.e, fh.sessionBeginTime) ;
+							if(eventEnabled) submit(oetuple, OutEventKpi1) ;
+						}
+					}
+					else if(!eggsn.endROP)
+					{
+						//cdrtotrattype++;
+						
+						fh = eggsn.fHeader;
+						
+						mutable rstring datetmp = "20"+(rstring)substring(eggsn.cdrSchema.recordOpeningTime,0,12);
+				        timestamp ts = toTimestamp(Sys.YYYYMMDDhhmmss,datetmp);
+				        mutable float64 endTimeCDRfloat = getSeconds(ts) + (int64)eggsn.cdrSchema.duration;
+				        									
+						mutable int32 leng = size(eggsn.cdrSchema.ratingGroupId);
+		                
+	            		if(leng != 0)
+	            		{
+	            			for ( int32 i in range( eggsn.cdrSchema.ratingGroupId ) )
+			                {
+			                	mutable rstring key = (rstring)eggsn.cdrSchema.rATType+eggsn.cdrSchema.ratingGroupId[i];
+			                	
+			                	if((endTimeCDRfloat >= eggsn.startRopSecsOld) && (endTimeCDRfloat < eggsn.endRopSecsOld))
+								{
+									addCdrRating(eggsn,CDRforRatingGroupPrec,key,i,nameOutputFileOld,filePrefix,fileSuffix,eggsn.startRopSecsOld,eggsn.endRopSecsOld);	
+			                		
+								}
+								else if((endTimeCDRfloat > startROPstate) && (endTimeCDRfloat < endROPstate))
+								{
+									addCdrRating(eggsn,CDRforRatingGroup,key,i,nameOutputFilestate,filePrefix,fileSuffix,startROPstate,endROPstate);
+								}
+					         }
+			            }
+					}
+			}
+								
+			onPunct eggsn :
+			{
+				if(currentPunct() == Sys.WindowMarker)
+				{
+					
+					oetuple.e.eventType = 200 ;
+					oetuple.e.resultCode = 0 ;
+					oetuple.e.rawFile = filename(fh.fName) ;
+					swap(oetuple.e.eventCorrelationId, fh.eventCorrelationId);
+                    swap(oetuple.e.rop, fh.rop);
+                    swap(oetuple.e.emId, fh.emId);
+                    swap(oetuple.e.neId, fh.neId);
+					oetuple.e.eventText = "End Rating Group SQM";
+					boolean eventEnabled = mkEvent(oetuple.e, fh.sessionBeginTime) ;
+					if(eventEnabled) submit(oetuple, OutEventKpi1) ;
+					
+					submit(Sys.WindowMarker, OutEventKpi1) ;
+				}
+
+			}
+			
+			config
+				threadedPort: queue(eggsn, Sys.Wait, 1000000);
+
+		}
+
+	
+		
+	}
+
+
+void countCdrsRating(AggregateSqmSchema eggsn1, mutable RatingG aggrSQMtmp, int32 i) 
+{
+   	aggrSQMtmp.volume_traffico_downlink = aggrSQMtmp.volume_traffico_downlink + (int64)eggsn1.cdrSchema.datavolumeDownlinkRatingG[i];
+	aggrSQMtmp.volume_traffico_uplink = aggrSQMtmp.volume_traffico_uplink + (int64)eggsn1.cdrSchema.datavolumeUplinkRatingG[i];
+	
+}
+
+void addCdrRating(AggregateSqmSchema eggsn, mutable SqmRatingGroup cdr, rstring key, int32 i, rstring nameOutputFile, rstring filePrefix, rstring fileSuffix, float64 startROP, float64 endROP)
+{
+	mutable RatingG firstEntry = {};
+	mutable RatingG existEntry = {};
+	
+	if(has(cdr, key) == false) 
+    {   
+    	firstEntry.nameOutputFile = nameOutputFile; 
+		firstEntry.filePrefix = filePrefix;
+		firstEntry.suffix = fileSuffix;									
+										
+    	firstEntry.rat_type = (rstring)eggsn.cdrSchema.rATType;
+		firstEntry.rating_group = eggsn.cdrSchema.ratingGroupId[i] ;
+		firstEntry.start_time = getUtilConvert((rstring)startROP); 
+		firstEntry.end_time = getUtilConvert((rstring)endROP);
+		//firstEntry.num_connection = (int64)1 ;
+		//firstEntry.tot_duration = (int64)eggsn.cdrSchema.duration ;
+		countCdrsRating(eggsn, firstEntry, i) ;
+		insertM(cdr, key, firstEntry) ;
+    }  
+    else 
+    {     
+     	existEntry = cdr[key];
+     	
+     	//existEntry.num_connection++;
+		//existEntry.tot_duration = existEntry.tot_duration + (int64)eggsn.cdrSchema.duration ;
+     	
+     	countCdrsRating(eggsn, existEntry, i) ;
+ 					
+ 		removeM (cdr, key);
+	    insertM( cdr, key, existEntry);
+    }
+}
+
+RatingG initEmptyEndRopTupleRatingGroup() 
+{
+	mutable RatingG result = {};
+	
+	result.endROP = true;
+	
+	return result;
+}
+
+
+void aggregateRating (mutable SqmRatingGroup SqmPrec, mutable SqmRatingGroup sqm)
+{
+	for(rstring key in SqmPrec)
+	{		
+		if(has(sqm, key)==true)
+		{
+			//sqm[key_temp].num_connection = sqm[key_temp].num_connection + SqmPrec[key].num_connection;
+			//sqm[key_temp].tot_duration = sqm[key_temp].tot_duration + SqmPrec[key].tot_duration;
+			sqm[key].volume_traffico_downlink = sqm[key].volume_traffico_downlink + SqmPrec[key].volume_traffico_downlink;
+			sqm[key].volume_traffico_uplink = sqm[key].volume_traffico_uplink + SqmPrec[key].volume_traffico_uplink;
+		}
+    	else
+    	{
+    		insertM(sqm, key, SqmPrec[key]);
+    	}
+	}
+}

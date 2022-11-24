@@ -1,0 +1,90 @@
+       IDENTIFICATION DIVISION.                                                
+       PROGRAM-ID. COBOLSD.                                                    
+       ENVIRONMENT DIVISION.                                                   
+       CONFIGURATION SECTION.                                                  
+       DATA DIVISION.     
+	    SELECT IN-FILE     ASSIGN TO DISK.
+	    SELECT SORTED-FILE ASSIGN TO DISK.
+	    SELECT SORT-WORK   ASSIGN TO DISK.
+		FD  IN-FILE
+			VALUE OF FILE-ID IS 'PAYROLL-FILE'.
+		01  IN-RECORD          PIC X(200).
+		FD  SORTED-FILE
+			  VALUE OF FILE-ID IS 'SORTED-PAYROL-FILE'.
+			01  SORTED-RECORD      PIC X(200).
+		SD  SORT-WORK
+			VALUE OF FILE-ID IS 'TEMP-1'.
+		01  SORT-RECORD.
+			05  SR-EMPLOYEE    PIC 9(09).
+         WORKING-STORAGE SECTION.       
+		 01  WS-END-OF-FILE-SW         PIC X   VALUE 'N'.
+         88  WS-END-OF-FILE                VALUE 'Y'.
+	   PROCEDURE DIVISION 
+         PERFORM 100-INITIALIZE THRU 110-READ-INPUT-FILE.
+         PERFORM 200-PROCESS-INPUT UNTIL WS-END-OF-FILE.
+         GO TO 900-TERMINATE.
+     100-INITIALIZE.
+         OPEN INPUT INPUT-FILE.
+         PERFORM 110-READ-INPUT-FILE.
+     110-READ-INPUT-FILE.
+         READ INPUT-FILE AT END MOVE 'Y' TO WS-END-OF-FILE-SW.
+     200-PROCESS-INPUT.
+         PERFORM 110-READ-INPUT-FILE
+     900-TERMINATE.  
+         CLOSE INPUT-FILE.    
+         PERFORM 200-READ-ORDER.
+         PERFORM 210-READ-CUSTOMER.
+         PERFORM 300-COMPARE UNTIL WS-EOF-SW.
+         STOP RUN.
+    200-READ-ORDER.
+        READ IN-ORDER AT END MOVE 'Y' TO END-OF-ORDER-SW
+             MOVE HIGH-VALUES TO O-CUST-NBR
+        END-READ.
+    210-READ-CUSTOMER.
+        READ IN-CUSTOMER AT END MOVE 'Y' TO END-OF-ORDER-SW
+             MOVE HIGH-VALUES TO C-CUST-NBR
+        END-READ.
+    300-COMPARE.
+        IF O-CUST-NBR = C-CUST-NBR
+           PERFORM P200-READ-ORDER
+           PERFORM P210-READ-CUSTOMER
+        ELSE
+           IF O-CUST-NBR < C-CUST-NBR
+              PERFORM P200-READ-ORDER
+           ELSE
+              PERFORM P210-READ-CUSTOMER
+           END-IF
+        END-IF.
+	    SORT SORT-WORK ON ASCENDING KEY SR-EMPLOYEE 
+			USING IN-FILE GIVING SORTED-FILE.
+            OPEN INPUT SORTED-FILE.
+            PERFORM UNTIL WS-EOF-SW = 'Y' 
+               READ SORTED-FILE AT END MOVE 'Y' TO WS-EOF-SW
+                  NOT AT END PERFORM 200-PROCESS
+               END-READ
+            END-PERFORM.
+            CLOSE SORTED-FILE.
+            STOP RUN.
+	    SORT SORT-WORK ON ASCENDING KEY SR-EMPLOYEE
+        INPUT  PROCEDURE 100-PRE-SORT OUTPUT PROCEDURE 200-POST-SORT.
+       100-PRE-SORT.
+            OPEN INPUT IN-FILE.
+            PERFORM UNTIL WS-EOF-SW = 'Y'
+               READ IN-FILE AT END MOVE 'Y' TO WS-EOF-SW
+                  NOT AT END PERFORM 110-PROCESS
+               END-READ
+            END-PERFORM.
+            CLOSE IN-FILE.
+       110-PROCESS.
+            MOVE IN-RECORD TO SORT-RECORD.
+            IF SR-DEPT NOT EQUAL ZEROES RELEASE SORT-RECORD.
+       200-POST-SORT.
+            OPEN INPUT SORT-FILE.
+            MOVE 'N' TO WS-EOF-SW.
+            PERFORM UNTIL WS-EOF-SW = 'Y'
+               RETURN SORT-FILE AT END MOVE 'Y' TO WS-EOF-SW
+                  NOT AT END
+                     PERFORM 300-PROCESS
+               END-READ
+            END-PERFORM.
+            CLOSE SORT-FILE.

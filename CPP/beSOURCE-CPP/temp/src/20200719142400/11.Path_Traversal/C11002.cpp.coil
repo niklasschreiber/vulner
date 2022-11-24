@@ -1,0 +1,82 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/11.Path_Traversal/C11002.cpp");
+   ("language", "CPP");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<unistd.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/11.Path_Traversal/C11002.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/11.Path_Traversal/C11002.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/11.Path_Traversal/C11002.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/11.Path_Traversal/C11002.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/11.Path_Traversal/C11002.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/11.Path_Traversal/C11002.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/11.Path_Traversal/C11002.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C11002",
+   SI(<"C11002">,
+   {[
+      {;
+      ,(1#1,14#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,14#1,!1)}
+   )
+   ,(1#1,14#1,!1)},
+
+   {"C11002",
+   FN([public],(<"C11002">,"cwe36_bad"):unit,[],[],
+   {[
+      {VD("rName",ref(char),{SC((<"C11002">,"getenv"),[string],[{"reportName"S,string,(11#24,11#35,!1)}]),class((,"%undef")),(11#17,11#36,!1)})
+      ,(11#7,11#13,!1)};
+      {PC0((<"C11002">,"unlink"),[ref(char)],[{V("rName"),ref(char),(12#10,12#14,!1)}])
+      ,(12#3,12#15,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(9#1,13#1,!1)}
+   )
+   ,(9#1,13#1,!1)},
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/11.Path_Traversal/C11002.cpp",
+   [
+      S("//\n",1),
+      S("// \n",2),
+      S("//\n",3)
+   ]
+   }
+]

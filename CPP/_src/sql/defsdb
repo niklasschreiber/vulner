@@ -1,0 +1,4 @@
+alter define =_DEFAULTS, catalog $sas3.map3cat
+add define =CATALOG, class catalog, subvol $sas3.map3cat
+add define =USRDESC, class map    , file   $sas3.map3db.usrdesc
+add define =USRTYPE, class map    , file   $sas3.map3db.usrtype

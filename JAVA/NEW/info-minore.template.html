@@ -1,0 +1,46 @@
+<feu-modal modal-config="$infoMinore.modalConfig" modal-id="infoMinoreModal"
+    show-modal="$infoMinore.showModal">
+</feu-modal>
+
+<div style="border-bottom: 1px solid #D9D9D9 !important;" class="product-configurator">
+    <div ng-if="!$infoMinore.infoArrived">
+        <div class="row-form" style="padding: 10px">
+            <h5 class="pt10 mb10 h5">Inserire il codice fiscale del minore</h5>
+        </div>
+        <div class="col-sm-4 config-content mb20">
+            <label class="label">Codice Fiscale</label>
+            <div class="ci-form form-user-search-cf-code cf-form">
+                    <input ng-class="{'error-cf' : !!$infoMinore.fiscalId && !$infoMinore.controlloCf($infoMinore.fiscalId)}" type="text"
+                        id="cfMinore" maxlength="16" autocomplete="off" placeholder="CODICE FISCALE"
+                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'CODICE FISCALE'"
+                        placeholder="CODICE FISCALE" ng-model="$infoMinore.fiscalId"
+                        ng-disabled="$infoMinore.infoArrived" />
+                    <input type="button" ng-click="$infoMinore.findMinoreInfo($infoMinore.fiscalId)"
+                        ng-disabled="($infoMinore.fiscalId.length<16)" />
+            </div>
+        </div>
+    </div>
+    <div ng-if="$infoMinore.infoArrived">
+        <div class="row-form" style="padding: 10px; margin-bottom: -25px;">
+            <h5 class="pt10 mb10 h5">Intestatario Buono Minori</h5>
+        </div>
+        <div class="row product-conf-row" ng-if="$infoMinore.infoArrived">
+            <div class="col-sm-4 config-content" ng-if="$infoMinore.infoArrived">
+                <label class="label">Codice fiscale</label>
+                <strong class="cname"> {{$infoMinore.fiscalId}}</strong>
+            </div>
+            <div class="col-sm-4 config-content" style="white-space: nowrap;" ng-if="$infoMinore.infoArrived"
+                ng-attr-title="{{$infoMinore.name}} {{$infoMinore.surname}}">
+                <label class="label">Nome/Cognome</label>
+                <strong class="cname" style="overflow: hidden; text-overflow: ellipsis; width:100%"> {{$infoMinore.name}}
+                    {{$infoMinore.surname}} </strong>
+            </div>
+            <div class="col-sm-4 config-content" ng-if="$infoMinore.infoArrived">
+                <div class="ci-form form-$infoMinore-search-cf-code cf-form">
+                    <label class="label">Numero Libretto</label>
+                    <strong class="cname"> {{$infoMinore.reportNumber}}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

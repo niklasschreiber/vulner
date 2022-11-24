@@ -1,0 +1,18 @@
+[info] [SourceCollector] start collect
+#1,100
+[info] [Collector] check remote files...
+[trac] [Collector]    remote dir: /CIVETTA-VB6
+[trac] [Collector]    remote dir: /VB6
+[trac] [Collector]    remote dir: /VB6/.data
+[trac] [Collector]    remote dir: /VB6/.filter
+[trac] [Collector]    remote dir: /VB6/.log
+[trac] [Collector]    remote dir: /VB6/lib
+[trac] [Collector]    remote dir: /VB6/src
+[info] [Collector] id=20210125190500(2001), from=D:/_OpenSource/SRA/CIVETTA/VB, target files=2
+[info] [Collector] new=2, change=0, remove=0
+[info] [Collector] copy new files...
+[info] [Collector] copy end.
+[info] [SourceCollector] end collect (time=277ms)
+#100,100
+[info] working time: 458ms
+#complete

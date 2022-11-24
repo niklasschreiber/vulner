@@ -1,0 +1,188 @@
+#---------------------------------------------------------------------
+#
+# File:         component_makefile
+# Project:      
+# Component:    
+# Description:  UNIX makefile for the component
+# Version:      1
+#
+# Author:       Antonino Di Guardo
+# Date:         04/10/2013
+# Last Update:  
+# Copyright(c): GFM Integration 2013
+#
+#---------------------------------------------------------------------
+
+
+###############################################################################
+#
+# Target rules (explicit rules)
+#
+###############################################################################
+
+#######################################
+# Default target
+#######################################
+
+.DEFAULT:
+	@$(MAKE) -f ../$(COMPONENT_HELP_FILE)
+
+
+#######################################
+# External target rules
+#
+# Target usable by the users.
+# Targets that the user normally passes
+# as parameter to the 'make' command
+#######################################
+.PHONY: ? all clean dist distclean share unshare install uninstall integrate unintegrate
+
+all: build_dir share
+ifneq ($(LIB_MODULE_DIRS),)
+	@for dir in $(LIB_MODULE_DIRS); do \
+		echo; \
+		echo; \
+		echo Accessing module directory \"$$dir\"...; \
+		echo; \
+		cd $$dir; if [ ! $$? -eq 0 ]; then exit 1; fi; \
+		$(MAKE) -f $(MAKE_FILE) lib; if [ ! $$? -eq 0 ]; then exit 1; fi; \
+		$(MAKE) -f $(MAKE_FILE) share; if [ ! $$? -eq 0 ]; then exit 1; fi; \
+		cd ..; \
+	done
+endif
+ifneq ($(BIN_MODULE_DIRS),)
+	@for dir in $(BIN_MODULE_DIRS); do \
+		echo; \
+		echo; \
+		echo Accessing module directory \"$$dir\"...; \
+		echo; \
+		cd $$dir; if [ ! $$? -eq 0 ]; then exit 1; fi; \
+		$(MAKE) -f $(MAKE_FILE)	$(BUILD_OPTIONS); if [ ! $$? -eq 0 ]; then exit 1; fi; \
+		cd ..; \
+	done
+endif
+	@echo 
+	@echo Component \"$(COMPONENT)\" successfully created on directory \"$(BUILD_OUT_DIR)\"
+	@echo 
+
+?:
+	@$(MAKE) -f ../$(COMPONENT_HELP_FILE)
+
+clean: destroy_obj_dir
+	@echo 
+	@echo Objects directory \"$(BUILD_OBJ_DIR)\" successfully removed
+	@echo 
+
+dist: all
+	@tar cf $(BUILD_BASE_DIR)/$(DIST_TAR_NAME) $(BUILD_OUT_DIR)/*
+	@gzip -f $(BUILD_BASE_DIR)/$(DIST_TAR_NAME)
+	@echo 
+	@echo Distribution package \"$(DIST_ZIP_NAME)\" successfully created on directory \"$(BUILD_BASE_DIR)\"
+	@echo 
+
+distclean: destroy_dir
+	@echo 
+	@echo Distribution package \"$(DIST_ZIP_NAME)\" and building directory \"$(BUILD_BASE_DIR)\" successfully removed
+	@echo 
+
+share: build_share_dir
+ifneq ($(LIB_MODULE_DIRS),)
+	@for dir in $(LIB_MODULE_DIRS); do \
+		echo; \
+		echo; \
+		echo Accessing module directory \"$$dir\"...; \
+		echo; \
+		cd $$dir; if [ ! $$? -eq 0 ]; then exit 1; fi; \
+		$(MAKE) -f $(MAKE_FILE) share; if [ ! $$? -eq 0 ]; then exit 1; fi; \
+		cd ..; \
+	done
+endif
+	@echo 
+	@echo Sharing of modules of component \"$(COMPONENT)\" successfully completed on directory \"$(SHARE_BASE_DIR)\"
+	@echo 
+
+unshare: destroy_share_dir
+	@echo 
+	@echo Sharing of modules of component \"$(COMPONENT)\" successfully removed from directory \"$(SHARE_BASE_DIR)\"
+	@echo 
+
+install: build_install_dir all
+	@for dir in $(MODULE_DIRS); do \
+		echo; \
+		echo; \
+		echo Accessing module directory \"$$dir\"...; \
+		echo; \
+		cd $$dir; if [ ! $$? -eq 0 ]; then exit 1; fi; \
+		$(MAKE) -f $(MAKE_FILE)	$(INSTALL_OPTIONS); if [ ! $$? -eq 0 ]; then exit 1; fi; \
+		cd ..; \
+	done
+	@echo 
+	@echo Component \"$(COMPONENT)\" successfully installed on directory \"$(INSTALL_BASE_DIR)\"
+	@echo 
+
+uninstall: destroy_install_dir
+	@echo 
+	@echo Component \"$(COMPONENT)\" successfully removed from directory \"$(INSTALL_BASE_DIR)\"
+	@echo 
+
+integrate: build_integrate_dir
+ifeq ($(MAKE_UP_LEVEL_INTEGRATION),)
+	@cd ../; \
+	$(MAKE) -f $(APPLICATION_INTEGRATE_SCRIPT) integrate
+endif
+	cd $(DEVELOP_SRC_DIR)
+	@$(MAKE) -f ../$(COMPONENT_INTEGRATE_SCRIPT) integrate DEVELOP_SRC_DIR=$(DEVELOP_SRC_DIR)
+	@for dir in $(MODULE_DIRS); do \
+		echo; \
+		echo; \
+		echo Accessing module directory \"$$dir\"...; \
+		echo; \
+		cd $$dir; if [ ! $$? -eq 0 ]; then exit 1; fi; \
+		$(MAKE) -f $(MAKE_FILE)	integrate MAKE_UP_LEVEL_INTEGRATION=false; if [ ! $$? -eq 0 ]; then exit 1; fi; \
+		cd ..; \
+	done
+	@echo 
+	@echo Integration of component \"$(COMPONENT)\" successfully completed on directory \"$(APP_INT_BASE_DIR)\"
+	@echo 
+
+unintegrate: destroy_integrate_dir
+	@echo 
+	@echo Integration of component \"$(COMPONENT)\" successfully removed from directory \"$(APP_INT_BASE_DIR)\"
+	@echo 
+
+
+#######################################
+# Internal target rules
+#
+# Target usable by external targets.
+# Target that the user doesn't need to
+# pass as parameter to the 'make' command
+#######################################
+.PHONY: destroy_obj_dir build_dir destroy_dir build_share_dir destroy_share_dir build_install_dir destroy_install_dir build_integrate_dir destroy_integrate_dir
+
+destroy_obj_dir:
+	-rm -rf $(BUILD_OBJ_DIR)
+
+build_dir: $(BUILD_BASE_DIR)
+
+destroy_dir: destroy_share_dir
+	-rm -rf $(BUILD_BASE_DIR)
+
+build_share_dir: $(SHARE_BASE_DIR)
+
+destroy_share_dir:
+	-rm -rf $(SHARE_BASE_DIR)
+
+build_install_dir: $(INSTALL_BASE_DIR)
+
+destroy_install_dir:
+	-rm -rf $(INSTALL_BASE_DIR)
+
+build_integrate_dir: $(INTEGRATE_MAKE_DIR) $(INTEGRATE_SRC_DIR)
+
+destroy_integrate_dir:
+	-rm -rf $(INTEGRATE_MAKE_BASE_DIR)
+	-rm -rf $(INTEGRATE_SRC_BASE_DIR)
+
+$(BUILD_BASE_DIR) $(SHARE_BASE_DIR) $(INSTALL_BASE_DIR) $(INTEGRATE_MAKE_DIR) $(INTEGRATE_SRC_DIR):
+	mkdir -p $@

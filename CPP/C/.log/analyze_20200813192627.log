@@ -1,0 +1,11 @@
+[info] [SourceCollector] start collect
+[info] [Collector] check remote files...
+[trac] [Collector]    remote dir: /fix
+[trac] [Collector]    remote dir: /orig
+[info] [Collector] id=20200813192600(2001), from=C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/Sample/C, target files=14
+[info] [Collector] new=14, change=0, remove=0
+[info] [Collector] copy new files...
+[info] [Collector] copy end.
+[info] [SourceCollector] end collect (time=419ms)
+[info] working time: 612ms
+[info] CLI end...

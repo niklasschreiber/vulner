@@ -1,0 +1,224 @@
+namespace com.ti.oss.common.cdr.evalROP;
+
+use com.ti.oss.common.cdr.util::*;
+use com.ti.oss.common.types::*;
+use com.ti.oss.common.cdr.types::*;
+
+
+
+
+public composite AddrSplitSqm (input stream<CdrSchemaForAggrSQMWithROP> IROP; 
+                            output 
+							stream<CdrSchemaForAggrSQMWithROP> OROP0
+							,
+							stream<CdrSchemaForAggrSQMWithROP> OROP1
+							,
+							stream<CdrSchemaForAggrSQMWithROP> OROP2
+							,
+							stream<CdrSchemaForAggrSQMWithROP> OROP3
+							,
+							stream<CdrSchemaForAggrSQMWithROP> OROP4
+							,
+							stream<CdrSchemaForAggrSQMWithROP> OROP5
+							,
+							stream<CdrSchemaForAggrSQMWithROP> OROP6
+							,
+							stream<CdrSchemaForAggrSQMWithROP> OROP7
+							,
+							stream<CdrSchemaForAggrSQMWithROP> OROP8
+							,
+							stream<CdrSchemaForAggrSQMWithROP> OROP9
+							,
+							stream<CdrSchemaForAggrSQMWithROP> OROP10
+							,
+							stream<CdrSchemaForAggrSQMWithROP> OROP11
+							,
+							stream<CdrSchemaForAggrSQMWithROP> OROP12
+							,
+							stream<CdrSchemaForAggrSQMWithROP> OROP13
+							,
+							stream<CdrSchemaForAggrSQMWithROP> OROP14
+							,
+							stream<CdrSchemaForAggrSQMWithROP> OROP15
+							
+							)
+{
+	type AddrTable = map<rstring, uint32>;
+	
+	graph
+	
+		(
+		stream<CdrSchemaForAggrSQMWithROP> OROP0
+		;
+		stream<CdrSchemaForAggrSQMWithROP> OROP1
+		;
+		stream<CdrSchemaForAggrSQMWithROP> OROP2
+		;
+		stream<CdrSchemaForAggrSQMWithROP> OROP3
+		;
+		stream<CdrSchemaForAggrSQMWithROP> OROP4
+		;
+		stream<CdrSchemaForAggrSQMWithROP> OROP5
+		;
+		stream<CdrSchemaForAggrSQMWithROP> OROP6
+		;
+		stream<CdrSchemaForAggrSQMWithROP> OROP7
+		;
+		stream<CdrSchemaForAggrSQMWithROP> OROP8
+		;
+		stream<CdrSchemaForAggrSQMWithROP> OROP9
+		;
+		stream<CdrSchemaForAggrSQMWithROP> OROP10
+		;
+		stream<CdrSchemaForAggrSQMWithROP> OROP11
+		;
+		stream<CdrSchemaForAggrSQMWithROP> OROP12
+		;
+		stream<CdrSchemaForAggrSQMWithROP> OROP13
+		;
+		stream<CdrSchemaForAggrSQMWithROP> OROP14
+		;
+		stream<CdrSchemaForAggrSQMWithROP> OROP15
+		
+		) = Custom(IROP as I)
+		{
+		logic state:
+			{
+				mutable uint32 countPort = 0;
+				mutable AddrTable addrTable;
+			} 
+		
+			onTuple I : 
+			{      	
+				if (I.changed)
+				{
+					
+					appTrc(Trace.info, "sending changed signal to output port " + (rstring)0);
+					submit(I,OROP0);
+					
+					appTrc(Trace.info, "sending changed signal to output port " + (rstring)1);
+					submit(I,OROP1);
+					
+					appTrc(Trace.info, "sending changed signal to output port " + (rstring)2);
+					submit(I,OROP2);
+					
+					appTrc(Trace.info, "sending changed signal to output port " + (rstring)3);
+					submit(I,OROP3);
+					
+					appTrc(Trace.info, "sending changed signal to output port " + (rstring)4);
+					submit(I,OROP4);
+					
+					appTrc(Trace.info, "sending changed signal to output port " + (rstring)5);
+					submit(I,OROP5);
+					
+					appTrc(Trace.info, "sending changed signal to output port " + (rstring)6);
+					submit(I,OROP6);
+					
+					appTrc(Trace.info, "sending changed signal to output port " + (rstring)7);
+					submit(I,OROP7);
+					
+					appTrc(Trace.info, "sending changed signal to output port " + (rstring)8);
+					submit(I,OROP8);
+					
+					appTrc(Trace.info, "sending changed signal to output port " + (rstring)9);
+					submit(I,OROP9);
+					
+					appTrc(Trace.info, "sending changed signal to output port " + (rstring)10);
+					submit(I,OROP10);
+					
+					appTrc(Trace.info, "sending changed signal to output port " + (rstring)11);
+					submit(I,OROP11);
+					
+					appTrc(Trace.info, "sending changed signal to output port " + (rstring)12);
+					submit(I,OROP12);
+					
+					appTrc(Trace.info, "sending changed signal to output port " + (rstring)13);
+					submit(I,OROP13);
+					
+					appTrc(Trace.info, "sending changed signal to output port " + (rstring)14);
+					submit(I,OROP14);
+					
+					appTrc(Trace.info, "sending changed signal to output port " + (rstring)15);
+					submit(I,OROP15);
+										
+				}
+				else if (I.waitEnd) {
+					
+					appTrc(Trace.info, "sending waitEnd signal to output port " + (rstring)0);
+					submit(I,OROP0);
+					
+					appTrc(Trace.info, "sending waitEnd signal to output port " + (rstring)1);
+					submit(I,OROP1);
+					
+					appTrc(Trace.info, "sending waitEnd signal to output port " + (rstring)2);
+					submit(I,OROP2);
+					
+					appTrc(Trace.info, "sending waitEnd signal to output port " + (rstring)3);
+					submit(I,OROP3);
+					
+					appTrc(Trace.info, "sending waitEnd signal to output port " + (rstring)4);
+					submit(I,OROP4);
+					
+					appTrc(Trace.info, "sending waitEnd signal to output port " + (rstring)5);
+					submit(I,OROP5);
+					
+					appTrc(Trace.info, "sending waitEnd signal to output port " + (rstring)6);
+					submit(I,OROP6);
+					
+					appTrc(Trace.info, "sending waitEnd signal to output port " + (rstring)7);
+					submit(I,OROP7);
+					
+					appTrc(Trace.info, "sending waitEnd signal to output port " + (rstring)8);
+					submit(I,OROP8);
+					
+					appTrc(Trace.info, "sending waitEnd signal to output port " + (rstring)9);
+					submit(I,OROP9);
+					
+					appTrc(Trace.info, "sending waitEnd signal to output port " + (rstring)10);
+					submit(I,OROP10);
+					
+					appTrc(Trace.info, "sending waitEnd signal to output port " + (rstring)11);
+					submit(I,OROP11);
+					
+					appTrc(Trace.info, "sending waitEnd signal to output port " + (rstring)12);
+					submit(I,OROP12);
+					
+					appTrc(Trace.info, "sending waitEnd signal to output port " + (rstring)13);
+					submit(I,OROP13);
+					
+					appTrc(Trace.info, "sending waitEnd signal to output port " + (rstring)14);
+					submit(I,OROP14);
+					
+					appTrc(Trace.info, "sending waitEnd signal to output port " + (rstring)15);
+					submit(I,OROP15);
+					
+				}
+				else
+				{
+					if(has(addrTable, I.cdrschema.cdrSchema.nodeId) == false)
+					{
+						
+						insertM( addrTable, I.cdrschema.cdrSchema.nodeId, countPort);
+						submit(I, countPort);
+						countPort ++;
+						if (countPort == ((uint32)16-(uint32)1))
+						{
+							countPort = (uint32)0;
+						}
+					}
+					else
+					{
+						submit(I, addrTable[I.cdrschema.cdrSchema.nodeId]);
+					}
+					
+//					uint64 addr = hashCode((rstring)I.cdrschema.cdrSchema.chargingID);
+//					uint64 addr = hashCode(I.cdrschema.cdrSchema.address+(rstring)I.cdrschema.cdrSchema.chargingID);
+//					uint64 modAddr = addr%(uint64)16;
+//					submit(I, (uint32)(abs(modAddr)));
+					
+				}
+	        }
+	        config
+	        	threadedPort: queue(I, Sys.Wait, 100000);
+		}
+}

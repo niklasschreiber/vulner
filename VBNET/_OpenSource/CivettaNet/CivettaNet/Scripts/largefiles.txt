@@ -1,0 +1,1 @@
+"D:\_SRC\BUGGYCODE\VBNET\_OpenSource\CivettaNet\CivettaNet\Scripts\jquery-1.4.1.min.js" 

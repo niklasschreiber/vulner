@@ -1,0 +1,81 @@
+#---------------------------------------------------------------------
+#
+# File:         application_install.script
+# Project:      
+# Component:    
+# Description:  Installation script for application
+# Version:      1
+#
+# Author:       Antonino Di Guardo
+# Date:         05/10/2013
+# Last Update:  
+# Copyright(c): GFM Integration 2013
+#
+#---------------------------------------------------------------------
+
+
+###############################################################################
+#
+# Application common parameters
+#
+# NOTE: The $(MAKE_FILE) variable is also passed to this script so you can
+#       use it to differenciate the installation if needed
+#
+###############################################################################
+include application.info
+include template/application.info
+
+
+###############################################################################
+#
+# Application directories
+#
+###############################################################################
+ifeq ($(MAKE_FILE), makefile_target)
+BASE_DEST_DIR =
+
+INSTALL_DIRS =
+endif
+
+
+###############################################################################
+#
+# Target rules (explicit rules)
+#
+###############################################################################
+
+#######################################
+# External target rules
+#
+# Target usable by the users.
+# Targets that the user normally passes
+# as parameter to the 'make' command
+#######################################
+.PHONY: install uninstall
+
+install: destroy_install_dir build_install_dir
+#install: build_install_dir
+ifeq ($(MAKE_FILE), makefile_target)
+#	@cd $(APP_BASE_DIR); \
+#	make -f Makefile
+endif
+
+uninstall: destroy_install_dir
+
+
+#######################################
+# Internal target rules
+#
+# Target usable by external targets.
+# Target that the user doesn't need to
+# pass as parameter to the 'make' command
+#######################################
+.PHONY: build_install_dir destroy_install_dir
+
+build_install_dir: $(INSTALL_DIRS)
+
+destroy_install_dir:
+	-@rm -rf $(INSTALL_DIRS)
+
+$(INSTALL_DIRS):
+	@mkdir -p $@

@@ -1,0 +1,22 @@
+Package: rminions
+Title: A Package for Easy R Processing Scalability Via Message Queues
+Version: 2.0.0
+Authors@R: person("Jonathan", "Adams", email = "jd.adams16@gmail.com", role = c("aut", "cre"))
+Description: This package provides generic functions to allow easy setup of worker servers
+    in a distributed message-based computing environment for R. This environment uses Redis
+    to handle communication with the worker servers via messages and PUB/SUB broadcasts.
+    Functions are provided to facilitate the quick and easy setup of new servers for fast
+    scalability.
+Depends:
+    R (>= 3.2.3)
+Imports:
+    jsonlite (>= 0.9.19),
+    plyr (>= 1.8.3),
+    Rbunyan (>= 1.0.0),
+    redux (>= 1.1.0),
+    R.utils (>= 2.2.0)
+Remotes:
+    PieceMaker/Rbunyan
+License: GPL-2
+LazyData: true
+RoxygenNote: 6.1.1

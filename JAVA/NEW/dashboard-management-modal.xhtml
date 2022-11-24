@@ -1,0 +1,80 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	
+		
+	<form target="invisible" name="DashboardManagement"
+		id="dashboardManagement" action="/ORACOLO_SMART/DashboardManagement"
+		method="post" enctype="multipart/form-data">
+		<div class="modal fade" id="dashboardManagementModal" tabindex="-1"
+			role="dialog" aria-labelledby="dashboardManagementModalLabel">
+			<div class="modal-dialog" style="width: 625px" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">x</span>
+						</button>
+						<h4 class="modal-title" id="esportaModalLabel">Dashboard Management</h4>
+					</div>
+					<div class="modal-body">
+						<div class="modal-box">
+							<div class="row">
+								<div class="col-sm-4">
+									<label class="desc" style="line-height: 40px;" for="TestoScorrevole">Testo
+										Scorrevole:</label>
+								</div>
+
+								<h:inputText 
+									styleClass="inputTextRicerca"
+									style="height: 40px; width:36%" maxlength="250"
+									name="TestoScorrevole" id="TestoScorrevole">
+								</h:inputText>
+
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<label class="desc" style="line-height: 40px;" for="fileAnnoPrecedente">File Casi
+										Anno Precedente:</label>
+								</div>
+								
+								<input id="uploadFilePrecedente" placeholder="Scegli un file..." class="inputTextRicerca upload-file"/>
+								<div class="fileUpload btn btn-default">
+									<span>SFOGLIA...</span>
+									<input id="uploadBtnPrecedente" name="fileAnnoPrecedente" type="file" class="upload" />
+								</div>
+							</div>	
+
+							<div class="row">
+								<div class="col-sm-4">
+									<label class="desc" style="line-height: 40px;" for="fileAnnoCorrente">File Casi Anno Corrente:</label>
+								</div>
+								
+								<input id="uploadFileCorrente" placeholder="Scegli un file..." class="inputTextRicerca upload-file"/>
+								<div class="fileUpload btn btn-default">
+									<span>SFOGLIA...</span>
+									<input id="uploadBtnCorrente" name="fileAnnoCorrente" type="file" class="upload" />
+								</div>
+							</div>
+						</div>
+						<div class="modal-box" id="iframeDiv" style="display:none">
+							<div class="">
+								<iframe id="invisible" name="invisible" style="width:100%;border:0; height: 76px;"></iframe>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<input id="bottone" type="submit" value="SALVA"
+							class="btn btn-primary"
+							onclick="document.getElementById('iframeDiv').style.display='block'" />
+						<input id="btn-chiudi" type="button" value="CHIUDI"
+							class="btn btn-default"
+							onclick="jQuery('#dashboardManagementModal').modal('hide');document.getElementById('iframeDiv').style.display='none'" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</ui:composition>

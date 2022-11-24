@@ -1,0 +1,1 @@
+"D:\_SRC\BESource-samples\beSOURCE-CPP\temp\src\20200719142400\E06.CWE226_Sensitive_Information_Uncleared_Before_Release\CWE226_Sensitive_Information_Uncleared_Before_Release__w32_wchar_t_declare_01.cpp.coil" 

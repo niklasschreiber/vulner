@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectID>-1</ProjectID>
+  <Name>C</Name>
+  <Desc />
+  <Path>C:\Users\S&amp;SSLAWKS\Desktop\Project\C</Path>
+  <Platform>CSP Developer</Platform>
+  <LangCode>5111</LangCode>
+  <LangName>C99</LangName>
+  <Encoding>KSC5601</Encoding>
+  <RuleSetID>145111</RuleSetID>
+  <RuleSetName>C OWASP Top 10 2017</RuleSetName>
+  <AnalyzeMode>LOCAL</AnalyzeMode>
+  <AnalyzeTypeID />
+  <TargetSrcDir />
+  <TargetSrcFile />
+  <TargetExtentions>*.c;*.h;*.pc</TargetExtentions>
+  <JavaBinPath>C:\Users\S&amp;SSLAWKS\BeyondSecurity\beSOURCE developer\beSOURCE 5.0\bin\../data/CodePrism/analyzer/jre_x86/bin</JavaBinPath>
+  <JVMOptions>-Xms256m -Xmx512m</JVMOptions>
+  <CodeMRIOptions>sasp.thread=1</CodeMRIOptions>
+  <IsKeepFilterFiles>true</IsKeepFilterFiles>
+  <LogPath>.log</LogPath>
+  <FilterPath>.filter</FilterPath>
+  <DataPath>.data</DataPath>
+  <DataFileName>data.db</DataFileName>
+  <DataBackup>true</DataBackup>
+  <SrcPath>src</SrcPath>
+  <LibPath>lib</LibPath>
+  <CREATE_DT>20200813192626</CREATE_DT>
+  <CheckSourceChange>true</CheckSourceChange>
+  <AutoUpdate>false</AutoUpdate>
+  <InitialAnalysis>false</InitialAnalysis>
+  <SkipMetric>true</SkipMetric>
+  <BuiltInHeaders>
+    <Path />
+  </BuiltInHeaders>
+  <SystemHeaders>
+    <Path />
+  </SystemHeaders>
+  <AnalyzerOptions>
+    <Option name="ignore-case-for-find-header" value="False" />
+    <Option name="show-cpp-detail-info" value="False" />
+    <Option name="auto-delete-temp-files" value="True" />
+    <Option name="include-header-file" value="" />
+    <Option name="reference-header-path" value="" />
+    <Option name="user-cpp-option" value="-dD" />
+    <Option name="cpp-program-path" value="[cpp]" />
+  </AnalyzerOptions>
+</ProjectTemplate>

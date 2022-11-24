@@ -1,0 +1,163 @@
+namespace com.ti.oss.common.cdr.evalROP;
+
+use com.ti.oss.common.cdr.parser.eggsn::*;
+use com.ti.oss.common.cdr.util::*;
+use com.ti.oss.common.types::*;
+use com.ibm.streamsx.file::*;
+use com.ti.oss.common.event::*;
+use com.ti.oss.common.cdr.types::*;
+use com.ti.oss.common.util.cfg::*;
+// from MediationUtils
+use com.ti.oss.common.util.time::*;
+
+
+public composite RopEvalSQM(output stream<CdrSchemaForAggrSQMWithROP> EvalROP)
+{	
+	param
+	    expression <rstring> $tmpOutFilePrefix;
+		expression <rstring> $tmpOutFileSuffix;
+		expression <rstring> $mediationName;
+		expression <rstring> $interval;
+		expression <rstring> $wait;
+		expression <rstring> $delta_start;
+		expression <rstring> $delta_end;
+		expression <rstring> $rop_time;
+		
+	graph
+		stream<boolean checkROP> ControlROP = Beacon()
+		{
+			param
+				period : 1.0;
+			output
+				ControlROP : checkROP = true;
+		}
+		
+		stream<CdrSchemaForAggrSQMWithROP> EvalROP 
+			= Custom(ControlROP)
+		{
+			logic state :
+			{
+				rstring mediationNameParam = $mediationName;
+				rstring intervalParam = $interval;
+				rstring tmpOutFilePrefixParam = $tmpOutFilePrefix;
+				rstring tmpOutFileSuffixParam = $tmpOutFileSuffix;
+				rstring waitParam = $wait;
+				rstring delta_startParam = $delta_start;
+				rstring delta_endParam = $delta_end;
+				rstring rop_timeParam = $rop_time;
+				
+				mutable rstring nameOutputFile;
+				mutable float64 startROP=0;
+				mutable float64 endROP=0;
+				mutable int32 interval = (int32)getCfgParam("COMMON_CFG_DIR",mediationNameParam,intervalParam);
+				mutable int32 wait = (int32)getCfgParam("COMMON_CFG_DIR",mediationNameParam,waitParam);
+				mutable int32 delta_start = (int32)getCfgParam("COMMON_CFG_DIR",mediationNameParam,delta_startParam);
+				mutable int32 delta_end = (int32)getCfgParam("COMMON_CFG_DIR",mediationNameParam,delta_endParam);
+				mutable int32 rop_time = (int32)getCfgParam("COMMON_CFG_DIR",mediationNameParam,rop_timeParam);
+				mutable boolean changed = false;
+				mutable float64 endROPold = 0;
+				mutable float64 startROPold = 0;
+				
+				mutable CdrSchemaForAggrSQMWithROP endOfDataTuple = initEndOfDataTupleSQM();
+				mutable CdrSchemaForAggrSQMWithROP waitEndTuple = initWaitEndTupleSQM();
+				mutable CdrSchemaForAggrSQMWithROP changedTuple = initChangedTupleSQM();
+				mutable EvalROP otuple = initOutputTupleSQM();
+			} 
+			onTuple ControlROP :
+			{
+				mutable rstring datetmp = getUtilTimeStampForRop()+"00";
+	           	timestamp ts = toTimestamp(Sys.YYYYMMDDhhmmss,datetmp);
+	           	
+	           	if(endROPold != (float64)0) 
+	           	{
+	           		if (getUtilTimeStampInSecs() >= endROPold+(float64)wait*(float64)60)
+	           		{			
+						waitEndTuple.nameOutputFile = nameOutputFile;
+			            waitEndTuple.startROP = startROP;
+			            waitEndTuple.endROP = endROP;
+						
+		            	submit(waitEndTuple, EvalROP);
+		            	endROPold = (float64)0;
+	           		}
+	           	}
+	           	
+				if (endROP == (float64)0) 
+				{
+	            	interval = checkConfiguration(mediationNameParam,intervalParam,interval);
+	            	wait = checkConfiguration(mediationNameParam,waitParam,wait);
+	            	delta_start = checkConfiguration(mediationNameParam,delta_startParam,delta_start);
+	            	delta_end = checkConfiguration(mediationNameParam,delta_endParam,delta_end);
+	            	rop_time = checkConfiguration(mediationNameParam,rop_timeParam,rop_time);
+	            	
+	            	endROP = generateENDROP((float64)getSeconds(ts),interval)-((float64)rop_time * (float64)60);
+	            	startROP = endROP - ((float64)interval * (float64)60);
+	            	nameOutputFile = tmpOutFilePrefixParam+(rstring)endROP + tmpOutFileSuffixParam;
+					appTrc(Trace.info, "Control ROP " + (rstring)endROP + (rstring)startROP + (rstring)nameOutputFile);
+	            }
+	            else 
+	            {
+	            	if(generateENDROP((float64)getSeconds(ts),interval)-((float64)rop_time * (float64)60) != endROP) {
+		            	interval = checkConfiguration(mediationNameParam,intervalParam,interval);
+	            		wait = checkConfiguration(mediationNameParam,waitParam,wait);
+		            	delta_start = checkConfiguration(mediationNameParam,delta_startParam,delta_start);
+		            	delta_end = checkConfiguration(mediationNameParam,delta_endParam,delta_end);
+		            	rop_time = checkConfiguration(mediationNameParam,rop_timeParam,rop_time);
+		            	
+		            	endROPold = endROP;
+		            	startROPold = startROP;
+		            	
+		            	endROP = generateENDROP((float64)getSeconds(ts),interval)-((float64)rop_time * (float64)60);
+		            	startROP = endROP - ((float64)interval * (float64)60);
+		            	nameOutputFile = tmpOutFilePrefixParam+(rstring)endROP + tmpOutFileSuffixParam;
+		            	
+						changedTuple.nameOutputFile = nameOutputFile;
+			            changedTuple.startROP = startROP;
+			            changedTuple.endROP = endROP;
+						
+						appTrc(Trace.info, "Sending changed signal");
+		            	submit(changedTuple, EvalROP);
+		            }
+	            }				
+			}
+		}
+}
+
+CdrSchemaForAggrSQMWithROP initEndOfDataTupleSQM() 
+{
+	mutable CdrSchemaForAggrSQMWithROP result = {};
+	result.cdrschema.endOfData = true;
+	result.waitEnd = false;
+	result.changed = false;
+	
+	return result;
+} 
+
+CdrSchemaForAggrSQMWithROP initWaitEndTupleSQM() 
+{
+	mutable CdrSchemaForAggrSQMWithROP result = {};
+	result.cdrschema.endOfData = false;
+	result.waitEnd = true;
+	result.changed = false;
+	
+	return result;
+} 
+
+CdrSchemaForAggrSQMWithROP initChangedTupleSQM() 
+{
+	mutable CdrSchemaForAggrSQMWithROP result = {};
+	result.cdrschema.endOfData = false;
+	result.waitEnd = false;
+	result.changed = true;
+	
+	return result;
+} 
+
+CdrSchemaForAggrSQMWithROP initOutputTupleSQM() 
+{
+	mutable CdrSchemaForAggrSQMWithROP result = {};
+	result.cdrschema.endOfData = false;
+	result.waitEnd = false;
+	result.changed = false;
+	
+	return result;
+}

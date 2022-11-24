@@ -1,0 +1,397 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp");
+   ("language", "CPP");
+   ("include", "std_testcase.h");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<stddef.h>");
+   ("include", "<time.h>");
+   ("include", "<limits.h>");
+   ("include", "<string.h>");
+   ("include", "<stdint.h>");
+   ("include", "<stdint.h>");
+   ("include", "<ctype.h>");
+   ("include", "<fcntl.h>");
+   ("include", "<sys/types.h>");
+   ("include", "<sys/stat.h>");
+   ("include", "std_testcase_io.h");
+   ("include", "std_testcase.h");
+}
+{
+   (!3, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase_io.h");
+   (!2, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h");
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp",
+   MD("RAND32()",[],"((rand()<<30) ^ (rand()<<15) ^ rand())")
+   ,(84#0,84#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp",
+   MD("RAND64()",[],"(((int64_t)rand()<<60) ^ ((int64_t)rand()<<45) ^ ((int64_t)rand()<<30) ^ ((int64_t)rand()<<15) ^ (int64_t)rand())")
+   ,(87#0,87#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   SF([extern,const,extern],int,<"CWE416_Use_After_Free__return_freed_ptr_01">,"GLOBAL_CONST_TRUE")
+   ,(103#18,103#34,!2)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   SF([extern,const,extern],int,<"CWE416_Use_After_Free__return_freed_ptr_01">,"GLOBAL_CONST_FALSE")
+   ,(104#18,104#35,!2)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   SF([extern,const,extern],int,<"CWE416_Use_After_Free__return_freed_ptr_01">,"GLOBAL_CONST_FIVE")
+   ,(105#18,105#34,!2)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   SF([extern,extern],int,<"CWE416_Use_After_Free__return_freed_ptr_01">,"globalTrue")
+   ,(110#12,110#21,!2)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   SF([extern,extern],int,<"CWE416_Use_After_Free__return_freed_ptr_01">,"globalFalse")
+   ,(111#12,111#22,!2)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   SF([extern,extern],int,<"CWE416_Use_After_Free__return_freed_ptr_01">,"globalFive")
+   ,(112#12,112#21,!2)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   SF([extern,extern],int,<"CWE416_Use_After_Free__return_freed_ptr_01">,"globalArgc")
+   ,(55#12,55#21,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   SF([extern,extern],ref(ref(char)),<"CWE416_Use_After_Free__return_freed_ptr_01">,"globalArgv")
+   ,(56#12,56#24,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   SI(<"CWE416_Use_After_Free__return_freed_ptr_01">,
+   {[
+      {;
+      ,(1#1,129#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,129#1,!1)}
+   )
+   ,(1#1,129#1,!1)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   PT([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"printLine"):unit,[(mod(ref(char),[const]):"line",(14#16,14#32,!3))],[]
+   )
+   ,(14#1,14#34,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   PT([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"printWLine"):unit,[(mod(ref(wchar),[const]):"line",(16#17,16#36,!3))],[]
+   )
+   ,(16#1,16#38,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   PT([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"printIntLine"):unit,[(int:"intNumber",(18#20,18#32,!3))],[]
+   )
+   ,(18#1,18#34,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   PT([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"printShortLine"):unit,[(short:"shortNumber",(20#22,20#38,!3))],[]
+   )
+   ,(20#1,20#40,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   PT([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"printFloatLine"):unit,[(float:"floatNumber",(22#22,22#38,!3))],[]
+   )
+   ,(22#1,22#40,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   PT([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"printLongLine"):unit,[(long:"longNumber",(24#20,24#34,!3))],[]
+   )
+   ,(24#1,24#36,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   PT([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"printLongLongLine"):unit,[(class((,int64_t)):"longLongIntNumber",(26#24,26#48,!3))],[]
+   )
+   ,(26#1,26#50,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   PT([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"printSizeTLine"):unit,[(class((,size_t)):"sizeTNumber",(28#21,28#38,!3))],[]
+   )
+   ,(28#1,28#40,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   PT([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"printHexCharLine"):unit,[(char:"charHex",(30#23,30#34,!3))],[]
+   )
+   ,(30#1,30#36,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   PT([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"printWcharLine"):unit,[(wchar:"wideChar",(32#21,32#36,!3))],[]
+   )
+   ,(32#1,32#38,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   PT([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"printUnsignedLine"):unit,[(uint:"unsignedNumber",(34#24,34#46,!3))],[]
+   )
+   ,(34#1,34#48,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   PT([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"printHexUnsignedCharLine"):unit,[(uchar:"unsignedCharacter",(36#31,36#61,!3))],[]
+   )
+   ,(36#1,36#63,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   PT([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"printDoubleLine"):unit,[(double:"doubleNumber",(38#22,38#40,!3))],[]
+   )
+   ,(38#1,38#42,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   PT([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"printStructLine"):unit,[(mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]):"structTwoIntsStruct",(40#22,40#62,!3))],[]
+   )
+   ,(40#1,40#64,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   PT([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"printBytesLine"):unit,[(mod(ref(uchar),[const]):"bytes",(42#21,42#47,!3)),(class((,size_t)):"numBytes",(42#50,42#64,!3))],[]
+   )
+   ,(42#1,42#66,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   PT([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"decodeHexChars"):class((,size_t)),[(ref(uchar):"bytes",(44#23,44#43,!3)),(class((,size_t)):"numBytes",(44#46,44#60,!3)),(mod(ref(char),[const]):"hex",(44#63,44#78,!3))],[]
+   )
+   ,(44#1,44#80,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   PT([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"decodeHexWChars"):class((,size_t)),[(ref(uchar):"bytes",(46#24,46#44,!3)),(class((,size_t)):"numBytes",(46#47,46#61,!3)),(mod(ref(wchar),[const]):"hex",(46#64,46#82,!3))],[]
+   )
+   ,(46#1,46#84,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   PT([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"globalReturnsTrue"):int,[],[]
+   )
+   ,(48#1,48#24,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   PT([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"globalReturnsFalse"):int,[],[]
+   )
+   ,(50#1,50#25,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   PT([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"globalReturnsTrueOrFalse"):int,[],[]
+   )
+   ,(52#1,52#31,!3)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   FN([public,static],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"helperBad"):mod(ref(char),[static]),[("aString":ref(char),(18#25,18#38,!1))],[],
+   {[
+      {VD("i",class((,size_t)),{"0"N,int,(20#16,20#16,!1)})
+      ,(20#12,20#12,!1)};
+      {VD("j",class((,size_t)))
+      ,(21#12,21#12,!1)};
+      {VD("reversedString",ref(char),{CS(ref(unit),{"0"N,int,(22#29,22#32,!1)}),ref(unit),(22#29,22#32,!1)})
+      ,(22#10,22#25,!1)};
+      {IF({BO(!=,{V("aString"),ref(char),(23#9,23#15,!1)},{CS(ref(unit),{"0"N,int,(23#20,23#23,!1)}),ref(unit),(23#20,23#23,!1)}),bool,(23#9,23#23,!1)},
+         {[
+            {{AE({V("i"),class((,size_t)),(25#9,25#9,!1)},{SC((<"CWE416_Use_After_Free__return_freed_ptr_01">,"strlen"),[ref(char)],[{V("aString"),ref(char),(25#20,25#26,!1)}]),class((,"%undef")),(25#13,25#27,!1)}),class((,size_t)),(25#9,25#27,!1)}
+            ,(25#9,25#27,!1)};
+            {{AE({V("reversedString"),ref(char),(26#9,26#22,!1)},{CS(ref(char),{SC((<"CWE416_Use_After_Free__return_freed_ptr_01">,"malloc"),[class((,size_t))],[{BO(+,{V("i"),class((,size_t)),(26#42,26#42,!1)},{"1"N,int,(26#44,26#44,!1)}),class((,size_t)),(26#42,26#44,!1)}]),class((,"%undef")),(26#35,26#45,!1)}),ref(char),(26#26,26#45,!1)}),ref(char),(26#9,26#45,!1)}
+            ,(26#9,26#45,!1)};
+            {FL(L151,
+               {[
+                  {{AE({V("j"),class((,size_t)),(27#14,27#14,!1)},{"0"N,int,(27#18,27#18,!1)}),class((,size_t)),(27#14,27#18,!1)}
+                  ,(27#14,27#18,!1)}
+               ]
+               ,(27#9,30#9,!1)},{BO(<,{V("j"),class((,size_t)),(27#21,27#21,!1)},{V("i"),class((,size_t)),(27#25,27#25,!1)}),bool,(27#21,27#25,!1)},
+               {[
+                  {{IPO({V("j"),class((,size_t)),(27#28,27#28,!1)}),class((,size_t)),(27#28,27#30,!1)}
+                  ,(27#28,27#30,!1)}
+               ]
+               ,(27#9,30#9,!1)},
+               {[
+                  {{AE({AA({V("reversedString"),ref(char),(29#13,29#26,!1)},[{V("j"),class((,size_t)),(29#28,29#28,!1)}]),char,(29#13,29#29,!1)},{AA({V("aString"),ref(char),(29#33,29#39,!1)},[{BO(-,{BO(-,{V("i"),class((,size_t)),(29#41,29#41,!1)},{V("j"),class((,size_t)),(29#43,29#43,!1)}),class((,size_t)),(29#41,29#43,!1)},{"1"N,int,(29#45,29#45,!1)}),class((,size_t)),(29#41,29#45,!1)}]),char,(29#33,29#46,!1)}),char,(29#13,29#46,!1)}
+                  ,(29#13,29#46,!1)}
+                  ]
+               ,(28#9,30#9,!1)})
+            ,(27#9,30#9,!1)};
+            {{AE({AA({V("reversedString"),ref(char),(31#9,31#22,!1)},[{V("i"),class((,size_t)),(31#24,31#24,!1)}]),char,(31#9,31#25,!1)},{"\0"C,char,(31#29,31#32,!1)}),char,(31#9,31#32,!1)}
+            ,(31#9,31#32,!1)};
+            {PC0((<"CWE416_Use_After_Free__return_freed_ptr_01">,"free"),[ref(char)],[{V("reversedString"),ref(char),(33#14,33#27,!1)}])
+            ,(33#9,33#28,!1)};
+            {RE({V("reversedString"),ref(char),(34#16,34#29,!1)})
+            ,(34#9,34#30,!1)}
+            ]
+         ,(24#5,35#5,!1)},
+         {[
+            {RE({CS(ref(unit),{"0"N,int,(38#16,38#19,!1)}),ref(unit),(38#16,38#19,!1)})
+            ,(38#9,38#20,!1)}
+            ]
+         ,(37#5,39#5,!1)})
+      ,(23#5,39#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(18#1,40#1,!1)}
+   )
+   ,(18#1,40#1,!1)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   FN([public,static],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"helperGood"):mod(ref(char),[static]),[("aString":ref(char),(42#26,42#39,!1))],[],
+   {[
+      {VD("i",class((,size_t)),{"0"N,int,(44#16,44#16,!1)})
+      ,(44#12,44#12,!1)};
+      {VD("j",class((,size_t)))
+      ,(45#12,45#12,!1)};
+      {VD("reversedString",ref(char),{CS(ref(unit),{"0"N,int,(46#29,46#32,!1)}),ref(unit),(46#29,46#32,!1)})
+      ,(46#10,46#25,!1)};
+      {IF({BO(!=,{V("aString"),ref(char),(47#9,47#15,!1)},{CS(ref(unit),{"0"N,int,(47#20,47#23,!1)}),ref(unit),(47#20,47#23,!1)}),bool,(47#9,47#23,!1)},
+         {[
+            {{AE({V("i"),class((,size_t)),(49#9,49#9,!1)},{SC((<"CWE416_Use_After_Free__return_freed_ptr_01">,"strlen"),[ref(char)],[{V("aString"),ref(char),(49#20,49#26,!1)}]),class((,"%undef")),(49#13,49#27,!1)}),class((,size_t)),(49#9,49#27,!1)}
+            ,(49#9,49#27,!1)};
+            {{AE({V("reversedString"),ref(char),(50#9,50#22,!1)},{CS(ref(char),{SC((<"CWE416_Use_After_Free__return_freed_ptr_01">,"malloc"),[class((,size_t))],[{BO(+,{V("i"),class((,size_t)),(50#42,50#42,!1)},{"1"N,int,(50#44,50#44,!1)}),class((,size_t)),(50#42,50#44,!1)}]),class((,"%undef")),(50#35,50#45,!1)}),ref(char),(50#26,50#45,!1)}),ref(char),(50#9,50#45,!1)}
+            ,(50#9,50#45,!1)};
+            {FL(L152,
+               {[
+                  {{AE({V("j"),class((,size_t)),(51#14,51#14,!1)},{"0"N,int,(51#18,51#18,!1)}),class((,size_t)),(51#14,51#18,!1)}
+                  ,(51#14,51#18,!1)}
+               ]
+               ,(51#9,54#9,!1)},{BO(<,{V("j"),class((,size_t)),(51#21,51#21,!1)},{V("i"),class((,size_t)),(51#25,51#25,!1)}),bool,(51#21,51#25,!1)},
+               {[
+                  {{IPO({V("j"),class((,size_t)),(51#28,51#28,!1)}),class((,size_t)),(51#28,51#30,!1)}
+                  ,(51#28,51#30,!1)}
+               ]
+               ,(51#9,54#9,!1)},
+               {[
+                  {{AE({AA({V("reversedString"),ref(char),(53#13,53#26,!1)},[{V("j"),class((,size_t)),(53#28,53#28,!1)}]),char,(53#13,53#29,!1)},{AA({V("aString"),ref(char),(53#33,53#39,!1)},[{BO(-,{BO(-,{V("i"),class((,size_t)),(53#41,53#41,!1)},{V("j"),class((,size_t)),(53#43,53#43,!1)}),class((,size_t)),(53#41,53#43,!1)},{"1"N,int,(53#45,53#45,!1)}),class((,size_t)),(53#41,53#45,!1)}]),char,(53#33,53#46,!1)}),char,(53#13,53#46,!1)}
+                  ,(53#13,53#46,!1)}
+                  ]
+               ,(52#9,54#9,!1)})
+            ,(51#9,54#9,!1)};
+            {{AE({AA({V("reversedString"),ref(char),(55#9,55#22,!1)},[{V("i"),class((,size_t)),(55#24,55#24,!1)}]),char,(55#9,55#25,!1)},{"\0"C,char,(55#29,55#32,!1)}),char,(55#9,55#32,!1)}
+            ,(55#9,55#32,!1)};
+            {RE({V("reversedString"),ref(char),(57#16,57#29,!1)})
+            ,(57#9,57#30,!1)}
+            ]
+         ,(48#5,58#5,!1)},
+         {[
+            {RE({CS(ref(unit),{"0"N,int,(61#16,61#19,!1)}),ref(unit),(61#16,61#19,!1)})
+            ,(61#9,61#20,!1)}
+            ]
+         ,(60#5,62#5,!1)})
+      ,(47#5,62#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(42#1,63#1,!1)}
+   )
+   ,(42#1,63#1,!1)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   FN([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"CWE416_Use_After_Free__return_freed_ptr_01_bad"):unit,[],[],
+   {[
+      {[
+         {VD("reversedString",ref(char),{SC((<"CWE416_Use_After_Free__return_freed_ptr_01">,"helperBad"),[string],[{"BadSink"S,string,(71#43,71#51,!1)}]),mod(ref(char),[static]),(71#33,71#52,!1)})
+         ,(71#14,71#29,!1)};
+         {PC0((<"CWE416_Use_After_Free__return_freed_ptr_01">,"printLine"),[mod(ref(char),[const])],[{V("reversedString"),ref(char),(72#19,72#32,!1)}])
+         ,(72#9,72#33,!1)}
+         ]
+      ,(69#5,77#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(67#1,78#1,!1)}
+   )
+   ,(67#1,78#1,!1)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   FN([public,static],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"good1"):mod(unit,[static]),[],[],
+   {[
+      {[
+         {VD("reversedString",ref(char),{SC((<"CWE416_Use_After_Free__return_freed_ptr_01">,"helperGood"),[string],[{"GoodSink"S,string,(88#44,88#53,!1)}]),mod(ref(char),[static]),(88#33,88#54,!1)})
+         ,(88#14,88#29,!1)};
+         {PC0((<"CWE416_Use_After_Free__return_freed_ptr_01">,"printLine"),[mod(ref(char),[const])],[{V("reversedString"),ref(char),(89#19,89#32,!1)}])
+         ,(89#9,89#33,!1)}
+         ]
+      ,(86#5,94#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(84#1,95#1,!1)}
+   )
+   ,(84#1,95#1,!1)},
+
+   {"CWE416_Use_After_Free__return_freed_ptr_01",
+   FN([public],(<"CWE416_Use_After_Free__return_freed_ptr_01">,"CWE416_Use_After_Free__return_freed_ptr_01_good"):unit,[],[],
+   {[
+      {PC0((<"CWE416_Use_After_Free__return_freed_ptr_01">,"good1"),[],[])
+      ,(99#5,99#11,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(97#1,100#1,!1)}
+   )
+   ,(97#1,100#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp",
+   CL([struct],(,_twoIntsStruct),[])
+   {
+      ([public],"intOne":int,(92#9,92#14,!2));
+      ([public],"intTwo":int,(93#9,93#14,!2))
+   }
+   ,(90#1,94#16,!2)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp",
+   [
+      M("/* TEMPLATE GENERATED TESTCASE FILE\nFilename: CWE416_Use_After_Free__return_freed_ptr_01.c\nLabel Definition File: CWE416_Use_After_Free__return_freed_ptr.label.xml\nTemplate File: point-flaw-01.tmpl.c\n*/",1,(1#0,1#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp")),
+      M("/*\n * @description\n * CWE: 416 Use After Free\n * Sinks:\n *    GoodSink: Use a block of memory returned from a function\n *    BadSink : Use a block of memory returned from a function after it has been freed\n * Flow Variant: 01 Baseline\n *\n * */",6,(6#0,6#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp")),
+      M("/* FLAW: Freeing a memory block and then returning a pointer to the freed memory */",32,(32#0,32#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp")),
+      M("/* FIX: Do not free the memory before returning */",56,(56#0,56#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp")),
+      M("/* Call the bad helper function */",70,(70#0,70#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp")),
+      M("/* free(reversedString);\n         * This call to free() was removed because we want the tool to detect the use after free,\n         * but we don't want that function to be free(). Essentially we want to avoid a double free\n         */",73,(73#0,73#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp")),
+      M("/* OMITBAD */",80,(80#0,80#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp")),
+      M("/* Call the good helper function */",87,(87#0,87#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp")),
+      M("/* free(reversedString);\n         * This call to free() was removed because we want the tool to detect the use after free,\n         * but we don't want that function to be free(). Essentially we want to avoid a double free\n         */",90,(90#0,90#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp")),
+      M("/* OMITGOOD */",102,(102#0,102#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp")),
+      M("/* Below is the main(). It is only used when building this testcase on\n   its own for testing or for building a binary to use in testing binary\n   analysis tools. It is not used when compiling all the testcases as one\n   application, which is how source code analysis tools are tested. */",104,(104#0,104#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp")),
+      M("/* seed randomness */",113,(113#0,113#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp")),
+      M("/* OMITGOOD */",119,(119#0,119#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp")),
+      M("/* OMITBAD */",124,(124#0,124#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E18.CWE416_Use_After_Free/CWE416_Use_After_Free__return_freed_ptr_01.cpp"))
+   ]
+   }
+]

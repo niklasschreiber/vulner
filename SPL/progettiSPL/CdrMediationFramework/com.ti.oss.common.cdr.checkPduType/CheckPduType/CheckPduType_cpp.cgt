@@ -1,0 +1,103 @@
+/* Additional includes go here */
+
+<%SPL::CodeGen::implementationPrologue($model);%>
+
+// Constructor
+MY_OPERATOR::MY_OPERATOR()
+{
+	// Initialization code goes here
+}
+
+// Destructor
+MY_OPERATOR::~MY_OPERATOR() 
+{
+	// Finalization code goes here
+}
+
+// Notify port readiness
+void MY_OPERATOR::allPortsReady() 
+{
+	// Notifies that all ports are ready. No tuples should be submitted before
+	// this. Source operators can use this method to spawn threads.
+	/*
+	createThreads(1); // Create source thread
+	*/
+}
+ 
+// Notify pending shutdown
+void MY_OPERATOR::prepareToShutdown() 
+{
+	// This is an asynchronous call
+}
+
+// Processing for source and threaded operators   
+void MY_OPERATOR::process(uint32_t idx)
+{
+	// A typical implementation will loop until shutdown
+	/*
+	while(!getPE().getShutdownRequested())
+	{
+		// do work ...
+	}
+	*/
+}
+
+// Tuple processing for mutating ports 
+void MY_OPERATOR::process(Tuple & tuple, uint32_t port)
+{
+	IPort0Type const & ituple = static_cast<IPort0Type const&>(tuple);
+
+	std::string filename(ituple.get_fName());
+	std::string pduType;
+
+	pduType = retriever.getPluginId(filename);
+
+	OPort0Type otuple;
+
+	otuple.set_eventCorrelationId(ituple.get_eventCorrelationId());
+	otuple.set_sessionBeginTime(ituple.get_sessionBeginTime());
+	otuple.set_rop(ituple.get_rop());
+	otuple.set_fName(ituple.get_fName());
+	otuple.set_emId(ituple.get_emId());
+	otuple.set_neId(ituple.get_neId());
+
+	otuple.set_pduType(pduType);
+
+	SPLAPPTRC(L_DEBUG, "PduType: " << pduType, "dpsop");
+
+	if (pduType == "28" || pduType == "21")
+	{
+		submit(otuple, 0);
+	}
+	else if (pduType == "79")
+	{
+		submit(otuple, 1);
+	}
+	else if (pduType == "78")
+	{
+		submit(otuple, 2);
+	}
+	else
+	{
+		SPLAPPTRC(L_ERROR, "PduType not valid or empty", "dpsop");
+	}
+}
+
+// Tuple processing for non-mutating ports
+void MY_OPERATOR::process(Tuple const & tuple, uint32_t port)
+{
+	// Sample submit code
+	/* 
+	OPort0Type otuple;
+
+	submit(otuple, 0); // submit to output port 0
+	*/
+}
+
+// Punctuation processing
+void MY_OPERATOR::process(Punctuation const & punct, uint32_t port)
+{
+	submit(punct,port);
+}
+
+<%SPL::CodeGen::implementationEpilogue($model);%>

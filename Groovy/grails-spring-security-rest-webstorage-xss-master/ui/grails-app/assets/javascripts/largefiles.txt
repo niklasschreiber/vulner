@@ -1,0 +1,1 @@
+"D:\_SRC\BUGGYCODE\Groovy\grails-spring-security-rest-webstorage-xss-master\ui\grails-app\assets\javascripts\jquery-2.2.0.min.js" 

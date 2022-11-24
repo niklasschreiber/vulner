@@ -1,0 +1,8 @@
+ 
+"-cp" 
+"D:\_SRC\BUGGYCODE\JAVA\lib\junit.jar;D:\_SRC\BUGGYCODE\JAVA\lib\servlet.jar;D:\_SRC\BUGGYCODE\JAVA\lib\gnujaxp.jar;D:\_SRC\BUGGYCODE\JAVA\lib\jcommon-1.0.12.jar;D:\_SRC\BUGGYCODE\JAVA\lib\itext-2.0.6.jar" 
+"-source" 
+"1.8" 
+"-exclude" "D:\_SRC\BUGGYCODE\JAVA\**\*.jar" 
+"-exclude" "D:\_SRC\BUGGYCODE\JAVA\**\*.class" 
+"D:\_SRC\BUGGYCODE\JAVA" 

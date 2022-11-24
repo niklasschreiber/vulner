@@ -1,0 +1,26 @@
+[info] [SourceCollector] start collect
+[info] [Collector] check remote files...
+[trac] [Collector]    remote dir: /VBNET
+[trac] [Collector]    remote dir: /_OpenSource
+[trac] [Collector]    remote dir: /VBNET/.data
+[trac] [Collector]    remote dir: /VBNET/.filter
+[trac] [Collector]    remote dir: /VBNET/.log
+[trac] [Collector]    remote dir: /VBNET/lib
+[trac] [Collector]    remote dir: /VBNET/src
+[trac] [Collector]    remote dir: /_OpenSource/CivettaNet
+[trac] [Collector]    remote dir: /_OpenSource/CivettaNet/CivettaNet
+[trac] [Collector]    remote dir: /_OpenSource/CivettaNet/CivettaNet/Account
+[trac] [Collector]    remote dir: /_OpenSource/CivettaNet/CivettaNet/bin
+[trac] [Collector]    remote dir: /_OpenSource/CivettaNet/CivettaNet/My Project
+[trac] [Collector]    remote dir: /_OpenSource/CivettaNet/CivettaNet/obj
+[trac] [Collector]    remote dir: /_OpenSource/CivettaNet/CivettaNet/Scripts
+[trac] [Collector]    remote dir: /_OpenSource/CivettaNet/CivettaNet/Styles
+[trac] [Collector]    remote dir: /_OpenSource/CivettaNet/CivettaNet/My Project/MyExtensions
+[trac] [Collector]    remote dir: /_OpenSource/CivettaNet/CivettaNet/obj/Debug
+[info] [Collector] id=20210125190400(2001), from=D:/_OpenSource/SRA/CIVETTA/VBNET, target files=21
+[info] [Collector] new=21, change=0, remove=0
+[info] [Collector] copy new files...
+[info] [Collector] copy end.
+[info] [SourceCollector] end collect (time=329ms)
+[info] working time: 519ms
+[info] CLI end...

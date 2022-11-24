@@ -1,0 +1,433 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp");
+   ("language", "CPP");
+   ("include", "std_testcase.h");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<stddef.h>");
+   ("include", "<time.h>");
+   ("include", "<limits.h>");
+   ("include", "<string.h>");
+   ("include", "<stdint.h>");
+   ("include", "<stdint.h>");
+   ("include", "<ctype.h>");
+   ("include", "<fcntl.h>");
+   ("include", "<sys/types.h>");
+   ("include", "<sys/stat.h>");
+   ("include", "std_testcase_io.h");
+   ("include", "std_testcase.h");
+}
+{
+   (!3, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase_io.h");
+   (!2, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h");
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp",
+   MD("RAND32()",[],"((rand()<<30) ^ (rand()<<15) ^ rand())")
+   ,(84#0,84#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp",
+   MD("RAND64()",[],"(((int64_t)rand()<<60) ^ ((int64_t)rand()<<45) ^ ((int64_t)rand()<<30) ^ ((int64_t)rand()<<15) ^ (int64_t)rand())")
+   ,(87#0,87#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   SF([extern,const,extern],int,<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"GLOBAL_CONST_TRUE")
+   ,(103#18,103#34,!2)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   SF([extern,const,extern],int,<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"GLOBAL_CONST_FALSE")
+   ,(104#18,104#35,!2)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   SF([extern,const,extern],int,<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"GLOBAL_CONST_FIVE")
+   ,(105#18,105#34,!2)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   SF([extern,extern],int,<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"globalTrue")
+   ,(110#12,110#21,!2)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   SF([extern,extern],int,<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"globalFalse")
+   ,(111#12,111#22,!2)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   SF([extern,extern],int,<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"globalFive")
+   ,(112#12,112#21,!2)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   SF([extern,extern],int,<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"globalArgc")
+   ,(55#12,55#21,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   SF([extern,extern],ref(ref(char)),<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"globalArgv")
+   ,(56#12,56#24,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   SI(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,
+   {[
+      {;
+      ,(1#1,130#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,130#1,!1)}
+   )
+   ,(1#1,130#1,!1)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printLine"):unit,[(mod(ref(char),[const]):"line",(14#16,14#32,!3))],[]
+   )
+   ,(14#1,14#34,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printWLine"):unit,[(mod(ref(wchar),[const]):"line",(16#17,16#36,!3))],[]
+   )
+   ,(16#1,16#38,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printIntLine"):unit,[(int:"intNumber",(18#20,18#32,!3))],[]
+   )
+   ,(18#1,18#34,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printShortLine"):unit,[(short:"shortNumber",(20#22,20#38,!3))],[]
+   )
+   ,(20#1,20#40,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printFloatLine"):unit,[(float:"floatNumber",(22#22,22#38,!3))],[]
+   )
+   ,(22#1,22#40,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printLongLine"):unit,[(long:"longNumber",(24#20,24#34,!3))],[]
+   )
+   ,(24#1,24#36,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printLongLongLine"):unit,[(class((,int64_t)):"longLongIntNumber",(26#24,26#48,!3))],[]
+   )
+   ,(26#1,26#50,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printSizeTLine"):unit,[(class((,size_t)):"sizeTNumber",(28#21,28#38,!3))],[]
+   )
+   ,(28#1,28#40,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printHexCharLine"):unit,[(char:"charHex",(30#23,30#34,!3))],[]
+   )
+   ,(30#1,30#36,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printWcharLine"):unit,[(wchar:"wideChar",(32#21,32#36,!3))],[]
+   )
+   ,(32#1,32#38,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printUnsignedLine"):unit,[(uint:"unsignedNumber",(34#24,34#46,!3))],[]
+   )
+   ,(34#1,34#48,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printHexUnsignedCharLine"):unit,[(uchar:"unsignedCharacter",(36#31,36#61,!3))],[]
+   )
+   ,(36#1,36#63,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printDoubleLine"):unit,[(double:"doubleNumber",(38#22,38#40,!3))],[]
+   )
+   ,(38#1,38#42,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printStructLine"):unit,[(mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]):"structTwoIntsStruct",(40#22,40#62,!3))],[]
+   )
+   ,(40#1,40#64,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printBytesLine"):unit,[(mod(ref(uchar),[const]):"bytes",(42#21,42#47,!3)),(class((,size_t)):"numBytes",(42#50,42#64,!3))],[]
+   )
+   ,(42#1,42#66,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"decodeHexChars"):class((,size_t)),[(ref(uchar):"bytes",(44#23,44#43,!3)),(class((,size_t)):"numBytes",(44#46,44#60,!3)),(mod(ref(char),[const]):"hex",(44#63,44#78,!3))],[]
+   )
+   ,(44#1,44#80,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"decodeHexWChars"):class((,size_t)),[(ref(uchar):"bytes",(46#24,46#44,!3)),(class((,size_t)):"numBytes",(46#47,46#61,!3)),(mod(ref(wchar),[const]):"hex",(46#64,46#82,!3))],[]
+   )
+   ,(46#1,46#84,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"globalReturnsTrue"):int,[],[]
+   )
+   ,(48#1,48#24,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"globalReturnsFalse"):int,[],[]
+   )
+   ,(50#1,50#25,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"globalReturnsTrueOrFalse"):int,[],[]
+   )
+   ,(52#1,52#31,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   FN([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01_bad"):unit,[],[],
+   {[
+      {VD("data",ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))))
+      ,(24#19,24#24,!1)};
+      {VD("dataUninitArray",alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),([{"10"N,int,(25#35,25#36,!1)}]))
+      ,(25#19,25#37,!1)};
+      {{AE({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(26#5,26#8,!1)},{V("dataUninitArray"),arr(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(26#12,26#26,!1)}),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(26#5,26#26,!1)}
+      ,(26#5,26#26,!1)};
+      {[
+         {VD("i",int)
+         ,(31#13,31#13,!1)};
+         {FL(L208,
+            {[
+               {{AE({V("i"),int,(32#13,32#13,!1)},{"0"N,int,(32#15,32#15,!1)}),int,(32#13,32#15,!1)}
+               ,(32#13,32#15,!1)}
+            ]
+            ,(32#9,36#9,!1)},{BO(<,{V("i"),int,(32#18,32#18,!1)},{"10"N,int,(32#20,32#21,!1)}),bool,(32#18,32#21,!1)},
+            {[
+               {{IPO({V("i"),int,(32#24,32#24,!1)}),int,(32#24,32#26,!1)}
+               ,(32#24,32#26,!1)}
+            ]
+            ,(32#9,36#9,!1)},
+            {[
+               {PC0((<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printIntLine"),[int],[{OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(34#26,34#29,!1)},[{V("i"),int,(34#31,34#31,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(34#26,34#32,!1)},"intOne"),int,(34#26,34#39,!1)}])
+               ,(34#13,34#40,!1)};
+               {PC0((<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printIntLine"),[int],[{OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(35#26,35#29,!1)},[{V("i"),int,(35#31,35#31,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(35#26,35#32,!1)},"intTwo"),int,(35#26,35#39,!1)}])
+               ,(35#13,35#40,!1)}
+               ]
+            ,(33#9,36#9,!1)})
+         ,(32#9,36#9,!1)}
+         ]
+      ,(30#5,37#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(22#1,38#1,!1)}
+   )
+   ,(22#1,38#1,!1)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   FN([public,static],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"goodG2B"):mod(unit,[static]),[],[],
+   {[
+      {VD("data",ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))))
+      ,(47#19,47#24,!1)};
+      {VD("dataUninitArray",alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),([{"10"N,int,(48#35,48#36,!1)}]))
+      ,(48#19,48#37,!1)};
+      {{AE({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(49#5,49#8,!1)},{V("dataUninitArray"),arr(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(49#12,49#26,!1)}),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(49#5,49#26,!1)}
+      ,(49#5,49#26,!1)};
+      {[
+         {VD("i",int)
+         ,(52#13,52#13,!1)};
+         {FL(L209,
+            {[
+               {{AE({V("i"),int,(53#13,53#13,!1)},{"0"N,int,(53#15,53#15,!1)}),int,(53#13,53#15,!1)}
+               ,(53#13,53#15,!1)}
+            ]
+            ,(53#9,57#9,!1)},{BO(<,{V("i"),int,(53#18,53#18,!1)},{"10"N,int,(53#20,53#21,!1)}),bool,(53#18,53#21,!1)},
+            {[
+               {{IPO({V("i"),int,(53#24,53#24,!1)}),int,(53#24,53#26,!1)}
+               ,(53#24,53#26,!1)}
+            ]
+            ,(53#9,57#9,!1)},
+            {[
+               {{AE({OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(55#13,55#16,!1)},[{V("i"),int,(55#18,55#18,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(55#13,55#19,!1)},"intOne"),int,(55#13,55#26,!1)},{V("i"),int,(55#30,55#30,!1)}),int,(55#13,55#30,!1)}
+               ,(55#13,55#30,!1)};
+               {{AE({OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(56#13,56#16,!1)},[{V("i"),int,(56#18,56#18,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(56#13,56#19,!1)},"intTwo"),int,(56#13,56#26,!1)},{V("i"),int,(56#30,56#30,!1)}),int,(56#13,56#30,!1)}
+               ,(56#13,56#30,!1)}
+               ]
+            ,(54#9,57#9,!1)})
+         ,(53#9,57#9,!1)}
+         ]
+      ,(51#5,58#5,!1)};
+      {[
+         {VD("i",int)
+         ,(61#13,61#13,!1)};
+         {FL(L210,
+            {[
+               {{AE({V("i"),int,(62#13,62#13,!1)},{"0"N,int,(62#15,62#15,!1)}),int,(62#13,62#15,!1)}
+               ,(62#13,62#15,!1)}
+            ]
+            ,(62#9,66#9,!1)},{BO(<,{V("i"),int,(62#18,62#18,!1)},{"10"N,int,(62#20,62#21,!1)}),bool,(62#18,62#21,!1)},
+            {[
+               {{IPO({V("i"),int,(62#24,62#24,!1)}),int,(62#24,62#26,!1)}
+               ,(62#24,62#26,!1)}
+            ]
+            ,(62#9,66#9,!1)},
+            {[
+               {PC0((<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printIntLine"),[int],[{OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(64#26,64#29,!1)},[{V("i"),int,(64#31,64#31,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(64#26,64#32,!1)},"intOne"),int,(64#26,64#39,!1)}])
+               ,(64#13,64#40,!1)};
+               {PC0((<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printIntLine"),[int],[{OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(65#26,65#29,!1)},[{V("i"),int,(65#31,65#31,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(65#26,65#32,!1)},"intTwo"),int,(65#26,65#39,!1)}])
+               ,(65#13,65#40,!1)}
+               ]
+            ,(63#9,66#9,!1)})
+         ,(62#9,66#9,!1)}
+         ]
+      ,(60#5,67#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(45#1,68#1,!1)}
+   )
+   ,(45#1,68#1,!1)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   FN([public,static],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"goodB2G"):mod(unit,[static]),[],[],
+   {[
+      {VD("data",ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))))
+      ,(73#19,73#24,!1)};
+      {VD("dataUninitArray",alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),([{"10"N,int,(74#35,74#36,!1)}]))
+      ,(74#19,74#37,!1)};
+      {{AE({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(75#5,75#8,!1)},{V("dataUninitArray"),arr(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(75#12,75#26,!1)}),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(75#5,75#26,!1)}
+      ,(75#5,75#26,!1)};
+      {[
+         {VD("i",int)
+         ,(80#13,80#13,!1)};
+         {FL(L211,
+            {[
+               {{AE({V("i"),int,(81#13,81#13,!1)},{"0"N,int,(81#15,81#15,!1)}),int,(81#13,81#15,!1)}
+               ,(81#13,81#15,!1)}
+            ]
+            ,(81#9,85#9,!1)},{BO(<,{V("i"),int,(81#18,81#18,!1)},{"10"N,int,(81#20,81#21,!1)}),bool,(81#18,81#21,!1)},
+            {[
+               {{IPO({V("i"),int,(81#24,81#24,!1)}),int,(81#24,81#26,!1)}
+               ,(81#24,81#26,!1)}
+            ]
+            ,(81#9,85#9,!1)},
+            {[
+               {{AE({OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(83#13,83#16,!1)},[{V("i"),int,(83#18,83#18,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(83#13,83#19,!1)},"intOne"),int,(83#13,83#26,!1)},{V("i"),int,(83#30,83#30,!1)}),int,(83#13,83#30,!1)}
+               ,(83#13,83#30,!1)};
+               {{AE({OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(84#13,84#16,!1)},[{V("i"),int,(84#18,84#18,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(84#13,84#19,!1)},"intTwo"),int,(84#13,84#26,!1)},{V("i"),int,(84#30,84#30,!1)}),int,(84#13,84#30,!1)}
+               ,(84#13,84#30,!1)}
+               ]
+            ,(82#9,85#9,!1)})
+         ,(81#9,85#9,!1)}
+         ]
+      ,(79#5,86#5,!1)};
+      {[
+         {VD("i",int)
+         ,(88#13,88#13,!1)};
+         {FL(L212,
+            {[
+               {{AE({V("i"),int,(89#13,89#13,!1)},{"0"N,int,(89#15,89#15,!1)}),int,(89#13,89#15,!1)}
+               ,(89#13,89#15,!1)}
+            ]
+            ,(89#9,93#9,!1)},{BO(<,{V("i"),int,(89#18,89#18,!1)},{"10"N,int,(89#20,89#21,!1)}),bool,(89#18,89#21,!1)},
+            {[
+               {{IPO({V("i"),int,(89#24,89#24,!1)}),int,(89#24,89#26,!1)}
+               ,(89#24,89#26,!1)}
+            ]
+            ,(89#9,93#9,!1)},
+            {[
+               {PC0((<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printIntLine"),[int],[{OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(91#26,91#29,!1)},[{V("i"),int,(91#31,91#31,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(91#26,91#32,!1)},"intOne"),int,(91#26,91#39,!1)}])
+               ,(91#13,91#40,!1)};
+               {PC0((<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"printIntLine"),[int],[{OA({AA({V("data"),ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),(92#26,92#29,!1)},[{V("i"),int,(92#31,92#31,!1)}]),alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct])),(92#26,92#32,!1)},"intTwo"),int,(92#26,92#39,!1)}])
+               ,(92#13,92#40,!1)}
+               ]
+            ,(90#9,93#9,!1)})
+         ,(89#9,93#9,!1)}
+         ]
+      ,(87#5,94#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(71#1,95#1,!1)}
+   )
+   ,(71#1,95#1,!1)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01",
+   FN([public],(<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01_good"):unit,[],[],
+   {[
+      {PC0((<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"goodG2B"),[],[])
+      ,(99#5,99#13,!1)};
+      {PC0((<"CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01">,"goodB2G"),[],[])
+      ,(100#5,100#13,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(97#1,101#1,!1)}
+   )
+   ,(97#1,101#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp",
+   CL([struct],(,_twoIntsStruct),[])
+   {
+      ([public],"intOne":int,(92#9,92#14,!2));
+      ([public],"intTwo":int,(93#9,93#14,!2))
+   }
+   ,(90#1,94#16,!2)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp",
+   [
+      M("/* TEMPLATE GENERATED TESTCASE FILE\nFilename: CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.c\nLabel Definition File: CWE457_Use_of_Uninitialized_Variable.c_array.label.xml\nTemplate File: sources-sinks-01.tmpl.c\n*/",1,(1#0,1#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp")),
+      M("/*\n * @description\n * CWE: 457 Use of Uninitialized Variable\n * BadSource: no_init Don't initialize data\n * GoodSource: Initialize data\n * Sinks: use\n *    GoodSink: Initialize then use data\n *    BadSink : Use data\n * Flow Variant: 01 Baseline\n *\n * */",6,(6#0,6#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp")),
+      M("/* POTENTIAL FLAW: Don't initialize data */",27,(27#0,27#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp")),
+      M("/* empty statement needed for some flow variants */",28,(28#0,28#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp")),
+      M("/* POTENTIAL FLAW: Use data without initializing it */",29,(29#0,29#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp")),
+      M("/* OMITBAD */",40,(40#0,40#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp")),
+      M("/* goodG2B uses the GoodSource with the BadSink */",44,(44#0,44#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp")),
+      M("/* FIX: Completely initialize data */",50,(50#0,50#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp")),
+      M("/* POTENTIAL FLAW: Use data without initializing it */",59,(59#0,59#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp")),
+      M("/* goodB2G uses the BadSource with the GoodSink */",70,(70#0,70#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp")),
+      M("/* POTENTIAL FLAW: Don't initialize data */",76,(76#0,76#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp")),
+      M("/* empty statement needed for some flow variants */",77,(77#0,77#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp")),
+      M("/* FIX: Ensure data is initialized before use */",78,(78#0,78#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp")),
+      M("/* OMITGOOD */",103,(103#0,103#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp")),
+      M("/* Below is the main(). It is only used when building this testcase on\n   its own for testing or for building a binary to use in testing binary\n   analysis tools. It is not used when compiling all the testcases as one\n   application, which is how source code analysis tools are tested. */",105,(105#0,105#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp")),
+      M("/* seed randomness */",114,(114#0,114#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp")),
+      M("/* OMITGOOD */",120,(120#0,120#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp")),
+      M("/* OMITBAD */",125,(125#0,125#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__struct_array_declare_no_init_01.cpp"))
+   ]
+   }
+]

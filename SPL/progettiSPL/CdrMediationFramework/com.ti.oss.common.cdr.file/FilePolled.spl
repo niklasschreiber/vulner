@@ -1,0 +1,81 @@
+namespace com.ti.oss.common.cdr.file;
+
+use com.ti.oss.common.types::*;
+use com.ti.oss.common.event::*;
+use com.ti.oss.common.cdr.util::*;
+use com.ti.oss.common.util.cfg::*;
+use com.ibm.streamsx.file::*;
+
+public composite FilePolled(input stream<rstring fileName, uint64 fileSize> IFilePolled;
+                            output stream<FileHeader> OFilePolled, OutEventPolled, stream<FileHeader h, FileTrailer t> OTrailer)
+{
+	param
+		expression <rstring> $mediationName;
+		
+	graph
+	
+		(stream<FileHeader> OFilePolled; stream<Event e> OutEventPolled; stream<FileHeader h, FileTrailer t> OTrailer) = Custom(IFilePolled)
+		{
+			logic
+				state :
+				{
+					mutable rstring fn = "";
+					mutable FileHeader fh;
+					rstring mediationName = $mediationName;
+				}
+
+				onTuple IFilePolled :
+				{
+					if (fn != IFilePolled.fileName)
+					{
+						fn = IFilePolled.fileName;
+						fh.fName = IFilePolled.fileName;
+						fh.rop = "";
+						fh.emId = "GGSN";
+						fh.neId = getNodeIdFromPath(fn);
+
+						mutable Event event = {};
+						event.eventType = 110;
+						event.resultCode = 0;
+						event.rawFile = fh.fName;
+						event.rop = fh.rop;
+						event.emId = "GGSN";
+						event.neId = fh.neId;
+						event.eventText = "File polled";
+						boolean eventEnabled = mkEvent(event);
+
+						if (eventEnabled)
+							submit ({e=event}, OutEventPolled);
+
+						fh.eventCorrelationId = event.eventCorrelationId;
+						fh.sessionBeginTime = event.eventTime;
+
+					}
+					
+					if (IFilePolled.fileSize == (uint64)0)
+					{
+						mutable rstring pathNodeId = getCfgParam("COMMON_CFG_DIR",mediationName,"BACKUP_INPUT_PATH") + getNodeIdFromPath(IFilePolled.fileName);
+	                	mutable rstring exportFile = pathNodeId + "/" + rmSuffixFromFn(IFilePolled.fileName, ".ber");
+						
+						mutable FileTrailer ft = {};
+	                	ft.outFile = fh.fName;
+	                	ft.exportFile = exportFile;
+						
+						submit({h=fh, t=ft}, OTrailer);
+						
+					}	
+					else
+					{
+						submit(fh, OFilePolled);
+					}
+				}
+
+				onPunct IFilePolled :
+				{
+					if (currentPunct() == Sys.WindowMarker)
+					{
+						submit(Sys.WindowMarker, OFilePolled);
+					}
+				}
+		}
+}

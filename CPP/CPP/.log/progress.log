@@ -1,0 +1,17 @@
+[info] [SourceCollector] start collect
+#1,100
+[info] [Collector] check remote files...
+[trac] [Collector]    remote dir: /CPP
+[trac] [Collector]    remote dir: /CPP/.data
+[trac] [Collector]    remote dir: /CPP/.filter
+[trac] [Collector]    remote dir: /CPP/.log
+[trac] [Collector]    remote dir: /CPP/lib
+[trac] [Collector]    remote dir: /CPP/src
+[info] [Collector] id=20210125184900(2001), from=D:/_OpenSource/SRA/CIVETTA/CPP, target files=9
+[info] [Collector] new=9, change=0, remove=0
+[info] [Collector] copy new files...
+[info] [Collector] copy end.
+[info] [SourceCollector] end collect (time=285ms)
+#100,100
+[info] working time: 595ms
+#complete

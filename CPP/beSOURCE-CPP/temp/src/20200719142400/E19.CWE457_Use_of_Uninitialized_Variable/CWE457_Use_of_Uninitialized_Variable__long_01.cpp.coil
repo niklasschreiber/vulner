@@ -1,0 +1,312 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp");
+   ("language", "CPP");
+   ("include", "std_testcase.h");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<stddef.h>");
+   ("include", "<time.h>");
+   ("include", "<limits.h>");
+   ("include", "<string.h>");
+   ("include", "<stdint.h>");
+   ("include", "<stdint.h>");
+   ("include", "<ctype.h>");
+   ("include", "<fcntl.h>");
+   ("include", "<sys/types.h>");
+   ("include", "<sys/stat.h>");
+   ("include", "std_testcase_io.h");
+   ("include", "std_testcase.h");
+   ("include", "<wchar.h>");
+}
+{
+   (!3, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase_io.h");
+   (!2, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h");
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp",
+   MD("RAND32()",[],"((rand()<<30) ^ (rand()<<15) ^ rand())")
+   ,(84#0,84#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp",
+   MD("RAND64()",[],"(((int64_t)rand()<<60) ^ ((int64_t)rand()<<45) ^ ((int64_t)rand()<<30) ^ ((int64_t)rand()<<15) ^ (int64_t)rand())")
+   ,(87#0,87#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   SF([extern,const,extern],int,<"CWE457_Use_of_Uninitialized_Variable__long_01">,"GLOBAL_CONST_TRUE")
+   ,(103#18,103#34,!2)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   SF([extern,const,extern],int,<"CWE457_Use_of_Uninitialized_Variable__long_01">,"GLOBAL_CONST_FALSE")
+   ,(104#18,104#35,!2)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   SF([extern,const,extern],int,<"CWE457_Use_of_Uninitialized_Variable__long_01">,"GLOBAL_CONST_FIVE")
+   ,(105#18,105#34,!2)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   SF([extern,extern],int,<"CWE457_Use_of_Uninitialized_Variable__long_01">,"globalTrue")
+   ,(110#12,110#21,!2)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   SF([extern,extern],int,<"CWE457_Use_of_Uninitialized_Variable__long_01">,"globalFalse")
+   ,(111#12,111#22,!2)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   SF([extern,extern],int,<"CWE457_Use_of_Uninitialized_Variable__long_01">,"globalFive")
+   ,(112#12,112#21,!2)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   SF([extern,extern],int,<"CWE457_Use_of_Uninitialized_Variable__long_01">,"globalArgc")
+   ,(55#12,55#21,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   SF([extern,extern],ref(ref(char)),<"CWE457_Use_of_Uninitialized_Variable__long_01">,"globalArgv")
+   ,(56#12,56#24,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   SI(<"CWE457_Use_of_Uninitialized_Variable__long_01">,
+   {[
+      {;
+      ,(1#1,91#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,91#1,!1)}
+   )
+   ,(1#1,91#1,!1)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"printLine"):unit,[(mod(ref(char),[const]):"line",(14#16,14#32,!3))],[]
+   )
+   ,(14#1,14#34,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"printWLine"):unit,[(mod(ref(wchar),[const]):"line",(16#17,16#36,!3))],[]
+   )
+   ,(16#1,16#38,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"printIntLine"):unit,[(int:"intNumber",(18#20,18#32,!3))],[]
+   )
+   ,(18#1,18#34,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"printShortLine"):unit,[(short:"shortNumber",(20#22,20#38,!3))],[]
+   )
+   ,(20#1,20#40,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"printFloatLine"):unit,[(float:"floatNumber",(22#22,22#38,!3))],[]
+   )
+   ,(22#1,22#40,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"printLongLine"):unit,[(long:"longNumber",(24#20,24#34,!3))],[]
+   )
+   ,(24#1,24#36,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"printLongLongLine"):unit,[(class((,int64_t)):"longLongIntNumber",(26#24,26#48,!3))],[]
+   )
+   ,(26#1,26#50,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"printSizeTLine"):unit,[(class((,size_t)):"sizeTNumber",(28#21,28#38,!3))],[]
+   )
+   ,(28#1,28#40,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"printHexCharLine"):unit,[(char:"charHex",(30#23,30#34,!3))],[]
+   )
+   ,(30#1,30#36,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"printWcharLine"):unit,[(wchar:"wideChar",(32#21,32#36,!3))],[]
+   )
+   ,(32#1,32#38,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"printUnsignedLine"):unit,[(uint:"unsignedNumber",(34#24,34#46,!3))],[]
+   )
+   ,(34#1,34#48,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"printHexUnsignedCharLine"):unit,[(uchar:"unsignedCharacter",(36#31,36#61,!3))],[]
+   )
+   ,(36#1,36#63,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"printDoubleLine"):unit,[(double:"doubleNumber",(38#22,38#40,!3))],[]
+   )
+   ,(38#1,38#42,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"printStructLine"):unit,[(mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]):"structTwoIntsStruct",(40#22,40#62,!3))],[]
+   )
+   ,(40#1,40#64,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"printBytesLine"):unit,[(mod(ref(uchar),[const]):"bytes",(42#21,42#47,!3)),(class((,size_t)):"numBytes",(42#50,42#64,!3))],[]
+   )
+   ,(42#1,42#66,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"decodeHexChars"):class((,size_t)),[(ref(uchar):"bytes",(44#23,44#43,!3)),(class((,size_t)):"numBytes",(44#46,44#60,!3)),(mod(ref(char),[const]):"hex",(44#63,44#78,!3))],[]
+   )
+   ,(44#1,44#80,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"decodeHexWChars"):class((,size_t)),[(ref(uchar):"bytes",(46#24,46#44,!3)),(class((,size_t)):"numBytes",(46#47,46#61,!3)),(mod(ref(wchar),[const]):"hex",(46#64,46#82,!3))],[]
+   )
+   ,(46#1,46#84,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"globalReturnsTrue"):int,[],[]
+   )
+   ,(48#1,48#24,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"globalReturnsFalse"):int,[],[]
+   )
+   ,(50#1,50#25,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   PT([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"globalReturnsTrueOrFalse"):int,[],[]
+   )
+   ,(52#1,52#31,!3)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   FN([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"CWE457_Use_of_Uninitialized_Variable__long_01_bad"):unit,[],[],
+   {[
+      {VD("data",long)
+      ,(26#10,26#13,!1)};
+      {PC0((<"CWE457_Use_of_Uninitialized_Variable__long_01">,"printLongLine"),[long],[{V("data"),long,(30#19,30#22,!1)}])
+      ,(30#5,30#23,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(24#1,31#1,!1)}
+   )
+   ,(24#1,31#1,!1)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   FN([public,static],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"goodG2B"):mod(unit,[static]),[],[],
+   {[
+      {VD("data",long)
+      ,(40#10,40#13,!1)};
+      {{AE({V("data"),long,(42#5,42#8,!1)},{"5"N,long,(42#12,42#13,!1)}),long,(42#5,42#13,!1)}
+      ,(42#5,42#13,!1)};
+      {PC0((<"CWE457_Use_of_Uninitialized_Variable__long_01">,"printLongLine"),[long],[{V("data"),long,(44#19,44#22,!1)}])
+      ,(44#5,44#23,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(38#1,45#1,!1)}
+   )
+   ,(38#1,45#1,!1)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   FN([public,static],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"goodB2G"):mod(unit,[static]),[],[],
+   {[
+      {VD("data",long)
+      ,(50#10,50#13,!1)};
+      {{AE({V("data"),long,(54#5,54#8,!1)},{"5"N,long,(54#12,54#13,!1)}),long,(54#5,54#13,!1)}
+      ,(54#5,54#13,!1)};
+      {PC0((<"CWE457_Use_of_Uninitialized_Variable__long_01">,"printLongLine"),[long],[{V("data"),long,(55#19,55#22,!1)}])
+      ,(55#5,55#23,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(48#1,56#1,!1)}
+   )
+   ,(48#1,56#1,!1)},
+
+   {"CWE457_Use_of_Uninitialized_Variable__long_01",
+   FN([public],(<"CWE457_Use_of_Uninitialized_Variable__long_01">,"CWE457_Use_of_Uninitialized_Variable__long_01_good"):unit,[],[],
+   {[
+      {PC0((<"CWE457_Use_of_Uninitialized_Variable__long_01">,"goodG2B"),[],[])
+      ,(60#5,60#13,!1)};
+      {PC0((<"CWE457_Use_of_Uninitialized_Variable__long_01">,"goodB2G"),[],[])
+      ,(61#5,61#13,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(58#1,62#1,!1)}
+   )
+   ,(58#1,62#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp",
+   CL([struct],(,_twoIntsStruct),[])
+   {
+      ([public],"intOne":int,(92#9,92#14,!2));
+      ([public],"intTwo":int,(93#9,93#14,!2))
+   }
+   ,(90#1,94#16,!2)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp",
+   [
+      M("/* TEMPLATE GENERATED TESTCASE FILE\nFilename: CWE457_Use_of_Uninitialized_Variable__long_01.c\nLabel Definition File: CWE457_Use_of_Uninitialized_Variable.c.label.xml\nTemplate File: sources-sinks-01.tmpl.c\n*/",1,(1#0,1#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp")),
+      M("/*\n * @description\n * CWE: 457 Use of Uninitialized Variable\n * BadSource: no_init Don't initialize data\n * GoodSource: Initialize data\n * Sinks: use\n *    GoodSink: Initialize then use data\n *    BadSink : Use data\n * Flow Variant: 01 Baseline\n *\n * */",6,(6#0,6#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp")),
+      M("/* POTENTIAL FLAW: Don't initialize data */",27,(27#0,27#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp")),
+      M("/* empty statement needed for some flow variants */",28,(28#0,28#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp")),
+      M("/* POTENTIAL FLAW: Use data without initializing it */",29,(29#0,29#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp")),
+      M("/* OMITBAD */",33,(33#0,33#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp")),
+      M("/* goodG2B uses the GoodSource with the BadSink */",37,(37#0,37#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp")),
+      M("/* FIX: Initialize data */",41,(41#0,41#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp")),
+      M("/* POTENTIAL FLAW: Use data without initializing it */",43,(43#0,43#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp")),
+      M("/* goodB2G uses the BadSource with the GoodSink */",47,(47#0,47#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp")),
+      M("/* POTENTIAL FLAW: Don't initialize data */",51,(51#0,51#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp")),
+      M("/* empty statement needed for some flow variants */",52,(52#0,52#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp")),
+      M("/* FIX: Ensure data is initialized before use */",53,(53#0,53#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp")),
+      M("/* OMITGOOD */",64,(64#0,64#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp")),
+      M("/* Below is the main(). It is only used when building this testcase on\n   its own for testing or for building a binary to use in testing binary\n   analysis tools. It is not used when compiling all the testcases as one\n   application, which is how source code analysis tools are tested. */",66,(66#0,66#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp")),
+      M("/* seed randomness */",75,(75#0,75#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp")),
+      M("/* OMITGOOD */",81,(81#0,81#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp")),
+      M("/* OMITBAD */",86,(86#0,86#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E19.CWE457_Use_of_Uninitialized_Variable/CWE457_Use_of_Uninitialized_Variable__long_01.cpp"))
+   ]
+   }
+]

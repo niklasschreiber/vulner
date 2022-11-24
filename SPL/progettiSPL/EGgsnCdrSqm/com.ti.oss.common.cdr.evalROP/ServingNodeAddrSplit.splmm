@@ -1,0 +1,207 @@
+namespace com.ti.oss.common.cdr.evalROP;
+
+use com.ti.oss.common.cdr.util::*;
+use com.ti.oss.common.types::*;
+use com.ti.oss.common.cdr.types::*;
+use com.ti.oss.common.cdr.util.cfg::* ;
+use com.ti.oss.common.util.cfg::* ;
+
+<%
+	my $parallelSQM = 1;
+	my $parallelSQMmod = 16;
+%>
+
+
+public composite ServingNodeAddrSplit (input  stream<AggregateSqmSchema> IROP, stream<rstring sgsn> S; 
+                              output <%for(my $i = 0; $i < $parallelSQMmod; $i++) {%>
+							  stream<AggregateSqmSchema> OServing<%=$i%>
+							  <%if($i != $parallelSQMmod - 1) {
+							  print ",";
+							  }
+							  }%>,
+							  stream<AggregateSqmSchema> OROP,
+							  <%for(my $i = 0; $i < $parallelSQMmod; $i++) {%>
+							  stream<rstring sgsn> Osgsn<%=$i%>
+							  <%if($i != $parallelSQMmod - 1) {
+							  print ",";
+							  }
+							  }%>)
+{
+	
+	param
+		expression <rstring> $mediationName;
+	
+	graph
+	
+		(<%for(my $i = 0; $i < $parallelSQMmod; $i++) {%>
+		stream<AggregateSqmSchema> OServing<%=$i%>
+		<%if($i != $parallelSQMmod - 1) {
+			print ";";
+		}
+		}%>;
+		stream<AggregateSqmSchema> OROP;
+		<%for(my $i = 0; $i < $parallelSQMmod; $i++) {%>
+		stream<rstring sgsn> Osgsn<%=$i%>
+		<%if($i != $parallelSQMmod - 1) {
+			print ";";
+		}
+		}%>  
+		)
+		= Custom(IROP as I; S)
+		{
+		logic state:
+			{
+				mutable uint32 countPort = 0;
+				mutable int32 count_endROP = 0;
+				mutable int32 count_write_prev = 0;
+				
+				rstring mediationName = $mediationName;
+				mutable rstring sgsn_ip_name = getCfgParam("COMMON_CFG_DIR",$mediationName,"SGSN_IP_NAME");
+				mutable boolean flagSgsnIpName = loadCdrProvCfg("SGSNIPNAME",sgsn_ip_name, (uint32)1,",");//SGSNADDRESS
+			} 
+		
+			
+			onTuple S :
+			{
+				mutable list<rstring> rete = tokenize(S.sgsn, ",", true);
+					
+				if (rete[0] == "NODEID")
+				{
+					<%for(my $i = 0; $i < $parallelSQMmod; $i++) {%>
+						submit(S,Osgsn<%=$i%>);
+					<%}%>			
+				}else{
+					uint64 addr = hashCode(rete[0]);
+					uint32 modAddr = (uint32)(addr%(uint64)16);
+					if(modAddr < 0u) {
+						appTrc(Trace.error,"ERROR: the split returned a negative output port!");
+					}
+					else 
+					{
+						<%for(my $i = 0; $i < $parallelSQMmod; $i++) {%>
+							<%if($i > 0) { print "else ";}%>
+							if (modAddr==(uint32)<%=$i%>)
+							{
+								submit(S, Osgsn<%=$i%>);
+							}
+						<%}%>
+					}
+				}
+			}
+			
+			
+			onTuple I : 
+			{      	
+				if (I.endROP)
+				{
+					count_endROP++;
+					if(count_endROP == <%=$parallelSQM%>) 
+					{
+						submit(I,OROP);
+						count_endROP = 0;
+						
+						if (isCdrProvCfgChanged("SGSNIPNAME"))
+						{
+							reloadCdrProvCfg("SGSNIPNAME");
+						}
+					}			
+				}
+				else if (I.write_prev)
+				{
+					if (I.exclude_node == "")
+					{
+						count_write_prev++;
+						if(count_write_prev == <%=$parallelSQM%>) 
+						{
+							submit(I,OROP);
+							count_write_prev = 0;
+						}
+					}else{
+						submit(I,OROP);
+					}
+												
+				}
+				else
+				{
+					if (size(I.cdrSchema.servingNodeAddress)>0)
+					{	
+						mutable rstring sgsn_name = "";
+						if (flagSgsnIpName)
+						{	mutable list<rstring> tmpOutParamMapSGSNIPNAME = [];
+							
+							if ( getCdrProvRecord("SGSNIPNAME", (rstring)I.cdrSchema.servingNodeAddress[0], tmpOutParamMapSGSNIPNAME ) )
+							{
+								sgsn_name = tmpOutParamMapSGSNIPNAME[0];//NODEID
+							}
+						}
+						else
+						{
+							appTrc(Trace.error, "File SGSN_IP_NAME.csv non caricato correttamente ");
+						}
+						
+						if (sgsn_name != "")
+						{
+							uint64 addr = hashCode(sgsn_name);
+							uint32 modAddr = (uint32)(addr%(uint64)16);
+							if(modAddr < 0u) {
+								appTrc(Trace.error,"ERROR: the split returned a negative output port!");
+							}
+							else {
+								if (modAddr==(uint32)0)
+								{
+									submit(I, OServing0);
+								}else if (modAddr==(uint32)1)
+								{
+									submit(I, OServing1);
+								}else if (modAddr==(uint32)2)
+								{
+									submit(I, OServing2);
+								}else if (modAddr==(uint32)3)
+								{
+									submit(I, OServing3);
+								}else if (modAddr==(uint32)4)
+								{
+									submit(I, OServing4);
+								}else if (modAddr==(uint32)5)
+								{
+									submit(I, OServing5);
+								}else if (modAddr==(uint32)6)
+								{
+									submit(I, OServing6);
+								}else if (modAddr==(uint32)7)
+								{
+									submit(I, OServing7);
+								}else if (modAddr==(uint32)8)
+								{
+									submit(I, OServing8);
+								}else if (modAddr==(uint32)9)
+								{
+									submit(I, OServing9);
+								}else if (modAddr==(uint32)10)
+								{
+									submit(I, OServing10);
+								}else if (modAddr==(uint32)11)
+								{
+									submit(I, OServing11);
+								}else if (modAddr==(uint32)12)
+								{
+									submit(I, OServing12);
+								}else if (modAddr==(uint32)13)
+								{
+									submit(I, OServing13);
+								}else if (modAddr==(uint32)14)
+								{
+									submit(I, OServing14);
+								}
+								else if (modAddr==(uint32)15)
+								{
+									submit(I, OServing15);
+								}
+	
+							}
+						}
+					}
+				}
+	        }
+		}
+}

@@ -1,0 +1,1124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<toolkitModel xmlns="http://www.ibm.com/xmlns/prod/streams/spl/toolkit" productVersion="3.2.1.0" xmlns:common="http://www.ibm.com/xmlns/prod/streams/spl/common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <toolkit name="EGgsnCdrSqm" requiredProductVersion="3.0.0" version="1.0.0">
+    <description/>
+    <uriTable>
+      <uri index="1" value="com.ti.oss.common.cdr.evalROP/RatChargingSplit.spl"/>
+      <uri index="12" value="com.ti.oss.common.cdr.evalROP/AggregateApn.spl"/>
+      <uri index="23" value="com.ti.oss.common.cdr.evalROP/AggregateImsi.spl"/>
+      <uri index="19" value="com.ti.oss.common.cdr.evalROP/AggregateTac.spl"/>
+      <uri index="22" value="com.ti.oss.common.cdr.evalROP/AggregateRatType.spl"/>
+      <uri index="8" value="com.ti.oss.common.cdr.evalROP/ApnSplit.spl"/>
+      <uri index="37" value="com.ti.oss.common.cdr.sqm/TavGgsnCdr.spl"/>
+      <uri index="31" value="com.ti.oss.common.cdr.sqm/RatType.spl"/>
+      <uri index="36" value="com.ti.oss.common.cdr.sqm/RatingGroup.spl"/>
+      <uri index="28" value="com.ti.oss.common.cdr.sqm/BroadBandPgwApn.spl"/>
+      <uri index="20" value="com.ti.oss.common.cdr.evalROP/AggregateRoaming.spl"/>
+      <uri index="6" value="com.ti.oss.common.cdr.evalROP/AggregateMvno.spl"/>
+      <uri index="40" value="com.ti.oss.common.cdr.sqm/BroadBandImsiCapnet.spl"/>
+      <uri index="26" value="com.ti.oss.common.eggsncdr.paral/EGgsnCdrSqmMediationParallel.spl"/>
+      <uri index="9" value="com.ti.oss.common.cdr.evalROP/AggregateImsiCapnet.spl"/>
+      <uri index="30" value="com.ti.oss.common.cdr.sqm/BscBroadBandDownlink.spl"/>
+      <uri index="16" value="com.ti.oss.common.cdr.evalROP/AggregateTav.spl"/>
+      <uri index="43" value="com.ti.oss.common.cdr.sqm/TavSgsnCdr.spl"/>
+      <uri index="15" value="com.ti.oss.common.cdr.evalROP/RoamingSplit.spl"/>
+      <uri index="32" value="com.ti.oss.common.cdr.sqm/BroadBandGgsnApn.spl"/>
+      <uri index="18" value="com.ti.oss.common.cdr.evalROP/UserLocInfoSplit.spl"/>
+      <uri index="13" value="com.ti.oss.common.cdr.evalROP/MoveFileToDirScanBigData.spl"/>
+      <uri index="2" value="com.ti.oss.common.cdr.evalROP/RopEvalSQMHour.spl"/>
+      <uri index="10" value="com.ti.oss.common.cdr.evalROP/AggregateRnc.spl"/>
+      <uri index="25" value="com.ti.oss.common.cdr.evalROP/StorageRoamingBroadBandGGSN.spl"/>
+      <uri index="3" value="com.ti.oss.common.cdr.evalROP/NodeIdSplit.spl"/>
+      <uri index="33" value="com.ti.oss.common.cdr.sqm/RoamingBroadBandGgsn.spl"/>
+      <uri index="35" value="com.ti.oss.common.cdr.sqm/BroadReportImsi.spl"/>
+      <uri index="24" value="com.ti.oss.common.cdr.evalROP/RopEvalSQM.spl"/>
+      <uri index="5" value="com.ti.oss.common.cdr.evalROP/MsisdnSplit.spl"/>
+      <uri index="41" value="com.ti.oss.common.cdr.sqm/BroadBandTacLte.spl"/>
+      <uri index="11" value="com.ti.oss.common.cdr.evalROP/MergerCgiTav.spl"/>
+      <uri index="45" value="com.ti.oss.common.cdr.sqm/BroadBandImsi.spl"/>
+      <uri index="38" value="com.ti.oss.common.cdr.sqm/SqmHandler.spl"/>
+      <uri index="4" value="com.ti.oss.common.cdr.evalROP/AddrSplitSqm.spl"/>
+      <uri index="42" value="com.ti.oss.common.cdr.sqm/BroadBandSgsn.spl"/>
+      <uri index="21" value="com.ti.oss.common.cdr.evalROP/ServingNodeAddrSplit.spl"/>
+      <uri index="39" value="com.ti.oss.common.cdr.sqm/BroadBandMvno.spl"/>
+      <uri index="34" value="com.ti.oss.common.cdr.sqm/RncBroadBandDownlink.spl"/>
+      <uri index="44" value="com.ti.oss.common.cdr.sqm/SqmHandlerSgw.spl"/>
+      <uri index="7" value="com.ti.oss.common.cdr.evalROP/AggregateBsc.spl"/>
+      <uri index="17" value="com.ti.oss.common.cdr.evalROP/TacSplit.spl"/>
+      <uri index="29" value="com.ti.oss.common.cdr.sqm/ParserGGSNEnrichSQM.spl"/>
+      <uri index="27" value="com.ti.oss.common.eggsncdr.paral/PMainSqm.spl"/>
+      <uri index="14" value="com.ti.oss.common.cdr.evalROP/AggregateRatRating.spl"/>
+    </uriTable>
+    <namespace name="com.ti.oss.common.cdr.evalROP">
+      <compositeOp column="18" line="10" name="RatChargingSplit" potentialMain="false" public="true" uriIndex="1">
+        <inputPort name="IROP" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORatCharging0" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORatCharging1" portIndex="1" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORatCharging2" portIndex="2" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORatCharging3" portIndex="3" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORatCharging4" portIndex="4" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORatCharging5" portIndex="5" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORatCharging6" portIndex="6" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORatCharging7" portIndex="7" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORatCharging8" portIndex="8" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORatCharging9" portIndex="9" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORatCharging10" portIndex="10" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORatCharging11" portIndex="11" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORatCharging12" portIndex="12" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORatCharging13" portIndex="13" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORatCharging14" portIndex="14" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORatCharging15" portIndex="15" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OROP" portIndex="16" type="stream&lt;AggregateSqmSchema>"/>
+      </compositeOp>
+      <compositeOp column="18" line="14" name="RopEvalSQMHour" potentialMain="false" public="true" uriIndex="2">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <outputPort name="EvalROPHour" portIndex="0" type="stream&lt;RopHour>"/>
+      </compositeOp>
+      <compositeOp column="18" line="10" name="NodeIdSplit" potentialMain="false" public="true" uriIndex="3">
+        <inputPort name="IROP" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ONode0" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ONode1" portIndex="1" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ONode2" portIndex="2" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ONode3" portIndex="3" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ONode4" portIndex="4" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ONode5" portIndex="5" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ONode6" portIndex="6" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ONode7" portIndex="7" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ONode8" portIndex="8" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ONode9" portIndex="9" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ONode10" portIndex="10" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ONode11" portIndex="11" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ONode12" portIndex="12" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ONode13" portIndex="13" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ONode14" portIndex="14" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ONode15" portIndex="15" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OROP" portIndex="16" type="stream&lt;AggregateSqmSchema>"/>
+      </compositeOp>
+      <compositeOp column="18" line="10" name="AddrSplitSqm" potentialMain="false" public="true" uriIndex="4">
+        <inputPort name="IROP" portIndex="0" type="stream&lt;CdrSchemaForAggrSQM>"/>
+        <inputPort name="E" portIndex="1" type="stream&lt;rstring centrale>"/>
+        <outputPort name="OROP0" portIndex="0" type="stream&lt;CdrSchemaForAggrSQM>"/>
+        <outputPort name="Oemm0" portIndex="1" type="stream&lt;rstring centrale>"/>
+        <outputPort name="OROP1" portIndex="2" type="stream&lt;CdrSchemaForAggrSQM>"/>
+        <outputPort name="Oemm1" portIndex="3" type="stream&lt;rstring centrale>"/>
+        <outputPort name="OROP2" portIndex="4" type="stream&lt;CdrSchemaForAggrSQM>"/>
+        <outputPort name="Oemm2" portIndex="5" type="stream&lt;rstring centrale>"/>
+        <outputPort name="OROP3" portIndex="6" type="stream&lt;CdrSchemaForAggrSQM>"/>
+        <outputPort name="Oemm3" portIndex="7" type="stream&lt;rstring centrale>"/>
+        <outputPort name="OROP4" portIndex="8" type="stream&lt;CdrSchemaForAggrSQM>"/>
+        <outputPort name="Oemm4" portIndex="9" type="stream&lt;rstring centrale>"/>
+        <outputPort name="OROP5" portIndex="10" type="stream&lt;CdrSchemaForAggrSQM>"/>
+        <outputPort name="Oemm5" portIndex="11" type="stream&lt;rstring centrale>"/>
+        <outputPort name="OROP6" portIndex="12" type="stream&lt;CdrSchemaForAggrSQM>"/>
+        <outputPort name="Oemm6" portIndex="13" type="stream&lt;rstring centrale>"/>
+        <outputPort name="OROP7" portIndex="14" type="stream&lt;CdrSchemaForAggrSQM>"/>
+        <outputPort name="Oemm7" portIndex="15" type="stream&lt;rstring centrale>"/>
+        <outputPort name="OROP8" portIndex="16" type="stream&lt;CdrSchemaForAggrSQM>"/>
+        <outputPort name="Oemm8" portIndex="17" type="stream&lt;rstring centrale>"/>
+        <outputPort name="OROP9" portIndex="18" type="stream&lt;CdrSchemaForAggrSQM>"/>
+        <outputPort name="Oemm9" portIndex="19" type="stream&lt;rstring centrale>"/>
+        <outputPort name="OROP10" portIndex="20" type="stream&lt;CdrSchemaForAggrSQM>"/>
+        <outputPort name="Oemm10" portIndex="21" type="stream&lt;rstring centrale>"/>
+        <outputPort name="OROP11" portIndex="22" type="stream&lt;CdrSchemaForAggrSQM>"/>
+        <outputPort name="Oemm11" portIndex="23" type="stream&lt;rstring centrale>"/>
+        <outputPort name="OROP12" portIndex="24" type="stream&lt;CdrSchemaForAggrSQM>"/>
+        <outputPort name="Oemm12" portIndex="25" type="stream&lt;rstring centrale>"/>
+        <outputPort name="OROP13" portIndex="26" type="stream&lt;CdrSchemaForAggrSQM>"/>
+        <outputPort name="Oemm13" portIndex="27" type="stream&lt;rstring centrale>"/>
+        <outputPort name="OROP14" portIndex="28" type="stream&lt;CdrSchemaForAggrSQM>"/>
+        <outputPort name="Oemm14" portIndex="29" type="stream&lt;rstring centrale>"/>
+        <outputPort name="OROP15" portIndex="30" type="stream&lt;CdrSchemaForAggrSQM>"/>
+        <outputPort name="Oemm15" portIndex="31" type="stream&lt;rstring centrale>"/>
+        <type column="7" line="62" name="AddrTable" type="map&lt;rstring, uint32>" uriIndex="4"/>
+      </compositeOp>
+      <compositeOp column="18" line="598" name="AddrSplitSqmSgw" potentialMain="false" public="true" uriIndex="4">
+        <inputPort name="IROPSGW" portIndex="0" type="stream&lt;CdrSchemaForAggrSGWSQM>"/>
+        <outputPort name="OROPSGW0" portIndex="0" type="stream&lt;CdrSchemaForAggrSGWSQM>"/>
+        <outputPort name="OROPSGW1" portIndex="1" type="stream&lt;CdrSchemaForAggrSGWSQM>"/>
+        <type column="7" line="606" name="AddrTable" type="map&lt;rstring, uint32>" uriIndex="4"/>
+      </compositeOp>
+      <compositeOp column="18" line="12" name="MsisdnSplit" potentialMain="false" public="true" uriIndex="5">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="IROP" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdn0" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdn1" portIndex="1" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdn2" portIndex="2" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdn3" portIndex="3" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdn4" portIndex="4" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdn5" portIndex="5" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdn6" portIndex="6" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdn7" portIndex="7" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdn8" portIndex="8" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdn9" portIndex="9" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdn10" portIndex="10" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdn11" portIndex="11" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdn12" portIndex="12" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdn13" portIndex="13" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdn14" portIndex="14" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdn15" portIndex="15" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdnCapnet0" portIndex="16" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdnCapnet1" portIndex="17" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdnCapnet2" portIndex="18" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdnCapnet3" portIndex="19" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdnCapnet4" portIndex="20" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdnCapnet5" portIndex="21" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdnCapnet6" portIndex="22" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdnCapnet7" portIndex="23" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdnCapnet8" portIndex="24" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdnCapnet9" portIndex="25" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdnCapnet10" portIndex="26" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdnCapnet11" portIndex="27" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdnCapnet12" portIndex="28" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdnCapnet13" portIndex="29" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdnCapnet14" portIndex="30" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OMsisdnCapnet15" portIndex="31" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OROP" portIndex="32" type="stream&lt;AggregateSqmSchema>"/>
+      </compositeOp>
+      <compositeOp column="18" line="16" name="AggregateMvno" potentialMain="false" public="true" uriIndex="6">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="IMvno" portIndex="0" type="stream&lt;BroadMvnoSgw>"/>
+        <outputPort name="OMvno" portIndex="0" type="stream&lt;CsvWrite>"/>
+      </compositeOp>
+      <compositeOp column="18" line="117" name="AggregateMvnoAggrOp" potentialMain="false" public="true" uriIndex="6">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="IMvnoAO" portIndex="0" type="stream&lt;BroadMvnoAggrOpSgw>"/>
+        <outputPort name="OMvnoAO" portIndex="0" type="stream&lt;CsvWrite>"/>
+      </compositeOp>
+      <compositeOp column="18" line="17" name="AggregateBsc" potentialMain="false" public="true" uriIndex="7">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="IBsc" portIndex="0" type="stream&lt;BscBroadDownlink>"/>
+        <outputPort name="OBsc" portIndex="0" type="stream&lt;CsvWrite>"/>
+      </compositeOp>
+      <compositeOp column="18" line="11" name="ApnSplit" potentialMain="false" public="true" uriIndex="8">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="IROP" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <inputPort name="E" portIndex="1" type="stream&lt;rstring centrale>"/>
+        <outputPort name="OApn0" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OApn1" portIndex="1" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OApn2" portIndex="2" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OApn3" portIndex="3" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OApn4" portIndex="4" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OApn5" portIndex="5" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OApn6" portIndex="6" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OApn7" portIndex="7" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OApn8" portIndex="8" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OApn9" portIndex="9" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OApn10" portIndex="10" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OApn11" portIndex="11" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OApn12" portIndex="12" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OApn13" portIndex="13" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OApn14" portIndex="14" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OApn15" portIndex="15" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OApn16" portIndex="16" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OApn17" portIndex="17" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OApn18" portIndex="18" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OApn19" portIndex="19" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OROP" portIndex="20" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="Ocentrale0" portIndex="21" type="stream&lt;tuple&lt;rstring centrale, rstring apn>>"/>
+        <outputPort name="Ocentrale1" portIndex="22" type="stream&lt;tuple&lt;rstring centrale, rstring apn>>"/>
+        <outputPort name="Ocentrale2" portIndex="23" type="stream&lt;tuple&lt;rstring centrale, rstring apn>>"/>
+        <outputPort name="Ocentrale3" portIndex="24" type="stream&lt;tuple&lt;rstring centrale, rstring apn>>"/>
+        <outputPort name="Ocentrale4" portIndex="25" type="stream&lt;tuple&lt;rstring centrale, rstring apn>>"/>
+        <outputPort name="Ocentrale5" portIndex="26" type="stream&lt;tuple&lt;rstring centrale, rstring apn>>"/>
+        <outputPort name="Ocentrale6" portIndex="27" type="stream&lt;tuple&lt;rstring centrale, rstring apn>>"/>
+        <outputPort name="Ocentrale7" portIndex="28" type="stream&lt;tuple&lt;rstring centrale, rstring apn>>"/>
+        <outputPort name="Ocentrale8" portIndex="29" type="stream&lt;tuple&lt;rstring centrale, rstring apn>>"/>
+        <outputPort name="Ocentrale9" portIndex="30" type="stream&lt;tuple&lt;rstring centrale, rstring apn>>"/>
+        <outputPort name="Ocentrale10" portIndex="31" type="stream&lt;tuple&lt;rstring centrale, rstring apn>>"/>
+        <outputPort name="Ocentrale11" portIndex="32" type="stream&lt;tuple&lt;rstring centrale, rstring apn>>"/>
+        <outputPort name="Ocentrale12" portIndex="33" type="stream&lt;tuple&lt;rstring centrale, rstring apn>>"/>
+        <outputPort name="Ocentrale13" portIndex="34" type="stream&lt;tuple&lt;rstring centrale, rstring apn>>"/>
+        <outputPort name="Ocentrale14" portIndex="35" type="stream&lt;tuple&lt;rstring centrale, rstring apn>>"/>
+        <outputPort name="Ocentrale15" portIndex="36" type="stream&lt;tuple&lt;rstring centrale, rstring apn>>"/>
+        <outputPort name="Ocentrale16" portIndex="37" type="stream&lt;tuple&lt;rstring centrale, rstring apn>>"/>
+        <outputPort name="Ocentrale17" portIndex="38" type="stream&lt;tuple&lt;rstring centrale, rstring apn>>"/>
+        <outputPort name="Ocentrale18" portIndex="39" type="stream&lt;tuple&lt;rstring centrale, rstring apn>>"/>
+        <outputPort name="Ocentrale19" portIndex="40" type="stream&lt;tuple&lt;rstring centrale, rstring apn>>"/>
+      </compositeOp>
+      <compositeOp column="18" line="17" name="AggregateImsiCapnet" potentialMain="false" public="true" uriIndex="9">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="IImsi" portIndex="0" type="stream&lt;BroadImsiCapnet>"/>
+        <outputPort name="OImsi" portIndex="0" type="stream&lt;CsvWrite>"/>
+      </compositeOp>
+      <compositeOp column="18" line="17" name="AggregateRnc" potentialMain="false" public="true" uriIndex="10">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="IRnc" portIndex="0" type="stream&lt;RncBroadDownlink>"/>
+        <outputPort name="ORnc" portIndex="0" type="stream&lt;CsvWrite>"/>
+      </compositeOp>
+      <compositeOp column="18" line="6" name="MergerCgiTav" potentialMain="false" public="true" uriIndex="11">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="parall" optional="false" type="&lt;int32>"/>
+        <inputPort name="In" portIndex="0" type="stream&lt;rstring ratType, rstring cgiTav, rstring ROP, boolean endROP>"/>
+        <outputPort name="Out" portIndex="0" type="stream&lt;tuple&lt;rstring content>, tuple&lt;rstring fileName>>"/>
+      </compositeOp>
+      <compositeOp column="18" line="19" name="AggregateApn" potentialMain="false" public="true" uriIndex="12">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="IApn" portIndex="0" type="stream&lt;BroadGgsnApn>"/>
+        <outputPort name="OApn" portIndex="0" type="stream&lt;CsvWrite>"/>
+      </compositeOp>
+      <compositeOp column="18" line="137" name="AggregatePgwApn" potentialMain="false" public="true" uriIndex="12">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="IPgwApn" portIndex="0" type="stream&lt;BroadPgwApn>"/>
+        <outputPort name="OPgwApn" portIndex="0" type="stream&lt;CsvWrite>"/>
+      </compositeOp>
+      <compositeOp column="18" line="9" name="MoveFileToDirScanBigData" potentialMain="false" public="true" uriIndex="13">
+        <inputPort name="OJoin" portIndex="0" type="stream&lt;FileHeader h, FileTrailer t>"/>
+        <outputPort name="OutEvent" portIndex="0" type="stream&lt;Event e>"/>
+      </compositeOp>
+      <compositeOp column="18" line="17" name="AggregateRatRating" potentialMain="false" public="true" uriIndex="14">
+        <inputPort name="IRating" portIndex="0" type="stream&lt;RatingG>"/>
+        <outputPort name="ORatRating" portIndex="0" type="stream&lt;CsvWrite>"/>
+      </compositeOp>
+      <compositeOp column="18" line="12" name="RoamingSplit" potentialMain="false" public="true" uriIndex="15">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="IROP" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORoaming0" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORoaming1" portIndex="1" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORoaming2" portIndex="2" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORoaming3" portIndex="3" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORoaming4" portIndex="4" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORoaming5" portIndex="5" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORoaming6" portIndex="6" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORoaming7" portIndex="7" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORoaming8" portIndex="8" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORoaming9" portIndex="9" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORoaming10" portIndex="10" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORoaming11" portIndex="11" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORoaming12" portIndex="12" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORoaming13" portIndex="13" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORoaming14" portIndex="14" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="ORoaming15" portIndex="15" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OROP" portIndex="16" type="stream&lt;AggregateSqmSchema>"/>
+      </compositeOp>
+      <compositeOp column="18" line="17" name="AggregateTav" potentialMain="false" public="true" uriIndex="16">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="ITav" portIndex="0" type="stream&lt;TavGgsn>"/>
+        <outputPort name="OTav" portIndex="0" type="stream&lt;CsvWrite>"/>
+      </compositeOp>
+      <compositeOp column="18" line="12" name="TacSplit" potentialMain="false" public="true" uriIndex="17">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="IROP" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OTac0" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OTac1" portIndex="1" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OTac2" portIndex="2" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OTac3" portIndex="3" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OTac4" portIndex="4" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OTac5" portIndex="5" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OTac6" portIndex="6" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OTac7" portIndex="7" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OTac8" portIndex="8" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OTac9" portIndex="9" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OTac10" portIndex="10" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OTac11" portIndex="11" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OTac12" portIndex="12" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OTac13" portIndex="13" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OTac14" portIndex="14" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OTac15" portIndex="15" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OROP" portIndex="16" type="stream&lt;AggregateSqmSchema>"/>
+      </compositeOp>
+      <compositeOp column="18" line="11" name="UserLocInfoSplit" potentialMain="false" public="true" uriIndex="18">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="IROP" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserBsc0" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserBsc1" portIndex="1" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserBsc2" portIndex="2" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserBsc3" portIndex="3" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserBsc4" portIndex="4" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserBsc5" portIndex="5" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserBsc6" portIndex="6" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserBsc7" portIndex="7" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserBsc8" portIndex="8" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserBsc9" portIndex="9" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserBsc10" portIndex="10" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserBsc11" portIndex="11" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserBsc12" portIndex="12" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserBsc13" portIndex="13" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserBsc14" portIndex="14" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserBsc15" portIndex="15" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserRnc0" portIndex="16" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserRnc1" portIndex="17" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserRnc2" portIndex="18" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserRnc3" portIndex="19" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserRnc4" portIndex="20" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserRnc5" portIndex="21" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserRnc6" portIndex="22" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserRnc7" portIndex="23" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserRnc8" portIndex="24" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserRnc9" portIndex="25" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserRnc10" portIndex="26" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserRnc11" portIndex="27" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserRnc12" portIndex="28" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserRnc13" portIndex="29" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserRnc14" portIndex="30" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserRnc15" portIndex="31" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OROP" portIndex="32" type="stream&lt;AggregateSqmSchema>"/>
+        <type column="7" line="84" name="AddrTable" type="map&lt;rstring, uint32>" uriIndex="18"/>
+      </compositeOp>
+      <compositeOp column="18" line="536" name="UserLocInfoSplitTav" potentialMain="false" public="true" uriIndex="18">
+        <inputPort name="IROP" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserTav0" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserTav1" portIndex="1" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserTav2" portIndex="2" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserTav3" portIndex="3" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserTav4" portIndex="4" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserTav5" portIndex="5" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserTav6" portIndex="6" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserTav7" portIndex="7" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserTav8" portIndex="8" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserTav9" portIndex="9" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserTav10" portIndex="10" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserTav11" portIndex="11" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserTav12" portIndex="12" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserTav13" portIndex="13" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserTav14" portIndex="14" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OUserTav15" portIndex="15" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OROP" portIndex="16" type="stream&lt;AggregateSqmSchema>"/>
+        <type column="7" line="573" name="AddrTable" type="map&lt;rstring, uint32>" uriIndex="18"/>
+      </compositeOp>
+      <compositeOp column="18" line="17" name="AggregateTac" potentialMain="false" public="true" uriIndex="19">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="ITac" portIndex="0" type="stream&lt;BroadTacLte>"/>
+        <outputPort name="OTac" portIndex="0" type="stream&lt;CsvWrite>"/>
+      </compositeOp>
+      <compositeOp column="18" line="18" name="AggregateRoaming" potentialMain="false" public="true" uriIndex="20">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="IRoaming" portIndex="0" type="stream&lt;RoamingBroadGgsn>"/>
+        <outputPort name="ORoaming" portIndex="0" type="stream&lt;CsvWrite>"/>
+      </compositeOp>
+      <compositeOp column="18" line="12" name="ServingNodeAddrSplit" potentialMain="false" public="true" uriIndex="21">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="IROP" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <inputPort name="S" portIndex="1" type="stream&lt;rstring sgsn>"/>
+        <outputPort name="OServing0" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OServing1" portIndex="1" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OServing2" portIndex="2" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OServing3" portIndex="3" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OServing4" portIndex="4" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OServing5" portIndex="5" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OServing6" portIndex="6" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OServing7" portIndex="7" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OServing8" portIndex="8" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OServing9" portIndex="9" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OServing10" portIndex="10" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OServing11" portIndex="11" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OServing12" portIndex="12" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OServing13" portIndex="13" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OServing14" portIndex="14" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OServing15" portIndex="15" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OROP" portIndex="16" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="Osgsn0" portIndex="17" type="stream&lt;rstring sgsn>"/>
+        <outputPort name="Osgsn1" portIndex="18" type="stream&lt;rstring sgsn>"/>
+        <outputPort name="Osgsn2" portIndex="19" type="stream&lt;rstring sgsn>"/>
+        <outputPort name="Osgsn3" portIndex="20" type="stream&lt;rstring sgsn>"/>
+        <outputPort name="Osgsn4" portIndex="21" type="stream&lt;rstring sgsn>"/>
+        <outputPort name="Osgsn5" portIndex="22" type="stream&lt;rstring sgsn>"/>
+        <outputPort name="Osgsn6" portIndex="23" type="stream&lt;rstring sgsn>"/>
+        <outputPort name="Osgsn7" portIndex="24" type="stream&lt;rstring sgsn>"/>
+        <outputPort name="Osgsn8" portIndex="25" type="stream&lt;rstring sgsn>"/>
+        <outputPort name="Osgsn9" portIndex="26" type="stream&lt;rstring sgsn>"/>
+        <outputPort name="Osgsn10" portIndex="27" type="stream&lt;rstring sgsn>"/>
+        <outputPort name="Osgsn11" portIndex="28" type="stream&lt;rstring sgsn>"/>
+        <outputPort name="Osgsn12" portIndex="29" type="stream&lt;rstring sgsn>"/>
+        <outputPort name="Osgsn13" portIndex="30" type="stream&lt;rstring sgsn>"/>
+        <outputPort name="Osgsn14" portIndex="31" type="stream&lt;rstring sgsn>"/>
+        <outputPort name="Osgsn15" portIndex="32" type="stream&lt;rstring sgsn>"/>
+      </compositeOp>
+      <compositeOp column="18" line="17" name="AggregateRatType" potentialMain="false" public="true" uriIndex="22">
+        <inputPort name="IRat" portIndex="0" type="stream&lt;RatT>"/>
+        <outputPort name="ORat" portIndex="0" type="stream&lt;CsvWrite>"/>
+      </compositeOp>
+      <compositeOp column="18" line="17" name="AggregateImsi" potentialMain="false" public="true" uriIndex="23">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="IImsi" portIndex="0" type="stream&lt;BroadImsi>"/>
+        <outputPort name="OImsi" portIndex="0" type="stream&lt;CsvWrite>"/>
+      </compositeOp>
+      <compositeOp column="18" line="14" name="RopEvalSQM" potentialMain="false" public="true" uriIndex="24">
+        <parameter metaType="Expression" name="tmpOutFilePrefix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="tmpOutFileSuffix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="interval" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="wait" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="delta_start" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="delta_end" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="rop_time" optional="false" type="&lt;rstring>"/>
+        <outputPort name="EvalROP" portIndex="0" type="stream&lt;CdrSchemaForAggrSQMWithROP>"/>
+      </compositeOp>
+      <compositeOp column="18" line="17" name="StorageRoamingBroadBandGgsn" potentialMain="false" public="true" uriIndex="25">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="IRoaming" portIndex="0" type="stream&lt;RoamingBroadGgsn>"/>
+        <inputPort name="EvalROPHour" portIndex="1" type="stream&lt;RopHour>"/>
+        <outputPort name="outCsvStorageRoamingBroadBandGgsn" portIndex="0" type="stream&lt;CsvWrite>"/>
+      </compositeOp>
+      <function column="1" line="125" name="initEndOfDataTupleSQM" native="false" returnType="CdrSchemaForAggrSQMWithROP" uriIndex="24">
+        <prototype>CdrSchemaForAggrSQMWithROP initEndOfDataTupleSQM()</prototype>
+      </function>
+      <function column="1" line="135" name="initWaitEndTupleSQM" native="false" returnType="CdrSchemaForAggrSQMWithROP" uriIndex="24">
+        <prototype>CdrSchemaForAggrSQMWithROP initWaitEndTupleSQM()</prototype>
+      </function>
+      <function column="1" line="145" name="initChangedTupleSQM" native="false" returnType="CdrSchemaForAggrSQMWithROP" uriIndex="24">
+        <prototype>CdrSchemaForAggrSQMWithROP initChangedTupleSQM()</prototype>
+      </function>
+      <function column="1" line="155" name="initOutputTupleSQM" native="false" returnType="CdrSchemaForAggrSQMWithROP" uriIndex="24">
+        <prototype>CdrSchemaForAggrSQMWithROP initOutputTupleSQM()</prototype>
+      </function>
+      <function column="1" line="134" name="getSqmDn" native="false" returnType="rstring" uriIndex="25">
+        <prototype>rstring getSqmDn(rstring nodeId, boolean flagNamingLookup)</prototype>
+        <parameter name="nodeId" type="rstring"/>
+        <parameter name="flagNamingLookup" type="boolean"/>
+      </function>
+      <type column="6" line="14" name="BroadMvnoSgwT" static="true" type="map&lt;rstring, BroadMvnoSgw>" uriIndex="6"/>
+      <type column="6" line="115" name="BroadMvnoAggrOpSgwT" static="true" type="map&lt;rstring, BroadMvnoAggrOpSgw>" uriIndex="6"/>
+      <type column="6" line="15" name="BscBroadDownlinkT" static="true" type="map&lt;rstring, BscBroadDownlink>" uriIndex="7"/>
+      <type column="6" line="15" name="BroadImsiCapnetT" static="true" type="map&lt;rstring, BroadImsiCapnet>" uriIndex="9"/>
+      <type column="6" line="15" name="RncBroadDownlinkT" static="true" type="map&lt;rstring, RncBroadDownlink>" uriIndex="10"/>
+      <type column="6" line="15" name="BroadGgsnApnT" static="true" type="map&lt;rstring, BroadGgsnApn>" uriIndex="12"/>
+      <type column="6" line="16" name="BroadPgwApnT" static="true" type="map&lt;rstring, BroadPgwApn>" uriIndex="12"/>
+      <type column="6" line="15" name="RatingGT" static="true" type="map&lt;rstring, RatingG>" uriIndex="14"/>
+      <type column="6" line="15" name="TavGgsnT" static="true" type="map&lt;rstring, TavGgsn>" uriIndex="16"/>
+      <type column="6" line="15" name="BroadTacLteT" static="true" type="map&lt;rstring, BroadTacLte>" uriIndex="19"/>
+      <type column="6" line="15" name="RoamingBroadGgsnT" static="true" type="map&lt;rstring, RoamingBroadGgsn>" uriIndex="20"/>
+      <type column="6" line="15" name="RatTT" static="true" type="map&lt;rstring, RatT>" uriIndex="22"/>
+      <type column="6" line="15" name="BroadImsiT" static="true" type="map&lt;rstring, BroadImsi>" uriIndex="23"/>
+      <type column="6" line="15" name="SqmRoamingBroadGgsn" static="true" type="map&lt;rstring, RoamingBroadGgsn>" uriIndex="25"/>
+    </namespace>
+    <namespace name="com.ti.oss.common.eggsncdr.paral">
+      <compositeOp column="18" line="24" name="EGgsnCdrSqmMediationParallel" potentialMain="false" public="true" uriIndex="26">
+        <inputPort name="GgsnCdr" portIndex="0" type="stream&lt;EggsnCdr>"/>
+        <inputPort name="PgwCdrA" portIndex="1" type="stream&lt;EpgwCdr>"/>
+        <inputPort name="PgwCdrB" portIndex="2" type="stream&lt;EpgwCdr>"/>
+        <inputPort name="PgwCdrC" portIndex="3" type="stream&lt;EpgwCdr>"/>
+        <inputPort name="PgwCdrD" portIndex="4" type="stream&lt;EpgwCdr>"/>
+        <inputPort name="PgwCdrE" portIndex="5" type="stream&lt;EpgwCdr>"/>
+        <inputPort name="SgwCdr" portIndex="6" type="stream&lt;EsgwCdr>"/>
+        <outputPort name="OutEvent" portIndex="0" type="stream&lt;Event e>"/>
+      </compositeOp>
+      <compositeOp column="11" line="19" name="PMainSqm" potentialMain="true" uriIndex="27"/>
+    </namespace>
+    <namespace name="com.ti.oss.common.cdr.sqm">
+      <compositeOp column="18" line="16" name="BroadBandPgwApn" potentialMain="false" public="true" uriIndex="28">
+        <parameter metaType="Expression" name="tmpOutFilePrefix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="tmpOutFileSuffix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="eggsn" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <inputPort name="C" portIndex="1" type="stream&lt;rstring centrale, rstring apn>"/>
+        <outputPort name="outKpiPgwApn" portIndex="0" type="stream&lt;BroadPgwApn>"/>
+        <outputPort name="OutEventKpiPgwApn" portIndex="1"/>
+        <outputPort name="OutCounters" portIndex="2" type="stream&lt;CDRCounters>"/>
+      </compositeOp>
+      <compositeOp column="18" line="20" name="ParserGGSNEnrichSQM" potentialMain="false" public="true" uriIndex="29">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="GgsnCdr" portIndex="0" type="stream&lt;EggsnCdr>"/>
+        <outputPort name="CdrSchemaEnrichGGSN" portIndex="0" type="stream&lt;CdrSchemaForAggrSQM>"/>
+        <outputPort name="OutEventEnrichGGSN" portIndex="1"/>
+      </compositeOp>
+      <compositeOp column="18" line="154" name="ParserPGWEnrichSQM" potentialMain="false" public="true" uriIndex="29">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="PgwCdr" portIndex="0" type="stream&lt;EpgwCdr>"/>
+        <outputPort name="CdrSchemaEnrichPGW" portIndex="0" type="stream&lt;CdrSchemaForAggrSQM>"/>
+        <outputPort name="OutEventEnrichPGW" portIndex="1"/>
+      </compositeOp>
+      <compositeOp column="18" line="263" name="ParserSGWEnrichSQM" potentialMain="false" public="true" uriIndex="29">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="SgwCdr" portIndex="0" type="stream&lt;EsgwCdr>"/>
+        <outputPort name="CdrSchemaEnrichSGW" portIndex="0" type="stream&lt;CdrSchemaForAggrSGWSQM>"/>
+        <outputPort name="OutEventEnrichSGW" portIndex="1"/>
+      </compositeOp>
+      <compositeOp column="18" line="16" name="BscBroadBandDownlink" potentialMain="false" public="true" uriIndex="30">
+        <parameter metaType="Expression" name="tmpOutFilePrefix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="tmpOutFileSuffix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="eggsn" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <inputPort name="B" portIndex="1" type="stream&lt;rstring bsc>"/>
+        <inputPort name="E" portIndex="2" type="stream&lt;rstring centrale>"/>
+        <outputPort name="outKpiBsc" portIndex="0" type="stream&lt;BscBroadDownlink>"/>
+        <outputPort name="OutEventKpi6" portIndex="1"/>
+        <outputPort name="OutCounters" portIndex="2" type="stream&lt;CDRCounters>"/>
+      </compositeOp>
+      <compositeOp column="18" line="15" name="RatType" potentialMain="false" public="true" uriIndex="31">
+        <parameter metaType="Expression" name="tmpOutFilePrefix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="tmpOutFileSuffix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="eggsn" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="outKpi1" portIndex="0" type="stream&lt;RatT>"/>
+        <outputPort name="OutEventKpi1" portIndex="1"/>
+      </compositeOp>
+      <compositeOp column="18" line="16" name="BroadBandGgsnApn" potentialMain="false" public="true" uriIndex="32">
+        <parameter metaType="Expression" name="tmpOutFilePrefix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="tmpOutFileSuffix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="eggsn" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <inputPort name="C" portIndex="1" type="stream&lt;rstring centrale, rstring apn>"/>
+        <outputPort name="outKpi1" portIndex="0" type="stream&lt;BroadGgsnApn>"/>
+        <outputPort name="OutEventKpi1" portIndex="1"/>
+        <outputPort name="OutCounters" portIndex="2" type="stream&lt;CDRCounters>"/>
+      </compositeOp>
+      <compositeOp column="18" line="16" name="RoamingBroadBandGgsn" potentialMain="false" public="true" uriIndex="33">
+        <parameter metaType="Expression" name="tmpOutFilePrefix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="tmpOutFileSuffix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="eggsn" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="outKpi3" portIndex="0" type="stream&lt;RoamingBroadGgsn>"/>
+        <outputPort name="outKpiStorage" portIndex="1"/>
+        <outputPort name="OutEventKpi3" portIndex="2"/>
+        <outputPort name="OutCounters" portIndex="3" type="stream&lt;CDRCounters>"/>
+      </compositeOp>
+      <compositeOp column="18" line="16" name="RncBroadBandDownlink" potentialMain="false" public="true" uriIndex="34">
+        <parameter metaType="Expression" name="tmpOutFilePrefix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="tmpOutFileSuffix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="eggsn" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <inputPort name="R" portIndex="1" type="stream&lt;rstring rnc>"/>
+        <inputPort name="E" portIndex="2" type="stream&lt;rstring centrale>"/>
+        <outputPort name="outKpiRnc" portIndex="0" type="stream&lt;RncBroadDownlink>"/>
+        <outputPort name="OutEventKpi7" portIndex="1"/>
+        <outputPort name="OutCounters" portIndex="2" type="stream&lt;CDRCounters>"/>
+      </compositeOp>
+      <compositeOp column="18" line="16" name="BroadReportImsi" potentialMain="false" public="true" uriIndex="35">
+        <parameter metaType="Expression" name="tmpOutFilePrefix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="tmpOutFileSuffix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="eggsn" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="outCsv" portIndex="0" type="stream&lt;CsvWrite>"/>
+        <outputPort name="OutEventKpiReportImsi" portIndex="1"/>
+        <outputPort name="OutCounters" portIndex="2" type="stream&lt;CDRCounters>"/>
+      </compositeOp>
+      <compositeOp column="18" line="15" name="RatingGroup" potentialMain="false" public="true" uriIndex="36">
+        <parameter metaType="Expression" name="tmpOutFilePrefix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="tmpOutFileSuffix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="eggsn" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="outKpi1" portIndex="0" type="stream&lt;RatingG>"/>
+        <outputPort name="OutEventKpi1" portIndex="1"/>
+      </compositeOp>
+      <compositeOp column="18" line="16" name="TavGgsnCdr" potentialMain="false" public="true" uriIndex="37">
+        <parameter metaType="Expression" name="tmpOutFilePrefix3G" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="tmpOutFilePrefix4G" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="tmpOutFileSuffix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="eggsn" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <inputPort name="E" portIndex="1" type="stream&lt;rstring centrale>"/>
+        <inputPort name="CT" portIndex="2" type="stream&lt;rstring tratta>"/>
+        <outputPort name="outKpi3G" portIndex="0" type="stream&lt;TavGgsn>"/>
+        <outputPort name="outKpi4G" portIndex="1" type="stream&lt;TavGgsn>"/>
+        <outputPort name="OutEventKpi4" portIndex="2"/>
+        <outputPort name="OutCounters" portIndex="3" type="stream&lt;CDRCounters>"/>
+      </compositeOp>
+      <compositeOp column="18" line="22" name="SqmHandler" potentialMain="false" public="true" uriIndex="38">
+        <parameter metaType="Expression" name="tmpOutFilePrefix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="tmpOutFileSuffix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="eggsn" portIndex="0" type="stream&lt;CdrSchemaForAggrSQM>"/>
+        <inputPort name="EvalROP" portIndex="1" type="stream&lt;CdrSchemaForAggrSQMWithROP>"/>
+        <outputPort name="outAggregatedSQM" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OTrailer" portIndex="1" type="stream&lt;FileHeader h, FileTrailer t>"/>
+        <outputPort name="OutEventAggrSqm" portIndex="2"/>
+        <outputPort name="OutStatistics" portIndex="3" type="stream&lt;CDRExcludedNodes>"/>
+      </compositeOp>
+      <compositeOp column="18" line="19" name="BroadBandMvno" potentialMain="false" public="true" uriIndex="39">
+        <parameter metaType="Expression" name="tmpOutFilePrefix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="tmpOutFilePrefixAggrOp" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="tmpOutFileSuffix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="eggsn" portIndex="0" type="stream&lt;AggregateSqmSchemaSgw>"/>
+        <outputPort name="outKpiMvno" portIndex="0" type="stream&lt;BroadMvnoSgw>"/>
+        <outputPort name="outKpiMvnoAggrOp" portIndex="1" type="stream&lt;BroadMvnoAggrOpSgw>"/>
+        <outputPort name="OutEventKpiMvno" portIndex="2"/>
+        <outputPort name="OutCounters" portIndex="3" type="stream&lt;CDRCounters>"/>
+      </compositeOp>
+      <compositeOp column="18" line="16" name="BroadBandImsiCapnet" potentialMain="false" public="true" uriIndex="40">
+        <parameter metaType="Expression" name="tmpOutFilePrefix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="tmpOutFileSuffix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="eggsn" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="outKpiImsiCapnet" portIndex="0" type="stream&lt;BroadImsiCapnet>"/>
+        <outputPort name="OutEventKpiImsiCapnet" portIndex="1"/>
+        <outputPort name="OutCounters" portIndex="2" type="stream&lt;CDRCounters>"/>
+      </compositeOp>
+      <compositeOp column="18" line="16" name="BroadBandTacLte" potentialMain="false" public="true" uriIndex="41">
+        <parameter metaType="Expression" name="tmpOutFilePrefix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="tmpOutFileSuffix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="eggsn" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <inputPort name="T" portIndex="1" type="stream&lt;rstring tac>"/>
+        <inputPort name="E" portIndex="2" type="stream&lt;rstring centrale>"/>
+        <outputPort name="outKpiTacLte" portIndex="0" type="stream&lt;BroadTacLte>"/>
+        <outputPort name="OutEventKpiTacLte" portIndex="1"/>
+        <outputPort name="OutCounters" portIndex="2" type="stream&lt;CDRCounters>"/>
+      </compositeOp>
+      <compositeOp column="18" line="16" name="BroadBandSgsn" potentialMain="false" public="true" uriIndex="42">
+        <parameter metaType="Expression" name="tmpOutFilePrefix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="tmpOutFileSuffix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="eggsn" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <inputPort name="S" portIndex="1" type="stream&lt;rstring sgsn>"/>
+        <inputPort name="E" portIndex="2" type="stream&lt;rstring centrale>"/>
+        <outputPort name="outCsv2" portIndex="0" type="stream&lt;CsvWrite>"/>
+        <outputPort name="OutEventKpi2" portIndex="1"/>
+        <outputPort name="OutCounters" portIndex="2" type="stream&lt;CDRCounters>"/>
+      </compositeOp>
+      <compositeOp column="18" line="16" name="TavSgsnCdr" potentialMain="false" public="true" uriIndex="43">
+        <parameter metaType="Expression" name="tmpOutFilePrefix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="tmpOutFileSuffix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="eggsn" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="outCsv5" portIndex="0" type="stream&lt;CsvWrite>"/>
+        <outputPort name="OutEventKpi5" portIndex="1"/>
+        <outputPort name="OutCounters" portIndex="2" type="stream&lt;CDRCounters>"/>
+      </compositeOp>
+      <compositeOp column="18" line="15" name="SqmHandlerSgw" potentialMain="false" public="true" uriIndex="44">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="eggsn" portIndex="0" type="stream&lt;CdrSchemaForAggrSGWSQM>"/>
+        <inputPort name="EvalROP" portIndex="1" type="stream&lt;CdrSchemaForAggrSQMWithROP>"/>
+        <outputPort name="outAggregatedSQM" portIndex="0" type="stream&lt;AggregateSqmSchemaSgw>"/>
+        <outputPort name="OTrailer" portIndex="1" type="stream&lt;FileHeader h, FileTrailer t>"/>
+        <outputPort name="OutEventAggrSqm" portIndex="2"/>
+      </compositeOp>
+      <compositeOp column="18" line="16" name="BroadBandImsi" potentialMain="false" public="true" uriIndex="45">
+        <parameter metaType="Expression" name="tmpOutFilePrefix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="tmpOutFileSuffix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="eggsn" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="outKpiImsi" portIndex="0" type="stream&lt;BroadImsi>"/>
+        <outputPort name="OutEventKpiImsi" portIndex="1"/>
+        <outputPort name="OutCounters" portIndex="2" type="stream&lt;CDRCounters>"/>
+      </compositeOp>
+      <function column="1" line="397" name="countCdrsAPNLTE" native="false" returnType="void" uriIndex="28">
+        <prototype>void countCdrsAPNLTE(AggregateSqmSchema eggsn1, mutable BroadPgwApn aggrSQMtmp)</prototype>
+        <parameter name="eggsn1" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="aggrSQMtmp" type="BroadPgwApn"/>
+      </function>
+      <function column="1" line="409" name="addCdrPGWAPN" native="false" returnType="void" uriIndex="28">
+        <prototype>void addCdrPGWAPN(AggregateSqmSchema eggsn, mutable SqmBroadPgwApn cdr, rstring key, rstring nameOutputFile, rstring centralName, rstring filePrefix, rstring fileSuffix, float64 startROP, float64 endROP)</prototype>
+        <parameter name="eggsn" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="cdr" type="SqmBroadPgwApn"/>
+        <parameter name="key" type="rstring"/>
+        <parameter name="nameOutputFile" type="rstring"/>
+        <parameter name="centralName" type="rstring"/>
+        <parameter name="filePrefix" type="rstring"/>
+        <parameter name="fileSuffix" type="rstring"/>
+        <parameter name="startROP" type="float64"/>
+        <parameter name="endROP" type="float64"/>
+      </function>
+      <function column="1" line="439" name="initEmptyEndRopTupleApnLTE" native="false" returnType="BroadPgwApn" uriIndex="28">
+        <prototype>BroadPgwApn initEmptyEndRopTupleApnLTE()</prototype>
+      </function>
+      <function column="1" line="407" name="getNomeCentrale" native="false" returnType="rstring" uriIndex="29">
+        <prototype>rstring getNomeCentrale(rstring nodeId, rstring emm_rete, boolean flagEmmRete)</prototype>
+        <parameter name="nodeId" type="rstring"/>
+        <parameter name="emm_rete" type="rstring"/>
+        <parameter name="flagEmmRete" type="boolean"/>
+      </function>
+      <function column="1" line="409" name="countCdrsBBBD" native="false" returnType="void" uriIndex="30">
+        <prototype>void countCdrsBBBD(AggregateSqmSchema eggsn1, mutable BscBroadDownlink aggrSQMtmp)</prototype>
+        <parameter name="eggsn1" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="aggrSQMtmp" type="BscBroadDownlink"/>
+      </function>
+      <function column="1" line="420" name="addCdrBBBD" native="false" returnType="void" uriIndex="30">
+        <prototype>void addCdrBBBD(AggregateSqmSchema eggsn, mutable SqmBscBroadDownlink cdr, rstring key, rstring nameOutputFile, rstring filePrefix, rstring fileSuffix, float64 startROP, float64 endROP)</prototype>
+        <parameter name="eggsn" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="cdr" type="SqmBscBroadDownlink"/>
+        <parameter name="key" type="rstring"/>
+        <parameter name="nameOutputFile" type="rstring"/>
+        <parameter name="filePrefix" type="rstring"/>
+        <parameter name="fileSuffix" type="rstring"/>
+        <parameter name="startROP" type="float64"/>
+        <parameter name="endROP" type="float64"/>
+      </function>
+      <function column="1" line="447" name="initEmptyEndRopTupleBsc" native="false" returnType="BscBroadDownlink" uriIndex="30">
+        <prototype>BscBroadDownlink initEmptyEndRopTupleBsc()</prototype>
+      </function>
+      <function column="1" line="456" name="aggregateBscDownlink" native="false" returnType="void" uriIndex="30">
+        <prototype>void aggregateBscDownlink(mutable SqmBscBroadDownlinkNode sqmBscDownNode, mutable SqmBscBroadDownlink sqmBscDown, mutable SqmBscBroadDownlink cdrApp)</prototype>
+        <parameter mutable="true" name="sqmBscDownNode" type="SqmBscBroadDownlinkNode"/>
+        <parameter mutable="true" name="sqmBscDown" type="SqmBscBroadDownlink"/>
+        <parameter mutable="true" name="cdrApp" type="SqmBscBroadDownlink"/>
+      </function>
+      <function column="1" line="186" name="addCdrRat" native="false" returnType="void" uriIndex="31">
+        <prototype>void addCdrRat(AggregateSqmSchema eggsn, mutable SqmRatType cdr, rstring key, rstring nameOutputFile, rstring filePrefix, rstring fileSuffix, float64 startROP, float64 endROP)</prototype>
+        <parameter name="eggsn" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="cdr" type="SqmRatType"/>
+        <parameter name="key" type="rstring"/>
+        <parameter name="nameOutputFile" type="rstring"/>
+        <parameter name="filePrefix" type="rstring"/>
+        <parameter name="fileSuffix" type="rstring"/>
+        <parameter name="startROP" type="float64"/>
+        <parameter name="endROP" type="float64"/>
+      </function>
+      <function column="1" line="217" name="initEmptyEndRopTupleRatType" native="false" returnType="RatT" uriIndex="31">
+        <prototype>RatT initEmptyEndRopTupleRatType()</prototype>
+      </function>
+      <function column="1" line="228" name="aggregateRat" native="false" returnType="void" uriIndex="31">
+        <prototype>void aggregateRat(mutable SqmRatType SqmPrec, mutable SqmRatType sqm)</prototype>
+        <parameter mutable="true" name="SqmPrec" type="SqmRatType"/>
+        <parameter mutable="true" name="sqm" type="SqmRatType"/>
+      </function>
+      <function column="1" line="422" name="countCdrsBBGA" native="false" returnType="void" uriIndex="32">
+        <prototype>void countCdrsBBGA(AggregateSqmSchema eggsn1, mutable BroadGgsnApn aggrSQMtmp)</prototype>
+        <parameter name="eggsn1" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="aggrSQMtmp" type="BroadGgsnApn"/>
+      </function>
+      <function column="1" line="449" name="getSqmDn" native="false" returnType="rstring" uriIndex="32">
+        <prototype>rstring getSqmDn(rstring nodeId, boolean flagNamingLookup)</prototype>
+        <parameter name="nodeId" type="rstring"/>
+        <parameter name="flagNamingLookup" type="boolean"/>
+      </function>
+      <function column="1" line="469" name="addCdrBBGA" native="false" returnType="void" uriIndex="32">
+        <prototype>void addCdrBBGA(AggregateSqmSchema eggsn, mutable SqmBroadGgsnApn cdr, rstring key, rstring nameOutputFile, rstring centralName, rstring filePrefix, rstring fileSuffix, float64 startROP, float64 endROP)</prototype>
+        <parameter name="eggsn" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="cdr" type="SqmBroadGgsnApn"/>
+        <parameter name="key" type="rstring"/>
+        <parameter name="nameOutputFile" type="rstring"/>
+        <parameter name="centralName" type="rstring"/>
+        <parameter name="filePrefix" type="rstring"/>
+        <parameter name="fileSuffix" type="rstring"/>
+        <parameter name="startROP" type="float64"/>
+        <parameter name="endROP" type="float64"/>
+      </function>
+      <function column="1" line="499" name="initEmptyEndRopTupleApn" native="false" returnType="BroadGgsnApn" uriIndex="32">
+        <prototype>BroadGgsnApn initEmptyEndRopTupleApn()</prototype>
+      </function>
+      <function column="1" line="364" name="countCdrsRBBG" native="false" returnType="void" uriIndex="33">
+        <prototype>void countCdrsRBBG(AggregateSqmSchema eggsn1, mutable RoamingBroadGgsn aggrSQMtmp)</prototype>
+        <parameter name="eggsn1" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="aggrSQMtmp" type="RoamingBroadGgsn"/>
+      </function>
+      <function column="1" line="372" name="addCdrRBBG" native="false" returnType="void" uriIndex="33">
+        <prototype>void addCdrRBBG(AggregateSqmSchema eggsn, mutable SqmRoamingBroadGgsn cdr, rstring key, rstring nameOutputFile, rstring centralName, rstring operatore, rstring filePrefix, rstring fileSuffix, float64 startROP, float64 endROP)</prototype>
+        <parameter name="eggsn" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="cdr" type="SqmRoamingBroadGgsn"/>
+        <parameter name="key" type="rstring"/>
+        <parameter name="nameOutputFile" type="rstring"/>
+        <parameter name="centralName" type="rstring"/>
+        <parameter name="operatore" type="rstring"/>
+        <parameter name="filePrefix" type="rstring"/>
+        <parameter name="fileSuffix" type="rstring"/>
+        <parameter name="startROP" type="float64"/>
+        <parameter name="endROP" type="float64"/>
+      </function>
+      <function column="1" line="400" name="initEmptyEndRopTupleRoamGgsn" native="false" returnType="RoamingBroadGgsn" uriIndex="33">
+        <prototype>RoamingBroadGgsn initEmptyEndRopTupleRoamGgsn()</prototype>
+      </function>
+      <function column="1" line="409" name="aggregateRoamingNode" native="false" returnType="void" uriIndex="33">
+        <prototype>void aggregateRoamingNode(mutable SqmRoamingBroadGgsnNode sqmNode, mutable SqmRoamingBroadGgsn sqm)</prototype>
+        <parameter mutable="true" name="sqmNode" type="SqmRoamingBroadGgsnNode"/>
+        <parameter mutable="true" name="sqm" type="SqmRoamingBroadGgsn"/>
+      </function>
+      <function column="1" line="410" name="getSqmDnRnc" native="false" returnType="rstring" uriIndex="34">
+        <prototype>rstring getSqmDnRnc(rstring nodeId, boolean flagNamingLookup)</prototype>
+        <parameter name="nodeId" type="rstring"/>
+        <parameter name="flagNamingLookup" type="boolean"/>
+      </function>
+      <function column="1" line="429" name="countCdrsRBBD" native="false" returnType="void" uriIndex="34">
+        <prototype>void countCdrsRBBD(AggregateSqmSchema eggsn1, mutable RncBroadDownlink aggrSQMtmp)</prototype>
+        <parameter name="eggsn1" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="aggrSQMtmp" type="RncBroadDownlink"/>
+      </function>
+      <function column="1" line="440" name="addCdrRBBD" native="false" returnType="void" uriIndex="34">
+        <prototype>void addCdrRBBD(AggregateSqmSchema eggsn, mutable SqmRncBroadDownlink cdr, rstring key, rstring nameOutputFile, rstring filePrefix, rstring fileSuffix, float64 startROP, float64 endROP)</prototype>
+        <parameter name="eggsn" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="cdr" type="SqmRncBroadDownlink"/>
+        <parameter name="key" type="rstring"/>
+        <parameter name="nameOutputFile" type="rstring"/>
+        <parameter name="filePrefix" type="rstring"/>
+        <parameter name="fileSuffix" type="rstring"/>
+        <parameter name="startROP" type="float64"/>
+        <parameter name="endROP" type="float64"/>
+      </function>
+      <function column="1" line="467" name="initEmptyEndRopTupleRnc" native="false" returnType="RncBroadDownlink" uriIndex="34">
+        <prototype>RncBroadDownlink initEmptyEndRopTupleRnc()</prototype>
+      </function>
+      <function column="1" line="476" name="aggregateRncDownlink" native="false" returnType="void" uriIndex="34">
+        <prototype>void aggregateRncDownlink(mutable SqmRncBroadDownlinkNode sqmRncDownNode, mutable SqmRncBroadDownlink sqmRncDown)</prototype>
+        <parameter mutable="true" name="sqmRncDownNode" type="SqmRncBroadDownlinkNode"/>
+        <parameter mutable="true" name="sqmRncDown" type="SqmRncBroadDownlink"/>
+      </function>
+      <function column="1" line="306" name="countCdrsReportIMSI" native="false" returnType="void" uriIndex="35">
+        <prototype>void countCdrsReportIMSI(AggregateSqmSchema eggsn1, mutable ReportImsi aggrSQMtmp)</prototype>
+        <parameter name="eggsn1" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="aggrSQMtmp" type="ReportImsi"/>
+      </function>
+      <function column="1" line="339" name="addCdrReportImsi" native="false" returnType="void" uriIndex="35">
+        <prototype>void addCdrReportImsi(AggregateSqmSchema eggsn, mutable SqmReport cdr, rstring key, rstring nameOutputFile, rstring filePrefix, rstring fileSuffix, float64 startROP, float64 endROP)</prototype>
+        <parameter name="eggsn" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="cdr" type="SqmReport"/>
+        <parameter name="key" type="rstring"/>
+        <parameter name="nameOutputFile" type="rstring"/>
+        <parameter name="filePrefix" type="rstring"/>
+        <parameter name="fileSuffix" type="rstring"/>
+        <parameter name="startROP" type="float64"/>
+        <parameter name="endROP" type="float64"/>
+      </function>
+      <function column="1" line="368" name="initEmptyEndRopTupleReportImsi" native="false" returnType="ReportImsi" uriIndex="35">
+        <prototype>ReportImsi initEmptyEndRopTupleReportImsi()</prototype>
+      </function>
+      <function column="1" line="196" name="countCdrsRating" native="false" returnType="void" uriIndex="36">
+        <prototype>void countCdrsRating(AggregateSqmSchema eggsn1, mutable RatingG aggrSQMtmp, int32 i)</prototype>
+        <parameter name="eggsn1" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="aggrSQMtmp" type="RatingG"/>
+        <parameter name="i" type="int32"/>
+      </function>
+      <function column="1" line="203" name="addCdrRating" native="false" returnType="void" uriIndex="36">
+        <prototype>void addCdrRating(AggregateSqmSchema eggsn, mutable SqmRatingGroup cdr, rstring key, int32 i, rstring nameOutputFile, rstring filePrefix, rstring fileSuffix, float64 startROP, float64 endROP)</prototype>
+        <parameter name="eggsn" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="cdr" type="SqmRatingGroup"/>
+        <parameter name="key" type="rstring"/>
+        <parameter name="i" type="int32"/>
+        <parameter name="nameOutputFile" type="rstring"/>
+        <parameter name="filePrefix" type="rstring"/>
+        <parameter name="fileSuffix" type="rstring"/>
+        <parameter name="startROP" type="float64"/>
+        <parameter name="endROP" type="float64"/>
+      </function>
+      <function column="1" line="237" name="initEmptyEndRopTupleRatingGroup" native="false" returnType="RatingG" uriIndex="36">
+        <prototype>RatingG initEmptyEndRopTupleRatingGroup()</prototype>
+      </function>
+      <function column="1" line="247" name="aggregateRating" native="false" returnType="void" uriIndex="36">
+        <prototype>void aggregateRating(mutable SqmRatingGroup SqmPrec, mutable SqmRatingGroup sqm)</prototype>
+        <parameter mutable="true" name="SqmPrec" type="SqmRatingGroup"/>
+        <parameter mutable="true" name="sqm" type="SqmRatingGroup"/>
+      </function>
+      <function column="1" line="539" name="countCdrsTGC" native="false" returnType="void" uriIndex="37">
+        <prototype>void countCdrsTGC(AggregateSqmSchema eggsn1, mutable TavGgsn aggrSQMtmp)</prototype>
+        <parameter name="eggsn1" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="aggrSQMtmp" type="TavGgsn"/>
+      </function>
+      <function column="1" line="553" name="addCdrTGC" native="false" returnType="void" uriIndex="37">
+        <prototype>void addCdrTGC(AggregateSqmSchema eggsn, mutable SqmTavGgsn cdr, rstring key, rstring nameOutputFile, rstring centralName, rstring filePrefix, rstring fileSuffix, float64 startROP, float64 endROP)</prototype>
+        <parameter name="eggsn" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="cdr" type="SqmTavGgsn"/>
+        <parameter name="key" type="rstring"/>
+        <parameter name="nameOutputFile" type="rstring"/>
+        <parameter name="centralName" type="rstring"/>
+        <parameter name="filePrefix" type="rstring"/>
+        <parameter name="fileSuffix" type="rstring"/>
+        <parameter name="startROP" type="float64"/>
+        <parameter name="endROP" type="float64"/>
+      </function>
+      <function column="1" line="580" name="initEmptyEndRopTupleTav" native="false" returnType="TavGgsn" uriIndex="37">
+        <prototype>TavGgsn initEmptyEndRopTupleTav()</prototype>
+      </function>
+      <function column="1" line="185" name="validateFileProgressive" native="false" returnType="boolean" uriIndex="38">
+        <prototype>boolean validateFileProgressive(mutable set&lt;rstring&gt; progressive, int32 startProgr)</prototype>
+        <parameter mutable="true" name="progressive" type="set&lt;rstring>"/>
+        <parameter name="startProgr" type="int32"/>
+      </function>
+      <function column="1" line="260" name="initEmptyWaitTuple" native="false" returnType="AggregateSqmSchema" uriIndex="38">
+        <prototype>AggregateSqmSchema initEmptyWaitTuple()</prototype>
+      </function>
+      <function column="1" line="499" name="countCdrsMvno" native="false" returnType="void" uriIndex="39">
+        <prototype>void countCdrsMvno(AggregateSqmSchemaSgw eggsn1, mutable BroadMvnoSgw aggrSQMtmp)</prototype>
+        <parameter name="eggsn1" type="AggregateSqmSchemaSgw"/>
+        <parameter mutable="true" name="aggrSQMtmp" type="BroadMvnoSgw"/>
+      </function>
+      <function column="1" line="512" name="countCdrsMvnoAO" native="false" returnType="void" uriIndex="39">
+        <prototype>void countCdrsMvnoAO(AggregateSqmSchemaSgw eggsn1, mutable BroadMvnoAggrOpSgw aggrSQMAOtmp)</prototype>
+        <parameter name="eggsn1" type="AggregateSqmSchemaSgw"/>
+        <parameter mutable="true" name="aggrSQMAOtmp" type="BroadMvnoAggrOpSgw"/>
+      </function>
+      <function column="1" line="526" name="addCdrMvno" native="false" returnType="void" uriIndex="39">
+        <prototype>void addCdrMvno(AggregateSqmSchemaSgw eggsn, mutable SqmMvno cdr, mutable SqmMvnoAggrOp cdrAO, rstring key, rstring nameOutputFile, rstring nameOutputFileAO, rstring sgsnName, rstring apnNI, rstring filePrefix, rstring filePrefixAO, rstring fileSuffix, float64 startROP, float64 endROP)</prototype>
+        <parameter name="eggsn" type="AggregateSqmSchemaSgw"/>
+        <parameter mutable="true" name="cdr" type="SqmMvno"/>
+        <parameter mutable="true" name="cdrAO" type="SqmMvnoAggrOp"/>
+        <parameter name="key" type="rstring"/>
+        <parameter name="nameOutputFile" type="rstring"/>
+        <parameter name="nameOutputFileAO" type="rstring"/>
+        <parameter name="sgsnName" type="rstring"/>
+        <parameter name="apnNI" type="rstring"/>
+        <parameter name="filePrefix" type="rstring"/>
+        <parameter name="filePrefixAO" type="rstring"/>
+        <parameter name="fileSuffix" type="rstring"/>
+        <parameter name="startROP" type="float64"/>
+        <parameter name="endROP" type="float64"/>
+      </function>
+      <function column="1" line="583" name="getApnNi" native="false" returnType="rstring" uriIndex="39">
+        <prototype>rstring getApnNi(rstring apn, boolean flagMonitoredApnNi)</prototype>
+        <parameter name="apn" type="rstring"/>
+        <parameter name="flagMonitoredApnNi" type="boolean"/>
+      </function>
+      <function column="1" line="603" name="initEmptyEndRopTupleMvno" native="false" returnType="BroadMvnoSgw" uriIndex="39">
+        <prototype>BroadMvnoSgw initEmptyEndRopTupleMvno()</prototype>
+      </function>
+      <function column="1" line="612" name="initEmptyEndRopTupleMvnoAggrOp" native="false" returnType="BroadMvnoAggrOpSgw" uriIndex="39">
+        <prototype>BroadMvnoAggrOpSgw initEmptyEndRopTupleMvnoAggrOp()</prototype>
+      </function>
+      <function column="1" line="280" name="countCdrsIMSI" native="false" returnType="void" uriIndex="40">
+        <prototype>void countCdrsIMSI(AggregateSqmSchema eggsn1, mutable BroadImsiCapnet aggrSQMtmp)</prototype>
+        <parameter name="eggsn1" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="aggrSQMtmp" type="BroadImsiCapnet"/>
+      </function>
+      <function column="1" line="323" name="addCdrImsi" native="false" returnType="void" uriIndex="40">
+        <prototype>void addCdrImsi(AggregateSqmSchema eggsn, mutable SqmBroadImsiCapnet cdr, rstring key, rstring nameOutputFile, rstring filePrefix, rstring fileSuffix, float64 startROP, float64 endROP)</prototype>
+        <parameter name="eggsn" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="cdr" type="SqmBroadImsiCapnet"/>
+        <parameter name="key" type="rstring"/>
+        <parameter name="nameOutputFile" type="rstring"/>
+        <parameter name="filePrefix" type="rstring"/>
+        <parameter name="fileSuffix" type="rstring"/>
+        <parameter name="startROP" type="float64"/>
+        <parameter name="endROP" type="float64"/>
+      </function>
+      <function column="1" line="352" name="initEmptyEndRopTupleImsiCapnet" native="false" returnType="BroadImsiCapnet" uriIndex="40">
+        <prototype>BroadImsiCapnet initEmptyEndRopTupleImsiCapnet()</prototype>
+      </function>
+      <function column="1" line="375" name="countCdrsTacLte" native="false" returnType="void" uriIndex="41">
+        <prototype>void countCdrsTacLte(AggregateSqmSchema eggsn1, mutable BroadTacLte aggrSQMtmp)</prototype>
+        <parameter name="eggsn1" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="aggrSQMtmp" type="BroadTacLte"/>
+      </function>
+      <function column="1" line="389" name="addCdrTacLte" native="false" returnType="void" uriIndex="41">
+        <prototype>void addCdrTacLte(AggregateSqmSchema eggsn, mutable SqmBroadTacLte cdr, rstring key, rstring nameOutputFile, rstring centralName, rstring filePrefix, rstring fileSuffix, float64 startROP, float64 endROP)</prototype>
+        <parameter name="eggsn" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="cdr" type="SqmBroadTacLte"/>
+        <parameter name="key" type="rstring"/>
+        <parameter name="nameOutputFile" type="rstring"/>
+        <parameter name="centralName" type="rstring"/>
+        <parameter name="filePrefix" type="rstring"/>
+        <parameter name="fileSuffix" type="rstring"/>
+        <parameter name="startROP" type="float64"/>
+        <parameter name="endROP" type="float64"/>
+      </function>
+      <function column="1" line="417" name="initEmptyEndRopTupleTacLte" native="false" returnType="BroadTacLte" uriIndex="41">
+        <prototype>BroadTacLte initEmptyEndRopTupleTacLte()</prototype>
+      </function>
+      <function column="1" line="427" name="aggregateTac" native="false" returnType="void" uriIndex="41">
+        <prototype>void aggregateTac(mutable SqmBroadTacLtenNode SqmNode, mutable SqmBroadTacLte sqm)</prototype>
+        <parameter mutable="true" name="SqmNode" type="SqmBroadTacLtenNode"/>
+        <parameter mutable="true" name="sqm" type="SqmBroadTacLte"/>
+      </function>
+      <function column="1" line="392" name="countCdrsBBS" native="false" returnType="void" uriIndex="42">
+        <prototype>void countCdrsBBS(AggregateSqmSchema eggsn1, mutable BroadSgsn aggrSQMtmp)</prototype>
+        <parameter name="eggsn1" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="aggrSQMtmp" type="BroadSgsn"/>
+      </function>
+      <function column="1" line="410" name="addCdrBBS" native="false" returnType="void" uriIndex="42">
+        <prototype>void addCdrBBS(AggregateSqmSchema eggsn, mutable SqmBroadSgsn cdr, rstring key, rstring nameOutputFile, rstring filePrefix, rstring fileSuffix, float64 startROP, float64 endROP)</prototype>
+        <parameter name="eggsn" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="cdr" type="SqmBroadSgsn"/>
+        <parameter name="key" type="rstring"/>
+        <parameter name="nameOutputFile" type="rstring"/>
+        <parameter name="filePrefix" type="rstring"/>
+        <parameter name="fileSuffix" type="rstring"/>
+        <parameter name="startROP" type="float64"/>
+        <parameter name="endROP" type="float64"/>
+      </function>
+      <function column="1" line="439" name="getSgsnName" native="false" returnType="rstring" uriIndex="42">
+        <prototype>rstring getSgsnName(rstring ip, boolean flagSgsnIpName)</prototype>
+        <parameter name="ip" type="rstring"/>
+        <parameter name="flagSgsnIpName" type="boolean"/>
+      </function>
+      <function column="1" line="458" name="initEmptyEndRopTupleSgsn" native="false" returnType="BroadSgsn" uriIndex="42">
+        <prototype>BroadSgsn initEmptyEndRopTupleSgsn()</prototype>
+      </function>
+      <function column="1" line="467" name="aggregateSgsnNode" native="false" returnType="void" uriIndex="42">
+        <prototype>void aggregateSgsnNode(mutable SqmBroadSgsnNode sqmSgsnNode, mutable SqmBroadSgsn sqmSgsn, mutable SqmBroadSgsn cdrApp)</prototype>
+        <parameter mutable="true" name="sqmSgsnNode" type="SqmBroadSgsnNode"/>
+        <parameter mutable="true" name="sqmSgsn" type="SqmBroadSgsn"/>
+        <parameter mutable="true" name="cdrApp" type="SqmBroadSgsn"/>
+      </function>
+      <function column="1" line="353" name="countCdrsTSC" native="false" returnType="void" uriIndex="43">
+        <prototype>void countCdrsTSC(AggregateSqmSchema eggsn1, mutable TavSgsn aggrSQMtmp)</prototype>
+        <parameter name="eggsn1" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="aggrSQMtmp" type="TavSgsn"/>
+      </function>
+      <function column="1" line="364" name="addCdrTSC" native="false" returnType="void" uriIndex="43">
+        <prototype>void addCdrTSC(AggregateSqmSchema eggsn, mutable SqmTavSgsn cdr, rstring key, rstring nameOutputFile, rstring filePrefix, rstring fileSuffix, float64 startROP, float64 endROP)</prototype>
+        <parameter name="eggsn" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="cdr" type="SqmTavSgsn"/>
+        <parameter name="key" type="rstring"/>
+        <parameter name="nameOutputFile" type="rstring"/>
+        <parameter name="filePrefix" type="rstring"/>
+        <parameter name="fileSuffix" type="rstring"/>
+        <parameter name="startROP" type="float64"/>
+        <parameter name="endROP" type="float64"/>
+      </function>
+      <function column="1" line="395" name="initEmptyEndRopTupleTavS" native="false" returnType="TavSgsn" uriIndex="43">
+        <prototype>TavSgsn initEmptyEndRopTupleTavS()</prototype>
+      </function>
+      <function column="1" line="404" name="aggregateTavSgsn" native="false" returnType="void" uriIndex="43">
+        <prototype>void aggregateTavSgsn(mutable SqmTavSgsnNode sqmTavSgsnNode, mutable SqmTavSgsn sqmTavSgsn, mutable SqmTavSgsn cdrApp)</prototype>
+        <parameter mutable="true" name="sqmTavSgsnNode" type="SqmTavSgsnNode"/>
+        <parameter mutable="true" name="sqmTavSgsn" type="SqmTavSgsn"/>
+        <parameter mutable="true" name="cdrApp" type="SqmTavSgsn"/>
+      </function>
+      <function column="1" line="175" name="initEmptyWaitTupleSgw" native="false" returnType="AggregateSqmSchemaSgw" uriIndex="44">
+        <prototype>AggregateSqmSchemaSgw initEmptyWaitTupleSgw()</prototype>
+      </function>
+      <function column="1" line="308" name="countCdrsIMSI" native="false" returnType="void" uriIndex="45">
+        <prototype>void countCdrsIMSI(AggregateSqmSchema eggsn1, mutable BroadImsi aggrSQMtmp)</prototype>
+        <parameter name="eggsn1" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="aggrSQMtmp" type="BroadImsi"/>
+      </function>
+      <function column="1" line="365" name="addCdrImsi" native="false" returnType="void" uriIndex="45">
+        <prototype>void addCdrImsi(AggregateSqmSchema eggsn, mutable SqmBroadImsiVip cdr, rstring key, rstring nameOutputFile, rstring filePrefix, rstring fileSuffix, float64 startROP, float64 endROP)</prototype>
+        <parameter name="eggsn" type="AggregateSqmSchema"/>
+        <parameter mutable="true" name="cdr" type="SqmBroadImsiVip"/>
+        <parameter name="key" type="rstring"/>
+        <parameter name="nameOutputFile" type="rstring"/>
+        <parameter name="filePrefix" type="rstring"/>
+        <parameter name="fileSuffix" type="rstring"/>
+        <parameter name="startROP" type="float64"/>
+        <parameter name="endROP" type="float64"/>
+      </function>
+      <function column="1" line="426" name="initEmptyEndRopTupleImsi" native="false" returnType="BroadImsi" uriIndex="45">
+        <prototype>BroadImsi initEmptyEndRopTupleImsi()</prototype>
+      </function>
+      <type column="6" line="13" name="SqmBroadPgwApn" static="true" type="map&lt;rstring, BroadPgwApn>" uriIndex="28"/>
+      <type column="6" line="14" name="SqmBroadPgwApnNode" static="true" type="map&lt;rstring, SqmBroadPgwApn>" uriIndex="28"/>
+      <type column="6" line="13" name="SqmBscBroadDownlink" static="true" type="map&lt;rstring, BscBroadDownlink>" uriIndex="30"/>
+      <type column="6" line="14" name="SqmBscBroadDownlinkNode" static="true" type="map&lt;rstring, SqmBscBroadDownlink>" uriIndex="30"/>
+      <type column="6" line="13" name="SqmRatType" static="true" type="map&lt;rstring, RatT>" uriIndex="31"/>
+      <type column="6" line="13" name="SqmBroadGgsnApn" static="true" type="map&lt;rstring, BroadGgsnApn>" uriIndex="32"/>
+      <type column="6" line="14" name="SqmBroadGgsnApnNode" static="true" type="map&lt;rstring, SqmBroadGgsnApn>" uriIndex="32"/>
+      <type column="6" line="13" name="SqmRoamingBroadGgsn" static="true" type="map&lt;rstring, RoamingBroadGgsn>" uriIndex="33"/>
+      <type column="6" line="14" name="SqmRoamingBroadGgsnNode" static="true" type="map&lt;rstring, SqmRoamingBroadGgsn>" uriIndex="33"/>
+      <type column="6" line="13" name="SqmRncBroadDownlink" static="true" type="map&lt;rstring, RncBroadDownlink>" uriIndex="34"/>
+      <type column="6" line="14" name="SqmRncBroadDownlinkNode" static="true" type="map&lt;rstring, SqmRncBroadDownlink>" uriIndex="34"/>
+      <type column="6" line="13" name="SqmReport" static="true" type="map&lt;rstring, ReportImsi>" uriIndex="35"/>
+      <type column="6" line="14" name="SqmReportImsiNode" static="true" type="map&lt;rstring, SqmReport>" uriIndex="35"/>
+      <type column="6" line="13" name="SqmRatingGroup" static="true" type="map&lt;rstring, RatingG>" uriIndex="36"/>
+      <type column="6" line="13" name="SqmTavGgsn" static="true" type="map&lt;rstring, TavGgsn>" uriIndex="37"/>
+      <type column="6" line="14" name="SqmTavGgsnNode" static="true" type="map&lt;rstring, SqmTavGgsn>" uriIndex="37"/>
+      <type column="6" line="16" name="progrL" static="true" type="set&lt;rstring>" uriIndex="38"/>
+      <type column="6" line="17" name="complete" static="true" type="boolean completeStart, boolean completeEnd" uriIndex="38"/>
+      <type column="6" line="18" name="nodeHofProgrL" static="true" type="map&lt;rstring, progrL>" uriIndex="38"/>
+      <type column="6" line="19" name="nodeHofComplete" static="true" type="map&lt;rstring, complete>" uriIndex="38"/>
+      <type column="6" line="13" name="SqmMvno" static="true" type="map&lt;rstring, BroadMvnoSgw>" uriIndex="39"/>
+      <type column="6" line="14" name="SqmMvnoNode" static="true" type="map&lt;rstring, SqmMvno>" uriIndex="39"/>
+      <type column="6" line="16" name="SqmMvnoAggrOp" static="true" type="map&lt;rstring, BroadMvnoAggrOpSgw>" uriIndex="39"/>
+      <type column="6" line="17" name="SqmMvnoNodeAggrOp" static="true" type="map&lt;rstring, SqmMvnoAggrOp>" uriIndex="39"/>
+      <type column="6" line="13" name="SqmBroadImsiCapnet" static="true" type="map&lt;rstring, BroadImsiCapnet>" uriIndex="40"/>
+      <type column="6" line="14" name="SqmBroadImsiCapnetNode" static="true" type="map&lt;rstring, SqmBroadImsiCapnet>" uriIndex="40"/>
+      <type column="6" line="13" name="SqmBroadTacLte" static="true" type="map&lt;rstring, BroadTacLte>" uriIndex="41"/>
+      <type column="6" line="14" name="SqmBroadTacLtenNode" static="true" type="map&lt;rstring, SqmBroadTacLte>" uriIndex="41"/>
+      <type column="6" line="13" name="SqmBroadSgsn" static="true" type="map&lt;rstring, BroadSgsn>" uriIndex="42"/>
+      <type column="6" line="14" name="SqmBroadSgsnNode" static="true" type="map&lt;rstring, SqmBroadSgsn>" uriIndex="42"/>
+      <type column="6" line="13" name="SqmTavSgsn" static="true" type="map&lt;rstring, TavSgsn>" uriIndex="43"/>
+      <type column="6" line="14" name="SqmTavSgsnNode" static="true" type="map&lt;rstring, SqmTavSgsn>" uriIndex="43"/>
+      <type column="6" line="13" name="SqmBroadImsiVip" static="true" type="map&lt;rstring, BroadImsi>" uriIndex="45"/>
+      <type column="6" line="14" name="SqmBroadImsiNode" static="true" type="map&lt;rstring, SqmBroadImsiVip>" uriIndex="45"/>
+    </namespace>
+    <dependency>
+      <common:name>RDirScan</common:name>
+      <common:version>1.0.0</common:version>
+    </dependency>
+    <dependency>
+      <common:name>MediationUtils</common:name>
+      <common:version>[1.0.0,2.0.0)</common:version>
+    </dependency>
+    <dependency>
+      <common:name>CdrMediationFramework</common:name>
+      <common:version>[1.0.0,2.0.0)</common:version>
+    </dependency>
+    <dependency>
+      <common:name>com.ibm.streamsx.file</common:name>
+      <common:version>[1.0.0,2.0.0)</common:version>
+    </dependency>
+    <dependency>
+      <common:name>CdrMediationUtils</common:name>
+      <common:version>[1.0.0,2.0.0)</common:version>
+    </dependency>
+  </toolkit>
+
+</toolkitModel>

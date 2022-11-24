@@ -1,0 +1,31 @@
+<html>
+	<title>TFS Rules </title>
+	<head>
+		<link rel="shortcut icon" href="" />
+		<link rel="stylesheet" href="frontend.css" type="text/css" media="screen" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	</head>
+	<body>
+
+	<center>
+	<br>
+<form method="POST" action="/tfs4/xml_rules.cgi" name="xmlRequestForm" target="_blank" >
+<textarea name="xmlRequest" cols="154" rows="15">
+<Request>
+	<Header>
+		<Service>TFS</Service>
+		<OperationType>LIST</OperationType>  # OperationType = LIST | GET | UPD | DEL | INS | APPLY
+	</Header>
+	<Parameters>
+	<RULE Country="" Operator="" TimeFrom="" TimeTo="" Days="" UserTypes="" Threshold="" Status="" Weight="" Politics="" />	# INS and UPD	
+		
+	</Parameters>
+</Request>
+</textarea>
+<br>
+<input type="submit" name="submit" value="Send Request">
+<input type="reset" name="reset" value="Reset">
+</form>
+</center>
+	</body>
+</html>

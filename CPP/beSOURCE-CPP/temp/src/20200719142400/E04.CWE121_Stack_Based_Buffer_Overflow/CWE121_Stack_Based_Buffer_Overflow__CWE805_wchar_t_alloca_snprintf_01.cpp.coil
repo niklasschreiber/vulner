@@ -1,0 +1,331 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp");
+   ("language", "CPP");
+   ("include", "std_testcase.h");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<stddef.h>");
+   ("include", "<time.h>");
+   ("include", "<limits.h>");
+   ("include", "<string.h>");
+   ("include", "<stdint.h>");
+   ("include", "<stdint.h>");
+   ("include", "<ctype.h>");
+   ("include", "<fcntl.h>");
+   ("include", "<sys/types.h>");
+   ("include", "<sys/stat.h>");
+   ("include", "std_testcase_io.h");
+   ("include", "std_testcase.h");
+   ("include", "<wchar.h>");
+}
+{
+   (!3, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase_io.h");
+   (!2, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h");
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp",
+   MD("RAND32()",[],"((rand()<<30) ^ (rand()<<15) ^ rand())")
+   ,(84#0,84#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp",
+   MD("RAND64()",[],"(((int64_t)rand()<<60) ^ ((int64_t)rand()<<45) ^ ((int64_t)rand()<<30) ^ ((int64_t)rand()<<15) ^ (int64_t)rand())")
+   ,(87#0,87#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   SF([extern,const,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"GLOBAL_CONST_TRUE")
+   ,(103#18,103#34,!2)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   SF([extern,const,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"GLOBAL_CONST_FALSE")
+   ,(104#18,104#35,!2)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   SF([extern,const,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"GLOBAL_CONST_FIVE")
+   ,(105#18,105#34,!2)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   SF([extern,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"globalTrue")
+   ,(110#12,110#21,!2)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   SF([extern,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"globalFalse")
+   ,(111#12,111#22,!2)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   SF([extern,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"globalFive")
+   ,(112#12,112#21,!2)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   SF([extern,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"globalArgc")
+   ,(55#12,55#21,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   SF([extern,extern],ref(ref(char)),<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"globalArgv")
+   ,(56#12,56#24,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   SI(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,
+   {[
+      {;
+      ,(1#1,104#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,104#1,!1)}
+   )
+   ,(1#1,104#1,!1)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"printLine"):unit,[(mod(ref(char),[const]):"line",(14#16,14#32,!3))],[]
+   )
+   ,(14#1,14#34,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"printWLine"):unit,[(mod(ref(wchar),[const]):"line",(16#17,16#36,!3))],[]
+   )
+   ,(16#1,16#38,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"printIntLine"):unit,[(int:"intNumber",(18#20,18#32,!3))],[]
+   )
+   ,(18#1,18#34,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"printShortLine"):unit,[(short:"shortNumber",(20#22,20#38,!3))],[]
+   )
+   ,(20#1,20#40,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"printFloatLine"):unit,[(float:"floatNumber",(22#22,22#38,!3))],[]
+   )
+   ,(22#1,22#40,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"printLongLine"):unit,[(long:"longNumber",(24#20,24#34,!3))],[]
+   )
+   ,(24#1,24#36,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"printLongLongLine"):unit,[(class((,int64_t)):"longLongIntNumber",(26#24,26#48,!3))],[]
+   )
+   ,(26#1,26#50,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"printSizeTLine"):unit,[(class((,size_t)):"sizeTNumber",(28#21,28#38,!3))],[]
+   )
+   ,(28#1,28#40,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"printHexCharLine"):unit,[(char:"charHex",(30#23,30#34,!3))],[]
+   )
+   ,(30#1,30#36,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"printWcharLine"):unit,[(wchar:"wideChar",(32#21,32#36,!3))],[]
+   )
+   ,(32#1,32#38,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"printUnsignedLine"):unit,[(uint:"unsignedNumber",(34#24,34#46,!3))],[]
+   )
+   ,(34#1,34#48,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"printHexUnsignedCharLine"):unit,[(uchar:"unsignedCharacter",(36#31,36#61,!3))],[]
+   )
+   ,(36#1,36#63,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"printDoubleLine"):unit,[(double:"doubleNumber",(38#22,38#40,!3))],[]
+   )
+   ,(38#1,38#42,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"printStructLine"):unit,[(mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]):"structTwoIntsStruct",(40#22,40#62,!3))],[]
+   )
+   ,(40#1,40#64,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"printBytesLine"):unit,[(mod(ref(uchar),[const]):"bytes",(42#21,42#47,!3)),(class((,size_t)):"numBytes",(42#50,42#64,!3))],[]
+   )
+   ,(42#1,42#66,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"decodeHexChars"):class((,size_t)),[(ref(uchar):"bytes",(44#23,44#43,!3)),(class((,size_t)):"numBytes",(44#46,44#60,!3)),(mod(ref(char),[const]):"hex",(44#63,44#78,!3))],[]
+   )
+   ,(44#1,44#80,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"decodeHexWChars"):class((,size_t)),[(ref(uchar):"bytes",(46#24,46#44,!3)),(class((,size_t)):"numBytes",(46#47,46#61,!3)),(mod(ref(wchar),[const]):"hex",(46#64,46#82,!3))],[]
+   )
+   ,(46#1,46#84,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"globalReturnsTrue"):int,[],[]
+   )
+   ,(48#1,48#24,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"globalReturnsFalse"):int,[],[]
+   )
+   ,(50#1,50#25,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"globalReturnsTrueOrFalse"):int,[],[]
+   )
+   ,(52#1,52#31,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   FN([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01_bad"):unit,[],[],
+   {[
+      {VD("data",ref(wchar))
+      ,(31#13,31#18,!1)};
+      {VD("dataBadBuffer",ref(wchar),{CS(ref(wchar),{SC((<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"alloca"),[int],[{BO(*,{"50"N,int,(32#49,32#50,!1)},{SO(wchar),int,(32#52,32#66,!1)}),int,(32#49,32#66,!1)}]),class((,"%undef")),(32#42,32#67,!1)}),ref(wchar),(32#31,32#67,!1)})
+      ,(32#13,32#27,!1)};
+      {VD("dataGoodBuffer",ref(wchar),{CS(ref(wchar),{SC((<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"alloca"),[int],[{BO(*,{"100"N,int,(33#50,33#52,!1)},{SO(wchar),int,(33#54,33#68,!1)}),int,(33#50,33#68,!1)}]),class((,"%undef")),(33#43,33#69,!1)}),ref(wchar),(33#32,33#69,!1)})
+      ,(33#13,33#28,!1)};
+      {{AE({V("data"),ref(wchar),(36#5,36#8,!1)},{V("dataBadBuffer"),ref(wchar),(36#12,36#24,!1)}),ref(wchar),(36#5,36#24,!1)}
+      ,(36#5,36#24,!1)};
+      {{AE({AA({V("data"),ref(wchar),(37#5,37#8,!1)},[{"0"N,int,(37#10,37#10,!1)}]),wchar,(37#5,37#11,!1)},{"\0"C,char,(37#15,37#19,!1)}),wchar,(37#5,37#19,!1)}
+      ,(37#5,37#19,!1)};
+      {[
+         {VD("source",wchar,([{"100"N,int,(39#24,39#26,!1)}]))
+         ,(39#17,39#27,!1)};
+         {PC0((<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"wmemset"),[arr(wchar),char,int],[{V("source"),arr(wchar),(40#17,40#22,!1)},{"C"C,char,(40#25,40#28,!1)},{BO(-,{"100"N,int,(40#31,40#33,!1)},{"1"N,int,(40#35,40#35,!1)}),int,(40#31,40#35,!1)}])
+         ,(40#9,40#36,!1)};
+         {{AE({AA({V("source"),arr(wchar),(41#9,41#14,!1)},[{BO(-,{"100"N,int,(41#16,41#18,!1)},{"1"N,int,(41#20,41#20,!1)}),int,(41#16,41#20,!1)}]),wchar,(41#9,41#21,!1)},{"\0"C,char,(41#25,41#29,!1)}),wchar,(41#9,41#29,!1)}
+         ,(41#9,41#29,!1)};
+         {PC0((<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"snprintf"),[ref(wchar),int,string,arr(wchar)],[{V("data"),ref(wchar),(43#18,43#21,!1)},{"100"N,int,(43#24,43#26,!1)},{"%s"S,string,(43#29,43#33,!1)},{V("source"),arr(wchar),(43#36,43#41,!1)}])
+         ,(43#9,43#42,!1)};
+         {PC0((<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"printWLine"),[mod(ref(wchar),[const])],[{V("data"),ref(wchar),(44#20,44#23,!1)}])
+         ,(44#9,44#24,!1)}
+         ]
+      ,(38#5,45#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(29#1,46#1,!1)}
+   )
+   ,(29#1,46#1,!1)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   FN([public,static],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"goodG2B"):mod(unit,[static]),[],[],
+   {[
+      {VD("data",ref(wchar))
+      ,(55#13,55#18,!1)};
+      {VD("dataBadBuffer",ref(wchar),{CS(ref(wchar),{SC((<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"alloca"),[int],[{BO(*,{"50"N,int,(56#49,56#50,!1)},{SO(wchar),int,(56#52,56#66,!1)}),int,(56#49,56#66,!1)}]),class((,"%undef")),(56#42,56#67,!1)}),ref(wchar),(56#31,56#67,!1)})
+      ,(56#13,56#27,!1)};
+      {VD("dataGoodBuffer",ref(wchar),{CS(ref(wchar),{SC((<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"alloca"),[int],[{BO(*,{"100"N,int,(57#50,57#52,!1)},{SO(wchar),int,(57#54,57#68,!1)}),int,(57#50,57#68,!1)}]),class((,"%undef")),(57#43,57#69,!1)}),ref(wchar),(57#32,57#69,!1)})
+      ,(57#13,57#28,!1)};
+      {{AE({V("data"),ref(wchar),(59#5,59#8,!1)},{V("dataGoodBuffer"),ref(wchar),(59#12,59#25,!1)}),ref(wchar),(59#5,59#25,!1)}
+      ,(59#5,59#25,!1)};
+      {{AE({AA({V("data"),ref(wchar),(60#5,60#8,!1)},[{"0"N,int,(60#10,60#10,!1)}]),wchar,(60#5,60#11,!1)},{"\0"C,char,(60#15,60#19,!1)}),wchar,(60#5,60#19,!1)}
+      ,(60#5,60#19,!1)};
+      {[
+         {VD("source",wchar,([{"100"N,int,(62#24,62#26,!1)}]))
+         ,(62#17,62#27,!1)};
+         {PC0((<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"wmemset"),[arr(wchar),char,int],[{V("source"),arr(wchar),(63#17,63#22,!1)},{"C"C,char,(63#25,63#28,!1)},{BO(-,{"100"N,int,(63#31,63#33,!1)},{"1"N,int,(63#35,63#35,!1)}),int,(63#31,63#35,!1)}])
+         ,(63#9,63#36,!1)};
+         {{AE({AA({V("source"),arr(wchar),(64#9,64#14,!1)},[{BO(-,{"100"N,int,(64#16,64#18,!1)},{"1"N,int,(64#20,64#20,!1)}),int,(64#16,64#20,!1)}]),wchar,(64#9,64#21,!1)},{"\0"C,char,(64#25,64#29,!1)}),wchar,(64#9,64#29,!1)}
+         ,(64#9,64#29,!1)};
+         {PC0((<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"snprintf"),[ref(wchar),int,string,arr(wchar)],[{V("data"),ref(wchar),(66#18,66#21,!1)},{"100"N,int,(66#24,66#26,!1)},{"%s"S,string,(66#29,66#33,!1)},{V("source"),arr(wchar),(66#36,66#41,!1)}])
+         ,(66#9,66#42,!1)};
+         {PC0((<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"printWLine"),[mod(ref(wchar),[const])],[{V("data"),ref(wchar),(67#20,67#23,!1)}])
+         ,(67#9,67#24,!1)}
+         ]
+      ,(61#5,68#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(53#1,69#1,!1)}
+   )
+   ,(53#1,69#1,!1)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01",
+   FN([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01_good"):unit,[],[],
+   {[
+      {PC0((<"CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01">,"goodG2B"),[],[])
+      ,(73#5,73#13,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(71#1,74#1,!1)}
+   )
+   ,(71#1,74#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp",
+   CL([struct],(,_twoIntsStruct),[])
+   {
+      ([public],"intOne":int,(92#9,92#14,!2));
+      ([public],"intTwo":int,(93#9,93#14,!2))
+   }
+   ,(90#1,94#16,!2)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp",
+   [
+      M("/* TEMPLATE GENERATED TESTCASE FILE\nFilename: CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.c\nLabel Definition File: CWE121_Stack_Based_Buffer_Overflow__CWE805.string.label.xml\nTemplate File: sources-sink-01.tmpl.c\n*/",1,(1#0,1#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp")),
+      M("/*\n * @description\n * CWE: 121 Stack Based Buffer Overflow\n * BadSource:  Set data pointer to the bad buffer\n * GoodSource: Set data pointer to the good buffer\n * Sink: snprintf\n *    BadSink : Copy string to data using snprintf\n * Flow Variant: 01 Baseline\n *\n * */",6,(6#0,6#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp")),
+      M("/* FLAW: Set a pointer to a \"small\" buffer. This buffer will be used in the sinks as a destination\n     * buffer in various memory copying functions using a \"large\" source buffer. */",34,(34#0,34#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp")),
+      M("/* null terminate */",37,(37#0,37#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp")),
+      M("/* fill with L'C's */",40,(40#0,40#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp")),
+      M("/* null terminate */",41,(41#0,41#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp")),
+      M("/* POTENTIAL FLAW: Possible buffer overflow if the size of data is less than the length of source */",42,(42#0,42#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp")),
+      M("/* OMITBAD */",48,(48#0,48#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp")),
+      M("/* goodG2B uses the GoodSource with the BadSink */",52,(52#0,52#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp")),
+      M("/* FIX: Set a pointer to a \"large\" buffer, thus avoiding buffer overflows in the sinks. */",58,(58#0,58#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp")),
+      M("/* null terminate */",60,(60#0,60#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp")),
+      M("/* fill with L'C's */",63,(63#0,63#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp")),
+      M("/* null terminate */",64,(64#0,64#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp")),
+      M("/* POTENTIAL FLAW: Possible buffer overflow if the size of data is less than the length of source */",65,(65#0,65#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp")),
+      M("/* OMITGOOD */",76,(76#0,76#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp")),
+      M("/* Below is the main(). It is only used when building this testcase on\n * its own for testing or for building a binary to use in testing binary\n * analysis tools. It is not used when compiling all the testcases as one\n * application, which is how source code analysis tools are tested.\n */",78,(78#0,78#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp")),
+      M("/* seed randomness */",88,(88#0,88#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp")),
+      M("/* OMITGOOD */",94,(94#0,94#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp")),
+      M("/* OMITBAD */",99,(99#0,99#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_wchar_t_alloca_snprintf_01.cpp"))
+   ]
+   }
+]

@@ -1,0 +1,214 @@
+namespace com.ti.oss.common.cdr.evalROP;
+
+use com.ti.oss.common.cdr.util::*;
+use com.ti.oss.common.types::*;
+use com.ti.oss.common.cdr.types::*;
+use com.ti.oss.common.util.cfg::*;
+use com.ti.oss.common.cdr.util.cfg::* ;
+
+
+
+
+public composite RoamingSplit (input  stream<AggregateSqmSchema> IROP; 
+                              output 
+							  stream<AggregateSqmSchema> ORoaming0
+							  ,
+							  stream<AggregateSqmSchema> ORoaming1
+							  ,
+							  stream<AggregateSqmSchema> ORoaming2
+							  ,
+							  stream<AggregateSqmSchema> ORoaming3
+							  ,
+							  stream<AggregateSqmSchema> ORoaming4
+							  ,
+							  stream<AggregateSqmSchema> ORoaming5
+							  ,
+							  stream<AggregateSqmSchema> ORoaming6
+							  ,
+							  stream<AggregateSqmSchema> ORoaming7
+							  ,
+							  stream<AggregateSqmSchema> ORoaming8
+							  ,
+							  stream<AggregateSqmSchema> ORoaming9
+							  ,
+							  stream<AggregateSqmSchema> ORoaming10
+							  ,
+							  stream<AggregateSqmSchema> ORoaming11
+							  ,
+							  stream<AggregateSqmSchema> ORoaming12
+							  ,
+							  stream<AggregateSqmSchema> ORoaming13
+							  ,
+							  stream<AggregateSqmSchema> ORoaming14
+							  ,
+							  stream<AggregateSqmSchema> ORoaming15
+							  ,
+							  stream<AggregateSqmSchema> OROP
+							
+							)
+{
+	param
+		expression <rstring> $mediationName;
+	
+	
+	graph
+	
+		(
+		stream<AggregateSqmSchema> ORoaming0
+		;
+		stream<AggregateSqmSchema> ORoaming1
+		;
+		stream<AggregateSqmSchema> ORoaming2
+		;
+		stream<AggregateSqmSchema> ORoaming3
+		;
+		stream<AggregateSqmSchema> ORoaming4
+		;
+		stream<AggregateSqmSchema> ORoaming5
+		;
+		stream<AggregateSqmSchema> ORoaming6
+		;
+		stream<AggregateSqmSchema> ORoaming7
+		;
+		stream<AggregateSqmSchema> ORoaming8
+		;
+		stream<AggregateSqmSchema> ORoaming9
+		;
+		stream<AggregateSqmSchema> ORoaming10
+		;
+		stream<AggregateSqmSchema> ORoaming11
+		;
+		stream<AggregateSqmSchema> ORoaming12
+		;
+		stream<AggregateSqmSchema> ORoaming13
+		;
+		stream<AggregateSqmSchema> ORoaming14
+		;
+		stream<AggregateSqmSchema> ORoaming15
+		;
+		stream<AggregateSqmSchema> OROP 
+		)
+		= Custom(IROP as I)
+		{
+		logic state:
+			{
+				mutable uint32 countPort = 0;
+				mutable int32 count_endROP = 0;
+				mutable int32 count_write_prev = 0;
+				rstring mediationName = $mediationName;
+				
+				mutable rstring packet_data = getCfgParam("COMMON_CFG_DIR", mediationName, "PACKET_DATA");
+				mutable boolean flagPacketData = loadCdrProvCfg("PACKETDATA", packet_data,(uint32)1, ",");
+			} 
+		
+			onTuple I : 
+			{      	
+				if (I.endROP)
+				{
+					count_endROP++;
+					if(count_endROP == 4) 
+					{
+						submit(I,OROP);	
+						count_endROP = 0;
+					}			
+				}
+				else if (I.write_prev)
+				{
+					if (I.exclude_node == "")
+					{
+						count_write_prev++;
+						if(count_write_prev == 4) 
+						{
+							submit(I,OROP);
+							count_write_prev = 0;
+						}
+					}else{
+						submit(I,OROP);
+					}							
+				}
+				else
+				{
+					if (size(I.cdrSchema.servingNodeAddress)>0)
+					{
+						mutable rstring operatore = "";
+						mutable list<rstring> tmpOutParamMap = [];
+						if ( getCdrProvRecord("PACKETDATA", I.cdrSchema.servingNodeAddress[0], tmpOutParamMap ) )
+						{   
+							mutable int32 end;
+							//len = length(tmpOutParamMap[0]) ;
+							end = findFirst(tmpOutParamMap[0], "-", 0);
+							if (end==-1)
+							{
+								operatore = tmpOutParamMap[0];//Operatore
+							}else{
+								operatore = substring(tmpOutParamMap[0],0,end);//Operatore
+							}
+						}
+						
+//						if(operatore!="")
+//						{
+							I.cdrSchema.servingNodeAddress[0] = operatore;
+							uint64 addr = hashCode(operatore);
+							uint32 modAddr = (uint32)(addr%(uint64)16);
+							if(modAddr < 0u) {
+								appTrc(Trace.error,"ERROR: the split returned a negative output port!");
+							}
+							else {
+								if (modAddr==(uint32)0)
+								{
+									submit(I, ORoaming0);
+								}else if (modAddr==(uint32)1)
+								{
+									submit(I, ORoaming1);
+								}else if (modAddr==(uint32)2)
+								{
+									submit(I, ORoaming2);
+								}else if (modAddr==(uint32)3)
+								{
+									submit(I, ORoaming3);
+								}else if (modAddr==(uint32)4)
+								{
+									submit(I, ORoaming4);
+								}else if (modAddr==(uint32)5)
+								{
+									submit(I, ORoaming5);
+								}else if (modAddr==(uint32)6)
+								{
+									submit(I, ORoaming6);
+								}else if (modAddr==(uint32)7)
+								{
+									submit(I, ORoaming7);
+								}else if (modAddr==(uint32)8)
+								{
+									submit(I, ORoaming8);
+								}else if (modAddr==(uint32)9)
+								{
+									submit(I, ORoaming9);
+								}else if (modAddr==(uint32)10)
+								{
+									submit(I, ORoaming10);
+								}else if (modAddr==(uint32)11)
+								{
+									submit(I, ORoaming11);
+								}else if (modAddr==(uint32)12)
+								{
+									submit(I, ORoaming12);
+								}else if (modAddr==(uint32)13)
+								{
+									submit(I, ORoaming13);
+								}else if (modAddr==(uint32)14)
+								{
+									submit(I, ORoaming14);
+								}
+								else if (modAddr==(uint32)15)
+								{
+									submit(I, ORoaming15);
+								}
+							}
+//						}
+					}
+					
+				}
+	        }
+		}
+}

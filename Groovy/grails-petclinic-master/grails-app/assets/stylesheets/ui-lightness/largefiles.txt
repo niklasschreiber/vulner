@@ -1,0 +1,1 @@
+"D:\_SRC\BUGGYCODE\Groovy\grails-petclinic-master\grails-app\assets\stylesheets\ui-lightness\jquery-ui-1.10.4.custom.min.css" 

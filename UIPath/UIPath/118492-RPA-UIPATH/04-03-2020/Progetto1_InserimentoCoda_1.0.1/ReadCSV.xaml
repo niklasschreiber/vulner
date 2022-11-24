@@ -1,0 +1,374 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="ReadCSV"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:si="clr-namespace:System.IO;assembly=mscorlib"
+ xmlns:ss="clr-namespace:System.Security;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="pathFile" Type="InArgument(x:String)" />
+    <x:Property Name="dtTRACCIATOALL" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="userSMTP" Type="InArgument(x:String)" />
+    <x:Property Name="pswSMTP" Type="InArgument(ss:SecureString)" />
+    <x:Property Name="serverSMTP" Type="InArgument(x:String)" />
+    <x:Property Name="portSMTP" Type="InArgument(x:Int32)" />
+    <x:Property Name="destinatariCheckLetturaTracciato" Type="InArgument(x:String)" />
+    <x:Property Name="tracciatoDaSpostare" Type="OutArgument(x:String)" />
+    <x:Property Name="pathOldFile" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>ReadCSV_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.Net</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="ReadCSV" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="dtTable" />
+      <Variable x:TypeArguments="x:String" Name="fileName" />
+      <Variable x:TypeArguments="x:Boolean" Name="fileExist" />
+      <Variable x:TypeArguments="x:Boolean" Name="folderExist" />
+      <Variable x:TypeArguments="x:Boolean" Name="pathExist" />
+      <Variable x:TypeArguments="x:String" Name="checkName" />
+      <Variable x:TypeArguments="ui:BusinessRuleException" Default="[New BusinessRuleException]" Name="BusinessRuleException" />
+    </Sequence.Variables>
+    <ui:Comment sap2010:WorkflowViewState.IdRef="Comment_1" Text="// Find the CSV with path pathFile and write its content in a dataTable and save a copy in spcified path" />
+    <Assign sap2010:Annotation.AnnotationText="Costruzione del nome del file .csv da leggere." DisplayName="Assign - fileName" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[fileName]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[Date.Now.Date.ToString("yyyy-MM-dd") + "_ExportRG.csv"]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <WriteLine sap2010:Annotation.AnnotationText="Check per Data Validation" DisplayName="Write Line" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[&quot;Nome del tracciato da aprire: &quot;+fileName]" />
+    <WriteLine sap2010:Annotation.AnnotationText="Check per Data Validation" DisplayName="Write Line" sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="[&quot;Path da controllare: &quot;+pathFile]" />
+    <ui:PathExists sap2010:Annotation.AnnotationText="Check sull'esistenza della Folder da cui prendere il tracciato .csv da leggere." DisplayName="Path Exists" Exists="[pathExist]" sap2010:WorkflowViewState.IdRef="PathExists_2" Path="[pathFile]" PathType="Folder" />
+    <If sap2010:Annotation.AnnotationText="Se la folder esiste e all'interno troviamo un solo file procediamo con la lavorazione altrimenti verrà alzata una eccezione inviando una email di segnalazione" Condition="[pathExist and Directory.GetFiles(pathFile).Count = 1]" DisplayName="If - pathExist and Directory.GetFiles(pathFile).Count = 1" sap2010:WorkflowViewState.IdRef="If_3">
+      <If.Then>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_5">
+          <Assign sap2010:Annotation.AnnotationText="FullName del file" DisplayName="Assign - pathFile" sap2010:WorkflowViewState.IdRef="Assign_6">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[pathFile]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[pathFile + fileName]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <WriteLine sap2010:Annotation.AnnotationText="Check per Data Validation" DisplayName="Write Line" sap2010:WorkflowViewState.IdRef="WriteLine_5" Text="[&quot;Full path: &quot;+pathFile]" />
+          <ui:PathExists sap2010:Annotation.AnnotationText="Check sull'esistenza del tracciato .csv da leggere." DisplayName="Path Exists" Exists="[fileExist]" sap2010:WorkflowViewState.IdRef="PathExists_3" Path="[pathFile]" PathType="File" />
+          <If sap2010:Annotation.AnnotationText="Se il file esiste possiamo procedere con la lavorazione altrimenti inviamo una email di segnalazione alzando una eccezione." Condition="[fileExist]" DisplayName="If - fileExist" sap2010:WorkflowViewState.IdRef="If_4">
+            <If.Then>
+              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_9">
+                <Sequence.Variables>
+                  <Variable x:TypeArguments="x:Boolean" Name="fileOldExist" />
+                </Sequence.Variables>
+                <Assign sap2010:Annotation.AnnotationText="Costruzione del path che punta alla folder dei tracciati lavorati." DisplayName="Assign - pathOldFile" sap2010:WorkflowViewState.IdRef="Assign_8">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[pathOldFile]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">[pathOldFile + fileName]</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <ui:PathExists DisplayName="Path Exists" Exists="[fileOldExist]" sap2010:WorkflowViewState.IdRef="PathExists_4" Path="[pathOldFile]" PathType="File" />
+                <If sap2010:Annotation.AnnotationText="Se il file che stiamo provando ad aprire e leggere esiste già nella cartella dei tracciati archiviati inviamo una email di segnalazione alzando una eccezione altrimenti leggiamo il tracciato costruendo la relativa DataTable" Condition="[fileOldExist]" DisplayName="If - fileOldExist" sap2010:WorkflowViewState.IdRef="If_5">
+                  <If.Then>
+                    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_11">
+                      <ui:Comment sap2010:WorkflowViewState.IdRef="Comment_4" Text="// Invio Email in caso di File già ricevuto e lavorato in precedenza" />
+                      <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;Buongiorno&quot;+vbCrLf+&quot;Il file tracciato &quot;+fileName+&quot; è stato caricato due volte con lo stesso nome.&quot;+vbCrLf+&quot;Questo messaggio parte da una casella automatica, si prega quindi di non rispondere.&quot;+vbCrLf+&quot;Cordiali saluti&quot;]" DisplayName="Send SMTP Mail Message" Email="[userSMTP]" EnableSSL="True" sap2010:WorkflowViewState.IdRef="SendMail_6" IsBodyHtml="False" Password="[(new System.Net.NetworkCredential(&quot;&quot;, pswSMTP)).Password]" Port="[portSMTP]" SecureConnection="Auto" Server="[serverSMTP]" Subject="[&quot;File tracciato &quot;+fileName+&quot;, doppio&quot;]" To="[destinatariCheckLetturaTracciato]">
+                        <ui:SendMail.Files>
+                          <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+                        </ui:SendMail.Files>
+                      </ui:SendMail>
+                      <Throw Exception="[BusinessRuleException]" sap2010:WorkflowViewState.IdRef="Throw_4" />
+                    </Sequence>
+                  </If.Then>
+                  <If.Else>
+                    <TryCatch DisplayName="Try Catch" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+                      <TryCatch.Try>
+                        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_8">
+                          <ui:ReadCsvFile Encoding="{x:Null}" DataTable="[dtTRACCIATOALL]" Delimitator="Semicolon" DisplayName="Read CSV" FilePath="[pathFile]" sap2010:WorkflowViewState.IdRef="ReadCsvFile_2" />
+                          <Assign sap2010:WorkflowViewState.IdRef="Assign_7">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[tracciatoDaSpostare]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[fileName]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </Sequence>
+                      </TryCatch.Try>
+                      <TryCatch.Catches>
+                        <Catch x:TypeArguments="si:IOException" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                          <ActivityAction x:TypeArguments="si:IOException">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="si:IOException" Name="exception" />
+                            </ActivityAction.Argument>
+                            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_12">
+                              <ui:Comment sap2010:WorkflowViewState.IdRef="Comment_5" Text="// Invio Email in caso di File lockato" />
+                              <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;Buongiorno&quot;+vbCrLf+&quot;Il file tracciato &quot;+fileName+&quot; non è apribile/leggibile.&quot;+vbCrLf+&quot;Questo messaggio parte da una casella automatica, si prega quindi di non rispondere.&quot;+vbCrLf+&quot;Cordiali saluti&quot;]" DisplayName="Send SMTP Mail Message" Email="[userSMTP]" EnableSSL="True" sap2010:WorkflowViewState.IdRef="SendMail_4" IsBodyHtml="False" Password="[(new System.Net.NetworkCredential(&quot;&quot;, pswSMTP)).Password]" Port="[portSMTP]" SecureConnection="Auto" Server="[serverSMTP]" Subject="[&quot;File tracciato &quot;+fileName+&quot;, non è apribile/leggibile&quot;]" To="[destinatariCheckLetturaTracciato]">
+                                <ui:SendMail.Files>
+                                  <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+                                </ui:SendMail.Files>
+                              </ui:SendMail>
+                            </Sequence>
+                          </ActivityAction>
+                        </Catch>
+                      </TryCatch.Catches>
+                    </TryCatch>
+                  </If.Else>
+                </If>
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_10">
+                <ui:Comment sap2010:WorkflowViewState.IdRef="Comment_3" Text="// Invio Email in caso di File non trovato" />
+                <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;Buongiorno&quot;+vbCrLf+&quot;impossibile trovare il tracciato &quot;+fileName+&quot; nel path indicato.&quot;+vbCrLf+&quot;Questo messaggio parte da una casella automatica, si prega quindi di non rispondere.&quot;+vbCrLf+&quot;Cordiali saluti&quot;]" DisplayName="Send SMTP Mail Message" Email="[userSMTP]" EnableSSL="True" sap2010:WorkflowViewState.IdRef="SendMail_5" IsBodyHtml="False" Password="[(new System.Net.NetworkCredential(&quot;&quot;, pswSMTP)).Password]" Port="[portSMTP]" SecureConnection="Auto" Server="[serverSMTP]" Subject="[&quot;Impossibile trovare il file tracciato &quot;+fileName]" To="[destinatariCheckLetturaTracciato]">
+                  <ui:SendMail.Files>
+                    <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+                  </ui:SendMail.Files>
+                </ui:SendMail>
+                <Throw Exception="[BusinessRuleException]" sap2010:WorkflowViewState.IdRef="Throw_3" />
+              </Sequence>
+            </If.Else>
+          </If>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_6">
+          <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;Buongiorno&quot;+vbCrLf+&quot;il numero di file trovato nella cartella di input è superiore o inesistente rispetto a quello previsto, impossibile procedere.&quot;]" DisplayName="Send SMTP Mail Message" Email="[userSMTP]" EnableSSL="True" sap2010:WorkflowViewState.IdRef="SendMail_3" IsBodyHtml="False" Password="[(new System.Net.NetworkCredential(&quot;&quot;, pswSMTP)).Password]" Port="[portSMTP]" SecureConnection="Auto" Server="[serverSMTP]" Subject="Numero di file non previsto" To="[destinatariCheckLetturaTracciato]">
+            <ui:SendMail.Files>
+              <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+            </ui:SendMail.Files>
+          </ui:SendMail>
+          <Throw Exception="[BusinessRuleException]" sap2010:WorkflowViewState.IdRef="Throw_2" />
+        </Sequence>
+      </If.Else>
+    </If>
+    <sads:DebugSymbol.Symbol>dz9DOlxVc2Vyc1xhemFkbWluXERlc2t0b3BcUHJvZ2V0dG8xX0luc2VyaW1lbnRvQ29kYVxSZWFkQ1NWLnhhbWxYVwPUAQ4CAQFfRF9hAgECYQVhrwEDAYUBYgVpDgMBgQFqBWrUAQIBfmsFa8sBAgF7bAVsjAICAXZtBdIBCgIBA2cwZ2gDAYQBZDFkOwMBggFqmgFq0QECAX9rmgFryAECAXxsqQFstgECAXls6wFs9wECAXdt1gFtjgICAQRvCcYBFAIBFckBCdABFAIBBXALdxQCAXB4C3jHAQIBbXkLefQBAgFoegvFARACARbKAQvOARkCAQjPAQvPAWICAQZ1NnVLAgFzcjdyQQIBcXigAXjEAQIBbnmTAXmgAQIBa3nVAXnhAQIBaXq5AXrGAQIBF3wPuAEaAgEruwEPwwEaAgEZygH1BMoBmQUCARPKAYYBygGyAgIBEsoB1ATKAfEEAgERygHeAsoB6gICAQ/KAZEEygGdBAIBDcoBvQTKAcsEAgELygHFA8oBiwQCAQnPARzPATUCAQeAARGHARoCAWKIARGIAagBAgFdiQERtwEWAgEsvAERvAF9AgEqvQERwQEfAgEcwgERwgFoAgEahQE8hQFUAgFlggE9ggFKAgFjiAFBiAFRAgFgiAGGAYgBlQECAV6JAaMCiQGzAgIBLYsBFZMBIAIBS5YBFbUBIAIBL70B9AW9AZgGAgEovQGMAb0BjwMCASe9AbEFvQHwBQIBJb0BuwO9AccDAgEjvQHuBL0B+gQCASG9AZoFvQGoBQIBH70BogS9AegEAgEdwgEiwgE7AgEbjAEXjAGdAQIBXI0BF5EBJQIBTpIBF5IBbgIBTJgBGaIBJAIBQKoBHbEBKAIBMI0BhQaNAakGAgFajQGSAY0BogMCAVmNAcQFjQGBBgIBV40BzgONAdoDAgFVjQGBBY0BjQUCAVONAa0FjQG7BQIBUY0BtQSNAfsEAgFPkgEokgFBAgFNmQEbmQHTAQIBRpoBG6EBJAIBQasBH6sBhwECAT+sAR+wAS0CATGZAUmZAVsCAUmZAZQBmQGgAQIBR58BRp8BUAIBRJwBR5wBXAIBQqwBigasAa4GAgE9rAGaAawBlQMCATysAbcFrAGGBgIBOqwBwQOsAc0DAgE4rAH0BKwBgAUCATasAaAFrAGuBQIBNKwBqASsAe4EAgEy</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="Comment_1" sap:VirtualizedContainerService.HintSize="1541,93" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="1541,104">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WriteLine_1" sap:VirtualizedContainerService.HintSize="1541,90">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WriteLine_4" sap:VirtualizedContainerService.HintSize="1541,90">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="PathExists_2" sap:VirtualizedContainerService.HintSize="1541,134">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="1158,88">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WriteLine_5" sap:VirtualizedContainerService.HintSize="1158,90">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="PathExists_3" sap:VirtualizedContainerService.HintSize="1158,118">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="775,104">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="PathExists_4" sap:VirtualizedContainerService.HintSize="775,90" />
+      <sap2010:ViewStateData Id="Comment_4" sap:VirtualizedContainerService.HintSize="314,75" />
+      <sap2010:ViewStateData Id="SendMail_6" sap:VirtualizedContainerService.HintSize="314,147" />
+      <sap2010:ViewStateData Id="Throw_4" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_11" sap:VirtualizedContainerService.HintSize="336,448">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ReadCsvFile_2" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="336,283">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Comment_5" sap:VirtualizedContainerService.HintSize="314,56" />
+      <sap2010:ViewStateData Id="SendMail_4" sap:VirtualizedContainerService.HintSize="314,147" />
+      <sap2010:ViewStateData Id="Sequence_12" sap:VirtualizedContainerService.HintSize="336,367">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Catch`1_2" sap:VirtualizedContainerService.HintSize="400,441">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_2" sap:VirtualizedContainerService.HintSize="414,607" />
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="775,801">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_9" sap:VirtualizedContainerService.HintSize="797,1199">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Comment_3" sap:VirtualizedContainerService.HintSize="314,56" />
+      <sap2010:ViewStateData Id="SendMail_5" sap:VirtualizedContainerService.HintSize="314,147" />
+      <sap2010:ViewStateData Id="Throw_3" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_10" sap:VirtualizedContainerService.HintSize="336,429">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_4" sap:VirtualizedContainerService.HintSize="1158,1377">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="1180,1917">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SendMail_3" sap:VirtualizedContainerService.HintSize="314,147" />
+      <sap2010:ViewStateData Id="Throw_2" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="336,333">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="1541,2095">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="1563,2930">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ReadCSV_1" sap:VirtualizedContainerService.HintSize="1603,3010" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

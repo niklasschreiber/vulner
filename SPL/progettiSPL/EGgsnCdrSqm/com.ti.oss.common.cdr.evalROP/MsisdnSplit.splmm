@@ -1,0 +1,168 @@
+namespace com.ti.oss.common.cdr.evalROP;
+
+use com.ti.oss.common.cdr.util::*;
+use com.ti.oss.common.types::*;
+use com.ti.oss.common.cdr.types::*;
+use com.ti.oss.common.cdr.util.cfg::*;
+use com.ti.oss.common.util.cfg::*;
+
+<%
+	my $parallelSQM = 1;
+	my $parallelSQMmod = 16;
+%>
+
+
+public composite MsisdnSplit (input  stream<AggregateSqmSchema> IROP; 
+                              output <%for(my $i = 0; $i < $parallelSQMmod; $i++) {%>
+							  stream<AggregateSqmSchema> OMsisdn<%=$i%>
+							  <%if($i != $parallelSQMmod - 1) {
+							  print ",";
+							  }
+							  }%>,
+							  <%for(my $i = 0; $i < $parallelSQMmod; $i++) {%>
+							  stream<AggregateSqmSchema> OMsisdnCapnet<%=$i%>
+							  <%if($i != $parallelSQMmod - 1) {
+							  print ",";
+							  }
+							  }%>,
+							  stream<AggregateSqmSchema> OROP
+							) 
+{
+	param
+		expression<rstring> $mediationName ;
+	
+	graph
+	
+		(<%for(my $i = 0; $i < $parallelSQMmod; $i++) {%>
+		stream<AggregateSqmSchema> OMsisdn<%=$i%>
+		<%if($i != $parallelSQMmod - 1) {
+			print ";";
+		}
+		}%>;
+		<%for(my $i = 0; $i < $parallelSQMmod; $i++) {%>
+		stream<AggregateSqmSchema> OMsisdnCapnet<%=$i%>
+		<%if($i != $parallelSQMmod - 1) {
+			print ";";
+		}
+		}%>;
+		stream<AggregateSqmSchema> OROP  
+		)
+		= Custom(IROP as I)
+		{
+		logic state:
+			{
+				mutable uint32 countPort = 0;
+				mutable int32 count_endROP = 0;
+				mutable int32 count_write_prev = 0;
+				rstring mediationName = $mediationName;
+				
+				mutable rstring msisdn = getCfgParam("COMMON_CFG_DIR", $mediationName, "MSISDN");
+				mutable boolean flagMsisdn = loadCdrProvCfg("MSISDN",msisdn, (uint32)0,",");
+				
+				mutable rstring msisdn_capnet = getCfgParam("COMMON_CFG_DIR", $mediationName, "MSISDN_CAPNET");
+				mutable boolean flagMsisdnCapnet = loadCdrProvCfg("MSISDNCAPNET",msisdn_capnet, (uint32)0,",");
+			}
+			 
+		
+			onTuple I : 
+			{      	
+				if (I.endROP)
+				{
+					count_endROP++;
+					if(count_endROP == <%=$parallelSQM%>) 
+					{	
+
+						submit(I,OROP);
+						count_endROP = 0;
+						
+						if (isCdrProvCfgChanged("MSISDN"))
+						{
+							reloadCdrProvCfg("MSISDN");
+						}
+						
+						if (isCdrProvCfgChanged("MSISDNCAPNET"))
+						{
+							reloadCdrProvCfg("MSISDNCAPNET");
+						}
+					}
+				}
+				else if (I.write_prev)
+				{
+					if (I.exclude_node == "")
+					{
+						count_write_prev++;
+						if(count_write_prev == <%=$parallelSQM%>) 
+						{
+							submit(I,OROP);
+							count_write_prev = 0;
+						}
+					}else{
+						submit(I,OROP);
+					}			
+				}
+				else
+				{	
+					int32 len = length(I.cdrSchema.servedMSISDN);
+					if (len >= 9)
+					{	
+						mutable rstring num = substring(I.cdrSchema.servedMSISDN, len-9, len);
+													
+						if (flagMsisdn)
+						{
+							mutable list<rstring> tmpOutParamMapMSISDN = [];
+							if ( getCdrProvRecord("MSISDN", num, tmpOutParamMapMSISDN ) )
+							{	
+								if (cleanApn(I.cdrSchema.apn) == tmpOutParamMapMSISDN[2] || tmpOutParamMapMSISDN[2] == "ALL")
+								{
+									I.id_gruppo = tmpOutParamMapMSISDN[1]; 
+									uint64 addr = hashCode(I.cdrSchema.servedMSISDN);
+									uint32 modAddr = (uint32)(addr%(uint64)16);
+									if(modAddr < 0u) {
+										appTrc(Trace.error,"ERROR: the split returned a negative output port!");
+									}
+									else 
+									{
+										<%for(my $i = 0; $i < $parallelSQMmod; $i++) {%>
+											<%if($i > 0) { print "else ";}%>
+											if (modAddr==(uint32)<%=$i%>)
+											{
+												submit(I, OMsisdn<%=$i%>);
+											}
+										<%}%>	
+									}
+								}
+							}
+						}
+						
+						if (flagMsisdnCapnet)
+						{
+							mutable list<rstring> tmpOutParamMapMSISDNCapnet = [];
+							if ( getCdrProvRecord("MSISDNCAPNET", num, tmpOutParamMapMSISDNCapnet ) )
+							{	
+								if (cleanApn(I.cdrSchema.apn) == tmpOutParamMapMSISDNCapnet[2])
+								//if (cleanApn(I.cdrSchema.apn) == "capnet.tim.it")
+								{
+									I.sito_capnet = tmpOutParamMapMSISDNCapnet[1];
+									uint64 addr = hashCode(I.cdrSchema.servedMSISDN);
+									uint32 modAddr = (uint32)(addr%(uint64)16);
+									if(modAddr < 0u) {
+										appTrc(Trace.error,"ERROR: the split returned a negative output port!");
+									}
+									else 
+									{
+										<%for(my $i = 0; $i < $parallelSQMmod; $i++) {%>
+											<%if($i > 0) { print "else ";}%>
+											if (modAddr==(uint32)<%=$i%>)
+											{
+												submit(I, OMsisdnCapnet<%=$i%>);
+											}
+										<%}%>	
+									}
+								}
+							}
+						}
+					}
+				}
+	        }
+		}
+}

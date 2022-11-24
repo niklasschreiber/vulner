@@ -1,0 +1,15 @@
+C:\APP_TFS\LIB - CommonLibrary\02 - MAIN\NET 4.5\BPLG\bin\Debug\BPLG.dll.config
+C:\APP_TFS\LIB - CommonLibrary\02 - MAIN\NET 4.5\BPLG\bin\Debug\BPLG.dll
+C:\APP_TFS\LIB - CommonLibrary\02 - MAIN\NET 4.5\BPLG\bin\Debug\BPLG.pdb
+C:\APP_TFS\LIB - CommonLibrary\02 - MAIN\NET 4.5\BPLG\bin\Debug\DiffieHellman.dll
+C:\APP_TFS\LIB - CommonLibrary\02 - MAIN\NET 4.5\BPLG\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\APP_TFS\LIB - CommonLibrary\02 - MAIN\NET 4.5\BPLG\bin\Debug\Microsoft.ReportViewer.WebForms.dll
+C:\APP_TFS\LIB - CommonLibrary\02 - MAIN\NET 4.5\BPLG\bin\Debug\Microsoft.SQLServer.DTSRuntimeWrap.dll
+C:\APP_TFS\LIB - CommonLibrary\02 - MAIN\NET 4.5\BPLG\bin\Debug\Microsoft.SQLServer.ManagedDTS.dll
+C:\APP_TFS\LIB - CommonLibrary\02 - MAIN\NET 4.5\BPLG\bin\Debug\Org.Mentalis.Security.dll
+C:\APP_TFS\LIB - CommonLibrary\02 - MAIN\NET 4.5\BPLG\bin\Debug\sharpSshTest.exe
+C:\APP_TFS\LIB - CommonLibrary\02 - MAIN\NET 4.5\BPLG\bin\Debug\Tamir.sharpSsh.dll
+C:\APP_TFS\LIB - CommonLibrary\02 - MAIN\NET 4.5\BPLG\obj\Debug\BPLG.csproj.CoreCompileInputs.cache
+C:\APP_TFS\LIB - CommonLibrary\02 - MAIN\NET 4.5\BPLG\obj\Debug\BPLG.dll
+C:\APP_TFS\LIB - CommonLibrary\02 - MAIN\NET 4.5\BPLG\obj\Debug\BPLG.pdb
+C:\APP_TFS\LIB - CommonLibrary\02 - MAIN\NET 4.5\BPLG\obj\Debug\BPLG.csprojResolveAssemblyReference.cache

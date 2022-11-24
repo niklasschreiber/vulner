@@ -1,0 +1,47 @@
+{
+  "name": "SuccessioniMain",
+  "description": "",
+  "main": "SuccessioniMain.xaml",
+  "dependencies": {
+    "UiPath.System.Activities": "[18.4.2]",
+    "UiPath.Excel.Activities": "[2.5.1]",
+    "UiPath.Mail.Activities": "[1.3.0]",
+    "UiPath.WebAPI.Activities": "[1.3.0]",
+    "UiPath.Credentials.Activities": "[1.1.6479.13204]",
+    "UiPath.UIAutomation.Activities": "[18.4.3]",
+    "SuccessioniLibrary_v01": "[1.0.17]",
+    "NavigateMonisLibrary": "[1.0.87]"
+  },
+  "schemaVersion": "3.2",
+  "studioVersion": "18.4.6.0",
+  "projectVersion": "1.0.72",
+  "runtimeOptions": {
+    "autoDispose": false,
+    "excludedLoggedData": [
+      "Private:*",
+      "*password*"
+    ]
+  },
+  "projectType": "Workflow",
+  "libraryOptions": {
+    "includeOriginalXaml": false,
+    "privateWorkflows": []
+  },
+  "arguments": {
+    "input": [
+      {
+        "name": "ProcessQueues",
+        "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "required": false,
+        "hasDefault": true
+      },
+      {
+        "name": "OraStop",
+        "type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "required": false,
+        "hasDefault": true
+      }
+    ],
+    "output": []
+  }
+}

@@ -1,0 +1,39 @@
+<ul class="slds-col slds-size--1-of-1">
+  <li class="slds-size--1-of-3 slds-show--inline-block">
+      <lightning:card variant="narrow" class="slds-m-around--small slds-card_boundary">
+          <aura:set attribute="title">
+              Isabel McCrory
+          </aura:set>
+          <div class="slds-tile slds-p-horizontal--large">
+              <div class="slds-tile__detail slds-text-body--small">
+                  <dl class="slds-list--horizontal slds-wrap">
+                      <dt class="slds-item--label slds-text-color--weak slds-truncate" title="First Label">Email Address:</dt>
+                      <dd class="slds-item--detail slds-truncate">isabel@codingcamp.com</dd>
+                      <dt class="slds-item--label slds-text-color--weak slds-truncate" title="Second Label">Title:</dt>
+                      <dd class="slds-item--detail slds-truncate">CEO</dd>
+                      <dt class="slds-item--label slds-text-color--weak slds-truncate" title="Third Label">Phone:</dt>
+                      <dd class="slds-item--detail slds-truncate">(456) 123-7890 </dd>
+                  </dl>
+              </div>
+          </div>
+      </lightning:card></li>
+  <li class="slds-size--1-of-3 slds-show--inline-block">
+      <lightning:card variant="narrow" class="slds-m-around--small slds-card_boundary">
+          <aura:set attribute="title">
+              Shanti Althaus
+          </aura:set>
+          <div class="slds-tile slds-p-horizontal--large">
+              <div class="slds-tile__detail slds-text-body--small">
+                  <dl class="slds-list--horizontal slds-wrap">
+                      <dt class="slds-item--label slds-text-color--weak slds-truncate" title="First Label">Email Address:</dt>
+                      <dd class="slds-item--detail slds-truncate">shanti@compass.com</dd>
+                      <dt class="slds-item--label slds-text-color--weak slds-truncate" title="Second Label">Title:</dt>
+                      <dd class="slds-item--detail slds-truncate">Senior Vice President, Tech</dd>
+                      <dt class="slds-item--label slds-text-color--weak slds-truncate" title="Third Label">Phone:</dt>
+                      <dd class="slds-item--detail slds-truncate">(555) 432-8765</dd>
+                  </dl>
+              </div>
+          </div>
+      </lightning:card>
+  </li>
+</ul>

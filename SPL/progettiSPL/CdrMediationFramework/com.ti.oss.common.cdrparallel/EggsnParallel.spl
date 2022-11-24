@@ -1,0 +1,147 @@
+namespace com.ti.oss.common.cdrparallel;
+
+use com.ti.oss.common.types::*;
+use com.ti.oss.common.cdr.parser.eggsn::*;
+use com.ti.oss.common.cdr.parser.epgw::*;
+use com.ti.oss.common.cdr.parser.esgw::*;
+use com.ti.oss.common.cdr.checkPduType::*;
+use com.ti.oss.common.cdr.sai::*;
+use com.ti.oss.common.cdr.sqm::*;
+use com.ti.oss.common.event::*;
+use com.ti.oss.common.cdr.file::*;
+use com.ti.oss.common.cdr.types::*;
+use com.ti.oss.common.cdrparallel::*;
+use com.ti.oss.common.util.cfg::*;
+use com.it.ibm.swg.rdirscan::RDirectoryScan;
+use com.ti.oss.common.cdr.bigdata::*;
+
+public composite EggsnParallel( input stream<PduType> GGSNPI, stream<PduType> PGWPI, stream<EndRop> CheckROP; 
+                                output ISAI, ISQM, GGSNP, PGWP, aggrSAICSV, 
+                                outCsv, outCsv2, outCsv3, outCsv4, outCsv5, outCsv6, outCsv7,
+                                OutEventP
+                                )
+{
+	graph
+	
+		stream<EggsnCdr> GGSNP = ParserGGSN(GGSNPI)
+		{
+			param
+	
+				pduTypes : "GgsnR6";
+				configEnvVar : "COMMON_CFG_DIR";
+				mediationName : "eggsncdr";
+				configFileKey : "ASN1_PARSER_CFG";
+		}
+		
+		
+		stream<EpgwCdr> PGWP = ParserPGW(PGWPI) 
+		{
+			param
+	
+				pduTypes : "GgsnR8";
+				configEnvVar : "COMMON_CFG_DIR";
+				mediationName : "eggsncdr";
+				configFileKey : "ASN1_PARSER_CFG";       
+		}
+		
+		
+		//GGSN rel. 6 and 8
+		(stream<CdrSchemaForAggr> CdrSchemaEnrich; stream<Event e> OutEventEnrich as OutEventP) = PParserGGSNEnrich(GGSNP; PGWP) 
+		{
+			
+		}
+		
+		
+		// Aggregate CSV for SAI
+		(stream<AggregateSAI> aggrSAICSV; stream<FileHeader h, FileTrailer t> ISAI; stream<Event e> OutEventAggr) = 
+		PSaiHandler(CdrSchemaEnrich; CheckROP)
+		{
+			
+		}
+		
+		
+		// Aggregate CSV for SQM
+		(stream<AggregateSqmSchema> aggrSQM; stream<FileHeader h, FileTrailer t> ISQM; stream<Event e> OutEventAggrSqm)  = 
+		PSqmHandler(CdrSchemaEnrich; CheckROP)
+		{
+			
+		}
+		
+		(stream<CsvWrite> outCsv; stream<Event e> OutEventKpi1)  = 
+		BroadBandGgsnApn(aggrSQM)
+		{
+			param
+	
+				tmpOutFilePrefix : "BroadGgsnApn";
+				tmpOutFileSuffix : ".tmp";
+				mediationName : "eggsncdr";
+		}
+	
+		(stream<CsvWrite> outCsv2; stream<Event e> OutEventKpi2) = 
+		BroadBandSgsn(aggrSQM)
+		{
+			param
+	
+				tmpOutFilePrefix : "BroadSgsn";
+				tmpOutFileSuffix : ".tmp";
+				mediationName : "eggsncdr";
+		}
+	
+		(stream<CsvWrite> outCsv3; stream<Event e> OutEventKpi3)  = 
+		RoamingBroadBandGgsn(aggrSQM)
+		{
+			param
+	
+				tmpOutFilePrefix : "RoamingBroadGgsn";
+				tmpOutFileSuffix : ".tmp";
+				mediationName : "eggsncdr";
+		}
+	
+		(stream<CsvWrite> outCsv4; stream<Event e> OutEventKpi4)  = 
+		TavGgsnCdr(aggrSQM)
+		{
+			param
+	
+				tmpOutFilePrefix : "TavGgsn";
+				tmpOutFileSuffix : ".tmp";
+				mediationName : "eggsncdr";
+		}
+	
+		(stream<CsvWrite> outCsv5; stream<Event e> OutEventKpi5)  = 
+		TavSgsnCdr(aggrSQM)
+		{
+			param
+	
+				tmpOutFilePrefix : "TavSgsn";
+				tmpOutFileSuffix : ".tmp";
+				mediationName : "eggsncdr";
+		}
+	
+		(stream<CsvWrite> outCsv6; stream<Event e> OutEventKpi6)  = 
+		BscBroadBandDownlink(aggrSQM)
+		{
+			param
+	
+				tmpOutFilePrefix : "BscBroadDownlink";
+				tmpOutFileSuffix : ".tmp";
+				mediationName : "eggsncdr";
+		}
+	
+		(stream<CsvWrite> outCsv7; stream<Event e> OutEventKpi7)  = 
+		RncBroadBandDownlink(aggrSQM)
+		{
+			param
+	
+				tmpOutFilePrefix : "RncBroadDownlink";
+				tmpOutFileSuffix : ".tmp";
+				mediationName : "eggsncdr";
+		}
+		
+		(stream<Event e> OutEventP) as EventForwarder = 
+		Custom(OutEventEnrich, OutEventAggr, OutEventAggrSqm,
+        OutEventKpi1, OutEventKpi2, OutEventKpi3, OutEventKpi4, OutEventKpi5, OutEventKpi6, OutEventKpi7)
+		{
+			
+		}
+}
+

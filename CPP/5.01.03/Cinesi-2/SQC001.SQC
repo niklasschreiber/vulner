@@ -1,0 +1,645 @@
+/*
+Nuove Rules e References-CPP-Cinesi-2
+*/
+
+#include	"sysdefine.h"
+#include	"code.h"
+#include	"attrdef.h"
+#include	"revglob.h"
+/* EXEC SQL INCLUDE sqlca; */ /* VIOLAZ CN2 */
+
+EXEC SQL BEGIN DECLARE SECTION ;
+	char amsassetprdinfo_assetcode[17];
+	short amsassetprdinfo_assetcode_id;
+	char amsassetprdinfo_assetkind[4];
+	short amsassetprdinfo_assetkind_id;
+	char amsassetprdinfo_assettype[3];
+	short amsassetprdinfo_assettype_id;
+	char amsassetprdinfo_assetdescript[41];
+	short amsassetprdinfo_assetdescript_id;
+	char amsassetprdinfo_ccy[4];
+	short amsassetprdinfo_ccy_id;
+	char amsassetprdinfo_assetcond[2];
+	short amsassetprdinfo_assetcond_id;
+	char amsassetprdinfo_manamethod[2];
+	short amsassetprdinfo_manamethod_id;
+	char amsassetprdinfo_assetcy[21];
+	short amsassetprdinfo_assetcy_id;
+	long amsassetprdinfo_minperiod;
+	short amsassetprdinfo_minperiod_id;
+	long amsassetprdinfo_maxperiod;
+	short amsassetprdinfo_maxperiod_id;
+	char amsassetprdinfo_unit[2];
+	short amsassetprdinfo_unit_id;
+	char amsassetprdinfo_reduceflag[2];
+	short amsassetprdinfo_reduceflag_id;
+	char amsassetprdinfo_reducemethod[11];
+	short amsassetprdinfo_reducemethod_id;
+	char amsassetprdinfo_reduceweek[5];
+	short amsassetprdinfo_reduceweek_id;
+	long amsassetprdinfo_reduceyears;
+	short amsassetprdinfo_reduceyears_id;
+	double amsassetprdinfo_remainrate;
+	short amsassetprdinfo_remainrate_id;
+	char amsassetprdinfo_addflag[2];
+	short amsassetprdinfo_addflag_id;
+	char amsassetprdinfo_cashcrtflag[3];
+	short amsassetprdinfo_cashcrtflag_id;
+	double amsassetprdinfo_maxamt;
+	short amsassetprdinfo_maxamt_id;
+	double amsassetprdinfo_minamt;
+	short amsassetprdinfo_minamt_id;
+	char amsassetprdinfo_adjflag[2];
+	short amsassetprdinfo_adjflag_id;
+	char amsassetprdinfo_stopreduflag[2];
+	short amsassetprdinfo_stopreduflag_id;
+	char amsassetprdinfo_transferflag[2];
+	short amsassetprdinfo_transferflag_id;
+	char amsassetprdinfo_deduflag[2];
+	short amsassetprdinfo_deduflag_id;
+	char amsassetprdinfo_workoffflag[2];
+	short amsassetprdinfo_workoffflag_id;
+	char amsassetprdinfo_subdict[4];
+	short amsassetprdinfo_subdict_id;
+	char amsassetprdinfo_brc[10];
+	short amsassetprdinfo_brc_id;
+	char amsassetprdinfo_initdate[11];
+	short amsassetprdinfo_initdate_id;
+	char amsassetprdinfo_enddate[11];
+	short amsassetprdinfo_enddate_id;
+	char amsassetprdinfo_memo[41];
+	short amsassetprdinfo_memo_id;
+	double amsassetprdinfo_rsvdec1;
+	short amsassetprdinfo_rsvdec1_id;
+	double amsassetprdinfo_rsvdec2;
+	short amsassetprdinfo_rsvdec2_id;
+	char amsassetprdinfo_rsvstr1[21];
+	short amsassetprdinfo_rsvstr1_id;
+	char amsassetprdinfo_rsvstr2[41];
+	short amsassetprdinfo_rsvstr2_id;
+EXEC SQL END DECLARE SECTION ;
+
+#define RR_AMSASSETPRDINFO \
+		:amsassetprdinfo_assetcode:amsassetprdinfo_assetcode_id, \
+		:amsassetprdinfo_assetkind:amsassetprdinfo_assetkind_id, \
+		:amsassetprdinfo_assettype:amsassetprdinfo_assettype_id, \
+		:amsassetprdinfo_assetdescript:amsassetprdinfo_assetdescript_id, \
+		:amsassetprdinfo_ccy:amsassetprdinfo_ccy_id, \
+		:amsassetprdinfo_assetcond:amsassetprdinfo_assetcond_id, \
+		:amsassetprdinfo_manamethod:amsassetprdinfo_manamethod_id, \
+		:amsassetprdinfo_assetcy:amsassetprdinfo_assetcy_id, \
+		:amsassetprdinfo_minperiod:amsassetprdinfo_minperiod_id, \
+		:amsassetprdinfo_maxperiod:amsassetprdinfo_maxperiod_id, \
+		:amsassetprdinfo_unit:amsassetprdinfo_unit_id, \
+		:amsassetprdinfo_reduceflag:amsassetprdinfo_reduceflag_id, \
+		:amsassetprdinfo_reducemethod:amsassetprdinfo_reducemethod_id, \
+		:amsassetprdinfo_reduceweek:amsassetprdinfo_reduceweek_id, \
+		:amsassetprdinfo_reduceyears:amsassetprdinfo_reduceyears_id, \
+		:amsassetprdinfo_remainrate:amsassetprdinfo_remainrate_id, \
+		:amsassetprdinfo_addflag:amsassetprdinfo_addflag_id, \
+		:amsassetprdinfo_cashcrtflag:amsassetprdinfo_cashcrtflag_id, \
+		:amsassetprdinfo_maxamt:amsassetprdinfo_maxamt_id, \
+		:amsassetprdinfo_minamt:amsassetprdinfo_minamt_id, \
+		:amsassetprdinfo_adjflag:amsassetprdinfo_adjflag_id, \
+		:amsassetprdinfo_stopreduflag:amsassetprdinfo_stopreduflag_id, \
+		:amsassetprdinfo_transferflag:amsassetprdinfo_transferflag_id, \
+		:amsassetprdinfo_deduflag:amsassetprdinfo_deduflag_id, \
+		:amsassetprdinfo_workoffflag:amsassetprdinfo_workoffflag_id, \
+		:amsassetprdinfo_subdict:amsassetprdinfo_subdict_id, \
+		:amsassetprdinfo_brc:amsassetprdinfo_brc_id, \
+		:amsassetprdinfo_initdate:amsassetprdinfo_initdate_id, \
+		:amsassetprdinfo_enddate:amsassetprdinfo_enddate_id, \
+		:amsassetprdinfo_memo:amsassetprdinfo_memo_id, \
+		:amsassetprdinfo_rsvdec1:amsassetprdinfo_rsvdec1_id, \
+		:amsassetprdinfo_rsvdec2:amsassetprdinfo_rsvdec2_id, \
+		:amsassetprdinfo_rsvstr1:amsassetprdinfo_rsvstr1_id, \
+		:amsassetprdinfo_rsvstr2:amsassetprdinfo_rsvstr2_id
+
+#define UU_AMSASSETPRDINFO \
+		assetcode, \
+		assetkind, \
+		assettype, \
+		assetdescript, \
+		ccy, \
+		assetcond, \
+		manamethod, \
+		assetcy, \
+		minperiod, \
+		maxperiod, \
+		unit, \
+		reduceflag, \
+		reducemethod, \
+		reduceweek, \
+		reduceyears, \
+		remainrate, \
+		addflag, \
+		cashcrtflag, \
+		maxamt, \
+		minamt, \
+		adjflag, \
+		stopreduflag, \
+		transferflag, \
+		deduflag, \
+		workoffflag, \
+		subdict, \
+		brc, \
+		initdate, \
+		enddate, \
+		memo, \
+		rsvdec1, \
+		rsvdec2, \
+		rsvstr1, \
+		rsvstr2
+
+#define WW_AMSASSETPRDINFO \
+		:amsassetprdinfo_assetcode, \
+		:amsassetprdinfo_assetkind, \
+		:amsassetprdinfo_assettype, \
+		:amsassetprdinfo_assetdescript, \
+		:amsassetprdinfo_ccy, \
+		:amsassetprdinfo_assetcond, \
+		:amsassetprdinfo_manamethod, \
+		:amsassetprdinfo_assetcy, \
+		:amsassetprdinfo_minperiod, \
+		:amsassetprdinfo_maxperiod, \
+		:amsassetprdinfo_unit, \
+		:amsassetprdinfo_reduceflag, \
+		:amsassetprdinfo_reducemethod, \
+		:amsassetprdinfo_reduceweek, \
+		:amsassetprdinfo_reduceyears, \
+		:amsassetprdinfo_remainrate, \
+		:amsassetprdinfo_addflag, \
+		:amsassetprdinfo_cashcrtflag, \
+		:amsassetprdinfo_maxamt, \
+		:amsassetprdinfo_minamt, \
+		:amsassetprdinfo_adjflag, \
+		:amsassetprdinfo_stopreduflag, \
+		:amsassetprdinfo_transferflag, \
+		:amsassetprdinfo_deduflag, \
+		:amsassetprdinfo_workoffflag, \
+		:amsassetprdinfo_subdict, \
+		:amsassetprdinfo_brc, \
+		:amsassetprdinfo_initdate, \
+		:amsassetprdinfo_enddate, \
+		:amsassetprdinfo_memo, \
+		:amsassetprdinfo_rsvdec1, \
+		:amsassetprdinfo_rsvdec2, \
+		:amsassetprdinfo_rsvstr1, \
+		:amsassetprdinfo_rsvstr2
+
+struct amsassetprdinfo
+{
+	char	assetcode[17];
+	char	assetkind[4];
+	char	assettype[3];
+	char	assetdescript[41];
+	char	ccy[4];
+	char	assetcond[2];
+	char	manamethod[2];
+	char	assetcy[21];
+	long	minperiod;
+	long	maxperiod;
+	char	unit[2];
+	char	reduceflag[2];
+	char	reducemethod[11];
+	char	reduceweek[5];
+	long	reduceyears;
+	double	remainrate;
+	char	addflag[2];
+	char	cashcrtflag[3];
+	double	maxamt;
+	double	minamt;
+	char	adjflag[2];
+	char	stopreduflag[2];
+	char	transferflag[2];
+	char	deduflag[2];
+	char	workoffflag[2];
+	char	subdict[4];
+	char	brc[10];
+	char	initdate[11];
+	char	enddate[11];
+	char	memo[41];
+	double	rsvdec1;
+	double	rsvdec2;
+	char	rsvstr1[21];
+	char	rsvstr2[41];
+};
+
+int main(int argc, char** argv)
+{
+  EXEC SQL WHENEVER SQLERROR GOTO errexit; /* vale per tutto il metodo */
+  EXEC SQL DECLARE cur_list CURSOR FOR  /* OK c’è la EXEC SQL WHENEVER SQLERROR che vale per tutto il metodo */
+		SELECT * FROM amsassetdyninfo
+		WHERE    substr(assetseqno,1,3) != '004'
+		  AND    reducurflag = '1'
+		  AND	 assetsts    = '0'
+		  ;
+
+  EXEC SQL FETCH cur_list INTO R_AMSASSETDYNINFO;  /* OK c’è la EXEC SQL WHENEVER SQLERROR che vale per tutto il metodo */
+
+  return 0:
+}
+
+
+void pubInitAmsassetprdinfo()
+{
+	memset( amsassetprdinfo_assetcode, 0x00, sizeof( amsassetprdinfo_assetcode ) ) ;
+	amsassetprdinfo_assetcode_id = 0 ;
+	memset( amsassetprdinfo_assetkind, 0x00, sizeof( amsassetprdinfo_assetkind ) ) ;
+	amsassetprdinfo_assetkind_id = 0 ;
+	memset( amsassetprdinfo_assettype, 0x00, sizeof( amsassetprdinfo_assettype ) ) ;
+	amsassetprdinfo_assettype_id = 0 ;
+	memset( amsassetprdinfo_assetdescript, 0x00, sizeof( amsassetprdinfo_assetdescript ) ) ;
+	amsassetprdinfo_assetdescript_id = 0 ;
+	memset( amsassetprdinfo_ccy, 0x00, sizeof( amsassetprdinfo_ccy ) ) ;
+	amsassetprdinfo_ccy_id = 0 ;
+	memset( amsassetprdinfo_assetcond, 0x00, sizeof( amsassetprdinfo_assetcond ) ) ;
+	amsassetprdinfo_assetcond_id = 0 ;
+	memset( amsassetprdinfo_manamethod, 0x00, sizeof( amsassetprdinfo_manamethod ) ) ;
+	amsassetprdinfo_manamethod_id = 0 ;
+	memset( amsassetprdinfo_assetcy, 0x00, sizeof( amsassetprdinfo_assetcy ) ) ;
+	amsassetprdinfo_assetcy_id = 0 ;
+	memset( &amsassetprdinfo_minperiod, 0x00, sizeof( amsassetprdinfo_minperiod ) ) ;
+	amsassetprdinfo_minperiod_id = 0 ;
+	memset( &amsassetprdinfo_maxperiod, 0x00, sizeof( amsassetprdinfo_maxperiod ) ) ;
+	amsassetprdinfo_maxperiod_id = 0 ;
+	memset( amsassetprdinfo_unit, 0x00, sizeof( amsassetprdinfo_unit ) ) ;
+	amsassetprdinfo_unit_id = 0 ;
+	memset( amsassetprdinfo_reduceflag, 0x00, sizeof( amsassetprdinfo_reduceflag ) ) ;
+	amsassetprdinfo_reduceflag_id = 0 ;
+	memset( amsassetprdinfo_reducemethod, 0x00, sizeof( amsassetprdinfo_reducemethod ) ) ;
+	amsassetprdinfo_reducemethod_id = 0 ;
+	memset( amsassetprdinfo_reduceweek, 0x00, sizeof( amsassetprdinfo_reduceweek ) ) ;
+	amsassetprdinfo_reduceweek_id = 0 ;
+	memset( &amsassetprdinfo_reduceyears, 0x00, sizeof( amsassetprdinfo_reduceyears ) ) ;
+	amsassetprdinfo_reduceyears_id = 0 ;
+	memset( &amsassetprdinfo_remainrate, 0x00, sizeof( amsassetprdinfo_remainrate ) ) ;
+	amsassetprdinfo_remainrate_id = 0 ;
+	memset( amsassetprdinfo_addflag, 0x00, sizeof( amsassetprdinfo_addflag ) ) ;
+	amsassetprdinfo_addflag_id = 0 ;
+	memset( amsassetprdinfo_cashcrtflag, 0x00, sizeof( amsassetprdinfo_cashcrtflag ) ) ;
+	amsassetprdinfo_cashcrtflag_id = 0 ;
+	memset( &amsassetprdinfo_maxamt, 0x00, sizeof( amsassetprdinfo_maxamt ) ) ;
+	amsassetprdinfo_maxamt_id = 0 ;
+	memset( &amsassetprdinfo_minamt, 0x00, sizeof( amsassetprdinfo_minamt ) ) ;
+	amsassetprdinfo_minamt_id = 0 ;
+	memset( amsassetprdinfo_adjflag, 0x00, sizeof( amsassetprdinfo_adjflag ) ) ;
+	amsassetprdinfo_adjflag_id = 0 ;
+	memset( amsassetprdinfo_stopreduflag, 0x00, sizeof( amsassetprdinfo_stopreduflag ) ) ;
+	amsassetprdinfo_stopreduflag_id = 0 ;
+	memset( amsassetprdinfo_transferflag, 0x00, sizeof( amsassetprdinfo_transferflag ) ) ;
+	amsassetprdinfo_transferflag_id = 0 ;
+	memset( amsassetprdinfo_deduflag, 0x00, sizeof( amsassetprdinfo_deduflag ) ) ;
+	amsassetprdinfo_deduflag_id = 0 ;
+	memset( amsassetprdinfo_workoffflag, 0x00, sizeof( amsassetprdinfo_workoffflag ) ) ;
+	amsassetprdinfo_workoffflag_id = 0 ;
+	memset( amsassetprdinfo_subdict, 0x00, sizeof( amsassetprdinfo_subdict ) ) ;
+	amsassetprdinfo_subdict_id = 0 ;
+	memset( amsassetprdinfo_brc, 0x00, sizeof( amsassetprdinfo_brc ) ) ;
+	amsassetprdinfo_brc_id = 0 ;
+	memset( amsassetprdinfo_initdate, 0x00, sizeof( amsassetprdinfo_initdate ) ) ;
+	amsassetprdinfo_initdate_id = 0 ;
+	memset( amsassetprdinfo_enddate, 0x00, sizeof( amsassetprdinfo_enddate ) ) ;
+	amsassetprdinfo_enddate_id = 0 ;
+	memset( amsassetprdinfo_memo, 0x00, sizeof( amsassetprdinfo_memo ) ) ;
+	amsassetprdinfo_memo_id = 0 ;
+	memset( &amsassetprdinfo_rsvdec1, 0x00, sizeof( amsassetprdinfo_rsvdec1 ) ) ;
+	amsassetprdinfo_rsvdec1_id = 0 ;
+	memset( &amsassetprdinfo_rsvdec2, 0x00, sizeof( amsassetprdinfo_rsvdec2 ) ) ;
+	amsassetprdinfo_rsvdec2_id = 0 ;
+	memset( amsassetprdinfo_rsvstr1, 0x00, sizeof( amsassetprdinfo_rsvstr1 ) ) ;
+	amsassetprdinfo_rsvstr1_id = 0 ;
+	memset( amsassetprdinfo_rsvstr2, 0x00, sizeof( amsassetprdinfo_rsvstr2 ) ) ;
+	amsassetprdinfo_rsvstr2_id = 0 ;
+}
+
+void pubStoVAmsassetprdinfo( struct amsassetprdinfo * pstAmsassetprdinfo )
+{
+	pubInitAmsassetprdinfo();
+	if( !strlen( pstAmsassetprdinfo->assetcode ) )
+		strcpy( pstAmsassetprdinfo->assetcode, " " );
+	strcpy( amsassetprdinfo_assetcode, pstAmsassetprdinfo->assetcode );
+	if( !strlen( pstAmsassetprdinfo->assetkind ) )
+		strcpy( pstAmsassetprdinfo->assetkind, " " );
+	strcpy( amsassetprdinfo_assetkind, pstAmsassetprdinfo->assetkind );
+	if( !strlen( pstAmsassetprdinfo->assettype ) )
+		strcpy( pstAmsassetprdinfo->assettype, " " );
+	strcpy( amsassetprdinfo_assettype, pstAmsassetprdinfo->assettype );
+	if( !strlen( pstAmsassetprdinfo->assetdescript ) )
+		strcpy( pstAmsassetprdinfo->assetdescript, " " );
+	strcpy( amsassetprdinfo_assetdescript, pstAmsassetprdinfo->assetdescript );
+	if( !strlen( pstAmsassetprdinfo->ccy ) )
+		strcpy( pstAmsassetprdinfo->ccy, " " );
+	strcpy( amsassetprdinfo_ccy, pstAmsassetprdinfo->ccy );
+	if( !strlen( pstAmsassetprdinfo->assetcond ) )
+		strcpy( pstAmsassetprdinfo->assetcond, " " );
+	strcpy( amsassetprdinfo_assetcond, pstAmsassetprdinfo->assetcond );
+	if( !strlen( pstAmsassetprdinfo->manamethod ) )
+		strcpy( pstAmsassetprdinfo->manamethod, " " );
+	strcpy( amsassetprdinfo_manamethod, pstAmsassetprdinfo->manamethod );
+	if( !strlen( pstAmsassetprdinfo->assetcy ) )
+		strcpy( pstAmsassetprdinfo->assetcy, " " );
+	strcpy( amsassetprdinfo_assetcy, pstAmsassetprdinfo->assetcy );
+	amsassetprdinfo_minperiod = pstAmsassetprdinfo->minperiod ;
+	amsassetprdinfo_maxperiod = pstAmsassetprdinfo->maxperiod ;
+	if( !strlen( pstAmsassetprdinfo->unit ) )
+		strcpy( pstAmsassetprdinfo->unit, " " );
+	strcpy( amsassetprdinfo_unit, pstAmsassetprdinfo->unit );
+	if( !strlen( pstAmsassetprdinfo->reduceflag ) )
+		strcpy( pstAmsassetprdinfo->reduceflag, " " );
+	strcpy( amsassetprdinfo_reduceflag, pstAmsassetprdinfo->reduceflag );
+	if( !strlen( pstAmsassetprdinfo->reducemethod ) )
+		strcpy( pstAmsassetprdinfo->reducemethod, " " );
+	strcpy( amsassetprdinfo_reducemethod, pstAmsassetprdinfo->reducemethod );
+	if( !strlen( pstAmsassetprdinfo->reduceweek ) )
+		strcpy( pstAmsassetprdinfo->reduceweek, " " );
+	strcpy( amsassetprdinfo_reduceweek, pstAmsassetprdinfo->reduceweek );
+	amsassetprdinfo_reduceyears = pstAmsassetprdinfo->reduceyears ;
+	amsassetprdinfo_remainrate = pstAmsassetprdinfo->remainrate ;
+	pubDround( &amsassetprdinfo_remainrate, 2 );
+	if( !strlen( pstAmsassetprdinfo->addflag ) )
+		strcpy( pstAmsassetprdinfo->addflag, " " );
+	strcpy( amsassetprdinfo_addflag, pstAmsassetprdinfo->addflag );
+	if( !strlen( pstAmsassetprdinfo->cashcrtflag ) )
+		strcpy( pstAmsassetprdinfo->cashcrtflag, " " );
+	strcpy( amsassetprdinfo_cashcrtflag, pstAmsassetprdinfo->cashcrtflag );
+	amsassetprdinfo_maxamt = pstAmsassetprdinfo->maxamt ;
+	pubDround( &amsassetprdinfo_maxamt, 2 );
+	amsassetprdinfo_minamt = pstAmsassetprdinfo->minamt ;
+	pubDround( &amsassetprdinfo_minamt, 2 );
+	if( !strlen( pstAmsassetprdinfo->adjflag ) )
+		strcpy( pstAmsassetprdinfo->adjflag, " " );
+	strcpy( amsassetprdinfo_adjflag, pstAmsassetprdinfo->adjflag );
+	if( !strlen( pstAmsassetprdinfo->stopreduflag ) )
+		strcpy( pstAmsassetprdinfo->stopreduflag, " " );
+	strcpy( amsassetprdinfo_stopreduflag, pstAmsassetprdinfo->stopreduflag );
+	if( !strlen( pstAmsassetprdinfo->transferflag ) )
+		strcpy( pstAmsassetprdinfo->transferflag, " " );
+	strcpy( amsassetprdinfo_transferflag, pstAmsassetprdinfo->transferflag );
+	if( !strlen( pstAmsassetprdinfo->deduflag ) )
+		strcpy( pstAmsassetprdinfo->deduflag, " " );
+	strcpy( amsassetprdinfo_deduflag, pstAmsassetprdinfo->deduflag );
+	if( !strlen( pstAmsassetprdinfo->workoffflag ) )
+		strcpy( pstAmsassetprdinfo->workoffflag, " " );
+	strcpy( amsassetprdinfo_workoffflag, pstAmsassetprdinfo->workoffflag );
+	if( !strlen( pstAmsassetprdinfo->subdict ) )
+		strcpy( pstAmsassetprdinfo->subdict, " " );
+	strcpy( amsassetprdinfo_subdict, pstAmsassetprdinfo->subdict );
+	if( !strlen( pstAmsassetprdinfo->brc ) )
+		strcpy( pstAmsassetprdinfo->brc, " " );
+	strcpy( amsassetprdinfo_brc, pstAmsassetprdinfo->brc );
+	if( !strlen( pstAmsassetprdinfo->initdate ) )
+		strcpy( pstAmsassetprdinfo->initdate, " " );
+	strcpy( amsassetprdinfo_initdate, pstAmsassetprdinfo->initdate );
+	if( !strlen( pstAmsassetprdinfo->enddate ) )
+		strcpy( pstAmsassetprdinfo->enddate, " " );
+	strcpy( amsassetprdinfo_enddate, pstAmsassetprdinfo->enddate );
+	if( !strlen( pstAmsassetprdinfo->memo ) )
+		strcpy( pstAmsassetprdinfo->memo, " " );
+	strcpy( amsassetprdinfo_memo, pstAmsassetprdinfo->memo );
+	amsassetprdinfo_rsvdec1 = pstAmsassetprdinfo->rsvdec1 ;
+	pubDround( &amsassetprdinfo_rsvdec1, 2 );
+	amsassetprdinfo_rsvdec2 = pstAmsassetprdinfo->rsvdec2 ;
+	pubDround( &amsassetprdinfo_rsvdec2, 2 );
+	if( !strlen( pstAmsassetprdinfo->rsvstr1 ) )
+		strcpy( pstAmsassetprdinfo->rsvstr1, " " );
+	strcpy( amsassetprdinfo_rsvstr1, pstAmsassetprdinfo->rsvstr1 );
+	if( !strlen( pstAmsassetprdinfo->rsvstr2 ) )
+		strcpy( pstAmsassetprdinfo->rsvstr2, " " );
+	strcpy( amsassetprdinfo_rsvstr2, pstAmsassetprdinfo->rsvstr2 );
+}
+
+void pubVtoSAmsassetprdinfo( struct amsassetprdinfo * pstAmsassetprdinfo )
+{
+	strcpy( pstAmsassetprdinfo->assetcode, amsassetprdinfo_assetcode );
+	strpack( pstAmsassetprdinfo->assetcode );
+	strcpy( pstAmsassetprdinfo->assetkind, amsassetprdinfo_assetkind );
+	strpack( pstAmsassetprdinfo->assetkind );
+	strcpy( pstAmsassetprdinfo->assettype, amsassetprdinfo_assettype );
+	strpack( pstAmsassetprdinfo->assettype );
+	strcpy( pstAmsassetprdinfo->assetdescript, amsassetprdinfo_assetdescript );
+	strpack( pstAmsassetprdinfo->assetdescript );
+	strcpy( pstAmsassetprdinfo->ccy, amsassetprdinfo_ccy );
+	strpack( pstAmsassetprdinfo->ccy );
+	strcpy( pstAmsassetprdinfo->assetcond, amsassetprdinfo_assetcond );
+	strpack( pstAmsassetprdinfo->assetcond );
+	strcpy( pstAmsassetprdinfo->manamethod, amsassetprdinfo_manamethod );
+	strpack( pstAmsassetprdinfo->manamethod );
+	strcpy( pstAmsassetprdinfo->assetcy, amsassetprdinfo_assetcy );
+	strpack( pstAmsassetprdinfo->assetcy );
+	pstAmsassetprdinfo->minperiod = amsassetprdinfo_minperiod ;
+	pstAmsassetprdinfo->maxperiod = amsassetprdinfo_maxperiod ;
+	strcpy( pstAmsassetprdinfo->unit, amsassetprdinfo_unit );
+	strpack( pstAmsassetprdinfo->unit );
+	strcpy( pstAmsassetprdinfo->reduceflag, amsassetprdinfo_reduceflag );
+	strpack( pstAmsassetprdinfo->reduceflag );
+	strcpy( pstAmsassetprdinfo->reducemethod, amsassetprdinfo_reducemethod );
+	strpack( pstAmsassetprdinfo->reducemethod );
+	strcpy( pstAmsassetprdinfo->reduceweek, amsassetprdinfo_reduceweek );
+	strpack( pstAmsassetprdinfo->reduceweek );
+	pstAmsassetprdinfo->reduceyears = amsassetprdinfo_reduceyears ;
+	pstAmsassetprdinfo->remainrate = amsassetprdinfo_remainrate ;
+	pubDround( &pstAmsassetprdinfo->remainrate, 2 );
+	strcpy( pstAmsassetprdinfo->addflag, amsassetprdinfo_addflag );
+	strpack( pstAmsassetprdinfo->addflag );
+	strcpy( pstAmsassetprdinfo->cashcrtflag, amsassetprdinfo_cashcrtflag );
+	strpack( pstAmsassetprdinfo->cashcrtflag );
+	pstAmsassetprdinfo->maxamt = amsassetprdinfo_maxamt ;
+	pubDround( &pstAmsassetprdinfo->maxamt, 2 );
+	pstAmsassetprdinfo->minamt = amsassetprdinfo_minamt ;
+	pubDround( &pstAmsassetprdinfo->minamt, 2 );
+	strcpy( pstAmsassetprdinfo->adjflag, amsassetprdinfo_adjflag );
+	strpack( pstAmsassetprdinfo->adjflag );
+	strcpy( pstAmsassetprdinfo->stopreduflag, amsassetprdinfo_stopreduflag );
+	strpack( pstAmsassetprdinfo->stopreduflag );
+	strcpy( pstAmsassetprdinfo->transferflag, amsassetprdinfo_transferflag );
+	strpack( pstAmsassetprdinfo->transferflag );
+	strcpy( pstAmsassetprdinfo->deduflag, amsassetprdinfo_deduflag );
+	strpack( pstAmsassetprdinfo->deduflag );
+	strcpy( pstAmsassetprdinfo->workoffflag, amsassetprdinfo_workoffflag );
+	strpack( pstAmsassetprdinfo->workoffflag );
+	strcpy( pstAmsassetprdinfo->subdict, amsassetprdinfo_subdict );
+	strpack( pstAmsassetprdinfo->subdict );
+	strcpy( pstAmsassetprdinfo->brc, amsassetprdinfo_brc );
+	strpack( pstAmsassetprdinfo->brc );
+	strcpy( pstAmsassetprdinfo->initdate, amsassetprdinfo_initdate );
+	strpack( pstAmsassetprdinfo->initdate );
+	strcpy( pstAmsassetprdinfo->enddate, amsassetprdinfo_enddate );
+	strpack( pstAmsassetprdinfo->enddate );
+	strcpy( pstAmsassetprdinfo->memo, amsassetprdinfo_memo );
+	strpack( pstAmsassetprdinfo->memo );
+	pstAmsassetprdinfo->rsvdec1 = amsassetprdinfo_rsvdec1 ;
+	pubDround( &pstAmsassetprdinfo->rsvdec1, 2 );
+	pstAmsassetprdinfo->rsvdec2 = amsassetprdinfo_rsvdec2 ;
+	pubDround( &pstAmsassetprdinfo->rsvdec2, 2 );
+	strcpy( pstAmsassetprdinfo->rsvstr1, amsassetprdinfo_rsvstr1 );
+	strpack( pstAmsassetprdinfo->rsvstr1 );
+	strcpy( pstAmsassetprdinfo->rsvstr2, amsassetprdinfo_rsvstr2 );
+	strpack( pstAmsassetprdinfo->rsvstr2 );
+}
+
+int pubReadAmsassetprdinfo( struct amsassetprdinfo * pstAmsassetprdinfo )
+{
+	pubInitAmsassetprdinfo();
+	pubStoVAmsassetprdinfo(pstAmsassetprdinfo);
+	EXEC SQL SELECT * INTO RR_AMSASSETPRDINFO  /* VIOLAZ CN1-Injection17 */
+		FROM amsassetprdinfo  
+		WHERE  
+		 assetcode = :amsassetprdinfo_assetcode  
+		 ; 
+	if ( SQLCODE ) 
+	{ 
+		strcpy( g_acRspCode, "999996" ); 
+		/* 数据库读错误 */ 
+		pubCrtRspInfo( "amsassetprdinfo",SQLCODE ); 
+		pubErrLog( __LINE__, __FILE__, g_acRspMsg ); 
+		return -1; 
+	}; 
+	EXEC SQL SELECT COUNT(*) INTO :lSubCount:s_Subid /* OK è una COUNT(*) */
+		FROM glssubdict
+		WHERE acctype = :acAccType
+		AND branchno = :acBranchNo;
+	SQLERR_PRO( "glssubdict" ) /* OK */
+	
+	pubVtoSAmsassetprdinfo(pstAmsassetprdinfo);
+	EXEC SQL DECLARE cur_list CURSOR FOR
+	SELECT * FROM amsassetinfo 				/* OK la SELECT * è dentro una EXEC SQL DECLARE */
+	WHERE	assetseqno like :acAssetSeqNo||'%'
+		and	assetname like :acAssetName||'%'
+		and assetsts = '0'
+		and trandate <= :acTranDate
+		order by sectorbrc,assetseqno
+		;
+	/* VIOLAZ CN4 non c'è la if su SQLCODE */
+	return 0; 
+} 
+ 
+int pubModiAmsassetprdinfo( struct amsassetprdinfo * pstAmsassetprdinfo )
+{
+	pubInitAmsassetprdinfo();
+	pubStoVAmsassetprdinfo(pstAmsassetprdinfo);
+	EXEC SQL WHENEVER NOT FOUND GOTO EXIT;  /* vale solo x il comando SQL che lo segue */
+	EXEC SQL SELECT DNAME /* OK è preceduta da EXEC SQL WHENEVER NOT FOUND */
+                  INTO :dname
+                  FROM DEPT
+                  WHERE DEPTNO = :deptno;
+
+	EXEC SQL UPDATE amsassetprdinfo /* VIOLAZ CN3 */
+		SET ( UU_AMSASSETPRDINFO ) = ( WW_AMSASSETPRDINFO ) 
+		 ; 
+	
+	/* VIOLAZ CN4 la if su SQLCODE è commentata */
+	/* if ( SQLCODE ) 
+	{ 
+		strcpy( g_acRspCode, "999997" ); 
+		/* 数据库更新错误 */ 
+		pubCrtRspInfo( "amsassetprdinfo",SQLCODE ); 
+		pubErrLog( __LINE__, __FILE__, g_acRspMsg ); 
+		return -1; 
+	}; 
+	*/
+	EXEC SQL DELETE FROM dpsaddprereg; /* VIOLAZ CN3 */
+	SQLERR_PROC
+	
+	EXEC SQL OPEN cur_list;
+	SQLERR_ALL	/* OK */
+	EXEC SQL OPEN pubcycworkcall_cur ;
+    if( sqlca.sqlcode )
+    {
+        snprintf( g_acTrcMsg,500,"打开周期作业调度游标错[%d]!!",
+                sqlca.sqlcode);
+        pubZqiErrLog( __LINE__, __FILE__, g_acTrcMsg);
+        return -1;
+    }
+
+	EXEC SQL DECLARE cur_list CURSOR FOR
+			SELECT * FROM amsassetdyninfo
+			WHERE    substr(assetseqno,1,3) != '004'
+			  AND    reducurflag = '1'
+			  AND	 assetsts    = '0'
+			  ;
+
+	EXEC SQL FETCH cur_list INTO R_AMSASSETDYNINFO;
+	if ( SQLCODE )  /* OK c'è la ERRLOG */
+		{ 
+			strcpy( g_acRspCode, "999971" );  
+			pubCrtRspInfo( "amsassetdyninfo_update",SQLCODE ); 
+			ERRLOG
+			goto EXIT;  /* VIOLAZ CE10 */
+		}
+
+	EXEC SQL CLOSE cur_list; /* OK */
+	return 0; 
+}
+  
+int pubInstAmsassetprdinfo( struct amsassetprdinfo * pstAmsassetprdinfo )
+{
+	pubInitAmsassetprdinfo();
+	pubStoVAmsassetprdinfo(pstAmsassetprdinfo);
+	char[] = “Passw0rd01”;
+	EXEC SQL BEGIN DECLARE SECTION;
+		char acDbName[ 50 ];
+		char acUser[ 10 ];
+		char acPass[ 10 ];
+		char acCardNo1[ 19 + 1 ];
+	EXEC SQL END   DECLARE SECTION;
+	sprintf( acPass, "%s", getenv("DBPASS" ));
+	EXEC SQL CONNECT TO :acDbName USER :acUser USING :acPass;  /* VIOLAZ CN8 acPass è letta con la getEnv */
+
+	EXEC SQL CONNECT TO :acDbName USER :acDBUser USING :acDBPasswd ;  /* VIOLAZ CN7 */
+	char[] = “changeme”;
+	EXEC SQL CONNECT TO :acDbName USER :acDBUser USING :acDBPasswd ;  /* OK, changeme */
+	char[] = “changeit”;
+	EXEC SQL CONNECT TO :acDbName USER :acDBUser USING :acDBPasswd ;  /* OK, changeit */
+	char[] = “${place}”;
+	EXEC SQL CONNECT TO :acDbName USER :acDBUser USING :acDBPasswd ;  /* OK, comincia  con ${ */
+
+	EXEC SQL INSERT INTO amsassetprdinfo VALUES ( RR_AMSASSETPRDINFO ) ;
+	if ( SQLCODE ) /* VIOLAZ CN5 */
+	{ 
+		EXEC SQL FETCH km_cur INTO R_GLSSUBDICT; /* VIOLAZ CN4 */
+		return -1; 
+	}; 
+	strcpy( acCardNo1 , “1234567890”);
+	EXEC SQL SELECT pass INTO :acPass FROM cmscitcardreg
+		WHERE cardno = :acCardNo1
+	EXEC SQL CONNECT TO :acDbName USER :acUser USING :acPass;  /* VIOLAZ CN10 acPass è letta da una tabella del DB */
+
+	SQLOPENCUR(km_cur,"km_cur")
+	if( SQLCODE == SQLNOTFOUND )	break;  /* OK c'è solo la break */
+	if( SQLCODE == 100 )	goto EXIT;  /* OK c'è solo la goto */
+	SQLCLOSECUR(CarInp_cur,"CarInp_cur") /* VIOLAZ CN4 */
+	return( !strcmp( g_acRspCode, PUBRSP_OK ) ? 0 : -1 );
+
+} 
+void sql_error(msg) 
+    char *msg;
+{ 
+    char err_msg[512];
+    size_t buf_len, msg_len;
+
+    EXEC SQL WHENEVER SQLERROR CONTINUE;
+	EXEC SQL SET ISOLATION TO DIRTY READ;
+
+    printf("\n%s\n", msg);
+
+/* Call sqlglm() to get the complete text of the
+ * error message.
+ */
+    buf_len = sizeof (err_msg);
+    sqlglm((unsigned char *) err_msg, &buf_len, &msg_len);
+    printf("%.*s\n", (int) msg_len, err_msg);  /* VIOLAZ CN9 */
+
+    EXEC SQL ROLLBACK RELEASE;
+    exit(EXIT_FAILURE);
+} 
+/* VIOLAZ CWE561P2  */
+UNSEDLAB:
+
+EXIT:
+	EXEC SQL CLOSE cur_list; /* VIOLAZ CN4 */
+
+	SQLERR_PRO( "SQC001" )
+
+}
+

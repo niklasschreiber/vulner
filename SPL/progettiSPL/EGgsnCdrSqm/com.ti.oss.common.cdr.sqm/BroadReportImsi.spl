@@ -1,0 +1,375 @@
+namespace com.ti.oss.common.cdr.sqm ;
+
+use com.ibm.streamsx.file::* ;
+use com.ti.oss.common.cdr.parser.eggsn::* ;
+use com.ti.oss.common.cdr.types::* ;
+use com.ti.oss.common.cdr.util::* ;
+use com.ti.oss.common.cdr.util.cfg::* ;
+use com.ti.oss.common.event::* ;
+use com.ti.oss.common.types::* ;
+use com.ti.oss.common.util.cfg::* ;
+use com.ti.oss.common.util.time::*;
+
+type SqmReport = map<rstring, ReportImsi>;
+type SqmReportImsiNode = map<rstring, SqmReport>;
+
+public composite BroadReportImsi(input stream<AggregateSqmSchema> eggsn; 
+	output stream<CsvWrite> outCsv, OutEventKpiReportImsi, stream<CDRCounters> OutCounters)
+{
+	param
+		expression<rstring> $tmpOutFilePrefix ;
+		expression<rstring> $tmpOutFileSuffix ;
+		expression<rstring> $mediationName ;
+	
+	graph
+		(stream<ReportImsi> outKpiReportImsi as O ; stream<Event e> OutEventKpiReportImsi as OE; stream<CDRCounters> OutCounters) = Custom(eggsn)
+		{
+			logic
+				state :
+				{
+					rstring tmpOutFilePrefix = $tmpOutFilePrefix;
+					rstring tmpOutFileSuffix = $tmpOutFileSuffix;
+					rstring mediationName = $mediationName;
+					
+					mutable float64 startROPstate = 0 ;
+					mutable float64 endROPstate = 0 ;
+					mutable float64 startROPold = 0 ;
+					mutable float64 endROPold = 0 ;
+					boolean flagMediationCfg = loadMediationCfg(mediationName) ;
+					mutable rstring nameOutputFilestate ;
+					mutable rstring nameOutputFileOld ;
+					mutable rstring path = getCfgParam("COMMON_CFG_DIR",mediationName,"SQM_REPORT_IMSI_OUTPUT_PATH");
+					mutable rstring filePrefix = getCfgParam("COMMON_CFG_DIR",mediationName,"FILE_PREFIX_REPORT_IMSI");
+					mutable rstring fileSuffix = getCfgParam("COMMON_CFG_DIR",mediationName,"FILE_SUFFIX");
+					mutable int32 interval = (int32)getCfgParam("COMMON_CFG_DIR",mediationName,"ROP_INTERVAL_SQM");
+					mutable SqmReport CDRforReportImsi ;
+					mutable SqmReportImsiNode SqmReportImsi ;
+					mutable SqmReportImsiNode SqmReportImsiNodePrec ;
+					mutable FileHeader fh = { } ;
+					
+					mutable O emptyEndRopTuple = initEmptyEndRopTupleReportImsi();
+					mutable OE oetuple = (OE){};
+					
+					mutable SqmReport cdrApp = {};
+					
+//					// Conta tutti CDR per rATType
+//					mutable uint64 cdrtotrattype = 0ul;
+//					mutable uint64 cdrtotrattypeold = 0ul;
+//					
+					// Conta i CDR corretti per questo KPI
+					mutable uint64 cdrtot = 0ul;
+					mutable uint64 cdrtotold = 0ul;
+					
+					// Conta i CDR scartati per il filtro impostato
+					mutable uint64 cdrexclude1 = 0ul;
+					mutable uint64 cdrexclude1old = 0ul;
+					
+					// Conta i CDR scartati esterni al ROP
+					mutable uint64 cdrexclude2 = 0ul;
+					mutable uint64 cdrexclude2old = 0ul;
+				}
+
+				onTuple eggsn :
+				{
+					if (eggsn.endROP)
+					{
+						interval = checkConfiguration(mediationName,"ROP_INTERVAL_SQM",interval);
+						path = checkConfiguration(mediationName,"SQM_REPORT_IMSI_OUTPUT_PATH",path);
+						filePrefix = checkConfiguration(mediationName,"FILE_PREFIX_REPORT_IMSI",filePrefix);
+						fileSuffix = checkConfiguration(mediationName,"FILE_SUFFIX",fileSuffix);
+				
+						swap(SqmReportImsi,SqmReportImsiNodePrec);
+						swap(cdrtot, cdrtotold);
+						cdrtot = 0ul;
+						swap(cdrexclude1, cdrexclude1old);
+						cdrexclude1 = 0ul;
+						swap(cdrexclude2, cdrexclude2old);
+						cdrexclude2 = 0ul;
+//						swap(cdrtotrattype, cdrtotrattypeold);
+//						cdrtotrattype = 0ul;
+//						
+						clearM(SqmReportImsi);
+						startROPold = startROPstate;
+						endROPold = endROPstate;
+						startROPstate = eggsn.startRopSecs;
+						endROPstate = eggsn.endRopSecs;
+						nameOutputFileOld = nameOutputFilestate;
+					}
+					
+					if(startROPstate == (float64)0 || endROPstate == (float64)0)
+					{
+						startROPstate = eggsn.startRopSecs;
+						endROPstate = eggsn.endRopSecs;
+					}
+					
+					if(nameOutputFilestate == "")
+					{
+						nameOutputFilestate = path + tmpOutFilePrefix +(rstring) eggsn.endRopSecs + tmpOutFileSuffix ;
+					}
+					
+					if(eggsn.endROP)
+					{
+						nameOutputFilestate = path + tmpOutFilePrefix +(rstring) eggsn.endRopSecs + tmpOutFileSuffix ;
+					}					
+					
+					if (eggsn.write_prev)
+					{	
+						if (eggsn.exclude_node == "")
+						{
+							mutable rstring filename_tmp = "";
+							mutable rstring central_val="";
+							
+							if(size(SqmReportImsiNodePrec) != 0)
+							{
+								mutable list<rstring> keysTmp = [];
+                   				for(rstring key in SqmReportImsiNodePrec) 
+								{
+									appendM(keysTmp, key);
+								}
+								for(rstring key in keysTmp)
+								{
+									swap(cdrApp, SqmReportImsiNodePrec[key]);
+									for(rstring keyCdr in cdrApp) 
+									{
+										submit(cdrApp[keyCdr], outKpiReportImsi);
+				                    }
+				                    central_val = central_val + key + ";";	
+								}
+								
+								filename_tmp = nameOutputFileOld;
+								emptyEndRopTuple.nameOutputFile = nameOutputFileOld;
+								submit(emptyEndRopTuple, outKpiReportImsi);									
+							}
+							else
+							{
+								filename_tmp = nameOutputFileOld;
+								emptyEndRopTuple.nameOutputFile = nameOutputFileOld;
+								submit(emptyEndRopTuple, outKpiReportImsi);
+							}
+							
+							mutable rstring sr = "";
+							mutable rstring er = "";
+							if(startROPold != (float64)0 && endROPold != (float64)0)
+							{
+								sr = getUtilConvert((rstring)startROPold);
+								er = getUtilConvert((rstring)endROPold);
+							}
+							else
+							{
+								sr = "0";
+								er = "0";
+							}
+							submit({kpi = "ReportImsi", ROP = sr + "-" + er, cdrtot = cdrtotold, cdrexclude1 = cdrexclude1old, cdrexclude2 = cdrexclude2old}, OutCounters);
+							
+							//clear statistics
+							//cdrtotrattypeold = 0ul;
+							cdrtotold = 0ul;
+							cdrexclude1old = 0ul;
+							cdrexclude2old = 0ul;
+							
+							clearM(SqmReportImsiNodePrec);
+							clearM(cdrApp);
+							startROPold = (float64)0;
+							endROPold = (float64)0;
+							nameOutputFileOld = "";
+							oetuple.e.eventType = 190 ;
+							oetuple.e.resultCode = 0 ;
+							oetuple.e.rawFile = filename_tmp ;
+							swap(oetuple.e.eventCorrelationId, fh.eventCorrelationId);
+		                    swap(oetuple.e.rop, fh.rop);
+		                    swap(oetuple.e.emId, fh.emId);
+		                    swap(oetuple.e.neId, fh.neId);
+							oetuple.e.eventText = "End write_prev close file " + filename_tmp + " for node: "+ central_val;
+							boolean eventEnabled = mkEvent(oetuple.e, fh.sessionBeginTime) ;
+							if(eventEnabled) submit(oetuple, OutEventKpiReportImsi) ;
+						}
+						else
+						{
+							if(has(SqmReportImsiNodePrec, eggsn.exclude_node) == true)
+							{
+								removeM(SqmReportImsiNodePrec, eggsn.exclude_node) ;
+							}
+						}
+					}
+					else if(!eggsn.endROP)
+					{
+						fh = eggsn.fHeader;
+						
+						//cdrtotrattype++;							
+						mutable rstring datetmp = "20"+(rstring)substring(eggsn.cdrSchema.recordOpeningTime,0,12);
+			            timestamp ts = toTimestamp(Sys.YYYYMMDDhhmmss,datetmp);
+			            mutable float64 endTimeCDRfloat = getSeconds(ts) + (int64)eggsn.cdrSchema.duration;
+						
+						mutable rstring centralName = eggsn.cdrSchema.nodeId; 
+						mutable rstring key = eggsn.alias_imsi;
+						
+						if((endTimeCDRfloat >= eggsn.startRopSecsOld) && (endTimeCDRfloat < eggsn.endRopSecsOld))
+                		{
+                			cdrtotold++;
+	                		if(has(SqmReportImsiNodePrec, centralName) == true)
+	                		{
+	                			addCdrReportImsi(eggsn,SqmReportImsiNodePrec[centralName],key,nameOutputFileOld,filePrefix,fileSuffix,eggsn.startRopSecsOld,eggsn.endRopSecsOld);	
+	                		}
+	                		else
+	                		{
+	                			addCdrReportImsi(eggsn,CDRforReportImsi,key,nameOutputFileOld,filePrefix,fileSuffix,eggsn.startRopSecsOld,eggsn.endRopSecsOld);
+	                			insertM(SqmReportImsiNodePrec, centralName, CDRforReportImsi) ;
+	                		}
+	                		
+                		}
+                		else if((endTimeCDRfloat >= eggsn.startRopSecs) && (endTimeCDRfloat < eggsn.endRopSecs))
+                		{
+                			cdrtot++;
+                			if(has(SqmReportImsi, centralName) == true)
+		                	{
+		                		addCdrReportImsi(eggsn,SqmReportImsi[centralName],key,nameOutputFilestate,filePrefix,fileSuffix,eggsn.startRopSecs,eggsn.endRopSecs);
+		                	}
+		                	else
+		                	{
+		                		addCdrReportImsi(eggsn,CDRforReportImsi,key,nameOutputFilestate,filePrefix,fileSuffix,eggsn.startRopSecs,eggsn.endRopSecs);
+								insertM(SqmReportImsi, centralName, CDRforReportImsi) ;
+		                	}
+                		}
+                		else
+						{
+							//exclude CDR fuori ROP
+							cdrexclude2++;
+						}
+						
+						clearM(cdrApp);
+						clearM(CDRforReportImsi);
+					}
+			}
+								
+			onPunct eggsn :
+			{
+				if(currentPunct() == Sys.WindowMarker)
+				{
+					
+					oetuple.e.eventType = 200 ;
+					oetuple.e.resultCode = 0 ;
+					oetuple.e.rawFile = filename(fh.fName) ;
+					swap(oetuple.e.eventCorrelationId, fh.eventCorrelationId);
+                    swap(oetuple.e.rop, fh.rop);
+                    swap(oetuple.e.emId, fh.emId);
+                    swap(oetuple.e.neId, fh.neId);
+					oetuple.e.eventText = "End Report Imsi SQM";
+					boolean eventEnabled = mkEvent(oetuple.e, fh.sessionBeginTime) ;
+					if(eventEnabled) submit(oetuple, OutEventKpiReportImsi) ;
+					
+					submit(Sys.WindowMarker, OutEventKpiReportImsi) ;
+				}
+
+			}
+			
+			config
+				threadedPort: queue(eggsn, Sys.Wait, 1000000);
+
+		}
+		
+		(stream<CsvWrite> outCsv) = Custom(outKpiReportImsi)
+		{
+			logic
+				state:
+				{	
+					mutable CsvWrite csv = {};
+				}	
+				
+				onTuple outKpiReportImsi: 
+				{
+					swap(csv.nameOutputFile, outKpiReportImsi.nameOutputFile);
+					swap(csv.endROP, outKpiReportImsi.endROP);
+					swap(csv.filePrefix, outKpiReportImsi.filePrefix);
+					swap(csv.suffix, outKpiReportImsi.suffix);
+					
+					if (outKpiReportImsi.imsi != "")
+					{
+						csv.outputContent = outKpiReportImsi.imsi+";"+outKpiReportImsi.start_time+";"+outKpiReportImsi.end_time+";"+(rstring)outKpiReportImsi.somma_volume+";"+(rstring)outKpiReportImsi.user_location_information;
+					}else{
+						csv.outputContent = "";
+					}
+					
+				
+					submit(csv, outCsv);
+				} 
+				
+				onPunct outKpiReportImsi :
+				{
+					if(currentPunct() == Sys.WindowMarker) {
+						submit(Sys.WindowMarker,outCsv);
+					}
+				}
+		}
+	}
+
+
+void countCdrsReportIMSI(AggregateSqmSchema eggsn1, mutable ReportImsi aggrSQMtmp) 
+{
+	for(int32 i in range(eggsn1.cdrSchema.datavolumeFBCDownlink))
+	{
+		aggrSQMtmp.somma_volume = aggrSQMtmp.somma_volume + (int64)eggsn1.cdrSchema.datavolumeFBCDownlink[i];
+	}
+	
+	for(int32 i in range(eggsn1.cdrSchema.datavolumeFBCUplink))
+	{
+		aggrSQMtmp.somma_volume = aggrSQMtmp.somma_volume + (int64)eggsn1.cdrSchema.datavolumeFBCUplink[i];	
+	}
+	
+	if (eggsn1.cdrSchema.userLocationInformation!="")
+	{
+		if ( (eggsn1.cdrSchema.rATType == 1) || (eggsn1.cdrSchema.rATType == 2))
+		{
+			aggrSQMtmp.user_location_information = transformUserLocalInfo( eggsn1.cdrSchema.userLocationInformation );
+		}
+		else
+		{
+			if (length(eggsn1.cdrSchema.userLocationInformation)>16)
+	    	{
+	    		aggrSQMtmp.user_location_information = transformUserLocalInfo_4G( eggsn1.cdrSchema.userLocationInformation );
+	    	}
+	    	else
+	    	{
+	    		aggrSQMtmp.user_location_information = transformUserLocalInfo_4Gsmall( eggsn1.cdrSchema.userLocationInformation );
+	    	}
+		}
+	}
+}
+
+
+void addCdrReportImsi(AggregateSqmSchema eggsn, mutable SqmReport cdr, rstring key, rstring nameOutputFile, rstring filePrefix, rstring fileSuffix, float64 startROP, float64 endROP)
+{
+	mutable ReportImsi firstEntry = {};
+	mutable ReportImsi existEntry = {};
+	
+	if(has(cdr, key) == false) 
+    {   
+    	firstEntry.nameOutputFile = nameOutputFile; 
+		firstEntry.filePrefix = filePrefix;
+		firstEntry.suffix = fileSuffix;									
+										
+    	firstEntry.imsi = key;
+		firstEntry.start_time = getUtilConvert((rstring)startROP); 
+		firstEntry.end_time = getUtilConvert((rstring)endROP);
+		countCdrsReportIMSI(eggsn, firstEntry) ;
+		insertM(cdr, key, firstEntry) ;
+    }  
+    else 
+    {     
+     	existEntry = cdr[key];
+     	
+     	countCdrsReportIMSI(eggsn, existEntry) ;
+ 					
+ 		removeM (cdr, key);
+	    insertM( cdr, key, existEntry);
+    }
+}
+
+
+ReportImsi initEmptyEndRopTupleReportImsi() 
+{
+	mutable ReportImsi result = {};
+	
+	result.endROP = true;
+	
+	return result;
+}

@@ -1,0 +1,244 @@
+namespace com.ti.oss.common.cdr.msc.evalROP;
+
+use com.ti.oss.common.cdr.parser.emsc::*;
+use com.ti.oss.common.cdr.util::*;
+use com.ti.oss.common.types::*;
+use com.ibm.streamsx.file::*;
+use com.ti.oss.common.event::*;
+use com.ti.oss.common.cdr.types::*;
+use com.ti.oss.common.util.cfg::*;
+use com.ti.oss.common.util.time::*;
+
+
+public composite RopEvalMsc(output stream<CdrSchemaForAggrMscWithROP> EvalROP)
+{	
+	param
+	    expression <rstring> $tmpOutFilePrefix;
+		expression <rstring> $tmpOutFileSuffix;
+		expression <rstring> $mediationName;
+		expression <rstring> $interval;
+		expression <rstring> $wait;
+		expression <rstring> $delta_start;
+		expression <rstring> $delta_end;
+		expression <rstring> $rop_time;
+		
+	graph
+		stream<boolean checkROP> ControlROP = Beacon()
+		{
+			param
+				period : 1.0;
+			output
+				ControlROP : checkROP = true;
+		}
+		
+		stream<CdrSchemaForAggrMscWithROP> EvalROP = Custom(ControlROP)
+		{
+			logic state :
+			{
+				rstring mediationNameParam = $mediationName;
+				rstring intervalParam = $interval;
+				rstring tmpOutFilePrefixParam = $tmpOutFilePrefix;
+				rstring tmpOutFileSuffixParam = $tmpOutFileSuffix;
+				rstring waitParam = $wait;
+				rstring delta_startParam = $delta_start;
+				rstring delta_endParam = $delta_end;
+				rstring rop_timeParam = $rop_time;
+				
+				mutable rstring nameOutputFile;
+				mutable float64 startROP=0;
+				mutable float64 endROP=0;
+				mutable int32 interval = (int32)getCfgParam("COMMON_CFG_DIR",mediationNameParam,intervalParam);
+				mutable int32 wait = (int32)getCfgParam("COMMON_CFG_DIR",mediationNameParam,waitParam);
+				mutable int32 delta_start = (int32)getCfgParam("COMMON_CFG_DIR",mediationNameParam,delta_startParam);
+				mutable int32 delta_end = (int32)getCfgParam("COMMON_CFG_DIR",mediationNameParam,delta_endParam);
+				mutable int32 rop_time = (int32)getCfgParam("COMMON_CFG_DIR",mediationNameParam,rop_timeParam);
+				mutable boolean changed = false;
+				mutable float64 startROPold = 0;
+				mutable float64 endROPold = 0;
+				
+				mutable CdrSchemaForAggrMscWithROP endOfDataTuple = initEndOfDataTuple();
+				mutable CdrSchemaForAggrMscWithROP waitEndTuple = initWaitEndTuple();
+				mutable CdrSchemaForAggrMscWithROP changedTuple = initChangedTuple();
+				mutable EvalROP otuple = initOutputTuple();
+			} 
+			onTuple ControlROP :
+			{
+				mutable rstring datetmp = getUtilTimeStampForRop()+"00";
+	           	timestamp ts = toTimestamp(Sys.YYYYMMDDhhmmss,datetmp);
+	           	
+	           	if(endROPold != (float64)0) {
+	           		if (getUtilTimeStampInSecs() >= endROPold+(float64)wait*(float64)60){
+	           					
+						waitEndTuple.nameOutputFile = nameOutputFile;
+			            waitEndTuple.startROP = startROP;
+			            waitEndTuple.endROP = endROP;
+				
+		            	submit(waitEndTuple, EvalROP);
+		            	endROPold = (float64)0;
+	           		}
+	           	}
+	           	
+				if (endROP == (float64)0) 
+				{
+	            	interval = checkInterval(mediationNameParam,intervalParam,interval);
+	            	wait = checkInterval(mediationNameParam,"WAIT_TIME",wait);
+	            	delta_start = checkInterval(mediationNameParam,"DELTA_START_TIME",delta_start);
+	            	delta_end = checkInterval(mediationNameParam,"DELTA_END_TIME",delta_end);
+	            	rop_time = checkInterval(mediationNameParam,"ROP_TIME",rop_time);
+	            	endROP = generateENDROP((float64)getSeconds(ts),interval)-((float64)rop_time * (float64)60);
+	            	startROP = endROP - ((float64)interval * (float64)60);
+	            	nameOutputFile = tmpOutFilePrefixParam+(rstring)endROP + tmpOutFileSuffixParam;
+	            	
+	            	otuple.nameOutputFile = nameOutputFile;
+		            otuple.startROP = startROP;
+		            otuple.endROP = endROP;
+					submit(otuple, EvalROP);					
+	            }
+	            else 
+	            {
+	            	if(generateENDROP((float64)getSeconds(ts),interval)-((float64)rop_time * (float64)60) != endROP) 
+	            	{
+		            	interval = checkInterval(mediationNameParam,intervalParam,interval);
+	            		wait = checkInterval(mediationNameParam,"WAIT_TIME",wait);
+	            		delta_start = checkInterval(mediationNameParam,"DELTA_START_TIME",delta_start);
+	            		delta_end = checkInterval(mediationNameParam,"DELTA_END_TIME",delta_end);
+	            		rop_time = checkInterval(mediationNameParam,"ROP_TIME",rop_time);		            	
+		            	startROPold = startROP;
+		            	endROPold = endROP;
+		            	endROP = generateENDROP((float64)getSeconds(ts),interval)-((float64)rop_time * (float64)60);
+		            	startROP = endROP - ((float64)interval * (float64)60);
+		            	nameOutputFile = tmpOutFilePrefixParam+(rstring)endROP + tmpOutFileSuffixParam;
+						changedTuple.nameOutputFile = nameOutputFile;
+			            changedTuple.startROP = startROP;
+			            changedTuple.endROP = endROP;
+		            	submit(changedTuple, EvalROP);
+		            }
+	            }
+				
+			}
+			
+//			onTuple emsc : 
+//			{	
+//				if(emsc.endOfData)
+//				{
+//					swap(endOfDataTuple.cdrschema.cdrSchema.networkCallReference, emsc.cdrSchema.networkCallReference);
+//					swap(endOfDataTuple.cdrschema.cdrSchema.callIdentificationNumber, emsc.cdrSchema.callIdentificationNumber);
+//					swap(endOfDataTuple.cdrschema.fHeader.fName, emsc.fHeader.fName);
+//					swap(endOfDataTuple.cdrschema.fHeader.eventCorrelationId, emsc.fHeader.eventCorrelationId);
+//					swap(endOfDataTuple.cdrschema.fHeader.sessionBeginTime, emsc.fHeader.sessionBeginTime);
+//					swap(endOfDataTuple.cdrschema.fHeader.rop, emsc.fHeader.rop);
+//					swap(endOfDataTuple.cdrschema.fHeader.emId,emsc.fHeader.emId);
+//					swap(endOfDataTuple.cdrschema.fHeader.neId, emsc.fHeader.neId);
+//					submit(endOfDataTuple, EvalROP);
+//				}
+//				else 
+//				{
+//					 if(emsc.cdrSchema.dateforStartofCharge!="" && emsc.cdrSchema.timeforStartofCharge!="")
+//					 {
+//						 
+//						 mutable rstring datetmp = "20"+regexReplace(emsc.cdrSchema.dateforStartofCharge,"-","",true)+regexReplace(emsc.cdrSchema.timeforStartofCharge,":","",true);//recoropeningtime
+//					     timestamp ts = toTimestamp(Sys.YYYYMMDDhhmmss,datetmp);
+//					     mutable float64 endTimeCDRfloat = getSeconds(ts) + getChargeableDurationInSecs(emsc.cdrSchema.chargeableDuration);
+//					     
+//					     if (endTimeCDRfloat > endROP)
+//			         	 {
+//				         	 changed = true;
+//					       	 mutable rstring datetmp = getUtilTimeStampForRop()+"00";
+//				           	 timestamp ts = toTimestamp(Sys.YYYYMMDDhhmmss,datetmp);
+//				             endROP = generateENDROP((float64)getSeconds(ts),interval)-((float64)rop_time * (float64)60);
+//				             startROP = endROP - ((float64)interval * (float64)60);
+//				             nameOutputFile = tmpOutFilePrefixParam+(rstring)endROP + tmpOutFileSuffixParam;
+//							 changedTuple.nameOutputFile = nameOutputFile;
+//				             changedTuple.startROP = startROP;
+//				             changedTuple.endROP = endROP;
+//			            	 submit(changedTuple, EvalROP);						 						 
+//							 swap(otuple.cdrschema, emsc);
+//				             otuple.nameOutputFile = nameOutputFile;
+//				             otuple.startROP = startROP;
+//				             otuple.endROP = endROP;
+//						 	 submit(otuple, EvalROP);
+//			         	 }
+//			         	 else 
+//			         	 {
+//			         	 	swap(otuple.cdrschema, emsc);
+//				         	 otuple.nameOutputFile = nameOutputFile;
+//				             otuple.startROP = startROP;
+//				             otuple.endROP = endROP;
+//				         	 submit(otuple, EvalROP);
+//			             }
+//					 }
+//			         else 
+//			         {
+//			         	 swap(otuple.cdrschema, emsc);
+//			         	 otuple.nameOutputFile = nameOutputFile;
+//			             otuple.startROP = startROP;
+//			             otuple.endROP = endROP;
+//			             otuple.startROPold = startROPold;
+//		             	 otuple.endROPold = endROPold;
+//			         	 submit(otuple, EvalROP);
+//			         }
+//				}
+//			}
+			
+//			onPunct emsc : 
+//			{
+//				if(currentPunct() == Sys.WindowMarker) 
+//					submit(Sys.WindowMarker, EvalROP);
+//			}		
+		
+//		config
+//			threadedPort : queue( ControlROP, Sys.Wait, 10000 ), queue( emsc, Sys.Wait, 100000 );	
+		}
+}
+
+stateful int32 checkInterval(rstring medname, rstring key, mutable int32 interval)
+{		
+	if ( isMediationCfgChanged() )
+	{
+		reloadMediationCfg();
+		
+		interval = (int32)getCfgParam("COMMON_CFG_DIR",medname,key);
+		
+	}
+	return interval;	
+}
+
+CdrSchemaForAggrMscWithROP initEndOfDataTuple() 
+{
+	mutable CdrSchemaForAggrMscWithROP result = {};
+	result.cdrschema.endOfData = true;
+	result.waitEnd = false;
+	result.changed = false;
+	
+	return result;
+} 
+
+CdrSchemaForAggrMscWithROP initWaitEndTuple() 
+{
+	mutable CdrSchemaForAggrMscWithROP result = {};
+	result.cdrschema.endOfData = false;
+	result.waitEnd = true;
+	result.changed = false;
+	
+	return result;
+} 
+
+CdrSchemaForAggrMscWithROP initChangedTuple() 
+{
+	mutable CdrSchemaForAggrMscWithROP result = {};
+	result.cdrschema.endOfData = false;
+	result.waitEnd = false;
+	result.changed = true;
+	
+	return result;
+} 
+
+CdrSchemaForAggrMscWithROP initOutputTuple() 
+{
+	mutable CdrSchemaForAggrMscWithROP result = {};
+	result.cdrschema.endOfData = false;
+	result.waitEnd = false;
+	result.changed = false;
+	
+	return result;
+}

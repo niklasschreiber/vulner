@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ibm.etools.webservice.wscbnd:ClientBinding xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:com.ibm.etools.webservice.wscbnd="http://www.ibm.com/websphere/appserver/schemas/5.0.2/wscbnd.xmi" xmi:id="ClientBinding_1537527860605">
+  <serviceRefs xmi:id="ServiceRef_1537527860605" serviceRefLink="service/ORACOLO_SDP_UPDATE_BL">
+    <portQnameBindings xmi:id="PortQnameBinding_1537527860605" portQnameNamespaceLink="http://localhost:8280/ORACOLO_SDP_UPDATE_BL/services/ORACOLO_SDP_UPDATE_BL" portQnameLocalNameLink="ORACOLO_SDP_UPDATE_BL" overriddenEndpointURI="http://localhost:8280/ORACOLO_SDP_UPDATE_BL/services/ORACOLO_SDP_UPDATE_BL"/>
+  </serviceRefs>
+</com.ibm.etools.webservice.wscbnd:ClientBinding>

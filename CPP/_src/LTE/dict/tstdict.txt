@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- *** Diameter protocol dictionary for the 3GPP Sh interface *** -->
+<!-- *** Based on 3GPP TS 29.329 V6.6.0 (September, 2005) *** -->
+<dictionary>
+  <vendor id="10415" name="3GPP"/> 
+  <application id="16777251" name="S6a" vendor="3GPP" service-type="Auth">
+  </application>
+</dictionary>

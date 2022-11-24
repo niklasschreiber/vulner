@@ -1,0 +1,1 @@
+"D:\_SRC\BUGGYCODE\Ruby\app\irma\funzioni\export_report_comparativo\formatter.rb" 

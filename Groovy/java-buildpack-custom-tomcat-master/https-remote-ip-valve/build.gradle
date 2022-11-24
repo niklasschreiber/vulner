@@ -1,0 +1,13 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+repositories {
+  jcenter()
+}
+
+dependencies {
+  compile 'org.apache.tomcat:tomcat-catalina:8.0.18'
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"

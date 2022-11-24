@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "0",
+    "Name": "PSRemoteRegistry",
+    "DevelopmentStatus": "Stable",
+    "Description": "The latest release version",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2014-04-17T13:23:41.56-07:00",
+    "Files": [
+      {
+        "Id": "a62566e1-4065-4dee-b740-4257a77bf530",
+        "FileName": "PSRemoteRegistry.msi",
+        "Url": "./0/a62566e1-4065-4dee-b740-4257a77bf530",
+        "Type": "Application",
+        "UploadDate": "2011-05-09T01:52:08.047-07:00"
+      },
+      {
+        "Id": "a31d0975-ebb5-4e15-aaa1-3547272ead2d",
+        "FileName": "PSRemoteRegistry.zip",
+        "Url": "./0/a31d0975-ebb5-4e15-aaa1-3547272ead2d",
+        "Type": "Source Code",
+        "UploadDate": "2014-04-17T13:23:41.373-07:00"
+      }
+    ]
+  }
+]

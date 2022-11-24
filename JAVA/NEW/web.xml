@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.0"
+ xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+ <display-name>HEALTH_CHECK_OCP</display-name>
+ <filter>
+  <filter-name>LoginFilter</filter-name>
+  <filter-class>it.poste.healthcheckocp.socket.LoginFilter</filter-class>
+ </filter>
+ <filter-mapping>
+  <filter-name>LoginFilter</filter-name>
+  <url-pattern>/index.jsp</url-pattern>
+ </filter-mapping>
+ <servlet>
+  <display-name>MonitoraggioServlet</display-name>
+  <servlet-name>MonitoraggioServlet</servlet-name>
+  <servlet-class>it.poste.healthcheckocp.socket.MonitoraggioServlet</servlet-class>
+  <load-on-startup>2</load-on-startup>
+ </servlet>
+  <servlet>
+  <display-name>SessionInvalidate</display-name>
+  <servlet-name>SessionInvalidate</servlet-name>
+  <servlet-class>it.poste.healthcheckocp.socket.SessionInvalidate</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>MonitoraggioServlet</servlet-name>
+  <url-pattern>/MonitoraggioServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>SessionInvalidate</servlet-name>
+  <url-pattern>/SessionInvalidate</url-pattern>
+ </servlet-mapping>
+ <session-config>
+  <session-timeout>20</session-timeout>
+ </session-config>
+ <welcome-file-list>
+  <welcome-file>index.jsp</welcome-file>
+ </welcome-file-list>
+</web-app>

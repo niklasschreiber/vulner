@@ -1,0 +1,80 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/36.NULL_Pointer_Dereference/C36001.cpp");
+   ("language", "CPP");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/36.NULL_Pointer_Dereference/C36001.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/36.NULL_Pointer_Dereference/C36001.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/36.NULL_Pointer_Dereference/C36001.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/36.NULL_Pointer_Dereference/C36001.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/36.NULL_Pointer_Dereference/C36001.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/36.NULL_Pointer_Dereference/C36001.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/36.NULL_Pointer_Dereference/C36001.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C36001",
+   SI(<"C36001">,
+   {[
+      {;
+      ,(1#1,17#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,17#1,!1)}
+   )
+   ,(1#1,17#1,!1)},
+
+   {"C36001",
+   FN([public],(<"C36001">,"main"):int,[],[],
+   {[
+      {VD("p",ref(char))
+      ,(12#8,12#9,!1)};
+      {{AE({V("p"),ref(char),(13#3,13#3,!1)},{CS(ref(char),{"0"N,int,(13#15,13#15,!1)}),ref(char),(13#7,13#15,!1)}),ref(char),(13#3,13#15,!1)}
+      ,(13#3,13#15,!1)};
+      {{AE({*{V("p"),ref(char),(14#4,14#4,!1)},char,(14#3,14#4,!1)},{"1"C,char,(14#8,14#10,!1)}),char,(14#3,14#10,!1)}
+      ,(14#3,14#10,!1)};
+      {RE({"0"N,int,(15#10,15#10,!1)})
+      ,(15#3,15#11,!1)}
+      ]
+   ,(11#1,16#1,!1)}
+   )
+   ,(11#1,16#1,!1)},
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/36.NULL_Pointer_Dereference/C36001.cpp",
+   [
+      M("/*\n\n\n\n\n*/",1,(1#0,1#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/36.NULL_Pointer_Dereference/C36001.cpp")),
+      M("/**  \n\n * \n **/",7,(7#0,7#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/36.NULL_Pointer_Dereference/C36001.cpp"))
+   ]
+   }
+]

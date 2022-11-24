@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coreProperties xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.openxmlformats.org/package/2006/metadata/core-properties">
+  <dc:creator>TST_COLLRPA28</dc:creator>
+  <dc:description>Blank Process</dc:description>
+  <dc:identifier>Successioni_Risottometti_Pratiche</dc:identifier>
+  <version>1.0.8</version>
+  <keywords></keywords>
+  <lastModifiedBy>UiPath.Project, Version=18.4.3.0, Culture=neutral, PublicKeyToken=null;Microsoft Windows NT 6.1.7601 Service Pack 1;.NET Framework 4.6.1</lastModifiedBy>
+</coreProperties>

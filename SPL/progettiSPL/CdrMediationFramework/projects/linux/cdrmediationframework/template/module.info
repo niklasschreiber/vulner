@@ -1,0 +1,82 @@
+#---------------------------------------------------------------------
+#
+# File:         module.info
+# Project:      
+# Component:    
+# Description:  Variable environment for the module
+# Version:      1
+#
+# Author:       Antonino Di Guardo
+# Date:         04/10/2013
+# Last Update:  
+# Copyright(c): GFM Integration 2013
+#
+#---------------------------------------------------------------------
+
+
+###############################################################################
+#
+# Module source directories
+#
+###############################################################################
+BIN_CFG_DIR =bin_cfg
+BIN_SRC_DIR =bin_src
+BIN_SCRIPT_DIR =bin_script
+LIB_CFG_DIR =lib_cfg
+LIB_INCLUDE_DIR =lib_include
+LIB_SRC_DIR =lib_src
+
+APP_DIR =$(DEVELOP_SRC_DIR)/$(MODULE)
+APP_BIN_CFG_DIR =$(APP_DIR)/$(BIN_CFG_DIR)
+APP_BIN_SRC_DIR =$(APP_DIR)/$(BIN_SRC_DIR)
+APP_BIN_SCRIPT_DIR =$(APP_DIR)/$(BIN_SCRIPT_DIR)
+APP_LIB_CFG_DIR =$(APP_DIR)/$(LIB_CFG_DIR)
+APP_LIB_INCLUDE_DIR =$(APP_DIR)/$(LIB_INCLUDE_DIR)
+APP_LIB_SRC_DIR =$(APP_DIR)/$(LIB_SRC_DIR)
+
+###############################################################################
+#
+# Module building directories
+#
+###############################################################################
+
+#######################################
+# Building directories
+#######################################
+OBJ_DIR =$(BUILD_OBJ_DIR)/$(MODULE)
+
+OUT_DIR =$(BUILD_OUT_DIR)/$(MODULE)
+OUT_BIN_DIR =$(OUT_DIR)/bin
+OUT_CFG_DIR =$(OUT_DIR)/cfg
+OUT_LIB_DIR =$(OUT_DIR)/lib
+OUT_LOG_DIR =$(OUT_DIR)/log
+
+
+###############################################################################
+#
+# Module scripts
+#
+###############################################################################
+
+#######################################
+# Installation scripts
+#######################################
+INSTALL_LIB_FILE =../../template/install_lib.script
+INSTALL_BIN_FILE =../../template/install_bin.script
+INSTALL_PURIFY_FILE =../../template/install_purify.script
+
+
+###############################################################################
+#
+# Module integration directories
+#
+###############################################################################
+INT_MAKE_DIR =$(INTEGRATE_MAKE_DIR)/$(MODULE)
+
+INT_DIR =$(INTEGRATE_SRC_DIR)/$(MODULE)
+INT_BIN_CFG_DIR =$(INT_DIR)/$(BIN_CFG_DIR)
+INT_BIN_SRC_DIR =$(INT_DIR)/$(BIN_SRC_DIR)
+INT_BIN_SCRIPT_DIR =$(INT_DIR)/$(BIN_SCRIPT_DIR)
+INT_LIB_CFG_DIR =$(INT_DIR)/$(LIB_CFG_DIR)
+INT_LIB_INCLUDE_DIR =$(INT_DIR)/$(LIB_INCLUDE_DIR)
+INT_LIB_SRC_DIR =$(INT_DIR)/$(LIB_SRC_DIR)

@@ -1,0 +1,98 @@
+{
+   ("encoding", "KSC5601");
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c");
+   ("language", "C");
+   ("include", "<assert.h>");
+   ("include", "<stdio.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c");
+   (!10, "s1.str\t%s\n"S);
+   (!11, "s.n\t%d\n"S);
+   (!2, "argc");
+   (!3, "argv");
+   (!4, "s1");
+   (!5, "s2");
+   (!6, "1"N);
+   (!7, "0"N);
+   (!8, "hello"S);
+   (!9, "s1.n\t%d\n"S);
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c",
+   SF([public,extern],int,<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c">,"nondet")
+   ,(12#12,12#12,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c",
+   SF([public],record((,S)),<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c">,"global_s")
+   ,(34#10,34#10,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c",
+   FN([public],(<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c">,"test_struct_01"):int,[(!2:int,(14#24,14#24,!1)),(!3:arr(ref(char)),(14#36,14#36,!1))],[],
+   {[
+      {VD(!4,record((,S)))
+      ,(16#14,16#14,!1)};
+      {VD(!5,alias("s",record((,S))),([],[{!6,int,(17#14,17#14,!1)}]))
+      ,(17#7,17#7,!1)};
+      {{AE({OA({V(!4),record((,S)),(20#5,20#5,!1)},"n"),int,(20#5,20#5,!1)},{!7,int,(20#12,20#12,!1)}),int,(20#5,20#5,!1)}
+      ,(20#5,20#13,!1)};
+      {{AE({OA({V(!4),record((,S)),(21#5,21#5,!1)},"str"),ref(char),(21#5,21#5,!1)},{!8,arr(char),(21#14,21#14,!1)}),ref(char),(21#5,21#5,!1)}
+      ,(21#5,21#21,!1)};
+      {IF({CA(<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c">,"nondet"),mod(int,[extern]),(23#9,23#9,!1)},
+         {[
+            {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c">,"printf"),[arr(char),int],[{!9,arr(char),(24#16,24#16,!1)},{OA({V(!4),record((,S)),(24#30,24#30,!1)},"n"),int,(24#30,24#30,!1)}])
+            ,(24#9,24#9,!1)};
+            {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c">,"printf"),[arr(char),ref(char)],[{!10,arr(char),(25#16,25#16,!1)},{OA({V(!4),record((,S)),(25#32,25#32,!1)},"str"),ref(char),(25#32,25#32,!1)}])
+            ,(25#9,25#9,!1)}
+            ]
+         ,(23#17,26#5,!1)},
+         {[
+            {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c">,"assert"),[bool],[{BO(==,{OA({V(!5),alias("s",record((,S))),(27#16,27#16,!1)},"n"),int,(27#16,27#16,!1)},{!6,int,(27#24,27#24,!1)}),bool,(27#16,27#16,!1)}])
+            ,(27#9,27#9,!1)};
+            {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c">,"assert"),[bool],[{BO(==,{OA({V(!5),alias("s",record((,S))),(28#16,28#16,!1)},"str"),ref(char),(28#16,28#16,!1)},{!7,int,(28#26,28#26,!1)}),bool,(28#16,28#16,!1)}])
+            ,(28#9,28#9,!1)}
+            ]
+         ,(26#12,29#5,!1)})
+      ,(23#5,29#5,"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c")};
+      {RE({!7,int,(31#12,31#12,!1)})
+      ,(31#5,31#5,!1)}
+      ]
+   ,(14#5,32#1,!1)}
+   )
+   ,(14#5,32#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c",
+   FN([public],(<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c">,"test_struct_02"):int,[],[],
+   {[
+      {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c">,"printf"),[arr(char),int],[{!11,arr(char),(39#12,39#12,!1)},{OA({CA(<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c">,"global_s"),record((,S)),(39#25,39#25,!1)},"n"),int,(39#25,39#25,!1)}])
+      ,(39#5,39#5,!1)};
+      {RE0
+      ,(!)}
+      ]
+   ,(36#5,40#1,!1)}
+   )
+   ,(36#5,40#1,!1)}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c",
+   CL([struct],(,S),[])
+   {
+      ([public],"n":int,(6#9,6#9,!1));
+      ([public],"str":ref(char),(7#11,7#11,!1))
+   }
+   ,(4#8,4#8,!1)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c",
+   [
+      S("// FIX use of uninitialized variable: initialize s1\n",19),
+      S("// uninitialized field\n",24),
+      S("// uninitialized pointer\n",25),
+      S("// fields of global_s are initialized with 0.\n",38),
+      S("// global_s.n = 0\n",39)
+   ]
+   }
+]

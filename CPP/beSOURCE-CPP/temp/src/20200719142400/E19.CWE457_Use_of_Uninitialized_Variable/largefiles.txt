@@ -1,0 +1,1 @@
+"D:\_SRC\BESource-samples\beSOURCE-CPP\temp\src\20200719142400\E19.CWE457_Use_of_Uninitialized_Variable\CWE457_Use_of_Uninitialized_Variable__struct_array_malloc_partial_init_01.cpp.coil" 

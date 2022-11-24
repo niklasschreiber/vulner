@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet href="/cgi/menu.xsl" type="text/xsl"?>
+<menu>
+	<topic title="Global Title Translator">
+		<link title="Import" rel="service" href="import_gtt.cgi" />
+		<link title="Network Nodes" rel="service" href="gttnodes.cgi" />
+		<link title="Mobile Global Titles" rel="service" href="gttmgt.cgi" />
+		<link title="Send Command" rel="service" href="gttcmd.cgi?OPERAZIONE=CREA_INS" />
+	</topic>
+	<topic title="Steering Rules">
+		<link title="Pre-Steering" rel="service" href="rules_pre_steering.cgi" />
+		<link title="Steering" rel="service" href="rules_steering.cgi" />
+	</topic>
+	<topic title="Configuration">
+		<link title="Countries" rel="service" href="country.cgi" />
+		<link title="Countries Groups" rel="service" href="country_group.cgi" />
+		<link title="Operators" rel="service" href="operator.cgi" />
+		<link title="Operators Groups" rel="service" href="operator_group.cgi" />
+		<link title="Device-specific Strategies" rel="service" href="nostdtac.cgi" />
+		<link title="IMSI Black List" rel="service" href="imsi_bl.cgi" />
+		<link title="Home Network" rel="service" href="home_network.cgi" />
+		<link title="User Definitions" rel="service" href="usertype.cgi?DB=DESC" />
+		<link title="User Types" rel="service" href="usertype.cgi?DB=TYPE" />
+	</topic>
+	<topic title="Management">
+		<link title="IMSI GSM" rel="service" href="imsi.cgi?DBIMSI=IMSI-GSM-MBE-PATH" />
+		<link title="IMSI DAT" rel="service" href="imsi.cgi?DBIMSI=IMSI-DAT-MBE-PATH" />
+		<link title="IMSI LTE" rel="service" href="imsi.cgi?DBIMSI=IMSI-LTE-MBE-PATH" />
+		<link title="Apply" rel="service" href="apply.cgi" />
+		<link title="Unknown VLR" rel="service" href="unknown_vlr.txt" />
+	</topic>
+	<topic title="Provisioning">
+		<link title="Import Countries" rel="service" href="import_country.cgi" />
+		<link title="Import Operators" rel="service" href="import_operator.cgi" />
+		<link title="Import IMSI Black List" rel="service" href="import_bl.cgi" />
+		<link title="Update Operators" rel="service" href="country_operator_group_upd.cgi" />
+		<link title="Export Operators" rel="service" href="export_operator.cgi" />
+		<link title="Export IMSI Black List" rel="service" href="export_bl.cgi" />
+		<link title="Download" rel="service" href="download/" />
+	</topic>
+	<topic title="Web Configuration">
+		<link title="WebServer Config" rel="service" href="sconfig.cgi?NAME=Configuration&amp;FILE=/usr/tandem/webserver/conf/tfs.config" />
+		<link title="INI LTE" rel="service" href="editconfig.cgi?NAME=INI File&amp;FILE=/G/sas3/tfs9base/tfsltini&amp;XML=/usr/tandem/webserver/tfs9/IniSchema/lte/ini_schema.xml&amp;USER=admin" />
+		<link title="INI MAP Inbound" rel="service" href="editconfig.cgi?NAME=INI File&amp;FILE=/G/sas3/tfs9base/tfinini&amp;XML=/usr/tandem/webserver/tfs9/IniSchema/mapin/ini_schema.xml&amp;USER=admin" />
+		<link title="INI MAP Outbound" rel="service" href="editconfig.cgi?NAME=INI File&amp;FILE=/G/sas3/tfs9base/tfoutini&amp;XML=/usr/tandem/webserver/tfs9/IniSchema/mapout/ini_schema.xml&amp;USER=admin" />
+		<link title="INI MAP Relay" rel="service" href="editconfig.cgi?NAME=INI File&amp;FILE=/G/sas3/tfs9base/tfrelini&amp;XML=/usr/tandem/webserver/tfs9/IniSchema/maprel/ini_schema.xml&amp;USER=admin" />
+		<link title="INI Steering" rel="service" href="editconfig.cgi?NAME=INI File&amp;FILE=/G/sas3/tfs9base/tfsini&amp;XML=/usr/tandem/webserver/tfs9/IniSchema/steering/ini_schema.xml&amp;USER=admin" />
+	</topic>
+	<topic title="Web Monitor">
+		<link rel="alternate" href="monitor.cgi?FILE=/G/sas3/tfs9base/tfsini" />
+	</topic>
+	<topic title="PPLMN Plugin">
+		<link title="Pending" rel="service" href="pplmn/tfspend.cgi" />
+		<link title="Journal" rel="service" href="pplmn/tfsjour.cgi?DBJOUR=DB-TFS-JOURNAL-PATH" />
+		<link title="MSISDN Black List" rel="service" href="pplmn/wblist/wblist_n.cgi?OPERATION=DISPLAY&amp;SEZIONE_INI=BLACKMSISDN" />
+		<link title="MSISDN White List" rel="service" href="pplmn/wblist/wblist_n.cgi?OPERATION=DISPLAY&amp;SEZIONE_INI=WHITEMSISDN" />
+		<link title="PLMN Definition" rel="service" href="pplmn/scripts.cgi" />
+		<link title="CC-PLMN" rel="service" href="pplmn/tfsplmn.cgi" />
+		<link title="Report" rel="service" href="pplmn/tfs_report.htm?DBJOUR=DB-TFS-JOURNAL-PATH" />
+		<link title="Ext.Journal" rel="service" href="pplmn/tfsjour.cgi?DBJOUR=DB-TFS-JOUREXT-PATH" />
+		<link title="Ext.Report" rel="service" href="pplmn/tfs_report.htm?DBJOUR=DB-TFS-JOUREXT-PATH" />
+	</topic>
+
+</menu>

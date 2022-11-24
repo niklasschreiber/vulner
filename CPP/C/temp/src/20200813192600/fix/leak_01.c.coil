@@ -1,0 +1,63 @@
+{
+   ("encoding", "KSC5601");
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_01.c");
+   ("language", "C");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_01.c");
+   (!2, "s");
+   (!3, "p");
+   (!4, "0"N);
+   (!5, "malloc"S);
+   (!6, "1"N);
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_01.c",
+   FN([public],(<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_01.c">,"aux_malloc"):ref(unit),[(!2:record((,size_t)),(4#25,4#25,!1))],[],
+   {[
+      {VD(!3,ref(unit))
+      ,(6#11,6#11,!1)};
+      {IF0({BO(==,{AE({V(!3),ref(unit),(8#10,8#10,!1)},{SC((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_01.c">,"malloc"),[record((,size_t))],[{V(!2),record((,size_t)),(8#21,8#21,!1)}]),top,(8#14,8#14,!1)}),ref(unit),(8#9,8#9,!1)},{!4,int,(8#28,8#28,!1)}),bool,(8#9,8#9,!1)},
+         {[
+            {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_01.c">,"perror"),[arr(char)],[{!5,arr(char),(9#16,9#16,!1)}])
+            ,(9#9,9#9,!1)};
+            {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_01.c">,"exit"),[int],[{!6,int,(10#14,10#14,!1)}])
+            ,(10#9,10#9,!1)}
+            ]
+         ,(8#34,11#5,!1)})
+      ,(8#5,11#5,"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_01.c")};
+      {RE({V(!3),ref(unit),(13#12,13#12,!1)})
+      ,(13#5,13#5,!1)}
+      ]
+   ,(4#7,14#1,!1)}
+   )
+   ,(4#7,14#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_01.c",
+   FN([public],(<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_01.c">,"leak_test"):unit,[],[],
+   {[
+      {VD(!3,ref(int))
+      ,(18#10,18#10,!1)};
+      {{AE({V(!3),ref(int),(20#5,20#5,!1)},{SC((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_01.c">,"aux_malloc"),[record((,size_t))],[{SO(int),int,(20#20,20#20,!1)}]),ref(unit),(20#9,20#9,!1)}),ref(int),(20#5,20#5,!1)}
+      ,(20#5,20#32,!1)};
+      {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_01.c">,"free"),[ref(int)],[{V(!3),ref(int),(22#10,22#10,!1)}])
+      ,(22#5,22#5,!1)};
+      {RE0
+      ,(!)}
+      ]
+   ,(16#6,23#1,!1)}
+   )
+   ,(16#6,23#1,!1)},
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_01.c",
+   [
+      S("// FIX resource leak: release p.\n",21),
+      S("// Local variables:\n",26),
+      S("// compile-command: \"clang -std=c99 -pedantic -Wall -c leak-02.c && \\\n// c2coil.sh leak-02.c\"\n",27),
+      S("// End:\n",29)
+   ]
+   }
+]

@@ -1,0 +1,532 @@
+namespace com.ti.oss.pm.mediation.ericsson.e3g.utils;
+
+
+/*
+ * Import ext namespaces
+ */
+use com.ibm.streamsx.file::*;
+
+/*
+ * Import local namespaces
+ */
+use com.ti.oss.common.types::*;
+use com.ti.oss.common.event::*;
+//use com.ti.oss.common.pm.parser::*;
+use com.ti.oss.common.util.cfg::*;
+
+
+
+/** 
+ * The Duplicates Check Parser (DCheckParser) operator is in charge to parse the 3GPP XML DTD files and
+ * check for duplicated moids (potential duplicates) during the parsing operation.
+ */ 
+public composite DCheckParserWithEof(input OFReaderDTD,OutEoF ; output ORawData, OEvent)
+{
+	param
+		expression <rstring> $mediationId;
+        expression <rstring> $commonEnv : "COMMON_CFG_DIR";
+        expression <rstring> $eventsListCfgParam : "EVENT_TYPE_LIST";
+
+    type 
+       FReaderT = FileHeader, tuple<blob rawBlock>;
+       MParserT = FileHeader, tuple<rstring moid>;
+       DHandlerT = FileHeader, tuple<map<rstring, int32> dTable>;
+       
+       // Parser data structures
+       XmlRawHeader = FileHeader fHeader, rstring fName, rstring vName, rstring sName, rstring sType, rstring cbt ;
+       XmlRawMvBlock = rstring moid, list<rstring> r ;
+       XmlRawMiBlock = rstring mts, rstring gp, list<rstring> mt, list<XmlRawMvBlock> mv ;
+
+	graph
+	
+
+       /**
+        * The MParser is in charge to parse the XML block in order fetch the moid.  
+        */
+       (stream<MParserT> OMParser) as MParser = XMLParse(OFReaderDTD  as I) {
+          
+          param 
+             trigger : "/mdc/md/mi/mv/moid";
+             parsing : permissive;  // log and ignore errors
+             xmlInput : rawBlock ;
+             
+          output OMParser : 
+                  fName = I.fName,
+                  eventCorrelationId = I.eventCorrelationId,
+                  sessionBeginTime = I.sessionBeginTime,
+                  rop = I.rop,
+                  emId = I.emId,
+                  neId = I.neId,
+                  moid = XPath("text()"); // *trigger: /mdc/md/mi/mv/moid
+           config
+				threadedPort: queue(I, Sys.Wait, 1000);
+       } // End MParser Operator
+       
+
+       /**
+        * The DHandler operator is in charge to manage the table of duplicates. It submits
+        * a table of duplicates + the FileHeader.
+        */
+	   (stream<rstring fName> ODHandlerFileName; stream<DHandlerT> ODHandler; stream<Event e> DHandlerEvent) as DHandler = Custom (OMParser as I; OutEoF) 
+	   {
+			logic
+				
+				state : 
+				{
+				  mutable ODHandler oDHandler = {};
+				  mutable Event event = {}; 
+				  mutable rstring rawFile = "";
+				  mutable map<int32, boolean> eventTable = getEventTable($commonEnv, $mediationId, $eventsListCfgParam);
+				}		
+				
+				
+				onTuple OutEoF :
+				{
+                   
+                   //appTrc(Trace.info, "DCheckParserWithEof OutEoF: " + (rstring)OutEoF) ;
+                   
+                   if(e!=0) {
+                      appTrc(Trace.warn, "DHandler - failed to open file \"" + fName + "\"") ;
+                      
+                      // Generate failure event
+                      mutable Event errorEvent = {}; 
+                      errorEvent.eventType = 110;
+                      errorEvent.resultCode = 2;
+                      errorEvent.rawFile = filename(fName);
+                      errorEvent.eventText = "Failed to open input file " + fName;
+
+                      mkEvent(errorEvent);
+                      submit ({e=errorEvent}, DHandlerEvent);
+                   } 
+				}
+				
+				onTuple OMParser :
+				{
+                   
+                   //appTrc(Trace.info, "DCheckParserWithEof OMParser: " + (rstring)OMParser) ;
+                   
+                   if(filename(fName) != rawFile) {                      
+                      
+                      rawFile = filename(fName);
+                      oDHandler.fName = OMParser.fName; 
+                      oDHandler.eventCorrelationId = OMParser.eventCorrelationId;
+                      oDHandler.sessionBeginTime = OMParser.sessionBeginTime;
+                      oDHandler.rop = OMParser.rop;
+                      oDHandler.emId = OMParser.emId;
+                      oDHandler.neId = OMParser.neId;
+                      
+                      // Submit the File polled event created by the FReader operator
+                      event.eventId = OMParser.eventCorrelationId;
+                      event.eventCorrelationId = OMParser.eventCorrelationId;
+                      event.eventType = 110;
+                      event.eventTime = OMParser.sessionBeginTime;
+                      event.processingTime = 0l;
+                      event.resultCode = 0;
+                      event.rawFile = rawFile;
+                      event.rop = "";
+                      event.emId = "";
+                      event.neId = "";
+                      event.eventText = "File polled";
+                      submit ({e=event}, DHandlerEvent);                                             
+                   }
+                   
+                    if(has(oDHandler.dTable, moid)) {
+                       oDHandler.dTable[moid]++;
+                    } else {
+                       // Add an entry into cache
+                       insertM( oDHandler.dTable, moid, 1) ;                    
+                    }
+                    
+                }
+                
+                onPunct OMParser :
+                {
+                    if(currentPunct() == Sys.WindowMarker) {
+
+                       mutable int32 nOfMoids = 0;
+                       mutable int32 nOfDuplicates = 0;
+                       mutable map<rstring, int32> tmpTable = {};
+                       for (rstring k in oDHandler.dTable) {
+                          if(oDHandler.dTable[k] > 1) {
+                            nOfDuplicates++;
+                            insertM( tmpTable, k, oDHandler.dTable[k]);
+                          }
+                          nOfMoids++;
+                       }
+                       swap(oDHandler.dTable, tmpTable);
+                       
+                       // Submit the duplicates table
+                       submit(oDHandler, ODHandler) ;
+                      
+                       // Generate the event 
+                       event.eventType = 111;
+                       event.resultCode = 0;
+                       event.eventText = (nOfDuplicates > 0 ) ? "The raw file with " + (rstring)nOfMoids + " moids contains " + (rstring)nOfDuplicates + " potential duplicates"
+                                                              : "The raw file does not contain potential duplicates (defrag not needed)";
+
+                       uint64 eTime = event.eventTime;
+                       boolean eventEnabled = mkEvent(event, eTime, eventTable);
+                       if(eventEnabled) {
+                         submit ({e=event}, DHandlerEvent);
+                       }
+                       
+                       // Debug trace
+                       appTrc(Trace.info, "DHandler - the raw file \"" + rawFile + "\" contains " + (rstring)nOfDuplicates + " potential duplicates") ;
+
+                       // Submit the filename 
+                       submit({fName=oDHandler.fName}, ODHandlerFileName); 
+                                              
+                       // Clear the state
+                       rawFile = "";
+                       oDHandler.fName = ""; 
+                       oDHandler.eventCorrelationId = "";
+                       oDHandler.sessionBeginTime = (uint64)0;
+                       oDHandler.rop = "";
+                       oDHandler.emId = "";
+                       oDHandler.neId = "";
+                       clearM(oDHandler.dTable);
+					}
+                }	 
+                config
+				threadedPort: queue(I, Sys.Wait, 1000);   
+	   } // End DHandler Operator
+
+       /**
+        * The FPReader (File Parser Reader) operator is in charge to read the file at blocks.
+        */
+       (stream<FReaderT> OFPReader) as FPReader = FileSource(ODHandlerFileName as I)
+       {
+			logic
+			
+			
+				onTuple ODHandlerFileName :
+				{
+				   // Debug traces
+                   appTrc(Trace.info, "FPReader - reading file " + fName + "...") ;
+				}
+
+			param
+			
+                /*
+                 * The file is read at blocks.
+                 */
+				format: block ;
+				
+				/*
+				 * The block size (8k)
+				 */
+				blockSize: 8192u;
+				
+				/*
+				 * The input file is assumed to be formatted correctly, and no runtime checks are performed.
+				 */
+				parsing: fast;
+				
+				/*
+				 * If the input file cannot be opened, the FileSource operator logs an error 
+				 * and proceeds with the next input file.
+				 */
+				ignoreOpenErrors: true;
+				
+				/*
+				 * Path of the RAW Archive Directory, it should be configurable.
+				 */
+				//moveFileToDirectory: <Path of the RAW Archive Directory>; 
+				
+				/*
+				 * To hanlde file gzipped. It should be configurable.
+				 */
+				//compression: gzip;
+				
+				
+			output
+
+				OFPReader : 
+				   fName = FileName(),
+                   eventCorrelationId = "",
+                   sessionBeginTime = 0ul,
+                   rop = "",
+                   emId = "",
+                   neId = ""; 
+           config
+			threadedPort: queue(I, Sys.Wait, 10);
+				
+       } // End FPReader Operator
+       
+
+		(stream<XmlRawHeader> Header ; stream<rstring networkElementDN>	NetworkElementDN ; stream<XmlRawMiBlock> MiBlock) = XMLParse(OFPReader as I)
+		{
+			param
+				trigger : "/mdc/mfh", "/mdc/md/neid/nedn", "/mdc/md/mi" ;
+				parsing : permissive ;
+				xmlInput : rawBlock ;
+				
+			output
+			
+				Header : fHeader = {eventCorrelationId = OFPReader.eventCorrelationId,
+				                    sessionBeginTime = OFPReader.sessionBeginTime,
+				                    fName = OFPReader.fName,
+				                    rop = OFPReader.rop,
+				                    emId = OFPReader.emId,
+				                    neId = OFPReader.neId
+				                    }, 
+				         vName = XPath("vn/text()"), 
+				         sName = XPath("sn/text()"), 
+				         sType = XPath("st/text()"), 
+				         cbt = XPath("cbt/text()") ;
+				         
+				NetworkElementDN : networkElementDN = XPath("text()") ;
+				MiBlock : mts = XPath("mts/text()"), gp = XPath("gp/text()"), mt =
+					XPathList("mt/text()"), mv = XPathList("mv", { moid =
+					XPath("moid/text()"), r = XPathList("r/text()") }) ;
+		
+			config
+			threadedPort: queue(I, Sys.Wait, 10000);
+
+		}
+		
+
+		(stream<XmlRawHeader> EofHeader;stream<rstring networkElementDN> EofNetworkElementDN;stream<XmlRawMiBlock, tuple<rstring fName, boolean eof>> EofMiBlock)= Custom(Header as I1; NetworkElementDN as I2; MiBlock as I3) 
+		{
+       		logic state : 
+       		{
+       			mutable EofMiBlock eofTuple = {};
+       			mutable boolean fileIsChanged = true;
+       			mutable rstring fName;
+       			
+       		}
+       		onTuple I1 :
+       		{
+       			if(fileIsChanged) 
+       			{
+       				eofTuple.fName = I1.fHeader.fName;
+       				fileIsChanged = false;
+       			}
+       			submit(I1, EofHeader);
+       		}
+       		onTuple I2 :
+       		{
+       			submit(I2, EofNetworkElementDN);
+       		}
+       		onTuple I3 :
+       		{
+       			submit({mts = I3.mts, gp = I3.gp, mt = I3.mt, mv = I3.mv, fName = eofTuple.fName, eof = false}, EofMiBlock);
+       		}
+       		onPunct I3 : 
+       		{
+       			eofTuple.eof = true;
+       			submit(eofTuple, EofMiBlock);
+       			fileIsChanged = true;
+       			
+       			if(currentPunct() == Sys.WindowMarker) {
+       				submit(Sys.WindowMarker, EofMiBlock);
+       			}
+       		}
+       }
+
+
+		(stream<RawDataHeader rHeader, ERawDataBlock rBblock> ORawData; stream<Event e> ParserEvent) as EDtdParser = Custom(EofHeader; EofNetworkElementDN; EofMiBlock; ODHandler)
+		{
+			logic
+				state :
+				{
+				    // Counter of potential duplicates
+                    mutable int32 pDuplicates = 0;
+                    
+                    // Data structure for the output
+				    mutable ORawData oRawData = {};
+				
+				    // Table of duplicated moids - potential duplicates in OMeS
+				    //mutable map<rstring, int32> pDTable;
+				    				    
+					// Event table loaded from configuration
+                    mutable map<int32, boolean> eventTable = getEventTable($commonEnv, $mediationId, $eventsListCfgParam);
+                    
+                    mutable map<rstring, ODHandler> odHandlerMap;
+				}
+
+				onTuple ODHandler :
+				{
+					insertM(odHandlerMap, ODHandler.fName, ODHandler);
+					
+				    //oRawData.rHeader.fileHeader.fName = ODHandler.fName;
+				    //oRawData.rHeader.fileHeader.eventCorrelationId = ODHandler.eventCorrelationId;
+                    //oRawData.rHeader.fileHeader.sessionBeginTime = ODHandler.sessionBeginTime;
+                    //swap(pDTable, ODHandler.dTable); 
+                }
+                
+				onTuple EofHeader :
+				{
+                    // Copy the input header into output header
+                    oRawData.rHeader.fileHeader.fName = fHeader.fName;
+                    oRawData.rHeader.vName = vName ;
+					oRawData.rHeader.sName = sName ;
+					oRawData.rHeader.sType = sType ;
+					oRawData.rHeader.cbt = cbt ;
+					                    
+					// Debug traces 
+					appTrc(Trace.info, "EDtdParser - parsing new file with header <eventCorrelationId=" + oRawData.rHeader.fileHeader.eventCorrelationId + 
+					                    ", fName=\"" + oRawData.rHeader.fileHeader.fName + "\", vName=" + vName + ", sName=" + sName + ", sType=" + sType + 
+					                    ", cbt=" + cbt + ">") ;
+				}
+
+				onTuple EofNetworkElementDN :
+				{
+                    //RawDataBlock = tuple<rstring neDn, rstring measInfoId, rstring gp, rstring moid, map<rstring, rstring> cTable>
+					oRawData.rBblock.neDn = networkElementDN ;
+
+					// Debug traces
+					appTrc(Trace.trace, "EDtdParser - parsed neDn " + networkElementDN) ;
+				}
+
+				onTuple EofMiBlock :
+				{
+					if(EofMiBlock.eof)
+					{
+						// Submit event tuple
+						mutable Event event = {};		
+             	        event.eventType = 130;
+                        event.resultCode = 0;
+                        event.rawFile = filename(oRawData.rHeader.fileHeader.fName);
+                        event.eventCorrelationId = oRawData.rHeader.fileHeader.eventCorrelationId;
+                        event.rop = oRawData.rHeader.fileHeader.rop;
+                        event.emId = oRawData.rHeader.fileHeader.emId;
+                        event.neId = oRawData.rHeader.fileHeader.neId;
+                        event.eventText = "The raw file has been parsed";
+                        boolean eventEnabled = mkEvent( event, oRawData.rHeader.fileHeader.sessionBeginTime, eventTable );
+                        if(eventEnabled) submit ({e=event}, ParserEvent);
+						
+						// Send punctuation
+						submit(Sys.WindowMarker, ORawData) ;
+
+						// Clear local objects
+						clearM(oRawData.rBblock.cTable) ;
+
+						// Debug traces
+						if(pDuplicates > 0) {
+                          appTrc(Trace.info, "EDtdParser - the \"" + oRawData.rHeader.fileHeader.fName + "\" file has been parsed, it contains " + (rstring)pDuplicates + " potential duplicates." ) ;
+                          pDuplicates = 0;                   
+                        } else {
+                          appTrc(Trace.info, "EDtdParser - the \"" + oRawData.rHeader.fileHeader.fName + "\" file has been parsed" ) ;                        
+                        }
+                        
+                        // clear the state
+                        //clearM(pDTable);
+					    oRawData.rHeader.fileHeader.eventCorrelationId = "";
+					    oRawData.rHeader.fileHeader.sessionBeginTime=(uint64)0;
+					    oRawData.rHeader.fileHeader.fName = "";
+					    oRawData.rHeader.fileHeader.rop = "";
+					    oRawData.rHeader.fileHeader.emId = "";
+					    oRawData.rHeader.fileHeader.neId = "";    
+					     
+					    if(has(odHandlerMap, EofMiBlock.fName)) {
+							removeM(odHandlerMap, EofMiBlock.fName);
+						}    
+					
+					}
+					else
+					{
+	                    appTrc(Trace.trace, "EDtdParser - processing <mi> block neDn=\"" + oRawData.rBblock.neDn + "\"...");
+	
+						if(has(odHandlerMap, EofMiBlock.fName)) {
+							oRawData.rHeader.fileHeader.eventCorrelationId = odHandlerMap[EofMiBlock.fName].eventCorrelationId;
+                    		oRawData.rHeader.fileHeader.sessionBeginTime = odHandlerMap[EofMiBlock.fName].sessionBeginTime;
+                    	}
+						oRawData.rBblock.measInfoId = "" ;
+						oRawData.rBblock.mts = mts ;
+						oRawData.rBblock.gp = gp ;
+	                    int32 mtSize = size(mt);
+	                    
+						// Now fill the cTable
+						mutable RawCounterTableEntry entry = {};    
+						for(int32 i in range(mv))
+						{
+						    // Makes the block i <moid, cTable> 
+							oRawData.rBblock.moid = mv [ i ].moid ;
+							
+							// Check if the block is a potential duplicate
+							if(has(odHandlerMap, EofMiBlock.fName) && 
+								has(odHandlerMap[EofMiBlock.fName].dTable, oRawData.rBblock.moid)) {
+							  pDuplicates++;
+							  oRawData.rBblock.duplicate = true;
+							
+							} else {
+							  oRawData.rBblock.duplicate = false;
+							}
+								
+	                        // Check if the block mv is valid, meaning the number of cValues (<r></r>) is equal to the
+	                        // number of CNames (<mt></mt>.
+	                        if(size(mv [ i ].r) == mtSize) {
+							   // Debug traces
+	                           appTrc(Trace.trace, "EDtdParser - processing block having moid=\"" + oRawData.rBblock.moid + "\"...") ;
+	                           mutable boolean validCounter = true;
+	                           for(int32 j in range(mt))
+	                           {                           
+	                               entry.cName = mt [ j ];
+	                               if(length(mv [ i ].r [ j ]) > 0)  {
+	                                  entry.cValue = trim(mv [ i ].r [ j ], " ");
+	                                  
+	                                  // Check if cValue contains a valid value
+	                                  if(findFirst(entry.cValue, ",", 0) < 0) {
+	                                     // Its a scalar so I check if a valid number
+	                                     mutable float64 x = 0.0;
+	                                     if( parseNumber(x, entry.cValue) < 0 ) 
+	                                       validCounter = false;
+	                                  }                                     
+								   } else {
+	                                  //appTrc(Trace.trace, "EDtdParser - setting empty counter \"" + mt [ j ] + "\" to NIL...") ;
+	                                  entry.cValue = "NIL";
+								   }
+								   
+								   if(validCounter)
+								     appendM(oRawData.rBblock.cTable, entry);
+								     
+								   validCounter = true;  
+							   }
+	
+	                           // Submit the rowDataBlock
+	                           submit(oRawData, ORawData); 
+	                                   
+	                           // Create the list of counters
+	                           clearM(oRawData.rBblock.cTable) ;
+	                        } else {
+	                           
+	                           appLog(Log.warn, "EDtdParser - Discarding malformed block with moid=\"" + oRawData.rBblock.moid + "\"..." );
+	                           
+							   // Submit the error event
+	                           mutable Event event = {};		
+	                           event.eventType = 130;
+	                           event.resultCode = 5;
+	                           event.rawFile = filename(oRawData.rHeader.fileHeader.fName);
+	                           event.eventCorrelationId = oRawData.rHeader.fileHeader.eventCorrelationId;
+	                           event.rop = oRawData.rHeader.fileHeader.rop;
+	                           event.emId = oRawData.rHeader.fileHeader.emId;
+	                           event.neId = oRawData.rHeader.fileHeader.neId;
+	                           event.eventText = "Discarded malformed block with moid " + oRawData.rBblock.moid;
+	                           mkEvent( event, oRawData.rHeader.fileHeader.sessionBeginTime);
+	                           submit ({e=event}, ParserEvent);
+	                        } 
+	                        
+						} //EndFor
+					}
+
+				}
+
+		} // End EDtdParser operator
+		
+		
+		/**
+		 * Event Aggregator operator
+		 */
+		(stream<Event e> OEvent) as EDxmlParserMerger = Custom(DHandlerEvent, ParserEvent as E)
+        {
+           logic
+                          
+           onTuple E :
+            {
+               submit(E, OEvent);
+            }           
+        }
+		
+}
+

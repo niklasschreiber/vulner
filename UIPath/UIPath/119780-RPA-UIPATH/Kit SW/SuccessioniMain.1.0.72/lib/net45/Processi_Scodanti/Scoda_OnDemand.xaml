@@ -1,0 +1,1497 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="Scoda_OnDemand"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:nj="clr-namespace:Newtonsoft.Json;assembly=Newtonsoft.Json"
+ xmlns:s="clr-namespace:SuccessioniLibrary_v01;assembly=SuccessioniLibrary_v01"
+ xmlns:s1="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>Scoda_OnDemand_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>SuccessioniLibrary</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>SuccessioniLibrary_v01</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>SuccessioniLibrary</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>SuccessioniLibrary_v01</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Scoda_OnDemand" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="nj:JsonSerializerSettings" Name="serializerSettings" />
+      <Variable x:TypeArguments="x:String" Name="TipologiaQuery" />
+      <Variable x:TypeArguments="s:MessagePes" Name="messaggioDiEccezione" />
+      <Variable x:TypeArguments="s:AggiornaMonis" Name="AggiornaMonisInput" />
+      <Variable x:TypeArguments="s:RichiestaSaldo" Name="RichiestaSaldoInput" />
+      <Variable x:TypeArguments="s:BlocchiPerCF" Name="BlocchiPerCFInput" />
+      <Variable x:TypeArguments="s:BloccoRapporti" Name="BloccoRapportiInput" />
+      <Variable x:TypeArguments="x:String" Name="Guid_Chiamata" />
+      <Variable x:TypeArguments="x:String" Name="TipologiaQueryFramework" />
+      <Variable x:TypeArguments="x:String" Name="ProdottiDaGestire" />
+    </Sequence.Variables>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GetSerializerSettings workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Json_Utility\GetSerializerSettings.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <OutArgument x:TypeArguments="nj:JsonSerializerSettings" x:Key="SerializerSettings">[serializerSettings]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[TipologiaQuery]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("TipologiaQuery").ToString]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[TipologiaQuery]" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+      <Switch.Default>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
+            <Assign.To>
+              <OutArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="s:MessagePes">[New MessagePes]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign sap2010:WorkflowViewState.IdRef="Assign_3">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[messaggioDiEccezione.GUID]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[in_TransactionItem.Reference.Split({"_"},stringsplitoptions.None)(1).Replace("GUID:","")]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign sap2010:WorkflowViewState.IdRef="Assign_4">
+            <Assign.To>
+              <OutArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione.AddEccezione(New Errore(25,"Scrivania Digitale","Non valorizzata la TipologiaQuery"))]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke AddJsonDaInviare workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddJsonDaInviare.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="BodyJSON">[JsonConvert.SerializeObject(messaggioDiEccezione, serializerSettings)]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="ItemReference">[in_TransactionItem.Reference]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+        </Sequence>
+      </Switch.Default>
+      <Sequence x:Key="RichiestaSaldo" DisplayName="Richiesta Saldo" sap2010:WorkflowViewState.IdRef="Sequence_18">
+        <TryCatch sap2010:WorkflowViewState.IdRef="TryCatch_2">
+          <TryCatch.Try>
+            <Assign sap2010:WorkflowViewState.IdRef="Assign_14">
+              <Assign.To>
+                <OutArgument x:TypeArguments="s:RichiestaSaldo">[RichiestaSaldoInput]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="s:RichiestaSaldo">[JsonConvert.DeserializeObject(Of RichiestaSaldo)(in_TransactionItem.SpecificContent("datiSuccessioni").ToString, serializerSettings)]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </TryCatch.Try>
+          <TryCatch.Catches>
+            <Catch x:TypeArguments="s1:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+              <ActivityAction x:TypeArguments="s1:Exception">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="s1:Exception" Name="exception" />
+                </ActivityAction.Argument>
+                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_6">
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_15">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s:MessagePes">[New MessagePes]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_16">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[messaggioDiEccezione.GUID]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[in_TransactionItem.Reference.Split({"_"},stringsplitoptions.None)(1).Replace("GUID:","")]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_17">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[messaggioDiEccezione.TipoChiamata]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">ricalcolaSaldo</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_18">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione.AddEccezione(New Errore(25,"Scrivania Digitale","Input in formato non corretto"))]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke AddJsonDaInviare workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddJsonDaInviare.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="BodyJSON">[JsonConvert.SerializeObject(messaggioDiEccezione, serializerSettings)]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="ItemReference">[in_TransactionItem.Reference]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </ActivityAction>
+            </Catch>
+          </TryCatch.Catches>
+        </TryCatch>
+        <If sap2010:Annotation.AnnotationText="Verifico se l'input non è valido" Condition="[(RichiestaSaldoInput.CodiceFiscale.Length = 0) Or&#xA;(RichiestaSaldoInput.DataDecesso.Year = 1)]" DisplayName="If - validazione Input" sap2010:WorkflowViewState.IdRef="If_5">
+          <If.Then>
+            <Sequence DisplayName="KO - validazione" sap2010:WorkflowViewState.IdRef="Sequence_14">
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_35">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="s:MessagePes">[New MessagePes]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_36">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[messaggioDiEccezione.GUID]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[in_TransactionItem.Reference.Split({"_"},stringsplitoptions.None)(1).Replace("GUID:","")]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_37">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[messaggioDiEccezione.TipoChiamata]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">["ricalcolaSaldo"]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_38">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione.AddEccezione(New Errore(25,"Scrivania Digitale","Input in formato non corretto"))]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke AddJsonDaInviare workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_15" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddJsonDaInviare.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="BodyJSON">[JsonConvert.SerializeObject(messaggioDiEccezione, serializerSettings)]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="ItemReference">[in_TransactionItem.Reference]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <Sequence DisplayName="OK - validazione" sap2010:WorkflowViewState.IdRef="Sequence_17">
+              <Sequence DisplayName="Ricalcola Saldo add Item" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                <Sequence.Variables>
+                  <Variable x:TypeArguments="x:String" Name="ProdottiDaGestire" />
+                </Sequence.Variables>
+                <Assign sap2010:WorkflowViewState.IdRef="Assign_39">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">[Guid_Chiamata]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">[Guid.NewGuid.ToString]</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke creaJsonRicercaAnagrafica workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="Json_3270Framework\CreaJson_RicercaAnagrafica.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <OutArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</OutArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="GUID">[Guid_Chiamata]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="CodiceFiscale">[RichiestaSaldoInput.CodiceFiscale]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="AddRecuperoDati3270-Aggiornamento Anagrafica" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_17" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddRecuperoDati3270.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="TipologiaQuery">searchAnag</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="itemReference">[RichiestaSaldoInput.GUID + "_searchAnag_" + Guid_Chiamata]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="TipoChiamata">ricalcolaSaldo</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+              </Sequence>
+            </Sequence>
+          </If.Else>
+        </If>
+      </Sequence>
+      <Sequence x:Key="BlocchiPerCF" DisplayName="Blocco-Sblocco per CF" sap2010:WorkflowViewState.IdRef="Sequence_10">
+        <TryCatch sap2010:WorkflowViewState.IdRef="TryCatch_3">
+          <TryCatch.Try>
+            <Assign sap2010:WorkflowViewState.IdRef="Assign_19">
+              <Assign.To>
+                <OutArgument x:TypeArguments="s:BlocchiPerCF">[BlocchiPerCFInput]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="s:BlocchiPerCF">[JsonConvert.DeserializeObject(Of BlocchiPerCF)(in_TransactionItem.SpecificContent("datiSuccessioni").ToString, serializerSettings)]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </TryCatch.Try>
+          <TryCatch.Catches>
+            <Catch x:TypeArguments="s1:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_3">
+              <ActivityAction x:TypeArguments="s1:Exception">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="s1:Exception" Name="exception" />
+                </ActivityAction.Argument>
+                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_7">
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_20">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s:MessagePes">[New MessagePes]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_21">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[messaggioDiEccezione.GUID]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[in_TransactionItem.Reference.Split({"_"},stringsplitoptions.None)(1).Replace("GUID:","")]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_22">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[messaggioDiEccezione.TipoChiamata]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">["bloccoSbloccoPerCF"]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_23">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione.AddEccezione(New Errore(25,"Scrivania Digitale","Input in formato non corretto"))]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke AddJsonDaInviare workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddJsonDaInviare.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="BodyJSON">[JsonConvert.SerializeObject(messaggioDiEccezione, serializerSettings)]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="ItemReference">[in_TransactionItem.Reference]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </ActivityAction>
+            </Catch>
+          </TryCatch.Catches>
+        </TryCatch>
+        <If sap2010:Annotation.AnnotationText="Verifico se l'input non è valido" Condition="[BlocchiPerCFInput.CodiceFiscale.Length &gt; 0 And&#xA;(BlocchiPerCFInput.TipoChiamata.Equals(&quot;BLOCCO&quot;) Or BlocchiPerCFInput.TipoChiamata.Equals(&quot;SBLOCCO&quot;))]" DisplayName="If - validazione Input" sap2010:WorkflowViewState.IdRef="If_2">
+          <If.Then>
+            <Sequence DisplayName="OK - validazione" sap2010:WorkflowViewState.IdRef="Sequence_9">
+              <If Condition="[BlocchiPerCFInput.TipoChiamata.Equals(&quot;BLOCCO&quot;)]" DisplayName="Blocco?" sap2010:WorkflowViewState.IdRef="If_3">
+                <If.Then>
+                  <Sequence DisplayName="Blocco" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_33">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[Guid_Chiamata]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[Guid.NewGuid.ToString]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke creaJsonRicercaAnagrafica workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="Json_3270Framework\CreaJson_RicercaAnagrafica.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <OutArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</OutArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="GUID">[Guid_Chiamata]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="CodiceFiscale">[BlocchiPerCFInput.CodiceFiscale]</InArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="AddRecuperoDati3270-Aggiornamento Anagrafica" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddRecuperoDati3270.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="TipologiaQuery">searchAnag</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="itemReference">[BlocchiPerCFInput.GUID + "_searchAnag_" + Guid_Chiamata]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="TipoChiamata">bloccoPerCF</InArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                  </Sequence>
+                </If.Then>
+                <If.Else>
+                  <Sequence DisplayName="Sblocco" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_34">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[Guid_Chiamata]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[Guid.NewGuid.ToString]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke creaJsonRicercaAnagrafica workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="Json_3270Framework\CreaJson_RicercaAnagrafica.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <OutArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</OutArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="GUID">[Guid_Chiamata]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="CodiceFiscale">[BlocchiPerCFInput.CodiceFiscale]</InArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="AddRecuperoDati3270-Aggiornamento Anagrafica" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddRecuperoDati3270.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="TipologiaQuery">searchAnag</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="itemReference">[BlocchiPerCFInput.GUID + "_searchAnag_" + Guid_Chiamata]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="TipoChiamata">sbloccoPerCF</InArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                  </Sequence>
+                </If.Else>
+              </If>
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <Sequence DisplayName="KO - validazione" sap2010:WorkflowViewState.IdRef="Sequence_13">
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_29">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="s:MessagePes">[New MessagePes]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_30">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[messaggioDiEccezione.GUID]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[in_TransactionItem.Reference.Split({"_"},stringsplitoptions.None)(1).Replace("GUID:","")]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_31">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[messaggioDiEccezione.TipoChiamata]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">bloccoSbloccoPerCF</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_32">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione.AddEccezione(New Errore(25,"Scrivania Digitale","Input in formato non corretto"))]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke AddJsonDaInviare workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddJsonDaInviare.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="BodyJSON">[JsonConvert.SerializeObject(messaggioDiEccezione, serializerSettings)]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="ItemReference">[in_TransactionItem.Reference]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+            </Sequence>
+          </If.Else>
+        </If>
+      </Sequence>
+      <Sequence x:Key="BloccoRapporti" DisplayName="Blocco Sblocco rapporti" sap2010:WorkflowViewState.IdRef="Sequence_23">
+        <TryCatch sap2010:WorkflowViewState.IdRef="TryCatch_4">
+          <TryCatch.Try>
+            <Assign sap2010:WorkflowViewState.IdRef="Assign_24">
+              <Assign.To>
+                <OutArgument x:TypeArguments="s:BloccoRapporti">[BloccoRapportiInput]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="s:BloccoRapporti">[JsonConvert.DeserializeObject(Of BloccoRapporti)(in_TransactionItem.SpecificContent("datiSuccessioni").ToString, serializerSettings)]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </TryCatch.Try>
+          <TryCatch.Catches>
+            <Catch x:TypeArguments="s1:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_4">
+              <ActivityAction x:TypeArguments="s1:Exception">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="s1:Exception" Name="exception" />
+                </ActivityAction.Argument>
+                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_8">
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_25">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s:MessagePes">[New MessagePes]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_26">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[messaggioDiEccezione.GUID]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[in_TransactionItem.Reference.Split({"_"},stringsplitoptions.None)(1).Replace("GUID:","")]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_27">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[messaggioDiEccezione.TipoChiamata]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">bloccoSbloccoRapporti</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_28">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione.AddEccezione(New Errore(25,"Scrivania Digitale","Input in formato non corretto"))]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke AddJsonDaInviare workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddJsonDaInviare.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="BodyJSON">[JsonConvert.SerializeObject(messaggioDiEccezione, serializerSettings)]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="ItemReference">[in_TransactionItem.Reference]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </ActivityAction>
+            </Catch>
+          </TryCatch.Catches>
+        </TryCatch>
+        <If sap2010:Annotation.AnnotationText="Verifico se l'input non è valido" Condition="[(BloccoRapportiInput.Rapporti.Count = 0) And&#xA;(BloccoRapportiInput.CodiceFiscale.Length = 0) And&#xA;(BloccoRapportiInput.DataDecesso.Year = 1) And&#xA;(Not BloccoRapportiInput.TipoChiamata.Equals(&quot;BLOCCO&quot;) Or (Not BloccoRapportiInput.TipoChiamata.Equals(&quot;SBLOCCO&quot;)))]" DisplayName="If - validazione Input" sap2010:WorkflowViewState.IdRef="If_7">
+          <If.Then>
+            <Sequence DisplayName="KO - validazione" sap2010:WorkflowViewState.IdRef="Sequence_19">
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_41">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="s:MessagePes">[New MessagePes]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_42">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[messaggioDiEccezione.GUID]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[in_TransactionItem.Reference.Split({"_"},stringsplitoptions.None)(1).Replace("GUID:","")]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_43">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[messaggioDiEccezione.TipoChiamata]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">bloccoSbloccoRapporti</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_44">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione.AddEccezione(New Errore(25,"Scrivania Digitale","Input in formato non corretto"))]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke AddJsonDaInviare workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_20" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddJsonDaInviare.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="BodyJSON">[JsonConvert.SerializeObject(messaggioDiEccezione, serializerSettings)]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="ItemReference">[in_TransactionItem.Reference]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <Sequence DisplayName="OK - validazione" sap2010:WorkflowViewState.IdRef="Sequence_22">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:Boolean" Name="DaBloccare" />
+              </Sequence.Variables>
+              <If Condition="[BloccoRapportiInput.TipoChiamata.Equals(&quot;BLOCCO&quot;)]" DisplayName="Blocco?" sap2010:WorkflowViewState.IdRef="If_6">
+                <If.Then>
+                  <Sequence DisplayName="Blocco" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:String" Name="ProdottiDaGestire" />
+                    </Sequence.Variables>
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_48">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[TipologiaQueryFramework]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">queryBlocco</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_65">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Boolean">[DaBloccare]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </Sequence>
+                </If.Then>
+                <If.Else>
+                  <Sequence DisplayName="Sblocco" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:String" Name="ProdottiDaGestire" />
+                    </Sequence.Variables>
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_49">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[TipologiaQueryFramework]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">querySblocco</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_66">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Boolean">[DaBloccare]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </Sequence>
+                </If.Else>
+              </If>
+              <ui:ForEach x:TypeArguments="s:Rapporto" CurrentIndex="{x:Null}" DisplayName="For Each" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[BloccoRapportiInput.Rapporti]">
+                <ui:ForEach.Body>
+                  <ActivityAction x:TypeArguments="s:Rapporto">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="s:Rapporto" Name="Rapporto" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_32">
+                      <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[rapporto.TipologiaRapporto]" sap2010:WorkflowViewState.IdRef="Switch`1_2">
+                        <Sequence x:Key="CC" DisplayName="Blocco/Sblocco CC" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                          <Assign sap2010:WorkflowViewState.IdRef="Assign_50">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[Guid_Chiamata]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[Guid.NewGuid.ToString]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Blocco CC" DisplayName="Invoke CreaJson_Blocco_Sblocco_InfoBlocco workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_25" UnSafe="False" WorkflowFileName="Json_3270Framework\CreaJson_Blocco_Sblocco_InfoBlocco.xaml">
+                            <ui:InvokeWorkflowFile.Arguments>
+                              <OutArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</OutArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="GuidUnivoco">[Guid_Chiamata]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="TipologiaProdotto">Conti</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="NumeroProdotto">[rapporto.NumeroRapporto]</InArgument>
+                            </ui:InvokeWorkflowFile.Arguments>
+                          </ui:InvokeWorkflowFile>
+                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Blocco CC" DisplayName="Invoke AddRecuperoDati3270 workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_26" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddRecuperoDati3270.xaml">
+                            <ui:InvokeWorkflowFile.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="TipologiaQuery">[TipologiaQueryFramework]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="itemReference">[BloccoRapportiInput.GUID + "_" + TipologiaQueryFramework+"_" + Guid_Chiamata]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="TipoChiamata">bloccoSbloccoRapporti</InArgument>
+                            </ui:InvokeWorkflowFile.Arguments>
+                          </ui:InvokeWorkflowFile>
+                        </Sequence>
+                        <Sequence x:Key="DR" DisplayName="Blocco/Sblocco DR" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                          <Assign sap2010:WorkflowViewState.IdRef="Assign_53">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[Guid_Chiamata]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[Guid.NewGuid.ToString]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <If Condition="[DaBloccare]" sap2010:WorkflowViewState.IdRef="If_8">
+                            <If.Then>
+                              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_35">
+                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreaJson_BloccoDR workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_57" UnSafe="False" WorkflowFileName="Json_3270Framework\CreaJson_BloccoDR.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <OutArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</OutArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="NumeroProdotto">[Rapporto.NumeroRapporto]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="CodiceFiscale">[BloccoRapportiInput.CodiceFiscale]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="GuidUnivoco">[Guid_Chiamata]</InArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Blocco DR" DisplayName="Invoke AddRecuperoDati3270 workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_32" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddRecuperoDati3270.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <InArgument x:TypeArguments="x:String" x:Key="TipologiaQuery">queryBloccoDR</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="itemReference">[BloccoRapportiInput.GUID + "_queryBloccoDR_" + Guid_Chiamata]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="TipoChiamata">bloccoSbloccoRapporti</InArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                              </Sequence>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_34">
+                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Sblocco DR" DisplayName="Invoke CreaJson_Blocco_Sblocco_InfoBlocco workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_31" UnSafe="False" WorkflowFileName="Json_3270Framework\CreaJson_Blocco_Sblocco_InfoBlocco.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <OutArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</OutArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="GuidUnivoco">[Guid_Chiamata]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="TipologiaProdotto">Libretti</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="NumeroProdotto">[Rapporto.NumeroRapporto]</InArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Sblocco DR" DisplayName="Invoke AddRecuperoDati3270 workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_55" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddRecuperoDati3270.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <InArgument x:TypeArguments="x:String" x:Key="TipologiaQuery">querySbloccoDR</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="itemReference">[BloccoRapportiInput.GUID + "_querySbloccoDR_" + Guid_Chiamata]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="TipoChiamata">bloccoSbloccoRapporti</InArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                              </Sequence>
+                            </If.Else>
+                          </If>
+                        </Sequence>
+                        <Sequence x:Key="DT" DisplayName="Blocco Sblocco DT" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                          <Assign sap2010:WorkflowViewState.IdRef="Assign_58">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[Guid_Chiamata]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[Guid.NewGuid.ToString]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Sblocco DT" DisplayName="Invoke CreaJson_Blocco_Sblocco_InfoBlocco workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_43" UnSafe="False" WorkflowFileName="Json_3270Framework\CreaJson_Blocco_Sblocco_InfoBlocco.xaml">
+                            <ui:InvokeWorkflowFile.Arguments>
+                              <OutArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</OutArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="GuidUnivoco">[Guid_Chiamata]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="TipologiaProdotto">Titoli</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="NumeroProdotto">[rapporto.NumeroRapporto]</InArgument>
+                            </ui:InvokeWorkflowFile.Arguments>
+                          </ui:InvokeWorkflowFile>
+                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Sblocco DT" DisplayName="Invoke AddRecuperoDati3270 workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_44" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddRecuperoDati3270.xaml">
+                            <ui:InvokeWorkflowFile.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="TipologiaQuery">[TipologiaQueryFramework]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="itemReference">[BloccoRapportiInput.GUID + "_" + TipologiaQueryFramework+"_" + Guid_Chiamata]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="TipoChiamata">bloccoSbloccoRapporti</InArgument>
+                            </ui:InvokeWorkflowFile.Arguments>
+                          </ui:InvokeWorkflowFile>
+                        </Sequence>
+                        <Sequence x:Key="BPF" DisplayName="Blocco Sblocco BPF" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                          <Assign sap2010:WorkflowViewState.IdRef="Assign_68">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[Guid_Chiamata]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[Guid.NewGuid.ToString]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <If Condition="[DaBloccare]" sap2010:WorkflowViewState.IdRef="If_10">
+                            <If.Then>
+                              <Sequence DisplayName="Ricerca BPF" sap2010:WorkflowViewState.IdRef="Sequence_37">
+                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreaJson_Blocco_Sblocco_InfoBlocco workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_64" UnSafe="False" WorkflowFileName="Json_3270Framework\CreaJson_Blocco_Sblocco_InfoBlocco.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <OutArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</OutArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="GuidUnivoco">[Guid_Chiamata]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="TipologiaProdotto">BPF</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="NumeroProdotto">[Rapporto.NumeroRapporto]</InArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Blocco DR" DisplayName="Invoke AddRecuperoDati3270 workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_61" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddRecuperoDati3270.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <InArgument x:TypeArguments="x:String" x:Key="TipologiaQuery">searchBPF</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="itemReference">[BloccoRapportiInput.GUID + "_searchBPF_" + Guid_Chiamata]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="TipoChiamata">bloccoSbloccoRapporti</InArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                              </Sequence>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_38">
+                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreaJson_Sblocco_BPF workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_62" UnSafe="False" WorkflowFileName="Json_3270Framework\CreaJson_Sblocco_BPF.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <OutArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</OutArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="NumeroProdotto">[Rapporto.NumeroRapporto]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="GuidUnivoco">[Guid_Chiamata]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="CodiceFiscale">[BloccoRapportiInput.CodiceFiscale]</InArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Sblocco DR" DisplayName="Invoke AddRecuperoDati3270 workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_63" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddRecuperoDati3270.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <InArgument x:TypeArguments="x:String" x:Key="TipologiaQuery">querySblocco</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="itemReference">[BloccoRapportiInput.GUID + "_querySblocco_" + Guid_Chiamata]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="TipoChiamata">bloccoSbloccoRapporti</InArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                              </Sequence>
+                            </If.Else>
+                          </If>
+                        </Sequence>
+                        <Sequence x:Key="BUONO" DisplayName="Blocco Sblocco Buoni" sap2010:WorkflowViewState.IdRef="Sequence_33">
+                          <Assign sap2010:WorkflowViewState.IdRef="Assign_64">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[Guid_Chiamata]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[Guid.NewGuid.ToString]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreaJson_Blocco_Buoni workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_53" UnSafe="False" WorkflowFileName="Json_3270Framework\CreaJson_Blocco_Buoni.xaml">
+                            <ui:InvokeWorkflowFile.Arguments>
+                              <OutArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</OutArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="NumeroProdotto">[Rapporto.NumeroRapporto]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="NumeroProdottoAssociato">[Rapporto.NumeroRapportoAssociato]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="TipologiaProdottoAssociato">[Rapporto.TipologiaRapportoAssociato]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="GuidUnivoco">[Guid_Chiamata]</InArgument>
+                            </ui:InvokeWorkflowFile.Arguments>
+                          </ui:InvokeWorkflowFile>
+                          <If Condition="[DaBloccare]" sap2010:WorkflowViewState.IdRef="If_9">
+                            <If.Then>
+                              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Blocco Buono" DisplayName="Invoke AddRecuperoDati3270 workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_54" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddRecuperoDati3270.xaml">
+                                <ui:InvokeWorkflowFile.Arguments>
+                                  <InArgument x:TypeArguments="x:String" x:Key="TipologiaQuery">queryBloccoDematerializzati</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="itemReference">[BloccoRapportiInput.GUID + "_queryBloccoDematerializzati_" + Guid_Chiamata]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="TipoChiamata">bloccoSbloccoRapporti</InArgument>
+                                </ui:InvokeWorkflowFile.Arguments>
+                              </ui:InvokeWorkflowFile>
+                            </If.Then>
+                            <If.Else>
+                              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Blocco Buono" DisplayName="Invoke AddRecuperoDati3270 workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_56" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddRecuperoDati3270.xaml">
+                                <ui:InvokeWorkflowFile.Arguments>
+                                  <InArgument x:TypeArguments="x:String" x:Key="TipologiaQuery">querySbloccoDematerializzati</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="itemReference">[BloccoRapportiInput.GUID + "_querySbloccoDematerializzati_" + Guid_Chiamata]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="TipoChiamata">bloccoSbloccoRapporti</InArgument>
+                                </ui:InvokeWorkflowFile.Arguments>
+                              </ui:InvokeWorkflowFile>
+                            </If.Else>
+                          </If>
+                        </Sequence>
+                        <Sequence x:Key="CARTA" DisplayName="Blocco/Sblocco Carte" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                          <Assign sap2010:WorkflowViewState.IdRef="Assign_67">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[Guid_Chiamata]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[Guid.NewGuid.ToString]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Blocco CC" DisplayName="Invoke CreaJson_Blocco_Sblocco_InfoBlocco workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_58" UnSafe="False" WorkflowFileName="Json_3270Framework\CreaJson_Blocco_Sblocco_InfoBlocco.xaml">
+                            <ui:InvokeWorkflowFile.Arguments>
+                              <OutArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</OutArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="GuidUnivoco">[Guid_Chiamata]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="TipologiaProdotto">Carte</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="NumeroProdotto">[rapporto.NumeroRapporto]</InArgument>
+                            </ui:InvokeWorkflowFile.Arguments>
+                          </ui:InvokeWorkflowFile>
+                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Blocco CC" DisplayName="Invoke AddRecuperoDati3270 workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_59" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddRecuperoDati3270.xaml">
+                            <ui:InvokeWorkflowFile.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="TipologiaQuery">[TipologiaQueryFramework]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="itemReference">[BloccoRapportiInput.GUID + "_" + TipologiaQueryFramework+"_" + Guid_Chiamata]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="TipoChiamata">bloccoSbloccoRapporti</InArgument>
+                            </ui:InvokeWorkflowFile.Arguments>
+                          </ui:InvokeWorkflowFile>
+                        </Sequence>
+                      </Switch>
+                    </Sequence>
+                  </ActivityAction>
+                </ui:ForEach.Body>
+              </ui:ForEach>
+            </Sequence>
+          </If.Else>
+        </If>
+      </Sequence>
+      <Sequence x:Key="AggiornaMonis" sap2010:WorkflowViewState.IdRef="Sequence_4">
+        <TryCatch sap2010:WorkflowViewState.IdRef="TryCatch_1">
+          <TryCatch.Try>
+            <Assign sap2010:WorkflowViewState.IdRef="Assign_5">
+              <Assign.To>
+                <OutArgument x:TypeArguments="s:AggiornaMonis">[AggiornaMonisInput]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="s:AggiornaMonis">[JsonConvert.DeserializeObject(Of AggiornaMonis)(in_TransactionItem.SpecificContent("datiSuccessioni").ToString, serializerSettings)]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </TryCatch.Try>
+          <TryCatch.Catches>
+            <Catch x:TypeArguments="s1:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+              <ActivityAction x:TypeArguments="s1:Exception">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="s1:Exception" Name="exception" />
+                </ActivityAction.Argument>
+                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_3">
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_6">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s:MessagePes">[New MessagePes]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_7">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[messaggioDiEccezione.GUID]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[in_TransactionItem.Reference.Split({"_"},stringsplitoptions.None)(1).Replace("GUID:","")]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_9">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[messaggioDiEccezione.TipoChiamata]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">ritornoMonis</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_8">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione.AddEccezione(New Errore(25,"Scrivania Digitale","Input in formato non corretto"))]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke AddJsonDaInviare workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddJsonDaInviare.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="BodyJSON">[JsonConvert.SerializeObject(messaggioDiEccezione, serializerSettings)]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="ItemReference">[in_TransactionItem.Reference]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </ActivityAction>
+            </Catch>
+          </TryCatch.Catches>
+        </TryCatch>
+        <If sap2010:Annotation.AnnotationText="Verifico se l'input non è valido" Condition="[(AggiornaMonisInput.IdMonis.Length = 0) Or (AggiornaMonisInput.StatoPratica.Length = 0) Or&#xA;(AggiornaMonisInput.TSCDiRiferimento &lt;&gt; &quot;BA&quot; And AggiornaMonisInput.TSCDiRiferimento&lt;&gt; &quot;TS&quot; And AggiornaMonisInput.TSCDiRiferimento &lt;&gt; &quot;FI&quot; And AggiornaMonisInput.TSCDiRiferimento &lt;&gt; &quot;BA1&quot; )]" DisplayName="If - validazione Input" sap2010:WorkflowViewState.IdRef="If_1">
+          <If.Then>
+            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_5">
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_10">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="s:MessagePes">[New MessagePes]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_11">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[messaggioDiEccezione.GUID]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[in_TransactionItem.Reference.Split({"_"},stringsplitoptions.None)(1).Replace("GUID:","")]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_12">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[messaggioDiEccezione.TipoChiamata]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">ritornoMonis</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_13">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="s:MessagePes">[messaggioDiEccezione.AddEccezione(New Errore(25,"Scrivania Digitale","Input in formato non corretto"))]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke AddJsonDaInviare workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddJsonDaInviare.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="BodyJSON">[JsonConvert.SerializeObject(messaggioDiEccezione, serializerSettings)]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="ItemReference">[in_TransactionItem.Reference]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Priority">High</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke AddAggiornaMonis workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddAggiornaMonis.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="GUID">[AggiornaMonisInput.GUID]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="Priority">Normal</InArgument>
+                <InArgument x:TypeArguments="s:AggiornaMonis" x:Key="AggiornaMonisRequest">[AggiornaMonisInput]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+          </If.Else>
+        </If>
+      </Sequence>
+    </Switch>
+    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_1" sap:VirtualizedContainerService.HintSize="1202,87" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="1202,60" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_2" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="336,511">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_14" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_15" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_16" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_17" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_18" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_6" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="336,608">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Catch`1_2" sap:VirtualizedContainerService.HintSize="404,21">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_2" sap:VirtualizedContainerService.HintSize="719,287">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_35" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_36" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_37" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_38" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_15" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Sequence_14" sap:VirtualizedContainerService.HintSize="336,611">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_39" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_16" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_17" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Sequence_15" sap:VirtualizedContainerService.HintSize="336,438">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_17" sap:VirtualizedContainerService.HintSize="358,562">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="719,763">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_18" sap:VirtualizedContainerService.HintSize="741,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_19" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_20" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_21" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_22" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_23" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_7" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="336,608">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Catch`1_3" sap:VirtualizedContainerService.HintSize="404,21">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_3" sap:VirtualizedContainerService.HintSize="1080,287">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_33" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_11" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_12" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Sequence_11" sap:VirtualizedContainerService.HintSize="336,438">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_34" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_13" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_14" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Sequence_12" sap:VirtualizedContainerService.HintSize="336,438">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="697,586" />
+      <sap2010:ViewStateData Id="Sequence_9" sap:VirtualizedContainerService.HintSize="719,710">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_29" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_30" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_31" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_32" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_9" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Sequence_13" sap:VirtualizedContainerService.HintSize="336,611">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="1080,862">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_10" sap:VirtualizedContainerService.HintSize="1102,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_24" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_25" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_26" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_27" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_28" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_8" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="336,599">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Catch`1_4" sap:VirtualizedContainerService.HintSize="404,21">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_4" sap:VirtualizedContainerService.HintSize="1160,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_41" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_42" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_43" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_44" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_20" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Sequence_19" sap:VirtualizedContainerService.HintSize="336,611">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_48" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_65" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_20" sap:VirtualizedContainerService.HintSize="264,284">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_49" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_66" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_21" sap:VirtualizedContainerService.HintSize="264,284">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="777,432" />
+      <sap2010:ViewStateData Id="Assign_50" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_25" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_26" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_25" sap:VirtualizedContainerService.HintSize="336,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_53" sap:VirtualizedContainerService.HintSize="697,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_57" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_32" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_35" sap:VirtualizedContainerService.HintSize="336,338">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_31" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_55" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_34" sap:VirtualizedContainerService.HintSize="336,338">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_8" sap:VirtualizedContainerService.HintSize="697,486" />
+      <sap2010:ViewStateData Id="Sequence_28" sap:VirtualizedContainerService.HintSize="719,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_58" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_43" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_44" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_30" sap:VirtualizedContainerService.HintSize="336,435">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_68" sap:VirtualizedContainerService.HintSize="697,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_64" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_61" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_37" sap:VirtualizedContainerService.HintSize="336,338">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_62" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_63" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_38" sap:VirtualizedContainerService.HintSize="336,338">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_10" sap:VirtualizedContainerService.HintSize="697,486" />
+      <sap2010:ViewStateData Id="Sequence_31" sap:VirtualizedContainerService.HintSize="719,710">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_64" sap:VirtualizedContainerService.HintSize="653,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_53" sap:VirtualizedContainerService.HintSize="653,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_54" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_56" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_9" sap:VirtualizedContainerService.HintSize="653,235" />
+      <sap2010:ViewStateData Id="Sequence_33" sap:VirtualizedContainerService.HintSize="675,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_67" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_58" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_59" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_36" sap:VirtualizedContainerService.HintSize="336,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Switch`1_2" sap:VirtualizedContainerService.HintSize="739,1004" />
+      <sap2010:ViewStateData Id="Sequence_32" sap:VirtualizedContainerService.HintSize="761,1128">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="777,1262" />
+      <sap2010:ViewStateData Id="Sequence_22" sap:VirtualizedContainerService.HintSize="799,1858">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_7" sap:VirtualizedContainerService.HintSize="1160,2010">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_23" sap:VirtualizedContainerService.HintSize="1182,2225">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_3" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="336,608">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Catch`1_1" sap:VirtualizedContainerService.HintSize="404,21">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="675,287" />
+      <sap2010:ViewStateData Id="Assign_10" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_11" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_12" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_13" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_4" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="336,611">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_5" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="675,763">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="697,1214">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Switch`1_1" sap:VirtualizedContainerService.HintSize="1202,2475" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="1224,2826">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Scoda_OnDemand_1" sap:VirtualizedContainerService.HintSize="1264,2906" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

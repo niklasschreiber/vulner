@@ -1,0 +1,632 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="ProcessTransaction" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>610,6764</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Database</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Database</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Description: In this file all other process specific files will be invoked. If an application exception occurs, the current transaction can be retried. If a BRE is thrown, the transaction will be skipped. Can be a flowchart or sequence. " DisplayName="ProcessTransaction" sap:VirtualizedContainerService.HintSize="590,6704" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="AllWorkedToday" />
+      <Variable x:TypeArguments="sd:DataTable" Name="KOWorkedToday" />
+      <Variable x:TypeArguments="sd:DataTable" Name="OKWorkedToday" />
+      <Variable x:TypeArguments="sd:DataTable" Name="TableTranscodifica" />
+      <Variable x:TypeArguments="sd:DataTable" Name="TableTranscodifica_DEC" />
+      <Variable x:TypeArguments="x:String" Name="dbLoaded" />
+      <Variable x:TypeArguments="x:String" Name="PathDB" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence DisplayName="Sequenza Invio EMail" sap:VirtualizedContainerService.HintSize="548,6561" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:String" Name="sDT1" />
+        <Variable x:TypeArguments="sd:DataTable" Name="TableKoOdaPRC" />
+        <Variable x:TypeArguments="sd:DataTable" Name="TableKoForSI" />
+        <Variable x:TypeArguments="sd:DataTable" Name="AllWorkedTodayCSV" />
+        <Variable x:TypeArguments="x:String" Name="NameFileCSV" />
+        <Variable x:TypeArguments="ui:DatabaseConnection" Name="stringConnectionToDB" />
+        <Variable x:TypeArguments="sd:DataTable" Name="TableOKKOPrc" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="506,59" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[in_Config(&quot;user&quot;).ToString + in_Config(&quot;pass_robot1&quot;).ToString]" />
+      <TryCatch DisplayName="Try Take Table" sap:VirtualizedContainerService.HintSize="506,1889" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+        <TryCatch.Try>
+          <Sequence sap:VirtualizedContainerService.HintSize="376,1671" sap2010:WorkflowViewState.IdRef="Sequence_21">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="Assign_1">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[PathDB]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[in_Config("ConnectionString").ToString]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:DatabaseConnect DatabaseConnection="[stringConnectionToDB]" DisplayName="Connect DB RpaDbPosteIt" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="System.Data.OleDb" ConnectionString="[PathDB]" />
+            <ui:Comment sap:VirtualizedContainerService.HintSize="334,55" sap2010:WorkflowViewState.IdRef="Comment_2" Text="Take table of worked ok or ko" />
+            <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[AllWorkedTodayCSV]" DisplayName="Execute Query All Worked for Write csv" ExistingDbConnection="[stringConnectionToDB]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_11" Sql="Select ODABdc, posizioneOda, importoPreventivoValidato, importoEm, importoLiquidabile, qtaEm, qtaLiquidabile, motivazioneBlocco, flagEntrataMerciStampata, flagModelloEStampato, partenzaEffettiva, chiusuraEffettiva, regione, svincoloTrattenuta, subappalto, dataSal, idTicket, idBpm, statoBpm, accordoQuadroSap, posizioneAccordoQuadroSap, fk_FGOContratti_Id, usernameBpm, IIF(f.EmailPRC=1, 'X', '') as NotificatoAncheAlPRC,  vapIdCreated, (s.statusName &amp; ' - ' &amp; f.userMessage) as descriptionMessage&#xA;&#xA;From ImmobiliareRealGimm i, Map_Rpa_Status s, Map_Rpa_Process_Flowbranch f &#xA;&#xA;Where i.idMapStatus=s.id And i.idMapProcessFlowbranch=f.id And  (i.idMapStatus=100 Or i.idMapStatus=400 Or i.idMapStatus=410) &#xA;And  i.timeLastModified &gt;= Date()">
+              <ui:ExecuteQuery.Parameters>
+                <scg:Dictionary x:TypeArguments="x:String, Argument" />
+              </ui:ExecuteQuery.Parameters>
+            </ui:ExecuteQuery>
+            <ui:CommentOut sap2010:Annotation.AnnotationText="disabilita invio dei lavorati totali" DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="334,80" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,180" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[AllWorkedToday]" DisplayName="Execute Query All Worked Today minus any Flowbranches" ExistingDbConnection="[stringConnectionToDB]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_10" Sql="Select ODABdc, posizioneOda, importoPreventivoValidato, importoEm, importoLiquidabile, qtaEm, qtaLiquidabile, motivazioneBlocco, flagEntrataMerciStampata, flagModelloEStampato, partenzaEffettiva, chiusuraEffettiva, regione, svincoloTrattenuta, subappalto, dataSal, idTicket, idBpm, statoBpm, accordoQuadroSap, posizioneAccordoQuadroSap, vapIdCreated, (s.statusName &amp; ' - ' &amp; f.userMessage) as descriptionMessage&#xA;&#xA;From ImmobiliareRealGimm i, Map_Rpa_Status s, Map_Rpa_Process_Flowbranch f &#xA;&#xA;Where i.idMapStatus=s.id And i.idMapProcessFlowbranch=f.id And (i.idMapProcessFlowbranch&lt;&gt;13 And i.idMapProcessFlowbranch&lt;&gt;10 And i.idMapProcessFlowbranch&lt;&gt;12) And  (i.idMapStatus=100 Or i.idMapStatus=400 Or i.idMapStatus=410) &#xA;&#xA;And  i.timeLastModified &gt;= Date()">
+                    <ui:ExecuteQuery.Parameters>
+                      <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                    </ui:ExecuteQuery.Parameters>
+                  </ui:ExecuteQuery>
+                </Sequence>
+              </ui:CommentOut.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:CommentOut>
+            <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[KOWorkedToday]" DisplayName="Execute Query Ko ODA Today minus any flowbranches" ExistingDbConnection="[stringConnectionToDB]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_2" Sql="Select distinct i.id as id, ODABdc, posizioneOda, importoPreventivoValidato, importoEm, importoLiquidabile, qtaEm, qtaLiquidabile, motivazioneBlocco, flagEntrataMerciStampata, flagModelloEStampato, partenzaEffettiva, chiusuraEffettiva, regione, svincoloTrattenuta, subappalto, dataSal, idTicket, idBpm, statoBpm, accordoQuadroSap, posizioneAccordoQuadroSap, fk_FGOContratti_Id, IIF(f.EmailPRC=1, 'X', '') as NotificatoAncheAlPRC,  vapIdCreated,  (s.statusName &amp; ' - ' &amp; f.userMessage &amp; &#xD;&#xA;IIF(f.id=7, '('&amp; IIF(PosizioneODA is null,'PosizioneODA, ','') &amp; IIF(Regione is null,'Regione, ','') &amp; IIF(ImportoEM is null,'ImportoEM, ','') &amp; IIF(ImportoLiquidabile is null,'ImportoLiquidabile, ','') &amp; IIF(QtaEM is null,'QtaEM, ','') &amp; IIF(QtaLiquidabile is null,'QtaLiquidabile','') &amp; ')', '')&#xD;&#xA; &amp; ' - ' &amp; IIF(vapIdCreated &lt;&gt; 0, i.warningMessage, '') ) as descriptionMessage&#xD;&#xA;&#xD;&#xA;From ImmobiliareRealGimm i, Map_Rpa_Status s, Map_Rpa_Process_Flowbranch f &#xD;&#xA;&#xD;&#xA;Where i.idMapStatus=s.id And (i.idMapStatus=400 OR i.idMapStatus=410) &#xD;&#xA;&#xD;&#xA;And i.idMapProcessFlowbranch=f.id&#xD;&#xA;and f.EmailDEC=1&#xD;&#xA;and f.flowbranchStatus='ko'&#xD;&#xA;&#xD;&#xA;and i.idMapProcess=1">
+              <ui:ExecuteQuery.Parameters>
+                <scg:Dictionary x:TypeArguments="x:String, Argument" />
+              </ui:ExecuteQuery.Parameters>
+            </ui:ExecuteQuery>
+            <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[OKWorkedToday]" DisplayName="Execute Query OK ODA Today" ExistingDbConnection="[stringConnectionToDB]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_3" Sql="Select distinct i.id as id, ODABdc, posizioneOda, importoPreventivoValidato, importoEm, importoLiquidabile, qtaEm, qtaLiquidabile, motivazioneBlocco, flagEntrataMerciStampata, flagModelloEStampato, partenzaEffettiva, chiusuraEffettiva, regione, svincoloTrattenuta, subappalto, dataSal, idTicket, idBpm, statoBpm, accordoQuadroSap, posizioneAccordoQuadroSap, fk_FGOContratti_Id, IIF(f.EmailPRC=1, 'X', '') as NotificatoAncheAlPRC,  vapIdCreated, (s.statusName &amp; ' - ' &amp; f.userMessage  &amp; ' - ' &amp; IIF(vapIdCreated &lt;&gt; 0, i.warningMessage, '')) as descriptionMessage&#xA;&#xA;From ImmobiliareRealGimm i, Map_Rpa_Status s, Map_Rpa_Process_Flowbranch f &#xA;&#xA;Where i.idMapStatus=s.id And i.idMapStatus=100&#xA;&#xA;And i.idMapProcessFlowbranch=f.id&#xA;and f.EmailDEC=1&#xA;and f.flowbranchStatus='ok'&#xA;&#xA;and i.idMapProcess=1">
+              <ui:ExecuteQuery.Parameters>
+                <scg:Dictionary x:TypeArguments="x:String, Argument" />
+              </ui:ExecuteQuery.Parameters>
+            </ui:ExecuteQuery>
+            <ui:Comment sap:VirtualizedContainerService.HintSize="334,55" sap2010:WorkflowViewState.IdRef="Comment_3" Text="Take the new table of requisiti" />
+            <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[TableKoOdaPRC]" DisplayName="Execute Query KO FOR PRC VAP in eccezione specifica" ExistingDbConnection="[stringConnectionToDB]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_8" Sql="Select distinct i.id as id, ODABdc, posizioneOda, importoPreventivoValidato, importoEm, importoLiquidabile, qtaEm, qtaLiquidabile, motivazioneBlocco, flagEntrataMerciStampata, flagModelloEStampato, partenzaEffettiva, chiusuraEffettiva, regione, svincoloTrattenuta, subappalto, dataSal, idTicket, idBpm, statoBpm, accordoQuadroSap, posizioneAccordoQuadroSap, fk_FGOContratti_Id, IIF(f.EmailPRC=1, 'X', '') as NotificatoAncheAlPRC,  vapIdCreated, (s.statusName &amp; ' - ' &amp; f.userMessage  &amp; ' - ' &amp; IIF(vapIdCreated &lt;&gt; 0, i.warningMessage, '')) as descriptionMessage&#xA;&#xA;From ImmobiliareRealGimm i, Map_Rpa_Status s, Map_Rpa_Process_Flowbranch f &#xA;&#xA;Where i.idMapStatus=s.id And (i.idMapStatus=400 OR i.idMapStatus=410) &#xA;&#xA;and i.idMapProcessFlowbranch=f.id And (i.idMapProcessFlowbranch=8 or i.idMapProcessFlowbranch=9 or i.idMapProcessFlowbranch=13 or i.idMapProcessFlowbranch=15 or i.idMapProcessFlowbranch=18)&#xA;&#xA;and i.idMapProcess=1">
+              <ui:ExecuteQuery.Parameters>
+                <scg:Dictionary x:TypeArguments="x:String, Argument" />
+              </ui:ExecuteQuery.Parameters>
+            </ui:ExecuteQuery>
+            <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[TableKoForSI]" DisplayName="Execute Query KO FOR  SI VAP in ecczione specifica" ExistingDbConnection="[stringConnectionToDB]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_9" Sql="Select distinct i.id as id, ODABdc, posizioneOda, importoPreventivoValidato, importoEm, importoLiquidabile, qtaEm, qtaLiquidabile, motivazioneBlocco, flagEntrataMerciStampata, flagModelloEStampato, partenzaEffettiva, chiusuraEffettiva, regione, svincoloTrattenuta, subappalto, dataSal, idTicket, idBpm, statoBpm, accordoQuadroSap, posizioneAccordoQuadroSap, fk_FGOContratti_Id, IIF(f.EmailPRC=1, 'X', '') as NotificatoAncheAlPRC,  vapIdCreated, (s.statusName &amp; ' - ' &amp; f.userMessage  &amp; ' - ' &amp; IIF(vapIdCreated &lt;&gt; 0, i.warningMessage, '')) as descriptionMessage&#xA;&#xA;From ImmobiliareRealGimm i, Map_Rpa_Status s, Map_Rpa_Process_Flowbranch f &#xA;&#xA;Where i.idMapStatus=s.id And (i.idMapStatus=400 OR i.idMapStatus=410) &#xA;&#xA;And i.idMapProcessFlowbranch=f.id&#xA;and f.EmailSI=1&#xA;and f.flowbranchStatus='ko'&#xA;&#xA;and i.idMapProcess=1">
+              <ui:ExecuteQuery.Parameters>
+                <scg:Dictionary x:TypeArguments="x:String, Argument" />
+              </ui:ExecuteQuery.Parameters>
+            </ui:ExecuteQuery>
+            <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[TableOKKOPrc]" DisplayName="Execute Query KO&amp;OK FOR PRC VAP chiusura effettiva" ExistingDbConnection="[stringConnectionToDB]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_12" Sql="Select Distinct i.id As id, ODABdc, posizioneOda, importoPreventivoValidato, importoEm, importoLiquidabile, qtaEm, qtaLiquidabile, motivazioneBlocco, flagEntrataMerciStampata, flagModelloEStampato, partenzaEffettiva, chiusuraEffettiva, regione, svincoloTrattenuta, subappalto, dataSal, idTicket, idBpm, statoBpm, accordoQuadroSap, posizioneAccordoQuadroSap, fk_FGOContratti_Id, IIF(f.EmailPRC=1, 'X', '') as NotificatoAncheAlPRC,  vapIdCreated,idMapProcessFlowbranch, (s.statusName &amp; ' - ' &amp; f.userMessage &amp; ' - ' &amp; IIF(vapIdCreated &lt;&gt; 0, i.warningMessage, '')) as descriptionMessage&#xA;&#xA;From ImmobiliareRealGimm i, Map_Rpa_Status s, Map_Rpa_Process_Flowbranch f &#xA;&#xA;Where i.idMapStatus=s.id And (i.idMapStatus=400 Or i.idMapStatus=410 Or i.idMapStatus=100) AND  Year([chiusuraEffettiva]) = Year(Date()) - 1&#xA;&#xA;And i.idMapProcessFlowbranch=f.id And (i.idMapProcessFlowbranch=1 Or i.idMapProcessFlowbranch=2 Or i.idMapProcessFlowbranch=3 Or i.idMapProcessFlowbranch=10 )&#xA;&#xA;And i.idMapProcess=1">
+              <ui:ExecuteQuery.Parameters>
+                <scg:Dictionary x:TypeArguments="x:String, Argument" />
+              </ui:ExecuteQuery.Parameters>
+            </ui:ExecuteQuery>
+            <ui:Comment sap:VirtualizedContainerService.HintSize="334,55" sap2010:WorkflowViewState.IdRef="Comment_4" Text="Take Table of Transcodifica for sending email&#xA;" />
+            <ui:CommentOut sap2010:Annotation.AnnotationText="mandiamo solo tramite DEC" DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="334,80" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,180" sap2010:WorkflowViewState.IdRef="Sequence_26">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[TableTranscodifica]" DisplayName="Execute Query Transcodifica FOR AQ" ExistingDbConnection="[stringConnectionToDB]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_4" Sql="Select * from PosteIt_MailingList">
+                    <ui:ExecuteQuery.Parameters>
+                      <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                    </ui:ExecuteQuery.Parameters>
+                  </ui:ExecuteQuery>
+                </Sequence>
+              </ui:CommentOut.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:CommentOut>
+            <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[TableTranscodifica_DEC]" DisplayName="Execute Query Transcodifica FOR DEC" ExistingDbConnection="[stringConnectionToDB]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_5" Sql="SELECT fk_FGOContratti_Id, email, name, surname from PosteIt_Contact_Bpm a, PosteIt_Contratto_Rg_Detail b where usernameBpm=direttoreEsecutivo">
+              <ui:ExecuteQuery.Parameters>
+                <scg:Dictionary x:TypeArguments="x:String, Argument" />
+              </ui:ExecuteQuery.Parameters>
+            </ui:ExecuteQuery>
+          </Sequence>
+        </TryCatch.Try>
+        <TryCatch.Catches>
+          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,20" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ActivityAction x:TypeArguments="s:Exception">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+              </ActivityAction.Argument>
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Warn" Message="Non riesce a scrivere sul db" />
+            </ActivityAction>
+          </Catch>
+        </TryCatch.Catches>
+      </TryCatch>
+      <TryCatch DisplayName="TrySend Email" sap:VirtualizedContainerService.HintSize="506,3718" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+        <TryCatch.Try>
+          <Sequence sap:VirtualizedContainerService.HintSize="468,3500" sap2010:WorkflowViewState.IdRef="Sequence_22">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="sd:DataTable" Name="TableKoOdaPRC_NOID" />
+              <Variable x:TypeArguments="sd:DataTable" Name="TableKoForSI_NOID" />
+              <Variable x:TypeArguments="sd:DataTable" Name="OKWorkedToday_NOID" />
+              <Variable x:TypeArguments="sd:DataTable" Name="KOWorkedToday_NOID" />
+              <Variable x:TypeArguments="sd:DataTable" Name="TableOKKOPrc_NOID" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:Comment sap:VirtualizedContainerService.HintSize="426,55" sap2010:WorkflowViewState.IdRef="Comment_1" Text="send Email" />
+            <ui:CommentOut sap2010:Annotation.AnnotationText="disabilitata l'estrazione, disabilito anche l'invio" DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="426,87" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,179" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Filter and send Mail for AQ" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="FilterForAttachmentAQ.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="sd:DataTable" x:Key="DT1">[AllWorkedToday]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="Path">[in_Config("PathTemporaneiPR1").ToString]</InArgument>
+                      <InArgument x:TypeArguments="sd:DataTable" x:Key="Tab_transcodifica">[TableTranscodifica]</InArgument>
+                      <InArgument x:TypeArguments="x:Boolean" x:Key="BoolKoSendMail">False</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="nameTable">[in_Config("nameTableImmobiliarePR1").ToString]</InArgument>
+                      <InArgument x:TypeArguments="ui:DatabaseConnection" x:Key="StringConnDB">[stringConnectionToDB]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="user">[in_Config("user").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="smtpServer">[in_Config("smtpServer").ToString]</InArgument>
+                      <InArgument x:TypeArguments="ui:GenericValue" x:Key="portSmtp">[in_Config("portSmtp").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="pass_robot1">[in_Config("pass_robot1").ToString]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </ui:CommentOut.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:CommentOut>
+            <ui:CommentOut sap2010:Annotation.AnnotationText="disabilitato l'invio dei KO" DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="426,80" sap2010:WorkflowViewState.IdRef="CommentOut_4">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,179" sap2010:WorkflowViewState.IdRef="Sequence_27">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Filter and send Mail for KO - AQ" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="FilterForAttachmentAQ.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="sd:DataTable" x:Key="DT1">[KOWorkedToday]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="Path">[in_Config("PathTemporaneiPR1").ToString]</InArgument>
+                      <InArgument x:TypeArguments="sd:DataTable" x:Key="Tab_transcodifica">[TableTranscodifica]</InArgument>
+                      <InArgument x:TypeArguments="x:Boolean" x:Key="BoolKoSendMail">True</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="nameTable">[in_Config("nameTableImmobiliarePR1").ToString]</InArgument>
+                      <InArgument x:TypeArguments="ui:DatabaseConnection" x:Key="StringConnDB">[stringConnectionToDB]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="user">[in_Config("user").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="smtpServer">[in_Config("smtpServer").ToString]</InArgument>
+                      <InArgument x:TypeArguments="ui:GenericValue" x:Key="portSmtp">[in_Config("portSmtp").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="pass_robot1">[in_Config("pass_robot1").ToString]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </ui:CommentOut.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:CommentOut>
+            <ui:FilterDataTable DataTable="[OKWorkedToday]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="426,59" sap2010:WorkflowViewState.IdRef="FilterDataTable_3" OutputDataTable="[OKWorkedToday_NOID]" SelectColumnsMode="Remove">
+              <ui:FilterDataTable.Filters>
+                <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                  <ui:FilterOperationArgument Column="{x:Null}" Operand="{x:Null}" BooleanOperator="And" Operator="LT" />
+                </scg:List>
+              </ui:FilterDataTable.Filters>
+              <ui:FilterDataTable.SelectColumns>
+                <scg:List x:TypeArguments="InArgument" Capacity="4">
+                  <InArgument x:TypeArguments="x:String">["id"]</InArgument>
+                </scg:List>
+              </ui:FilterDataTable.SelectColumns>
+            </ui:FilterDataTable>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Filter and send Mail for OK - DEC" sap:VirtualizedContainerService.HintSize="426,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="FilterForAttachmentDEC.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="DT1">[OKWorkedToday_NOID]</InArgument>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="dtTranscodifica">[TableTranscodifica_DEC]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="Path">[in_Config("PathTemporaneiPR1").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="user">[in_Config("user").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="smtpServer">[in_Config("smtpServer").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="portSmtp">[in_Config("portSmtp").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="pass_robot1">[in_Config("pass_robot1").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:Boolean" x:Key="BoolKoSendMail">False</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="messaggio_OKDEC">[in_Config("messaggio_OKDEC").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="messaggio_KODEC">[in_Config("messaggio_KODEC").ToString]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:FilterDataTable DataTable="[KOWorkedToday]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="426,59" sap2010:WorkflowViewState.IdRef="FilterDataTable_4" OutputDataTable="[KOWorkedToday_NOID]" SelectColumnsMode="Remove">
+              <ui:FilterDataTable.Filters>
+                <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                  <ui:FilterOperationArgument Column="{x:Null}" Operand="{x:Null}" BooleanOperator="And" Operator="LT" />
+                </scg:List>
+              </ui:FilterDataTable.Filters>
+              <ui:FilterDataTable.SelectColumns>
+                <scg:List x:TypeArguments="InArgument" Capacity="4">
+                  <InArgument x:TypeArguments="x:String">["id"]</InArgument>
+                </scg:List>
+              </ui:FilterDataTable.SelectColumns>
+            </ui:FilterDataTable>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Filter and send Mail for KO - DEC" sap:VirtualizedContainerService.HintSize="426,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="FilterForAttachmentDEC.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="DT1">[KOWorkedToday_NOID]</InArgument>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="dtTranscodifica">[TableTranscodifica_DEC]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="Path">[in_Config("PathTemporaneiPR1").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="user">[in_Config("user").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="smtpServer">[in_Config("smtpServer").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="portSmtp">[in_Config("portSmtp").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="pass_robot1">[in_Config("pass_robot1").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:Boolean" x:Key="BoolKoSendMail">True</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="messaggio_OKDEC">[in_Config("messaggio_OKDEC").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="messaggio_KODEC">[in_Config("messaggio_KODEC").ToString]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:FilterDataTable DataTable="[TableKoOdaPRC]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="426,59" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[TableKoOdaPRC_NOID]" SelectColumnsMode="Remove">
+              <ui:FilterDataTable.Filters>
+                <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                  <ui:FilterOperationArgument Column="{x:Null}" Operand="{x:Null}" BooleanOperator="And" Operator="LT" />
+                </scg:List>
+              </ui:FilterDataTable.Filters>
+              <ui:FilterDataTable.SelectColumns>
+                <scg:List x:TypeArguments="InArgument" Capacity="4">
+                  <InArgument x:TypeArguments="x:String">["id"]</InArgument>
+                </scg:List>
+              </ui:FilterDataTable.SelectColumns>
+            </ui:FilterDataTable>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke  FilterKOForPrcVapInEccezioneSpecifica workflow" sap:VirtualizedContainerService.HintSize="426,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="FilterKOForPrcVapInEccezioneSpecifica.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="DT1">[TableKoOdaPRC_NOID]</InArgument>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="dtTranscodifica">[TableTranscodifica_DEC]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="Path">[in_Config("PathTemporaneiPR1").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="user">[in_Config("user").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="smtpServer">[in_Config("smtpServer").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="portSmtp">[in_Config("portSmtp").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="pass_robot1">[in_Config("pass_robot1").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:Boolean" x:Key="BoolKoSendMail">True</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="messaggio_OKeKOPRC_1">[in_Config("messaggio_OKeKOPRC_1").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="messaggio_OKeKOPRC_2">[in_Config("messaggio_OKeKOPRC_2").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="messaggio_KOPRC">[in_Config("messaggio_KOPRC").ToString]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="426,49" sap2010:WorkflowViewState.IdRef="CommentOut_5">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,179" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Filter and send Mail for ko oda popUp error" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="SendMailwithAttachments.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="NameFile">["Scartati_PopUpgenerici"+ now.ToString("ddMMyyyy")+".xlsx"]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="PasswordEmail">[in_Config("pass_robot1").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="EmailTo">[in_Config("EmailToSI").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="EmailFrom">[in_Config("user").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="Subject">Scartati con Anomalie</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="PathTemp">[in_Config("PathTemporaneiPR1").ToString]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="BodyEmail">[TemplateEmailSI]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="smtpServer">[in_Config("smtpServer").ToString]</InArgument>
+                      <InArgument x:TypeArguments="ui:GenericValue" x:Key="PortSMTP">[in_Config("portSmtp").ToString]</InArgument>
+                      <InArgument x:TypeArguments="sd:DataTable" x:Key="TableAttachment">[TableKoOdaPRC_NOID]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </ui:CommentOut.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:CommentOut>
+            <ui:FilterDataTable DataTable="[TableOKKOPrc]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="426,59" sap2010:WorkflowViewState.IdRef="FilterDataTable_5" OutputDataTable="[TableOKKOPrc_NOID]" SelectColumnsMode="Remove">
+              <ui:FilterDataTable.Filters>
+                <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                  <ui:FilterOperationArgument Column="{x:Null}" Operand="{x:Null}" BooleanOperator="And" Operator="LT" />
+                </scg:List>
+              </ui:FilterDataTable.Filters>
+              <ui:FilterDataTable.SelectColumns>
+                <scg:List x:TypeArguments="InArgument" Capacity="4">
+                  <InArgument x:TypeArguments="x:String">["id"]</InArgument>
+                </scg:List>
+              </ui:FilterDataTable.SelectColumns>
+            </ui:FilterDataTable>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Filter&amp;Send KO&amp;OK FOR PRC VAP chiusura effettiva" sap:VirtualizedContainerService.HintSize="426,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="FilterKOForPrcVapInEccezioneSpecifica.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="DT1">[TableOKKOPrc_NOID]</InArgument>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="dtTranscodifica">[TableTranscodifica_DEC]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="Path">[in_Config("PathTemporaneiPR1").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="user">[in_Config("user").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="smtpServer">[in_Config("smtpServer").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="portSmtp">[in_Config("portSmtp").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="pass_robot1">[in_Config("pass_robot1").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:Boolean" x:Key="BoolKoSendMail">False</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="messaggio_OKeKOPRC_1">[in_Config("messaggio_OKeKOPRC_1").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="messaggio_OKeKOPRC_2">[in_Config("messaggio_OKeKOPRC_2").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="messaggio_KOPRC">[in_Config("messaggio_KOPRC").ToString]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:FilterDataTable DataTable="[TableKoForSI]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="426,59" sap2010:WorkflowViewState.IdRef="FilterDataTable_2" OutputDataTable="[TableKoForSI_NOID]" SelectColumnsMode="Remove">
+              <ui:FilterDataTable.Filters>
+                <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                  <ui:FilterOperationArgument Column="{x:Null}" Operand="{x:Null}" BooleanOperator="And" Operator="LT" />
+                </scg:List>
+              </ui:FilterDataTable.Filters>
+              <ui:FilterDataTable.SelectColumns>
+                <scg:List x:TypeArguments="InArgument" Capacity="4">
+                  <InArgument x:TypeArguments="x:String">["id"]</InArgument>
+                </scg:List>
+              </ui:FilterDataTable.SelectColumns>
+            </ui:FilterDataTable>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Filter and send Mail KO for SI" sap:VirtualizedContainerService.HintSize="426,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="SendMailwithAttachments.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="NameFile">["Scarti lavorazione_"+ now.ToString("ddMMyyyy")+".xlsx"]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="PasswordEmail">[in_Config("pass_robot1").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="EmailFrom">[in_Config("user").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="Subject">Scartati con Anomalie</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="PathTemp">[in_Config("PathTemporaneiPR1").ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="smtpServer">[in_Config("smtpServer").ToString]</InArgument>
+                <InArgument x:TypeArguments="ui:GenericValue" x:Key="PortSMTP">[in_Config("portSmtp").ToString]</InArgument>
+                <InArgument x:TypeArguments="sd:DataTable" x:Key="TableAttachment">[TableKoForSI_NOID]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="EmailToSI" />
+                <InArgument x:TypeArguments="x:String" x:Key="messaggio_SI">[in_Config("messaggio_SI").ToString]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[TableKoForSI]" DisplayName="Set update error" sap:VirtualizedContainerService.HintSize="426,325" sap2010:WorkflowViewState.IdRef="ForEachRow_4">
+              <ui:ForEachRow.Body>
+                <ActivityAction x:TypeArguments="sd:DataRow">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,180" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:ExecuteNonQuery AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Execute Non Query" ExistingDbConnection="[stringConnectionToDB]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_4" Sql="[&quot;UPDATE ImmobiliareRealGimm SET idMapStatus= IIF(idMapStatus=400,401,411) WHERE id=&quot;+row(&quot;id&quot;).ToString]">
+                      <ui:ExecuteNonQuery.Parameters>
+                        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                      </ui:ExecuteNonQuery.Parameters>
+                    </ui:ExecuteNonQuery>
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEachRow.Body>
+            </ui:ForEachRow>
+            <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[TableKoOdaPRC]" DisplayName="Set update error" sap:VirtualizedContainerService.HintSize="426,325" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
+              <ui:ForEachRow.Body>
+                <ActivityAction x:TypeArguments="sd:DataRow">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,180" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:ExecuteNonQuery AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Execute Non Query" ExistingDbConnection="[stringConnectionToDB]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_3" Sql="[&quot;UPDATE ImmobiliareRealGimm SET idMapStatus= IIF(idMapStatus=400,401,411) WHERE id=&quot;+row(&quot;id&quot;).ToString]">
+                      <ui:ExecuteNonQuery.Parameters>
+                        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                      </ui:ExecuteNonQuery.Parameters>
+                    </ui:ExecuteNonQuery>
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEachRow.Body>
+            </ui:ForEachRow>
+            <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[TableOKKOPrc]" DisplayName="Set update error" sap:VirtualizedContainerService.HintSize="426,325" sap2010:WorkflowViewState.IdRef="ForEachRow_7">
+              <ui:ForEachRow.Body>
+                <ActivityAction x:TypeArguments="sd:DataRow">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,180" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:ExecuteNonQuery AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Execute Non Query" ExistingDbConnection="[stringConnectionToDB]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_7" Sql="[&quot;UPDATE ImmobiliareRealGimm SET idMapStatus= IIF(idMapStatus=400,401, IIF(idMapStatus=100,101,411)) WHERE id=&quot;+row(&quot;id&quot;).ToString]">
+                      <ui:ExecuteNonQuery.Parameters>
+                        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                      </ui:ExecuteNonQuery.Parameters>
+                    </ui:ExecuteNonQuery>
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEachRow.Body>
+            </ui:ForEachRow>
+            <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[KOWorkedToday]" DisplayName="Set update KOWorkedToday" sap:VirtualizedContainerService.HintSize="426,325" sap2010:WorkflowViewState.IdRef="ForEachRow_5">
+              <ui:ForEachRow.Body>
+                <ActivityAction x:TypeArguments="sd:DataRow">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,180" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:ExecuteNonQuery AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Execute Non Query" ExistingDbConnection="[stringConnectionToDB]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_5" Sql="[&quot;UPDATE ImmobiliareRealGimm SET idMapStatus= IIF(idMapStatus=400,401,411) WHERE id=&quot;+row(&quot;id&quot;).ToString]">
+                      <ui:ExecuteNonQuery.Parameters>
+                        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                      </ui:ExecuteNonQuery.Parameters>
+                    </ui:ExecuteNonQuery>
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEachRow.Body>
+            </ui:ForEachRow>
+            <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[OKWorkedToday]" DisplayName="Set update OKWorkedToday" sap:VirtualizedContainerService.HintSize="426,325" sap2010:WorkflowViewState.IdRef="ForEachRow_6">
+              <ui:ForEachRow.Body>
+                <ActivityAction x:TypeArguments="sd:DataRow">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,180" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:ExecuteNonQuery AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Execute Non Query" ExistingDbConnection="[stringConnectionToDB]" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteNonQuery_6" Sql="[&quot;UPDATE ImmobiliareRealGimm SET idMapStatus= IIF(idMapStatus=400,401,411) WHERE id=&quot;+row(&quot;id&quot;).ToString]">
+                      <ui:ExecuteNonQuery.Parameters>
+                        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                      </ui:ExecuteNonQuery.Parameters>
+                    </ui:ExecuteNonQuery>
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEachRow.Body>
+            </ui:ForEachRow>
+            <ui:DatabaseDisconnect DatabaseConnection="[stringConnectionToDB]" DisplayName="Disconnect" sap:VirtualizedContainerService.HintSize="426,22" sap2010:WorkflowViewState.IdRef="DatabaseDisconnect_1" />
+          </Sequence>
+        </TryCatch.Try>
+        <TryCatch.Catches>
+          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="472,20" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ActivityAction x:TypeArguments="s:Exception">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+              </ActivityAction.Argument>
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Warn" Message="Non riesce a inviare l'email" />
+            </ActivityAction>
+          </Catch>
+        </TryCatch.Catches>
+      </TryCatch>
+      <TryCatch DisplayName="Try Write csv" sap:VirtualizedContainerService.HintSize="506,683" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+        <TryCatch.Try>
+          <Sequence sap:VirtualizedContainerService.HintSize="418,465" sap2010:WorkflowViewState.IdRef="Sequence_23">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:Comment sap:VirtualizedContainerService.HintSize="376,55" sap2010:WorkflowViewState.IdRef="Comment_5" Text="// Write your comments in the Text property" />
+            <Assign sap:VirtualizedContainerService.HintSize="376,59" sap2010:WorkflowViewState.IdRef="Assign_2">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[NameFileCSV]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[in_Config("CsvPathOutput_RPA-Immobiliare").Tostring+"Results_"+now.ToString("yyyyMMdd")+".csv"]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Sequence DisplayName="write csv" sap:VirtualizedContainerService.HintSize="376,179" sap2010:WorkflowViewState.IdRef="Sequence_13">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:WriteCsvFile Encoding="{x:Null}" AddHeaders="True" DataTable="[AllWorkedTodayCSV]" Delimitator="Semicolon" DisplayName="Write CSV" FilePath="[NameFileCSV]" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="WriteCsvFile_1" />
+            </Sequence>
+          </Sequence>
+        </TryCatch.Try>
+        <TryCatch.Catches>
+          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="422,20" sap2010:WorkflowViewState.IdRef="Catch`1_3">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ActivityAction x:TypeArguments="s:Exception">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+              </ActivityAction.Argument>
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Warn" Message="Non riesce a scrivere il file csv" />
+            </ActivityAction>
+          </Catch>
+        </TryCatch.Catches>
+      </TryCatch>
+    </Sequence>
+  </Sequence>
+</Activity>

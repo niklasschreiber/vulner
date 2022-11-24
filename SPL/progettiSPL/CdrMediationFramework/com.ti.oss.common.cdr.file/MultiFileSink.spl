@@ -1,0 +1,197 @@
+namespace com.ti.oss.common.cdr.file ;
+
+use spl.file::*;
+use spl.collection::*;
+
+use com.ti.oss.common.event::*;
+use com.ti.oss.common.cdr.types::*;
+use com.ibm.streamsx.file::*;
+use  com.ti.oss.common.cdr.util::*;
+use  com.ti.oss.common.util.cfg::*;
+
+// from MediationUtils
+use com.ti.oss.common.util.time::*;
+
+
+public composite MultiFileSink( input stream<CsvWrite> I; 
+                               output stream<Event e> OEvent) {
+
+	param
+		expression<rstring> $mediationName ;
+	
+	type
+		FTableEntry = rstring expFile, uint64 fDesc, boolean closeFile;
+		
+	graph
+		(stream<Event e> OEvent) as Sink = Custom(I) 
+		{
+			logic
+				state :
+				{
+                    //mutable rstring outFilename;
+                    mutable rstring header_broadbandggsnapn = getCfgParam("COMMON_CFG_DIR",$mediationName,"HEADER_BROADBANDGGSNAPN");
+                    mutable rstring header_broadbandsgsn = getCfgParam("COMMON_CFG_DIR",$mediationName,"HEADER_BROADBANDSGSN");
+                    mutable rstring header_roamingbroadbandggsn = getCfgParam("COMMON_CFG_DIR",$mediationName,"HEADER_ROAMINGBROADBANDGGSN");
+                    mutable rstring header_tavggsn = getCfgParam("COMMON_CFG_DIR",$mediationName,"HEADER_TAVGGSN");
+                    mutable rstring header_tavsgsn = getCfgParam("COMMON_CFG_DIR",$mediationName,"HEADER_TAVSGSN");
+                    mutable rstring header_bscbroaddownlink = getCfgParam("COMMON_CFG_DIR",$mediationName,"HEADER_BSCBROADDOWNLINK");
+                    mutable rstring header_rncbroaddownlink = getCfgParam("COMMON_CFG_DIR",$mediationName,"HEADER_RNCBROADDOWNLINK");
+                    mutable rstring header_broadmvno = getCfgParam("COMMON_CFG_DIR",$mediationName,"HEADER_BROADMVNO");
+                    mutable rstring header_broadroaming = getCfgParam("COMMON_CFG_DIR",$mediationName,"HEADER_BROADROAMING");
+                    mutable rstring header_broadmvnoaggrop = getCfgParam("COMMON_CFG_DIR",$mediationName,"HEADER_BROADMVNOAGGROP");
+                    mutable map<rstring, FTableEntry> fTable;
+                    mutable map<rstring, FTableEntry> fTableTmp;
+                    mutable rstring strCR= "\n";
+                    mutable rstring keyToDelete;
+				}
+					
+				onTuple I:
+				{
+                    mutable int32 err = 0ul;
+					if (!has(fTable, I.nameOutputFile)) {
+						
+						
+						rstring pathname = getPathFile(I.nameOutputFile);
+						if(!exists(pathname)) {
+	               	       int32 error = createDirectory(pathname);
+	                       if(error!=0) {
+	                         appTrc(Trace.error, "MultiFileSink - Can not create directory \"" + pathname + 
+	                                             "\". Please, verify user rights - Error is \"" + strerror(error) + "\"");                     
+	                       }
+	               	    }
+						
+						uint64 fd = fopen(I.nameOutputFile, "w", err); 
+						if (err != 0) 
+						{
+						    appTrc(Trace.error, "MultiFileSink - Cannot open file \"" + I.nameOutputFile + "\" for writing");
+							
+						} 
+						else 
+						{
+						    if (getNodeIdFromPath(I.nameOutputFile) == "broadbandggsnapn"){
+						    	fwriteString(header_broadbandggsnapn+strCR, fd, err);
+						    }
+						    if (getNodeIdFromPath(I.nameOutputFile) == "broadbandsgsn"){
+						    	fwriteString(header_broadbandsgsn+strCR, fd, err);
+						    }
+						    if (getNodeIdFromPath(I.nameOutputFile) == "roamingbroadbandggsn"){
+						    	fwriteString(header_roamingbroadbandggsn+strCR, fd, err);
+						    }
+						    if (getNodeIdFromPath(I.nameOutputFile) == "tavggsn"){
+						    	fwriteString(header_tavggsn+strCR, fd, err);
+						    }
+						    if (getNodeIdFromPath(I.nameOutputFile) == "tavsgsn"){
+						    	fwriteString(header_tavsgsn+strCR, fd, err);
+						    }
+						    if (getNodeIdFromPath(I.nameOutputFile) == "bscbroadbanddownlink"){
+						    	fwriteString(header_bscbroaddownlink+strCR, fd, err);
+						    }
+						    if (getNodeIdFromPath(I.nameOutputFile) == "rncbroadbanddownlink"){
+						    	fwriteString(header_rncbroaddownlink+strCR, fd, err);
+						    }
+						    if (getNodeIdFromPath(I.nameOutputFile) == "broadbandmvno"){
+						    	fwriteString(header_broadmvno+strCR, fd, err);
+						    }
+						    if (getNodeIdFromPath(I.nameOutputFile) == "roamingbroadbandsgsn"){
+						    	fwriteString(header_broadroaming+strCR, fd, err);
+						    }
+						    if (getNodeIdFromPath(I.nameOutputFile) == "broadbandmvnoaggrop"){
+						    	fwriteString(header_broadmvnoaggrop+strCR, fd, err);
+						    }
+						    
+						    mutable FTableEntry entry = {expFile=I.nameOutputFile, fDesc=fd, closeFile=I.endROP};						    
+							fTable[I.nameOutputFile] = entry;
+							if (I.outputContent != "")
+							{
+								fwriteString(I.outputContent+strCR, fd, err);
+							}
+						}	
+					} 
+					else 
+					{
+					  if (I.outputContent != "")
+					  {
+					  	fwriteString(I.outputContent+strCR, fTable[I.nameOutputFile].fDesc, err);
+					  }					  
+					  if (err != 0)
+						appTrc(Trace.error, "MultiFileSink - Cannot write to file \"" + I.nameOutputFile + "\"");
+						
+					  fTable[I.nameOutputFile].closeFile = I.endROP;
+							
+					}
+					
+					for(rstring key in fTable)
+					{						
+						if (fTable[key].closeFile)
+						{
+							mutable Event event = {};		
+		                    event.eventType = 191;
+		                    event.resultCode = 0;
+		                    event.rawFile = fTable[key].expFile;
+		                    event.eventCorrelationId = "";
+		                    event.rop = "";
+		                    event.emId = $mediationName;
+	                  		event.neId = "";			
+							
+							mutable int32 err = 0;							
+							appTrc(Trace.trace, "MultiFileSink - closing file \"" + fTable[key].expFile + "\"...");
+							fclose(fTable[fTable[key].expFile].fDesc, err);
+							if (err != 0)
+							{
+								appTrc(Trace.error, "MultiFileSink - Cannot close file \"" + fTable[key].expFile + "\". Error number : " + (rstring)err);
+								event.resultCode = 9;
+								event.eventText = "Filed to close the file: "+ fTable[key].expFile;
+                                boolean eventEnabled = mkEvent( event);
+                                if(eventEnabled) 
+                                	submit ({e=event}, OEvent);
+							}
+							else
+							{
+								//RENAME FILE
+								mutable int32 error = 0;
+								if( exists(fTable[key].expFile))
+								{
+									mutable rstring filenamenew;
+									
+									if (I.northIf == "Bigdata")
+									{
+										mutable int32 len;   
+										len = length(fTable[key].expFile) ;
+										filenamenew = substring(fTable[key].expFile,0,findLast(fTable[key].expFile, ".", len))+I.suffix;
+									}else{
+										filenamenew = getPathFile(fTable[key].expFile)+"/"+I.filePrefix+getUtilTimeStampForOut()+I.suffix;
+									}
+									
+									error = rename(fTable[key].expFile,filenamenew);
+									if(error != 0)
+									{
+										appTrc(Trace.error, "RenameFile - Could not rename file \"" +
+											fTable[key].expFile + "\" into \"" + filenamenew + "\"" +
+											strerror(error)) ;
+									}
+									else
+									{
+										// Submit the event to write
+										event.resultCode = 0;
+										event.eventText = "File closed: "+ fTable[key].expFile;
+                                		boolean eventEnabled = mkEvent( event);
+                                		
+                                		if(eventEnabled) 
+                                			submit ({e=event}, OEvent);
+									}
+									
+								}	
+							}
+						}
+						else
+						{
+							fTableTmp[key] = fTable[key];
+						}
+					} 
+					
+					fTable = fTableTmp;
+					clearM(fTableTmp);
+					 
+				}
+		}
+}

@@ -1,0 +1,243 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="ClickFineListaRapporti"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="numeroProdotti" Type="InArgument(x:Int32)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>ClickFineListaRapporti_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="ClickFineListaRapporti" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="onclick" />
+      <Variable x:TypeArguments="ui:UiElement" Name="ancestor" />
+      <Variable x:TypeArguments="x:Boolean" Default="False" Name="esisteLast" />
+      <Variable x:TypeArguments="x:Boolean" Default="False" Name="esisteNext" />
+      <Variable x:TypeArguments="x:Boolean" Default="False" Name="esisteFwd" />
+      <Variable x:TypeArguments="x:String" Name="selettoreRicercaAncestrale">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:String" Value="" />
+        </Variable.Default>
+      </Variable>
+    </Sequence.Variables>
+    <If Condition="[numeroProdotti &gt; 6]" DisplayName="If numeroProdotti maggiori di 6" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <ui:UiElementExists DisplayName="Element Exists 'last'" Exists="[esisteLast]" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
+            <ui:UiElementExists.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="5294282cd998f64e1d806b925e63701e" Selector="&lt;html app='chrome.exe' omit:title='MONIS - Gestione pratica' /&gt;&lt;webctrl id='frmGestionePratica:topScroller_table' tag='TABLE' /&gt;&lt;webctrl src='../images/ctrl-last.png' /&gt;" TimeoutMS="1000" WaitForReady="NONE" />
+            </ui:UiElementExists.Target>
+          </ui:UiElementExists>
+          <If Condition="[esisteLast]" DisplayName="If esiste last" sap2010:WorkflowViewState.IdRef="If_2">
+            <If.Then>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[selettoreRicercaAncestrale]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">["&lt;html app='chrome.exe' omit:title='MONIS - Gestione pratica' /&gt;&lt;webctrl id='frmGestionePratica:topScroller_table' tag='TABLE' /&gt;&lt;webctrl src='../images/ctrl-last.png' /&gt;"]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </If.Then>
+            <If.Else>
+              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <ui:UiElementExists DisplayName="Element Exists 'forward'" Exists="[esisteFwd]" sap2010:WorkflowViewState.IdRef="UiElementExists_3">
+                  <ui:UiElementExists.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="5294282cd998f64e1d806b925e63701e" Selector="&lt;html app='chrome.exe' omit:title='MONIS - Gestione pratica' /&gt;&lt;webctrl id='frmGestionePratica:topScroller_table' tag='TABLE' /&gt;&lt;webctrl src='../images/ctrl-fwd.png' /&gt;" TimeoutMS="1000" WaitForReady="NONE" />
+                  </ui:UiElementExists.Target>
+                </ui:UiElementExists>
+                <If Condition="[esisteFwd]" DisplayName="If esiste fwd" sap2010:WorkflowViewState.IdRef="If_3">
+                  <If.Then>
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[selettoreRicercaAncestrale]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">&lt;html app='chrome.exe' omit:title='MONIS - Gestione pratica' /&gt;&lt;webctrl id='frmGestionePratica:topScroller_table' tag='TABLE' /&gt;&lt;webctrl src='../images/ctrl-fwd.png' /&gt;</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </If.Then>
+                  <If.Else>
+                    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_4">
+                      <ui:UiElementExists DisplayName="Element Exists next" Exists="[esisteNext]" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+                        <ui:UiElementExists.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="5294282cd998f64e1d806b925e63701e" Selector="&lt;html app='chrome.exe' omit:title='MONIS - Gestione pratica' /&gt;&lt;webctrl id='frmGestionePratica:topScroller_table' tag='TABLE' /&gt;&lt;webctrl src='../images/ctrl-next.png' /&gt;" TimeoutMS="1000" WaitForReady="NONE" />
+                        </ui:UiElementExists.Target>
+                      </ui:UiElementExists>
+                      <If Condition="[esisteNext]" DisplayName="If esiste next" sap2010:WorkflowViewState.IdRef="If_4">
+                        <If.Then>
+                          <Assign sap2010:WorkflowViewState.IdRef="Assign_3">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[selettoreRicercaAncestrale]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">&lt;html app='chrome.exe' omit:title='MONIS - Gestione pratica' /&gt;&lt;webctrl id='frmGestionePratica:topScroller_table' tag='TABLE' /&gt;&lt;webctrl src='../images/ctrl-next.png' /&gt;</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </If.Then>
+                      </If>
+                    </Sequence>
+                  </If.Else>
+                </If>
+              </Sequence>
+            </If.Else>
+          </If>
+        </Sequence>
+      </If.Then>
+    </If>
+    <If Condition="[selettoreRicercaAncestrale.Equals(&quot;&quot;)]" DisplayName="If selettore non nullo" sap2010:WorkflowViewState.IdRef="If_5">
+      <If.Else>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_5">
+          <ui:GetAncestor Ancestor="[ancestor]" DisplayName="Get Ancestor" sap2010:WorkflowViewState.IdRef="GetAncestor_1" UpLevels="1">
+            <ui:GetAncestor.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="[selettoreRicercaAncestrale]" WaitForReady="NONE" />
+            </ui:GetAncestor.Target>
+          </ui:GetAncestor>
+          <ui:GetAttribute ContinueOnError="{x:Null}" Attribute="onClick" DisplayName="Get Attribute" sap2010:WorkflowViewState.IdRef="GetAttribute_1">
+            <ui:GetAttribute.Result>
+              <OutArgument x:TypeArguments="x:String">[onclick]</OutArgument>
+            </ui:GetAttribute.Result>
+            <ui:GetAttribute.Target>
+              <ui:Target ClippingRegion="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" Element="[ancestor]" WaitForReady="NONE" />
+            </ui:GetAttribute.Target>
+          </ui:GetAttribute>
+          <If Condition="[onclick.Equals(&quot;&quot;)]" DisplayName="If onclick" sap2010:WorkflowViewState.IdRef="If_6">
+            <If.Else>
+              <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
+                <ui:Click.CursorPosition>
+                  <ui:CursorPosition Position="Center">
+                    <ui:CursorPosition.OffsetX>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:CursorPosition.OffsetX>
+                    <ui:CursorPosition.OffsetY>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:CursorPosition.OffsetY>
+                  </ui:CursorPosition>
+                </ui:Click.CursorPosition>
+                <ui:Click.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" Element="[ancestor]" WaitForReady="INTERACTIVE" />
+                </ui:Click.Target>
+              </ui:Click>
+            </If.Else>
+          </If>
+        </Sequence>
+      </If.Else>
+    </If>
+    <sads:DebugSymbol.Symbol>d3JDOlxVc2Vyc1x0c3RfY29sbFJQQTIxXERlc2t0b3BcU3VjY2Vzc2lvbmkgUmVsZWFzZVxSZWxlYXNlXFVpUGF0aFxOYXZpZ2F0ZU1vbmlzTGlicmFyeVxDbGlja0ZpbmVMaXN0YVJhcHBvcnRpLnhhbWwzRgO7AQ4CAQFKNUo8AgEFSzVLPAIBBEw1TDwCAQNPC086AgECUwWTAQoCARuUAQW5AQoCAQZTE1MsAgEcVQmRARQCAR6UAROUAUYCAQeWAQm3ARQCAQlWC1ogAgFAWwuQARACAR+XAQubARwCARacAQujAR0CARCkAQu2ARACAQpYiQFYxgICAURY0QJY1wICAUNWSlZYAgFBWxlbJwIBIF0PZBgCATxnD44BGgIBIpkBZZkBgwECARmXASSXATACARecAUGcAUoCAROeATeeAUACARGhAWWhAXECARSkARmkATkCAQumAQ+0ARoCAQ1iOmL5AQIBP187X1cCAT1oEWwmAgE3bRGNARYCASOyAWmyAXUCAQ5qjwFqywICATtq1gJq3AICATpoU2hgAgE4bR9tLAIBJG8Vdh4CATN5FYsBIAIBJnRAdPoBAgE2cUFxXQIBNHoXfiwCAS5/F4oBHAIBJ3yVAXzSAgIBMnzdAnzjAgIBMXpUemICAS9/JX8zAgEogQEbiAEkAgEqhgFGhgGBAgIBLYMBR4MBYwIBKw==</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="UiElementExists_2" sap:VirtualizedContainerService.HintSize="1042,106" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="UiElementExists_3" sap:VirtualizedContainerService.HintSize="753,106" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="UiElementExists_1" sap:VirtualizedContainerService.HintSize="464,106" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_4" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="486,478">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="753,626" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="775,896">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="1042,1044" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="1064,1314">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="1189,1462" />
+      <sap2010:ViewStateData Id="GetAncestor_1" sap:VirtualizedContainerService.HintSize="464,68" />
+      <sap2010:ViewStateData Id="GetAttribute_1" sap:VirtualizedContainerService.HintSize="464,96" />
+      <sap2010:ViewStateData Id="Click_1" sap:VirtualizedContainerService.HintSize="314,68" />
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="464,216" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="486,584">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="1189,732" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="1211,2358">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ClickFineListaRapporti_1" sap:VirtualizedContainerService.HintSize="1251,2438" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

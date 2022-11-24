@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Custom settings used by Volunteers for Salesforce.</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Contact_Match_Email_Fields__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>A semicolon separated list of additional Contact email fields to try to match against when doing Contact matching. Note that the fields are specified by their full API Name, including namespace prefix. NPSP email fields are automatically checked.</inlineHelpText>
+        <label>Contact Match Email Fields</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_Match_First_Name_Fields__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>A semicolon separated list of additional Contact first name fields to try to match against when doing Contact matching. E.g., a nickname field. Note that the fields are specified by their full API Name, including namespace prefix.</inlineHelpText>
+        <label>Contact Match First Name Fields</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_Matching_Rule__c</fullName>
+        <defaultValue>&quot;Firstname;Lastname;Email&quot;</defaultValue>
+        <description>Determines which fields (FirstName, LastName, and/or Email) V4S uses when matching Contacts against existing Contacts on Volunteers Sites pages. Use a semicolon-separated list, for example: FirstName;Email. Specify fields by their API Name.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines which fields (FirstName, LastName, and/or Email) V4S uses when matching Contacts against existing Contacts on Volunteers Sites pages. Use a semicolon-separated list, for example: FirstName;Email. Specify fields by their API Name.</inlineHelpText>
+        <label>Contact Matching Rule</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Google_Maps_API_Key__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>If you enter a Google Maps API Key, V4S includes a map of the Job Location on the Job Listing pages of your Volunteer Site.</inlineHelpText>
+        <label>Google Maps API Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Grant_Guest_Users_Update_Access__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Allow guest users to update records based on their Create access.</inlineHelpText>
+        <label>Grant Guest Users Update Access</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Personal_Site_Org_Wide_Email_Name__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>If you&apos;ve configured an Organization-Wide Email Address that you&apos;d like to use on the email sent from the Personal Site Contact Lookup Sites page, enter the Display Name of the Organization-Wide Email Address here.</inlineHelpText>
+        <label>Personal Site Org-Wide Email Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Personal_Site_Report_Hours_Filtered__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Personal Site Report Hours Filter By Contact</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Personal Site Report Hours Filter By Contact</inlineHelpText>
+        <label>Personal Site Report Hours Filtered</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Personal_Site_Requires_URL_Email_Match__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If selected, the Personal Site link needs to include the Email URL parameter, which V4S uses to match against an email field on the specified Contact.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If selected, the Personal Site link needs to include the Email URL parameter, which V4S uses to match against an email field on the specified Contact.</inlineHelpText>
+        <label>Personal Site Requires URL Email Match</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Recurring_Job_Future_Months__c</fullName>
+        <defaultValue>4</defaultValue>
+        <description>Determines how many months into the future Recurring Job Shifts are scheduled. Scheduling more than 4 months may cause a Salesforce CPU time limit exceeded error, which would prevent the Job Scheduler from completing.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines how many months into the future Recurring Job Shifts are scheduled. Scheduling more than 4 months may cause a Salesforce CPU time limit exceeded error, which would prevent the Job Scheduler from completing.</inlineHelpText>
+        <label>Recurring Job Future Months</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Signup_Bucket_Account_On_Create__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The name of the Account to use when creating new Contacts during Signup. If you are using the Nonprofit Success Pack One-to-One model, leave this setting blank. If you are using the bucket model, set this to the name of the Account, usually &apos;Individual&apos;.</inlineHelpText>
+        <label>Signup Bucket Account On Create</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Signup_Creates_Contacts_If_No_Match__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>When selected, the Volunteer Signup form creates a new Contact record, if Signup Matches Existing Contacts is selected and no existing Contact is found. Otherwise, the form creates a Lead.</inlineHelpText>
+        <label>Signup Creates Contacts If No Match</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Signup_Matches_Existing_Contacts__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>If selected, the Volunteer Signup Page tries to match the person to an existing Contact (by First Name, Last Name, and Email), and updates their existing Contact information with the data submitted on the Volunteer Signup Page.</inlineHelpText>
+        <label>Signup Matches Existing Contacts</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Volunteers Settings</label>
+    <visibility>Public</visibility>
+</CustomObject>

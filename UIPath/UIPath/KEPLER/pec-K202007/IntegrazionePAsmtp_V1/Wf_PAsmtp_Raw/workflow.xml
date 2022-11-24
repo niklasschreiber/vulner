@@ -1,0 +1,83 @@
+<workflow-app name="PAsmtp_raw" xmlns="uri:oozie:workflow:0.2">
+<start to="copyPA_tmp"/> 
+<action name="copyPA_tmp">
+        <distcp xmlns="uri:oozie:distcp-action:0.1">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+		<configuration>
+			<property>
+			  <name>mapred.job.queue.name</name>
+			  <value>databreach</value>
+			</property>
+			<property>
+			  <name>oozie.launcher.mapred.job.queue.name</name>
+			  <value>databreach</value>
+			</property>
+		 </configuration>
+              <arg>/prs/etl/PEC/PAsmtp/inbox/*</arg>
+              <arg>/databreach/inbox/PEC/PAsmtp/tmp/</arg>
+        </distcp>
+        <ok to="clear_inbox"/>
+        <error to="kill"/>
+    </action>
+	<action name="clear_inbox">
+        <fs>  
+			  <delete path='${nameNode}/prs/etl/PEC/PAsmtp/inbox/*'/>
+        </fs>
+        <ok to="copyPA_backup"/>
+        <error to="kill"/>
+    </action>
+	<action name="copyPA_backup">
+        <distcp xmlns="uri:oozie:distcp-action:0.1">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+		<configuration>
+			<property>
+			  <name>mapred.job.queue.name</name>
+			  <value>databreach</value>
+			</property>
+			<property>
+			  <name>oozie.launcher.mapred.job.queue.name</name>
+			  <value>databreach</value>
+			</property>
+		 </configuration>
+              <arg>/databreach/inbox/PEC/PAsmtp/tmp/*</arg>
+              <arg>/prs/backup/PEC/PAsmtp/</arg>
+        </distcp>
+        <ok to="pa_hive_script"/>
+        <error to="kill"/>
+    </action>     
+    <action name="pa_hive_script">
+        <hive2 xmlns="uri:oozie:hive2-action:0.1">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+		<configuration>
+			<property>
+			  <name>mapred.job.queue.name</name>
+			  <value>databreach</value>
+			</property>
+			<property>
+			  <name>oozie.launcher.mapred.job.queue.name</name>
+			  <value>databreach</value>
+			</property>
+		 </configuration>
+			<jdbc-url>${hiveJdbc}</jdbc-url>
+			<password>${passwordHive}</password>
+            <script>/user/oozie/WorkflowShellWorkspace/Wf_PAsmtp_Raw/PAsmtp_raw.sql</script>
+        </hive2>
+        <ok to="clear_all"/>
+        <error to="kill"/>
+    </action>
+    <action name="clear_all">
+        <fs>
+              <delete path='${nameNode}/databreach/inbox/PEC/PAsmtp/tmp/*'/>
+			  <delete path='${nameNode}/kepler/export/PEC/PAsmtp/*'/> 
+        </fs>
+        <ok to="end"/>
+		<error to="kill"/>
+    </action>
+    <kill name="kill">
+        <message>Action failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
+    </kill>
+    <end name="end"/>
+</workflow-app>

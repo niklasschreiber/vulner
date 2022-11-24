@@ -1,0 +1,50 @@
+
+Visual COBOL Exception Handler - 01/09/2021  17:46:55
+C:\Program Files\Fortify\Fortify_SCA_and_Apps_21.1.2\Core\cobol\EABinaries\Checker\bin\cobol.exe caused an exception at address : 0x029A0B83
+Exception type - EXCEPTION_ACCESS_VIOLATION on Write. Address 0x0000008A
+
+Registers:
+
+	EAX 0C000300	EBX 0000014B
+	ECX 00000000	EDX 00000000
+	DS  002B	ESI 0300EA10
+	ES  002B	EDI 0000001A
+	FS  0053	GS  002B
+	CS  0023	EIP 029A0B83
+	SS  002B	ESP 0019AE04	EBP 0019DD10
+	Flags 00010246
+
+Error occurred in : C:\Program Files\Fortify\Fortify_SCA_and_Apps_21.1.2\Core\cobol\EABinaries\Checker\bin\cdi2.dll, loaded at 0x02990000
+
+	CompanyName Micro Focus
+	FileDescription cdi2
+	FileVersion VisualCOBOL-R17/062
+	LegalCopyright (C) Copyright 1984-2021 Micro Focus or one of its affiliates.
+	OriginalFileName cdi2.dll
+	ProductName Micro Focus COBOL 2017
+	ProductVersion 7.0.00213
+
+Command Line : Files\Fortify\Fortify_SCA_and_Apps_21.1.2\Core\cobol\EABinaries/Checker/bin/cobol.exe" "D:/_SRC/BUGGYCODE/COBOL/2.6/CBLPROT26.cbl" DIALECT(ENTCOBOL) nognt osext() NOMAPNAME EAGENXML(C:\Users\Security\AppData\Local\Fortify\sca21.1\build\BUGGYCODE\scratch\002\8E280E1C-7F14-4923-86AA-E377D36C824D16980\Temp\CBLPROT26.cbl#COBOL#1.KenlyGen.xml) noint noquery PANVALET LIBRARIAN NO-TRUNCCOPY NOEOF-1A NONULL-ESCAPE copyext(.cpy,.dcl,.wrk,.sel,.mas,.cpb,.pro,.mam,.mai,.lnk,.cfl,.cpf,.cpv,.mat,.ins,.mf,.ss)    DIRECTIVES(C:\Users\Security\AppData\Local\Fortify\sca21.1\build\BUGGYCODE\scratch\002\8E280E1C-7F14-4923-86AA-E377D36C824D16980\Temp\CBLPROT26.cbl#COBOL#1.CheckerKeywordsAsIdentifiers.dir) DIRECTIVES(C:\Users\Security\AppData\Local\Fortify\sca21.1\build\BUGGYCODE\scratch\002\8E280E1C-7F14-4923-86AA-E377D36C824D16980\Temp\CBLPROT26.cbl#COBOL#1.EAmodCustDirectives.dir) preprocess(cp) nocopyinexec exec-ignore-trailing  ;
+
+COBOL call stack:
+
+	cdi2	(obj program)
+	kenlygen	(obj program)
+	check	(obj program)
+	cobcli	(obj program)
+
+Run-time : C:\Program Files\Fortify\Fortify_SCA_and_Apps_21.1.2\Core\cobol\EABinaries\Checker\bin\cblrtsm.dll, loaded at 0x10000000
+
+	CompanyName Micro Focus
+	FileDescription Micro Focus Run Time System Core Support
+	FileVersion VisualCOBOL-R17/062
+	LegalCopyright (C) Copyright 1984-2021 Micro Focus or one of its affiliates.
+	OriginalFileName cblrtsm.dll
+	ProductName Micro Focus COBOL 2017
+	ProductVersion 7.0.00213
+
+OS Information:
+
+Windows NT 10.0 (Build 19041: )
+CPU: Intel Pentium Model 158 step 10, 12 processors
+Available memory - 4194303 KB

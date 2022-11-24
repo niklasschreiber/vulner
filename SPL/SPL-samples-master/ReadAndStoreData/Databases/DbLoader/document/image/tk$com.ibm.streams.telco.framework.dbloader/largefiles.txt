@@ -1,0 +1,1 @@
+"D:\_SRC\SPL\SPL-samples-master\ReadAndStoreData\Databases\DbLoader\document\image\tk$com.ibm.streams.telco.framework.dbloader\op$com.ibm.streamsx.db.dbloader$ORACLELoadFile.svg" 

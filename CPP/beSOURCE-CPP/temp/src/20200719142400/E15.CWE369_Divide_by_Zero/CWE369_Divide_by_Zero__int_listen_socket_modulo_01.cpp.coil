@@ -1,0 +1,510 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp");
+   ("language", "CPP");
+   ("include", "std_testcase.h");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<stddef.h>");
+   ("include", "<time.h>");
+   ("include", "<limits.h>");
+   ("include", "<string.h>");
+   ("include", "<stdint.h>");
+   ("include", "<stdint.h>");
+   ("include", "<ctype.h>");
+   ("include", "<fcntl.h>");
+   ("include", "<sys/types.h>");
+   ("include", "<sys/stat.h>");
+   ("include", "std_testcase_io.h");
+   ("include", "std_testcase.h");
+   ("include", "<sys/types.h>");
+   ("include", "<sys/socket.h>");
+   ("include", "<netinet/in.h>");
+   ("include", "<arpa/inet.h>");
+   ("include", "<unistd.h>");
+}
+{
+   (!3, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase_io.h");
+   (!2, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h");
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp",
+   MD("RAND32()",[],"((rand()<<30) ^ (rand()<<15) ^ rand())")
+   ,(84#0,84#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp",
+   MD("RAND64()",[],"(((int64_t)rand()<<60) ^ ((int64_t)rand()<<45) ^ ((int64_t)rand()<<30) ^ ((int64_t)rand()<<15) ^ (int64_t)rand())")
+   ,(87#0,87#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   SF([extern,const,extern],int,<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"GLOBAL_CONST_TRUE")
+   ,(103#18,103#34,!2)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   SF([extern,const,extern],int,<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"GLOBAL_CONST_FALSE")
+   ,(104#18,104#35,!2)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   SF([extern,const,extern],int,<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"GLOBAL_CONST_FIVE")
+   ,(105#18,105#34,!2)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   SF([extern,extern],int,<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"globalTrue")
+   ,(110#12,110#21,!2)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   SF([extern,extern],int,<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"globalFalse")
+   ,(111#12,111#22,!2)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   SF([extern,extern],int,<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"globalFive")
+   ,(112#12,112#21,!2)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   SF([extern,extern],int,<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"globalArgc")
+   ,(55#12,55#21,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   SF([extern,extern],ref(ref(char)),<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"globalArgv")
+   ,(56#12,56#24,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   SI(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,
+   {[
+      {;
+      ,(1#1,257#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,257#1,!1)}
+   )
+   ,(1#1,257#1,!1)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   PT([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"printLine"):unit,[(mod(ref(char),[const]):"line",(14#16,14#32,!3))],[]
+   )
+   ,(14#1,14#34,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   PT([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"printWLine"):unit,[(mod(ref(wchar),[const]):"line",(16#17,16#36,!3))],[]
+   )
+   ,(16#1,16#38,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   PT([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"printIntLine"):unit,[(int:"intNumber",(18#20,18#32,!3))],[]
+   )
+   ,(18#1,18#34,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   PT([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"printShortLine"):unit,[(short:"shortNumber",(20#22,20#38,!3))],[]
+   )
+   ,(20#1,20#40,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   PT([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"printFloatLine"):unit,[(float:"floatNumber",(22#22,22#38,!3))],[]
+   )
+   ,(22#1,22#40,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   PT([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"printLongLine"):unit,[(long:"longNumber",(24#20,24#34,!3))],[]
+   )
+   ,(24#1,24#36,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   PT([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"printLongLongLine"):unit,[(class((,int64_t)):"longLongIntNumber",(26#24,26#48,!3))],[]
+   )
+   ,(26#1,26#50,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   PT([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"printSizeTLine"):unit,[(class((,size_t)):"sizeTNumber",(28#21,28#38,!3))],[]
+   )
+   ,(28#1,28#40,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   PT([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"printHexCharLine"):unit,[(char:"charHex",(30#23,30#34,!3))],[]
+   )
+   ,(30#1,30#36,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   PT([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"printWcharLine"):unit,[(wchar:"wideChar",(32#21,32#36,!3))],[]
+   )
+   ,(32#1,32#38,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   PT([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"printUnsignedLine"):unit,[(uint:"unsignedNumber",(34#24,34#46,!3))],[]
+   )
+   ,(34#1,34#48,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   PT([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"printHexUnsignedCharLine"):unit,[(uchar:"unsignedCharacter",(36#31,36#61,!3))],[]
+   )
+   ,(36#1,36#63,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   PT([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"printDoubleLine"):unit,[(double:"doubleNumber",(38#22,38#40,!3))],[]
+   )
+   ,(38#1,38#42,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   PT([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"printStructLine"):unit,[(mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]):"structTwoIntsStruct",(40#22,40#62,!3))],[]
+   )
+   ,(40#1,40#64,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   PT([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"printBytesLine"):unit,[(mod(ref(uchar),[const]):"bytes",(42#21,42#47,!3)),(class((,size_t)):"numBytes",(42#50,42#64,!3))],[]
+   )
+   ,(42#1,42#66,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   PT([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"decodeHexChars"):class((,size_t)),[(ref(uchar):"bytes",(44#23,44#43,!3)),(class((,size_t)):"numBytes",(44#46,44#60,!3)),(mod(ref(char),[const]):"hex",(44#63,44#78,!3))],[]
+   )
+   ,(44#1,44#80,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   PT([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"decodeHexWChars"):class((,size_t)),[(ref(uchar):"bytes",(46#24,46#44,!3)),(class((,size_t)):"numBytes",(46#47,46#61,!3)),(mod(ref(wchar),[const]):"hex",(46#64,46#82,!3))],[]
+   )
+   ,(46#1,46#84,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   PT([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"globalReturnsTrue"):int,[],[]
+   )
+   ,(48#1,48#24,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   PT([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"globalReturnsFalse"):int,[],[]
+   )
+   ,(50#1,50#25,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   PT([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"globalReturnsTrueOrFalse"):int,[],[]
+   )
+   ,(52#1,52#31,!3)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   FN([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"CWE369_Divide_by_Zero__int_listen_socket_modulo_01_bad"):unit,[],[],
+   {[
+      {VD("data",int)
+      ,(46#9,46#12,!1)};
+      {{AE({V("data"),int,(48#5,48#8,!1)},{UO(-,{"1"N,int,(48#13,48#13,!1)}),int,(48#12,48#13,!1)}),int,(48#5,48#13,!1)}
+      ,(48#5,48#13,!1)};
+      {[
+         {VD("recvResult",int)
+         ,(54#13,54#22,!1)};
+         {VD("service",mod(class((,sockaddr_in)),[struct]))
+         ,(55#28,55#34,!1)};
+         {VD("listenSocket",int,{UO(-,{"1"N,int,(56#29,56#29,!1)}),int,(56#28,56#29,!1)})
+         ,(56#13,56#24,!1)};
+         {VD("acceptSocket",int,{UO(-,{"1"N,int,(57#29,57#29,!1)}),int,(57#28,57#29,!1)})
+         ,(57#13,57#24,!1)};
+         {VD("inputBuffer",char,([{BO(+,{BO(*,{"3"N,int,(58#27,58#27,!1)},{SO({V("data"),int,(58#38,58#41,!1)}),int,(58#31,58#42,!1)}),int,(58#27,58#42,!1)},{"2"N,int,(58#46,58#46,!1)}),int,(58#26,58#47,!1)}]))
+         ,(58#14,58#48,!1)};
+         {DW(L107,
+            {[
+               {{AE({V("listenSocket"),int,(69#13,69#24,!1)},{SC((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"socket"),[class((,"%undef")),class((,"%undef")),class((,"%undef"))],[{V("AF_INET"),class((,"%undef")),(69#35,69#41,!1)},{V("SOCK_STREAM"),class((,"%undef")),(69#44,69#54,!1)},{V("IPPROTO_TCP"),class((,"%undef")),(69#57,69#67,!1)}]),class((,"%undef")),(69#28,69#68,!1)}),int,(69#13,69#68,!1)}
+               ,(69#13,69#68,!1)};
+               {IF0({BO(==,{V("listenSocket"),int,(70#17,70#28,!1)},{UO(-,{"1"N,int,(70#34,70#34,!1)}),int,(70#33,70#34,!1)}),bool,(70#17,70#34,!1)},
+                  {[
+                     {BR @ 
+                     ,(72#17,72#22,!1)}
+                     ]
+                  ,(71#13,73#13,!1)})
+               ,(70#13,73#13,!1)};
+               {PC0((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"memset"),[ref(mod(class((,sockaddr_in)),[struct])),int,int],[{&{V("service"),mod(class((,sockaddr_in)),[struct]),(74#21,74#27,!1)},ref(mod(class((,sockaddr_in)),[struct])),(74#20,74#27,!1)},{"0"N,int,(74#30,74#30,!1)},{SO({V("service"),mod(class((,sockaddr_in)),[struct]),(74#40,74#46,!1)}),int,(74#33,74#47,!1)}])
+               ,(74#13,74#48,!1)};
+               {{AE({OA({V("service"),mod(class((,sockaddr_in)),[struct]),(75#13,75#19,!1)},"sin_family"),class((,"%undef")),(75#13,75#30,!1)},{V("AF_INET"),class((,"%undef")),(75#34,75#40,!1)}),class((,"%undef")),(75#13,75#40,!1)}
+               ,(75#13,75#40,!1)};
+               {{AE({OA({OA({V("service"),mod(class((,sockaddr_in)),[struct]),(76#13,76#19,!1)},"sin_addr"),class((,"%undef")),(76#13,76#28,!1)},"s_addr"),class((,"%undef")),(76#13,76#35,!1)},{V("INADDR_ANY"),class((,"%undef")),(76#39,76#48,!1)}),class((,"%undef")),(76#13,76#48,!1)}
+               ,(76#13,76#48,!1)};
+               {{AE({OA({V("service"),mod(class((,sockaddr_in)),[struct]),(77#13,77#19,!1)},"sin_port"),class((,"%undef")),(77#13,77#28,!1)},{SC((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"htons"),[int],[{"27015"N,int,(77#38,77#42,!1)}]),class((,"%undef")),(77#32,77#43,!1)}),class((,"%undef")),(77#13,77#43,!1)}
+               ,(77#13,77#43,!1)};
+               {IF0({BO(==,{SC((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"bind"),[int,ref(mod(class((,sockaddr)),[struct])),int],[{V("listenSocket"),int,(78#22,78#33,!1)},{CS(ref(mod(class((,sockaddr)),[struct])),{&{V("service"),mod(class((,sockaddr_in)),[struct]),(78#55,78#61,!1)},ref(mod(class((,sockaddr_in)),[struct])),(78#54,78#61,!1)}),ref(mod(class((,sockaddr)),[struct])),(78#36,78#61,!1)},{SO({V("service"),mod(class((,sockaddr_in)),[struct]),(78#71,78#77,!1)}),int,(78#64,78#78,!1)}]),class((,"%undef")),(78#17,78#79,!1)},{UO(-,{"1"N,int,(78#85,78#85,!1)}),int,(78#84,78#85,!1)}),bool,(78#17,78#85,!1)},
+                  {[
+                     {BR @ 
+                     ,(80#17,80#22,!1)}
+                     ]
+                  ,(79#13,81#13,!1)})
+               ,(78#13,81#13,!1)};
+               {IF0({BO(==,{SC((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"listen"),[int,int],[{V("listenSocket"),int,(82#24,82#35,!1)},{"5"N,int,(82#38,82#38,!1)}]),class((,"%undef")),(82#17,82#39,!1)},{UO(-,{"1"N,int,(82#45,82#45,!1)}),int,(82#44,82#45,!1)}),bool,(82#17,82#45,!1)},
+                  {[
+                     {BR @ 
+                     ,(84#17,84#22,!1)}
+                     ]
+                  ,(83#13,85#13,!1)})
+               ,(82#13,85#13,!1)};
+               {{AE({V("acceptSocket"),int,(86#13,86#24,!1)},{SC((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"accept"),[int,ref(unit),ref(unit)],[{V("listenSocket"),int,(86#35,86#46,!1)},{CS(ref(unit),{"0"N,int,(86#49,86#52,!1)}),ref(unit),(86#49,86#52,!1)},{CS(ref(unit),{"0"N,int,(86#55,86#58,!1)}),ref(unit),(86#55,86#58,!1)}]),class((,"%undef")),(86#28,86#59,!1)}),int,(86#13,86#59,!1)}
+               ,(86#13,86#59,!1)};
+               {IF0({BO(==,{V("acceptSocket"),int,(87#17,87#28,!1)},{UO(-,{"1"N,int,(87#34,87#34,!1)}),int,(87#33,87#34,!1)}),bool,(87#17,87#34,!1)},
+                  {[
+                     {BR @ 
+                     ,(89#17,89#22,!1)}
+                     ]
+                  ,(88#13,90#13,!1)})
+               ,(87#13,90#13,!1)};
+               {{AE({V("recvResult"),int,(92#13,92#22,!1)},{SC((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"recv"),[int,arr(char),int,int],[{V("acceptSocket"),int,(92#31,92#42,!1)},{V("inputBuffer"),arr(char),(92#45,92#55,!1)},{BO(-,{BO(+,{BO(*,{"3"N,int,(92#59,92#59,!1)},{SO({V("data"),int,(92#70,92#73,!1)}),int,(92#63,92#74,!1)}),int,(92#59,92#74,!1)},{"2"N,int,(92#78,92#78,!1)}),int,(92#58,92#79,!1)},{"1"N,int,(92#83,92#83,!1)}),int,(92#59,92#83,!1)},{"0"N,int,(92#86,92#86,!1)}]),class((,"%undef")),(92#26,92#87,!1)}),int,(92#13,92#87,!1)}
+               ,(92#13,92#87,!1)};
+               {IF0({BO(||,{BO(==,{V("recvResult"),int,(93#17,93#26,!1)},{UO(-,{"1"N,int,(93#32,93#32,!1)}),int,(93#31,93#32,!1)}),bool,(93#17,93#32,!1)},{BO(==,{V("recvResult"),int,(93#37,93#46,!1)},{"0"N,int,(93#51,93#51,!1)}),bool,(93#37,93#51,!1)}),bool,(93#17,93#51,!1)},
+                  {[
+                     {BR @ 
+                     ,(95#17,95#22,!1)}
+                     ]
+                  ,(94#13,96#13,!1)})
+               ,(93#13,96#13,!1)};
+               {{AE({AA({V("inputBuffer"),arr(char),(98#13,98#23,!1)},[{V("recvResult"),int,(98#25,98#34,!1)}]),char,(98#13,98#35,!1)},{"\0"C,char,(98#39,98#42,!1)}),char,(98#13,98#42,!1)}
+               ,(98#13,98#42,!1)};
+               {{AE({V("data"),int,(100#13,100#16,!1)},{SC((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"atoi"),[arr(char)],[{V("inputBuffer"),arr(char),(100#25,100#35,!1)}]),class((,"%undef")),(100#20,100#36,!1)}),int,(100#13,100#36,!1)}
+               ,(100#13,100#36,!1)}
+               ]
+            ,(60#9,101#9,!1)},
+            {"0"N,int,(102#16,102#16,!1)})
+         ,(59#9,102#18,!1)};
+         {IF0({BO(!=,{V("listenSocket"),int,(103#13,103#24,!1)},{UO(-,{"1"N,int,(103#30,103#30,!1)}),int,(103#29,103#30,!1)}),bool,(103#13,103#30,!1)},
+            {[
+               {PC0((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"close"),[int],[{V("listenSocket"),int,(105#19,105#30,!1)}])
+               ,(105#13,105#31,!1)}
+               ]
+            ,(104#9,106#9,!1)})
+         ,(103#9,106#9,!1)};
+         {IF0({BO(!=,{V("acceptSocket"),int,(107#13,107#24,!1)},{UO(-,{"1"N,int,(107#30,107#30,!1)}),int,(107#29,107#30,!1)}),bool,(107#13,107#30,!1)},
+            {[
+               {PC0((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"close"),[int],[{V("acceptSocket"),int,(109#19,109#30,!1)}])
+               ,(109#13,109#31,!1)}
+               ]
+            ,(108#9,110#9,!1)})
+         ,(107#9,110#9,!1)}
+         ]
+      ,(49#5,117#5,!1)};
+      {PC0((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"printIntLine"),[int],[{BO(%,{"100"N,int,(119#18,119#20,!1)},{V("data"),int,(119#24,119#27,!1)}),int,(119#18,119#27,!1)}])
+      ,(119#5,119#28,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(44#1,120#1,!1)}
+   )
+   ,(44#1,120#1,!1)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   FN([public,static],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"goodG2B"):mod(unit,[static]),[],[],
+   {[
+      {VD("data",int)
+      ,(129#9,129#12,!1)};
+      {{AE({V("data"),int,(131#5,131#8,!1)},{UO(-,{"1"N,int,(131#13,131#13,!1)}),int,(131#12,131#13,!1)}),int,(131#5,131#13,!1)}
+      ,(131#5,131#13,!1)};
+      {{AE({V("data"),int,(133#5,133#8,!1)},{"7"N,int,(133#12,133#12,!1)}),int,(133#5,133#12,!1)}
+      ,(133#5,133#12,!1)};
+      {PC0((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"printIntLine"),[int],[{BO(%,{"100"N,int,(135#18,135#20,!1)},{V("data"),int,(135#24,135#27,!1)}),int,(135#18,135#27,!1)}])
+      ,(135#5,135#28,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(127#1,136#1,!1)}
+   )
+   ,(127#1,136#1,!1)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   FN([public,static],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"goodB2G"):mod(unit,[static]),[],[],
+   {[
+      {VD("data",int)
+      ,(141#9,141#12,!1)};
+      {{AE({V("data"),int,(143#5,143#8,!1)},{UO(-,{"1"N,int,(143#13,143#13,!1)}),int,(143#12,143#13,!1)}),int,(143#5,143#13,!1)}
+      ,(143#5,143#13,!1)};
+      {[
+         {VD("recvResult",int)
+         ,(149#13,149#22,!1)};
+         {VD("service",mod(class((,sockaddr_in)),[struct]))
+         ,(150#28,150#34,!1)};
+         {VD("listenSocket",int,{UO(-,{"1"N,int,(151#29,151#29,!1)}),int,(151#28,151#29,!1)})
+         ,(151#13,151#24,!1)};
+         {VD("acceptSocket",int,{UO(-,{"1"N,int,(152#29,152#29,!1)}),int,(152#28,152#29,!1)})
+         ,(152#13,152#24,!1)};
+         {VD("inputBuffer",char,([{BO(+,{BO(*,{"3"N,int,(153#27,153#27,!1)},{SO({V("data"),int,(153#38,153#41,!1)}),int,(153#31,153#42,!1)}),int,(153#27,153#42,!1)},{"2"N,int,(153#46,153#46,!1)}),int,(153#26,153#47,!1)}]))
+         ,(153#14,153#48,!1)};
+         {DW(L108,
+            {[
+               {{AE({V("listenSocket"),int,(164#13,164#24,!1)},{SC((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"socket"),[class((,"%undef")),class((,"%undef")),class((,"%undef"))],[{V("AF_INET"),class((,"%undef")),(164#35,164#41,!1)},{V("SOCK_STREAM"),class((,"%undef")),(164#44,164#54,!1)},{V("IPPROTO_TCP"),class((,"%undef")),(164#57,164#67,!1)}]),class((,"%undef")),(164#28,164#68,!1)}),int,(164#13,164#68,!1)}
+               ,(164#13,164#68,!1)};
+               {IF0({BO(==,{V("listenSocket"),int,(165#17,165#28,!1)},{UO(-,{"1"N,int,(165#34,165#34,!1)}),int,(165#33,165#34,!1)}),bool,(165#17,165#34,!1)},
+                  {[
+                     {BR @ 
+                     ,(167#17,167#22,!1)}
+                     ]
+                  ,(166#13,168#13,!1)})
+               ,(165#13,168#13,!1)};
+               {PC0((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"memset"),[ref(mod(class((,sockaddr_in)),[struct])),int,int],[{&{V("service"),mod(class((,sockaddr_in)),[struct]),(169#21,169#27,!1)},ref(mod(class((,sockaddr_in)),[struct])),(169#20,169#27,!1)},{"0"N,int,(169#30,169#30,!1)},{SO({V("service"),mod(class((,sockaddr_in)),[struct]),(169#40,169#46,!1)}),int,(169#33,169#47,!1)}])
+               ,(169#13,169#48,!1)};
+               {{AE({OA({V("service"),mod(class((,sockaddr_in)),[struct]),(170#13,170#19,!1)},"sin_family"),class((,"%undef")),(170#13,170#30,!1)},{V("AF_INET"),class((,"%undef")),(170#34,170#40,!1)}),class((,"%undef")),(170#13,170#40,!1)}
+               ,(170#13,170#40,!1)};
+               {{AE({OA({OA({V("service"),mod(class((,sockaddr_in)),[struct]),(171#13,171#19,!1)},"sin_addr"),class((,"%undef")),(171#13,171#28,!1)},"s_addr"),class((,"%undef")),(171#13,171#35,!1)},{V("INADDR_ANY"),class((,"%undef")),(171#39,171#48,!1)}),class((,"%undef")),(171#13,171#48,!1)}
+               ,(171#13,171#48,!1)};
+               {{AE({OA({V("service"),mod(class((,sockaddr_in)),[struct]),(172#13,172#19,!1)},"sin_port"),class((,"%undef")),(172#13,172#28,!1)},{SC((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"htons"),[int],[{"27015"N,int,(172#38,172#42,!1)}]),class((,"%undef")),(172#32,172#43,!1)}),class((,"%undef")),(172#13,172#43,!1)}
+               ,(172#13,172#43,!1)};
+               {IF0({BO(==,{SC((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"bind"),[int,ref(mod(class((,sockaddr)),[struct])),int],[{V("listenSocket"),int,(173#22,173#33,!1)},{CS(ref(mod(class((,sockaddr)),[struct])),{&{V("service"),mod(class((,sockaddr_in)),[struct]),(173#55,173#61,!1)},ref(mod(class((,sockaddr_in)),[struct])),(173#54,173#61,!1)}),ref(mod(class((,sockaddr)),[struct])),(173#36,173#61,!1)},{SO({V("service"),mod(class((,sockaddr_in)),[struct]),(173#71,173#77,!1)}),int,(173#64,173#78,!1)}]),class((,"%undef")),(173#17,173#79,!1)},{UO(-,{"1"N,int,(173#85,173#85,!1)}),int,(173#84,173#85,!1)}),bool,(173#17,173#85,!1)},
+                  {[
+                     {BR @ 
+                     ,(175#17,175#22,!1)}
+                     ]
+                  ,(174#13,176#13,!1)})
+               ,(173#13,176#13,!1)};
+               {IF0({BO(==,{SC((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"listen"),[int,int],[{V("listenSocket"),int,(177#24,177#35,!1)},{"5"N,int,(177#38,177#38,!1)}]),class((,"%undef")),(177#17,177#39,!1)},{UO(-,{"1"N,int,(177#45,177#45,!1)}),int,(177#44,177#45,!1)}),bool,(177#17,177#45,!1)},
+                  {[
+                     {BR @ 
+                     ,(179#17,179#22,!1)}
+                     ]
+                  ,(178#13,180#13,!1)})
+               ,(177#13,180#13,!1)};
+               {{AE({V("acceptSocket"),int,(181#13,181#24,!1)},{SC((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"accept"),[int,ref(unit),ref(unit)],[{V("listenSocket"),int,(181#35,181#46,!1)},{CS(ref(unit),{"0"N,int,(181#49,181#52,!1)}),ref(unit),(181#49,181#52,!1)},{CS(ref(unit),{"0"N,int,(181#55,181#58,!1)}),ref(unit),(181#55,181#58,!1)}]),class((,"%undef")),(181#28,181#59,!1)}),int,(181#13,181#59,!1)}
+               ,(181#13,181#59,!1)};
+               {IF0({BO(==,{V("acceptSocket"),int,(182#17,182#28,!1)},{UO(-,{"1"N,int,(182#34,182#34,!1)}),int,(182#33,182#34,!1)}),bool,(182#17,182#34,!1)},
+                  {[
+                     {BR @ 
+                     ,(184#17,184#22,!1)}
+                     ]
+                  ,(183#13,185#13,!1)})
+               ,(182#13,185#13,!1)};
+               {{AE({V("recvResult"),int,(187#13,187#22,!1)},{SC((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"recv"),[int,arr(char),int,int],[{V("acceptSocket"),int,(187#31,187#42,!1)},{V("inputBuffer"),arr(char),(187#45,187#55,!1)},{BO(-,{BO(+,{BO(*,{"3"N,int,(187#59,187#59,!1)},{SO({V("data"),int,(187#70,187#73,!1)}),int,(187#63,187#74,!1)}),int,(187#59,187#74,!1)},{"2"N,int,(187#78,187#78,!1)}),int,(187#58,187#79,!1)},{"1"N,int,(187#83,187#83,!1)}),int,(187#59,187#83,!1)},{"0"N,int,(187#86,187#86,!1)}]),class((,"%undef")),(187#26,187#87,!1)}),int,(187#13,187#87,!1)}
+               ,(187#13,187#87,!1)};
+               {IF0({BO(||,{BO(==,{V("recvResult"),int,(188#17,188#26,!1)},{UO(-,{"1"N,int,(188#32,188#32,!1)}),int,(188#31,188#32,!1)}),bool,(188#17,188#32,!1)},{BO(==,{V("recvResult"),int,(188#37,188#46,!1)},{"0"N,int,(188#51,188#51,!1)}),bool,(188#37,188#51,!1)}),bool,(188#17,188#51,!1)},
+                  {[
+                     {BR @ 
+                     ,(190#17,190#22,!1)}
+                     ]
+                  ,(189#13,191#13,!1)})
+               ,(188#13,191#13,!1)};
+               {{AE({AA({V("inputBuffer"),arr(char),(193#13,193#23,!1)},[{V("recvResult"),int,(193#25,193#34,!1)}]),char,(193#13,193#35,!1)},{"\0"C,char,(193#39,193#42,!1)}),char,(193#13,193#42,!1)}
+               ,(193#13,193#42,!1)};
+               {{AE({V("data"),int,(195#13,195#16,!1)},{SC((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"atoi"),[arr(char)],[{V("inputBuffer"),arr(char),(195#25,195#35,!1)}]),class((,"%undef")),(195#20,195#36,!1)}),int,(195#13,195#36,!1)}
+               ,(195#13,195#36,!1)}
+               ]
+            ,(155#9,196#9,!1)},
+            {"0"N,int,(197#16,197#16,!1)})
+         ,(154#9,197#18,!1)};
+         {IF0({BO(!=,{V("listenSocket"),int,(198#13,198#24,!1)},{UO(-,{"1"N,int,(198#30,198#30,!1)}),int,(198#29,198#30,!1)}),bool,(198#13,198#30,!1)},
+            {[
+               {PC0((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"close"),[int],[{V("listenSocket"),int,(200#19,200#30,!1)}])
+               ,(200#13,200#31,!1)}
+               ]
+            ,(199#9,201#9,!1)})
+         ,(198#9,201#9,!1)};
+         {IF0({BO(!=,{V("acceptSocket"),int,(202#13,202#24,!1)},{UO(-,{"1"N,int,(202#30,202#30,!1)}),int,(202#29,202#30,!1)}),bool,(202#13,202#30,!1)},
+            {[
+               {PC0((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"close"),[int],[{V("acceptSocket"),int,(204#19,204#30,!1)}])
+               ,(204#13,204#31,!1)}
+               ]
+            ,(203#9,205#9,!1)})
+         ,(202#9,205#9,!1)}
+         ]
+      ,(144#5,212#5,!1)};
+      {IF({BO(!=,{V("data"),int,(214#9,214#12,!1)},{"0"N,int,(214#17,214#17,!1)}),bool,(214#9,214#17,!1)},
+         {[
+            {PC0((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"printIntLine"),[int],[{BO(%,{"100"N,int,(216#22,216#24,!1)},{V("data"),int,(216#28,216#31,!1)}),int,(216#22,216#31,!1)}])
+            ,(216#9,216#32,!1)}
+            ]
+         ,(215#5,217#5,!1)},
+         {[
+            {PC0((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"printLine"),[mod(ref(char),[const])],[{"This would result in a divide by zero"S,string,(220#19,220#57,!1)}])
+            ,(220#9,220#58,!1)}
+            ]
+         ,(219#5,221#5,!1)})
+      ,(214#5,221#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(139#1,222#1,!1)}
+   )
+   ,(139#1,222#1,!1)},
+
+   {"CWE369_Divide_by_Zero__int_listen_socket_modulo_01",
+   FN([public],(<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"CWE369_Divide_by_Zero__int_listen_socket_modulo_01_good"):unit,[],[],
+   {[
+      {PC0((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"goodG2B"),[],[])
+      ,(226#5,226#13,!1)};
+      {PC0((<"CWE369_Divide_by_Zero__int_listen_socket_modulo_01">,"goodB2G"),[],[])
+      ,(227#5,227#13,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(224#1,228#1,!1)}
+   )
+   ,(224#1,228#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp",
+   CL([struct],(,_twoIntsStruct),[])
+   {
+      ([public],"intOne":int,(92#9,92#14,!2));
+      ([public],"intTwo":int,(93#9,93#14,!2))
+   }
+   ,(90#1,94#16,!2)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp",
+   [
+      M("/* TEMPLATE GENERATED TESTCASE FILE\nFilename: CWE369_Divide_by_Zero__int_listen_socket_modulo_01.c\nLabel Definition File: CWE369_Divide_by_Zero__int.label.xml\nTemplate File: sources-sinks-01.tmpl.c\n*/",1,(1#0,1#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/*\n * @description\n * CWE: 369 Divide by Zero\n * BadSource: listen_socket Read data using a listen socket (server side)\n * GoodSource: Non-zero\n * Sinks: modulo\n *    GoodSink: Check for zero before modulo\n *    BadSink : Modulo a constant with data\n * Flow Variant: 01 Baseline\n *\n * */",6,(6#0,6#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* include ws2_32.lib when linking */",24,(24#0,24#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* Initialize data */",47,(47#0,47#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* POTENTIAL FLAW: Read data using a listen socket */",68,(68#0,68#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* Abort on error or the connection was closed */",91,(91#0,91#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* NUL-terminate the string */",97,(97#0,97#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* Convert to int */",99,(99#0,99#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* POTENTIAL FLAW: Possibly divide by zero */",118,(118#0,118#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* OMITBAD */",122,(122#0,122#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* goodG2B uses the GoodSource with the BadSink */",126,(126#0,126#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* Initialize data */",130,(130#0,130#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* FIX: Use a value not equal to zero */",132,(132#0,132#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* POTENTIAL FLAW: Possibly divide by zero */",134,(134#0,134#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* goodB2G uses the BadSource with the GoodSink */",138,(138#0,138#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* Initialize data */",142,(142#0,142#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* POTENTIAL FLAW: Read data using a listen socket */",163,(163#0,163#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* Abort on error or the connection was closed */",186,(186#0,186#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* NUL-terminate the string */",192,(192#0,192#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* Convert to int */",194,(194#0,194#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* FIX: test for a zero denominator */",213,(213#0,213#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* OMITGOOD */",230,(230#0,230#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* Below is the main(). It is only used when building this testcase on\n   its own for testing or for building a binary to use in testing binary\n   analysis tools. It is not used when compiling all the testcases as one\n   application, which is how source code analysis tools are tested. */",232,(232#0,232#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* seed randomness */",241,(241#0,241#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* OMITGOOD */",247,(247#0,247#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp")),
+      M("/* OMITBAD */",252,(252#0,252#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E15.CWE369_Divide_by_Zero/CWE369_Divide_by_Zero__int_listen_socket_modulo_01.cpp"))
+   ]
+   }
+]

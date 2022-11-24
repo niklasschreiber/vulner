@@ -1,0 +1,45 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 1,
+    "Custom": null,
+    "Description": "When searching for Windows Uninstall Keys/Values Under the LocalMachine Hive, I am unable to reach keys which are located under SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall.\r\n\r\nFor example Adobe Acrobat XI Pro would be located under: SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{AC76BA86-1033-FFFF-7760-000000000006}\r\n\r\nGet-RegValue -ComputerName EDM-RCHEN-7 -Hive LocalMachine -Key \"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{7299052b-02a4-4627-81f2-1818da5d550d}\" -Value DisplayName\r\n\r\nWill return a result like:\r\n\r\nGet-RegValue : Key 'SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{7299052b-02a4-4627-81f2-1818da5d550d}'\r\ndoesn't exist.\r\nAt line:1 char:1\r\n+ Get-RegValue -ComputerName EDM-RCHEN-7 -Hive LocalMachine -Key \"SOFTWARE\\Microso ...\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\r\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,Get-RegValue\r\n\r\nHowever, if searching for a Key under SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\ results are returned as expected.\r\n\r\nI know this project has not been updated in a long time but I'm hoping someone else has run into this and may have some sort of work-around for it.\r\n",
+    "LastUpdatedDate": "2015-05-28T11:05:08.957-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "PSRemoteRegistry",
+    "ReportedDate": "2015-05-28T11:00:19.86-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Unable to find non-Wow6432Node Uninstall Keys",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 1
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Sorry for the noise on this. The workaround in this case is to use the x86 version of Powershell instead of the x64 version.",
+      "PostedDate": "2015-05-28T11:05:08.957-07:00",
+      "Id": 184890
+    }
+  ]
+}

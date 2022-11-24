@@ -1,0 +1,132 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+CivettaNet
+</name>
+</assembly>
+<members>
+<member name="F:CivettaNet.Login.RegisterHyperLink">
+	<summary>
+Controllo RegisterHyperLink.
+</summary>
+	<remarks>
+Campo generato automaticamente.
+Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+</remarks>
+</member><member name="F:CivettaNet.Login.LoginUser">
+	<summary>
+Controllo LoginUser.
+</summary>
+	<remarks>
+Campo generato automaticamente.
+Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+</remarks>
+</member><member name="F:CivettaNet.Site.HeadContent">
+	<summary>
+Controllo HeadContent.
+</summary>
+	<remarks>
+Campo generato automaticamente.
+Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+</remarks>
+</member><member name="F:CivettaNet.Site.MasterPageScriptManager">
+	<summary>
+Controllo MasterPageScriptManager.
+</summary>
+	<remarks>
+Campo generato automaticamente.
+Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+</remarks>
+</member><member name="F:CivettaNet.Site.HeadLoginView">
+	<summary>
+Controllo HeadLoginView.
+</summary>
+	<remarks>
+Campo generato automaticamente.
+Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+</remarks>
+</member><member name="F:CivettaNet.Site.HeadHomeLink">
+	<summary>
+Controllo HeadHomeLink.
+</summary>
+	<remarks>
+Campo generato automaticamente.
+Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+</remarks>
+</member><member name="F:CivettaNet.Site.HeadAboutLink">
+	<summary>
+Controllo HeadAboutLink.
+</summary>
+	<remarks>
+Campo generato automaticamente.
+Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+</remarks>
+</member><member name="F:CivettaNet.Site.MainContent">
+	<summary>
+Controllo MainContent.
+</summary>
+	<remarks>
+Campo generato automaticamente.
+Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+</remarks>
+</member><member name="P:CivettaNet.My.MyWebExtension.Application">
+	<summary>
+ Restituisce informazioni sull'applicazione corrente.
+ </summary>
+</member><member name="P:CivettaNet.My.MyWebExtension.Computer">
+	<summary>
+ Restituisce le informazioni sul computer host.
+ </summary>
+</member><member name="P:CivettaNet.My.MyWebExtension.User">
+	<summary>
+ Restituisce le informazioni per l'utente Web corrente.
+ </summary>
+</member><member name="P:CivettaNet.My.MyWebExtension.Request">
+	<summary>
+ Restituisce l'oggetto Request.
+ </summary>
+</member><member name="P:CivettaNet.My.MyWebExtension.Response">
+	<summary>
+ Restituisce l'oggetto Response.
+ </summary>
+</member><member name="P:CivettaNet.My.MyWebExtension.Log">
+	<summary>
+ Restituisce l'oggetto AspLog.
+ </summary>
+</member><member name="P:CivettaNet.My.MyWebExtension.WebServices">
+	<summary>
+ Fornisce accesso ai servizi Web aggiunti al progetto.
+ </summary>
+</member><member name="T:CivettaNet.My.MyWebExtension">
+	<summary>
+ Modulo utilizzato per definire le proprietà disponibili nello spazio dei nomi My per i progetti Web.
+ </summary>
+	<remarks></remarks>
+</member><member name="F:CivettaNet.ChangePassword.ChangeUserPassword">
+	<summary>
+Controllo ChangeUserPassword.
+</summary>
+	<remarks>
+Campo generato automaticamente.
+Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+</remarks>
+</member><member name="F:CivettaNet.Register.RegisterUser">
+	<summary>
+Controllo RegisterUser.
+</summary>
+	<remarks>
+Campo generato automaticamente.
+Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+</remarks>
+</member><member name="F:CivettaNet.Register.RegisterUserWizardStep">
+	<summary>
+Controllo RegisterUserWizardStep.
+</summary>
+	<remarks>
+Campo generato automaticamente.
+Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+</remarks>
+</member>
+</members>
+</doc>

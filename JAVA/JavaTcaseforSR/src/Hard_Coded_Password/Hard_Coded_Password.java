@@ -1,0 +1,63 @@
+package Hard_Coded_Password;
+
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.util.logging.Logger;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
+
+public class Hard_Coded_Password
+{
+
+	static final Logger log = Logger.getLogger("local-logger");
+	
+	private static final String passwordText = "Password";  // bad 硬编码密码
+	
+    public String bad()
+    {
+        return passwordText;
+    }
+
+    
+    public String good(String sKey) throws UnsupportedEncodingException, NoSuchProviderException
+    {
+        String data = "key"; /* init data */
+        
+		//String sKey = "Skey";
+		Cipher cipher = null;
+		String pw = "";
+		try {
+			SecretKeySpec key = new SecretKeySpec(sKey.getBytes(), "AES");
+			cipher = Cipher.getInstance("AES/CBC/PKCS7Padding","CBC");
+			cipher.init(Cipher.DECRYPT_MODE, key);
+		}catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
+			log.info("error");
+		} catch (InvalidKeyException e) {
+			log.info("InvalidKeyException");
+		}
+			
+		try {
+			if(cipher != null){
+				pw = new String(cipher.doFinal(data.getBytes()),"UFT-8");
+			}
+			
+		} catch (IllegalBlockSizeException e) {
+			log.info("error");
+		} catch (BadPaddingException e) {
+			log.info("error");
+		}
+
+		String password = pw;  // good 硬编码密码
+		
+		return password;
+		       
+    }
+    
+}
+

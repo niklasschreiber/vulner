@@ -1,0 +1,207 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="Scoda_LetturaMonis"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:nj="clr-namespace:Newtonsoft.Json;assembly=Newtonsoft.Json"
+ xmlns:s="clr-namespace:SuccessioniLibrary_v01;assembly=SuccessioniLibrary_v01"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="messagePes" Type="OutArgument(s:MessagePes)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>Scoda_LetturaMonis_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>SuccessioniLibrary</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>SuccessioniLibrary_v01</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
+      <AssemblyReference>SuccessioniLibrary</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>SuccessioniLibrary_v01</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Scoda_LetturaMonis" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="s:LetturaMonis" Name="praticaDaLeggere" />
+      <Variable x:TypeArguments="nj:JsonSerializerSettings" Name="serializerSettings" />
+      <Variable x:TypeArguments="x:String" Default="[in_TransactionItem.SpecificContent(&quot;Json&quot;).ToString]" Name="inputJson" />
+      <Variable x:TypeArguments="s:Errore" Name="Esito" />
+      <Variable x:TypeArguments="x:String" Name="BodyJson" />
+      <Variable x:TypeArguments="x:String" Name="Guid_Chiamata" />
+    </Sequence.Variables>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GetSerializerSettings workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Json_Utility\GetSerializerSettings.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <OutArgument x:TypeArguments="nj:JsonSerializerSettings" x:Key="SerializerSettings">[serializerSettings]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:LetturaMonis">[praticaDaLeggere]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:LetturaMonis">[JsonConvert.DeserializeObject(Of LetturaMonis)(inputJson)]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke LeggiPraticaMonis workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Monis\LeggiPraticaMonis.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="s:LetturaMonis" x:Key="praticaDaLeggere">[praticaDaLeggere]</InArgument>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="config">[in_Config]</InArgument>
+        <OutArgument x:TypeArguments="s:Errore" x:Key="Esito">[Esito]</OutArgument>
+        <OutArgument x:TypeArguments="s:MessagePes" x:Key="messagePes">[messagePes]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <If Condition="[Esito.CodiceErrore = 0]" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[messagePes.TipoChiamata]" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+          <Switch.Default>
+            <Throw Exception="[New Exception(&quot;Errore interno: TipoChiamata non valorizzato per la pratica con IdMonis: &quot; + praticaDaLeggere.IdMonis)]" sap2010:WorkflowViewState.IdRef="Throw_2" />
+          </Switch.Default>
+          <Sequence x:Key="InsertPes" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="ProdottiDaGestire" />
+            </Sequence.Variables>
+            <Assign sap2010:WorkflowViewState.IdRef="Assign_3">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[Guid_Chiamata]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Guid.NewGuid.ToString]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke creaJsonRicercaAnagrafica workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Json_3270Framework\CreaJson_RicercaAnagrafica.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <OutArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</OutArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="GUID">[Guid_Chiamata]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="CodiceFiscale">[messagePes.DeCuius.CodiceFiscale]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="AddRecuperoDati3270-Aggiornamento Anagrafica" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddRecuperoDati3270.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="TipologiaQuery">searchAnag</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="itemReference">[messagePes.GUID + "_searchAnag_" + Guid_Chiamata]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="TipoChiamata">[messagePes.TipoChiamata]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="Priority">Normal</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+          </Sequence>
+          <Sequence x:Key="UpdatePes" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke PreparaJson workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Json_Utility\PreparaJson.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="s:MessagePes" x:Key="pesDaInviare">[messagePes]</InArgument>
+                <OutArgument x:TypeArguments="x:String" x:Key="JsonOutput">[BodyJson]</OutArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke AddJsonDaInviare workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddJsonDaInviare.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="BodyJSON">[BodyJson]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="ItemReference">[praticaDaLeggere.GUID]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="Priority">Normal</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+          </Sequence>
+        </Switch>
+      </If.Then>
+      <If.Else>
+        <Throw Exception="[New BusinessRuleException(&quot;Errore: &quot; + Esito.CodiceErrore.ToString + &quot; IdMonis: &quot; + praticaDaLeggere.IdMonis + &quot; Descrizione: &quot; + Esito.Descrizione)]" sap2010:WorkflowViewState.IdRef="Throw_1" />
+      </If.Else>
+    </If>
+    <sads:DebugSymbol.Symbol>d3tDOlxVc2Vyc1xUU1RfQ09MTFJQQTI4XERlc2t0b3BcU3VjY2Vzc2lvbmkgUmVsZWFzZVxSZWxlYXNlXFVpUGF0aFxTdWNjZXNzaW9uaU1haW5cUHJvY2Vzc2lfU2NvZGFudGlcU2NvZGFfTGV0dHVyYU1vbmlzLnhhbWwwUQOoAQ4CAQFVNFV1AgECWgVeHQIBOl8FZg4CATZnBW4dAgEsbwWmAQoCAQNcXVxxAgE8WsIBWusBAgE7ZDZkcQIBOWE3YUkCATdsSGxUAgE0aU9pYQIBMmpZamQCATBnvgFn3AECAS9rP2tGAgEtbxNvLQIBBHEJoQESAgEHpAEJpAH9AQIBBXFMcWcCAQh1C5EBFgIBGJIBC6ABFgIBC3MNc84BAgEJpAEapAHQAQIBBnkNgAEWAgEogQENhwElAgEhiAENkAElAgEZkwENmAElAgESmQENnwElAgEMcx5zoQECAQp+OH5PAgErezl7SAIBKYMBU4MBZgIBJoUBToUBcAIBJYQBRYQBVAIBI4EBzgGBAYICAgEijgFJjgFPAgEgjAFOjAGAAQIBH4sBUosBZQIBHYoBT4oBWQIBHI0BTY0BZgIBG4gB0QGIAf4BAgEalgFMlgFWAgEWlQFRlQFdAgEUkwHAAZMB3wECAROdAUmdAU8CARGbAUmbAVMCAQ+ZAcUBmQHvAQIBDpwBTpwBZQIBDQ==</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_1" sap:VirtualizedContainerService.HintSize="701,87" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="701,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_2" sap:VirtualizedContainerService.HintSize="701,87" />
+      <sap2010:ViewStateData Id="Throw_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_5" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_4" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="336,435">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_6" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_3" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="336,338">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Switch`1_1" sap:VirtualizedContainerService.HintSize="476,544" />
+      <sap2010:ViewStateData Id="Throw_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="701,692" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="723,1170">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Scoda_LetturaMonis_1" sap:VirtualizedContainerService.HintSize="763,1250" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

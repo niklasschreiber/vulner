@@ -1,0 +1,1 @@
+"D:\_SRC\BUGGYCODE\Groovy\tomcat-jndi-example-master\apache-tomcat-8.5.2.3\webapps\host-manager\images\asf-logo.svg" 

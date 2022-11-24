@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Type="http://schemas.microsoft.com/packaging/2010/07/manifest" Target="/SuccessioniLibrary_v01.nuspec" Id="RF9DB3A9B5B4BD207" />
+  <Relationship Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="/package/services/metadata/core-properties/66f2a69da1ab43fb8c77f38857f5085b.psmdcp" Id="RB67A494CBA24F286" />
+</Relationships>

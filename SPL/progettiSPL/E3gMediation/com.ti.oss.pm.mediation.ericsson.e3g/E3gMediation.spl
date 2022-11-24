@@ -1,0 +1,262 @@
+namespace com.ti.oss.pm.mediation.ericsson.e3g ;
+
+/*
+ * Import ext namespaces
+ */
+/*use com.ibm.streamsx.file::* ;
+use com.ti.oss.common.event::* ;
+use com.ti.oss.common.alarm::* ;
+use com.ti.oss.common.types::* ;
+use com.ti.oss.common.pm.process::* ;
+use com.ti.oss.common.writer::* ;
+use com.ti.oss.pm.mediation.ericsson.e3g.utils::* ;
+use com.ti.oss.common.pm.writer.omes::* ;
+use com.ti.oss.common.pm.parser.xml3gpp::* ;
+use com.ti.oss.common.pm.parser.cfg::* ;
+use com.ti.oss.common.pm.parser.util::* ;
+use com.ti.oss.common.pm.parser.xml3gpp.ericsson::* ;
+
+//For router messaging
+use com.ti.oss.common.pm.hdfs::* ;
+use com.ti.oss.common.messaging.kafka::* ;
+use com.ti.oss.common.messaging.router::* ;
+
+public composite E3gMediation(input stream<rstring fName> PolledFile ; output
+	OutEvent, OAlarm)
+{
+	graph
+
+	//************************** INIZIO ADAPTATION  ****************************
+		(stream<ClassType> AdaptationParser_out) as Parser = AdaptationParser()
+		{
+			param
+				mediationId : getCompileTimeValue("mediationId") ;
+				//partitionColocation for Adaptation
+
+			//config
+				//placement : partitionColocation("AdaptationParser") ;
+		}
+
+		(stream<NormClasses Classes, RelMeasInfoIdClass RelMeasInfoClass,
+			RelClassIdDimension RelClassDimension,
+			RelMeasinfoIdCounter RelMeasinfoCounter,
+			RelCounterMeasinfoId RelCounterMeasinfo> AdaptationLoader_out) as Loader =
+			AdaptationNormalizer(AdaptationParser_out as I)
+		{
+		//partitionColocation for Adaptation
+
+			//config
+				//placement : partitionColocation("AdaptationParser") ;
+		}
+
+		(stream<NormClasses Classes, RelMeasInfoIdClass RelMeasInfoClass,
+			RelClassIdDimension RelClassDimension,
+			RelMeasinfoIdCounter RelMeasinfoCounter,
+			RelCounterMeasinfoId RelCounterMeasinfo, NormClasses ClassDN>
+			AdaptationLoader_out1) as Loader_out1 =
+			ClassDNNormalizer(AdaptationLoader_out)
+		{
+		//partitionColocation for Adaptation
+
+			//config
+				//placement : partitionColocation("AdaptationParser") ;
+		}
+
+		//************************* FINE ADAPTATION ******************************
+		(stream<RawDataHeader rHeader, ERawDataBlock rBblock> PRawDataBlock ;
+			stream<Event e> ParserEventOut) as E3gNewDCheckParser =
+			DCheckParser(PolledFile as I)
+		{
+			param
+				mediationId : getCompileTimeValue("mediationId") ;
+			//config
+				
+				//placement : partitionColocation(getCompileTimeValue("mediationId") +
+					//"-parser" +(rstring) getChannel()) ;
+		}
+
+		(stream<MeasHeader mHeader, EMeasData mData> TransformedMeasDataBlock ;
+			stream<Event e> TransformEvent) as E3gNewTransformer =
+			ETransformer(PRawDataBlock as I)
+		{
+			param
+				mediationId : getCompileTimeValue("mediationId") ;
+				dnPrefix : "Network-TI" ;
+				mtPrefix : "m" ;
+				//cPrefix: "c";
+
+		}
+
+		//		(stream<MeasHeader mHeader, MeasData mData> DefragMeasDataBlock ;
+		//			stream<Event e> DefragEvent) as E3gNewDefrag =
+		//			Defrag(TransformedMeasDataBlock)
+		//		{
+		//		}
+
+		// new
+		(stream<MeasHeader mHeader, MeasData mData> AdaptedMeasDataBlock ;
+			stream<Event e> AdaptedEvent) as Adapter = Custom(TransformedMeasDataBlock
+			as TMB)
+		{
+			logic
+				state :
+				{
+					mutable MeasData tmpMeasData = { } ;
+				}
+
+				onTuple TMB :
+				{
+				//appTrc(Trace.trace,	(rstring) TMB) ;
+					tmpMeasData.fdn = mData.fdn ;
+					tmpMeasData.dimensions = mData.dimensions ;
+					tmpMeasData.measTypes = mData.measTypes ;
+					submit({ mHeader = TMB.mHeader, mData = tmpMeasData },
+						AdaptedMeasDataBlock) ;
+				}
+
+				onPunct TMB :
+				{
+				// Forward punctuation
+					if(currentPunct() == Sys.WindowMarker)
+					{
+						appTrc(Trace.debug,
+							"EventForwarder - forwarding FinalMarker punctuation...") ;
+						submit(Sys.WindowMarker, AdaptedMeasDataBlock) ;
+					}
+
+				}
+
+		}
+
+		//************************** INIZIO ARRAY NORMALIZER *******************************
+		(stream<MeasHeader mHeader, MeasData mData> ArrayNormMeasDataBlock ;
+			stream<Event e> ArrayNormalizerEvent) as E3GArrayNormalizer =
+			ArrayNormalizer(AdaptedMeasDataBlock as I1; AdaptationLoader_out1 as I2)
+		{
+			param
+				mediationId : getCompileTimeValue("mediationId") ;
+			
+		}
+
+		(stream<MeasHeader mHeader, MeasData mData> NormMeasDataBlock ;
+			stream<Event e> NormalizerEvent) as E3gNewNormalizer =
+			Normalizer(ArrayNormMeasDataBlock as I)
+		{
+			
+		}
+
+		//		(stream<MeasHeader mHeader, MeasData mData> NormMeasDataBlock ;
+		//			stream<Event e> NormalizerEvent) as E3gNewNormalizer = 
+		//		Normalizer(DefragMeasDataBlock)
+		//		{
+		//		}
+
+		//************************* FINE ARRAY NORMALIZER ********************************
+		(stream<Event e> MessagingRouterEvent) as E3gNewMessagingRouter =
+			MessagingRouter(AdaptedMeasDataBlock as I)
+		{
+			param
+				mediationId : getCompileTimeValue("mediationId") ;
+				vendor : "Ericsson" ;
+				domain : "4G" ;
+			
+		}
+
+		// Export 
+		() as E3gNewExport = PMDataExporter(NormMeasDataBlock as I)
+		{
+			param
+				mediationId : getCompileTimeValue("mediationId") ;
+				vendor : "Ericsson" ;
+				domain : "4G" ;
+			
+		}
+
+		(stream<MeasHeader mHeader, MeasData mData, FileTrailer trailer>
+			EnrichedMeasBlock ; stream<Event e> EnrichEvent ; stream<Alarm alarm>
+			EnrichAlarm) as E3gNewEnricher = Enricher(NormMeasDataBlock as I)
+		{
+			param
+				mediationId : getCompileTimeValue("mediationId") ;
+				dnPrefix : "Network-TI" ;
+				fileSuffix : ".xml" ;
+				rootRdnElemLevel : 2 ;
+				importIdlBugLogic : true ;
+			
+		}
+
+		(stream<Event e> OWEvent ; stream<Alarm alarm> OWAlarm ; stream<FileHeader h,
+			FileTrailer t> OTrailer) as E3gNewOMeSWriter =
+			OMeSWriter(EnrichedMeasBlock as I)
+		{
+			param
+				mediationId : getCompileTimeValue("mediationId") ;
+				addNewLine : false ;
+
+				// config 
+				// placement : partitionColocation("e3g-POMeSWriter") ;
+				// placement : host("cmst1n1"), partitionColocation("e3g-POMeSWriter") ;
+			
+
+		}
+
+		(stream<Event e> FileExportEvent ; stream<Alarm alarm> FileExportAlarm) as
+			NorthboundFileExport = FileExport(OTrailer as I)
+		{
+			param
+				mediationId : getCompileTimeValue("mediationId") ;
+			
+		}
+
+		(stream<Event e> OutEvent) as EventForwarder = Custom(ParserEventOut,
+			TransformEvent, NormalizerEvent, EnrichEvent, OWEvent, FileExportEvent,
+			ArrayNormalizerEvent ,MessagingRouterEvent  
+		as I)
+		{
+			logic
+				onTuple I :
+				{
+					submit(I, OutEvent) ;
+				}
+
+				onPunct I :
+				{
+				// Forward punctuation
+					if(currentPunct() == Sys.FinalMarker)
+					{
+						appTrc(Trace.debug,
+							"EventForwarder - forwarding FinalMarker punctuation...") ;
+						submit(Sys.FinalMarker, OutEvent) ;
+					}
+
+				}
+
+		}
+
+		(stream<Alarm alarm> OAlarm) as AlarmForwarder = Custom(EnrichAlarm, OWAlarm,
+			FileExportAlarm as A)
+		{
+			logic
+				onTuple A :
+				{
+					submit(A, OAlarm) ;
+				}
+
+				onPunct A :
+				{
+				// Forward punctuation
+					if(currentPunct() == Sys.FinalMarker)
+					{
+						appTrc(Trace.debug,
+							"AlarmForwarder - forwarding FinalMarker punctuation...") ;
+						submit(Sys.FinalMarker, OAlarm) ;
+					}
+
+				}
+
+		}
+		
+		config
+			placement: partitionColocation( getCompileTimeValue("mediationId") + "-E3gMediationPipeline-" + (rstring) getChannel()) ;
+
+}*/

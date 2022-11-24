@@ -1,0 +1,499 @@
+namespace com.ti.oss.common.cdr.sqm ;
+
+use com.ibm.streamsx.file::* ;
+use com.ti.oss.common.cdr.parser.eggsn::* ;
+use com.ti.oss.common.cdr.types::* ;
+use com.ti.oss.common.cdr.util.cfg::* ;
+use com.ti.oss.common.cdr.util::* ;
+use com.ti.oss.common.event::* ;
+use com.ti.oss.common.types::* ;
+use com.ti.oss.common.util.cfg::* ;
+use com.ti.oss.common.util.time::*;
+
+type SqmBroadSgsn = map<rstring, BroadSgsn>;
+type SqmBroadSgsnNode = map<rstring, SqmBroadSgsn>;
+
+public composite BroadBandSgsn(input stream<AggregateSqmSchema> eggsn, stream<rstring sgsn> S, stream<rstring centrale>E; output
+	stream<CsvWrite> outCsv2, OutEventKpi2, stream<CDRCounters> OutCounters)
+{
+	param
+		expression<rstring> $tmpOutFilePrefix ;
+		expression<rstring> $tmpOutFileSuffix ;
+		expression<rstring> $mediationName ;
+	graph
+		
+		
+		
+		(stream<BroadSgsn> outKpi2 as O; stream<Event e> OutEventKpi2 as OE; stream<CDRCounters> OutCounters) =
+			Custom(eggsn;S;E)
+		{
+			logic
+				state :
+				{
+					rstring tmpOutFilePrefix = $tmpOutFilePrefix;
+					rstring tmpOutFileSuffix = $tmpOutFileSuffix;
+					rstring mediationName = $mediationName;
+					
+					mutable float64 startROPstate = 0 ;
+					mutable float64 endROPstate = 0 ;
+					mutable float64 startROPold = 0 ;
+					mutable float64 endROPold = 0 ;
+					boolean flagMediationCfg = loadMediationCfg(mediationName) ;
+					mutable rstring nameOutputFilestate ;
+					mutable rstring nameOutputFileOld ;
+					mutable rstring path = getCfgParam("COMMON_CFG_DIR", mediationName, "SQM_SGSN_OUTPUT_PATH") ;
+					mutable rstring filePrefix = getCfgParam("COMMON_CFG_DIR", mediationName, "FILE_PREFIX_BROAD_SGSN") ;
+					mutable rstring fileSuffix = getCfgParam("COMMON_CFG_DIR", mediationName, "FILE_SUFFIX") ;
+					mutable int32 interval = (int32)getCfgParam("COMMON_CFG_DIR",mediationName,"ROP_INTERVAL_SQM");
+					mutable rstring sgsn_ip_name = getCfgParam("COMMON_CFG_DIR",mediationName,"SGSN_IP_NAME");
+					mutable boolean flagSgsnIpName = loadCdrProvCfg("SGSNIPNAME",sgsn_ip_name, (uint32)1,",");//SGSNADDRESS
+					mutable SqmBroadSgsn CDRforBroadSgsn ;
+					mutable SqmBroadSgsnNode SqmBroadSgsnNodeT ;
+					mutable SqmBroadSgsnNode SqmBroadSgsnNodePrec ;
+					mutable FileHeader fh = { } ;
+					
+					mutable set<rstring> listSgsn;
+					mutable list<rstring> listCentrale;
+					
+					mutable O emptyEndRopTuple = initEmptyEndRopTupleSgsn();
+					mutable OE oetuple = (OE){};
+					
+					mutable SqmBroadSgsn cdrApp = {};
+					
+					mutable int32 count = 1;
+					
+//					// Conta tutti CDR per rATType
+//					mutable uint64 cdrtotrattype = 0ul;
+//					mutable uint64 cdrtotrattypeold = 0ul;
+					
+					// Conta i CDR corretti per questo KPI
+					mutable uint64 cdrtot = 0ul;
+					mutable uint64 cdrtotold = 0ul;
+					
+					// Conta i CDR scartati per il filtro impostato
+					mutable uint64 cdrexclude1 = 0ul;
+					mutable uint64 cdrexclude1old = 0ul;
+					
+					// Conta i CDR scartati esterni al ROP
+					mutable uint64 cdrexclude2 = 0ul;
+					mutable uint64 cdrexclude2old = 0ul;
+				}
+
+				onTuple S:
+				{
+					mutable list<rstring> rete = tokenize(S.sgsn, ",", true);
+					
+					if (rete[0] == "NODEID")
+					{
+						clearM(listSgsn);
+					}else{
+						insertM(listSgsn, rete[0]);
+					}
+				}
+				
+				
+				onTuple E:
+				{
+					mutable list<rstring> rete = tokenize(E.centrale, ",", true);
+					mutable rstring centrale = regexReplace(rete[1],"\n","",true);
+					centrale = regexReplace(centrale,"\r","",true);
+					
+					if (centrale == "CENTRALE")
+					{
+						clearM(listCentrale);
+					}else{
+						appendM(listCentrale, centrale);
+					}
+				}
+				
+				onTuple eggsn :
+				{	
+					if(eggsn.endROP)
+					{
+						interval = checkConfiguration(mediationName,"ROP_INTERVAL_SQM",interval);
+						path = checkConfiguration(mediationName, "SQM_SGSN_OUTPUT_PATH", path);
+						filePrefix = checkConfiguration(mediationName, "FILE_PREFIX_BROAD_SGSN", filePrefix);
+						fileSuffix = checkConfiguration(mediationName, "FILE_SUFFIX", fileSuffix);
+						
+						if (isCdrProvCfgChanged("SGSNIPNAME"))
+						{
+							reloadCdrProvCfg("SGSNIPNAME");
+						}
+						
+						swap(SqmBroadSgsnNodeT,SqmBroadSgsnNodePrec);
+						swap(cdrtot, cdrtotold);
+						cdrtot = 0ul;
+						swap(cdrexclude1, cdrexclude1old);
+						cdrexclude1 = 0ul;
+						swap(cdrexclude2, cdrexclude2old);
+						cdrexclude2 = 0ul;
+//						swap(cdrtotrattype, cdrtotrattypeold);
+//						cdrtotrattype = 0ul;
+
+						clearM(SqmBroadSgsnNodeT);
+						startROPold = startROPstate;
+						endROPold = endROPstate;
+						startROPstate = eggsn.startRopSecs;
+						endROPstate = eggsn.endRopSecs;
+						nameOutputFileOld = nameOutputFilestate;
+						
+						nameOutputFilestate = path + tmpOutFilePrefix +(rstring) eggsn.endRopSecs + tmpOutFileSuffix;
+						
+						mutable BroadSgsn entry = {};
+						entry.nameOutputFile = nameOutputFilestate ;
+						entry.filePrefix = filePrefix ;
+						entry.suffix = fileSuffix ;
+				    	entry.start_time = getUtilConvert((rstring)startROPstate); 
+						entry.end_time = getUtilConvert((rstring)endROPstate);
+						entry.downlink_2g = (int64)0;
+						entry.downlink_3g = (int64)0;
+						
+						for (rstring elem in listSgsn)
+						{	
+							entry.sgsn_dn = elem;
+							insertM(CDRforBroadSgsn,elem,entry);
+							for (int32 k in range(listCentrale))
+							{
+								insertM(SqmBroadSgsnNodeT,listCentrale[k],CDRforBroadSgsn);
+							}	 
+						}
+						clearM(CDRforBroadSgsn);
+					}
+					
+					if(startROPstate == (float64)0 || endROPstate == (float64)0)
+					{
+						startROPstate = eggsn.startRopSecs;
+						endROPstate = eggsn.endRopSecs;
+					}
+					
+					if(nameOutputFilestate == "")
+					{
+						nameOutputFilestate = path + tmpOutFilePrefix +(rstring) eggsn.endRopSecs + tmpOutFileSuffix ;
+					}
+					
+					if(eggsn.endROP)
+					{
+						nameOutputFilestate = path + tmpOutFilePrefix +(rstring) eggsn.endRopSecs + tmpOutFileSuffix ;
+					}
+
+					if(eggsn.write_prev)
+					{
+						if (eggsn.exclude_node == "")
+						{
+							mutable rstring filename_tmp = "";
+							mutable rstring central_val="";
+							if(size(SqmBroadSgsnNodePrec) != 0)
+							{
+								aggregateSgsnNode(SqmBroadSgsnNodePrec, CDRforBroadSgsn, cdrApp);
+                   				
+		                		for(rstring key in CDRforBroadSgsn)
+								{
+									submit(CDRforBroadSgsn[key], outKpi2);
+									central_val = central_val + key + ";";
+								}
+								
+								filename_tmp = nameOutputFileOld;
+								emptyEndRopTuple.nameOutputFile = nameOutputFileOld;
+								emptyEndRopTuple.endROP = true;
+								submit(emptyEndRopTuple, outKpi2);	
+														
+							}else{
+								filename_tmp = nameOutputFileOld;
+								emptyEndRopTuple.nameOutputFile = nameOutputFileOld;
+								emptyEndRopTuple.endROP = true;
+								submit(emptyEndRopTuple, outKpi2);
+							}
+							
+							mutable rstring sr = "";
+							mutable rstring er = "";
+							if(startROPold != (float64)0 && endROPold != (float64)0)
+							{
+								sr = getUtilConvert((rstring)startROPold);
+								er = getUtilConvert((rstring)endROPold);
+							}
+							else
+							{
+								sr = "0";
+								er = "0";
+							}
+							submit({kpi = "BroadBandSgsn", ROP = sr + "-" + er, cdrtot = cdrtotold, cdrexclude1 = cdrexclude1old, cdrexclude2 = cdrexclude2old}, OutCounters);
+							
+							//clear statistics
+							//cdrtotrattypeold = 0ul;
+							cdrtotold = 0ul;
+							cdrexclude1old = 0ul;
+							cdrexclude2old = 0ul;
+							
+							clearM(SqmBroadSgsnNodePrec);
+							clearM(cdrApp);
+							startROPold = (float64)0;
+							endROPold = (float64)0;
+							nameOutputFileOld = "";
+							oetuple.e.eventType = 190 ;
+							oetuple.e.resultCode = 0 ;
+							oetuple.e.rawFile = filename_tmp ;
+							swap(oetuple.e.eventCorrelationId, fh.eventCorrelationId);
+		                    swap(oetuple.e.rop, fh.rop);
+		                    swap(oetuple.e.emId, fh.emId);
+		                    swap(oetuple.e.neId, fh.neId);
+							oetuple.e.eventText = "End write_prev close file " + filename_tmp;
+							boolean eventEnabled = mkEvent(oetuple.e, fh.sessionBeginTime) ;
+							if(eventEnabled) submit(oetuple, OutEventKpi2) ;
+						}else{
+							if(has(SqmBroadSgsnNodePrec, eggsn.exclude_node) == true)
+							{
+								removeM (SqmBroadSgsnNodePrec, eggsn.exclude_node);
+							}
+						}	
+					}
+					else if((eggsn.cdrSchema.rATType == 1 || eggsn.cdrSchema.rATType == 2) && !eggsn.endROP)
+					{
+						//cdrtotrattype++;
+						fh = eggsn.fHeader;	
+							
+						mutable rstring datetmp = "20" +(rstring)substring(eggsn.cdrSchema.recordOpeningTime, 0, 12) ;
+						timestamp ts = toTimestamp(Sys.YYYYMMDDhhmmss, datetmp) ;
+						mutable float64 endTimeCDRfloat = getSeconds(ts) +(int64)eggsn.cdrSchema.duration ;				
+						
+						if (size(eggsn.cdrSchema.servingNodeAddress)>0)
+						{							
+							mutable rstring sgsnName = 	getSgsnName(eggsn.cdrSchema.servingNodeAddress[0],flagSgsnIpName);
+							
+							if (sgsnName!= "")
+							{	
+								mutable rstring centralName = eggsn.cdrSchema.nodeId;
+								mutable rstring key = sgsnName;
+								
+								if((endTimeCDRfloat >= eggsn.startRopSecsOld) && (endTimeCDRfloat < eggsn.endRopSecsOld))
+								{
+									cdrtotold++;
+									if(has(SqmBroadSgsnNodePrec, centralName) == true)
+			                		{
+			                			addCdrBBS(eggsn,SqmBroadSgsnNodePrec[centralName],key,nameOutputFileOld,filePrefix,fileSuffix,eggsn.startRopSecsOld,eggsn.endRopSecsOld);
+			                		}else{
+			                			addCdrBBS(eggsn,CDRforBroadSgsn,key,nameOutputFileOld,filePrefix,fileSuffix,eggsn.startRopSecsOld,eggsn.endRopSecsOld);
+			                			insertM(SqmBroadSgsnNodePrec, centralName, CDRforBroadSgsn) ;
+			                		}
+								}
+								else if((endTimeCDRfloat >= eggsn.startRopSecs) && (endTimeCDRfloat < eggsn.endRopSecs))
+								{
+									cdrtot++;
+									if(has(SqmBroadSgsnNodeT, centralName) == true)
+				                	{
+				                		addCdrBBS(eggsn,SqmBroadSgsnNodeT[centralName],key,nameOutputFilestate,filePrefix,fileSuffix,eggsn.startRopSecs,eggsn.endRopSecs);
+				                	}else{
+				                		addCdrBBS(eggsn,CDRforBroadSgsn,key,nameOutputFilestate,filePrefix,fileSuffix,eggsn.startRopSecs,eggsn.endRopSecs);
+				                		insertM(SqmBroadSgsnNodeT, centralName, CDRforBroadSgsn) ;
+				                	}
+								}
+								else
+								{
+									//exclude CDR fuori ROP
+									cdrexclude2++;
+								}
+								
+								clearM(cdrApp);
+								clearM(CDRforBroadSgsn);
+							}	
+							else 
+							{		
+								if((endTimeCDRfloat >= eggsn.startRopSecs) && (endTimeCDRfloat < eggsn.endRopSecs))
+								{
+									//exclude Filtro CDR in ROP
+									cdrexclude1++;
+								}
+								else
+								{
+									//exclude Filtro CDR fuori ROP
+									cdrexclude1old++;	
+								}
+							}
+						}
+					}
+				}
+
+				onPunct eggsn :
+				{
+					if(currentPunct() == Sys.WindowMarker)
+					{
+						oetuple.e.eventType = 200 ;
+						oetuple.e.resultCode = 0 ;
+						oetuple.e.rawFile = filename(fh.fName) ;
+						swap(oetuple.e.eventCorrelationId, fh.eventCorrelationId);
+	                    swap(oetuple.e.rop, fh.rop);
+	                    swap(oetuple.e.emId, fh.emId);
+	                    swap(oetuple.e.neId, fh.neId);
+						oetuple.e.eventText = "End Broadband Sgsn SQM";
+						boolean eventEnabled = mkEvent(oetuple.e, fh.sessionBeginTime) ;
+						
+						if(eventEnabled) 
+							submit(oetuple, OutEventKpi2) ;
+						
+						submit(Sys.WindowMarker, OutEventKpi2) ;
+					}
+
+				}
+				
+			config
+				threadedPort: queue(eggsn, Sys.Wait, 1000000);
+
+			}
+
+		(stream<CsvWrite> outCsv2) = Custom(outKpi2)
+		{
+			logic
+				state:
+				{
+					mutable rstring naming_lookup = getCfgParam("COMMON_CFG_DIR", $mediationName, "NAMING_LOOKUP"); 
+					mutable boolean flagNamingLookup = loadCdrProvCfg("NAMINGLOOKUP", naming_lookup,(uint32) 3, ";") ;
+					
+					mutable CsvWrite csv = {};
+				}
+				
+				
+				onTuple outKpi2: 
+				{
+					if (outKpi2.endROP)
+					{
+						if (isCdrProvCfgChanged("NAMINGLOOKUP"))
+						{
+							reloadCdrProvCfg("NAMINGLOOKUP");
+						}
+					}
+					
+					swap(csv.nameOutputFile, outKpi2.nameOutputFile);
+					swap(csv.endROP, outKpi2.endROP);
+					swap(csv.filePrefix, outKpi2.filePrefix);
+					swap(csv.suffix, outKpi2.suffix);
+					
+					mutable rstring sqmDn = "";
+					if (outKpi2.sgsn_dn != "")
+					{
+						sqmDn = getSqmDn(outKpi2.sgsn_dn,flagNamingLookup);
+					}
+					if (sqmDn != "")
+					{
+						csv.outputContent = sqmDn+";"+outKpi2.start_time+";"+outKpi2.end_time+";"+(rstring)outKpi2.downlink_2g+";"+(rstring)outKpi2.downlink_3g;
+					}else{
+						csv.outputContent = "";
+					}
+					
+					submit(csv, outCsv2);					
+				}
+				onPunct outKpi2 :
+				{
+					if(currentPunct() == Sys.WindowMarker) {
+						submit(Sys.WindowMarker,outCsv2);
+					}
+				} 
+		}
+	}
+
+void countCdrsBBS(AggregateSqmSchema eggsn1, mutable BroadSgsn aggrSQMtmp) 
+{
+   if(eggsn1.cdrSchema.rATType == 1){
+	
+		for(int32 i in range(eggsn1.cdrSchema.datavolumeFBCDownlink))
+		{
+			aggrSQMtmp.downlink_3g = aggrSQMtmp.downlink_3g + (int64)eggsn1.cdrSchema.datavolumeFBCDownlink[i];
+		}	
+	}else if (eggsn1.cdrSchema.rATType == 2)
+	{
+		for(int32 i in range(eggsn1.cdrSchema.datavolumeFBCDownlink))
+		{
+			aggrSQMtmp.downlink_2g = aggrSQMtmp.downlink_2g + (int64)eggsn1.cdrSchema.datavolumeFBCDownlink[i];
+		}
+	}
+}
+
+									
+void addCdrBBS(AggregateSqmSchema eggsn, mutable SqmBroadSgsn cdr, rstring key, rstring nameOutputFile, rstring filePrefix, rstring fileSuffix, float64 startROP, float64 endROP)
+{
+	mutable BroadSgsn firstEntry = {};
+	mutable BroadSgsn existEntry = {};
+	
+	if(has(cdr, key) == false) 
+    {   
+    	firstEntry.nameOutputFile = nameOutputFile ;
+		firstEntry.filePrefix = filePrefix ;
+		firstEntry.suffix = fileSuffix ;
+    	firstEntry.sgsn_dn = key;
+		firstEntry.start_time = getUtilConvert((rstring)startROP); 
+		firstEntry.end_time = getUtilConvert((rstring)endROP);
+		countCdrsBBS(eggsn, firstEntry) ;
+		insertM(cdr, key, firstEntry) ;
+    }  
+    else 
+    {     
+     	existEntry = cdr[key];
+     	
+     	countCdrsBBS(eggsn, existEntry) ;
+ 					
+ 		removeM (cdr, key);
+	    insertM( cdr, key, existEntry);
+    }
+    
+}
+
+
+rstring getSgsnName(rstring ip, boolean flagSgsnIpName)
+{
+	mutable list<rstring> tmpOutParamMapIPNAME = [];
+	mutable rstring nomeCentrale="";
+	if (flagSgsnIpName)
+	{
+		if ( getCdrProvRecord("SGSNIPNAME", ip, tmpOutParamMapIPNAME ) )
+		{   
+			nomeCentrale = tmpOutParamMapIPNAME[0];
+		}
+	}
+	else
+	{
+		appTrc(Trace.error, "File SGSN_IP_NAME.csv non caricato correttamente ");
+	}
+	
+	return nomeCentrale;
+}
+
+BroadSgsn initEmptyEndRopTupleSgsn() 
+{
+	mutable BroadSgsn result = {};
+	
+	result.endROP = true;
+	
+	return result;
+}
+
+void aggregateSgsnNode(mutable SqmBroadSgsnNode sqmSgsnNode, mutable SqmBroadSgsn sqmSgsn, mutable SqmBroadSgsn cdrApp)
+{
+	mutable list<rstring> keysTmp = [];
+	for(rstring key in sqmSgsnNode) 
+	{
+		appendM(keysTmp, key);
+	}
+	for(rstring key in keysTmp)
+	{
+		swap(cdrApp, sqmSgsnNode[key]);
+		for(rstring keyCdr in cdrApp) 
+		{	
+			if(has(sqmSgsn, keyCdr))
+			{
+				if (cdrApp[keyCdr].downlink_2g!=(int64)-1 && sqmSgsn[keyCdr].downlink_2g!=(int64)-1)
+				{
+					sqmSgsn[keyCdr].downlink_2g = sqmSgsn[keyCdr].downlink_2g + cdrApp[keyCdr].downlink_2g;
+				}
+				
+				if (cdrApp[keyCdr].downlink_3g!=(int64)-1 && sqmSgsn[keyCdr].downlink_3g!=(int64)-1)
+				{
+					sqmSgsn[keyCdr].downlink_3g = sqmSgsn[keyCdr].downlink_3g + cdrApp[keyCdr].downlink_3g;
+				}
+    		}
+        	else
+        	{
+        		insertM(sqmSgsn, keyCdr, cdrApp[keyCdr]);
+        	}
+        }
+	}
+	clearM(keysTmp);
+	clearM(cdrApp);
+}

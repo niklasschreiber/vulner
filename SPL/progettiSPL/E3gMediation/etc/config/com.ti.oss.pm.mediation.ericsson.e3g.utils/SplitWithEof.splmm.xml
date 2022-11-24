@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<i:Spltosplmm
+  xmlns:i="http://www.ibm.com/xmlns/prod/streams/spl/splmmindex">
+    <i:verbatim splStart="0" splEnd="126" mmStart="0"/>
+    <i:verbatim splStart="127" splEnd="177" mmStart="607"/>
+    <i:verbatim splStart="178" splEnd="182" mmStart="704"/>
+    <i:generated splStart="183" splEnd="183" mmStart="709" mmEnd="715"/>
+    <i:verbatim splStart="184" splEnd="185" mmStart="716"/>
+    <i:verbatim splStart="186" splEnd="186" mmStart="761"/>
+    <i:verbatim splStart="187" splEnd="210" mmStart="767"/>
+    <i:verbatim splStart="211" splEnd="288" mmStart="838"/>
+    <i:generated splStart="289" splEnd="289" mmStart="916" mmEnd="922"/>
+    <i:verbatim splStart="290" splEnd="299" mmStart="923"/>
+    <i:verbatim splStart="300" splEnd="308" mmStart="977"/>
+    <i:verbatim splStart="309" splEnd="532" mmStart="991"/>
+    <i:verbatim splStart="533" splEnd="558" mmStart="1262"/>
+    <i:generated splStart="559" splEnd="559" mmStart="1288" mmEnd="1294"/>
+    <i:verbatim splStart="560" splEnd="573" mmStart="1295"/>
+    <i:verbatim splStart="574" splEnd="802" mmStart="1314"/>
+    <i:generated splStart="803" splEnd="805" mmStart="1543" mmEnd="1561"/>
+    <i:verbatim splStart="806" splEnd="863" mmStart="1562"/>
+</i:Spltosplmm>

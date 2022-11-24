@@ -1,0 +1,1574 @@
+/*
+**	By Vanda Soft Group   VBS2000
+**
+**		Subsystem: GLS Function
+**
+**		Description: 外币总帐折算功能函数
+**
+**		Editer: Steven Chen
+**
+**	First Edit Date: 2004-12-02
+**
+**	Function List:
+**
+**		Update List:
+**			Modifier   Modify Date         Description
+**
+*/
+#include "sysdefine.h"
+#include "public.h"
+#include "code.h"
+#include "attrdef.h"
+#include "pubbatch.h"
+
+#include "glscycltotal.h"
+#include "glssubdict.h"
+#include "pubfxrate.h"
+#include "pubbranchinfo.h"
+#include "glszsceb.h"
+
+EXEC SQL INCLUDE SQLCA;
+
+/* 装载总账数据 */
+int glLoadBaseGenLeg( pHead, pcBrc, pcTranDate, pcAcctType, pcCcyBase, pcCcyResult )
+GNLCVT **pHead;       
+char *pcBrc;
+char *pcTranDate;
+char *pcAcctType;
+char *pcCcyBase;
+char *pcCcyResult;
+{
+	char	acMonth[3];
+	char	acYear[5];
+	GNLCVT	*pNext=NULL;
+	GNLCVT	*pNode=NULL;
+	struct	glscycltotal *pGenLeg;
+
+	EXEC SQL BEGIN DECLARE SECTION;
+		long	iCycle;
+		long	iCycle1;
+	EXEC SQL END DECLARE SECTION;
+
+	memset( acMonth, 0x00, sizeof( acMonth ) );
+	memset( acYear, 0x00, sizeof( acYear ) );
+
+	if( ( iCycle = pubCircle( pcTranDate ) ) < 0 )
+	{
+		ERRLOG
+		goto Exit;
+	}
+  	iCycle1 = iCycle;
+	if( iCycle >= QMBZ_YM )		iCycle = QMBZ_XXM;
+
+	pubInitGlscycltotal();
+
+	strcpy( glscycltotal_brccode, pcBrc );
+	strcpy( glscycltotal_acctype, pcAcctType );
+	strcpy( glscycltotal_ccy, pcCcyBase );
+	strncpy( glscycltotal_year, pcTranDate, 4 );
+	strncpy( acMonth, pcTranDate+5, 2 );
+	glscycltotal_month = atol( acMonth );
+	
+	/* 循环读取某基础币种的周期总账 */
+	EXEC SQL DECLARE cyc_cur CURSOR FOR
+			 SELECT *
+			 FROM 	glscycltotal
+			 WHERE 	brccode = :glscycltotal_brccode		AND 
+			 		acctype = :glscycltotal_acctype		AND 
+			 		ccy 	= :glscycltotal_ccy			AND 
+			 		year 	= :glscycltotal_year		AND 
+			 		month 	= :glscycltotal_month		AND 
+			 		cycle 	>= :iCycle
+			        order by subctrlcode;
+
+	SQLOPENCUR(cyc_cur,"cyc_cur")
+	if( SQLCODE )
+	{
+		strcpy( g_acRspCode, "PUB401" );
+		pubCrtRspInfo( "glscycltotal", SQLCODE );
+		ERRLOG
+		goto Exit;
+	}
+
+	while( 1 )
+	{
+		EXEC SQL FETCH cyc_cur INTO R_GLSCYCLTOTAL;
+		if( SQLCODE && SQLCODE != SQLNOTFOUND )
+		{
+			strcpy( g_acRspCode, "PUB402" );
+			pubCrtRspInfo( "glscycltotal", SQLCODE );
+			ERRLOG
+			goto Exit;
+		}
+
+		if( SQLCODE == SQLNOTFOUND )	break;
+		
+		/* 更改基础币种为折算结果币种 */
+		strcpy( glscycltotal_ccy, pcCcyResult );
+
+		pNode = ( GNLCVT * ) malloc( sizeof( GNLCVT ) ) ;
+		if( pNode == NULL )
+		{
+			strcpy( g_acRspCode, "PUB400" );
+			strcpy( g_acRspMsg, "内存不足!"  );
+			ERRLOG
+			goto Exit;
+		}
+
+		pGenLeg = ( struct glscycltotal * ) malloc( sizeof( struct glscycltotal ) );
+
+		if( pGenLeg == NULL )
+		{
+			strcpy( g_acRspCode, "PUB400" );
+			strcpy( g_acRspMsg, "内存不足!"  );
+			ERRLOG
+			goto Exit;
+		}
+
+		memset( pNode, 0x00, sizeof( GNLCVT ) );
+		memset( pGenLeg, 0x00, sizeof( struct glscycltotal ) );
+
+		pubVtoSGlscycltotal( pGenLeg );	
+		
+		if(	iCycle1 != QMBZ_NM )
+		{
+			switch ( glscycltotal_cycle )
+			{
+				case QMBZ_NM :
+					glscycltotal_month -= 12;
+					break;
+				case QMBZ_BNM :
+					glscycltotal_month -= 6;
+					break;
+				case QMBZ_JM :
+					glscycltotal_month -= 3;
+					break;
+				case QMBZ_YM :
+					glscycltotal_month -= 1;
+					break;
+				case QMBZ_XXM :
+				case QMBZ_ZXM :
+					glscycltotal_cycle -= 1;
+					break;
+				case QMBZ_SXM :
+					glscycltotal_month -= 1;
+					glscycltotal_cycle = QMBZ_YM;
+					break;
+			}
+					
+			if( glscycltotal_month <= 0 )
+			{
+				memset( acYear, 0x00, sizeof( acYear ) );
+				strcpy( acYear, glscycltotal_year );
+				sprintf( glscycltotal_year, "%d", atol(acYear)-1 );
+				glscycltotal_month = 12;
+			}
+			
+			/* 读取结果币种的总账基础数据 */
+			EXEC SQL	SELECT	crbal, dbbal
+						INTO	:glscycltotal_crbal:glscycltotal_crbal_id,
+								:glscycltotal_dbbal:glscycltotal_dbbal_id
+						FROM	glscycltotal
+						WHERE	brccode = :glscycltotal_brccode
+						AND		acctype = :glscycltotal_acctype
+						AND		ccy = :glscycltotal_ccy
+						AND		subctrlcode = :glscycltotal_subctrlcode
+						AND		year = :glscycltotal_year
+						AND		month = :glscycltotal_month
+						AND		cycle = :glscycltotal_cycle;
+			SQLERR_PRO( "glscycltotal" )
+	
+			if ( glscycltotal_crbal_id < 0 )
+				glscycltotal_crbal = 0.0;
+			if ( glscycltotal_dbbal_id < 0 )
+				glscycltotal_dbbal = 0.0;
+	
+			pGenLeg->origcrbal = glscycltotal_crbal;
+			pGenLeg->origdbbal = glscycltotal_dbbal;
+			pubStoVGlscycltotal( pGenLeg );	
+		}
+		pNode->pGenLeg = pGenLeg;
+
+		if( *pHead == NULL )
+		{
+			*pHead = pNext = pNode;
+		}
+		else
+		{
+			pNext->pNext  = pNode;
+			pNext = pNode;
+		}
+	}
+
+	SQLCLOSECUR(cyc_cur,"cyc_cur")
+	if( SQLCODE )
+	{
+		strcpy( g_acRspCode, "PUB403" );
+		pubCrtRspInfo( "glscycltotal", SQLCODE );
+		ERRLOG
+		goto Exit;
+	}
+
+Exit:
+	return( !strcmp( g_acRspCode, PUBRSP_OK ) ? 0 : -1 );
+}
+
+/* 总账折算--
+   pcCcy -- 被折算外币币种
+   pcCcyBase -- 折算币种 
+   ccyresult -- 折算结果币种 
+   此处ccyresult -- 为997即为所有外币折美元时的周期总账币种 */
+int glCvtCurrentCcyGenLeg( pHead, pcBrc, pcTranDate, pcAcctType, pcCcy, pcCcyBase, pcCcyResult )
+GNLCVT **pHead;
+char *pcBrc;
+char *pcTranDate;
+char *pcAcctType;
+char *pcCcy;		/* 被折算外币币种 	*/
+char *pcCcyBase;	/* 折算基础币种 	*/
+char *pcCcyResult;  /* 折算结果币种 	*/
+{
+	double	dRate1=0.00, dRate2=0.00;
+	double	dUnit1=0.00, dUnit2=0.00;
+	double	dRate3=0.00, dRate4=0.00;
+	double	dUnit3=0.00, dUnit4=0.00;
+	double	dRate;
+	double	dAmount=0.00;
+	char	acMonth[3];
+	char	acYear[5];
+	char	acFxCode[FXCODE_LEN+1];
+	char	acCeSub[SUBCODE_LEN+1];
+
+	EXEC SQL BEGIN DECLARE SECTION;
+		char	acPosCcy[CCY_LEN+1];
+		long	iCycleCvt;
+		long	iCycleCvt1;
+	EXEC SQL END DECLARE SECTION;
+
+	struct	glscycltotal stGlscycltotal;
+	struct	glscycltotal stGlscycltotalCe;
+	struct	glscycltotal *pGenLeg;
+	struct	glscycltotal *pGenLegCe;
+	struct	glssubdict stGlssubdict;
+	GNLCVT	*pNode=NULL;
+
+
+	memset( acMonth, 0x00, sizeof( acMonth ) );
+	memset( acFxCode, 0x00, sizeof( acFxCode ) );
+	memset( acPosCcy, 0x00, sizeof( acPosCcy ) );
+	memset( acCeSub, 0x00, sizeof( acCeSub ) );
+	memset( &stGlscycltotal, 0x00, sizeof( struct glscycltotal ) );
+	memset( &stGlscycltotalCe, 0x00, sizeof( struct glscycltotal ) );
+	memset( &stGlssubdict, 0x00, sizeof( struct glssubdict ) );
+
+	if( ( iCycleCvt = pubCircle( pcTranDate ) ) < 0 )
+	{
+		ERRLOG
+		goto Exit;
+	}
+    iCycleCvt1 = iCycleCvt;
+	if( iCycleCvt >= QMBZ_YM )		iCycleCvt = QMBZ_XXM;
+
+	if( pubGetBaseInfo( "cetzkm", acCeSub ) )
+	FUNCERR_PRO
+
+	pubInitGlscycltotal();
+
+	strcpy( glscycltotal_brccode, pcBrc );
+	strcpy( glscycltotal_acctype, pcAcctType );
+	strcpy( glscycltotal_ccy, pcCcy );
+	strncpy( glscycltotal_year, pcTranDate, 4 );
+	strncpy( acMonth, pcTranDate+5, 2 );
+	glscycltotal_month = atol( acMonth );
+	
+	/* 取折算汇率 */
+	strcpy( acFxCode, FXCODE_ZSJ );
+	
+	/* 最后一次的汇率--本周期未的汇率 */
+	if( pubGetRmtRate( pcTranDate, pcCcy, pcCcyBase, acFxCode, &dRate1, &dUnit1 ) )
+		FUNCERR_PRO
+		
+	/* 倒数第二次的汇率--上一周期未的汇率 */
+	if( glGetLastRmtRate( pcTranDate, pcCcy, pcCcyBase, acFxCode, &dRate3, &dUnit3 ) )
+		FUNCERR_PRO
+		
+	/* 循环读取被折算外币的周期总账数据 */
+	EXEC SQL DECLARE cal_cur CURSOR FOR
+			 SELECT *
+			 FROM 	glscycltotal
+			 WHERE 	brccode = :glscycltotal_brccode		AND 
+			 		acctype = :glscycltotal_acctype		AND 
+			 		ccy 	= :glscycltotal_ccy			AND 
+			 		year 	= :glscycltotal_year		AND 
+			 		month 	= :glscycltotal_month		AND 
+			 		cycle 	>= :iCycleCvt;
+
+	SQLOPENCUR(cal_cur,"cal_cur")
+	if( SQLCODE )
+	{
+		strcpy( g_acRspCode, "PUB401" );
+		pubCrtRspInfo( "glscycltotal", SQLCODE );
+		ERRLOG
+		goto Exit;
+	}
+
+	while( 1 )
+	{
+		EXEC SQL FETCH cal_cur INTO R_GLSCYCLTOTAL;
+		if( SQLCODE && SQLCODE != SQLNOTFOUND )
+		{
+			strcpy( g_acRspCode, "PUB402" );
+			pubCrtRspInfo( "glscycltotal", SQLCODE );
+			ERRLOG
+			goto Exit;
+		}
+
+		if( SQLCODE == SQLNOTFOUND )	break;
+
+		strcpy( glscycltotal_ccy, pcCcyResult );
+
+		pubVtoSGlscycltotal( &stGlscycltotal );	
+		
+		/* 按科目号和周期类型,定位在周期总账中的位置--定位到pNode */
+		if( glGetLinkAddressByGnl( pHead, &stGlscycltotal, &pNode ) )
+			FUNCERR_PRO
+
+		pGenLeg = ( struct glscycltotal * ) pNode->pGenLeg;
+		
+		/* ?? 折算汇率问题 */
+		/* 运营资金按历史汇率折算 */
+		if ( strncmp(stGlscycltotal.subctrlcode,"3901",4)==0 )
+		{
+			dRate = dRate3 / dUnit3;
+		}
+		else
+		{
+			dRate = dRate1 / dUnit1;
+		}
+		
+		/* ?? 期初余额以经付给,是否重复累加 */
+		if ( iCycleCvt1 == QMBZ_NM )
+		{
+			dAmount = stGlscycltotal.origdbbal*dRate;
+			pubDround( &dAmount, 2 );
+			pGenLeg->origdbbal += dAmount;
+			pubDround( &(pGenLeg->origdbbal), 2 );
+	
+			dAmount = stGlscycltotal.origcrbal*dRate;
+			pubDround( &dAmount, 2 );
+			pGenLeg->origcrbal += dAmount;
+			pubDround( &(pGenLeg->origcrbal), 2 );
+		}
+		
+		/* 将该币种累加到折算币种中 */
+		pGenLeg->origaccnum += stGlscycltotal.origaccnum;
+
+		dAmount = stGlscycltotal.dbtranamt*dRate;
+		pubDround( &dAmount, 2 );
+		pGenLeg->dbtranamt += dAmount;
+		pubDround( &(pGenLeg->dbtranamt), 2 );
+
+		dAmount = stGlscycltotal.crtranamt*dRate;
+		pubDround( &dAmount, 2 );
+		pGenLeg->crtranamt += dAmount;
+		pubDround( &(pGenLeg->crtranamt), 2 );
+
+		pGenLeg->dbnum += stGlscycltotal.dbnum;
+		pGenLeg->crnum += stGlscycltotal.crnum;
+
+		pGenLeg->opennum += stGlscycltotal.opennum;
+		pGenLeg->cannum += stGlscycltotal.cannum;
+
+		dAmount = stGlscycltotal.dbbal*dRate;
+		pubDround( &dAmount, 2 );
+		pGenLeg->dbbal += dAmount;
+		pubDround( &(pGenLeg->dbbal), 2 );
+
+		dAmount = stGlscycltotal.crbal*dRate;
+		pubDround( &dAmount, 2 );
+		pGenLeg->crbal += dAmount;
+		pubDround( &(pGenLeg->crbal), 2 );
+		
+		/* 营运资金-按历史汇率折算,并记折算损益科目 */
+		if ( strncmp(stGlscycltotal.subctrlcode,"3901",4)==0 )
+		{
+			if( nGetSubdictBySub( pcBrc, pcAcctType, stGlscycltotal.subctrlcode, &stGlssubdict ) )
+			FUNCERR_PRO
+
+			if( stGlssubdict.subsubflag[0] == NO )
+			{
+				memset( &stGlscycltotalCe, 0x00, sizeof( struct glscycltotal ) );
+				memcpy( &stGlscycltotalCe, &stGlscycltotal, sizeof( struct  glscycltotal ) );
+				if( nGetSubdictBySub( pcBrc, pcAcctType, acCeSub, &stGlssubdict ) )
+				FUNCERR_PRO
+
+				strcpy( stGlscycltotalCe.subctrlcode, acCeSub );
+				strcpy( stGlscycltotalCe.balctrldir, stGlssubdict.balctrldir );
+				strcpy( stGlscycltotalCe.subtype, stGlssubdict.subtype );
+				strcpy( stGlscycltotalCe.acckind, stGlssubdict.subkind );
+				strcpy( stGlscycltotalCe.sumbalway, stGlssubdict.sumamtdir );
+				stGlscycltotalCe.balanceflag[0] = YES;
+				stGlscycltotalCe.sublevel = stGlssubdict.sublevel;
+
+				if( glGetLinkAddressByGnl( pHead, &stGlscycltotalCe, &pNode ) )
+				FUNCERR_PRO
+
+				pGenLegCe = ( struct glscycltotal * ) pNode->pGenLeg;
+
+				dRate =	 dRate1 / dUnit1 - dRate3 / dUnit3;
+
+				/* Feng modify in 2006-06-27 Begin */
+				/*begin modi by gao 2006-06-19 */
+				if ( iCycleCvt1 == QMBZ_NM )
+				{
+					dAmount = stGlscycltotal.origdbbal*dRate;
+					pubDround( &dAmount, 2 );
+					pGenLegCe->origdbbal += dAmount;
+					pubDround( &(pGenLegCe->origdbbal), 2 );
+	
+					dAmount = stGlscycltotal.origcrbal*dRate;
+					pubDround( &dAmount, 2 );
+					pGenLegCe->origcrbal += dAmount;
+					pubDround( &(pGenLegCe->origcrbal), 2 );
+				}
+				/*end modi by gao*/
+				/* Feng modify in 2006-06-27 End */
+
+				dAmount = stGlscycltotal.dbtranamt*dRate;
+				pubDround( &dAmount, 2 );
+				pGenLegCe->dbtranamt += dAmount;
+				pubDround( &(pGenLegCe->dbtranamt), 2 );
+
+				dAmount = stGlscycltotal.crtranamt*dRate;
+				pubDround( &dAmount, 2 );
+				pGenLegCe->crtranamt += dAmount;
+				pubDround( &(pGenLegCe->crtranamt), 2 );
+
+				dAmount = stGlscycltotal.dbbal*dRate;
+				pubDround( &dAmount, 2 );
+				pGenLegCe->dbbal += dAmount;
+				pubDround( &(pGenLegCe->dbbal), 2 );
+
+				dAmount = stGlscycltotal.crbal*dRate;
+				pubDround( &dAmount, 2 );
+				pGenLegCe->crbal += dAmount;
+				pubDround( &(pGenLegCe->crbal), 2 );
+			}
+		}
+	}
+
+	SQLCLOSECUR(cal_cur,"cal_cur")
+	if( SQLCODE )
+	{
+		strcpy( g_acRspCode, "PUB403" );
+		pubCrtRspInfo( "glscycltotal", SQLCODE );
+		ERRLOG
+		goto Exit;
+	}
+
+Exit:
+	return( !strcmp( g_acRspCode, PUBRSP_OK ) ? 0 : -1 );
+}
+
+/* 按科目号和周期类型,定位在周期总账中的位置 */
+int glGetLinkAddressByGnl( pHead, pstGlscycltotal, pNode )
+GNLCVT **pHead;
+struct glscycltotal *pstGlscycltotal;
+GNLCVT **pNode;
+{
+	GNLCVT	*pTmpNode=NULL;
+	GNLCVT	*pNext=NULL;
+	struct	glscycltotal *pGenLeg;
+
+	for( pTmpNode = *pHead; pTmpNode != NULL; pTmpNode = pTmpNode->pNext )
+	{
+		pNext = pTmpNode;
+
+		pGenLeg = ( struct glscycltotal * ) pTmpNode->pGenLeg;
+
+		if( !strcmp( pGenLeg->subctrlcode, pstGlscycltotal->subctrlcode ) && pGenLeg->cycle == pstGlscycltotal->cycle ) 
+			break;
+	}
+
+	if( pTmpNode == NULL )
+	{
+		pTmpNode = ( GNLCVT * ) malloc( sizeof( GNLCVT ) ) ;
+		if( pTmpNode == NULL )
+		{
+			strcpy( g_acRspCode, "PUB400" );
+			strcpy( g_acRspMsg, "内存不足!"  );
+			ERRLOG
+			goto Exit;
+		}
+
+		pGenLeg = ( struct glscycltotal * ) malloc( sizeof( struct glscycltotal ) );
+
+		if( pGenLeg == NULL )
+		{
+			strcpy( g_acRspCode, "PUB400" );
+			strcpy( g_acRspMsg, "内存不足!"  );
+			ERRLOG
+			goto Exit;
+		}
+
+		memset( pTmpNode, 0x00, sizeof( GNLCVT ) );
+		memset( pGenLeg, 0x00, sizeof( struct glscycltotal ) );
+
+		pTmpNode->pGenLeg = pGenLeg;
+
+		if( *pHead == NULL )
+			*pHead = pTmpNode;
+		else
+			pNext->pNext  = pTmpNode;
+
+		/* 拷贝数据 */
+		memcpy( pGenLeg, pstGlscycltotal, sizeof(struct glscycltotal) );
+
+		pGenLeg->origdbbal = pGenLeg->origcrbal = 0.00;
+		pGenLeg->origaccnum = 0;
+		pGenLeg->dbtranamt = pGenLeg->crtranamt = 0.00;
+		pGenLeg->dbnum = pGenLeg->crnum = 0;
+		pGenLeg->opennum = pGenLeg->cannum = 0;
+		pGenLeg->dbbal = pGenLeg->crbal = 0.00;
+		pGenLeg->accnum = 0;
+	}
+
+	*pNode = pTmpNode;
+
+Exit:
+	return( !strcmp( g_acRspCode, PUBRSP_OK ) ? 0 : -1 );
+}
+
+int glLoadSubDict( pcAcctType, pcBranchNo, pstSubDict, plNum )
+char *pcAcctType;
+char *pcBranchNo;
+struct glssubdict **pstSubDict;
+long *plNum;
+{
+	long lNum=0;
+	struct glssubdict *pSubDict;
+
+	EXEC SQL BEGIN DECLARE SECTION;
+		char acAccType[ACCTTYPE_LEN+1];
+		char acBranchNo[BRC_LEN+1];
+		long lSubCount=0;
+		short s_Subid;
+	EXEC SQL END DECLARE SECTION;
+
+	memset( acAccType, 0x00, sizeof( acAccType ) );
+	memset( acBranchNo, 0x00, sizeof( acBranchNo ) );
+
+	strcpy( acAccType, pcAcctType );
+	strcpy( acBranchNo, pcBranchNo );
+
+	EXEC SQL SELECT COUNT(*) INTO :lSubCount:s_Subid
+		FROM glssubdict
+		WHERE acctype = :acAccType
+		AND branchno = :acBranchNo;
+	SQLERR_PRO( "glssubdict" )
+
+	lNum = lSubCount * sizeof( struct glssubdict );
+
+	pSubDict = ( struct glssubdict * ) malloc ( lNum );
+	if( pSubDict == NULL )
+	{
+		strcpy( g_acRspCode, "PUB400" );
+		sprintf( g_acRspMsg, "申请内存错[%ld]", lNum );
+		ERRLOG
+		goto Exit;
+	}
+
+	memset( pSubDict, 0x00, lNum );
+
+	*pstSubDict = pSubDict;
+	*plNum = lSubCount;
+
+	EXEC SQL DECLARE sub_cur CURSOR FOR
+		SELECT * 
+		FROM glssubdict
+		WHERE acctype = :acAccType
+		AND branchno = :acBranchNo;
+
+	SQLOPENCUR(sub_cur,"sub_cur")
+	if( SQLCODE )
+	{
+		strcpy( g_acRspCode, "PUB401" );	/* 打开游标错 */
+		pubCrtRspInfo( "glssubdict", SQLCODE );
+		ERRLOG
+		goto Exit;
+	}
+
+	while( 1 )
+	{
+		pubInitGlssubdict();
+		EXEC SQL FETCH sub_cur INTO R_GLSSUBDICT;
+		if( SQLCODE && SQLCODE != SQLNOTFOUND )
+		{
+			strcpy( g_acRspCode, "PUB402" );
+			pubCrtRspInfo( "glssubdict", SQLCODE );
+			ERRLOG
+	SQLCLOSECUR(sub_cur,"sub_cur")
+			goto Exit;
+		}
+			
+		if( SQLCODE == SQLNOTFOUND ) break;
+
+		strpack( glssubdict_subctrlcode );
+		strpack( glssubdict_upctrlcode );
+
+		pubVtoSGlssubdict( pSubDict );
+		
+		pSubDict++;
+		
+	} /* end of while */
+
+	SQLCLOSECUR(sub_cur,"sub_cur")
+	if( SQLCODE )
+	{
+		strcpy( g_acRspCode, "PUB403" );	/* 打开游标错 */
+		pubCrtRspInfo( "glssubdict", SQLCODE );
+		ERRLOG
+		goto Exit;
+	}
+
+Exit:
+	return( !strcmp( g_acRspCode, PUBRSP_OK ) ? 0 : -1 );
+}
+
+int glAdjustResultGenLeg( pHead, pstSubDict, lSubNum, iCycle )
+GNLCVT *pHead;
+struct glssubdict *pstSubDict;
+long lSubNum;
+int iCycle;
+{
+	if( iCycle < QMBZ_YM && glAdjustResultGenLegByCycle( pHead, pstSubDict, lSubNum, iCycle , iCycle) )
+	FUNCERR_PRO
+
+	if( iCycle >= QMBZ_YM && glAdjustResultGenLegByCycle( pHead, pstSubDict, lSubNum, QMBZ_XXM, iCycle ) )
+	FUNCERR_PRO
+
+	if( iCycle >= QMBZ_YM && glAdjustResultGenLegByCycle( pHead, pstSubDict, lSubNum, QMBZ_YM, iCycle ) )
+	FUNCERR_PRO
+
+	if( iCycle >= QMBZ_JM && glAdjustResultGenLegByCycle( pHead, pstSubDict, lSubNum, QMBZ_JM, iCycle ) )
+	FUNCERR_PRO
+
+	if( iCycle >= QMBZ_BNM && glAdjustResultGenLegByCycle( pHead, pstSubDict, lSubNum, QMBZ_BNM, iCycle ) )
+	FUNCERR_PRO
+
+	if( iCycle == QMBZ_NM && glAdjustResultGenLegByCycle( pHead, pstSubDict, lSubNum, QMBZ_NM, iCycle ) )
+	FUNCERR_PRO
+
+Exit:
+	return( !strcmp( g_acRspCode, PUBRSP_OK ) ? 0 : -1 );
+}
+
+int glAdjustResultGenLegByCycle( pHead, pstSubDict, lSubNum, iCycle, iCycleCvt )
+GNLCVT *pHead;
+struct glssubdict *pstSubDict;
+long lSubNum;
+int iCycle;
+int	iCycleCvt;
+{
+	GNLCVT *pNext=NULL;
+	struct glscycltotal *pGenLeg;
+	struct glssubdict *pSubDict;
+	double dDbBal=0.00;
+	double dCrBal=0.00;
+	double dDCAmt=0.00;
+	double dDbBalLast=0.00;
+	double dCrBalLast=0.00;
+	double dDCAmtLast=0.00;
+	double dAmt=0.00;
+	
+	for( pNext = pHead; pNext != NULL; pNext = pNext->pNext )
+	{
+		pGenLeg = ( struct glscycltotal * ) pNext->pGenLeg;
+
+		if( pGenLeg->cycle != iCycle )	continue;
+
+		if( glLocSubject( &pSubDict, pstSubDict, pGenLeg->subctrlcode, lSubNum ) ) 
+		FUNCERR_PRO
+
+		strcpy( pNext->sumctrlcode, pSubDict->upctrlcode );
+		strcpy( pNext->subsubflag, pSubDict->subsubflag );
+
+		if( pSubDict->subsubflag[0] == YES )
+		{
+			pGenLeg->origdbbal = 0.00;	
+			pGenLeg->origcrbal = 0.00;	
+			pGenLeg->dbtranamt = 0.00;	
+			pGenLeg->crtranamt = 0.00;	
+			pGenLeg->dbbal = 0.00;	
+			pGenLeg->crbal = 0.00;	
+
+			continue;
+		}
+		else
+		{
+			if( pGenLeg->balanceflag[0] != YES && pGenLeg->subtype[0] != NO )
+				continue;
+
+			if ( pGenLeg->subtype[0] != NO )
+			{
+				dDbBal += pGenLeg->dbbal;
+				dCrBal += pGenLeg->crbal;
+				dDbBalLast += pGenLeg->origdbbal;
+				dCrBalLast += pGenLeg->origcrbal;
+			}
+		
+			sprintf( g_acTrcMsg, "subctrlcode[%s]", pGenLeg->subctrlcode );
+			TRCLOG2
+			if ( pGenLeg->subtype[0] == NO )
+			{
+			sprintf( g_acTrcMsg, "subctrlcode[%s]", pGenLeg->subctrlcode );
+			TRCLOG2
+				if ( nAdjustVirOneRecord( pHead, pNext ) )
+				{
+					ERRLOG
+					goto Exit;
+				}
+			sprintf( g_acTrcMsg, "subctrlcode[%s]", pGenLeg->subctrlcode );
+			TRCLOG2
+			}
+			nAdjustOneRecord( pNext , iCycleCvt );
+			sprintf( g_acTrcMsg, "subctrlcode[%s]", pGenLeg->subctrlcode );
+			TRCLOG2
+		}
+	}
+
+	/* 总帐平衡调整 */
+	dDCAmtLast = dDbBalLast - dCrBalLast;
+	dDCAmt = dDbBal - dCrBal;
+
+	if( fabs( dDCAmtLast ) > DZERO )
+	{
+		sprintf( g_acTrcMsg, "周期[%d]总帐期初借贷不平, 期初差额[%.2lf]", iCycle, dDCAmtLast );
+		TRCLOG2
+
+		for( pNext = pHead; pNext != NULL; pNext = pNext->pNext )
+		{
+			pGenLeg = ( struct glscycltotal * ) pNext->pGenLeg;
+
+			if( pGenLeg->cycle != iCycle )	continue;
+
+			if( pNext->subsubflag[0] == YES ) continue;
+
+			if( dDCAmtLast > DZERO &&
+				pGenLeg->origdbbal - dDCAmtLast > DZERO &&
+				pGenLeg->dbtranamt > DZERO )
+			{
+				sprintf( g_acTrcMsg, "总帐期初借贷不平调整科目[%s], 期初调整数[%.2lf]", pGenLeg->subctrlcode, dDCAmtLast );
+				TRCLOG2
+				pGenLeg->origdbbal -= dDCAmtLast; 
+				pGenLeg->dbtranamt += dDCAmtLast;
+				pubDround( &(pGenLeg->origdbbal), 2 );
+				pubDround( &(pGenLeg->dbtranamt), 2 );
+				break;
+			}
+
+			if( dDCAmtLast < DZERO &&
+				pGenLeg->origcrbal + dDCAmtLast > DZERO &&
+				pGenLeg->crtranamt > DZERO )
+			{
+				sprintf( g_acTrcMsg, "总帐期初借贷不平调整科目[%s], 期初调整数[%.2lf]", pGenLeg->subctrlcode, dDCAmtLast );
+				TRCLOG2
+				pGenLeg->origcrbal += dDCAmtLast; 
+				pGenLeg->crtranamt -= dDCAmtLast;
+				pubDround( &(pGenLeg->origcrbal), 2 );
+				pubDround( &(pGenLeg->crtranamt), 2 );
+				break;
+			}
+		}
+	}
+
+	if( fabs( dDCAmt ) > DZERO )
+	{
+		sprintf( g_acTrcMsg, "周期[%d]总帐期末借贷不平, 期末差额[%.2lf]", iCycle, dDCAmt );
+		TRCLOG2
+
+		for( pNext = pHead; pNext != NULL; pNext = pNext->pNext )
+		{
+			pGenLeg = ( struct glscycltotal * ) pNext->pGenLeg;
+
+			if( pGenLeg->cycle != iCycle )	continue;
+
+			if( pNext->subsubflag[0] == YES ) continue;
+
+			if( dDCAmt > DZERO &&
+				pGenLeg->dbbal - dDCAmt > DZERO &&
+				pGenLeg->dbtranamt - dDCAmt > DZERO )
+			{
+				sprintf( g_acTrcMsg, "总帐期末借贷不平调整科目[%s], 期末调整数[%.2lf]", pGenLeg->subctrlcode, dDCAmt );
+				TRCLOG2
+				pGenLeg->dbbal -= dDCAmt; 
+				pGenLeg->dbtranamt -= dDCAmt;
+				pubDround( &(pGenLeg->origdbbal), 2 );
+				pubDround( &(pGenLeg->dbtranamt), 2 );
+				break;
+			}
+
+			if( dDCAmt < DZERO &&
+				pGenLeg->crbal + dDCAmt > DZERO &&
+				pGenLeg->crtranamt + dDCAmt > DZERO )
+			{
+				sprintf( g_acTrcMsg, "总帐期末借贷不平调整科目[%s], 期末调整数[%.2lf]", pGenLeg->subctrlcode, dDCAmt );
+				TRCLOG2
+				pGenLeg->crbal += dDCAmt; 
+				pGenLeg->crtranamt += dDCAmt;
+				pubDround( &(pGenLeg->origcrbal), 2 );
+				pubDround( &(pGenLeg->crtranamt), 2 );
+				break;
+			}
+		}
+	}
+
+Exit:
+	return( !strcmp( g_acRspCode, PUBRSP_OK ) ? 0 : -1 );
+}
+
+int glLocSubject( pSubject, pstSubject, pcSubCtrlCode, lNum )
+struct glssubdict **pSubject;
+struct glssubdict *pstSubject;
+char *pcSubCtrlCode;
+long lNum;
+{
+	long lCount=0;
+
+	for( lCount = 0; lCount < lNum; lCount++ )
+	{
+		*pSubject = pstSubject + lCount;
+		if( !strcmp( (*pSubject)->subctrlcode, pcSubCtrlCode ) )
+			break;
+	} /* end of for */
+
+	if( lCount == lNum )
+	{
+		strcpy( g_acRspCode, "PUB400" );
+		sprintf( g_acRspMsg, "未找到科目[%s]数据", pcSubCtrlCode );
+		ERRLOG
+		goto Exit;
+	}
+
+Exit:
+	return( !strcmp( g_acRspCode, PUBRSP_OK ) ? 0 : -1 );
+}
+
+int glSumResultGenLeg( pHead )
+GNLCVT *pHead;
+{
+	char acSubCtrlCode[SUBCODE_LEN+1];
+	int iCycle;
+
+	GNLCVT *pNext;
+	GNLCVT *pNode;
+	struct glscycltotal *pGenLeg;
+	struct glscycltotal *pNodeGenLeg;
+
+	memset( acSubCtrlCode, 0x00, sizeof( acSubCtrlCode ) );
+
+	for( pNext = pHead; pNext != NULL; pNext = pNext->pNext )
+	{
+		pGenLeg = ( struct glscycltotal * ) pNext->pGenLeg;
+
+		if( pNext->subsubflag[0] == YES ) 	continue;
+
+		if( pGenLeg->sublevel == 1 ) 	continue;
+
+		iCycle = pGenLeg->cycle;
+		strcpy( acSubCtrlCode, pNext->sumctrlcode );
+		sprintf( g_acTrcMsg, "subctrlcode=[%s][%s]", pNext->sumctrlcode, pGenLeg->subctrlcode );
+		TRCLOG2
+		sprintf( g_acTrcMsg, "year=[%s][%d][%d]", pGenLeg->year, pGenLeg->month, pGenLeg->cycle );
+		TRCLOG2
+
+		while( 1 )
+		{
+			if( glGetLinkAddressBySub( pHead, acSubCtrlCode, iCycle, &pNode ) )
+			FUNCERR_PRO
+
+			pNodeGenLeg = ( struct glscycltotal * ) pNode->pGenLeg;
+
+			pNodeGenLeg->origdbbal += pGenLeg->origdbbal;  
+			pNodeGenLeg->origcrbal += pGenLeg->origcrbal;  
+			pNodeGenLeg->dbtranamt += pGenLeg->dbtranamt;  
+			pNodeGenLeg->crtranamt += pGenLeg->crtranamt;  
+			pNodeGenLeg->dbbal += pGenLeg->dbbal;  
+			pNodeGenLeg->crbal += pGenLeg->crbal;  
+
+			if( pNodeGenLeg->sublevel == 1 )
+				break;
+			else
+				strcpy( acSubCtrlCode, pNode->sumctrlcode );
+		}
+	}
+
+Exit:
+	return( !strcmp( g_acRspCode, PUBRSP_OK ) ? 0 : -1 );
+}
+
+int glGetLinkAddressBySub( pHead, pcSubCtrlCode, iCycle, pNode )
+GNLCVT *pHead;
+char *pcSubCtrlCode;
+int iCycle;
+GNLCVT **pNode;
+{
+	GNLCVT	*pNext=NULL;
+	struct	glscycltotal *pGenLeg;
+
+	for( pNext = pHead; pNext != NULL; pNext = pNext->pNext )
+	{
+		pGenLeg = ( struct glscycltotal * ) pNext->pGenLeg;
+
+		if( !strcmp( pGenLeg->subctrlcode, pcSubCtrlCode )
+			&& pGenLeg->cycle == iCycle						) 
+			break;
+	}
+
+	if( pNext == NULL )
+	{
+		strcpy( g_acRspCode, "PUB400" );
+		sprintf( g_acRspMsg, "未找到总帐数[%s][%d]!", pcSubCtrlCode, iCycle );
+		ERRLOG
+		goto Exit;
+	}
+
+	*pNode = pNext;
+
+Exit:
+	return( !strcmp( g_acRspCode, PUBRSP_OK ) ? 0 : -1 );
+}
+
+int glWrtResultGenLeg( pHead )
+GNLCVT *pHead;
+{
+	GNLCVT *pNext;
+	struct glscycltotal *pGenLeg;
+
+	for( pNext = pHead; pNext != NULL; pNext = pNext->pNext )
+	{
+		pGenLeg = ( struct glscycltotal * ) pNext->pGenLeg;
+
+		pubInitGlscycltotal();
+
+		pubStoVGlscycltotal( pGenLeg );
+
+		if( pubInstGlscycltotal( pGenLeg ) )
+		{
+			sprintf( g_acTrcMsg, "插入周期总帐[%s][%s][%s][%s][%s][%d][%d]", pGenLeg->brccode, pGenLeg->acctype, pGenLeg->ccy, pGenLeg->subctrlcode, pGenLeg->year, pGenLeg->month, pGenLeg->cycle );
+			TRCLOG2
+			ERRLOG
+			goto Exit;
+		}
+	}
+
+Exit:
+	return( !strcmp( g_acRspCode, PUBRSP_OK ) ? 0 : -1 );
+}
+
+
+int glSumCvtNatGenLeg( pHead, pcBrc, pcTranDate, pcAcctType, pcCcyCvtNat, pcCcyResult )
+GNLCVT **pHead;
+char *pcBrc;
+char *pcTranDate;
+char *pcAcctType;
+char *pcCcyCvtNat;
+char *pcCcyResult;
+{
+	char	acMonth[3];
+	struct	glscycltotal stGlscycltotal;
+
+	EXEC SQL BEGIN DECLARE SECTION;
+		long	iCycleCvtNat;
+	EXEC SQL END DECLARE SECTION;
+	
+	long	iCycleCvtNat1;
+
+	memset( acMonth, 0x00, sizeof( acMonth ) );
+	memset( &stGlscycltotal, 0x00, sizeof( struct  glscycltotal ) );
+
+	if( ( iCycleCvtNat = pubCircle( pcTranDate ) ) < 0 )
+	{
+		ERRLOG
+		goto Exit;
+	}
+	iCycleCvtNat1 = iCycleCvtNat;
+	if( iCycleCvtNat >= QMBZ_YM )		iCycleCvtNat = QMBZ_XXM;
+
+	pubInitGlscycltotal();
+
+	strcpy( glscycltotal_brccode, pcBrc );
+	strcpy( glscycltotal_acctype, pcAcctType );
+	strcpy( glscycltotal_ccy, pcCcyCvtNat );
+	strncpy( glscycltotal_year, pcTranDate, 4 );
+	strncpy( acMonth, pcTranDate+5, 2 );
+	glscycltotal_month = atol( acMonth );
+
+	EXEC SQL DECLARE sum_cvt_cur CURSOR FOR
+		SELECT *
+		FROM glscycltotal
+		WHERE brccode = :glscycltotal_brccode
+		AND acctype = :glscycltotal_acctype
+		AND ccy = :glscycltotal_ccy
+		AND year = :glscycltotal_year
+		AND month = :glscycltotal_month
+		AND cycle >= :iCycleCvtNat;
+
+	SQLOPENCUR(sum_cvt_cur,"sum_cvt_cur")
+	if( SQLCODE )
+	{
+		strcpy( g_acRspCode, "PUB401" );
+		pubCrtRspInfo( "glscycltotal", SQLCODE );
+		ERRLOG
+		goto Exit;
+	}
+
+	while( 1 )
+	{
+		EXEC SQL FETCH sum_cvt_cur INTO R_GLSCYCLTOTAL;
+		if( SQLCODE && SQLCODE != SQLNOTFOUND )
+		{
+			strcpy( g_acRspCode, "PUB402" );
+			pubCrtRspInfo( "glscycltotal", SQLCODE );
+			ERRLOG
+			goto Exit;
+		}
+
+		if( SQLCODE == SQLNOTFOUND )	break;
+
+		strcpy( glscycltotal_ccy, pcCcyResult );
+
+		pubVtoSGlscycltotal( &stGlscycltotal );	
+
+		if( glSumCvtGnlToLink( pHead, &stGlscycltotal, iCycleCvtNat1 ) )
+		FUNCERR_PRO
+	}
+
+	SQLCLOSECUR(sum_cvt_cur,"sum_cvt_cur")
+	if( SQLCODE )
+	{
+		strcpy( g_acRspCode, "PUB403" );
+		pubCrtRspInfo( "glscycltotal", SQLCODE );
+		ERRLOG
+		goto Exit;
+	}
+
+Exit:
+	return( !strcmp( g_acRspCode, PUBRSP_OK ) ? 0 : -1 );
+}
+
+int glSumCvtGnlToLink( pHead, pstGlscycltotal, iCycleCvt )
+GNLCVT **pHead;
+struct glscycltotal *pstGlscycltotal;
+{
+	GNLCVT	*pNode=NULL;
+	GNLCVT	*pNext=NULL;
+	struct	glscycltotal *pGenLeg;
+	
+	for( pNode = *pHead; pNode != NULL; pNode = pNode->pNext )
+	{
+		pNext = pNode;
+
+		pGenLeg = ( struct glscycltotal * ) pNode->pGenLeg;
+
+		if( !strcmp( pGenLeg->subctrlcode, pstGlscycltotal->subctrlcode ) && pGenLeg->cycle == pstGlscycltotal->cycle ) 
+			break;
+	}
+
+	if( pNode == NULL )
+	{
+		pNode = ( GNLCVT * ) malloc( sizeof( GNLCVT ) ) ;
+		if( pNode == NULL )
+		{
+			strcpy( g_acRspCode, "PUB400" );
+			strcpy( g_acRspMsg, "内存不足!"  );
+			ERRLOG
+			goto Exit;
+		}
+
+		pGenLeg = ( struct glscycltotal * ) malloc( sizeof( struct glscycltotal ) );
+
+		if( pGenLeg == NULL )
+		{
+			strcpy( g_acRspCode, "PUB400" );
+			strcpy( g_acRspMsg, "内存不足!"  );
+			ERRLOG
+			goto Exit;
+		}
+
+		memset( pNode, 0x00, sizeof( GNLCVT ) );
+		memset( pGenLeg, 0x00, sizeof( struct glscycltotal ) );
+
+		pNode->pGenLeg = pGenLeg;
+
+		if( *pHead == NULL )
+			*pHead = pNode;
+		else
+			pNext->pNext  = pNode;
+
+		/* 拷贝数据 */
+		memcpy( pGenLeg, pstGlscycltotal, sizeof(struct glscycltotal) );
+	}
+	else
+	{
+		pGenLeg = ( struct glscycltotal * ) pNode->pGenLeg;
+
+		/* Feng modify in 2006-06-28 Begin */
+		/*modi by gao 2006-12-19*/ 
+		if ( iCycleCvt == QMBZ_NM )
+		{
+			pGenLeg->origdbbal += pstGlscycltotal->origdbbal;
+			pGenLeg->origcrbal += pstGlscycltotal->origcrbal;
+		}
+		/*end modi by gao 2006-12-19*/
+		/* Feng modify in 2006-06-28 End */
+		pGenLeg->origaccnum += pstGlscycltotal->origaccnum;
+		pGenLeg->dbtranamt += pstGlscycltotal->dbtranamt;
+		pGenLeg->crtranamt += pstGlscycltotal->crtranamt;
+		pGenLeg->dbnum += pstGlscycltotal->dbnum;
+		pGenLeg->crnum += pstGlscycltotal->crnum;
+		pGenLeg->opennum += pstGlscycltotal->opennum;
+		pGenLeg->cannum += pstGlscycltotal->cannum;
+		pGenLeg->dbbal += pstGlscycltotal->dbbal;
+		pGenLeg->crbal += pstGlscycltotal->crbal;
+
+		pubDround( &(pGenLeg->origdbbal), 2 );
+		pubDround( &(pGenLeg->origcrbal), 2 );
+		pubDround( &(pGenLeg->dbtranamt), 2 );
+		pubDround( &(pGenLeg->crtranamt), 2 );
+		pubDround( &(pGenLeg->dbbal), 2 );
+		pubDround( &(pGenLeg->crbal), 2 );
+	}
+
+Exit:
+	return( !strcmp( g_acRspCode, PUBRSP_OK ) ? 0 : -1 );
+}
+/*增加参数iCycleCvt by gao 2006-12-20*/
+int nAdjustOneRecord( pNode , iCycleCvt )
+GNLCVT *pNode;
+int	iCycleCvt;
+{
+	double dAmount=0.00;
+	struct glscycltotal *pGenLeg;
+
+	pGenLeg = ( struct glscycltotal * ) pNode->pGenLeg;
+
+	switch( pGenLeg->subtype[0] )
+	{
+		case SUBTYPE_ZC:
+			dAmount = pGenLeg->dbbal - pGenLeg->crbal - pGenLeg->dbtranamt + pGenLeg->crtranamt - pGenLeg->origdbbal + pGenLeg->origcrbal;
+			pubDround( &dAmount, 2 );
+
+			if( dAmount > DZERO )
+			{
+				sprintf( g_acTrcMsg, "资产类科目[%s], 期末借余额[%.2lf],期末贷余额[%.2lf], 借方发生额[%.2lf],贷方发生额[%.2lf], 期初借余额[%.2lf],期初贷余额[%.2lf], 差额[%.2lf], 补借方发生额", pGenLeg->subctrlcode, pGenLeg->dbbal, pGenLeg->crbal, pGenLeg->dbtranamt, pGenLeg->crtranamt, pGenLeg->origdbbal, pGenLeg->origcrbal, dAmount );
+				TRCLOG2
+				/*modi by gao 2006-12-20 begin*/
+				if ( iCycleCvt != QMBZ_NM )
+					pGenLeg->dbtranamt += dAmount;
+				else
+					pGenLeg->origdbbal += dAmount;
+				/*modi by gao 2006-12-20 end*/
+				pubDround( &(pGenLeg->dbtranamt), 2 );
+			}
+			else if( dAmount < -DZERO )
+			{
+				sprintf( g_acTrcMsg, "资产类科目[%s], 期末借余额[%.2lf],期末贷余额[%.2lf], 借方发生额[%.2lf],贷方发生额[%.2lf], 期初借余额[%.2lf],期初贷余额[%.2lf], 差额[%.2lf], 补贷方发生额", pGenLeg->subctrlcode, pGenLeg->dbbal, pGenLeg->crbal, pGenLeg->dbtranamt, pGenLeg->crtranamt, pGenLeg->origdbbal, pGenLeg->origcrbal, dAmount );
+				TRCLOG2
+				/*modi by gao 2006-12-20 begin*/
+				if ( iCycleCvt != QMBZ_NM )
+					pGenLeg->crtranamt -= dAmount;
+				else
+					pGenLeg->origcrbal -= dAmount;
+				/*modi by gao 2006-12-20 end*/
+				pubDround( &(pGenLeg->crtranamt), 2 );
+			}
+			break;
+		case SUBTYPE_FZ:
+			dAmount = pGenLeg->crbal - pGenLeg->dbbal - pGenLeg->crtranamt + pGenLeg->dbtranamt - pGenLeg->origcrbal + pGenLeg->origdbbal;
+			pubDround( &dAmount, 2 );
+			if( dAmount > DZERO )
+			{
+				sprintf( g_acTrcMsg, "负债类科目[%s], 期末贷余额[%.2lf],期末借余额[%.2lf], 贷方发生额[%.2lf],借方发生额[%.2lf], 期初贷余额[%.2lf],期借贷余额[%.2lf], 差额[%.2lf], 补贷方发生额", pGenLeg->subctrlcode, pGenLeg->crbal, pGenLeg->dbbal, pGenLeg->crtranamt, pGenLeg->dbtranamt, pGenLeg->origcrbal, pGenLeg->origdbbal, dAmount );
+				TRCLOG2
+				/*modi by gao 2006-12-20 begin*/
+				if ( iCycleCvt != QMBZ_NM )
+					pGenLeg->crtranamt += dAmount;
+				else
+					pGenLeg->origcrbal += dAmount;
+				/*modi by gao 2006-12-20 end*/
+				pubDround( &(pGenLeg->crtranamt), 2 );
+			}
+			else if( dAmount < -DZERO )
+			{
+				sprintf( g_acTrcMsg, "负债类科目[%s], 期末贷余额[%.2lf],期末借余额[%.2lf], 贷方发生额[%.2lf],借方发生额[%.2lf], 期初贷余额[%.2lf],期借贷余额[%.2lf], 差额[%.2lf], 补借方发生额", pGenLeg->subctrlcode, pGenLeg->crbal, pGenLeg->dbbal, pGenLeg->crtranamt, pGenLeg->dbtranamt, pGenLeg->origcrbal, pGenLeg->origdbbal, dAmount );
+				TRCLOG2
+				/*modi by gao 2006-12-20 begin*/
+				if ( iCycleCvt != QMBZ_NM )
+					pGenLeg->dbtranamt -= dAmount;
+				else
+					pGenLeg->origdbbal -= dAmount;
+				/*modi by gao 2006-12-20 end*/
+				pubDround( &(pGenLeg->dbtranamt), 2 );
+			}
+			break;
+		case SUBTYPE_QY:
+			dAmount = pGenLeg->crbal - pGenLeg->dbbal - pGenLeg->crtranamt + pGenLeg->dbtranamt - pGenLeg->origcrbal + pGenLeg->origdbbal;
+			pubDround( &dAmount, 2 );
+			if( dAmount > DZERO )
+			{
+				sprintf( g_acTrcMsg, "权益类科目[%s], 期末贷余额[%.2lf],期末借余额[%.2lf], 贷方发生额[%.2lf],借方发生额[%.2lf], 期初贷余额[%.2lf],期借贷余额[%.2lf], 差额[%.2lf], 补贷方发生额", pGenLeg->subctrlcode, pGenLeg->crbal, pGenLeg->dbbal, pGenLeg->crtranamt, pGenLeg->dbtranamt, pGenLeg->origcrbal, pGenLeg->origdbbal, dAmount );
+				TRCLOG2
+				/*modi by gao 2006-12-20 begin*/
+				if ( iCycleCvt != QMBZ_NM )
+					pGenLeg->crtranamt += dAmount;
+				else
+					pGenLeg->origcrbal += dAmount;
+				/*modi by gao 2006-12-20 end*/
+				pubDround( &(pGenLeg->crtranamt), 2 );
+			}
+			else if( dAmount < -DZERO )
+			{
+				sprintf( g_acTrcMsg, "权益类科目[%s], 期末贷余额[%.2lf],期末借余额[%.2lf], 贷方发生额[%.2lf],借方发生额[%.2lf], 期初贷余额[%.2lf],期借贷余额[%.2lf], 差额[%.2lf], 补借方发生额", pGenLeg->subctrlcode, pGenLeg->crbal, pGenLeg->dbbal, pGenLeg->crtranamt, pGenLeg->dbtranamt, pGenLeg->origcrbal, pGenLeg->origdbbal, dAmount );
+				TRCLOG2
+				/*modi by gao 2006-12-20 begin*/
+				if ( iCycleCvt != QMBZ_NM )
+					pGenLeg->dbtranamt -= dAmount;
+				else
+					pGenLeg->origdbbal -= dAmount;
+				/*modi by gao 2006-12-20 end*/
+				pubDround( &(pGenLeg->dbtranamt), 2 );
+			}
+			break;
+		case SUBTYPE_GT:
+			dAmount = pGenLeg->crbal - pGenLeg->dbbal - pGenLeg->crtranamt + pGenLeg->dbtranamt - pGenLeg->origcrbal + pGenLeg->origdbbal;
+			pubDround( &dAmount, 2 );
+			if( fabs( dAmount ) > DZERO )
+			{
+				sprintf( g_acTrcMsg, "共同类科目[%s], 期末贷余额[%.2lf],期末借余额[%.2lf], 贷方发生额[%.2lf],借方发生额[%.2lf], 期初贷余额[%.2lf],期借贷余额[%.2lf], 差额[%.2lf], 差额调整至贷方发生额", pGenLeg->subctrlcode, pGenLeg->crbal, pGenLeg->dbbal, pGenLeg->crtranamt, pGenLeg->dbtranamt, pGenLeg->origcrbal, pGenLeg->origdbbal, dAmount );
+				TRCLOG2
+				/*modi by gao 2006-12-20 begin*/
+				if ( iCycleCvt != QMBZ_NM )
+					pGenLeg->crtranamt += dAmount;
+				else
+					pGenLeg->origcrbal += dAmount;
+				/*modi by gao 2006-12-20 end*/
+				pubDround( &(pGenLeg->crtranamt), 2 );
+			}
+			break;
+		case SUBTYPE_INCOME:
+			dAmount = pGenLeg->crbal - pGenLeg->dbbal - pGenLeg->crtranamt + pGenLeg->dbtranamt - pGenLeg->origcrbal + pGenLeg->origdbbal;
+			pubDround( &dAmount, 2 );
+			if( dAmount > DZERO )
+			{
+				sprintf( g_acTrcMsg, "收入类科目[%s], 期末贷余额[%.2lf],期末借余额[%.2lf], 贷方发生额[%.2lf],借方发生额[%.2lf], 期初贷余额[%.2lf],期借贷余额[%.2lf], 差额[%.2lf], 补贷方发生额", pGenLeg->subctrlcode, pGenLeg->crbal, pGenLeg->dbbal, pGenLeg->crtranamt, pGenLeg->dbtranamt, pGenLeg->origcrbal, pGenLeg->origdbbal, dAmount );
+				TRCLOG2
+				/*modi by gao 2006-12-20 begin*/
+				if ( iCycleCvt != QMBZ_NM )
+					pGenLeg->crtranamt += dAmount;
+				else
+					pGenLeg->origcrbal += dAmount;
+				/*modi by gao 2006-12-20 end*/
+				pubDround( &(pGenLeg->crtranamt), 2 );
+			}
+			else if( dAmount < -DZERO )
+			{
+				sprintf( g_acTrcMsg, "收入类科目[%s], 期末贷余额[%.2lf],期末借余额[%.2lf], 贷方发生额[%.2lf],借方发生额[%.2lf], 期初贷余额[%.2lf],期借贷余额[%.2lf], 差额[%.2lf], 补借方发生额", pGenLeg->subctrlcode, pGenLeg->crbal, pGenLeg->dbbal, pGenLeg->crtranamt, pGenLeg->dbtranamt, pGenLeg->origcrbal, pGenLeg->origdbbal, dAmount );
+				TRCLOG2
+				/*modi by gao 2006-12-20 begin*/
+				if ( iCycleCvt != QMBZ_NM )
+					pGenLeg->dbtranamt -= dAmount;
+				else
+					pGenLeg->origdbbal -= dAmount;
+				/*modi by gao 2006-12-20 end*/
+				pubDround( &(pGenLeg->dbtranamt), 2 );
+			}
+			break;
+		case SUBTYPE_PAYOUT:
+			dAmount = pGenLeg->crbal - pGenLeg->dbbal - pGenLeg->crtranamt + pGenLeg->dbtranamt - pGenLeg->origcrbal + pGenLeg->origdbbal;
+			pubDround( &dAmount, 2 );
+			if( dAmount > DZERO )
+			{
+				sprintf( g_acTrcMsg, "支出类科目[%s], 期末贷余额[%.2lf],期末借余额[%.2lf], 贷方发生额[%.2lf],借方发生额[%.2lf], 期初贷余额[%.2lf],期借贷余额[%.2lf], 差额[%.2lf], 补贷方发生额", pGenLeg->subctrlcode, pGenLeg->crbal, pGenLeg->dbbal, pGenLeg->crtranamt, pGenLeg->dbtranamt, pGenLeg->origcrbal, pGenLeg->origdbbal, dAmount );
+				TRCLOG2
+				/*modi by gao 2006-12-20 begin*/
+				if ( iCycleCvt != QMBZ_NM )
+					pGenLeg->crtranamt += dAmount;
+				else
+					pGenLeg->origcrbal += dAmount;
+				/*modi by gao 2006-12-20 end*/
+				pubDround( &(pGenLeg->crtranamt), 2 );
+			}
+			else if( dAmount < -DZERO )
+			{
+				sprintf( g_acTrcMsg, "支出类科目[%s], 期末贷余额[%.2lf],期末借余额[%.2lf], 贷方发生额[%.2lf],借方发生额[%.2lf], 期初贷余额[%.2lf],期借贷余额[%.2lf], 差额[%.2lf], 补借方发生额", pGenLeg->subctrlcode, pGenLeg->crbal, pGenLeg->dbbal, pGenLeg->crtranamt, pGenLeg->dbtranamt, pGenLeg->origcrbal, pGenLeg->origdbbal, dAmount );
+				TRCLOG2
+				/*modi by gao 2006-12-20 begin*/
+				if ( iCycleCvt != QMBZ_NM )
+					pGenLeg->dbtranamt -= dAmount;
+				else
+					pGenLeg->origdbbal -= dAmount;
+				/*modi by gao 2006-12-20 end*/
+				pubDround( &(pGenLeg->dbtranamt), 2 );
+			}
+			break;
+		/* 20060531 增加虚拟科目处理 */
+		case '0':
+			dAmount = pGenLeg->crbal - pGenLeg->dbbal - pGenLeg->crtranamt + pGenLeg->dbtranamt - pGenLeg->origcrbal + pGenLeg->origdbbal;
+			pubDround( &dAmount, 2 );
+			if( dAmount > DZERO )
+			{
+				sprintf( g_acTrcMsg, "虚拟类科目[%s], 期末贷余额[%.2lf],期末借余额[%.2lf], 贷方发生额[%.2lf],借方发生额[%.2lf], 期初贷余额[%.2lf],期借贷余额[%.2lf], 差额[%.2lf], 补贷方发生额", pGenLeg->subctrlcode, pGenLeg->crbal, pGenLeg->dbbal, pGenLeg->crtranamt, pGenLeg->dbtranamt, pGenLeg->origcrbal, pGenLeg->origdbbal, dAmount );
+				TRCLOG2
+				/*modi by gao 2006-12-20 begin*/
+				if ( iCycleCvt != QMBZ_NM )
+					pGenLeg->crtranamt += dAmount;
+				else
+					pGenLeg->origcrbal += dAmount;
+				/*modi by gao 2006-12-20 end*/
+				pubDround( &(pGenLeg->crtranamt), 2 );
+			}
+			else if( dAmount < -DZERO )
+			{
+				sprintf( g_acTrcMsg, "虚拟类科目[%s], 期末贷余额[%.2lf],期末借余额[%.2lf], 贷方发生额[%.2lf],借方发生额[%.2lf], 期初贷余额[%.2lf],期借贷余额[%.2lf], 差额[%.2lf], 补借方发生额", pGenLeg->subctrlcode, pGenLeg->crbal, pGenLeg->dbbal, pGenLeg->crtranamt, pGenLeg->dbtranamt, pGenLeg->origcrbal, pGenLeg->origdbbal, dAmount );
+				TRCLOG2
+				/*modi by gao 2006-12-20 begin*/
+				if ( iCycleCvt != QMBZ_NM )
+					pGenLeg->dbtranamt -= dAmount;
+				else
+					pGenLeg->origdbbal -= dAmount;
+				/*modi by gao 2006-12-20 end*/
+				pubDround( &(pGenLeg->dbtranamt), 2 );
+			}
+			break;
+	}
+
+Exit:
+	return( !strcmp( g_acRspCode, PUBRSP_OK ) ? 0 : -1 );
+}
+
+int glFreeGenCvtLink( p )
+GNLCVT *p;
+{
+	GNLCVT *q;
+
+	while( p != NULL )
+	{
+		q = p;
+		p = p->pNext ;
+		free( q->pGenLeg );
+		free( q );
+	}
+
+	q = NULL;
+
+	p = NULL;
+
+	return 0;
+}
+
+int glGetLastRmtRate( pcTranDate, pcCurrCode, pcBaseCcy, pcRmtType, pdRmtRate, pdRmtUnit )
+char *pcTranDate;
+char *pcCurrCode;
+char *pcBaseCcy;
+char *pcRmtType;
+double *pdRmtRate;
+double *pdRmtUnit;
+{
+	int i;
+	double dPrice, dUnit;
+
+	pubInitPubfxrate();
+
+	strcpy( pubfxrate_ccy, pcCurrCode );
+	strcpy( pubfxrate_baseccy, pcBaseCcy  );
+	strcpy( pubfxrate_eftdate, pcTranDate );
+	strcpy( pubfxrate_fxcode,  pcRmtType  );
+
+	EXEC SQL DECLARE fxrate_cur CURSOR FOR
+		SELECT *
+		FROM pubfxrate
+		WHERE ccy = :pubfxrate_ccy
+		AND baseccy = :pubfxrate_baseccy
+		AND fxcode  = :pubfxrate_fxcode
+		AND eftdate <= :pubfxrate_eftdate
+		ORDER BY eftdate desc;
+
+	SQLOPENCUR(fxrate_cur,"fxrate_cur")
+	SQLERR_PRO( "pubfxrate" )
+
+	for( i=0; i<2; i++ )
+	{
+		EXEC SQL FETCH fxrate_cur INTO R_PUBFXRATE;
+		SQLERR_PRO( "pubfxrate" )
+		if( SQLCODE == SQLNOTFOUND )
+		{
+			if( i == 0 )
+			{
+				strcpy( g_acRspCode, PUBRSP_ERR );
+				sprintf( g_acRspMsg, "汇率表未定义[%s][%s][%s][%s]", pcCurrCode, pcBaseCcy, pubfxrate_fxcode, pcTranDate  );
+				ERRLOG
+				goto Exit;
+			}
+			else	break;
+		}
+
+		*pdRmtRate = pubfxrate_price;
+		*pdRmtUnit = pubfxrate_unit;
+	}
+
+	SQLCLOSECUR(fxrate_cur,"fxrate_cur")
+	SQLERR_PRO( "pubfxrate" )
+
+	return 0;
+Exit:
+	return -1;
+}
+
+int nGetSubdictBySub( pcBrc, pcAcctType, pcSubCtrlCode, pstGlssubdict )
+char *pcBrc;
+char *pcAcctType;
+char *pcSubCtrlCode;
+struct glssubdict *pstGlssubdict;
+{
+	pubInitPubbranchinfo();
+
+	strcpy( pubbranchinfo_brccode, pcBrc );
+
+	EXEC SQL SELECT * INTO R_PUBBRANCHINFO
+		FROM pubbranchinfo
+		WHERE brccode = :pubbranchinfo_brccode;
+	SQLERR_PRO( "pubbranchinfo" );
+
+	if( SQLCODE == SQLNOTFOUND )
+	{
+		strcpy( g_acRspCode, "PUB400" );
+		sprintf( g_acRspMsg, "机构不存在[%s]", pubbranchinfo_brccode );
+		ERRLOG
+		goto Exit;
+	}
+
+	pubInitGlssubdict();
+
+	strcpy( glssubdict_subctrlcode, pcSubCtrlCode );
+	strcpy( glssubdict_acctype, pcAcctType );
+	strcpy( glssubdict_branchno, pubbranchinfo_branchno );
+
+	EXEC SQL SELECT * INTO R_GLSSUBDICT
+		FROM glssubdict
+		WHERE subctrlcode = :glssubdict_subctrlcode
+		AND acctype = :glssubdict_acctype
+		AND branchno = :glssubdict_branchno;
+	SQLERR_PRO( "glssubdict" );
+
+	if( SQLCODE == SQLNOTFOUND )
+	{
+		strcpy( g_acRspCode, "PUB400" );
+		sprintf( g_acRspMsg, "科目不存在[%s]", glssubdict_subctrlcode );
+		ERRLOG
+		goto Exit;
+	}
+
+	pubVtoSGlssubdict( pstGlssubdict );
+
+	return 0;
+Exit:
+	return -1;
+}
+
+int nAdjustVirOneRecord( pHead, pNode )
+GNLCVT *pHead;
+GNLCVT *pNode;
+{
+	double dAmount=0.00;
+	struct glscycltotal *pGenLeg;
+	struct glscycltotal *pNewGenLeg;
+	struct glscycltotal stVirGlsCyc;
+	struct glscycltotal stVirGlsCyc1;
+	GNLCVT *pNext;
+
+	memset( &stVirGlsCyc, 0x00, sizeof( struct glscycltotal ) );
+	memset( &stVirGlsCyc1, 0x00, sizeof( struct glscycltotal ) );
+
+	pGenLeg = ( struct glscycltotal * ) pNode->pGenLeg;
+
+	sprintf( g_acTrcMsg, "subctrlcode[%s]", pGenLeg->subctrlcode );
+	TRCLOG2
+	strcpy( stVirGlsCyc.brccode, pGenLeg->brccode );
+	strcpy( stVirGlsCyc.acctype, pGenLeg->acctype );
+	strcpy( stVirGlsCyc.ccy, pGenLeg->ccy );
+	strncpy( stVirGlsCyc.subctrlcode, pGenLeg->subctrlcode+1, strlen( pGenLeg->subctrlcode ) -2  );
+	stVirGlsCyc.subctrlcode[ strlen( pGenLeg->subctrlcode ) -2 ] =0x00;
+	strcpy( stVirGlsCyc.year, pGenLeg->year );
+	stVirGlsCyc.month = pGenLeg->month;
+	stVirGlsCyc.cycle = pGenLeg->cycle;
+	sprintf( g_acTrcMsg, "subctrlcode[%s]", pGenLeg->subctrlcode );
+	TRCLOG2
+	for( pNext = pHead; pNext != NULL; pNext = pNext->pNext )
+	{
+		pNewGenLeg = ( struct glscycltotal * ) pNext->pGenLeg;
+
+		if( !strncmp( pNewGenLeg->subctrlcode, stVirGlsCyc.subctrlcode, strlen( stVirGlsCyc.subctrlcode ) )
+			&& pNewGenLeg->cycle == stVirGlsCyc.cycle
+			&& pNewGenLeg->month == stVirGlsCyc.month
+			&& pNext->subsubflag[0] == '0'
+			&& !strcmp( pNewGenLeg->ccy, stVirGlsCyc.ccy ) )
+		{
+			stVirGlsCyc.dbbal += pNewGenLeg->dbbal;
+			stVirGlsCyc.crbal += pNewGenLeg->crbal;
+		}
+	}
+	sprintf( g_acTrcMsg, "dbbal[%.2lf]crbal[%.2lf]", stVirGlsCyc.dbbal, stVirGlsCyc.crbal );
+	TRCLOG2
+
+	strcpy( stVirGlsCyc1.brccode, pGenLeg->brccode );
+	strcpy( stVirGlsCyc1.acctype, pGenLeg->acctype );
+	strcpy( stVirGlsCyc1.ccy, pGenLeg->ccy );
+	strncpy( stVirGlsCyc1.subctrlcode, pGenLeg->subctrlcode, strlen( pGenLeg->subctrlcode )-1 );
+	stVirGlsCyc1.subctrlcode[ strlen( pGenLeg->subctrlcode ) -1 ] =0x00;
+	strcpy( stVirGlsCyc1.year, pGenLeg->year );
+	stVirGlsCyc1.month = pGenLeg->month;
+	stVirGlsCyc1.cycle = pGenLeg->cycle;
+	sprintf( g_acTrcMsg, "subctrlcode[%s]", pGenLeg->subctrlcode );
+	TRCLOG2
+	for( pNext = pHead; pNext != NULL; pNext = pNext->pNext )
+	{
+		pNewGenLeg = ( struct glscycltotal * ) pNext->pGenLeg;
+
+		if( !strncmp( pNewGenLeg->subctrlcode, stVirGlsCyc1.subctrlcode, strlen( stVirGlsCyc1.subctrlcode ) )
+			&& strcmp( pNewGenLeg->subctrlcode, pGenLeg->subctrlcode )
+			&& pNewGenLeg->cycle == stVirGlsCyc1.cycle
+			&& pNewGenLeg->month == stVirGlsCyc1.month
+			&& !strcmp( pNewGenLeg->ccy, stVirGlsCyc1.ccy ) )
+		{
+	sprintf( g_acTrcMsg, "subctrlcode[%s]", stVirGlsCyc1.subctrlcode );
+	TRCLOG2
+	sprintf( g_acTrcMsg, "[%s]idbbal[%.2lf]icrbal[%.2lf]", pNewGenLeg->subctrlcode, pNewGenLeg->dbbal, pNewGenLeg->crbal );
+	TRCLOG2
+			stVirGlsCyc.dbbal -= pNewGenLeg->dbbal;
+			stVirGlsCyc.crbal -= pNewGenLeg->crbal;
+		}
+	}
+
+	sprintf( g_acTrcMsg, "dbbal[%.2lf]crbal[%.2lf]", stVirGlsCyc.dbbal, stVirGlsCyc.crbal );
+	TRCLOG2
+	sprintf( g_acTrcMsg, "idbbal[%.2lf]icrbal[%.2lf]", pGenLeg->dbbal, pGenLeg->crbal );
+	TRCLOG2
+	sprintf( g_acTrcMsg, "subctrlcode[%s]", pGenLeg->subctrlcode );
+	TRCLOG2
+	if ( stVirGlsCyc.dbbal < pGenLeg->dbbal - 0.005 
+		|| stVirGlsCyc.crbal < pGenLeg->crbal - 0.005 
+		|| stVirGlsCyc.dbbal > pGenLeg->dbbal + 0.005 
+		|| stVirGlsCyc.crbal > pGenLeg->crbal + 0.005  )
+	{
+		pGenLeg->dbbal = stVirGlsCyc.dbbal;
+		pGenLeg->crbal = stVirGlsCyc.crbal;
+	}
+	sprintf( g_acTrcMsg, "subctrlcode[%s]", pGenLeg->subctrlcode );
+	TRCLOG2
+
+	return 0 ;
+
+Exit:
+	return -1;
+
+}

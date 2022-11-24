@@ -1,0 +1,107 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/23.Plaintext_Storage_of_Password/C23001.cpp");
+   ("language", "CPP");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<string.h>");
+   ("include", "<sqlext.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/23.Plaintext_Storage_of_Password/C23001.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/23.Plaintext_Storage_of_Password/C23001.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/23.Plaintext_Storage_of_Password/C23001.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/23.Plaintext_Storage_of_Password/C23001.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/23.Plaintext_Storage_of_Password/C23001.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/23.Plaintext_Storage_of_Password/C23001.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/23.Plaintext_Storage_of_Password/C23001.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C23001",
+   SI(<"C23001">,
+   {[
+      {;
+      ,(1#1,40#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,40#1,!1)}
+   )
+   ,(1#1,40#1,!1)},
+
+   {"C23001",
+   FN([public],(<"C23001">,"cwe256_bad"):int,[("iuser":ref(char),(6#16,6#26,!1)),("ipasswd":ref(char),(6#29,6#41,!1))],[],
+   {[
+      {VD("fp",ref(class((,FILE))))
+      ,(8#10,8#12,!1)};
+      {VD("server",ref(char),{"DBserver"S,string,(9#20,9#29,!1)})
+      ,(9#10,9#16,!1)};
+      {VD("user",char,([{"20"N,int,(10#15,10#16,!1)}]))
+      ,(10#10,10#17,!1)};
+      {VD("passwd",char,([{"20"N,int,(11#17,11#18,!1)}]))
+      ,(11#10,11#19,!1)};
+      {VD("henv",class((,SQLHENV)))
+      ,(12#13,12#16,!1)};
+      {VD("hdbc",class((,SQLHDBC)))
+      ,(13#13,13#16,!1)};
+      {{AE({V("fp"),ref(class((,FILE))),(15#5,15#6,!1)},{SC((<"C23001">,"fopen"),[string,string],[{"config"S,string,(15#16,15#23,!1)},{"r"S,string,(15#26,15#28,!1)}]),class((,"%undef")),(15#10,15#29,!1)}),ref(class((,FILE))),(15#5,15#29,!1)}
+      ,(15#5,15#29,!1)};
+      {PC0((<"C23001">,"fgets"),[arr(char),int,ref(class((,FILE)))],[{V("user"),arr(char),(16#11,16#14,!1)},{SO({V("user"),arr(char),(16#24,16#27,!1)}),int,(16#17,16#28,!1)},{V("fp"),ref(class((,FILE))),(16#31,16#32,!1)}])
+      ,(16#5,16#33,!1)};
+      {PC0((<"C23001">,"fgets"),[arr(char),int,ref(class((,FILE)))],[{V("passwd"),arr(char),(17#11,17#16,!1)},{SO({V("passwd"),arr(char),(17#26,17#31,!1)}),int,(17#19,17#32,!1)},{V("fp"),ref(class((,FILE))),(17#35,17#36,!1)}])
+      ,(17#5,17#37,!1)};
+      {PC0((<"C23001">,"fclose"),[ref(class((,FILE)))],[{V("fp"),ref(class((,FILE))),(18#12,18#13,!1)}])
+      ,(18#5,18#14,!1)};
+      {{AE({V("r"),class((,"%undef")),(19#9,19#9,!1)},{"0"N,int,(19#13,19#13,!1)}),class((,"%undef")),(19#9,19#13,!1)}
+      ,(19#9,19#13,!1)};
+      {IF0({BO(||,{BO(!=,{SC((<"C23001">,"strncmp"),[arr(char),ref(char),int],[{V("user"),arr(char),(21#17,21#20,!1)},{V("iuser"),ref(char),(21#23,21#27,!1)},{SO({V("user"),arr(char),(21#37,21#40,!1)}),int,(21#30,21#41,!1)}]),class((,"%undef")),(21#9,21#42,!1)},{"0"N,int,(21#47,21#47,!1)}),bool,(21#9,21#47,!1)},{BO(!=,{SC((<"C23001">,"strncmp"),[arr(char),ref(char),int],[{V("passwd"),arr(char),(22#25,22#30,!1)},{V("ipasswd"),ref(char),(22#33,22#39,!1)},{SO({V("passwd"),arr(char),(22#49,22#54,!1)}),int,(22#42,22#55,!1)}]),class((,"%undef")),(22#17,22#56,!1)},{"0"N,int,(22#61,22#61,!1)}),bool,(22#17,22#61,!1)}),bool,(21#9,22#61,!1)},
+         {[
+            {PC0((<"C23001">,"printf"),[string,string],[{"%s /n"S,string,(23#16,23#22,!1)},{"ID and password do not match\n"S,string,(23#24,23#55,!1)}])
+            ,(23#9,23#56,!1)};
+            {{AE({V("r"),class((,"%undef")),(24#9,24#9,!1)},{UO(-,{"1"N,int,(24#14,24#14,!1)}),int,(24#13,24#14,!1)}),class((,"%undef")),(24#9,24#14,!1)}
+            ,(24#9,24#14,!1)}
+            ]
+         ,(22#65,25#5,!1)})
+      ,(21#5,25#5,!1)};
+      {PC0((<"C23001">,"SQLAllocHandle"),[class((,"%undef")),class((,"%undef")),ref(class((,SQLHENV)))],[{V("SQL_HANDLE_ENV"),class((,"%undef")),(27#20,27#33,!1)},{V("SQL_NULL_HANDLE"),class((,"%undef")),(27#36,27#50,!1)},{&{V("henv"),class((,SQLHENV)),(27#54,27#57,!1)},ref(class((,SQLHENV))),(27#53,27#57,!1)}])
+      ,(27#5,27#58,!1)};
+      {PC0((<"C23001">,"SQLAllocHandle"),[class((,"%undef")),class((,SQLHENV)),ref(class((,SQLHDBC)))],[{V("SQL_HANDLE_DBC"),class((,"%undef")),(28#20,28#33,!1)},{V("henv"),class((,SQLHENV)),(28#36,28#39,!1)},{&{V("hdbc"),class((,SQLHDBC)),(28#43,28#46,!1)},ref(class((,SQLHDBC))),(28#42,28#46,!1)}])
+      ,(28#5,28#47,!1)};
+      {PC0((<"C23001">,"SQLConnect"),[class((,SQLHDBC)),ref(class((,SQLCHAR))),class((,"%undef")),arr(char),class((,"%undef")),arr(char),class((,"%undef"))],[{V("hdbc"),class((,SQLHDBC)),(30#16,30#19,!1)},{CS(ref(class((,SQLCHAR))),{V("server"),ref(char),(30#33,30#38,!1)}),ref(class((,SQLCHAR))),(30#22,30#38,!1)},{SC((<"C23001">,"strlen"),[ref(char)],[{V("server"),ref(char),(31#35,31#40,!1)}]),class((,"%undef")),(31#28,31#41,!1)},{V("user"),arr(char),(32#24,32#27,!1)},{SC((<"C23001">,"strlen"),[arr(char)],[{V("user"),arr(char),(33#31,33#34,!1)}]),class((,"%undef")),(33#24,33#35,!1)},{V("passwd"),arr(char),(34#24,34#29,!1)},{SC((<"C23001">,"strlen"),[arr(char)],[{V("passwd"),arr(char),(35#31,35#36,!1)}]),class((,"%undef")),(35#24,35#37,!1)}])
+      ,(30#5,35#41,!1)};
+      {RE({V("r"),class((,"%undef")),(36#12,36#12,!1)})
+      ,(36#5,36#13,!1)}
+      ]
+   ,(6#1,37#1,!1)}
+   )
+   ,(6#1,37#1,!1)}
+]

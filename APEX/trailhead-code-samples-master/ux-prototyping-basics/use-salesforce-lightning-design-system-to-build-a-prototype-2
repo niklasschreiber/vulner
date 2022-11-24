@@ -1,0 +1,64 @@
+<ul class="slds-col slds-size--1-of-1">
+    <li class="slds-size--1-of-3 slds-show--inline-block">
+        <lightning:card variant="narrow" class="slds-m-around--small slds-card_boundary">
+            <aura:set attribute="title">
+                Jim Cooper
+            </aura:set>
+            <div class="slds-tile slds-p-horizontal--large">
+                <div class="slds-tile__detail slds-text-body--small">
+                    <dl class="slds-list--horizontal slds-wrap">
+                        <dt class="slds-item--label slds-text-color--weak slds-truncate" title="Second Label">Company:</dt>
+                        <dd class="slds-item--detail slds-truncate">Einstein Accolades</dd>
+                        <dt class="slds-item--label slds-text-color--weak slds-truncate" title="Second Label">Email Address:</dt>
+                        <dd class="slds-item--detail slds-truncate">jim@accolades.com</dd>
+                        <dt class="slds-item--label slds-text-color--weak slds-truncate" title="Third Label">Status:</dt>
+                        <dd class="slds-item--detail slds-truncate">Qualified</dd>
+                        <dt class="slds-item--label slds-text-color--weak slds-truncate" title="First Label">Phone:</dt>
+                        <dd class="slds-item--detail slds-truncate">(555) 123-4567</dd>
+                    </dl>
+                </div>
+            </div>
+        </lightning:card></li>
+    <li class="slds-size--1-of-3 slds-show--inline-block">
+        <lightning:card variant="narrow" class="slds-m-around--small slds-card_boundary">
+            <aura:set attribute="title">
+                Collin Rhee
+            </aura:set>
+            <div class="slds-tile slds-p-horizontal--large">
+                <div class="slds-tile__detail slds-text-body--small">
+                    <dl class="slds-list--horizontal slds-wrap">
+                        <dt class="slds-item--label slds-text-color--weak slds-truncate" title="Second Label">Company:</dt>
+                        <dd class="slds-item--detail slds-truncate">Badges &amp; Co.</dd>
+                        <dt class="slds-item--label slds-text-color--weak slds-truncate" title="Second Label">Email Address:</dt>
+                        <dd class="slds-item--detail slds-truncate">colin@badges.com</dd>
+                        <dt class="slds-item--label slds-text-color--weak slds-truncate" title="Third Label">Status:</dt>
+                        <dd class="slds-item--detail slds-truncate">Working - Contacted</dd>
+                        <dt class="slds-item--label slds-text-color--weak slds-truncate" title="First Label">Phone:</dt>
+                        <dd class="slds-item--detail slds-truncate">(123) 456-7890</dd>
+                    </dl>
+                </div>
+            </div>
+        </lightning:card>
+    </li>
+    <li class="slds-size--1-of-3 slds-show--inline-block">
+        <lightning:card variant="narrow" class="slds-m-around--small slds-card_boundary">
+            <aura:set attribute="title">
+                Cora Sadik
+            </aura:set>
+            <div class="slds-tile slds-p-horizontal--large">
+                <div class="slds-tile__detail slds-text-body--small">
+                    <dl class="slds-list--horizontal slds-wrap">
+                        <dt class="slds-item--label slds-text-color--weak slds-truncate" title="Second Label">Company:</dt>
+                        <dd class="slds-item--detail slds-truncate">Compass Construction Inc.</dd>
+                        <dt class="slds-item--label slds-text-color--weak slds-truncate" title="Second Label">Email Address:</dt>
+                        <dd class="slds-item--detail slds-truncate">sadik@construction.com</dd>
+                        <dt class="slds-item--label slds-text-color--weak slds-truncate" title="Third Label">Status:</dt>
+                        <dd class="slds-item--detail slds-truncate">Open - Not Contacted</dd>
+                        <dt class="slds-item--label slds-text-color--weak slds-truncate" title="First Label">Phone:</dt>
+                        <dd class="slds-item--detail slds-truncate">(123) 456-7777</dd>
+                    </dl>
+                </div>
+            </div>
+        </lightning:card>
+    </li>
+</ul>

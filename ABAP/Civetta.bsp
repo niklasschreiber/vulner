@@ -1,0 +1,22 @@
+<%@extension name="htmlb" prefix="htmlb"%>
+ <%@extension name="phtmlb" prefix="phtmlb"%>
+ <htmlb:content design="design2003">
+ <htmlb:page>
+Figure 11.1 Composite Element Example
+232 Creating your own BSP Extension Element
+ <htmlb:form>
+ ...body comes here...
+ <phtmlb:horizontalDivider hasRule = "TRUE"
+ separationHeight = "LARGE" />
+ <phtmlb:matrix width = "100 %" >
+ <phtmlb:matrixCell hAlign = "RIGHT" />
+ <htmlb:button text = "Page In-1"
+ design = "PREVIOUS"
+ onClick = "pageIn-1.bsp" />
+ <htmlb:button text = "Page In+1"
+ design = "NEXT"
+ onClick = "pageIn+1.bsp" />
+ </phtmlb:matrix>
+ </htmlb:form>
+ </htmlb:page>
+ </htmlb:content>

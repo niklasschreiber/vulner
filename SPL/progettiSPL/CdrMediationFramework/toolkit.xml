@@ -1,0 +1,887 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<toolkitModel xmlns="http://www.ibm.com/xmlns/prod/streams/spl/toolkit" productVersion="3.2.1.0" xmlns:common="http://www.ibm.com/xmlns/prod/streams/spl/common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <toolkit name="CdrMediationFramework" requiredProductVersion="3.0.0" version="1.0.0">
+    <description/>
+    <uriTable>
+      <uri index="18" value="com.ti.oss.common.cdr.file/SortFileNames.spl"/>
+      <uri index="17" value="com.ti.oss.common.cdr.file/MultiFileSink4.spl"/>
+      <uri index="11" value="com.ti.oss.common.cdr.file/FileExportEmptyFileDirScan.spl"/>
+      <uri index="3" value="com.ti.oss.common.cdr.util/MergerStatisticCounters.spl"/>
+      <uri index="29" value="com.ti.oss.common.cdr.parser.eggsn/CDRData.spl"/>
+      <uri index="36" value="com.ti.oss.common.cdr.parser.esgw/ParserSGW"/>
+      <uri index="5" value="com.ti.oss.common.cdr.evalROP/MergerWait.spl"/>
+      <uri index="32" value="com.ti.oss.common.cdr.parser.epgw/ParserPGW"/>
+      <uri index="28" value="com.ti.oss.common.cdr.parser.esgw/CDRData.spl"/>
+      <uri index="37" value="com.ti.oss.common.cdr.parser.esgsn/ParserSGSN"/>
+      <uri index="2" value="com.ti.oss.common.cdr.util/Utils.spl"/>
+      <uri index="39" value="com.ti.oss.common.cdr.file/CsvPrepareGeoloc"/>
+      <uri index="35" value="com.ti.oss.common.cdr.checkPduType/CheckPduType"/>
+      <uri index="30" value="com.ti.oss.common.cdr.parser.evolta/CDRData.spl"/>
+      <uri index="7" value="com.ti.oss.common.cdr.parser.epgw/CDRData.spl"/>
+      <uri index="9" value="com.ti.oss.common.cdr.file/FileExportCdrMsc.spl"/>
+      <uri index="27" value="com.ti.oss.common.cdr.parser.esgw/ParserSGWEnrich.spl"/>
+      <uri index="40" value="com.ti.oss.common.cdr.file/CsvPrepareMultiPort"/>
+      <uri index="33" value="com.ti.oss.common.cdr.util/native.function/function.xml"/>
+      <uri index="38" value="com.ti.oss.common.cdr.parser.emsc/ParserMSC"/>
+      <uri index="15" value="com.ti.oss.common.cdr.file/FileExportCdrVolta.spl"/>
+      <uri index="25" value="com.ti.oss.common.cdr.parser.emsc/ParserMSCEnrich.spl"/>
+      <uri index="4" value="com.ti.oss.common.cdr.util/Configuration.spl"/>
+      <uri index="14" value="com.ti.oss.common.cdr.file/MultiFileSink.spl"/>
+      <uri index="22" value="com.ti.oss.common.cdr.types/CDRData.spl"/>
+      <uri index="8" value="com.ti.oss.common.cdr.msc.evalROP/RopEvalMsc.spl"/>
+      <uri index="1" value="com.ti.oss.common.cdrparallel/EggsnParallel.spl"/>
+      <uri index="42" value="com.ti.oss.common.cdr.file/CsvPrepareMultiPortSgsn"/>
+      <uri index="19" value="com.ti.oss.common.cdr.file/FilePolled.spl"/>
+      <uri index="12" value="com.ti.oss.common.cdr.file/MultiFileSink3.spl"/>
+      <uri index="20" value="com.ti.oss.common.cdr.file/FileExportEmptyFile.spl"/>
+      <uri index="31" value="com.ti.oss.common.cdr.parser.evolta/ParserVOLTA"/>
+      <uri index="41" value="com.ti.oss.common.cdr.file/CsvPrepare"/>
+      <uri index="16" value="com.ti.oss.common.cdr.file/FileExportCdrGgsn.spl"/>
+      <uri index="10" value="com.ti.oss.common.cdr.file/FileExportCdrSgsn.spl"/>
+      <uri index="26" value="com.ti.oss.common.cdr.parser.emsc/CDRData.spl"/>
+      <uri index="13" value="com.ti.oss.common.cdr.file/RenameFile.spl"/>
+      <uri index="34" value="com.ti.oss.common.cdr.parser.eggsn/ParserGGSN"/>
+      <uri index="24" value="com.ti.oss.common.cdr.parser.esgsn/CDRData.spl"/>
+      <uri index="23" value="com.ti.oss.common.cdr.checkPduType/CDRData.spl"/>
+      <uri index="6" value="com.ti.oss.common.cdr.evalROP/MoveFile.spl"/>
+      <uri index="21" value="com.ti.oss.common.cdr.file/MultiFileSink2.spl"/>
+    </uriTable>
+    <namespace name="com.ti.oss.common.cdr.parser.evolta">
+      <primitiveOp language="Cpp" modelUriIndex="31" name="ParserVOLTA" public="true">
+        <description/>
+        <parametersDescription/>
+        <parameter cardinality="-1" expressionMode="Expression" name="pduTypes" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <parameter cardinality="-1" expressionMode="Expression" name="configEnvVar" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <parameter cardinality="-1" expressionMode="Expression" name="mediationName" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <parameter cardinality="-1" expressionMode="Expression" name="configFileKey" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="true" windowPunctInputMode="Oblivious">
+          <description>TODO: Your short description here</description>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <outputPort expressionMode="Constant" minNumPorts="0" optional="true" windowPunctOutputMode="Generating">
+          <description>TODO: Your short description here</description>
+        </outputPort>
+      </primitiveOp>
+      <type column="6" line="5" name="EOD" static="true" type="tuple&lt;boolean endOfData>" uriIndex="30"/>
+      <type column="6" line="7" name="EvoltaCdr" static="true" type="FileHeader, EOD, tuple&lt;rstring callModuleType, list&lt;rstring> listOfCallingPartyAddresses, int32 callingPartyAddressPresentationStatus, rstring callingPartyAddressE164, rstring callingPartyMSISDN, rstring fromHeader, int32 fromHeaderPresentationStatus, rstring callingSubscriberIMPI, rstring callingSubscriberIMSI, rstring calledPartyAddress, rstring calledPartyAddressE164, rstring calledPartyMSISDN, rstring translatedNumber, rstring startTime, int32 chargeableDuration, rstring callIdentification, list&lt;rstring> listOfRelatedCallIdentification, int32 partialOutputRecordNumber, rstring lastPartialOutput, rstring iMSChargingIdentifier, list&lt;rstring> listOfRelatedICID, rstring originatingNetwork, rstring terminatingNetwork, int32 callPosition, int32 causeCode, int32 accessType, list&lt;rstring> listOfMedia, list&lt;rstring> listOfMedia_listOfMedia, list&lt;rstring> listOfMedia_timeOfMediaChange, list&lt;int32> listOfSupplementaryService_supplementaryServiceIdentity, list&lt;int32> listOfSupplementaryService_supplementaryServiceAction, rstring firstCallingLocationInformation, rstring incompleteCallDataIndicator, rstring conferenceId, rstring sRVCCTimeStamp, int32 disconnectingParty, rstring conferenceTimeStamp, rstring callingSubscriberIMEI, rstring calledSubscriberIMEI, rstring destinationRealm, rstring sIPRingingTimestamp, rstring freeFormatData, rstring redirectingSubscriberIMPI, rstring redirectingSubscriberIMSI, rstring redirectingPartyAddress, rstring redirectingPartyAddressE164, int32 redirectionCounter, rstring originalCalledPartyAddress, rstring originalCalledPartyAddressE164, rstring calledSubscriberIMPI, rstring calledSubscriberIMSI, rstring firstCalledLocationInformation>" uriIndex="30"/>
+      <type column="6" line="68" name="EvoltaCdrWithROP" static="true" type="tuple&lt;EvoltaCdr evoltaCdr, float64 startROP, float64 endROP, boolean changed, boolean waitEnd>" uriIndex="30"/>
+    </namespace>
+    <namespace name="com.ti.oss.common.cdr.evalROP">
+      <compositeOp column="18" line="10" name="MergerWaitGeneric" potentialMain="false" public="true" uriIndex="5">
+        <inputPort name="generic" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric0" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric1" portIndex="1" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric2" portIndex="2" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric3" portIndex="3" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric4" portIndex="4" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric5" portIndex="5" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric6" portIndex="6" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric7" portIndex="7" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric8" portIndex="8" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric9" portIndex="9" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric10" portIndex="10" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric11" portIndex="11" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric12" portIndex="12" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric13" portIndex="13" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric14" portIndex="14" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric15" portIndex="15" type="stream&lt;AggregateSqmSchema>"/>
+      </compositeOp>
+      <compositeOp column="18" line="225" name="MergerWaitApn" potentialMain="false" public="true" uriIndex="5">
+        <inputPort name="generic" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric0" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric1" portIndex="1" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric2" portIndex="2" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric3" portIndex="3" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric4" portIndex="4" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric5" portIndex="5" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric6" portIndex="6" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric7" portIndex="7" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric8" portIndex="8" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric9" portIndex="9" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric10" portIndex="10" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric11" portIndex="11" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric12" portIndex="12" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric13" portIndex="13" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric14" portIndex="14" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric15" portIndex="15" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric16" portIndex="16" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric17" portIndex="17" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric18" portIndex="18" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerGeneric19" portIndex="19" type="stream&lt;AggregateSqmSchema>"/>
+      </compositeOp>
+      <compositeOp column="18" line="481" name="MergerWaitUserLoc" potentialMain="false" public="true" uriIndex="5">
+        <inputPort name="userloc" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerUserLoc0" portIndex="0" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerUserLoc1" portIndex="1" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerUserLoc2" portIndex="2" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerUserLoc3" portIndex="3" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerUserLoc4" portIndex="4" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerUserLoc5" portIndex="5" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerUserLoc6" portIndex="6" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerUserLoc7" portIndex="7" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerUserLoc8" portIndex="8" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerUserLoc9" portIndex="9" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerUserLoc10" portIndex="10" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerUserLoc11" portIndex="11" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerUserLoc12" portIndex="12" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerUserLoc13" portIndex="13" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerUserLoc14" portIndex="14" type="stream&lt;AggregateSqmSchema>"/>
+        <outputPort name="OutMergerUserLoc15" portIndex="15" type="stream&lt;AggregateSqmSchema>"/>
+      </compositeOp>
+      <compositeOp column="18" line="9" name="MoveFile" potentialMain="false" public="true" uriIndex="6">
+        <inputPort name="OJoin" portIndex="0" type="stream&lt;FileHeader h, FileTrailer t>"/>
+        <outputPort name="OutEvent" portIndex="0" type="stream&lt;Event e>"/>
+      </compositeOp>
+    </namespace>
+    <namespace name="com.ti.oss.common.cdr.types">
+      <type column="6" line="8" name="CdrSchema" static="true" type="tuple&lt;int32 recordType, rstring address, rstring servedIMSI, uint32 chargingID, list&lt;rstring> servingNodeAddress, rstring pdpType, rstring dynamicAddressFlag, list&lt;rstring> datavolumeFBCUplink, list&lt;rstring> datavolumeFBCDownlink, rstring recordOpeningTime, int32 duration, int32 causeForRecClosing, int32 apnSelectionMode, rstring chargingCharacteristics, int32 chChSelectionMode, rstring servingNodePLMNIdentifier, rstring servedIMEISV, rstring userLocationInformation, int32 rATType, rstring apn, rstring servedPDPPDNAddress, rstring iMSsignalingContext, rstring mSTimeZone, int32 recordSequenceNumber, rstring nodeId, uint32 localSequenceNumber, rstring servedMSISDN, list&lt;rstring> qCI, list&lt;rstring> maxRequestedBrandUl, list&lt;rstring> maxRequestedBrandDl, list&lt;rstring> guaranteedBitRateUl, list&lt;rstring> guaranteedBitRateDl, list&lt;rstring> arp, list&lt;int32> serviceContainers_indexes, list&lt;int32> serviceContainers_sizes, list&lt;int32> serviceContainers_firstUri_indexes, list&lt;rstring> ratingGroupId, list&lt;rstring> ratingGroupServiceContainer, list&lt;int32> listOfUri_indexes, list&lt;int32> listOfUri_sizes, list&lt;rstring> count, list&lt;rstring> uri, list&lt;rstring> uriIdentifier, list&lt;rstring> uriDataVolumeUplink, list&lt;rstring> uriDataVolumeDownlink, list&lt;rstring> listofUriTimeStamps>" uriIndex="22"/>
+      <type column="6" line="59" name="CdrSchemaSgsn" static="true" type="tuple&lt;rstring recordOpeningTime, int32 duration, rstring apnNI, rstring apnOI, list&lt;int32> dataVolumeGPRSUplink, list&lt;int32> dataVolumeGPRSDownlink, uint32 chargingID, int32 apnSelectionMode, rstring pdpType, rstring chargingCharacteristics, int32 chChSelectionMode, rstring servedIMSI, rstring servedIMEI, int32 rATType, rstring locationAreaCode, rstring ggsnAddressUsed, rstring cellIdentifier, rstring routingArea, rstring pLMNIdentifier, int32 causeForRecClosing, rstring sgsnChange, rstring dynamicAddressFlag, rstring mccMnc, rstring mvnoCode, rstring nodeId, rstring servedMSISDN>" uriIndex="22"/>
+      <type column="6" line="88" name="CdrSchemaSgsnSQM" static="true" type="tuple&lt;rstring ggsnAddressUsed, rstring recordOpeningTime, int32 duration, rstring apnNI, rstring apnOI, list&lt;int32> dataVolumeGPRSUplink, list&lt;int32> dataVolumeGPRSDownlink, rstring mccMnc, rstring nodeId>" uriIndex="22"/>
+      <type column="6" line="100" name="CdrSchemaSQM" static="true" type="tuple&lt;rstring address, list&lt;rstring> servingNodeAddress, list&lt;rstring> datavolumeFBCUplink, list&lt;rstring> datavolumeFBCDownlink, list&lt;rstring> ratingGroupId, uint32 chargingID, rstring recordOpeningTime, int32 duration, rstring chargingCharacteristics, rstring servedIMEISV, rstring servedMSISDN, rstring userLocationInformation, int32 rATType, rstring apn, rstring nodeId, list&lt;rstring> datavolumeUplinkRatingG, list&lt;rstring> datavolumeDownlinkRatingG, float64 endTimeCDRfloat>" uriIndex="22"/>
+      <type column="6" line="121" name="CdrSchemaSGWSQM" static="true" type="tuple&lt;rstring address, list&lt;rstring> servingNodeAddress, list&lt;rstring> datavolumeFBCUplink, list&lt;rstring> datavolumeFBCDownlink, rstring recordOpeningTime, int32 duration, rstring servedIMSI, int32 rATType, rstring apn, rstring nodeId, float64 endTimeCDRfloat>" uriIndex="22"/>
+      <type column="6" line="135" name="CdrSchemaVolteSQM" static="true" type="tuple&lt;rstring startTime, int32 chargeableDuration, rstring callModuleType, rstring freeFormatData, rstring destinationRealm, int32 callPosition, int32 partialOutputRecordNumber>" uriIndex="22"/>
+      <type column="6" line="145" name="GgsnMain" static="true" type="tuple&lt;int32 recordType, rstring servedIMSI, rstring gsnAddress, uint32 chargingID, rstring apnNI, rstring pdpPDNType, rstring servedPDPPDNAddress, rstring dynamicAddressFlag, rstring recordOpeningTime, int32 duration, int32 causeForRecClosing, int32 recordSequenceNumber, rstring nodeId, uint32 localSequenceNumber, int32 apnSelectionMode, rstring servedMSISDN, rstring chargingCharacteristics, rstring chChSelectionMode, rstring iMSsignalingContext, rstring servingNodePLMNIdentifier, rstring pSFreeFormatData, rstring pSFFDAppendInticator, rstring servedIMEISV, rstring rATType, rstring mSTimeZone, rstring userLocationInformation, rstring sGWChange, rstring p_GWAddressUsed, rstring p_GWPLMNIdentifier, rstring startTime, rstring stopTime, int32 pDNConnectionID, rstring servedPDPPDNAddressExt, rstring tac, rstring mcc, rstring mnc, rstring imei, rstring sv, rstring sgsnAddress, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="193" name="SgsnMain" static="true" type="tuple&lt;int32 recordType, rstring networkInitiation, rstring servedIMSI, rstring servedIMEI, rstring sgsnAddress, rstring servedMSISDN, rstring msNetworkCapability, rstring serviceCentre, rstring recordingEntity, rstring locationAreaCode, rstring routingArea, rstring cellIdentifier, uint32 chargingID, rstring ggsnAddressUsed, rstring apnNI, rstring pdpType, rstring servedPDPNAddress, rstring recordOpeningTime, int32 duration, rstring sgsnChange, int32 causeForRecClosing, int32 diagnostics, int32 recordSequenceNumber, rstring nodeId, uint32 localSequenceNumber, int32 apnSelectionMode, rstring apnOI, rstring chargingCharacteristics, rstring rATType, rstring sCFAddressPDP, int32 serviceKey, int32 defaultTransactionHandling, rstring camelApnNi, rstring camelApnOi, int32 numberOfDPEncountered, rstring levelOfCamelService, rstring freeFormatDataPDP, rstring fFDAppendIndicator, rstring sCFAddressSMS, int32 camelServiceKey, int32 defaultSmsHandling, rstring camelCallingPartyNumber, rstring camelDestinationSubscriberNumber, rstring camelSmsCAddress, rstring freeFormatDataSMS, rstring smsReferenceNumber, int32 chChSelectionMode, rstring dynamicAddressFlag, rstring plmnIdentifier, rstring mSTimeZone, rstring messageReference, rstring eventTimeStamp, int32 smsResult, rstring destinationNumber, int32 numberOfSm, rstring locationAreaLastSm, rstring routingAreaLastSm, rstring cellIdentifierLastSm, rstring plmnIdentifierLastSm, rstring tac, rstring mcc, rstring mnc, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="263" name="VoltaMain" static="true" type="tuple&lt;rstring callModuleType, rstring listOfCallingPartyAddresses, rstring callingPartyAddressPresentationStatus, rstring callingPartyAddressE164, rstring fromHeader, rstring fromHeaderPresentationStatus, rstring callingSubscriberIMPI, rstring callingSubscriberIMSI, rstring calledSubscriberIMPI, rstring calledSubscriberIMSI, rstring redirectingSubscriberIMPI, rstring redirectingSubscriberIMSI, rstring calledPartyAddress, rstring calledPartyAddressE164, rstring redirectingPartyAddress, rstring redirectingPartyAddressE164, rstring redirectionCounter, rstring originalCalledPartyAddress, rstring originalCalledPartyAddressE164, rstring translatedNumber, rstring startTime, rstring chargeableDuration, rstring callIdentification, rstring listOfRelatedCallIdentification, rstring partialOutputRecordNumber, rstring lastPartialOutput, rstring iMSChargingIdentifier, rstring listOfRelatedICID, rstring originatingNetwork, rstring terminatingNetwork, rstring callPosition, rstring causeCode, rstring accessType, rstring listOfMedia, rstring listOfMediaChange, rstring listOfMedia_timeOfMediaChange, rstring listOfSupplementaryService_supplementaryServiceIdentity, rstring listOfSupplementaryService_supplementaryServiceAction, rstring firstCallingLocationInformation, rstring firstCalledLocationInformation, rstring incompleteCallDataIndicator, rstring conferenceId, rstring sRVCCTimeStamp, rstring disconnectingParty, rstring conferenceTimeStamp, rstring callingSubscriberIMEI, rstring calledSubscriberIMEI, rstring tac, rstring destinationRealm, rstring sIPRingingTimestamp, rstring freeFormatData, rstring callingPartyMSISDN, rstring calledPartyMSISDN, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="324" name="ContainerListOfCallingPartyAddresses" static="true" type="tuple&lt;rstring callIdentification, rstring callingPartyAddress, rstring containerType, int32 containerInstance, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="337" name="ContainerListOfRelatedCallIdentification" static="true" type="tuple&lt;rstring callIdentification, rstring relatedCallIdentification, rstring containerType, int32 containerInstance, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="349" name="ContainerListOfRelatedICID" static="true" type="tuple&lt;rstring callIdentification, rstring relatedICID, rstring containerType, int32 containerInstance, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="361" name="ContainerListOfMedia" static="true" type="tuple&lt;rstring callIdentification, rstring media, rstring containerType, int32 containerInstance, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="373" name="ContainerListOfMediaChange" static="true" type="tuple&lt;rstring callIdentification, rstring media, rstring containerType, int32 containerInstance, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="385" name="ContainerRecordExtension" static="true" type="tuple&lt;rstring gsnAddress, uint32 chargingID, int32 localSequenceNumber, rstring identifier, rstring significance, rstring creditControlRequestType, rstring creditControlRequestStatus, rstring creditControlResultCode, rstring creditControlRequestNumber, rstring creditControlSessionId, rstring creditControlCcsRealm, rstring policyControlRequestType, rstring policyControlRequestStatus, rstring policyControlResultCode, rstring policyControlStopTime, rstring policyControlPcsRealm, rstring policyControlSessionId, rstring userCategory, rstring ruleSpaceId, int32 extendedDiagnostics, rstring containerType, int32 containerInstance, rstring fatherContainerType, rstring fatherContainerInstance, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="417" name="ContainerListOfTrafficVolumes" static="true" type="tuple&lt;rstring gsnAddress, uint32 chargingID, uint32 localSequenceNumber, rstring qosRequested, rstring qosNegotiated, int32 dataVolumeGPRSUplink, int32 dataVolumeGPRSDownlink, int32 changeCondition, rstring changeTime, rstring userLocationInformation, int32 qci, int32 maxRequestedBrandUl, int32 maxRequestedBrandDl, int32 guaranteedBitRateUl, int32 guaranteedBitRateDl, int32 arp, rstring containerType, int32 containerInstance, rstring fatherContainerType, rstring fatherContainerInstance, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="445" name="ContainerListOfTrafficVolumesSG" static="true" type="tuple&lt;rstring gsnAddress, uint32 chargingID, int32 localSequenceNumber, rstring qosRequested, rstring qosNegotiated, int32 dataVolumeGPRSUplink, int32 dataVolumeGPRSDownlink, int32 changeCondition, rstring changeTime, rstring userLocationInformation, int32 qci, int32 maxRequestedBrandUl, int32 maxRequestedBrandDl, int32 guaranteedBitRateUl, int32 guaranteedBitRateDl, int32 arp, rstring containerType, int32 containerInstance, rstring fatherContainerType, rstring fatherContainerInstance, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="474" name="ContainerExtendedDiagnosticsBssgp" static="true" type="tuple&lt;rstring gsnAddress, uint32 chargingID, int32 localSequenceNumber, int32 tsBssgpCause, int32 tsBssgpMessageType, int32 tsBssgpMessageSource, rstring tsBssgpCauseTimeStamp, rstring containerType, int32 containerInstance, rstring fatherContainerType, rstring fatherContainerInstance, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="493" name="ContainerExtendedDiagnosticsRanapgp" static="true" type="tuple&lt;rstring gsnAddress, uint32 chargingID, int32 localSequenceNumber, int32 tsBssgpRanapCause, int32 tsBssgpRanaPMessageType, int32 tsBssgpRanapMessageSource, rstring tsBssgpRanapCauseTimeStamp, rstring containerType, int32 containerInstance, rstring fatherContainerType, rstring fatherContainerInstance, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="512" name="ContainerServingNodeAddress" static="true" type="tuple&lt;rstring gsnAddress, uint32 chargingID, int32 localSequenceNumber, rstring servingNodeAddress, rstring containerType, int32 containerInstance, rstring fatherContainerType, rstring fatherContainerInstance, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="528" name="ContainerServiceContainers" static="true" type="tuple&lt;rstring gsnAddress, uint32 chargingID, int32 localSequenceNumber, rstring ratingGroupId, rstring serviceIdentifier, rstring locSeqNumber, rstring method, rstring inactivity, rstring resolution, rstring ccRequestNumber, rstring serviceSpecificUnits, rstring containerType, int32 containerInstance, rstring fatherContainerType, rstring fatherContainerInstance, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="551" name="ContainerTimeReports" static="true" type="tuple&lt;rstring gsnAddress, uint32 chargingID, int32 localSequenceNumber, rstring ratingGroupId, rstring startTime, rstring endTime, rstring dataVolumeUplink, rstring dataVolumeDownlink, rstring containerType, int32 containerInstance, rstring fatherContainerType, rstring fatherContainerInstance, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="571" name="ContainerListOfUri" static="true" type="tuple&lt;rstring gsnAddress, uint32 chargingID, int32 localSequenceNumber, rstring count, rstring uri, rstring uriIdentifier, rstring uriDataVolumeUplink, rstring uriDataVolumeDownlink, rstring containerType, int32 containerInstance, rstring fatherContainerType, rstring fatherContainerInstance, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="591" name="ContainerListOfUriTimeStamps" static="true" type="tuple&lt;rstring gsnAddress, uint32 chargingID, int32 localSequenceNumber, rstring listOfUriTimeStamps, rstring containerType, int32 containerInstance, rstring fatherContainerType, rstring fatherContainerInstance, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="607" name="ContainerListOfServiceData" static="true" type="tuple&lt;rstring gsnAddress, uint32 chargingID, int32 localSequenceNumber, rstring ratingGroup, rstring resultCode, rstring locSeqNumber, rstring timeOfFirstUsage, rstring timeOfLastUsage, rstring timeUsage, rstring serviceConditionChange, rstring qosNegotiated, rstring qCI, rstring maxRequestedBandwithUL, rstring maxRequestedBandwithDL, rstring guaranteedBitrateUL, rstring guaranteedBitrateDL, rstring aRP, rstring servingNodeAddress, rstring sgsnPlmnIdentifier, rstring dataVolumeFBCUplink, rstring dataVolumeFBCDownlink, rstring timeOfReport, rstring rATType, rstring failureHandlingContinue, rstring serviceIdentifier, rstring pSFreeFormatData, rstring pSFFDAppendIndicator, rstring userLocationInformation, rstring numberOfEvents, rstring containerType, int32 containerInstance, rstring fatherContainerType, rstring fatherContainerInstance, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="649" name="ContainerAfRecordInformation" static="true" type="tuple&lt;rstring gsnAddress, uint32 chargingID, int32 localSequenceNumber, rstring aFChargingIdentifier, rstring containerType, int32 containerInstance, rstring fatherContainerType, rstring fatherContainerInstance, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="665" name="ContainerEventTimeStamps" static="true" type="tuple&lt;rstring gsnAddress, uint32 chargingID, int32 localSequenceNumber, rstring eventTimeStamps, rstring containerType, int32 containerInstance, rstring fatherContainerType, rstring fatherContainerInstance, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="681" name="ContainerServingNodeType" static="true" type="tuple&lt;rstring gsnAddress, uint32 chargingID, int32 localSequenceNumber, rstring servingNodeType, rstring containerType, int32 containerInstance, rstring fatherContainerType, rstring fatherContainerInstance, rstring nameOutputFile, boolean endRop, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="697" name="CallModule" static="true" type="tuple&lt;rstring tAC, rstring trafficActivityCode, rstring callIdentificationNumber, rstring callingPartyNumber, rstring callingPartyMSISDN, rstring chargedCallingPartyNumber, rstring callingSubscriberIMSI, rstring callingSubscriberIMEI, rstring calledPartyNumber, rstring calledPartyMSISDN, rstring calledSubscriberIMSI, rstring calledSubscriberIMEI, rstring originalCalledNumber, rstring redirectingNumber, rstring redirectingIMSI, rstring redirectionCounter, rstring mobileStationRoamingNumber, rstring disconnectingParty, rstring chargeableDuration, rstring tariffClass, rstring tariffSwitchInd, rstring incomingRoute, rstring teleserviceCode, rstring bearerServiceCode, rstring serviceCentreAddress, rstring transparencyIndicator, rstring lastPartialOutput, rstring partialOutputRecNum, rstring presentationAndScreeningInd, rstring relatedCallNumber, rstring radioChannelProperty, rstring networkCallReference, rstring networkProvidedCallingPartyNumber, rstring userProvidedCallingPartyNum, rstring subscriptionType, rstring calledMobileStationRoamingNumber, rstring outgoingRoute, rstring incompleteCallDataIndicator, rstring iNMarkingOfMS, rstring serviceKey, rstring gsmSCFAddress, rstring gSMCallReferenceNumber, rstring mSCAddress, rstring cAMELInitiatedCallForwarding, rstring calledGenericIMSI, rstring multimediaCall, rstring guaranteedBitrate, rstring trafficClass, rstring maxBitRateDownlink, rstring maxBitRateUplink, rstring calledPartyMNPInfo, rstring optimalRoutingType, rstring optimalRoutingInvocationFailed, rstring callPosition, rstring faultCode, rstring internalCauseandLocation, rstring cause, rstring location, rstring rANAPCauseCode, rstring userRate, rstring asyncSyncIndicator, rstring uILayer1Protocol, rstring callingSubscriberIMEISV, rstring calledSubscriberIMEISV, rstring destinationAddress, rstring originatingAddress, rstring bSSMAPCauseCode, rstring userToUserInformation, rstring accessType, rstring roamingPriorityLevel, rstring mCASMSIndicator, rstring reroutedToServiceCentreAddress, rstring bCUIdentifier, rstring cAMELSMSCAddress, rstring sMSResult, rstring incomingPChargingVector, rstring outgoingPChargingVector, rstring iUCodec, rstring mMEName, rstring bladeID, rstring buddyBladeIndicator, rstring trafficIsolationIndicator, rstring iNServiceTrigger, rstring levelOfCamelService, rstring StartofCharging, rstring firstCallingLocationInformation_MCC, rstring firstCallingLocationInformation_MNC, rstring firstCallingLocationInformation_LAC, rstring firstCallingLocationInformation_CI_SAC, rstring firstCallingLocationInformationExtension_ECI, rstring firstCalledLocationInformation_MCC, rstring firstCalledLocationInformation_MNC, rstring firstCalledLocationInformation_LAC, rstring firstCalledLocationInformation_CI_SAC, rstring firstCalledLocationInformationExtension_ECI, rstring lastCallingLocationInformation_MCC, rstring lastCallingLocationInformation_MNC, rstring lastCallingLocationInformation_LAC, rstring lastCallingLocationInformation_CI_SAC, rstring lastCalledLocationInformation_MCC, rstring lastCalledLocationInformation_MNC, rstring lastCalledLocationInformation_LAC, rstring lastCalledLocationInformation_CI_SAC, rstring call_module_type, uint64 call_module_ID, uint64 composite_call_data_record_ID, rstring mMEIdentity, rstring sRVCCIndicator, rstring pChargingVectorRelated, rstring sRVCCAlertingIndicator, rstring emergencyServiceCategory, rstring calling_TAC, rstring called_TAC, rstring calling_MCC, rstring calling_MNC, rstring called_MCC, rstring called_MNC, rstring northIf, rstring nameOutputFile, rstring suffix, boolean endRop, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="833" name="EventModule" static="true" type="tuple&lt;rstring genericChargingDigit_1, rstring genericChargingDigit_2, rstring genericChargingDigit_3, rstring genericChargingDigit_4, rstring genericChargingDigit_5, rstring genericChargingDigit_6, rstring genericChargingDigit_7, rstring genericChargingDigit_8, rstring genericChargingDigit_9, rstring genericChargingDigit_10, rstring genericChargingDigit_11, rstring genericChargingDigit_12, rstring genericChargingDigit_13, rstring genericChargingDigit_14, rstring genericChargingDigit_15, rstring genericChargingDigit_16, rstring genericChargingDigit_17, rstring genericChargingDigit_18, rstring genericChargingDigit_19, rstring genericChargingDigit_20, rstring GenericNumberSet_1, rstring GenericNumberSet_2, rstring GenericNumberSet_3, rstring GenericNumberSet_4, rstring GenericNumberSet_5, rstring GenericNumberSet_6, rstring GenericNumberSet_7, rstring GenericNumberSet_8, rstring GenericNumberSet_9, rstring GenericNumberSet_10, rstring GenericNumberSet_11, rstring GenericNumberSet_12, rstring GenericNumberSet_13, rstring GenericNumberSet_14, rstring GenericNumberSet_15, rstring GenericNumberSet_16, rstring GenericNumberSet_17, rstring GenericNumberSet_18, rstring GenericNumberSet_19, rstring GenericNumberSet_20, rstring serviceFeatureCode, rstring incompleteCallDataIndicator, rstring FreeFormatData, rstring trafficActivityCode, rstring isdnIncompleteCallDataIndicator, rstring event_module_type, uint64 event_module_ID, uint64 composite_call_data_record_ID, rstring northIf, rstring nameOutputFile, rstring suffix, boolean endRop, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="891" name="RopHour" static="true" type="boolean end, float64 startRop, float64 endRop" uriIndex="22"/>
+      <type column="6" line="893" name="CdrSchemaForAggr" static="true" type="CdrSchema cdrSchema, FileHeader fHeader, boolean endOfData" uriIndex="22"/>
+      <type column="6" line="895" name="CdrSchemaForAggrSQM" static="true" type="CdrSchemaSQM cdrSchema, FileHeader fHeader, boolean endOfData" uriIndex="22"/>
+      <type column="6" line="897" name="CdrSchemaForAggrSGWSQM" static="true" type="CdrSchemaSGWSQM cdrSchema, FileHeader fHeader, boolean endOfData" uriIndex="22"/>
+      <type column="6" line="899" name="CdrSchemaForAggrWithROP" static="true" type="tuple&lt;CdrSchemaForAggr cdrschema, rstring nameOutputFile, float64 startROP, float64 endROP, boolean changed, boolean waitEnd>" uriIndex="22"/>
+      <type column="6" line="901" name="CdrSchemaForAggrSQMWithROP" static="true" type="tuple&lt;CdrSchemaForAggrSQM cdrschema, rstring nameOutputFile, float64 startROP, float64 endROP, float64 startROPold, float64 endROPold, boolean changed, boolean waitEnd>" uriIndex="22"/>
+      <type column="6" line="903" name="CdrSchemaForAggrSGWSQMWithROP" static="true" type="tuple&lt;CdrSchemaForAggrSGWSQM cdrschema, rstring nameOutputFile, float64 startROP, float64 endROP, float64 startROPold, float64 endROPold, boolean changed, boolean waitEnd>" uriIndex="22"/>
+      <type column="6" line="905" name="CdrSchemaForAggrSgsn" static="true" type="CdrSchemaSgsn cdrSchema, FileHeader fHeader, boolean endOfData" uriIndex="22"/>
+      <type column="6" line="907" name="CdrSchemaForAggrSgsnWithROP" static="true" type="tuple&lt;CdrSchemaForAggrSgsn cdrschema, rstring nameOutputFile, float64 startROP, float64 endROP, boolean changed, boolean waitEnd>" uriIndex="22"/>
+      <type column="6" line="909" name="CdrSchemaForAggrSgsnSQM" static="true" type="CdrSchemaSgsnSQM cdrSchema, FileHeader fHeader, boolean endOfData" uriIndex="22"/>
+      <type column="6" line="911" name="CdrSchemaForAggrSQMSgsnWithROP" static="true" type="tuple&lt;CdrSchemaForAggrSgsnSQM cdrschema, rstring nameOutputFile, float64 startROP, float64 endROP, float64 startROPold, float64 endROPold, boolean changed, boolean waitEnd>" uriIndex="22"/>
+      <type column="6" line="913" name="CdrSchemaForAggrMsc" static="true" type="EmscCdr cdrSchema, FileHeader fHeader, boolean endOfData" uriIndex="22"/>
+      <type column="6" line="915" name="CdrSchemaForAggrMscWithROP" static="true" type="tuple&lt;CdrSchemaForAggrMsc cdrschema, rstring nameOutputFile, float64 startROP, float64 endROP, float64 startROPold, float64 endROPold, boolean changed, boolean waitEnd>" uriIndex="22"/>
+      <type column="6" line="917" name="CdrSchemaForAggrVolteSQM" static="true" type="CdrSchemaVolteSQM cdrSchema, FileHeader fHeader, boolean endOfData" uriIndex="22"/>
+      <type column="6" line="919" name="CdrSchemaForAggrSQMVolteWithROP" static="true" type="tuple&lt;CdrSchemaForAggrVolteSQM cdrschema, rstring nameOutputFile, float64 startROP, float64 endROP, boolean changed, boolean waitEnd>" uriIndex="22"/>
+      <type column="6" line="921" name="BigDataWithROP" static="true" type="tuple&lt;float64 startROP, float64 endROP, boolean changed, boolean waitEnd>" uriIndex="22"/>
+      <type column="6" line="923" name="AggregateSAI" static="true" type="tuple&lt;float64 timeTmp, rstring cdr_time, rstring openingTime, rstring customer_category, rstring mvno_code, rstring tav_id, rstring roaming_type, rstring charging, rstring tac, int32 ran_type, rstring lac, rstring sac, rstring bsc, rstring rnc, rstring nodeB, rstring bts, rstring cell, int32 record_type, rstring ximsi, rstring mcc_mnc, rstring ggsn_address, uint32 charging_id, rstring sgsn_address, rstring apn_ni, rstring pdp_type, rstring dynamic_add_flag, int32 data_volume_downlink, int32 data_volume_uplink, rstring record_opening_time, int32 duration, int32 cause_for_rec_closing, rstring node_id, int32 apn_selection_mode, rstring xmsisdn, int32 num_cdrs_per_volume_limit, int32 num_cdrs_per_time_limit, int32 num_cdrs_per_sgsn_change, int32 num_cdrs_per_max_change_cond, int32 num_cdrs_per_plmn_change, int32 num_cdrs_per_camel_init_call_release, int32 num_cdrs_per_zboundary_crossing, int32 num_cdrs_per_management_intervention, rstring ch_selection_mode, rstring sgsn_plmn_id, rstring ximei, rstring user_location_information, rstring serving_node_address, rstring nameOutputFile, boolean endRop, rstring filePrefix, rstring suffix>" uriIndex="22"/>
+      <type column="6" line="977" name="AggregateSAISgsn" static="true" type="tuple&lt;float64 timeTmp, rstring cdr_time, rstring record_opening_time, rstring roaming_type, rstring charging, rstring mvno_code, rstring apn_ni, rstring apn_oi, int32 data_volume_downlink, int32 data_volume_uplink, uint32 charging_id, int32 apn_selection_mode, rstring pdp_type, rstring charging_characteristics, rstring ch_selection_mode, int32 duration, rstring mcc_mnc, rstring ximsi, rstring tac, rstring ximei, rstring xmsisdn, int32 ran_type, rstring sgsn_address, rstring lac, rstring ggsn_address, rstring sac, rstring bsc, rstring rnc, rstring nodeB, rstring bts, rstring cell, rstring cell_id, rstring routing_area, rstring plmn_id, int32 cause_for_closing, rstring sgsn_diagnostics_cause, rstring sgsn_diagnostics_map_error_value, rstring sgsn_change, rstring dynamic_address_flag, rstring ggsn_address_used, rstring served_MSISDN, rstring nameOutputFile, boolean endRop, rstring filePrefix, rstring suffix>" uriIndex="22"/>
+      <type column="6" line="1025" name="SaiLte" static="true" type="tuple&lt;float64 timeTmp, rstring keyCharging, int32 recordType, rstring servedIMSI, rstring gsnAddress, uint32 chargingID, rstring servingNodeAddress, rstring apnNI, rstring pdpPDNType, rstring servedPDPPDNAddress, rstring dynamicAddressFlag, rstring recordOpeningTime, int32 duration, int32 causeForRecClosing, int32 recordSequenceNumber, rstring nodeId, uint32 localSequenceNumber, int32 apnSelectionMode, rstring servedMSISDN, rstring chargingCharacteristics, rstring chChSelectionMode, rstring iMSsignalingContext, rstring servedIMEISV, int32 rATType, rstring mSTimeZone, rstring userLocationInformation, rstring ratingGroup, rstring uriNormalized, rstring uriDataVolumeUplink, rstring uriDataVolumeDownlink, rstring qCI, rstring maxRequestedBrandUl, rstring maxRequestedBrandDl, rstring guaranteedBitRateUl, rstring guaranteedBitRateDl, rstring arp, rstring mvno_code, rstring tac, rstring enodeb, rstring mme, rstring cell, rstring tai, rstring cell_id, rstring mcc_mnc, rstring ggsnAddress, rstring cdrTime, int32 num_cdrs_per_volume_limit, int32 num_cdrs_per_time_limit, int32 num_cdrs_per_sgsn_change, int32 num_cdrs_per_max_change_cond, int32 num_cdrs_per_plmn_change, rstring trakingArea, rstring customer_category, int32 diffUp, int32 diffDown, rstring nameOutputFile, boolean endRop, rstring suffix, rstring filePrefix, rstring northIf>" uriIndex="22"/>
+      <type column="6" line="1088" name="AggregateSAIMsc" static="true" type="tuple&lt;float64 timeTmp, rstring callStartTime, rstring timeOfAnswer, rstring callEndTime, rstring chargingEndTime, rstring chargingDuration, rstring eventTime, rstring faultCode, rstring internalCode, rstring incomingRoute, rstring outgoingRoute, rstring networkCallRef, rstring disconnectingParty, rstring msc, rstring traffiClass, rstring tariffswitchIndicator, rstring callPosition, rstring aMccMnc, rstring aXimsi, rstring aXimsIsdn, rstring aTac, rstring aXimei, rstring aMvnoCode, rstring aCustomerCategory, rstring aRoamingType, rstring termination, rstring aRanType, rstring aFirstLac, rstring aFirstSac, rstring aFirstBsc, rstring aFirstRnc, rstring aFirstBts, rstring aFirstNodeB, rstring aFirstCell, rstring aLastLac, rstring aLastSac, rstring aLastBsc, rstring aLastRnc, rstring aLastBts, rstring aLastNodeB, rstring aLastCell, rstring bMccMnc, rstring bXimsi, rstring bXimsIsdn, rstring bTac, rstring bXimei, rstring bMvnoCode, rstring bCustomerCategory, rstring bRoamingType, rstring bRanType, rstring bFirstLac, rstring bFirstSac, rstring bFirstBsc, rstring bFirstRnc, rstring bFirstBts, rstring bFirstNodeB, rstring bFirstCell, rstring bLastLac, rstring bLastSac, rstring bLastBsc, rstring bLastRnc, rstring bLastBts, rstring bLastNodeB, rstring bLastCell, rstring nameOutputFile, boolean endRop, rstring suffix, rstring filePrefix, rstring northIf>" uriIndex="22"/>
+      <type column="6" line="1160" name="AggregateSAIMscSms" static="true" type="tuple&lt;float64 timeTmp, rstring timeOfIssuing, rstring eventTime, rstring serviceCentreAddress, rstring smsResult, rstring termination, rstring aMccMnc, rstring aXimsi, rstring aXimsIsdn, rstring aTac, rstring aXimei, rstring aMvnoCode, rstring aCustomerCategory, rstring aRanType, rstring aFirstLac, rstring aFirstSac, rstring aFirstBsc, rstring aFirstRnc, rstring aFirstBts, rstring aFirstNodeB, rstring aFirstCell, rstring bMccMnc, rstring bXimsi, rstring bXimsIsdn, rstring bTac, rstring bXimei, rstring bMvnoCode, rstring bCustomerCategory, rstring bRanType, rstring bFirstLac, rstring bFirstSac, rstring bFirstBsc, rstring bFirstRnc, rstring bFirstBts, rstring bFirstNodeB, rstring bFirstCell, rstring camelSmscAdd, rstring destinationAddress, rstring originatingAddress, rstring nameOutputFile, boolean endRop, rstring suffix, rstring filePrefix, rstring northIf>" uriIndex="22"/>
+      <type column="6" line="1207" name="AggregateSaiSchema" static="true" type="tuple&lt;AggregateSAI aggrSAI, boolean endROP, FileHeader fHeader>" uriIndex="22"/>
+      <type column="6" line="1209" name="AggregateSaiSchemaParquet" static="true" type="tuple&lt;rstring accesspointnameni, int32 apnselectionmode, rstring arp, rstring bsc, rstring bts, int32 causeforrecclosing, rstring cdr_time, rstring cell, rstring cell_id, rstring chargingcharacteristics, int32 chargingid, rstring chchselectionmode, rstring commonfileoutput, rstring customer_category, rstring uri_normalized, int64 datavolumedownlink, int64 datavolumeuplink, int32 duration, rstring dynamicaddressflag, rstring ggsn_address, rstring lac, rstring mcc_mnc, rstring mvno_code, rstring nodeid, rstring nodeb, int32 num_cdrs_per_camel_init_call_release, int32 num_cdrs_per_management_intervention, rstring gsnaddress, rstring guaranteedbitratedl, rstring guaranteedbitrateul, rstring imssignalingcontext, int32 localsequencenumber, rstring maxrequestedbandwithdl, rstring maxrequestedbandwithul, rstring mme, rstring mstimezone, int32 num_cdrs_per_max_change_cond, int32 num_cdrs_per_plmn_change, int32 num_cdrs_per_sgsn_change, int32 num_cdrs_per_time_limit, int32 num_cdrs_per_volume_limit, int32 num_cdrs_per_zboundary_crossing, rstring pdptype, rstring qci, rstring ratinggroup, int32 rattype, int32 recordopeningtime, int32 recordsequencenumber, int32 recordtype, rstring rnc, int32 ropofday, int32 ropofhour, int32 hour, rstring sac, rstring sgsn_address, rstring sgsn_plmn_id, rstring imei, rstring imsi, rstring servedmsisdn, rstring servedpdppdnaddress, rstring servingnodeaddress, rstring tac, rstring tai, rstring trackingarea, rstring userlocationinformation, rstring TIMEDAY>" uriIndex="22"/>
+      <type column="6" line="1281" name="AggregateSaiSchemaLteParquet" static="true" type="tuple&lt;int32 recordType, rstring servedIMSI, rstring gsnAddress, int32 chargingID, rstring servingNodeAddress, rstring apnNI, rstring pdpPDNType, rstring servedPDPPDNAddress, rstring dynamicAddressFlag, rstring recordOpeningTime, int32 duration, int32 causeForRecClosing, int32 recordSequenceNumber, rstring nodeId, int32 localSequenceNumber, int32 apnSelectionMode, rstring servedMSISDN, rstring chargingCharacteristics, rstring chChSelectionMode, rstring iMSsignalingContext, rstring servedIMEISV, int32 rATType, rstring mSTimeZone, rstring userLocationInformation, rstring ratingGroup, rstring uriNormalized, rstring uriDataVolumeUplink, rstring uriDataVolumeDownlink, rstring qCI, rstring maxRequestedBrandUl, rstring maxRequestedBrandDl, rstring guaranteedBitRateUl, rstring guaranteedBitRateDl, rstring arp, rstring mvno_code, rstring tac, rstring enodeb, rstring mme, rstring cell, rstring tai, rstring cell_id, rstring mcc_mnc, rstring ggsnAddress, rstring cdrTime, int32 num_cdrs_per_volume_limit, int32 num_cdrs_per_time_limit, int32 num_cdrs_per_sgsn_change, int32 num_cdrs_per_max_change_cond, int32 num_cdrs_per_plmn_change, rstring trakingArea, rstring customer_category, rstring nameOutputFile, int32 rop_of_day, int32 rop_of_hour, int32 YEAR, int32 MONTH, int32 DAY>" uriIndex="22"/>
+      <type column="6" line="1340" name="AggregateSaiSchemaSgsn" static="true" type="tuple&lt;AggregateSAISgsn aggrSAI, boolean endROP, FileHeader fHeader>" uriIndex="22"/>
+      <type column="6" line="1342" name="AggregateSqmSchema" static="true" type="tuple&lt;CdrSchemaSQM cdrSchema, float64 startRopSecs, float64 endRopSecs, float64 startRopSecsOld, float64 endRopSecsOld, boolean endROP, boolean wait, boolean write_prev, rstring exclude_node, rstring id_gruppo, rstring alias_imsi, rstring sito_capnet, FileHeader fHeader>" uriIndex="22"/>
+      <type column="6" line="1344" name="AggregateSqmSchemaSgw" static="true" type="tuple&lt;CdrSchemaSGWSQM cdrSchema, float64 startRopSecs, float64 endRopSecs, float64 startRopSecsOld, float64 endRopSecsOld, boolean endROP, boolean wait, boolean write_prev, rstring exclude_node, FileHeader fHeader>" uriIndex="22"/>
+      <type column="6" line="1346" name="AggregateSqmSchemaSgsn" static="true" type="tuple&lt;CdrSchemaSgsnSQM cdrSchema, float64 startRopSecs, float64 endRopSecs, float64 startRopSecsOld, float64 endRopSecsOld, boolean endROP, boolean wait, boolean write_prev, rstring exclude_node, list&lt;rstring> mvnoNotFound, FileHeader fHeader>" uriIndex="22"/>
+      <type column="6" line="1348" name="AggregateSqmSchemaMsc" static="true" type="tuple&lt;EmscCdr cdrSchema, float64 startRopSecs, float64 endRopSecs, float64 startRopSecsOld, float64 endRopSecsOld, boolean endROP, boolean wait, boolean write_prev, rstring nodeId, rstring exclude_node, rstring id_gruppo, list&lt;rstring> mvnoNotFound, FileHeader fHeader>" uriIndex="22"/>
+      <type column="6" line="1350" name="AggregateSqmSchemaVolte" static="true" type="tuple&lt;CdrSchemaVolteSQM cdrSchema, float64 startRopSecs, float64 endRopSecs, float64 startRopSecsOld, float64 endRopSecsOld, boolean endROP, boolean wait, boolean write_prev, rstring exclude_node, FileHeader fHeader>" uriIndex="22"/>
+      <type column="6" line="1352" name="AggregateSaiSchemaLte" static="true" type="tuple&lt;SaiLte aggrSAI, boolean endRop, FileHeader fHeader>" uriIndex="22"/>
+      <type column="6" line="1354" name="AggregateSaiSchemaMsc" static="true" type="tuple&lt;AggregateSAIMsc aggrSAI, boolean endROP, FileHeader fHeader>" uriIndex="22"/>
+      <type column="6" line="1356" name="AggregateSaiSchemaMscSms" static="true" type="tuple&lt;AggregateSAIMscSms aggrSAI, boolean endROP, FileHeader fHeader>" uriIndex="22"/>
+      <type column="6" line="1359" name="BroadGgsnApnExclude" static="true" type="tuple&lt;rstring start_time, rstring end_time, rstring start_time_old, rstring end_time_old, uint32 chargingID, rstring recordOpeningTime, int32 duration, rstring nodeId, rstring apn_name, int64 downlink_post, int64 downlink_prep, rstring nameInputFile, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1380" name="BroadGgsnApn" static="true" type="tuple&lt;rstring ggsn_dn, rstring apn_name, rstring start_time, rstring end_time, int64 downlink_post, int64 downlink_prep, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1396" name="BroadSgsn" static="true" type="tuple&lt;rstring sgsn_dn, rstring start_time, rstring end_time, int64 downlink_2g, int64 downlink_3g, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1411" name="RoamingBroadGgsn" static="true" type="tuple&lt;rstring ggsn_dn, rstring country_roaming_operator, rstring start_time, rstring end_time, int64 cdr_foreign_downlink_control_ggsn, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1426" name="TavGgsn" static="true" type="tuple&lt;rstring tratta_dn, rstring start_time, rstring end_time, int64 tav_bb_downlink_uplink, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1439" name="TavSgsn" static="true" type="tuple&lt;rstring sgsn_dn, rstring start_time, rstring end_time, int64 tav_bb_downlink, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1452" name="BscBroadDownlink" static="true" type="tuple&lt;rstring bsc, rstring start_time, rstring end_time, int64 bb_bsc_downlink, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1465" name="RncBroadDownlink" static="true" type="tuple&lt;rstring rnc, rstring start_time, rstring end_time, int64 bb_rnc_downlink, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1478" name="BroadMvno" static="true" type="tuple&lt;rstring sgsn_dn, rstring mvno_name, rstring start_time, rstring end_time, int64 mvno_bb_downlink, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1492" name="BroadRoaming" static="true" type="tuple&lt;rstring country_dn, rstring country, rstring start_time, rstring end_time, int64 cdr_foreign_downlink_control_sgsn, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1507" name="BroadMvnoAggrOp" static="true" type="tuple&lt;rstring mvno_name, rstring start_time, rstring end_time, int64 mvno_bb_operator_downlink, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1521" name="BroadTacLte" static="true" type="tuple&lt;rstring tac, rstring start_time, rstring end_time, int64 downlink_tac_lte, int64 uplink_tac_lte, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1536" name="BroadPgwApn" static="true" type="tuple&lt;rstring ggsn_dn, rstring apn_name, rstring start_time, rstring end_time, int64 downlink_4g, int64 uplink_4g, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1551" name="BroadImsi" static="true" type="tuple&lt;rstring ggsn_dn, rstring start_time, rstring end_time, int64 imsi_lte_dl_somma_volume, int64 imsi_lte_ul_somma_volume, int64 imsi_bb_dl_somma_volume, int64 imsi_bb_ul_somma_volume, int64 bb_utenti_distinti, int64 lte_utenti_distinti, int64 bb_throughput_medio_ul_per_utenti_distinti, int64 bb_throughput_medio_dl_per_utenti_distinti, int64 bb_utenti_distinti_ul, int64 lte_utenti_distinti_ul, int64 bb_utenti_distinti_dl, int64 lte_utenti_distinti_dl, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, rstring idGruppo, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1579" name="BroadImsiCapnet" static="true" type="tuple&lt;rstring ggsn_dn, rstring start_time, rstring end_time, int64 imsi_lte_dl_somma_volume, int64 imsi_lte_ul_somma_volume, int64 imsi_bb_dl_somma_volume, int64 imsi_bb_ul_somma_volume, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1597" name="ReportImsi" static="true" type="tuple&lt;rstring imsi, rstring start_time, rstring end_time, int64 somma_volume, rstring user_location_information, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1611" name="BroadMvnoSgw" static="true" type="tuple&lt;rstring sgsn_dn, rstring mvno_name, rstring start_time, rstring end_time, int64 mvno_bb_4g_downlink_uplink, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1625" name="BroadMvnoAggrOpSgw" static="true" type="tuple&lt;rstring mvno_name, rstring start_time, rstring end_time, int64 mvno_bb_4g_downlink_uplink_nazionale, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1639" name="Fonia" static="true" type="tuple&lt;rstring msc, rstring start_time, rstring end_time, int64 traff_orig_cons_prepaid, int64 traff_orig_cons_postpaid, int64 traff_orig_busin_postpaid_rif, int64 traff_term_cons_prepaid, int64 traff_term_cons_postpaid, int64 chiamate_tit_con_risp_gest_ri, int64 chiamate_titpcn_con_risp_gest_ri, int64 chiamate_tit_titpcn_con_risp_gest_ri, int64 chiamate_tit_rif_con_risposta_gestite_da_ri, int64 chiamate_rif_con_risposta_gestite_da_ri, int64 chiamate_tit_rif_pcn_con_risposta_gestite_da_ri, int64 chiamate_rif_titrif_titrifpcn_con_risposta_non_gestite_da_ri, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1666" name="Sms" static="true" type="tuple&lt;rstring msc, rstring start_time, rstring end_time, int64 volume_di_sms_mo_ok_prepagato, int64 volume_di_sms_mo_ok_postpagato, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1680" name="FoniaRoamingInbound" static="true" type="tuple&lt;rstring country_dn, rstring country, rstring start_time, rstring end_time, int64 volume_di_traffico_inbound_originato, int64 volume_di_traffico_inbound_terminato, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1695" name="SmsRoamingInbound" static="true" type="tuple&lt;rstring country_dn, rstring country, rstring start_time, rstring end_time, int64 volume_di_sms_mo_inbound_verso_smsc_roamers, int64 volume_di_sms_mt_inbound_verso_smsc_roamers, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1710" name="FoniaMvno" static="true" type="tuple&lt;rstring msc_dn, rstring mvno_name, rstring start_time, rstring end_time, int64 mvno_fonia_traffico_originato, int64 mvno_fonia_traffico_terminato, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1726" name="SmsMvno" static="true" type="tuple&lt;rstring msc_dn, rstring mvno_name, rstring start_time, rstring end_time, int64 mvno_sms_traffico_originato, int64 mvno_sms_traffico_terminato, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1742" name="Spx" static="true" type="tuple&lt;rstring msc_dn, rstring start_time, rstring end_time, int64 cont_chiamate_con_risp, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1756" name="FoniaMvnoAggrOp" static="true" type="tuple&lt;rstring mvno_name, rstring start_time, rstring end_time, int64 mvno_fonia_traffico_originato_tot, int64 mvno_fonia_traffico_terminato_tot, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1770" name="SmsMvnoAggrOp" static="true" type="tuple&lt;rstring mvno_name, rstring start_time, rstring end_time, int64 mvno_sms_traffico_originato_tot, int64 mvno_sms_traffico_terminato_tot, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1785" name="FoniaRoamingOutbound" static="true" type="tuple&lt;rstring country_dn, rstring country, rstring start_time, rstring end_time, float64 r_fonia_out_chiamate_terminate_post, float64 r_fonia_out_chiamate_terminate_success_rate_post, float64 r_fonia_out_chiamate_terminate_prep, float64 r_fonia_out_chiamate_terminate_success_rate_prep, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1802" name="Imsi" static="true" type="tuple&lt;rstring sqm_dn, rstring start_time, rstring end_time, int64 imsi_mo_ni_disconnections_rate_2g_ch_drop, int64 imsi_mo_ni_disconnections_rate_3g_ch_drop, int64 imsi_number_of_users, int64 imsi_rate_of_impacted_users_ni_disc, int64 imsi_rate_of_impacted_users_ko_att, int64 imsi_failure_rate_mo_prec_prepaid_postpaid_no_rtc_failure, int64 imsi_failure_rate_mo_prepaid_rtc_failure, int64 imsi_number_of_sms_mo_prepaid_postpaid_no_rtc, int64 imsi_number_of_sms_mo_prepaid, int64 mo_2g_chiam_risp, int64 mo_3g_chiam_risp, int64 mo_2g_chiam_bloc_no_err, int64 mo_2g_chiam_bloc_err, int64 mo_3g_chiam_bloc_no_err, int64 mo_3g_chiam_bloc_err, int64 mt_2g_chiam_bloc_err, int64 mt_2g_chiam_bloc_no_err, int64 mt_3g_chiam_bloc_err, int64 mt_3g_chiam_bloc_no_err, int64 mt_2g_chiam_risp, int64 mt_3g_chiam_risp, int64 mo_sms_num_cdr, int64 imsi_fonia_mo_somma_volume, int64 imsi_fonia_mt_somma_volume, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, rstring idGruppo, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1885" name="RatingG" static="true" type="tuple&lt;rstring rat_type, rstring rating_group, rstring start_time, rstring end_time, int64 volume_traffico_downlink, int64 volume_traffico_uplink, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1900" name="RatT" static="true" type="tuple&lt;rstring rat_type, rstring start_time, rstring end_time, int64 num_connection, int64 tot_duration, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1914" name="Volte" static="true" type="tuple&lt;rstring dn, rstring start_time, rstring end_time, int64 chiamate_volte_tit_con_risposta_gestite_da_ri, int64 chiamate_volte_business_tit_con_risposta_gestite_da_ri, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, float64 endRopSecs, float64 startRopSecs>" uriIndex="22"/>
+      <type column="6" line="1929" name="CsvWrite" static="true" type="tuple&lt;rstring outputContent, rstring nameOutputFile, boolean endROP, rstring filePrefix, rstring suffix, rstring northIf, boolean writeOn>" uriIndex="22"/>
+      <type column="6" line="1939" name="EndRop" static="true" type="tuple&lt;rstring rop>" uriIndex="22"/>
+      <type column="6" line="1943" name="CDRCounters" static="true" type="tuple&lt;rstring kpi, rstring ROP, uint64 cdrtot, uint64 cdrexclude1, uint64 cdrexclude2>" uriIndex="22"/>
+      <type column="6" line="1952" name="CDRExcludedNodes" static="true" type="tuple&lt;rstring fileName, rstring centrale, rstring rop, rstring listOfFiles>" uriIndex="22"/>
+    </namespace>
+    <namespace name="com.ti.oss.common.cdr.parser.epgw">
+      <primitiveOp language="Cpp" modelUriIndex="32" name="ParserPGW" public="true">
+        <description/>
+        <parametersDescription/>
+        <parameter cardinality="-1" expressionMode="Expression" name="pduTypes" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <parameter cardinality="-1" expressionMode="Expression" name="configEnvVar" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <parameter cardinality="-1" expressionMode="Expression" name="mediationName" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <parameter cardinality="-1" expressionMode="Expression" name="configFileKey" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description>TODO: Your short description here</description>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <outputPort expressionMode="Constant" minNumPorts="0" optional="true" windowPunctOutputMode="Generating">
+          <description>TODO: Your short description here</description>
+        </outputPort>
+      </primitiveOp>
+      <type column="6" line="5" name="EpgwCdr" static="true" type="FileHeader, tuple&lt;int32 recordType, rstring servedIMSI, rstring ggsnAddress, uint32 chargingID, list&lt;rstring> servingNodeAddress, rstring apn, rstring pdpPDNType, rstring servedPDPPDNAddress, rstring eTSIAddress, rstring dynamicAddressFlag, rstring recordOpeningTime, int32 duration, int32 causeForRecClosing, int32 recordSequenceNumber, rstring nodeID, list&lt;rstring> identifier, list&lt;int32> serviceContainers_indexes, list&lt;int32> serviceContainers_sizes, list&lt;int32> serviceContainers_firstUri_indexes, list&lt;int32> listOfUri_indexes, list&lt;int32> listOfUri_sizes, list&lt;rstring> ratingGroupId, list&lt;rstring> uri, list&lt;rstring> uriDataVolumeUplink, list&lt;rstring> uriDataVolumeDownlink, uint32 localSequenceNumber, int32 apnSelectionMode, rstring servedMSISDN, rstring chargingCharacteristics, int32 chChSelectionMode, rstring iMSsignalingContext, rstring servingNodePLMNIdentifier, rstring pSFreeFormatData, rstring pSFFDAppendIndicator, rstring servedIMEISV, int32 rATType, rstring mSTimeZone, rstring userLocationInformation, list&lt;rstring> changeRatingGroupId, list&lt;rstring> qCI, list&lt;rstring> maxRequestedBandwithUL, list&lt;rstring> maxRequestedBandwithDL, list&lt;rstring> guaranteedBitrateUL, list&lt;rstring> guaranteedBitrateDL, list&lt;rstring> aRP, list&lt;rstring> datavolumeFBCUplink, list&lt;rstring> datavolumeFBCDownlink, rstring p_GWPLMNTIdentifier, rstring startTime, rstring stopTime, int32 pDNConnectionID, rstring servedPDPPDNAddressExt, rstring eTSIAddressExt, boolean endOfData>" uriIndex="7"/>
+      <type column="6" line="131" name="EpgwCdrSchema" static="true" type="EpgwCdr epgwCdr, FileHeader fHeader" uriIndex="7"/>
+      <type column="6" line="133" name="EpgwCdrWithROP" static="true" type="tuple&lt;EpgwCdr epgwCdr, float64 startROP, float64 endROP, boolean changed, boolean waitEnd>" uriIndex="7"/>
+    </namespace>
+    <namespace name="com.ti.oss.common.cdr.util">
+      <compositeOp column="18" line="6" name="MergerStatisticCounters" potentialMain="false" public="true" uriIndex="3">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="parall" optional="false" type="&lt;int32>"/>
+        <inputPort name="In" portIndex="0" type="stream&lt;CDRCounters>"/>
+        <outputPort name="Out" portIndex="0" type="stream&lt;tuple&lt;rstring content>, tuple&lt;rstring fileName>>"/>
+        <type column="3" line="12" name="Counters" type="tuple&lt;rstring rop, uint64 cdrtotrattype, uint64 cdrtot, uint64 cdrexclude1, uint64 cdrexclude2, int32 count>" uriIndex="3"/>
+      </compositeOp>
+      <function modelUriIndex="33" name="transformUserLocationInfo" native="true" public="true" returnType="rstring" uriIndex="0">
+        <prototype>public rstring transformUserLocationInfo( rstring ulc )</prototype>
+        <parameter name="ulc" type="rstring"/>
+      </function>
+      <function modelUriIndex="33" name="cancFile" native="true" public="true" returnType="int32" uriIndex="0">
+        <prototype>public int32 cancFile(rstring filename)</prototype>
+        <parameter name="filename" type="rstring"/>
+      </function>
+      <function column="1" line="13" name="rmSuffixFromFn" native="false" public="true" returnType="rstring" uriIndex="2">
+        <prototype>public rstring rmSuffixFromFn(rstring fileName, rstring suffix)</prototype>
+        <parameter name="fileName" type="rstring"/>
+        <parameter name="suffix" type="rstring"/>
+      </function>
+      <function column="1" line="33" name="cleanPlmnid" native="false" public="true" returnType="rstring" uriIndex="2">
+        <prototype>public rstring cleanPlmnid(rstring plmnid)</prototype>
+        <parameter name="plmnid" type="rstring"/>
+      </function>
+      <function column="1" line="47" name="getNodeIdFromPath" native="false" public="true" returnType="rstring" uriIndex="2">
+        <prototype>public rstring getNodeIdFromPath(rstring fileName)</prototype>
+        <parameter name="fileName" type="rstring"/>
+      </function>
+      <function column="1" line="64" name="getPathFile" native="false" public="true" returnType="rstring" uriIndex="2">
+        <prototype>public rstring getPathFile(rstring fileName)</prototype>
+        <parameter name="fileName" type="rstring"/>
+      </function>
+      <function column="1" line="78" name="cleanApn" native="false" public="true" returnType="rstring" uriIndex="2">
+        <prototype>public rstring cleanApn(rstring val)</prototype>
+        <parameter name="val" type="rstring"/>
+      </function>
+      <function column="1" line="99" name="addPadding" native="false" public="true" returnType="rstring" uriIndex="2">
+        <prototype>public rstring addPadding(rstring val, int32 string_size)</prototype>
+        <parameter name="val" type="rstring"/>
+        <parameter name="string_size" type="int32"/>
+      </function>
+      <function column="1" line="118" name="hexstring2int" native="false" public="true" returnType="int32" uriIndex="2">
+        <prototype>public int32 hexstring2int(rstring hex)</prototype>
+        <parameter name="hex" type="rstring"/>
+      </function>
+      <function column="1" line="155" name="hexstring2bin" native="false" public="true" returnType="rstring" uriIndex="2">
+        <prototype>public rstring hexstring2bin(rstring hex)</prototype>
+        <parameter name="hex" type="rstring"/>
+      </function>
+      <function column="1" line="204" name="bin2dec" native="false" public="true" returnType="int32" uriIndex="2">
+        <prototype>public int32 bin2dec(rstring bin)</prototype>
+        <parameter name="bin" type="rstring"/>
+      </function>
+      <function column="1" line="231" name="transformUserLocalInfo" native="false" public="true" returnType="rstring" uriIndex="2">
+        <prototype>public rstring transformUserLocalInfo(rstring ulc)</prototype>
+        <parameter name="ulc" type="rstring"/>
+      </function>
+      <function column="1" line="283" name="transformUserLocalInfo_4G" native="false" public="true" returnType="rstring" uriIndex="2">
+        <prototype>public rstring transformUserLocalInfo_4G(rstring ulc)</prototype>
+        <parameter name="ulc" type="rstring"/>
+      </function>
+      <function column="1" line="334" name="transformUserLocalInfo_4Gsmall" native="false" public="true" returnType="rstring" uriIndex="2">
+        <prototype>public rstring transformUserLocalInfo_4Gsmall(rstring ulc)</prototype>
+        <parameter name="ulc" type="rstring"/>
+      </function>
+      <function column="1" line="385" name="transformUserLocalInfoMsc" native="false" public="true" returnType="rstring" uriIndex="2">
+        <prototype>public rstring transformUserLocalInfoMsc(rstring ulc)</prototype>
+        <parameter name="ulc" type="rstring"/>
+      </function>
+      <function column="1" line="434" name="getUserLocationInfoMsc" native="false" public="true" returnType="boolean" uriIndex="2">
+        <prototype>public boolean getUserLocationInfoMsc(rstring uli, mutable rstring mcc, mutable rstring mnc, mutable rstring lac, mutable rstring ci)</prototype>
+        <parameter name="uli" type="rstring"/>
+        <parameter mutable="true" name="mcc" type="rstring"/>
+        <parameter mutable="true" name="mnc" type="rstring"/>
+        <parameter mutable="true" name="lac" type="rstring"/>
+        <parameter mutable="true" name="ci" type="rstring"/>
+      </function>
+      <function column="1" line="494" name="getUserLocationInfoExtensionMsc" native="false" public="true" returnType="boolean" uriIndex="2">
+        <prototype>public boolean getUserLocationInfoExtensionMsc(rstring uli, mutable rstring eci)</prototype>
+        <parameter name="uli" type="rstring"/>
+        <parameter mutable="true" name="eci" type="rstring"/>
+      </function>
+      <function column="1" line="519" name="generateENDROP" native="false" public="true" returnType="float64" uriIndex="2">
+        <prototype>public float64 generateENDROP(float64 timeStampInSec, int32 durationROP)</prototype>
+        <parameter name="timeStampInSec" type="float64"/>
+        <parameter name="durationROP" type="int32"/>
+      </function>
+      <function column="1" line="533" name="checkCDRinROP" native="false" public="true" returnType="boolean" uriIndex="2">
+        <prototype>public boolean checkCDRinROP(float64 endROP, rstring endtimeCDR)</prototype>
+        <parameter name="endROP" type="float64"/>
+        <parameter name="endtimeCDR" type="rstring"/>
+      </function>
+      <function column="1" line="560" name="getEndTimeCDR" native="false" public="true" returnType="rstring" uriIndex="2">
+        <prototype>public rstring getEndTimeCDR(rstring time, int32 duration)</prototype>
+        <parameter name="time" type="rstring"/>
+        <parameter name="duration" type="int32"/>
+      </function>
+      <function column="1" line="570" name="formatCdrTime" native="false" public="true" returnType="rstring" uriIndex="2">
+        <prototype>public rstring formatCdrTime(rstring date)</prototype>
+        <parameter name="date" type="rstring"/>
+      </function>
+      <function column="1" line="581" name="getEndTimeCDRfloat" native="false" public="true" returnType="float64" uriIndex="2">
+        <prototype>public float64 getEndTimeCDRfloat(rstring time, int32 duration)</prototype>
+        <parameter name="time" type="rstring"/>
+        <parameter name="duration" type="int32"/>
+      </function>
+      <function column="1" line="589" name="getRecordOpeningTime" native="false" public="true" returnType="rstring" uriIndex="2">
+        <prototype>public rstring getRecordOpeningTime(rstring date)</prototype>
+        <parameter name="date" type="rstring"/>
+      </function>
+      <function column="1" line="595" name="getRecordOpeningTimeBigData" native="false" public="true" returnType="rstring" uriIndex="2">
+        <prototype>public rstring getRecordOpeningTimeBigData(rstring date)</prototype>
+        <parameter name="date" type="rstring"/>
+      </function>
+      <function column="1" line="607" name="getStartTimeVolte" native="false" public="true" returnType="rstring" uriIndex="2">
+        <prototype>public rstring getStartTimeVolte(rstring date)</prototype>
+        <parameter name="date" type="rstring"/>
+      </function>
+      <function column="1" line="618" name="getChargeableDurationInSecs" native="false" public="true" returnType="int64" uriIndex="2">
+        <prototype>public int64 getChargeableDurationInSecs(rstring date)</prototype>
+        <parameter name="date" type="rstring"/>
+      </function>
+      <function column="1" line="636" name="prepareHostPools" native="false" public="true" returnType="list&lt;rstring>" uriIndex="2">
+        <prototype>public list&lt;rstring&gt; prepareHostPools(rstring par)</prototype>
+        <parameter name="par" type="rstring"/>
+      </function>
+      <function column="1" line="643" name="getOperatorByIP" native="false" public="true" returnType="rstring" uriIndex="2">
+        <prototype>public rstring getOperatorByIP(rstring key, rstring operatorIP, int32 maxSubnetworkMask)</prototype>
+        <parameter name="key" type="rstring"/>
+        <parameter name="operatorIP" type="rstring"/>
+        <parameter name="maxSubnetworkMask" type="int32"/>
+      </function>
+      <function column="1" line="689" name="fillOperatorName" native="false" public="true" returnType="boolean" uriIndex="2">
+        <prototype>public boolean fillOperatorName(rstring key, mutable rstring countryRoamingOperator)</prototype>
+        <parameter name="key" type="rstring"/>
+        <parameter mutable="true" name="countryRoamingOperator" type="rstring"/>
+      </function>
+      <function column="1" line="7" name="isConfigurationChanged" native="false" public="true" returnType="boolean" uriIndex="4">
+        <prototype>public boolean isConfigurationChanged(rstring medname)</prototype>
+        <parameter name="medname" type="rstring"/>
+      </function>
+      <function column="1" line="17" name="checkConfiguration" native="false" public="true" returnType="int32" stateful="true" uriIndex="4">
+        <prototype>stateful public int32 checkConfiguration(rstring medname, rstring key, mutable int32 interval)</prototype>
+        <parameter name="medname" type="rstring"/>
+        <parameter name="key" type="rstring"/>
+        <parameter mutable="true" name="interval" type="int32"/>
+      </function>
+      <function column="1" line="31" name="checkConfiguration" native="false" public="true" returnType="rstring" stateful="true" uriIndex="4">
+        <prototype>stateful public rstring checkConfiguration(rstring medname, rstring key, mutable rstring interval)</prototype>
+        <parameter name="medname" type="rstring"/>
+        <parameter name="key" type="rstring"/>
+        <parameter mutable="true" name="interval" type="rstring"/>
+      </function>
+    </namespace>
+    <namespace name="com.ti.oss.common.cdr.parser.eggsn">
+      <primitiveOp language="Cpp" modelUriIndex="34" name="ParserGGSN" public="true">
+        <description/>
+        <parametersDescription/>
+        <parameter cardinality="-1" expressionMode="Expression" name="pduTypes" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <parameter cardinality="-1" expressionMode="Expression" name="configEnvVar" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <parameter cardinality="-1" expressionMode="Expression" name="mediationName" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <parameter cardinality="-1" expressionMode="Expression" name="configFileKey" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="true" windowPunctInputMode="Oblivious">
+          <description>TODO: Your short description here</description>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <outputPort expressionMode="Constant" minNumPorts="0" optional="true" windowPunctOutputMode="Generating">
+          <description>TODO: Your short description here</description>
+        </outputPort>
+      </primitiveOp>
+      <type column="6" line="5" name="EOD" static="true" type="tuple&lt;boolean endOfData>" uriIndex="29"/>
+      <type column="6" line="7" name="EggsnCdr" static="true" type="FileHeader, EOD, tuple&lt;int32 recordType, rstring servedIMSI, rstring address, uint32 chargingID, list&lt;rstring> sgsnAddress, rstring apn, rstring pdpType, rstring servedPDPAddress, rstring dynamicAddressFlag, list&lt;rstring> qosNegotiated, list&lt;int32> dataVolumeGPRSUplink, list&lt;int32> dataVolumeGPRSDownlink, list&lt;int32> changeCondition, list&lt;rstring> changeTime, rstring recordOpeningTime, int32 duration, int32 causeForRecClosing, int32 recordSequenceNumber, rstring nodeID, list&lt;rstring> identifier, list&lt;rstring> significance, list&lt;rstring> creditRequestType, list&lt;rstring> creditRequestStatus, list&lt;rstring> creditResultCode, list&lt;rstring> ccRequestNumber, list&lt;rstring> creditControlSessionId, list&lt;rstring> ccsRealm, list&lt;rstring> policyRequestType, list&lt;rstring> policyRequestStatus, list&lt;rstring> policyResultCode, list&lt;rstring> policyStopTime, list&lt;rstring> pcsRealm, list&lt;rstring> policyControlSessionId, list&lt;rstring> userCategory, list&lt;rstring> ruleSpaceId, list&lt;int32> serviceContainers_indexes, list&lt;int32> serviceContainers_sizes, list&lt;int32> serviceContainers_firstUri_indexes, list&lt;int32> listOfUri_indexes, list&lt;int32> listOfUri_sizes, list&lt;rstring> ratingGroupId, list&lt;rstring> serviceIdentifier, list&lt;rstring> serviceLocalSequenceNumber, list&lt;rstring> activeTimeMethod, list&lt;rstring> inactivity, list&lt;rstring> resolution, list&lt;rstring> serviceCcRequestNumber, list&lt;rstring> serviceSpecificUnits, list&lt;rstring> count, list&lt;rstring> uri, list&lt;rstring> uriIdentifier, list&lt;rstring> uriDataVolumeUplink, list&lt;rstring> uriDataVolumeDownlink, list&lt;rstring> listofUriTimeStamps, list&lt;int32> timeReports_indexes, list&lt;int32> timeReports_sizes, list&lt;rstring> timeRatingGroupId, list&lt;rstring> timeStartTime, list&lt;rstring> endTime, list&lt;rstring> dataVolumeUplink, list&lt;rstring> dataVolumeDownlink, uint32 localSequenceNumber, int32 apnSelectionMode, rstring servedMSISDN, rstring chargingCharacteristics, int32 chChSelectionMode, rstring iMSsignalingContext, rstring externalChargingId, rstring sgsnPLMNIdentifier, rstring pSFreeFormatData, rstring pSFFDAppendIndicator, rstring servedIMEISV, int32 rATType, rstring mSTimeZone, rstring userLocationInformation, list&lt;rstring> changeRatingGroupId, list&lt;rstring> changeResultCode, list&lt;rstring> changeLocalSequenceNumber, list&lt;rstring> timeOfFirstUsage, list&lt;rstring> timeOfLastUsage, list&lt;rstring> timeUsage, list&lt;rstring> serviceConditionChange, list&lt;rstring> qoSInformationNeg, list&lt;rstring> sgsn_Address, list&lt;rstring> changeSgsnPLMNIdentifier, list&lt;rstring> datavolumeFBCUplink, list&lt;rstring> datavolumeFBCDownlink, list&lt;rstring> changeTimeOfReport, list&lt;rstring> changeRaTType, list&lt;rstring> failureHandlingContinue, list&lt;rstring> changeServiceIdentifier, list&lt;rstring> changePSFreeFormatData, list&lt;rstring> changePSFFDAppendIndicator, list&lt;rstring> aFRecordInformation>" uriIndex="29"/>
+      <type column="6" line="123" name="EggsnCdrWithROP" static="true" type="tuple&lt;EggsnCdr eggsnCdr, float64 startROP, float64 endROP, boolean changed, boolean waitEnd>" uriIndex="29"/>
+    </namespace>
+    <namespace name="com.ti.oss.common.cdr.checkPduType">
+      <primitiveOp language="Cpp" modelUriIndex="35" name="CheckPduType" public="true">
+        <description/>
+        <parametersDescription/>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <outputPort expressionMode="Expression" maxNumPorts="1" minNumPorts="1" optional="false" windowPunctOutputMode="Generating">
+          <description/>
+        </outputPort>
+        <outputPort expressionMode="Expression" maxNumPorts="1" minNumPorts="1" optional="false" windowPunctOutputMode="Generating">
+          <description/>
+        </outputPort>
+        <outputPort expressionMode="Expression" maxNumPorts="1" minNumPorts="1" optional="false" windowPunctOutputMode="Generating">
+          <description/>
+        </outputPort>
+      </primitiveOp>
+      <type column="6" line="5" name="PduType" static="true" type="FileHeader, tuple&lt;rstring pduType>" uriIndex="23"/>
+    </namespace>
+    <namespace name="com.ti.oss.common.cdr.parser.esgw">
+      <primitiveOp language="Cpp" modelUriIndex="36" name="ParserSGW" public="true">
+        <description/>
+        <parametersDescription/>
+        <parameter cardinality="-1" expressionMode="Expression" name="pduTypes" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <parameter cardinality="-1" expressionMode="Expression" name="configEnvVar" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <parameter cardinality="-1" expressionMode="Expression" name="mediationName" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <parameter cardinality="-1" expressionMode="Expression" name="configFileKey" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description>TODO: Your short description here</description>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <outputPort expressionMode="Constant" minNumPorts="0" optional="true" windowPunctOutputMode="Generating">
+          <description>TODO: Your short description here</description>
+        </outputPort>
+      </primitiveOp>
+      <compositeOp column="18" line="21" name="ParserSGWEnrich" potentialMain="false" public="true" uriIndex="27">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="SgwCdr" portIndex="0" type="stream&lt;EsgwCdr>"/>
+        <outputPort name="OTrailer" portIndex="0" type="stream&lt;FileHeader h, FileTrailer t>"/>
+        <outputPort name="OutEventEnrichSGW" portIndex="1"/>
+      </compositeOp>
+      <function column="1" line="70" name="getNomeCentrale" native="false" returnType="rstring" uriIndex="27">
+        <prototype>rstring getNomeCentrale(rstring nodeId, rstring emm_rete, boolean flagEmmRete)</prototype>
+        <parameter name="nodeId" type="rstring"/>
+        <parameter name="emm_rete" type="rstring"/>
+        <parameter name="flagEmmRete" type="boolean"/>
+      </function>
+      <type column="6" line="5" name="EsgwCdr" static="true" type="FileHeader, tuple&lt;int32 recordType, rstring servedIMSI, rstring gsnAddress, uint32 chargingID, list&lt;rstring> servingNodeAddress, rstring apn, rstring pdpPDNType, rstring servedPDPPDNAddress, list&lt;int32> dataVolumeGPRSUplink, list&lt;int32> dataVolumeGPRSDownlink, list&lt;int32> changeCondition, list&lt;rstring> changeTime, list&lt;rstring> userLocationInformation, list&lt;rstring> qCI, list&lt;rstring> maxRequestedBandwithUL, list&lt;rstring> maxRequestedBandwithDL, list&lt;rstring> guaranteedBitrateUL, list&lt;rstring> guaranteedBitrateDL, list&lt;rstring> aRP, rstring recordOpeningTime, int32 duration, int32 causeForRecClosing, int32 recordSequenceNumber, rstring nodeID, uint32 localSequenceNumber, rstring servedMSISDN, rstring chargingCharacteristics, rstring servingNodePLMNIdentifier, rstring servedIMEISV, int32 rATType, rstring mSTimeZone, rstring sgwChange, list&lt;int32> servingNodeType, rstring p_GWAddresUsed, rstring p_GWPLMNTIdentifier, int32 pDNConnectionID, rstring iPAddress, rstring eTSIAddress, boolean endOfData>" uriIndex="28"/>
+      <type column="6" line="56" name="EsgwCdrSchema" static="true" type="EsgwCdr esgwCdr, FileHeader fHeader" uriIndex="28"/>
+      <type column="6" line="58" name="EsgwCdrWithROP" static="true" type="tuple&lt;EsgwCdr esgwCdr, float64 startROP, float64 endROP, boolean changed, boolean waitEnd>" uriIndex="28"/>
+    </namespace>
+    <namespace name="com.ti.oss.common.cdr.parser.esgsn">
+      <primitiveOp language="Cpp" modelUriIndex="37" name="ParserSGSN" public="true">
+        <description/>
+        <parametersDescription/>
+        <parameter cardinality="-1" expressionMode="Expression" name="pduTypes" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <parameter cardinality="-1" expressionMode="Expression" name="configEnvVar" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <parameter cardinality="-1" expressionMode="Expression" name="mediationName" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <parameter cardinality="-1" expressionMode="Expression" name="configFileKey" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description>TODO: Your short description here</description>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <outputPort expressionMode="Constant" minNumPorts="0" optional="true" windowPunctOutputMode="Generating">
+          <description>TODO: Your short description here</description>
+        </outputPort>
+      </primitiveOp>
+      <type column="6" line="5" name="EOD" static="true" type="tuple&lt;boolean endOfData>" uriIndex="24"/>
+      <type column="6" line="7" name="EsgsnCdr" static="true" type="FileHeader, EOD, tuple&lt;int32 recordType, rstring networkInitiation, rstring servedIMSI, rstring servedIMEI, rstring sgsnAddress, rstring msNetworkCapability, rstring routingArea, rstring locationArea, rstring cellIdentifier, uint32 chargingID, rstring ggsnAddressUsed, rstring accessPointNameNI, rstring pdpType, rstring servedPDPAddress, list&lt;rstring> qosRequested, list&lt;rstring> qosNegotiated, list&lt;int32> dataVolumeGPRSUplink, list&lt;int32> dataVolumeGPRSDownlink, list&lt;int32> changeCondition, list&lt;rstring> changeTime, list&lt;rstring> userLocationInformation, rstring recordOpeningTime, int32 duration, rstring sgsnChange, int32 causeForRecClosing, int32 diagnostics, int32 recordSequenceNumber, rstring nodeID, list&lt;rstring> identifier, list&lt;rstring> significance, list&lt;int32> extendedDiagnostics, list&lt;int32> extendedDiagnosticsBssgp_indexes, list&lt;int32> extendedDiagnosticsBssgp_sizes, list&lt;int32> extendedDiagnosticsBssgp_tsBssgpRanapCause, list&lt;int32> extendedDiagnosticsBssgp_tsBssgpRanaPMessageType, list&lt;int32> extendedDiagnosticsBssgp_tsBssgpRanapMessageSource, list&lt;rstring> extendedDiagnosticsBssgp_tsBssgpRanapCauseTimeStamp, list&lt;int32> extendedDiagnosticsRanap_indexes, list&lt;int32> extendedDiagnosticsRanap_sizes, list&lt;int32> extendedDiagnosticsRanap_tsBssgpRanapCause, list&lt;int32> extendedDiagnosticsRanap_tsBssgpRanaPMessageType, list&lt;int32> extendedDiagnosticsRanap_tsBssgpRanapMessageSource, list&lt;rstring> extendedDiagnosticsRanap_tsBssgpRanapCauseTimeStamp, uint32 localSequenceNumber, int32 apnSelectionMode, rstring accessPointNameOI, rstring servedMSISDN, rstring chargingCharacteristics, int32 rATType, rstring cAMELInformationPDP_sCFAddress, int32 cAMELInformationPDP_serviceKey, int32 cAMELInformationPDP_defaultTransactionHandling, rstring cAMELInformationPDP_cAMELAccessPointNameNI, rstring cAMELInformationPDP_cAMELAccessPointNameOI, int32 cAMELInformationPDP_numberOfDPEncountered, list&lt;rstring> cAMELInformationPDP_levelOfCAMELService, rstring cAMELInformationPDP_freeFormatData, rstring cAMELInformationPDP_fFDAppendIndicator, int32 chChSelectionMode, rstring dynamicAddressFlag, rstring pLMNIdentifier, rstring mSTimeZone, rstring serviceCentre, rstring recordingEntity, rstring messageReference, rstring eventTimeStamp, int32 smsResult, rstring destinationNumber, rstring cAMELInformationSMS_sCFAddress, int32 cAMELInformationSMS_serviceKey, int32 cAMELInformationSMS_defaultSMSHandling, rstring cAMELInformationSMS_cAMELCallingPartyNumber, rstring cAMELInformationSMS_cAMELDestinationSubscriberNumber, rstring cAMELInformationSMS_cAMELSMSCAddress, rstring cAMELInformationSMS_freeFormatData, rstring cAMELInformationSMS_smsReferenceNumber, int32 numberOfSM, rstring locationAreaLastSM, rstring routingAreaLastSM, rstring cellIdentifierLastSM, rstring pLMNIdentifierLastSM>" uriIndex="24"/>
+      <type column="7" line="107" name="EsgsnCdrWithROP" static="true" type="tuple&lt;EsgsnCdr esgsnCdr, float64 startROP, float64 endROP, boolean changed, boolean waitEnd>" uriIndex="24"/>
+    </namespace>
+    <namespace name="com.ti.oss.common.cdr.parser.emsc">
+      <primitiveOp language="Cpp" modelUriIndex="38" name="ParserMSC" public="true">
+        <description/>
+        <parametersDescription/>
+        <parameter cardinality="-1" expressionMode="Expression" name="pduTypes" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <parameter cardinality="-1" expressionMode="Expression" name="configEnvVar" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <parameter cardinality="-1" expressionMode="Expression" name="mediationName" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <parameter cardinality="-1" expressionMode="Expression" name="configFileKey" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description>TODO: Your short description here</description>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <outputPort expressionMode="Constant" minNumPorts="0" optional="true" windowPunctOutputMode="Generating">
+          <description>TODO: Your short description here</description>
+        </outputPort>
+      </primitiveOp>
+      <compositeOp column="18" line="12" name="ParserMSCEnrich" potentialMain="false" public="true" uriIndex="25">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="cdrFile" portIndex="0" type="stream&lt;EmscCdr>"/>
+        <outputPort name="OMsc" portIndex="0" type="stream&lt;CdrSchemaForAggrMsc>"/>
+        <outputPort name="OutEventEnrich" portIndex="1"/>
+      </compositeOp>
+      <type column="6" line="7" name="EOD" static="true" type="tuple&lt;boolean endOfData>" uriIndex="26"/>
+      <type column="6" line="10" name="EmscCdr" static="true" type="FileHeader, EOD, tuple&lt;boolean compositeCdr, uint64 composite_call_data_record_ID, int16 callModule, uint64 call_module_ID, boolean isEventModule, list&lt;int16> eventModule, list&lt;uint64> event_module_ID, list&lt;rstring> genericChargingDigits, list&lt;rstring> genericChargingNumbers, list&lt;rstring> serviceFeatureCode, list&lt;boolean> eventInIncompleteCallDataIndicator, list&lt;rstring> freeFormatData, list&lt;rstring> eventTrafficActivityCode, list&lt;boolean> eventIsdnIncompleteCallDataIndicator, int32 callPosition, rstring networkCallReference, int32 tariffClass, rstring calledPartyNumber, rstring calledPartyMSISDN, rstring calledPartyNumberOICK, int32 calledPartyNumberTON, int32 subscriptionType, rstring serviceCentreAddress, rstring camelSMSCAddress, rstring destinationAddress, int32 sMSresult, rstring callIdentificationNumber, rstring timeforStartofCharge, rstring chargeableDuration, int32 tariffSwitchInd, int32 disconnectingParty, int32 faultCode, int32 internalCauseandLoc, int32 cause, int32 location, int32 accessType, rstring callingSubscriberIMSI, rstring callingSubscriberIMEISV, rstring firstCallingLocationInformation, rstring lastCallingLocationInformation, rstring outgoingRoute, rstring calledSubscriberIMSI, rstring calledSubscriberIMEISV, rstring firstCalledLocationInformation, rstring lastCalledLocationInformation, rstring incomingRoute, rstring firstCallingLocationInformationExtension, rstring firstCalledLocationInformationExtension, rstring mMEName, boolean ccbsCallIndicator, rstring mMEIdentity, int32 sRVCCIndicator, int32 sRVCCAlertingIndicator, rstring pChargingVectorRelated, rstring emergencyServiceCategory, rstring dateforStartofCharge, rstring tAC, rstring callingPartyNumber, rstring callingPartyMSISDN, rstring callingSubscriberIMEI, int32 teleServiceCode, int32 bearerServiceCode, rstring calledGenericIMSI, rstring calledMobileStationRoamingNumber, uint32 bCUIdentifier, int32 transparencyIndicator, rstring calledPartyMNPInfo, int32 iNMarkingofMS, boolean lastPartialOutput, int32 partialOutputRecNum, int32 radioChannelProperty, boolean incompleteCallDataIndicator, int32 serviceKey, rstring gsmSCFAddress, rstring gSMCallReferenceNumber, rstring mSCAddress, int32 rANAPCauseCode, int32 bSSMAPCauseCode, boolean multimediaCall, int32 guaranteedBitrate, int32 trafficClass, int32 maxBitRateDownlink, int32 maxBitRateUplink, rstring userToUserInformation, int32 roamingPriorityLevel, rstring outgoingPChargingVector, int32 iUCodec, int32 bladeId, boolean buddyBladeIndicator, boolean trafficIsolationIndicator, rstring calledSubscriberIMEI, rstring originalCalledNumber, int32 redirectionCounter, rstring mobileStationRoamingNumber, int32 presentationAndScreeningInd, int32 relatedCallNumber, rstring trafficActivityCode, rstring chargedCallingPartyNumber, rstring networkProvidedCallingPartyNum, rstring userProvidedCallingPartyNum, boolean mCASMSIndicator, rstring reroutedToServiceCentreAddress, rstring originatingAddress, int32 iNServiceTrigger, rstring levelOfCamelService, rstring redirectingNumber, rstring redirectingIMSI, boolean cAMELInitiatedCallForwarding, int32 optimalRoutingType, boolean optimalRoutingInvocationFailed, int32 userRate, int32 asyncSyncIndicator, int32 uILayer1Protocol, rstring incomingPChargingVector>" uriIndex="26"/>
+      <type column="6" line="173" name="EmscCdrWithROP" static="true" type="tuple&lt;EmscCdr emscCdr, rstring nameOutputFile, float64 startROP, float64 endROP, boolean changed, boolean waitEnd>" uriIndex="26"/>
+    </namespace>
+    <namespace name="com.ti.oss.common.cdr.file">
+      <primitiveOp language="Cpp" modelUriIndex="39" name="CsvPrepareGeoloc" public="true">
+        <description/>
+        <parametersDescription/>
+        <parameter cardinality="1" expressionMode="AttributeFree" name="separator" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <parameter cardinality="1" expressionMode="AttributeFree" name="dirGeoLoc" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <outputPort expressionMode="Expression" maxNumPorts="1" minNumPorts="1" optional="false" windowPunctOutputMode="Generating">
+          <description/>
+        </outputPort>
+      </primitiveOp>
+      <primitiveOp language="Cpp" modelUriIndex="40" name="CsvPrepareMultiPort" public="true">
+        <description/>
+        <parametersDescription/>
+        <parameter cardinality="1" expressionMode="AttributeFree" name="separator" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <outputPort expressionMode="Expression" maxNumPorts="1" minNumPorts="1" optional="false" windowPunctOutputMode="Generating">
+          <description/>
+        </outputPort>
+      </primitiveOp>
+      <primitiveOp language="Cpp" modelUriIndex="41" name="CsvPrepare" public="true">
+        <description/>
+        <parametersDescription/>
+        <parameter cardinality="1" expressionMode="AttributeFree" name="separator" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <outputPort expressionMode="Expression" maxNumPorts="1" minNumPorts="1" optional="false" windowPunctOutputMode="Generating">
+          <description/>
+        </outputPort>
+      </primitiveOp>
+      <primitiveOp language="Cpp" modelUriIndex="42" name="CsvPrepareMultiPortSgsn" public="true">
+        <description/>
+        <parametersDescription/>
+        <parameter cardinality="1" expressionMode="AttributeFree" name="separator" optional="false" type="rstring">
+          <description/>
+        </parameter>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <inputPort maxNumPorts="1" minNumPorts="1" optional="false" windowPunctInputMode="Oblivious">
+          <description/>
+          <windowPolicy>NonWindowed</windowPolicy>
+        </inputPort>
+        <outputPort expressionMode="Expression" maxNumPorts="1" minNumPorts="1" optional="false" windowPunctOutputMode="Generating">
+          <description/>
+        </outputPort>
+      </primitiveOp>
+      <compositeOp column="18" line="8" name="FileExportCdrMsc" potentialMain="false" public="true" uriIndex="9">
+        <inputPort name="ISQM" portIndex="0" type="stream&lt;FileHeader h, FileTrailer t>"/>
+        <outputPort name="OutEvent" portIndex="0"/>
+        <type column="3" line="11" name="HeaderTrailer" type="FileHeader h, FileTrailer t, int32 count" uriIndex="9"/>
+      </compositeOp>
+      <compositeOp column="18" line="8" name="FileExportCdrSgsn" potentialMain="false" public="true" uriIndex="10">
+        <inputPort name="ISAI" portIndex="0" type="stream&lt;FileHeader h, FileTrailer t>"/>
+        <inputPort name="ISQM" portIndex="1" type="stream&lt;FileHeader h, FileTrailer t>"/>
+        <outputPort name="OutEvent" portIndex="0"/>
+        <type column="3" line="11" name="HeaderTrailer" type="FileHeader h, FileTrailer t, int32 count" uriIndex="10"/>
+      </compositeOp>
+      <compositeOp column="18" line="13" name="FileExportEmptyFileDirScan" potentialMain="false" public="true" uriIndex="11">
+        <inputPort name="File" portIndex="0" type="stream&lt;FileHeader h, FileTrailer t>"/>
+        <outputPort name="OutEvent" portIndex="0"/>
+        <type column="3" line="25" name="HeaderTrailer" type="FileHeader h, FileTrailer t, int32 count" uriIndex="11"/>
+      </compositeOp>
+      <compositeOp column="18" line="17" name="MultiFileSink3" potentialMain="false" public="true" uriIndex="12">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="parallelSize" optional="false" type="&lt;int32>"/>
+        <inputPort name="I" portIndex="0" type="stream&lt;CsvWrite>"/>
+        <outputPort name="OEvent" portIndex="0" type="stream&lt;Event e>"/>
+        <type column="3" line="25" name="FTableEntry" type="rstring expFile, int32 closeFile, boolean isNorthIf, rstring suffixString, rstring prefixString, boolean isFileOpened" uriIndex="12"/>
+      </compositeOp>
+      <compositeOp column="18" line="8" name="RenameFile" potentialMain="false" public="true" uriIndex="13">
+        <inputPort name="I" portIndex="0" type="stream&lt;rstring filename>"/>
+      </compositeOp>
+      <compositeOp column="18" line="16" name="MultiFileSink" potentialMain="false" public="true" uriIndex="14">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="I" portIndex="0" type="stream&lt;CsvWrite>"/>
+        <outputPort name="OEvent" portIndex="0" type="stream&lt;Event e>"/>
+        <type column="3" line="23" name="FTableEntry" type="rstring expFile, uint64 fDesc, boolean closeFile" uriIndex="14"/>
+      </compositeOp>
+      <compositeOp column="18" line="8" name="FileExportCdrVolta" potentialMain="false" public="true" uriIndex="15">
+        <inputPort name="IBigData" portIndex="0" type="stream&lt;FileHeader h, FileTrailer t>"/>
+        <outputPort name="OutEvent" portIndex="0"/>
+        <type column="3" line="12" name="HeaderTrailer" type="FileHeader h, FileTrailer t, int32 count" uriIndex="15"/>
+      </compositeOp>
+      <compositeOp column="18" line="8" name="FileExportCdr" potentialMain="false" public="true" uriIndex="16">
+        <inputPort name="ISAI" portIndex="0" type="stream&lt;FileHeader h, FileTrailer t>"/>
+        <inputPort name="ISAILte" portIndex="1" type="stream&lt;FileHeader h, FileTrailer t>"/>
+        <inputPort name="ISQM" portIndex="2" type="stream&lt;FileHeader h, FileTrailer t>"/>
+        <outputPort name="OutEvent" portIndex="0"/>
+        <type column="3" line="13" name="HeaderTrailer" type="FileHeader h, FileTrailer t, int32 count" uriIndex="16"/>
+      </compositeOp>
+      <compositeOp column="18" line="22" name="MultiFileSink4" potentialMain="false" public="true" uriIndex="17">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="parallelSize" optional="false" type="&lt;int32>"/>
+        <inputPort name="I" portIndex="0" type="stream&lt;CsvWrite>"/>
+        <outputPort name="OEvent" portIndex="0" type="stream&lt;Event e>"/>
+        <type column="3" line="39" name="FTableEntry" type="rstring expFile, int32 closeFileCounter, boolean isBigData, rstring suffixString, rstring prefixString, boolean isFileOpen, rstring isCompressed, rstring isCloseSize, int32 maxSize" uriIndex="17"/>
+      </compositeOp>
+      <compositeOp column="18" line="15" name="SortFileNames" potentialMain="false" public="true" uriIndex="18">
+        <inputPort name="File" portIndex="0" type="stream&lt;PduType>"/>
+        <inputPort name="Control" portIndex="1" type="stream&lt;boolean control>"/>
+        <outputPort name="OutFile" portIndex="0" type="stream&lt;PduType>"/>
+      </compositeOp>
+      <compositeOp column="18" line="9" name="FilePolled" potentialMain="false" public="true" uriIndex="19">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <inputPort name="IFilePolled" portIndex="0" type="stream&lt;rstring fileName, uint64 fileSize>"/>
+        <outputPort name="OFilePolled" portIndex="0" type="stream&lt;FileHeader>"/>
+        <outputPort name="OutEventPolled" portIndex="1"/>
+        <outputPort name="OTrailer" portIndex="2" type="stream&lt;FileHeader h, FileTrailer t>"/>
+      </compositeOp>
+      <compositeOp column="18" line="8" name="FileExportEmptyFile" potentialMain="false" public="true" uriIndex="20">
+        <inputPort name="ISAI" portIndex="0" type="stream&lt;FileHeader h, FileTrailer t>"/>
+        <inputPort name="ISQM" portIndex="1" type="stream&lt;FileHeader h, FileTrailer t>"/>
+        <outputPort name="OutEvent" portIndex="0"/>
+        <type column="3" line="13" name="HeaderTrailer" type="FileHeader h, FileTrailer t, int32 count" uriIndex="20"/>
+      </compositeOp>
+      <compositeOp column="18" line="156" name="FileExportEmptyFileMSC" potentialMain="false" public="true" uriIndex="20">
+        <inputPort name="File" portIndex="0" type="stream&lt;FileHeader h, FileTrailer t>"/>
+        <outputPort name="OutEvent" portIndex="0"/>
+        <type column="3" line="161" name="HeaderTrailer" type="FileHeader h, FileTrailer t, int32 count" uriIndex="20"/>
+      </compositeOp>
+      <compositeOp column="18" line="13" name="MultiFileSink2" potentialMain="false" public="true" uriIndex="21">
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="parallelSize" optional="false" type="&lt;int32>"/>
+        <inputPort name="I" portIndex="0" type="stream&lt;CsvWrite>"/>
+        <outputPort name="OEvent" portIndex="0" type="stream&lt;Event e>"/>
+        <type column="3" line="20" name="FTableEntry" type="rstring expFile, uint64 fDesc, int32 closeFile, boolean isNorthIf, rstring suffixString, rstring prefixString" uriIndex="21"/>
+      </compositeOp>
+      <function column="1" line="576" name="createDir" native="false" returnType="void" uriIndex="17">
+        <prototype>void createDir(rstring nameOutputFile)</prototype>
+        <parameter name="nameOutputFile" type="rstring"/>
+      </function>
+      <function column="1" line="592" name="openFile" native="false" returnType="boolean" uriIndex="17">
+        <prototype>boolean openFile(CsvWrite I, rstring compress, rstring suffix)</prototype>
+        <parameter name="I" type="CsvWrite"/>
+        <parameter name="compress" type="rstring"/>
+        <parameter name="suffix" type="rstring"/>
+      </function>
+      <function column="1" line="616" name="writeHeaders" native="false" returnType="void" uriIndex="17">
+        <prototype>void writeHeaders(rstring nameOutputFile)</prototype>
+        <parameter name="nameOutputFile" type="rstring"/>
+      </function>
+      <function column="1" line="694" name="writeContent" native="false" returnType="void" uriIndex="17">
+        <prototype>void writeContent(CsvWrite I, boolean isBigData, rstring closeSize, int32 outputSize)</prototype>
+        <parameter name="I" type="CsvWrite"/>
+        <parameter name="isBigData" type="boolean"/>
+        <parameter name="closeSize" type="rstring"/>
+        <parameter name="outputSize" type="int32"/>
+      </function>
+    </namespace>
+    <namespace name="com.ti.oss.common.cdrparallel">
+      <compositeOp column="18" line="18" name="EggsnParallel" potentialMain="false" public="true" uriIndex="1">
+        <inputPort name="GGSNPI" portIndex="0" type="stream&lt;PduType>"/>
+        <inputPort name="PGWPI" portIndex="1" type="stream&lt;PduType>"/>
+        <inputPort name="CheckROP" portIndex="2" type="stream&lt;EndRop>"/>
+        <outputPort name="ISAI" portIndex="0"/>
+        <outputPort name="ISQM" portIndex="1"/>
+        <outputPort name="GGSNP" portIndex="2"/>
+        <outputPort name="PGWP" portIndex="3"/>
+        <outputPort name="aggrSAICSV" portIndex="4"/>
+        <outputPort name="outCsv" portIndex="5"/>
+        <outputPort name="outCsv2" portIndex="6"/>
+        <outputPort name="outCsv3" portIndex="7"/>
+        <outputPort name="outCsv4" portIndex="8"/>
+        <outputPort name="outCsv5" portIndex="9"/>
+        <outputPort name="outCsv6" portIndex="10"/>
+        <outputPort name="outCsv7" portIndex="11"/>
+        <outputPort name="OutEventP" portIndex="12"/>
+      </compositeOp>
+    </namespace>
+    <namespace name="com.ti.oss.common.cdr.msc.evalROP">
+      <compositeOp column="18" line="13" name="RopEvalMsc" potentialMain="false" public="true" uriIndex="8">
+        <parameter metaType="Expression" name="tmpOutFilePrefix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="tmpOutFileSuffix" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="mediationName" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="interval" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="wait" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="delta_start" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="delta_end" optional="false" type="&lt;rstring>"/>
+        <parameter metaType="Expression" name="rop_time" optional="false" type="&lt;rstring>"/>
+        <outputPort name="EvalROP" portIndex="0" type="stream&lt;CdrSchemaForAggrMscWithROP>"/>
+      </compositeOp>
+      <function column="1" line="194" name="checkInterval" native="false" returnType="int32" stateful="true" uriIndex="8">
+        <prototype>stateful int32 checkInterval(rstring medname, rstring key, mutable int32 interval)</prototype>
+        <parameter name="medname" type="rstring"/>
+        <parameter name="key" type="rstring"/>
+        <parameter mutable="true" name="interval" type="int32"/>
+      </function>
+      <function column="1" line="206" name="initEndOfDataTuple" native="false" returnType="CdrSchemaForAggrMscWithROP" uriIndex="8">
+        <prototype>CdrSchemaForAggrMscWithROP initEndOfDataTuple()</prototype>
+      </function>
+      <function column="1" line="216" name="initWaitEndTuple" native="false" returnType="CdrSchemaForAggrMscWithROP" uriIndex="8">
+        <prototype>CdrSchemaForAggrMscWithROP initWaitEndTuple()</prototype>
+      </function>
+      <function column="1" line="226" name="initChangedTuple" native="false" returnType="CdrSchemaForAggrMscWithROP" uriIndex="8">
+        <prototype>CdrSchemaForAggrMscWithROP initChangedTuple()</prototype>
+      </function>
+      <function column="1" line="236" name="initOutputTuple" native="false" returnType="CdrSchemaForAggrMscWithROP" uriIndex="8">
+        <prototype>CdrSchemaForAggrMscWithROP initOutputTuple()</prototype>
+      </function>
+    </namespace>
+    <dependency>
+      <common:name>MediationFramework</common:name>
+      <common:version>[1.0.0,2.0.0)</common:version>
+    </dependency>
+    <dependency>
+      <common:name>MediationUtils</common:name>
+      <common:version>[1.0.0,2.0.0)</common:version>
+    </dependency>
+  </toolkit>
+
+</toolkitModel>

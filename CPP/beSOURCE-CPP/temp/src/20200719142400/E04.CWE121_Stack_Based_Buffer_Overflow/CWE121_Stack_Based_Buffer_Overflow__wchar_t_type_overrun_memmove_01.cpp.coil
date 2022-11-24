@@ -1,0 +1,326 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp");
+   ("language", "CPP");
+   ("include", "std_testcase.h");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<stddef.h>");
+   ("include", "<time.h>");
+   ("include", "<limits.h>");
+   ("include", "<string.h>");
+   ("include", "<stdint.h>");
+   ("include", "<stdint.h>");
+   ("include", "<ctype.h>");
+   ("include", "<fcntl.h>");
+   ("include", "<sys/types.h>");
+   ("include", "<sys/stat.h>");
+   ("include", "std_testcase_io.h");
+   ("include", "std_testcase.h");
+   ("include", "<wchar.h>");
+}
+{
+   (!3, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase_io.h");
+   (!2, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h");
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp",
+   MD("RAND32()",[],"((rand()<<30) ^ (rand()<<15) ^ rand())")
+   ,(84#0,84#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp",
+   MD("RAND64()",[],"(((int64_t)rand()<<60) ^ ((int64_t)rand()<<45) ^ ((int64_t)rand()<<30) ^ ((int64_t)rand()<<15) ^ (int64_t)rand())")
+   ,(87#0,87#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   SF([extern,const,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"GLOBAL_CONST_TRUE")
+   ,(103#18,103#34,!2)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   SF([extern,const,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"GLOBAL_CONST_FALSE")
+   ,(104#18,104#35,!2)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   SF([extern,const,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"GLOBAL_CONST_FIVE")
+   ,(105#18,105#34,!2)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   SF([extern,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"globalTrue")
+   ,(110#12,110#21,!2)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   SF([extern,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"globalFalse")
+   ,(111#12,111#22,!2)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   SF([extern,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"globalFive")
+   ,(112#12,112#21,!2)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   SF([extern,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"globalArgc")
+   ,(55#12,55#21,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   SF([extern,extern],ref(ref(char)),<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"globalArgv")
+   ,(56#12,56#24,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   SI(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,
+   {[
+      {;
+      ,(1#1,100#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,100#1,!1)}
+   )
+   ,(1#1,100#1,!1)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printLine"):unit,[(mod(ref(char),[const]):"line",(14#16,14#32,!3))],[]
+   )
+   ,(14#1,14#34,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printWLine"):unit,[(mod(ref(wchar),[const]):"line",(16#17,16#36,!3))],[]
+   )
+   ,(16#1,16#38,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printIntLine"):unit,[(int:"intNumber",(18#20,18#32,!3))],[]
+   )
+   ,(18#1,18#34,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printShortLine"):unit,[(short:"shortNumber",(20#22,20#38,!3))],[]
+   )
+   ,(20#1,20#40,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printFloatLine"):unit,[(float:"floatNumber",(22#22,22#38,!3))],[]
+   )
+   ,(22#1,22#40,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printLongLine"):unit,[(long:"longNumber",(24#20,24#34,!3))],[]
+   )
+   ,(24#1,24#36,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printLongLongLine"):unit,[(class((,int64_t)):"longLongIntNumber",(26#24,26#48,!3))],[]
+   )
+   ,(26#1,26#50,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printSizeTLine"):unit,[(class((,size_t)):"sizeTNumber",(28#21,28#38,!3))],[]
+   )
+   ,(28#1,28#40,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printHexCharLine"):unit,[(char:"charHex",(30#23,30#34,!3))],[]
+   )
+   ,(30#1,30#36,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printWcharLine"):unit,[(wchar:"wideChar",(32#21,32#36,!3))],[]
+   )
+   ,(32#1,32#38,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printUnsignedLine"):unit,[(uint:"unsignedNumber",(34#24,34#46,!3))],[]
+   )
+   ,(34#1,34#48,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printHexUnsignedCharLine"):unit,[(uchar:"unsignedCharacter",(36#31,36#61,!3))],[]
+   )
+   ,(36#1,36#63,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printDoubleLine"):unit,[(double:"doubleNumber",(38#22,38#40,!3))],[]
+   )
+   ,(38#1,38#42,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printStructLine"):unit,[(mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]):"structTwoIntsStruct",(40#22,40#62,!3))],[]
+   )
+   ,(40#1,40#64,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printBytesLine"):unit,[(mod(ref(uchar),[const]):"bytes",(42#21,42#47,!3)),(class((,size_t)):"numBytes",(42#50,42#64,!3))],[]
+   )
+   ,(42#1,42#66,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"decodeHexChars"):class((,size_t)),[(ref(uchar):"bytes",(44#23,44#43,!3)),(class((,size_t)):"numBytes",(44#46,44#60,!3)),(mod(ref(char),[const]):"hex",(44#63,44#78,!3))],[]
+   )
+   ,(44#1,44#80,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"decodeHexWChars"):class((,size_t)),[(ref(uchar):"bytes",(46#24,46#44,!3)),(class((,size_t)):"numBytes",(46#47,46#61,!3)),(mod(ref(wchar),[const]):"hex",(46#64,46#82,!3))],[]
+   )
+   ,(46#1,46#84,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"globalReturnsTrue"):int,[],[]
+   )
+   ,(48#1,48#24,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"globalReturnsFalse"):int,[],[]
+   )
+   ,(50#1,50#25,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"globalReturnsTrueOrFalse"):int,[],[]
+   )
+   ,(52#1,52#31,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   FN([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01_bad"):unit,[],[],
+   {[
+      {[
+         {VD("structCharVoid",alias("charVoid",mod(record((,_charVoid)),[struct])))
+         ,(37#18,37#31,!1)};
+         {{AE({OA({V("structCharVoid"),alias("charVoid",mod(record((,_charVoid)),[struct])),(38#9,38#22,!1)},"voidSecond"),ref(unit),(38#9,38#33,!1)},{CS(ref(unit),{"0123456789abcde0123"S,string,(38#45,38#66,!1)}),ref(unit),(38#37,38#66,!1)}),ref(unit),(38#9,38#66,!1)}
+         ,(38#9,38#66,!1)};
+         {PC0((<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printWLine"),[mod(ref(wchar),[const])],[{CS(ref(wchar),{OA({V("structCharVoid"),alias("charVoid",mod(record((,_charVoid)),[struct])),(40#31,40#44,!1)},"voidSecond"),ref(unit),(40#31,40#55,!1)}),ref(wchar),(40#20,40#55,!1)}])
+         ,(40#9,40#56,!1)};
+         {PC0((<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"memmove"),[arr(wchar),string,int],[{OA({V("structCharVoid"),alias("charVoid",mod(record((,_charVoid)),[struct])),(42#17,42#30,!1)},"charFirst"),arr(wchar),(42#17,42#40,!1)},{"0123456789abcde0123"S,string,(42#43,42#64,!1)},{SO({V("structCharVoid"),alias("charVoid",mod(record((,_charVoid)),[struct])),(42#74,42#87,!1)}),int,(42#67,42#88,!1)}])
+         ,(42#9,42#89,!1)};
+         {{AE({AA({OA({V("structCharVoid"),alias("charVoid",mod(record((,_charVoid)),[struct])),(43#9,43#22,!1)},"charFirst"),arr(wchar),(43#9,43#32,!1)},[{BO(-,{BO(/,{SO({OA({V("structCharVoid"),alias("charVoid",mod(record((,_charVoid)),[struct])),(43#42,43#55,!1)},"charFirst"),arr(wchar),(43#42,43#65,!1)}),int,(43#35,43#66,!1)},{SO(wchar),int,(43#68,43#82,!1)}),int,(43#34,43#83,!1)},{"1"N,int,(43#85,43#85,!1)}),int,(43#35,43#85,!1)}]),wchar,(43#9,43#86,!1)},{"\0"C,char,(43#90,43#94,!1)}),wchar,(43#9,43#94,!1)}
+         ,(43#9,43#94,!1)};
+         {PC0((<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printWLine"),[mod(ref(wchar),[const])],[{CS(ref(wchar),{OA({V("structCharVoid"),alias("charVoid",mod(record((,_charVoid)),[struct])),(44#31,44#44,!1)},"charFirst"),arr(wchar),(44#31,44#54,!1)}),ref(wchar),(44#20,44#54,!1)}])
+         ,(44#9,44#55,!1)};
+         {PC0((<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printWLine"),[mod(ref(wchar),[const])],[{CS(ref(wchar),{OA({V("structCharVoid"),alias("charVoid",mod(record((,_charVoid)),[struct])),(45#31,45#44,!1)},"voidSecond"),ref(unit),(45#31,45#55,!1)}),ref(wchar),(45#20,45#55,!1)}])
+         ,(45#9,45#56,!1)}
+         ]
+      ,(36#5,46#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(34#1,47#1,!1)}
+   )
+   ,(34#1,47#1,!1)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   FN([public,static],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"good1"):mod(unit,[static]),[],[],
+   {[
+      {[
+         {VD("structCharVoid",alias("charVoid",mod(record((,_charVoid)),[struct])))
+         ,(56#18,56#31,!1)};
+         {{AE({OA({V("structCharVoid"),alias("charVoid",mod(record((,_charVoid)),[struct])),(57#9,57#22,!1)},"voidSecond"),ref(unit),(57#9,57#33,!1)},{CS(ref(unit),{"0123456789abcde0123"S,string,(57#45,57#66,!1)}),ref(unit),(57#37,57#66,!1)}),ref(unit),(57#9,57#66,!1)}
+         ,(57#9,57#66,!1)};
+         {PC0((<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printWLine"),[mod(ref(wchar),[const])],[{CS(ref(wchar),{OA({V("structCharVoid"),alias("charVoid",mod(record((,_charVoid)),[struct])),(59#31,59#44,!1)},"voidSecond"),ref(unit),(59#31,59#55,!1)}),ref(wchar),(59#20,59#55,!1)}])
+         ,(59#9,59#56,!1)};
+         {PC0((<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"memmove"),[arr(wchar),string,int],[{OA({V("structCharVoid"),alias("charVoid",mod(record((,_charVoid)),[struct])),(61#17,61#30,!1)},"charFirst"),arr(wchar),(61#17,61#40,!1)},{"0123456789abcde0123"S,string,(61#43,61#64,!1)},{SO({OA({V("structCharVoid"),alias("charVoid",mod(record((,_charVoid)),[struct])),(61#74,61#87,!1)},"charFirst"),arr(wchar),(61#74,61#97,!1)}),int,(61#67,61#98,!1)}])
+         ,(61#9,61#99,!1)};
+         {{AE({AA({OA({V("structCharVoid"),alias("charVoid",mod(record((,_charVoid)),[struct])),(62#9,62#22,!1)},"charFirst"),arr(wchar),(62#9,62#32,!1)},[{BO(-,{BO(/,{SO({OA({V("structCharVoid"),alias("charVoid",mod(record((,_charVoid)),[struct])),(62#42,62#55,!1)},"charFirst"),arr(wchar),(62#42,62#65,!1)}),int,(62#35,62#66,!1)},{SO(wchar),int,(62#68,62#82,!1)}),int,(62#34,62#83,!1)},{"1"N,int,(62#85,62#85,!1)}),int,(62#35,62#85,!1)}]),wchar,(62#9,62#86,!1)},{"\0"C,char,(62#90,62#94,!1)}),wchar,(62#9,62#94,!1)}
+         ,(62#9,62#94,!1)};
+         {PC0((<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printWLine"),[mod(ref(wchar),[const])],[{CS(ref(wchar),{OA({V("structCharVoid"),alias("charVoid",mod(record((,_charVoid)),[struct])),(63#31,63#44,!1)},"charFirst"),arr(wchar),(63#31,63#54,!1)}),ref(wchar),(63#20,63#54,!1)}])
+         ,(63#9,63#55,!1)};
+         {PC0((<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"printWLine"),[mod(ref(wchar),[const])],[{CS(ref(wchar),{OA({V("structCharVoid"),alias("charVoid",mod(record((,_charVoid)),[struct])),(64#31,64#44,!1)},"voidSecond"),ref(unit),(64#31,64#55,!1)}),ref(wchar),(64#20,64#55,!1)}])
+         ,(64#9,64#56,!1)}
+         ]
+      ,(55#5,65#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(53#1,66#1,!1)}
+   )
+   ,(53#1,66#1,!1)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01",
+   FN([public],(<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01_good"):unit,[],[],
+   {[
+      {PC0((<"CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01">,"good1"),[],[])
+      ,(70#5,70#11,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(68#1,71#1,!1)}
+   )
+   ,(68#1,71#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp",
+   CL([struct],(,_twoIntsStruct),[])
+   {
+      ([public],"intOne":int,(92#9,92#14,!2));
+      ([public],"intTwo":int,(93#9,93#14,!2))
+   }
+   ,(90#1,94#16,!2)}
+
+,
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp",
+   CL([struct],(,_charVoid),[])
+   {
+      ([public],"charFirst":wchar,([{"16"N,int,(27#23,27#24,!1)}]),(27#13,27#25,!1));
+      ([public],"voidSecond":ref(unit),(28#10,28#21,!1));
+      ([public],"voidThird":ref(unit),(29#10,29#20,!1))
+   }
+   ,(25#1,30#11,!1)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp",
+   [
+      M("/* TEMPLATE GENERATED TESTCASE FILE\nFilename: CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.c\nLabel Definition File: CWE121_Stack_Based_Buffer_Overflow.label.xml\nTemplate File: point-flaw-01.tmpl.c\n*/",1,(1#0,1#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp")),
+      M("/*\n * @description\n * CWE: 121 Stack Based Buffer Overflow\n * Sinks: type_overrun_memmove\n *    GoodSink: Perform the memmove() and prevent overwriting part of the structure\n *    BadSink : Overwrite part of the structure by incorrectly using the sizeof(struct) in memmove()\n * Flow Variant: 01 Baseline\n *\n * */",6,(6#0,6#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp")),
+      M("/* SRC_STR is 20 wchar_t long, including the null terminator */",22,(22#0,22#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp")),
+      M("/* Print the initial block pointed to by structCharVoid.voidSecond */",39,(39#0,39#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp")),
+      M("/* FLAW: Use the sizeof(structCharVoid) which will overwrite the pointer voidSecond */",41,(41#0,41#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp")),
+      M("/* null terminate the string */",43,(43#0,43#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp")),
+      M("/* OMITBAD */",49,(49#0,49#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp")),
+      M("/* Print the initial block pointed to by structCharVoid.voidSecond */",58,(58#0,58#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp")),
+      M("/* FIX: Use sizeof(structCharVoid.charFirst) to avoid overwriting the pointer voidSecond */",60,(60#0,60#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp")),
+      M("/* null terminate the string */",62,(62#0,62#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp")),
+      M("/* OMITGOOD */",73,(73#0,73#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp")),
+      M("/* Below is the main(). It is only used when building this testcase on\n   its own for testing or for building a binary to use in testing binary\n   analysis tools. It is not used when compiling all the testcases as one\n   application, which is how source code analysis tools are tested. */",75,(75#0,75#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp")),
+      M("/* seed randomness */",84,(84#0,84#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp")),
+      M("/* OMITGOOD */",90,(90#0,90#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp")),
+      M("/* OMITBAD */",95,(95#0,95#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__wchar_t_type_overrun_memmove_01.cpp"))
+   ]
+   }
+]

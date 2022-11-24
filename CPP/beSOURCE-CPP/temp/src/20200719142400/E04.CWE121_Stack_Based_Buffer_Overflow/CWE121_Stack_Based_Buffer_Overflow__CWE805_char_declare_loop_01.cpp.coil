@@ -1,0 +1,371 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp");
+   ("language", "CPP");
+   ("include", "std_testcase.h");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<stddef.h>");
+   ("include", "<time.h>");
+   ("include", "<limits.h>");
+   ("include", "<string.h>");
+   ("include", "<stdint.h>");
+   ("include", "<stdint.h>");
+   ("include", "<ctype.h>");
+   ("include", "<fcntl.h>");
+   ("include", "<sys/types.h>");
+   ("include", "<sys/stat.h>");
+   ("include", "std_testcase_io.h");
+   ("include", "std_testcase.h");
+   ("include", "<wchar.h>");
+}
+{
+   (!3, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase_io.h");
+   (!2, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h");
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp",
+   MD("RAND32()",[],"((rand()<<30) ^ (rand()<<15) ^ rand())")
+   ,(84#0,84#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp",
+   MD("RAND64()",[],"(((int64_t)rand()<<60) ^ ((int64_t)rand()<<45) ^ ((int64_t)rand()<<30) ^ ((int64_t)rand()<<15) ^ (int64_t)rand())")
+   ,(87#0,87#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   SF([extern,const,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"GLOBAL_CONST_TRUE")
+   ,(103#18,103#34,!2)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   SF([extern,const,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"GLOBAL_CONST_FALSE")
+   ,(104#18,104#35,!2)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   SF([extern,const,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"GLOBAL_CONST_FIVE")
+   ,(105#18,105#34,!2)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   SF([extern,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"globalTrue")
+   ,(110#12,110#21,!2)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   SF([extern,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"globalFalse")
+   ,(111#12,111#22,!2)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   SF([extern,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"globalFive")
+   ,(112#12,112#21,!2)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   SF([extern,extern],int,<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"globalArgc")
+   ,(55#12,55#21,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   SF([extern,extern],ref(ref(char)),<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"globalArgv")
+   ,(56#12,56#24,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   SI(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,
+   {[
+      {;
+      ,(1#1,108#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,108#1,!1)}
+   )
+   ,(1#1,108#1,!1)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"printLine"):unit,[(mod(ref(char),[const]):"line",(14#16,14#32,!3))],[]
+   )
+   ,(14#1,14#34,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"printWLine"):unit,[(mod(ref(wchar),[const]):"line",(16#17,16#36,!3))],[]
+   )
+   ,(16#1,16#38,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"printIntLine"):unit,[(int:"intNumber",(18#20,18#32,!3))],[]
+   )
+   ,(18#1,18#34,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"printShortLine"):unit,[(short:"shortNumber",(20#22,20#38,!3))],[]
+   )
+   ,(20#1,20#40,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"printFloatLine"):unit,[(float:"floatNumber",(22#22,22#38,!3))],[]
+   )
+   ,(22#1,22#40,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"printLongLine"):unit,[(long:"longNumber",(24#20,24#34,!3))],[]
+   )
+   ,(24#1,24#36,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"printLongLongLine"):unit,[(class((,int64_t)):"longLongIntNumber",(26#24,26#48,!3))],[]
+   )
+   ,(26#1,26#50,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"printSizeTLine"):unit,[(class((,size_t)):"sizeTNumber",(28#21,28#38,!3))],[]
+   )
+   ,(28#1,28#40,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"printHexCharLine"):unit,[(char:"charHex",(30#23,30#34,!3))],[]
+   )
+   ,(30#1,30#36,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"printWcharLine"):unit,[(wchar:"wideChar",(32#21,32#36,!3))],[]
+   )
+   ,(32#1,32#38,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"printUnsignedLine"):unit,[(uint:"unsignedNumber",(34#24,34#46,!3))],[]
+   )
+   ,(34#1,34#48,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"printHexUnsignedCharLine"):unit,[(uchar:"unsignedCharacter",(36#31,36#61,!3))],[]
+   )
+   ,(36#1,36#63,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"printDoubleLine"):unit,[(double:"doubleNumber",(38#22,38#40,!3))],[]
+   )
+   ,(38#1,38#42,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"printStructLine"):unit,[(mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]):"structTwoIntsStruct",(40#22,40#62,!3))],[]
+   )
+   ,(40#1,40#64,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"printBytesLine"):unit,[(mod(ref(uchar),[const]):"bytes",(42#21,42#47,!3)),(class((,size_t)):"numBytes",(42#50,42#64,!3))],[]
+   )
+   ,(42#1,42#66,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"decodeHexChars"):class((,size_t)),[(ref(uchar):"bytes",(44#23,44#43,!3)),(class((,size_t)):"numBytes",(44#46,44#60,!3)),(mod(ref(char),[const]):"hex",(44#63,44#78,!3))],[]
+   )
+   ,(44#1,44#80,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"decodeHexWChars"):class((,size_t)),[(ref(uchar):"bytes",(46#24,46#44,!3)),(class((,size_t)):"numBytes",(46#47,46#61,!3)),(mod(ref(wchar),[const]):"hex",(46#64,46#82,!3))],[]
+   )
+   ,(46#1,46#84,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"globalReturnsTrue"):int,[],[]
+   )
+   ,(48#1,48#24,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"globalReturnsFalse"):int,[],[]
+   )
+   ,(50#1,50#25,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   PT([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"globalReturnsTrueOrFalse"):int,[],[]
+   )
+   ,(52#1,52#31,!3)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   FN([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01_bad"):unit,[],[],
+   {[
+      {VD("data",ref(char))
+      ,(25#10,25#15,!1)};
+      {VD("dataBadBuffer",char,([{"50"N,int,(26#24,26#25,!1)}]))
+      ,(26#10,26#26,!1)};
+      {VD("dataGoodBuffer",char,([{"100"N,int,(27#25,27#27,!1)}]))
+      ,(27#10,27#28,!1)};
+      {{AE({V("data"),ref(char),(30#5,30#8,!1)},{V("dataBadBuffer"),arr(char),(30#12,30#24,!1)}),ref(char),(30#5,30#24,!1)}
+      ,(30#5,30#24,!1)};
+      {{AE({AA({V("data"),ref(char),(31#5,31#8,!1)},[{"0"N,int,(31#10,31#10,!1)}]),char,(31#5,31#11,!1)},{"\0"C,char,(31#15,31#18,!1)}),char,(31#5,31#18,!1)}
+      ,(31#5,31#18,!1)};
+      {[
+         {VD("i",class((,size_t)))
+         ,(33#16,33#16,!1)};
+         {VD("source",char,([{"100"N,int,(34#21,34#23,!1)}]))
+         ,(34#14,34#24,!1)};
+         {PC0((<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"memset"),[arr(char),char,int],[{V("source"),arr(char),(35#16,35#21,!1)},{"C"C,char,(35#24,35#26,!1)},{BO(-,{"100"N,int,(35#29,35#31,!1)},{"1"N,int,(35#33,35#33,!1)}),int,(35#29,35#33,!1)}])
+         ,(35#9,35#34,!1)};
+         {{AE({AA({V("source"),arr(char),(36#9,36#14,!1)},[{BO(-,{"100"N,int,(36#16,36#18,!1)},{"1"N,int,(36#20,36#20,!1)}),int,(36#16,36#20,!1)}]),char,(36#9,36#21,!1)},{"\0"C,char,(36#25,36#28,!1)}),char,(36#9,36#28,!1)}
+         ,(36#9,36#28,!1)};
+         {FL(L109,
+            {[
+               {{AE({V("i"),class((,size_t)),(38#14,38#14,!1)},{"0"N,int,(38#18,38#18,!1)}),class((,size_t)),(38#14,38#18,!1)}
+               ,(38#14,38#18,!1)}
+            ]
+            ,(38#9,41#9,!1)},{BO(<,{V("i"),class((,size_t)),(38#21,38#21,!1)},{"100"N,int,(38#25,38#27,!1)}),bool,(38#21,38#27,!1)},
+            {[
+               {{IPO({V("i"),class((,size_t)),(38#30,38#30,!1)}),class((,size_t)),(38#30,38#32,!1)}
+               ,(38#30,38#32,!1)}
+            ]
+            ,(38#9,41#9,!1)},
+            {[
+               {{AE({AA({V("data"),ref(char),(40#13,40#16,!1)},[{V("i"),class((,size_t)),(40#18,40#18,!1)}]),char,(40#13,40#19,!1)},{AA({V("source"),arr(char),(40#23,40#28,!1)},[{V("i"),class((,size_t)),(40#30,40#30,!1)}]),char,(40#23,40#31,!1)}),char,(40#13,40#31,!1)}
+               ,(40#13,40#31,!1)}
+               ]
+            ,(39#9,41#9,!1)})
+         ,(38#9,41#9,!1)};
+         {{AE({AA({V("data"),ref(char),(42#9,42#12,!1)},[{BO(-,{"100"N,int,(42#14,42#16,!1)},{"1"N,int,(42#18,42#18,!1)}),int,(42#14,42#18,!1)}]),char,(42#9,42#19,!1)},{"\0"C,char,(42#23,42#26,!1)}),char,(42#9,42#26,!1)}
+         ,(42#9,42#26,!1)};
+         {PC0((<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"printLine"),[mod(ref(char),[const])],[{V("data"),ref(char),(43#19,43#22,!1)}])
+         ,(43#9,43#23,!1)}
+         ]
+      ,(32#5,44#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(23#1,45#1,!1)}
+   )
+   ,(23#1,45#1,!1)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   FN([public,static],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"goodG2B"):mod(unit,[static]),[],[],
+   {[
+      {VD("data",ref(char))
+      ,(54#10,54#15,!1)};
+      {VD("dataBadBuffer",char,([{"50"N,int,(55#24,55#25,!1)}]))
+      ,(55#10,55#26,!1)};
+      {VD("dataGoodBuffer",char,([{"100"N,int,(56#25,56#27,!1)}]))
+      ,(56#10,56#28,!1)};
+      {{AE({V("data"),ref(char),(58#5,58#8,!1)},{V("dataGoodBuffer"),arr(char),(58#12,58#25,!1)}),ref(char),(58#5,58#25,!1)}
+      ,(58#5,58#25,!1)};
+      {{AE({AA({V("data"),ref(char),(59#5,59#8,!1)},[{"0"N,int,(59#10,59#10,!1)}]),char,(59#5,59#11,!1)},{"\0"C,char,(59#15,59#18,!1)}),char,(59#5,59#18,!1)}
+      ,(59#5,59#18,!1)};
+      {[
+         {VD("i",class((,size_t)))
+         ,(61#16,61#16,!1)};
+         {VD("source",char,([{"100"N,int,(62#21,62#23,!1)}]))
+         ,(62#14,62#24,!1)};
+         {PC0((<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"memset"),[arr(char),char,int],[{V("source"),arr(char),(63#16,63#21,!1)},{"C"C,char,(63#24,63#26,!1)},{BO(-,{"100"N,int,(63#29,63#31,!1)},{"1"N,int,(63#33,63#33,!1)}),int,(63#29,63#33,!1)}])
+         ,(63#9,63#34,!1)};
+         {{AE({AA({V("source"),arr(char),(64#9,64#14,!1)},[{BO(-,{"100"N,int,(64#16,64#18,!1)},{"1"N,int,(64#20,64#20,!1)}),int,(64#16,64#20,!1)}]),char,(64#9,64#21,!1)},{"\0"C,char,(64#25,64#28,!1)}),char,(64#9,64#28,!1)}
+         ,(64#9,64#28,!1)};
+         {FL(L110,
+            {[
+               {{AE({V("i"),class((,size_t)),(66#14,66#14,!1)},{"0"N,int,(66#18,66#18,!1)}),class((,size_t)),(66#14,66#18,!1)}
+               ,(66#14,66#18,!1)}
+            ]
+            ,(66#9,69#9,!1)},{BO(<,{V("i"),class((,size_t)),(66#21,66#21,!1)},{"100"N,int,(66#25,66#27,!1)}),bool,(66#21,66#27,!1)},
+            {[
+               {{IPO({V("i"),class((,size_t)),(66#30,66#30,!1)}),class((,size_t)),(66#30,66#32,!1)}
+               ,(66#30,66#32,!1)}
+            ]
+            ,(66#9,69#9,!1)},
+            {[
+               {{AE({AA({V("data"),ref(char),(68#13,68#16,!1)},[{V("i"),class((,size_t)),(68#18,68#18,!1)}]),char,(68#13,68#19,!1)},{AA({V("source"),arr(char),(68#23,68#28,!1)},[{V("i"),class((,size_t)),(68#30,68#30,!1)}]),char,(68#23,68#31,!1)}),char,(68#13,68#31,!1)}
+               ,(68#13,68#31,!1)}
+               ]
+            ,(67#9,69#9,!1)})
+         ,(66#9,69#9,!1)};
+         {{AE({AA({V("data"),ref(char),(70#9,70#12,!1)},[{BO(-,{"100"N,int,(70#14,70#16,!1)},{"1"N,int,(70#18,70#18,!1)}),int,(70#14,70#18,!1)}]),char,(70#9,70#19,!1)},{"\0"C,char,(70#23,70#26,!1)}),char,(70#9,70#26,!1)}
+         ,(70#9,70#26,!1)};
+         {PC0((<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"printLine"),[mod(ref(char),[const])],[{V("data"),ref(char),(71#19,71#22,!1)}])
+         ,(71#9,71#23,!1)}
+         ]
+      ,(60#5,72#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(52#1,73#1,!1)}
+   )
+   ,(52#1,73#1,!1)},
+
+   {"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01",
+   FN([public],(<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01_good"):unit,[],[],
+   {[
+      {PC0((<"CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01">,"goodG2B"),[],[])
+      ,(77#5,77#13,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(75#1,78#1,!1)}
+   )
+   ,(75#1,78#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp",
+   CL([struct],(,_twoIntsStruct),[])
+   {
+      ([public],"intOne":int,(92#9,92#14,!2));
+      ([public],"intTwo":int,(93#9,93#14,!2))
+   }
+   ,(90#1,94#16,!2)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp",
+   [
+      M("/* TEMPLATE GENERATED TESTCASE FILE\nFilename: CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.c\nLabel Definition File: CWE121_Stack_Based_Buffer_Overflow__CWE805.string.label.xml\nTemplate File: sources-sink-01.tmpl.c\n*/",1,(1#0,1#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp")),
+      M("/*\n * @description\n * CWE: 121 Stack Based Buffer Overflow\n * BadSource:  Set data pointer to the bad buffer\n * GoodSource: Set data pointer to the good buffer\n * Sink: loop\n *    BadSink : Copy string to data using a loop\n * Flow Variant: 01 Baseline\n *\n * */",6,(6#0,6#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp")),
+      M("/* FLAW: Set a pointer to a \"small\" buffer. This buffer will be used in the sinks as a destination\n     * buffer in various memory copying functions using a \"large\" source buffer. */",28,(28#0,28#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp")),
+      M("/* null terminate */",31,(31#0,31#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp")),
+      M("/* fill with 'C's */",35,(35#0,35#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp")),
+      M("/* null terminate */",36,(36#0,36#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp")),
+      M("/* POTENTIAL FLAW: Possible buffer overflow if the size of data is less than the length of source */",37,(37#0,37#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp")),
+      M("/* Ensure the destination buffer is null terminated */",42,(42#0,42#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp")),
+      M("/* OMITBAD */",47,(47#0,47#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp")),
+      M("/* goodG2B uses the GoodSource with the BadSink */",51,(51#0,51#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp")),
+      M("/* FIX: Set a pointer to a \"large\" buffer, thus avoiding buffer overflows in the sinks. */",57,(57#0,57#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp")),
+      M("/* null terminate */",59,(59#0,59#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp")),
+      M("/* fill with 'C's */",63,(63#0,63#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp")),
+      M("/* null terminate */",64,(64#0,64#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp")),
+      M("/* POTENTIAL FLAW: Possible buffer overflow if the size of data is less than the length of source */",65,(65#0,65#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp")),
+      M("/* Ensure the destination buffer is null terminated */",70,(70#0,70#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp")),
+      M("/* OMITGOOD */",80,(80#0,80#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp")),
+      M("/* Below is the main(). It is only used when building this testcase on\n * its own for testing or for building a binary to use in testing binary\n * analysis tools. It is not used when compiling all the testcases as one\n * application, which is how source code analysis tools are tested.\n */",82,(82#0,82#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp")),
+      M("/* seed randomness */",92,(92#0,92#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp")),
+      M("/* OMITGOOD */",98,(98#0,98#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp")),
+      M("/* OMITBAD */",103,(103#0,103#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E04.CWE121_Stack_Based_Buffer_Overflow/CWE121_Stack_Based_Buffer_Overflow__CWE805_char_declare_loop_01.cpp"))
+   ]
+   }
+]

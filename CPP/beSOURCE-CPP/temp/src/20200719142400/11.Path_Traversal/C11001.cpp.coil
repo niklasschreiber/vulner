@@ -1,0 +1,89 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/11.Path_Traversal/C11001.cpp");
+   ("language", "CPP");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<unistd.h>");
+   ("include", "<string.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/11.Path_Traversal/C11001.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/11.Path_Traversal/C11001.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/11.Path_Traversal/C11001.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/11.Path_Traversal/C11001.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/11.Path_Traversal/C11001.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/11.Path_Traversal/C11001.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/11.Path_Traversal/C11001.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C11001",
+   SI(<"C11001">,
+   {[
+      {;
+      ,(1#1,19#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,19#1,!1)}
+   )
+   ,(1#1,19#1,!1)},
+
+   {"C11001",
+   FN([public],(<"C11001">,"cwe23_bad"):unit,[],[],
+   {[
+      {VD("rName",ref(char),{SC((<"C11001">,"getenv"),[string],[{"reportName"S,string,(12#24,12#35,!1)}]),class((,"%undef")),(12#17,12#36,!1)})
+      ,(12#7,12#13,!1)};
+      {VD("buf",char,([{"30"N,int,(13#13,13#14,!1)}]))
+      ,(13#9,13#15,!1)};
+      {PC0((<"C11001">,"strncpy"),[arr(char),string,int],[{V("buf"),arr(char),(15#11,15#13,!1)},{"/home/www/tmp/"S,string,(15#16,15#31,!1)},{"30"N,int,(15#34,15#35,!1)}])
+      ,(15#3,15#36,!1)};
+      {PC0((<"C11001">,"strncat"),[arr(char),ref(char),int],[{V("buf"),arr(char),(16#11,16#13,!1)},{V("rName"),ref(char),(16#16,16#20,!1)},{"30"N,int,(16#23,16#24,!1)}])
+      ,(16#3,16#25,!1)};
+      {PC0((<"C11001">,"unlink"),[arr(char)],[{V("buf"),arr(char),(17#10,17#12,!1)}])
+      ,(17#3,17#13,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(10#1,18#1,!1)}
+   )
+   ,(10#1,18#1,!1)},
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/11.Path_Traversal/C11001.cpp",
+   [
+      S("//\n",1),
+      S("// \n",2),
+      S("//\n",3)
+   ]
+   }
+]

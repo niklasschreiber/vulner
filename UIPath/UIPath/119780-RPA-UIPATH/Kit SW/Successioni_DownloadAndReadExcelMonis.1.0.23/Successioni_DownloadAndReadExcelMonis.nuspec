@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Successioni_DownloadAndReadExcelMonis</id>
+    <version>1.0.23</version>
+    <authors>TST_COLLRPA28</authors>
+    <owners>TST_COLLRPA28</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Processo di scarico del file excel da monis e relativa lettura</description>
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.1">
+        <dependency id="UiPath.System.Activities" version="[18.4.2]" />
+        <dependency id="UiPath.Excel.Activities" version="[2.5.1]" />
+        <dependency id="UiPath.Mail.Activities" version="[1.3.0]" />
+        <dependency id="UiPath.UIAutomation.Activities" version="[18.4.3]" />
+        <dependency id="UiPath.Credentials.Activities" version="[1.1.6479.13204]" />
+        <dependency id="SuccessioniLibrary_v01" version="[1.0.17]" />
+        <dependency id="NavigateMonisLibrary" version="[1.0.87]" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

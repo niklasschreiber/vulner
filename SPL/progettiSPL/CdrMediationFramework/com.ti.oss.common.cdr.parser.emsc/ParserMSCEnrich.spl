@@ -1,0 +1,138 @@
+namespace com.ti.oss.common.cdr.parser.emsc;
+
+use com.ti.oss.common.cdr.parser.emsc::*;
+use com.ti.oss.common.cdr.types::*;
+use com.ti.oss.common.types::*;
+use com.ti.oss.common.event::*;
+use com.ti.oss.common.util.cfg::*;
+use com.ti.oss.common.cdr.util.cfg::*;
+use com.ti.oss.common.cdr.util::*;
+
+
+public composite ParserMSCEnrich(input stream<EmscCdr> cdrFile;
+                                  output stream<CdrSchemaForAggrMsc> OMsc, OutEventEnrich)
+{
+	param
+
+		expression <rstring> $mediationName;
+
+	graph
+
+		(stream<CdrSchemaForAggrMsc> OMsc as O; stream<Event e> OutEventEnrich as OE) as MscEnrich = Custom(cdrFile as I)
+		{
+			logic
+
+				state:
+				{
+					mutable rstring mvno_apn = getCfgParam("COMMON_CFG_DIR",$mediationName,"MVNO-APN");
+					mutable boolean flagMvnoApn = loadCdrProvCfg("MVNOAPN",mvno_apn, (uint32)0, ",");//APN_NAME
+					
+					mutable FileHeader tmpFileHeader;
+					mutable O otuple = (O){};
+				}
+
+				onTuple I:
+				{
+					if(I.endOfData) 
+					{
+						mutable OMsc emptyOutputTuple = {};
+
+						emptyOutputTuple.cdrSchema.networkCallReference = I.networkCallReference;
+						emptyOutputTuple.cdrSchema.callIdentificationNumber = I.callIdentificationNumber;
+						emptyOutputTuple.cdrSchema.endOfData = true;
+						emptyOutputTuple.endOfData = true;
+						emptyOutputTuple.fHeader.fName = I.fName;
+						emptyOutputTuple.fHeader.eventCorrelationId = I.eventCorrelationId;
+						emptyOutputTuple.fHeader.sessionBeginTime = I.sessionBeginTime;
+						emptyOutputTuple.fHeader.rop = I.rop;
+						emptyOutputTuple.fHeader.emId = I.emId;
+						emptyOutputTuple.fHeader.neId = I.neId;
+						submit(emptyOutputTuple, OMsc);
+						
+						mutable Event event = {};
+						event.eventType = 130;
+						event.resultCode = 0;
+						event.rawFile = tmpFileHeader.fName;
+						event.rop = tmpFileHeader.rop;
+						event.emId = "MSC";
+						event.neId = tmpFileHeader.neId;
+						event.eventText = "End Merge Release MSC";
+						boolean eventEnabled = mkEvent(event,tmpFileHeader.sessionBeginTime);
+						if (eventEnabled)
+							submit ({e=event}, OutEventEnrich);
+					}
+					else
+					{
+						mutable EmscCdr tmpcdrSchema = {};
+						
+						tmpcdrSchema.networkCallReference = I.networkCallReference;
+						tmpcdrSchema.callIdentificationNumber = I.callIdentificationNumber;
+						tmpcdrSchema.timeforStartofCharge = I.timeforStartofCharge;
+						tmpcdrSchema.dateforStartofCharge = I.dateforStartofCharge;
+						tmpcdrSchema.chargeableDuration = I.chargeableDuration;
+						tmpcdrSchema.chargeableDuration = I.chargeableDuration;
+						tmpcdrSchema.faultCode = I.faultCode;
+						tmpcdrSchema.callModule = I.callModule; 
+						tmpcdrSchema.callPosition = I.callPosition;
+						tmpcdrSchema.tariffClass = I.tariffClass;
+						tmpcdrSchema.calledPartyNumber = I.calledPartyNumber;
+						tmpcdrSchema.calledPartyMSISDN = I.calledPartyMSISDN;
+						tmpcdrSchema.calledPartyNumberOICK = I.calledPartyNumberOICK;
+						tmpcdrSchema.calledPartyNumberTON = I.calledPartyNumberTON;
+						tmpcdrSchema.subscriptionType = I.subscriptionType;
+						tmpcdrSchema.serviceCentreAddress = I.serviceCentreAddress;
+						tmpcdrSchema.camelSMSCAddress = I.camelSMSCAddress;
+						tmpcdrSchema.destinationAddress = I.destinationAddress;
+						tmpcdrSchema.sMSresult = I.sMSresult;			
+						tmpcdrSchema.tariffSwitchInd = I.tariffSwitchInd;
+						tmpcdrSchema.disconnectingParty = I.disconnectingParty;
+						tmpcdrSchema.internalCauseandLoc = I.internalCauseandLoc;
+						tmpcdrSchema.cause = I.cause;
+						tmpcdrSchema.location = I.location;
+						tmpcdrSchema.accessType = I.accessType;
+						tmpcdrSchema.callingSubscriberIMSI = I.callingSubscriberIMSI;
+						tmpcdrSchema.callingSubscriberIMEISV = I.callingSubscriberIMEISV;
+						tmpcdrSchema.firstCallingLocationInformation = I.firstCallingLocationInformation;
+						tmpcdrSchema.lastCallingLocationInformation = I.lastCallingLocationInformation;
+						tmpcdrSchema.outgoingRoute = I.outgoingRoute;
+						tmpcdrSchema.calledSubscriberIMSI = I.calledSubscriberIMSI;
+						tmpcdrSchema.calledSubscriberIMEISV = I.calledSubscriberIMEISV;
+						tmpcdrSchema.firstCalledLocationInformation = I.firstCalledLocationInformation;
+						tmpcdrSchema.lastCalledLocationInformation = I.lastCalledLocationInformation;						
+						tmpcdrSchema.callingPartyNumber = I.callingPartyNumber;
+						tmpcdrSchema.callingPartyMSISDN = I.callingPartyMSISDN;
+						tmpcdrSchema.faultCode = I.faultCode;
+						tmpcdrSchema.incomingRoute = I.incomingRoute;
+						tmpcdrSchema.outgoingRoute = I.outgoingRoute;
+						tmpcdrSchema.networkCallReference = I.networkCallReference;
+						tmpcdrSchema.disconnectingParty = I.disconnectingParty;
+						tmpcdrSchema.tariffClass = I.tariffClass;
+						tmpcdrSchema.tariffSwitchInd = I.tariffSwitchInd;
+						tmpcdrSchema.callPosition = I.callPosition;
+						tmpcdrSchema.callingSubscriberIMSI = I.callingSubscriberIMSI;
+						tmpcdrSchema.callingSubscriberIMEISV = I.callingSubscriberIMEISV;
+						tmpcdrSchema.subscriptionType = I.subscriptionType;
+						tmpcdrSchema.tariffSwitchInd = I.tariffSwitchInd;
+						tmpcdrSchema.originatingAddress = I.originatingAddress;
+						tmpcdrSchema.iNMarkingofMS = I.iNMarkingofMS;
+						tmpcdrSchema.serviceKey = I.serviceKey;
+						tmpcdrSchema.gsmSCFAddress = I.gsmSCFAddress;
+						tmpcdrSchema.partialOutputRecNum = I.partialOutputRecNum;
+	
+						tmpFileHeader.fName = I.fName;
+						tmpFileHeader.emId = I.emId;
+						tmpFileHeader.neId = I.neId;
+	
+						submit( { cdrSchema = tmpcdrSchema, fHeader = tmpFileHeader , endOfData = false}, OMsc );
+					}
+				}
+
+				onPunct I :
+				{
+					if (currentPunct() == Sys.WindowMarker)
+					{
+						submit(Sys.WindowMarker, OMsc);						
+					}
+				}
+		}
+}

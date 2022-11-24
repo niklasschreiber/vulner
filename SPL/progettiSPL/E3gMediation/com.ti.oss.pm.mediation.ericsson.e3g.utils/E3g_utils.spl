@@ -1,0 +1,19 @@
+namespace com.ti.oss.pm.mediation.ericsson.e3g.utils;
+
+//
+// Local utility function
+//
+public rstring getAttributeVal(map<rstring, rstring> attributes, rstring key)
+{
+	if(has(attributes, key))
+	{
+		return trim((attributes [ key ]), " ") ;
+	}
+
+	else
+	{
+		return "" ;
+	}
+
+}
+

@@ -1,0 +1,183 @@
+namespace com.ti.oss.common.cdr.evalROP;
+
+use com.ti.oss.common.cdr.util::*;
+use com.ti.oss.common.types::*;
+use com.ti.oss.common.cdr.types::*;
+
+
+
+
+public composite ApnSplit (input stream<AggregateSqmSchema> IROP; 
+                            output 
+							  stream<AggregateSqmSchema> OApn0
+							  ,
+							  stream<AggregateSqmSchema> OApn1
+							  ,
+							  stream<AggregateSqmSchema> OApn2
+							  ,
+							  stream<AggregateSqmSchema> OApn3
+							  ,
+							  stream<AggregateSqmSchema> OApn4
+							  ,
+							  stream<AggregateSqmSchema> OApn5
+							  ,
+							  stream<AggregateSqmSchema> OApn6
+							  ,
+							  stream<AggregateSqmSchema> OApn7
+							  ,
+							  stream<AggregateSqmSchema> OApn8
+							  ,
+							  stream<AggregateSqmSchema> OApn9
+							  ,
+							  stream<AggregateSqmSchema> OApn10
+							  ,
+							  stream<AggregateSqmSchema> OApn11
+							  ,
+							  stream<AggregateSqmSchema> OApn12
+							  ,
+							  stream<AggregateSqmSchema> OApn13
+							  ,
+							  stream<AggregateSqmSchema> OApn14
+							  ,
+							  stream<AggregateSqmSchema> OApn15
+							  ,
+							  stream<AggregateSqmSchema> OROP
+							)
+{
+	
+	graph
+	
+		(
+		stream<AggregateSqmSchema> OApn0
+		;
+		stream<AggregateSqmSchema> OApn1
+		;
+		stream<AggregateSqmSchema> OApn2
+		;
+		stream<AggregateSqmSchema> OApn3
+		;
+		stream<AggregateSqmSchema> OApn4
+		;
+		stream<AggregateSqmSchema> OApn5
+		;
+		stream<AggregateSqmSchema> OApn6
+		;
+		stream<AggregateSqmSchema> OApn7
+		;
+		stream<AggregateSqmSchema> OApn8
+		;
+		stream<AggregateSqmSchema> OApn9
+		;
+		stream<AggregateSqmSchema> OApn10
+		;
+		stream<AggregateSqmSchema> OApn11
+		;
+		stream<AggregateSqmSchema> OApn12
+		;
+		stream<AggregateSqmSchema> OApn13
+		;
+		stream<AggregateSqmSchema> OApn14
+		;
+		stream<AggregateSqmSchema> OApn15
+		;
+		stream<AggregateSqmSchema> OROP 
+		)
+		 = Custom(IROP as I)
+		{
+		logic state:
+			{
+				mutable uint32 countPort = 0;
+				mutable int32 count_endROP = 0;
+				mutable int32 count_write_prev = 0;
+			} 
+		
+			onTuple I : 
+			{      	
+				if (I.endROP)
+				{
+					count_endROP++;
+					if(count_endROP == 4) 
+					{
+						submit(I,OROP);
+						count_endROP = 0;
+					}
+				}
+				else if (I.write_prev)
+				{
+					if (I.exclude_node == "")
+					{
+						count_write_prev++;
+						if(count_write_prev == 4) 
+						{
+							submit(I,OROP);
+							count_write_prev = 0;
+						}
+					}else{
+						submit(I,OROP);
+					}
+								
+				}
+				else
+				{
+					uint64 addr = hashCode((rstring)I.cdrSchema.apn + (rstring)I.cdrSchema.nodeId);
+					uint32 modAddr = (uint32)(addr%(uint64)16);
+					if(modAddr < 0u) {
+						appTrc(Trace.error,"ERROR: the split returned a negative output port!");
+					}
+					else {
+						if (modAddr==(uint32)0)
+						{
+							submit(I, OApn0);
+						}else if (modAddr==(uint32)1)
+						{
+							submit(I, OApn1);
+						}else if (modAddr==(uint32)2)
+						{
+							submit(I, OApn2);
+						}else if (modAddr==(uint32)3)
+						{
+							submit(I, OApn3);
+						}else if (modAddr==(uint32)4)
+						{
+							submit(I, OApn4);
+						}else if (modAddr==(uint32)5)
+						{
+							submit(I, OApn5);
+						}else if (modAddr==(uint32)6)
+						{
+							submit(I, OApn6);
+						}else if (modAddr==(uint32)7)
+						{
+							submit(I, OApn7);
+						}else if (modAddr==(uint32)8)
+						{
+							submit(I, OApn8);
+						}else if (modAddr==(uint32)9)
+						{
+							submit(I, OApn9);
+						}else if (modAddr==(uint32)10)
+						{
+							submit(I, OApn10);
+						}else if (modAddr==(uint32)11)
+						{
+							submit(I, OApn11);
+						}else if (modAddr==(uint32)12)
+						{
+							submit(I, OApn12);
+						}else if (modAddr==(uint32)13)
+						{
+							submit(I, OApn13);
+						}else if (modAddr==(uint32)14)
+						{
+							submit(I, OApn14);
+						}
+						else if (modAddr==(uint32)15)
+						{
+							submit(I, OApn15);
+						}
+					}
+					
+				}
+	        }
+		}
+}

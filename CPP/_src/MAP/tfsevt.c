@@ -1,0 +1,210 @@
+//------------------------------------------------------------------------------
+//   PROJECT : Traffic Steering - v 1.00 - EVT manager v 1.02
+//------------------------------------------------------------------------------
+//
+//   File Name   : tfsevt.c
+//   Created     : 05-09-2005
+//   Last Change : 20-09-2012
+//
+//------------------------------------------------------------------------------
+//   Description
+//   -----------
+//
+//------------------------------------------------------------------------------
+//   Functions
+//   ------------------
+//------------------------------------------------------------------------------
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <string.h>
+#include <strings.h>
+#include <time.h>
+#include <memory.h>
+#include <time.h>
+#include <sspevt.h>
+#include "tfsevt.h"
+
+static short _i_init_ems = 0;
+static EVT_MSG evt_msg[NBR_EVT_MSG_ERR];
+
+// ---------------------------------------------------------------------------
+void EVT_manage_init(void)
+{
+	short i;
+
+	for( i=0; i<NBR_EVT_MSG_ERR ; i++ )
+	{
+		memset(&evt_msg[i],0x00,sizeof(EVT_MSG));
+		evt_msg[i].c_status = EMS_STATUS_NORMAL;
+	}
+
+	_i_init_ems = 1;
+}
+
+/** ---------------------------------------------------------------------------
+*
+* @param i_msg_evt 		 - in parameter - EMS Number
+* @param i_nbr_alert_msg - in parameter - Nbr of alert will be showed on viewpoint
+* @param i_interval_time - in parameter - time interval between two alarm msg
+* @param c_ems_status    - in parameter - status of EMS alarm ( 'A' - Alarm armed | 'D' - Alarm disarmed | 'N' - Normal )
+* @param *ac_msg	 	 - in parameter - Description of EMS showed on viewpoint
+* \note Error Returned:
+* \note         0  : Ok
+* \note        -1  : the EMS number exceeds the maximum EMS number range
+* \note        -2  : wrong EMS status parameter value
+* -----------------------------------------------------------------------------
+*/
+short EVT_manage( short i_msg_evt,
+                  short i_nbr_alert_msg,
+                  short i_interval_time,
+                  char c_ems_status,
+                  const char *ac_msg, ... )
+{
+    short 	i_ret = 0;
+    short 	i_idx;
+    short	i_write_ems = 0;
+    char 	ac_out[256];
+    va_list ap;
+    time_t 	now;
+
+    if( _i_init_ems )
+    {
+		switch( c_ems_status )
+		{
+			case EMS_STATUS_ARMED:
+			{
+				i_idx = (short)(i_msg_evt - E_TFS_ARM_BASE_NUMBER);
+
+				if( i_idx >= 0 && i_idx < NBR_EVT_MSG_ERR )
+				{
+					i_write_ems = 0;
+
+					evt_msg[i_idx].c_status = EMS_STATUS_ARMED;
+
+					if( !i_interval_time &&
+						!i_nbr_alert_msg )
+					{
+						i_write_ems = 1; // like normal log_evt
+					}
+					else
+					{
+						if(i_interval_time)
+						{
+							time(&now);
+
+							if( (now - evt_msg[i_idx].i_first_msg_show_time > i_interval_time) ||
+								!evt_msg[i_idx].i_evt_alarm )
+							{
+								if(i_nbr_alert_msg)
+								{
+									if( evt_msg[i_idx].i_nbr_msg_showed < i_nbr_alert_msg )
+									{
+										i_write_ems = 1;
+										evt_msg[i_idx].i_nbr_msg_showed++;
+									}
+								}
+								else
+								{
+									i_write_ems = 1;
+								}
+
+								evt_msg[i_idx].i_evt_alarm = i_msg_evt;
+								time(&(evt_msg[i_idx].i_first_msg_show_time));
+							}
+						}
+
+						if( i_nbr_alert_msg &&
+							!i_write_ems )
+						{
+							if( evt_msg[i_idx].i_nbr_msg_showed < i_nbr_alert_msg )
+							{
+								i_write_ems = 1;
+
+								evt_msg[i_idx].i_nbr_msg_showed++;
+								evt_msg[i_idx].i_evt_alarm = i_msg_evt;
+							}
+						}
+					}
+
+					if(i_write_ems)
+					{
+						i_write_ems = 0;
+
+						va_start(ap, ac_msg);
+						vsprintf(ac_out, ac_msg, ap);
+
+						log_evt( SSPEVT_CRITICAL,
+								 SSPEVT_NOACTION,
+								 i_msg_evt,
+								 "%s", ac_out);
+
+						va_end(ap);
+					}
+				}
+				else
+					i_ret = -1;
+
+				break;
+			}
+
+			case EMS_STATUS_DISARMED:
+			{
+				i_idx = (short)(i_msg_evt - E_TFS_DISARM_BASE_NUMBER);
+
+				if( i_idx >= 0 && i_idx < NBR_EVT_MSG_ERR )
+				{
+					if( evt_msg[i_idx].c_status == EMS_STATUS_ARMED )
+					{
+						evt_msg[i_idx].i_evt_alarm      = 0;
+						evt_msg[i_idx].c_status         = EMS_STATUS_DISARMED;
+						evt_msg[i_idx].c_filler         = 0;
+						evt_msg[i_idx].i_nbr_msg_showed = 0;
+
+						time(&(evt_msg[i_idx].i_first_msg_show_time));
+
+						va_start(ap, ac_msg);
+						vsprintf(ac_out, ac_msg, ap);
+
+						log_evt( SSPEVT_NORMAL,
+								 SSPEVT_NOACTION,
+								 i_msg_evt,
+								 "%s", ac_out);
+
+						va_end(ap);
+					}
+				}
+				else
+					i_ret = -1;
+
+				break;
+			}
+
+			case EMS_STATUS_NORMAL:
+			{
+				va_start(ap, ac_msg);
+				vsprintf(ac_out, ac_msg, ap);
+
+				log_evt( SSPEVT_NORMAL,
+						 SSPEVT_NOACTION,
+						 i_msg_evt,
+						 "%s", ac_out);
+
+				va_end(ap);
+
+				break;
+			}
+
+			default:
+			{
+				i_ret = -2;
+
+				break;
+			}
+		}
+    }
+    else
+    	i_ret = -3;
+
+    return(i_ret);
+}

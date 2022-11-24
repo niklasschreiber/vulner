@@ -1,0 +1,328 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp");
+   ("language", "CPP");
+   ("include", "std_testcase.h");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<stddef.h>");
+   ("include", "<time.h>");
+   ("include", "<limits.h>");
+   ("include", "<string.h>");
+   ("include", "<stdint.h>");
+   ("include", "<stdint.h>");
+   ("include", "<ctype.h>");
+   ("include", "<fcntl.h>");
+   ("include", "<sys/types.h>");
+   ("include", "<sys/stat.h>");
+   ("include", "std_testcase_io.h");
+   ("include", "std_testcase.h");
+   ("include", "<wchar.h>");
+}
+{
+   (!3, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase_io.h");
+   (!2, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h");
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp",
+   MD("RAND32()",[],"((rand()<<30) ^ (rand()<<15) ^ rand())")
+   ,(84#0,84#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp",
+   MD("RAND64()",[],"(((int64_t)rand()<<60) ^ ((int64_t)rand()<<45) ^ ((int64_t)rand()<<30) ^ ((int64_t)rand()<<15) ^ (int64_t)rand())")
+   ,(87#0,87#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   SF([extern,const,extern],int,<"CWE401_Memory_Leak__malloc_realloc_char_01">,"GLOBAL_CONST_TRUE")
+   ,(103#18,103#34,!2)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   SF([extern,const,extern],int,<"CWE401_Memory_Leak__malloc_realloc_char_01">,"GLOBAL_CONST_FALSE")
+   ,(104#18,104#35,!2)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   SF([extern,const,extern],int,<"CWE401_Memory_Leak__malloc_realloc_char_01">,"GLOBAL_CONST_FIVE")
+   ,(105#18,105#34,!2)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   SF([extern,extern],int,<"CWE401_Memory_Leak__malloc_realloc_char_01">,"globalTrue")
+   ,(110#12,110#21,!2)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   SF([extern,extern],int,<"CWE401_Memory_Leak__malloc_realloc_char_01">,"globalFalse")
+   ,(111#12,111#22,!2)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   SF([extern,extern],int,<"CWE401_Memory_Leak__malloc_realloc_char_01">,"globalFive")
+   ,(112#12,112#21,!2)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   SF([extern,extern],int,<"CWE401_Memory_Leak__malloc_realloc_char_01">,"globalArgc")
+   ,(55#12,55#21,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   SF([extern,extern],ref(ref(char)),<"CWE401_Memory_Leak__malloc_realloc_char_01">,"globalArgv")
+   ,(56#12,56#24,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   SI(<"CWE401_Memory_Leak__malloc_realloc_char_01">,
+   {[
+      {;
+      ,(1#1,101#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,101#1,!1)}
+   )
+   ,(1#1,101#1,!1)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   PT([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"printLine"):unit,[(mod(ref(char),[const]):"line",(14#16,14#32,!3))],[]
+   )
+   ,(14#1,14#34,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   PT([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"printWLine"):unit,[(mod(ref(wchar),[const]):"line",(16#17,16#36,!3))],[]
+   )
+   ,(16#1,16#38,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   PT([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"printIntLine"):unit,[(int:"intNumber",(18#20,18#32,!3))],[]
+   )
+   ,(18#1,18#34,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   PT([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"printShortLine"):unit,[(short:"shortNumber",(20#22,20#38,!3))],[]
+   )
+   ,(20#1,20#40,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   PT([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"printFloatLine"):unit,[(float:"floatNumber",(22#22,22#38,!3))],[]
+   )
+   ,(22#1,22#40,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   PT([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"printLongLine"):unit,[(long:"longNumber",(24#20,24#34,!3))],[]
+   )
+   ,(24#1,24#36,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   PT([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"printLongLongLine"):unit,[(class((,int64_t)):"longLongIntNumber",(26#24,26#48,!3))],[]
+   )
+   ,(26#1,26#50,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   PT([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"printSizeTLine"):unit,[(class((,size_t)):"sizeTNumber",(28#21,28#38,!3))],[]
+   )
+   ,(28#1,28#40,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   PT([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"printHexCharLine"):unit,[(char:"charHex",(30#23,30#34,!3))],[]
+   )
+   ,(30#1,30#36,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   PT([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"printWcharLine"):unit,[(wchar:"wideChar",(32#21,32#36,!3))],[]
+   )
+   ,(32#1,32#38,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   PT([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"printUnsignedLine"):unit,[(uint:"unsignedNumber",(34#24,34#46,!3))],[]
+   )
+   ,(34#1,34#48,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   PT([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"printHexUnsignedCharLine"):unit,[(uchar:"unsignedCharacter",(36#31,36#61,!3))],[]
+   )
+   ,(36#1,36#63,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   PT([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"printDoubleLine"):unit,[(double:"doubleNumber",(38#22,38#40,!3))],[]
+   )
+   ,(38#1,38#42,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   PT([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"printStructLine"):unit,[(mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]):"structTwoIntsStruct",(40#22,40#62,!3))],[]
+   )
+   ,(40#1,40#64,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   PT([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"printBytesLine"):unit,[(mod(ref(uchar),[const]):"bytes",(42#21,42#47,!3)),(class((,size_t)):"numBytes",(42#50,42#64,!3))],[]
+   )
+   ,(42#1,42#66,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   PT([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"decodeHexChars"):class((,size_t)),[(ref(uchar):"bytes",(44#23,44#43,!3)),(class((,size_t)):"numBytes",(44#46,44#60,!3)),(mod(ref(char),[const]):"hex",(44#63,44#78,!3))],[]
+   )
+   ,(44#1,44#80,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   PT([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"decodeHexWChars"):class((,size_t)),[(ref(uchar):"bytes",(46#24,46#44,!3)),(class((,size_t)):"numBytes",(46#47,46#61,!3)),(mod(ref(wchar),[const]):"hex",(46#64,46#82,!3))],[]
+   )
+   ,(46#1,46#84,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   PT([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"globalReturnsTrue"):int,[],[]
+   )
+   ,(48#1,48#24,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   PT([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"globalReturnsFalse"):int,[],[]
+   )
+   ,(50#1,50#25,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   PT([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"globalReturnsTrueOrFalse"):int,[],[]
+   )
+   ,(52#1,52#31,!3)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   FN([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"CWE401_Memory_Leak__malloc_realloc_char_01_bad"):unit,[],[],
+   {[
+      {[
+         {VD("data",ref(char),{CS(ref(char),{SC((<"CWE401_Memory_Leak__malloc_realloc_char_01">,"malloc"),[int],[{BO(*,{"100"N,int,(27#38,27#40,!1)},{SO(char),int,(27#42,27#53,!1)}),int,(27#38,27#53,!1)}]),class((,"%undef")),(27#31,27#54,!1)}),ref(char),(27#23,27#54,!1)})
+         ,(27#14,27#19,!1)};
+         {PC0((<"CWE401_Memory_Leak__malloc_realloc_char_01">,"strcpy"),[ref(char),string],[{V("data"),ref(char),(29#16,29#19,!1)},{"A String"S,string,(29#22,29#31,!1)}])
+         ,(29#9,29#32,!1)};
+         {PC0((<"CWE401_Memory_Leak__malloc_realloc_char_01">,"printLine"),[mod(ref(char),[const])],[{V("data"),ref(char),(30#19,30#22,!1)}])
+         ,(30#9,30#23,!1)};
+         {{AE({V("data"),ref(char),(32#9,32#12,!1)},{CS(ref(char),{SC((<"CWE401_Memory_Leak__malloc_realloc_char_01">,"realloc"),[ref(char),int],[{V("data"),ref(char),(32#32,32#35,!1)},{BO(*,{"130000"N,int,(32#38,32#45,!1)},{SO(char),int,(32#47,32#58,!1)}),int,(32#39,32#58,!1)}]),class((,"%undef")),(32#24,32#59,!1)}),ref(char),(32#16,32#59,!1)}),ref(char),(32#9,32#59,!1)}
+         ,(32#9,32#59,!1)};
+         {IF0({BO(!=,{V("data"),ref(char),(33#13,33#16,!1)},{CS(ref(unit),{"0"N,int,(33#21,33#24,!1)}),ref(unit),(33#21,33#24,!1)}),bool,(33#13,33#24,!1)},
+            {[
+               {PC0((<"CWE401_Memory_Leak__malloc_realloc_char_01">,"strcpy"),[ref(char),string],[{V("data"),ref(char),(36#20,36#23,!1)},{"New String"S,string,(36#26,36#37,!1)}])
+               ,(36#13,36#38,!1)};
+               {PC0((<"CWE401_Memory_Leak__malloc_realloc_char_01">,"printLine"),[mod(ref(char),[const])],[{V("data"),ref(char),(37#23,37#26,!1)}])
+               ,(37#13,37#27,!1)};
+               {PC0((<"CWE401_Memory_Leak__malloc_realloc_char_01">,"free"),[ref(char)],[{V("data"),ref(char),(38#18,38#21,!1)}])
+               ,(38#13,38#22,!1)}
+               ]
+            ,(34#9,39#9,!1)})
+         ,(33#9,39#9,!1)}
+         ]
+      ,(26#5,40#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(24#1,41#1,!1)}
+   )
+   ,(24#1,41#1,!1)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   FN([public,static],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"good1"):mod(unit,[static]),[],[],
+   {[
+      {[
+         {VD("data",ref(char),{CS(ref(char),{SC((<"CWE401_Memory_Leak__malloc_realloc_char_01">,"malloc"),[int],[{BO(*,{"100"N,int,(50#38,50#40,!1)},{SO(char),int,(50#42,50#53,!1)}),int,(50#38,50#53,!1)}]),class((,"%undef")),(50#31,50#54,!1)}),ref(char),(50#23,50#54,!1)})
+         ,(50#14,50#19,!1)};
+         {VD("tmpData",ref(char))
+         ,(51#14,51#22,!1)};
+         {PC0((<"CWE401_Memory_Leak__malloc_realloc_char_01">,"strcpy"),[ref(char),string],[{V("data"),ref(char),(53#16,53#19,!1)},{"A String"S,string,(53#22,53#31,!1)}])
+         ,(53#9,53#32,!1)};
+         {PC0((<"CWE401_Memory_Leak__malloc_realloc_char_01">,"printLine"),[mod(ref(char),[const])],[{V("data"),ref(char),(54#19,54#22,!1)}])
+         ,(54#9,54#23,!1)};
+         {{AE({V("tmpData"),ref(char),(55#9,55#15,!1)},{CS(ref(char),{SC((<"CWE401_Memory_Leak__malloc_realloc_char_01">,"realloc"),[ref(char),int],[{V("data"),ref(char),(55#35,55#38,!1)},{BO(*,{"130000"N,int,(55#41,55#48,!1)},{SO(char),int,(55#50,55#61,!1)}),int,(55#42,55#61,!1)}]),class((,"%undef")),(55#27,55#62,!1)}),ref(char),(55#19,55#62,!1)}),ref(char),(55#9,55#62,!1)}
+         ,(55#9,55#62,!1)};
+         {IF0({BO(!=,{V("tmpData"),ref(char),(58#13,58#19,!1)},{CS(ref(unit),{"0"N,int,(58#24,58#27,!1)}),ref(unit),(58#24,58#27,!1)}),bool,(58#13,58#27,!1)},
+            {[
+               {{AE({V("data"),ref(char),(60#13,60#16,!1)},{V("tmpData"),ref(char),(60#20,60#26,!1)}),ref(char),(60#13,60#26,!1)}
+               ,(60#13,60#26,!1)};
+               {PC0((<"CWE401_Memory_Leak__malloc_realloc_char_01">,"strcpy"),[ref(char),string],[{V("data"),ref(char),(62#20,62#23,!1)},{"New String"S,string,(62#26,62#37,!1)}])
+               ,(62#13,62#38,!1)};
+               {PC0((<"CWE401_Memory_Leak__malloc_realloc_char_01">,"printLine"),[mod(ref(char),[const])],[{V("data"),ref(char),(63#23,63#26,!1)}])
+               ,(63#13,63#27,!1)}
+               ]
+            ,(59#9,64#9,!1)})
+         ,(58#9,64#9,!1)};
+         {PC0((<"CWE401_Memory_Leak__malloc_realloc_char_01">,"free"),[ref(char)],[{V("data"),ref(char),(65#14,65#17,!1)}])
+         ,(65#9,65#18,!1)}
+         ]
+      ,(49#5,66#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(47#1,67#1,!1)}
+   )
+   ,(47#1,67#1,!1)},
+
+   {"CWE401_Memory_Leak__malloc_realloc_char_01",
+   FN([public],(<"CWE401_Memory_Leak__malloc_realloc_char_01">,"CWE401_Memory_Leak__malloc_realloc_char_01_good"):unit,[],[],
+   {[
+      {PC0((<"CWE401_Memory_Leak__malloc_realloc_char_01">,"good1"),[],[])
+      ,(71#5,71#11,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(69#1,72#1,!1)}
+   )
+   ,(69#1,72#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp",
+   CL([struct],(,_twoIntsStruct),[])
+   {
+      ([public],"intOne":int,(92#9,92#14,!2));
+      ([public],"intTwo":int,(93#9,93#14,!2))
+   }
+   ,(90#1,94#16,!2)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp",
+   [
+      M("/* TEMPLATE GENERATED TESTCASE FILE\nFilename: CWE401_Memory_Leak__malloc_realloc_char_01.c\nLabel Definition File: CWE401_Memory_Leak__malloc_realloc.label.xml\nTemplate File: point-flaw-01.tmpl.c\n*/",1,(1#0,1#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp")),
+      M("/*\n * @description\n * CWE: 401 Memory Leak\n * Sinks:\n *    GoodSink: Ensure the memory block pointed to by data is always freed\n *    BadSink : malloc() and use then realloc() and use data before free()\n * Flow Variant: 01 Baseline\n *\n * */",6,(6#0,6#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp")),
+      M("/* Initialize and make use of data */",28,(28#0,28#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp")),
+      M("/* FLAW: If realloc() fails, the initial memory block will not be freed() */",31,(31#0,31#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp")),
+      M("/* Reinitialize and make use of data */",35,(35#0,35#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp")),
+      M("/* OMITBAD */",43,(43#0,43#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp")),
+      M("/* Initialize and make use of data */",52,(52#0,52#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp")),
+      M("/* FIX: Ensure realloc() was successful before assigning data to the memory block\n        * allocated with realloc() */",56,(56#0,56#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp")),
+      M("/* Reinitialize and make use of data */",61,(61#0,61#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp")),
+      M("/* OMITGOOD */",74,(74#0,74#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp")),
+      M("/* Below is the main(). It is only used when building this testcase on\n   its own for testing or for building a binary to use in testing binary\n   analysis tools. It is not used when compiling all the testcases as one\n   application, which is how source code analysis tools are tested. */",76,(76#0,76#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp")),
+      M("/* seed randomness */",85,(85#0,85#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp")),
+      M("/* OMITGOOD */",91,(91#0,91#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp")),
+      M("/* OMITBAD */",96,(96#0,96#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E16.CWE401_Memory_Leak/CWE401_Memory_Leak__malloc_realloc_char_01.cpp"))
+   ]
+   }
+]

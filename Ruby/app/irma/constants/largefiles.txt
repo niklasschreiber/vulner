@@ -1,0 +1,1 @@
+"D:\_SRC\BUGGYCODE\Ruby\app\irma\constants\tipo_segnalazione.rb" 

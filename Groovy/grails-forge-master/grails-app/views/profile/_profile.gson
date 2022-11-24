@@ -1,0 +1,11 @@
+import appgenerator.profile.Profile
+import groovy.transform.Field
+
+@Field Profile profile
+
+json {
+    version profile.version
+    features tmpl.feature(profile.features)
+    description profile.description
+    name profile.name
+}

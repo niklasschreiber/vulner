@@ -1,0 +1,74 @@
+#---------------------------------------------------------------------
+#
+# File:         install_purify.script
+# Project:      
+# Component:    
+# Description:  Installation script for module library and purified binary executable
+# Version:      1
+#
+# Author:       Antonino Di Guardo
+# Date:         06/11/2013
+# Last Update:  
+# Copyright(c): GFM Integration 2013
+#
+#---------------------------------------------------------------------
+
+
+###############################################################################
+#
+# Application common parameters
+#
+###############################################################################
+include ../../application.info
+include ../../template/application.info
+
+
+###############################################################################
+#
+# Component parameters
+#
+###############################################################################
+include ../component.info
+
+
+###############################################################################
+#
+# Module parameters
+#
+###############################################################################
+include ../../template/module.info
+include module.info
+
+
+###############################################################################
+#
+# Application objects and headers
+#
+###############################################################################
+LIB_HEADERS :=$(wildcard $(APP_LIB_SRC_DIR)/*.h)
+LIB_HEADERS +=$(wildcard $(APP_LIB_SRC_DIR)/*.hpp)
+
+
+###############################################################################
+#
+# Target rules (explicit rules)
+#
+###############################################################################
+
+#######################################
+# External target rules
+#
+# Target usable by the users.
+# Targets that the user normally passes
+# as parameter to the 'make' command
+#######################################
+.PHONY: all
+
+all:
+	-@cp -f $(OUT_CFG_DIR)/* $(INSTALL_CFG_DIR)/ 2>/dev/null
+	-@cp -f $(filter %.so %.SO %.sl %.SL,$(OUT_LIB_DIR)/$(LIB_NAME)) $(INSTALL_LIB_DIR)/ 2>/dev/null
+	-@cp -f $(filter %.so %.SO %.sl %.SL,$(LIBS)) $(INSTALL_LIB_DIR)/ 2>/dev/null
+	-@cp -f $(OUT_BIN_DIR)/* $(INSTALL_BIN_DIR)/ 2>/dev/null
+ifneq ($(INSTALL_AUX_BASE_DIR),)
+	-@cp -f $(filter %.a %.so %.SO %.sl %.SL,$(OUT_LIB_DIR)/$(LIB_NAME)) $(INSTALL_AUX_LIB_DIR)/ 2>/dev/null
+endif

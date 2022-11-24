@@ -1,0 +1,789 @@
+#1,100
+[info] init project...
+[info] cli_home=C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/
+[info] java_home=C:\Users\S&SSLAWKS\BeyondSecurity\beSOURCE developer\beSOURCE 5.0\data\CodePrism\analyzer\jre_x86
+[trac] [RuleSync] rule sync start.
+[trac] [RuleSync] base : C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/lib/data.db, project : C:\Users\S&SSLAWKS\Desktop\Project\C/.data/data.db
+[trac] [RuleSync] already has been updated...
+[trac] [RuleSync] rule sync end. (242ms)
+#5,100
+[trac] db repository version: V20190208
+[trac] db language code: en
+[trac] product name: beSOURCE, version: 5.0.0.0
+[info] module version info> cli = 0.9.3.1
+[info] module version info> cli.collector = 0.4.3.1
+[info] module version info> cli.standalone = 1.5.8.2
+[info] [SourceCollector] start collect
+#1,100
+[info] [Collector] check remote files...
+[trac] [Collector]    remote dir: /fix
+[trac] [Collector]    remote dir: /orig
+[info] [Collector] id=20200813192600(2001), from=C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/Sample/C, target files=14
+[info] [Collector] new=0, change=0, remove=0
+[info] [SourceCollector] updated by others=14
+[info] [SourceCollector] end collect (time=109ms)
+#6,100
+[trac] read target source list
+[trac] read rule list
+[info] ruleset> ruleset: C OWASP Top 10 2017(145111)
+[info] ruleset> rule info (code=5111, cp=0, sp=36, total=36)
+[info] ruleset> rule info (code=5100, cp=0, sp=0, total=0)
+[info] ruleset> rule info (code=1000, cp=0, sp=0, total=0)
+[info] ruleset> rule info (code=9900, cp=0, sp=0, total=0)
+[trac] analysis updated file only - cancel> first analysis.
+[trac] analysis updated file only - cancel> last analysis was failed.
+[trac] analysis updated file only - cancel> ruleset changed(db).
+[trac] analysis updated file only - cancel> module file updated.
+[trac] analysis updated file only - cancel> module file changed. (dat file not found)
+[trac] analysis updated file only - cancel> option changed. (dat file not found)
+[trac] analysis updated file only - cancel> reference source file changed. (dat file not found)
+[trac] init analyze unit
+[trac] set source map
+[info] [project info]
+[info]   > name: C, path: C:\Users\S&SSLAWKS\Desktop\Project\C
+[info]   > source size: 14, library size: 0
+[info]   > ruleset name: C OWASP Top 10 2017, rule size: 36, language: 5111
+[info]   > module-info: codeMRI.exe=2.2.2
+[info] init project end...
+#10,100
+[trac] [HandlerLoader] run startup handlers...
+[trac] [HandlerLoader] do not use handlers. (skip)
+[info] analyze project...
+[trac] [19:26:34] CP/SP    <DEBUG> Memory-max=494.9375M, total=247.5M, free=199.01399M, used=48.486008M
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-Analyzing Rule Infomations
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000015] [SP] External Control of System or Configuration Setting, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000022] [SP] Path Traversal, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000078] [SP] OS Command Injection, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000080] [SP] Cross-Site Scripting, XSS, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000089] [SP] SQL Injection, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000090] [SP] LDAP Injection, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000117] [SP] Improper Output Neutralization for Logs, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000134] [SP] Use of Externally-Controlled Format String, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000209] [SP] Information Leak through Error Message, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000242] [SP] Use of Inherently Dangerous Function, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000244] [SP] Heap Inspection, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000247] [SP] Reliance on DNS Lookups in a Security Decision, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000256] [SP] Plaintext Storage of a Password, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000258] [SP] Empty Password in Configuration File, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000259] [SP] Use of Hard-coded Password, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000260] [SP] Password in Configuration File, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000285] [SP] Improper Authorization, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000307] [SP] Improper Restriction of Excessive Authentication Attempts, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000312] [SP] Cleartext Storage of Sensitive Information, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000319] [SP] Transport Confidential Information in Plain Text, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000326] [SP] Inadequate Encryption Strength, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000327] [SP] Use of a Broken or Risky Cryptographic Algorithm, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000328] [SP] Reversible One-Way Hash, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000329] [SP] Not Using a Random IV with CBC Mode, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000359] [SP] Privacy Violation, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000477] [SP] Use of Obsolete Functions, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000521] [SP] Weak Password Requirements, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000615] [SP] Information Exposure Through Comments, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000643] [SP] XPath Injection, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000652] [SP] XQuery Injection, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000676] [SP] Use of Potentially Dangerous Function, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000732] [SP] Incorrect Permission Assignment for Critical Resource, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51000759] [SP] Use of a One-Way Hash without a Salt, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51009106] [SP] LDAP Manipulation, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51009307] [SP] Weak Cryptographic Hash: Hard-coded Salt, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-    - [51009309] [SP] Weak Encryption: Inadequate RSA Padding, sm.CODEMRIBasicRule, COMPILER: 5111, OPTION: 0
+[trac] [19:26:34] CP/SP    <DEBUG> CPStandAlone-Initializing Directories.
+[trac] [19:26:34] CP/SP    <DEBUG> CPStandAlone-  - directory : C:\Users\S&SSLAWKS\Desktop\Project\C\temp
+[trac] [19:26:34] CP/SP    <DEBUG> CPStandAlone-Loading CMParser...
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-COMPILER-CODE : {5111}
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-setting common options.
+[trac] [19:26:34] CP/SP    <DEBUG> ExtractorLoader-load usa config
+[trac] [19:26:34] CP/SP    <DEBUG> ExtractorLoader-  - analyzer exec : "C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/Analyzer/codeprism/usa/windows/usao5.exe.x86_64"
+[trac] [19:26:34] CP/SP    <DEBUG> ExtractorLoader-  - temp dir : C:/Users/S&SSLAWKS/Desktop/Project/C/temp
+[trac] [19:26:34] CP/SP    <DEBUG> ExtractorLoader-  - time out : 10
+[trac] [19:26:34] CP/SP    <DEBUG> ExtractorLoader-  - xml encoding : KSC5601
+[trac] [19:26:34] CP/SP    <DEBUG> ExtractorLoader-usa targets
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-setting parser options.
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-private options : {ReferenceHeaderFileList=[], IncludeFileList=[], TempFilePath=[C:/Users/S&SSLAWKS/Desktop/Project/C/temp]}
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-parser options : {setUsa2OptimizeOption=public void com.itplus.cm.parser.ec.CMParserEmbeddedCExtractorArgument.setUsa2OptimizeOption(int), setUseSymbolMap=public void com.itplus.cm.parser.ec.CMParserEmbeddedCExtractorArgument.setUseSymbolMap(boolean), setTandem=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setTandem(boolean), setUsaOptimizer=public void com.itplus.cm.parser.ec.CMParserEmbeddedCExtractorArgument.setUsaOptimizer(boolean), setLogManager=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setLogManager(com.itplus.cm.ce.util.LogManager), setNonExpandedMacroList=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setNonExpandedMacroList(java.util.List), setOnlyToCPPStep=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setOnlyToCPPStep(boolean), setCommonDataListForAnalyzeUnit=public void com.itplus.cm.parser.ec.CMParserEmbeddedCExtractorArgument.setCommonDataListForAnalyzeUnit(java.util.List), setFileListForAnalyzeUnit=public void com.itplus.cm.parser.ec.CMParserEmbeddedCExtractorArgument.setFileListForAnalyzeUnit(java.util.List), setUsa2Filters=public void com.itplus.cm.parser.ec.CMParserEmbeddedCExtractorArgument.setUsa2Filters(com.gtone.cm.parser.usa2.oast.filter.AbstractFilter), setWriteJavaSource=public void com.itplus.cm.parser.ec.CMParserEmbeddedCExtractorArgument.setWriteJavaSource(boolean), setSystemHeaderFileList=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setSystemHeaderFileList(java.util.List), setAutoDeleteTempFile=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setAutoDeleteTempFile(boolean), setUsaConfig=public void com.itplus.cm.parser.ec.CMParserEmbeddedCExtractorArgument.setUsaConfig(extractor.common.usa.config.UsaConfig), setExpandedSourceTest=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setExpandedSourceTest(boolean), setConvertTrigraph=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setConvertTrigraph(boolean), setShowAST=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setShowAST(boolean), setIgnoreCaseForFindHeader=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setIgnoreCaseForFindHeader(boolean), setTokenTest=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setTokenTest(boolean), setVcpp=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setVcpp(boolean), setAmdocs=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setAmdocs(boolean), setTempFilePath=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setTempFilePath(java.lang.String), setMacroFileList=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setMacroFileList(java.util.List), setShowCPPDetailInfo=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setShowCPPDetailInfo(boolean), setPrintSymTbl=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setPrintSymTbl(boolean), setIncludeFileList=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setIncludeFileList(java.util.List), setRemoveComment=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setRemoveComment(boolean), setSearchHeaderFromTop=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setSearchHeaderFromTop(boolean), setNeedGlobalInfo=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setNeedGlobalInfo(boolean), setRtJarFile=public void com.itplus.cm.parser.ec.CMParserEmbeddedCExtractorArgument.setRtJarFile(java.lang.String), setRemovePPDirective=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setRemovePPDirective(boolean), setClassLoader=public void com.itplus.cm.parser.ec.CMParserEmbeddedCExtractorArgument.setClassLoader(java.lang.ClassLoader), setUsaVersion=public void com.itplus.cm.parser.ec.CMParserEmbeddedCExtractorArgument.setUsaVersion(int), setCharset=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setCharset(java.lang.String), setReferenceHeaderFileList=public void com.gtone.cm.parser.cpp.common.AbstractCArgument.setReferenceHeaderFileList(java.util.List), setTargetList=public void com.itplus.cm.parser.ec.CMParserEmbeddedCExtractorArgument.setTargetList(java.util.List)}
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-argument setter invoke values : 
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-    - type name : bool
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-    - method name : setAutoDeleteTempFile
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-    - parameter value : true
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-  * argument setter invoke : setAutoDeleteTempFile()
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-argument setter invoke values : 
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-    - type name : bool
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-    - method name : setIgnoreCaseForFindHeader
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-    - parameter value : false
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-  * argument setter invoke : setIgnoreCaseForFindHeader()
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-argument setter invoke values : 
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-    - type name : java.lang.String
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-    - method name : setCharset
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-    - parameter value : KSC5601
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-  * argument setter invoke : setCharset()
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-argument setter invoke values : 
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-    - type name : java.util.List
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-    - method name : setReferenceHeaderFileList
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-    - parameter value : []
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-  * argument setter invoke : setReferenceHeaderFileList()
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-argument setter invoke values : 
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-    - type name : java.util.List
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-    - method name : setIncludeFileList
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-    - parameter value : []
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-  * argument setter invoke : setIncludeFileList()
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-argument setter invoke values : 
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-    - type name : java.lang.String
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-    - method name : setTempFilePath
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-    - parameter value : C:/Users/S&SSLAWKS/Desktop/Project/C/temp
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-  * argument setter invoke : setTempFilePath()
+[trac] [19:26:34] CP/SP     <TRACE> ExtractorLoader-argument invoke success:class com.itplus.cm.parser.ec.CMParserEmbeddedCExtractorArgument
+[trac] [19:26:34] CP/SP    <DEBUG> ExtractorLoader-extractor invoke success : class java.lang.String
+[trac] [19:26:34] CP/SP    <DEBUG> Memory-max=494.9375M, total=247.5M, free=197.64774M, used=49.852264M
+[trac] [19:26:34] CP/SP    <DEBUG> CPStandAlone-CMParser Intializing...
+[trac] [19:26:34] CP/SP <INFO> If you need builtin, copy builtin file to :: temp builtin file path ::-C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h
+[trac] [19:26:34] CP/SP    <DEBUG> [C Preprocessor]-macro list size is 0.
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-SupportedFileExtensions-[c, h, pc]
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-START ANALYSIS...
+#12,100
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-ANALYZE FILE : [1/14] :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_01.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-input file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/bof_01.c_1610524907050476746.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-preprocessed file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/bof_01.c_1610524907050476746.conv2
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-error file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/bof_01.c_1610524907050476746.err
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/bof_01.c_1610524907050476746.conv2
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/bof_01.c_1610524907050476746
+[trac] [19:26:34] CP/SP     <TRACE> [CoilTransManager] coil write> 20200813192600/fix/bof_01.c to C:/Users/S&SSLAWKS/Desktop/Project/C/temp/src/20200813192600/fix/
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_01.c:1:1: error: <stdlib.h>: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_01.c:2:1: error: <stdio.h>: No such file or directory (ENOENT)at 2
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@1ad98ef
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@165f738
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@1ad98ef
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@1ad98ef
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@165f738
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-file name :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_01.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - logical path :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - only name : bof_01.c
+[trac] [19:26:34] CP/SP    <DEBUG> analyzeStarted.-C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_01.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-CommonData : com.gtone.cm.codeprism.CPCommonData@1c50507
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor Start.
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor End.
+[trac] [19:26:34] CP/SP <INFO> CodePrism- Analyzing is ended...
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@165f738
+[trac] [19:26:34] CP/SP    <DEBUG> Memory-max=494.9375M, total=247.5M, free=232.1818M, used=15.318207M
+#14,100
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-ANALYZE FILE : [2/14] :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_02.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-input file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/bof_02.c_6297229599530869873.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-preprocessed file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/bof_02.c_6297229599530869873.conv2
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-error file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/bof_02.c_6297229599530869873.err
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/bof_02.c_6297229599530869873.conv2
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/bof_02.c_6297229599530869873
+[trac] [19:26:34] CP/SP     <TRACE> [CoilTransManager] coil write> 20200813192600/fix/bof_02.c to C:/Users/S&SSLAWKS/Desktop/Project/C/temp/src/20200813192600/fix/
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_02.c:1:1: error: <stdio.h>: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_02.c:2:1: error: <stdlib.h>: No such file or directory (ENOENT)at 2
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_02.c:3:1: error: <string.h>: No such file or directory (ENOENT)at 3
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@ae533a
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@da18ac
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@ae533a
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@ae533a
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@da18ac
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-file name :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_02.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - logical path :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - only name : bof_02.c
+[trac] [19:26:34] CP/SP    <DEBUG> analyzeStarted.-C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_02.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-CommonData : com.gtone.cm.codeprism.CPCommonData@8a0544
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor Start.
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor End.
+[trac] [19:26:34] CP/SP <INFO> CodePrism- Analyzing is ended...
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@da18ac
+[trac] [19:26:34] CP/SP    <DEBUG> Memory-max=494.9375M, total=247.5M, free=230.51497M, used=16.985031M
+#16,100
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-ANALYZE FILE : [3/14] :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-input file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/div_by_zero.c_624432006217867748.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-preprocessed file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/div_by_zero.c_624432006217867748.conv2
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-error file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/div_by_zero.c_624432006217867748.err
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/div_by_zero.c_624432006217867748.conv2
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/div_by_zero.c_624432006217867748
+[trac] [19:26:34] CP/SP     <TRACE> [CoilTransManager] coil write> 20200813192600/fix/div_by_zero.c to C:/Users/S&SSLAWKS/Desktop/Project/C/temp/src/20200813192600/fix/
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c:1:1: error: <stdio.h>: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c:2:1: error: <stdlib.h>: No such file or directory (ENOENT)at 2
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c:3:1: error: <time.h>: No such file or directory (ENOENT)at 3
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@29ce8c
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@b754b2
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@29ce8c
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@29ce8c
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@b754b2
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-file name :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - logical path :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - only name : div_by_zero.c
+[trac] [19:26:34] CP/SP    <DEBUG> analyzeStarted.-C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-CommonData : com.gtone.cm.codeprism.CPCommonData@aeea66
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor Start.
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor End.
+[trac] [19:26:34] CP/SP <INFO> CodePrism- Analyzing is ended...
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@b754b2
+[trac] [19:26:34] CP/SP    <DEBUG> Memory-max=494.9375M, total=247.5M, free=228.0146M, used=19.485397M
+#18,100
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-ANALYZE FILE : [4/14] :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_01.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-input file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/leak_01.c_962219270587802343.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-preprocessed file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/leak_01.c_962219270587802343.conv2
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-error file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/leak_01.c_962219270587802343.err
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/leak_01.c_962219270587802343.conv2
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/leak_01.c_962219270587802343
+[trac] [19:26:34] CP/SP     <TRACE> [CoilTransManager] coil write> 20200813192600/fix/leak_01.c to C:/Users/S&SSLAWKS/Desktop/Project/C/temp/src/20200813192600/fix/
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_01.c:1:1: error: <stdio.h>: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_01.c:2:1: error: <stdlib.h>: No such file or directory (ENOENT)at 2
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@1be16f5
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@d56b37
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@1be16f5
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@1be16f5
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@d56b37
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-file name :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_01.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - logical path :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - only name : leak_01.c
+[trac] [19:26:34] CP/SP    <DEBUG> analyzeStarted.-C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_01.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-CommonData : com.gtone.cm.codeprism.CPCommonData@171f189
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor Start.
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor End.
+[trac] [19:26:34] CP/SP <INFO> CodePrism- Analyzing is ended...
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@d56b37
+[trac] [19:26:34] CP/SP    <DEBUG> Memory-max=494.9375M, total=247.5M, free=226.34778M, used=21.152222M
+#20,100
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-ANALYZE FILE : [5/14] :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_02.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-input file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/leak_02.c_4491600476131031397.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-preprocessed file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/leak_02.c_4491600476131031397.conv2
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-error file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/leak_02.c_4491600476131031397.err
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/leak_02.c_4491600476131031397.conv2
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/leak_02.c_4491600476131031397
+[trac] [19:26:34] CP/SP     <TRACE> [CoilTransManager] coil write> 20200813192600/fix/leak_02.c to C:/Users/S&SSLAWKS/Desktop/Project/C/temp/src/20200813192600/fix/
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_02.c:1:1: error: <stdio.h>: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_02.c:2:1: error: <stdlib.h>: No such file or directory (ENOENT)at 2
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@b6548
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@269997
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@b6548
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@b6548
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@269997
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-file name :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_02.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - logical path :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - only name : leak_02.c
+[trac] [19:26:34] CP/SP    <DEBUG> analyzeStarted.-C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_02.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-CommonData : com.gtone.cm.codeprism.CPCommonData@16a9b9c
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor Start.
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor End.
+[trac] [19:26:34] CP/SP <INFO> CodePrism- Analyzing is ended...
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@269997
+[trac] [19:26:34] CP/SP    <DEBUG> Memory-max=494.9375M, total=247.5M, free=223.84741M, used=23.652588M
+#22,100
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-ANALYZE FILE : [6/14] :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/ret_stack.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-input file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/ret_stack.c_892568218139855398.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-preprocessed file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/ret_stack.c_892568218139855398.conv2
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-error file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/ret_stack.c_892568218139855398.err
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/ret_stack.c_892568218139855398.conv2
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/ret_stack.c_892568218139855398
+[trac] [19:26:34] CP/SP     <TRACE> [CoilTransManager] coil write> 20200813192600/fix/ret_stack.c to C:/Users/S&SSLAWKS/Desktop/Project/C/temp/src/20200813192600/fix/
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/ret_stack.c:1:1: error: <stdlib.h>: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/ret_stack.c:2:1: error: <stdio.h>: No such file or directory (ENOENT)at 2
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@1142196
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@a9255c
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@1142196
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@1142196
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@a9255c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-file name :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/ret_stack.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - logical path :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - only name : ret_stack.c
+[trac] [19:26:34] CP/SP    <DEBUG> analyzeStarted.-C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/ret_stack.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-CommonData : com.gtone.cm.codeprism.CPCommonData@d3c6a3
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor Start.
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor End.
+[trac] [19:26:34] CP/SP <INFO> CodePrism- Analyzing is ended...
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@a9255c
+[trac] [19:26:34] CP/SP    <DEBUG> Memory-max=494.9375M, total=247.5M, free=222.18057M, used=25.319427M
+#25,100
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-ANALYZE FILE : [7/14] :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-input file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/struct.c_5115475903800612887.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-preprocessed file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/struct.c_5115475903800612887.conv2
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-error file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/struct.c_5115475903800612887.err
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/struct.c_5115475903800612887.conv2
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/struct.c_5115475903800612887
+[trac] [19:26:34] CP/SP     <TRACE> [CoilTransManager] coil write> 20200813192600/fix/struct.c to C:/Users/S&SSLAWKS/Desktop/Project/C/temp/src/20200813192600/fix/
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c:1:1: error: <assert.h>: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c:2:1: error: <stdio.h>: No such file or directory (ENOENT)at 2
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@1e13e07
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@af72d8
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@1e13e07
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@1e13e07
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@af72d8
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-file name :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - logical path :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - only name : struct.c
+[trac] [19:26:34] CP/SP    <DEBUG> analyzeStarted.-C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-CommonData : com.gtone.cm.codeprism.CPCommonData@9cfec1
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor Start.
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor End.
+[trac] [19:26:34] CP/SP <INFO> CodePrism- Analyzing is ended...
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@af72d8
+[trac] [19:26:34] CP/SP    <DEBUG> Memory-max=494.9375M, total=247.5M, free=219.68034M, used=27.819656M
+#27,100
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-ANALYZE FILE : [8/14] :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_01.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-input file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/bof_01.c_3430304082302378530.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-preprocessed file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/bof_01.c_3430304082302378530.conv2
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-error file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/bof_01.c_3430304082302378530.err
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/bof_01.c_3430304082302378530.conv2
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/bof_01.c_3430304082302378530
+[trac] [19:26:34] CP/SP     <TRACE> [CoilTransManager] coil write> 20200813192600/orig/bof_01.c to C:/Users/S&SSLAWKS/Desktop/Project/C/temp/src/20200813192600/orig/
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_01.c:1:1: error: <stdlib.h>: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_01.c:2:1: error: <stdio.h>: No such file or directory (ENOENT)at 2
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@11c2b67
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@659db7
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@11c2b67
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@11c2b67
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@659db7
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-file name :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_01.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - logical path :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - only name : bof_01.c
+[trac] [19:26:34] CP/SP    <DEBUG> analyzeStarted.-C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_01.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-CommonData : com.gtone.cm.codeprism.CPCommonData@6355dc
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor Start.
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor End.
+[trac] [19:26:34] CP/SP <INFO> CodePrism- Analyzing is ended...
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@659db7
+[trac] [19:26:34] CP/SP    <DEBUG> Memory-max=494.9375M, total=247.5M, free=217.18011M, used=30.319885M
+#29,100
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-ANALYZE FILE : [9/14] :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_02.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-input file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/bof_02.c_5627855849211753660.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-preprocessed file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/bof_02.c_5627855849211753660.conv2
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-error file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/bof_02.c_5627855849211753660.err
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/bof_02.c_5627855849211753660.conv2
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/bof_02.c_5627855849211753660
+[trac] [19:26:34] CP/SP     <TRACE> [CoilTransManager] coil write> 20200813192600/orig/bof_02.c to C:/Users/S&SSLAWKS/Desktop/Project/C/temp/src/20200813192600/orig/
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_02.c:1:1: error: <stdio.h>: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_02.c:2:1: error: <stdlib.h>: No such file or directory (ENOENT)at 2
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_02.c:3:1: error: <string.h>: No such file or directory (ENOENT)at 3
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@6754d6
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@1dc0e7a
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@6754d6
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@6754d6
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@1dc0e7a
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-file name :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_02.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - logical path :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - only name : bof_02.c
+[trac] [19:26:34] CP/SP    <DEBUG> analyzeStarted.-C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_02.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-CommonData : com.gtone.cm.codeprism.CPCommonData@3a9bba
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor Start.
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor End.
+[trac] [19:26:34] CP/SP <INFO> CodePrism- Analyzing is ended...
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@1dc0e7a
+[trac] [19:26:34] CP/SP    <DEBUG> Memory-max=494.9375M, total=247.5M, free=215.51263M, used=31.987366M
+#31,100
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-ANALYZE FILE : [10/14] :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-input file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/div_by_zero.c_8626103808204079206.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-preprocessed file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/div_by_zero.c_8626103808204079206.conv2
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-error file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/div_by_zero.c_8626103808204079206.err
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/div_by_zero.c_8626103808204079206.conv2
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/div_by_zero.c_8626103808204079206
+[trac] [19:26:34] CP/SP     <TRACE> [CoilTransManager] coil write> 20200813192600/orig/div_by_zero.c to C:/Users/S&SSLAWKS/Desktop/Project/C/temp/src/20200813192600/orig/
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c:1:1: error: <stdio.h>: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c:2:1: error: <stdlib.h>: No such file or directory (ENOENT)at 2
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c:3:1: error: <time.h>: No such file or directory (ENOENT)at 3
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@8046f4
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@1b273cc
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@8046f4
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@8046f4
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@1b273cc
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-file name :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - logical path :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - only name : div_by_zero.c
+[trac] [19:26:34] CP/SP    <DEBUG> analyzeStarted.-C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-CommonData : com.gtone.cm.codeprism.CPCommonData@d05c13
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor Start.
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor End.
+[trac] [19:26:34] CP/SP <INFO> CodePrism- Analyzing is ended...
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@1b273cc
+[trac] [19:26:34] CP/SP    <DEBUG> Memory-max=494.9375M, total=247.5M, free=213.83017M, used=33.66983M
+#33,100
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-ANALYZE FILE : [11/14] :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_01.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-input file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/leak_01.c_5820200631127438261.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-preprocessed file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/leak_01.c_5820200631127438261.conv2
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-error file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/leak_01.c_5820200631127438261.err
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/leak_01.c_5820200631127438261.conv2
+[trac] [19:26:34] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/leak_01.c_5820200631127438261
+[trac] [19:26:34] CP/SP     <TRACE> [CoilTransManager] coil write> 20200813192600/orig/leak_01.c to C:/Users/S&SSLAWKS/Desktop/Project/C/temp/src/20200813192600/orig/
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_01.c:1:1: error: <stdio.h>: No such file or directory (ENOENT)at 1
+[trac] [19:26:34] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_01.c:2:1: error: <stdlib.h>: No such file or directory (ENOENT)at 2
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@1acfa31
+[trac] [19:26:34] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@15dd910
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@1acfa31
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@1acfa31
+[trac] [19:26:34] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@15dd910
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-file name :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_01.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - logical path :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-    - only name : leak_01.c
+[trac] [19:26:34] CP/SP    <DEBUG> analyzeStarted.-C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_01.c
+[trac] [19:26:34] CP/SP    <DEBUG> CodePrismAnalyzer-CommonData : com.gtone.cm.codeprism.CPCommonData@18ce14a
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor Start.
+[trac] [19:26:34] CP/SP     <TRACE> -RuleVisitor End.
+[trac] [19:26:34] CP/SP <INFO> CodePrism- Analyzing is ended...
+[trac] [19:26:34] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@15dd910
+[trac] [19:26:34] CP/SP    <DEBUG> Memory-max=494.9375M, total=247.5M, free=212.1477M, used=35.352295M
+#35,100
+[trac] [19:26:34] CP/SP     <TRACE> CPStandAlone-ANALYZE FILE : [12/14] :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-input file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/leak_02.c_2599791836425737388.c
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-preprocessed file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/leak_02.c_2599791836425737388.conv2
+[trac] [19:26:34] CP/SP     <TRACE> [C Preporcessor]-error file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/leak_02.c_2599791836425737388.err
+[trac] [19:26:35] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/leak_02.c_2599791836425737388.conv2
+[trac] [19:26:35] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/leak_02.c_2599791836425737388
+[trac] [19:26:35] CP/SP     <TRACE> [CoilTransManager] coil write> 20200813192600/orig/leak_02.c to C:/Users/S&SSLAWKS/Desktop/Project/C/temp/src/20200813192600/orig/
+[trac] [19:26:35] CPStandAlone    <DEBUG> warning> <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)at 1
+[trac] [19:26:35] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c:1:1: error: <stdio.h>: No such file or directory (ENOENT)at 1
+[trac] [19:26:35] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c:2:1: error: <stdlib.h>: No such file or directory (ENOENT)at 2
+[trac] [19:26:35] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@15e2ccd
+[trac] [19:26:35] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@edf730
+[trac] [19:26:35] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@15e2ccd
+[trac] [19:26:35] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@15e2ccd
+[trac] [19:26:35] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@edf730
+[trac] [19:26:35] CP/SP    <DEBUG> CodePrismAnalyzer-file name :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c
+[trac] [19:26:35] CP/SP    <DEBUG> CodePrismAnalyzer-    - logical path :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig
+[trac] [19:26:35] CP/SP    <DEBUG> CodePrismAnalyzer-    - only name : leak_02.c
+[trac] [19:26:35] CP/SP    <DEBUG> analyzeStarted.-C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c
+[trac] [19:26:35] CP/SP    <DEBUG> CodePrismAnalyzer-CommonData : com.gtone.cm.codeprism.CPCommonData@ff94b1
+[trac] [19:26:35] CP/SP     <TRACE> -RuleVisitor Start.
+[trac] [19:26:35] CP/SP     <TRACE> -RuleVisitor End.
+[trac] [19:26:35] CP/SP <INFO> CodePrism- Analyzing is ended...
+[trac] [19:26:35] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@edf730
+[trac] [19:26:35] CP/SP    <DEBUG> Memory-max=494.9375M, total=247.5M, free=208.79842M, used=38.701584M
+#37,100
+[trac] [19:26:35] CP/SP     <TRACE> CPStandAlone-ANALYZE FILE : [13/14] :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/ret_stack.c
+[trac] [19:26:35] CP/SP     <TRACE> [C Preporcessor]-input file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/ret_stack.c_820784988674849960.c
+[trac] [19:26:35] CP/SP     <TRACE> [C Preporcessor]-preprocessed file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/ret_stack.c_820784988674849960.conv2
+[trac] [19:26:35] CP/SP     <TRACE> [C Preporcessor]-error file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/ret_stack.c_820784988674849960.err
+[trac] [19:26:35] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/ret_stack.c_820784988674849960.conv2
+[trac] [19:26:35] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/ret_stack.c_820784988674849960
+[trac] [19:26:35] CP/SP     <TRACE> [CoilTransManager] coil write> 20200813192600/orig/ret_stack.c to C:/Users/S&SSLAWKS/Desktop/Project/C/temp/src/20200813192600/orig/
+[trac] [19:26:35] CPStandAlone    <DEBUG> warning> <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)at 1
+[trac] [19:26:35] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/ret_stack.c:1:1: error: <stdlib.h>: No such file or directory (ENOENT)at 1
+[trac] [19:26:35] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/ret_stack.c:2:1: error: <stdio.h>: No such file or directory (ENOENT)at 2
+[trac] [19:26:35] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@84ce7a
+[trac] [19:26:35] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@10fd7f6
+[trac] [19:26:35] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@84ce7a
+[trac] [19:26:35] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@84ce7a
+[trac] [19:26:35] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@10fd7f6
+[trac] [19:26:35] CP/SP    <DEBUG> CodePrismAnalyzer-file name :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/ret_stack.c
+[trac] [19:26:35] CP/SP    <DEBUG> CodePrismAnalyzer-    - logical path :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig
+[trac] [19:26:35] CP/SP    <DEBUG> CodePrismAnalyzer-    - only name : ret_stack.c
+[trac] [19:26:35] CP/SP    <DEBUG> analyzeStarted.-C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/ret_stack.c
+[trac] [19:26:35] CP/SP    <DEBUG> CodePrismAnalyzer-CommonData : com.gtone.cm.codeprism.CPCommonData@12b6c89
+[trac] [19:26:35] CP/SP     <TRACE> -RuleVisitor Start.
+[trac] [19:26:35] CP/SP     <TRACE> -RuleVisitor End.
+[trac] [19:26:35] CP/SP <INFO> CodePrism- Analyzing is ended...
+[trac] [19:26:35] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@10fd7f6
+[trac] [19:26:35] CP/SP    <DEBUG> Memory-max=494.9375M, total=247.5M, free=207.965M, used=39.535004M
+#40,100
+[trac] [19:26:35] CP/SP     <TRACE> CPStandAlone-ANALYZE FILE : [14/14] :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/struct.c
+[trac] [19:26:35] CP/SP     <TRACE> [C Preporcessor]-input file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/struct.c_6086532270682682555.c
+[trac] [19:26:35] CP/SP     <TRACE> [C Preporcessor]-preprocessed file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/struct.c_6086532270682682555.conv2
+[trac] [19:26:35] CP/SP     <TRACE> [C Preporcessor]-error file - C:/Users/S&SSLAWKS/Desktop/Project/C/temp/struct.c_6086532270682682555.err
+[trac] [19:26:35] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/struct.c_6086532270682682555.conv2
+[trac] [19:26:35] CP/SP    <DEBUG> TEMP_FILE_PREFIX -C:/Users/S&SSLAWKS/Desktop/Project/C/temp/struct.c_6086532270682682555
+[trac] [19:26:35] CP/SP     <TRACE> [CoilTransManager] coil write> 20200813192600/orig/struct.c to C:/Users/S&SSLAWKS/Desktop/Project/C/temp/src/20200813192600/orig/
+[trac] [19:26:35] CPStandAlone    <DEBUG> warning> <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)at 1
+[trac] [19:26:35] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/struct.c:1:1: error: <assert.h>: No such file or directory (ENOENT)at 1
+[trac] [19:26:35] CPStandAlone    <DEBUG> warning> C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/struct.c:2:1: error: <stdio.h>: No such file or directory (ENOENT)at 2
+[trac] [19:26:35] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@88df60
+[trac] [19:26:35] CP/SP    <DEBUG> Create Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@1318b
+[trac] [19:26:35] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@88df60
+[trac] [19:26:35] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.structure.StructureAnalyzer@88df60
+[trac] [19:26:35] CP/SP    <DEBUG> Start Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@1318b
+[trac] [19:26:35] CP/SP    <DEBUG> CodePrismAnalyzer-file name :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/struct.c
+[trac] [19:26:35] CP/SP    <DEBUG> CodePrismAnalyzer-    - logical path :C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig
+[trac] [19:26:35] CP/SP    <DEBUG> CodePrismAnalyzer-    - only name : struct.c
+[trac] [19:26:35] CP/SP    <DEBUG> analyzeStarted.-C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/struct.c
+[trac] [19:26:35] CP/SP    <DEBUG> CodePrismAnalyzer-CommonData : com.gtone.cm.codeprism.CPCommonData@5bb966
+[trac] [19:26:35] CP/SP     <TRACE> -RuleVisitor Start.
+[trac] [19:26:35] CP/SP     <TRACE> -RuleVisitor End.
+[trac] [19:26:35] CP/SP <INFO> CodePrism- Analyzing is ended...
+[trac] [19:26:35] CP/SP    <DEBUG> End Analyzer-com.gtone.codeprism.standalone.analyzer.codeprism.CodePrismAnalyzer@1318b
+[trac] [19:26:35] CP/SP    <DEBUG> Memory-max=494.9375M, total=247.5M, free=205.46461M, used=42.035385M
+[trac] [19:26:35] CP/SP    <DEBUG> CPStandAlone-START END-JOB...
+[trac] [19:26:35] CP/SP     <TRACE> [CoilTransManager] write reference coil files. (0 files)
+[trac] [19:26:35] CP/SP     <TRACE> [CoilTransManager] end. (time: 108 ms)
+[trac] [19:26:35] CP/SP     <TRACE> EndJobTask-code mri option(l) : sasp.thread=1,product_name=beSOURCE
+[trac] [19:26:35] CP/SP     <TRACE> EndJobTask-CODEMRI USER INPUT OPTION: sasp.thread=1
+[trac] [19:26:35] CP/SP     <TRACE> EndJobTask-CODEMRI USER INPUT OPTION: product_name=beSOURCE
+[trac] [19:26:35] CP/SP    <DEBUG> EndJobTask-sp entry point is null.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-target files = 14
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-reference files = 0
+[trac] [19:26:35] CP/SP <INFO> CodeMri Start
+[trac] [19:26:35] CP/SP <INFO> Rule count size-36
+[trac] [19:26:35] CP/SP <INFO> CodeMri User Options-[sasp.thread=1, product_name=beSOURCE]
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-[CodeMriRunner] .init file encoding = Cp1252 : null
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-ProcessRunThread Inter Start.
+[trac] [19:26:35] CP/SP <INFO> ProcessStopper Started.-
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-ProcessRunner start. timeout=0s : null
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-EXEC INFO: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/Analyzer/codeprism/usa/windows/codeMRI.exe.x86_64 -v C:/Users/S&SSLAWKS/Desktop/Project/C/temp/_codemri.init : null
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] codeMRI: Loading the configuration file: C:/Users/S&SSLAWKS/Desktop/Project/C/temp/_codemri.init
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cmi: ProcessManager: Installed: [-11]
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] codeMRI: CodeMRI 2.2.2
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] codeMRI: RDL 5111 2.2.20190625
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] codeMRI: The number of backup files: 5 (default)
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] codeMRI: Making backup: C:/Users/S&SSLAWKS/Desktop/Project/C/temp/_codemri.init -> C:\Users\S&SSLAWKS\Desktop\Project\C\temp\.backup\_codemri.init.bak_20200813192635
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] codeMRI: Making backup: C:\Users\S&SSLAWKS\BeyondSecurity\beSOURCE developer\beSOURCE 5.0\data\CodePrism\analyzer\codeprism\rdl\5111.ecp -> C:\Users\S&SSLAWKS\Desktop\Project\C\temp\.backup\5111.ecp.bak_20200813192635
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] codeMRI: Making backup: C:\Users\S&SSLAWKS\BeyondSecurity\beSOURCE developer\beSOURCE 5.0\data\CodePrism\analyzer\codeprism\rdl\5111.rdl -> C:\Users\S&SSLAWKS\Desktop\Project\C\temp\.backup\5111.rdl.bak_20200813192635
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] codeMRI: No rules for CSP analysis
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] codeMRI: No rules for ECP analysis
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] codeMRI: SASP: [51000015; 51000022; 51000078; 51000080; 51000089; 
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc>                        51000090; 51000117; 51000134; 51000209; 51000242; 
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc>                        51000244; 51000247; 51000256; 51000258; 51000259; 
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc>                        51000260; 51000285; 51000307; 51000312; 51000319; 
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc>                        51000326; 51000327; 51000328; 51000329; 51000359; 
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc>                        51000477; 51000521; 51000615; 51000643; 51000652; 
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc>                        51000676; 51000732; 51000759; 51009106; 51009307; 
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc>                        51009309]
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Process: [308] C:\Users\S&SSLAWKS\BeyondSecurity\beSOURCE developer\beSOURCE 5.0\data\CodePrism\Analyzer\codeprism\usa\windows\sasp.exe.x86_64 --vnum
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> 3.2.1
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Process: [304] C:\Users\S&SSLAWKS\BeyondSecurity\beSOURCE developer\beSOURCE 5.0\data\CodePrism\Analyzer\codeprism\usa\windows\sasp.exe.x86_64 analyze -v C:/Users/S&SSLAWKS/Desktop/Project/C/temp/_codemri.init --append --progress 0,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: Loading the configuration file: C:/Users/S&SSLAWKS/Desktop/Project/C/temp/_codemri.init
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: PID: 232
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: session.mode = save
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: Working directory: C:\Users\S&SSLAWKS\Desktop\Project\C\temp\.sasp
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: Starting SASP analysis...
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] extension: coil_transformers: 1 extensions. 0 transformers ready. 0.000000 sec.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: Loading RDL: [C:\Users\S&SSLAWKS\BeyondSecurity\beSOURCE developer\beSOURCE 5.0\data\CodePrism\analyzer\codeprism\rdl\5111.rdl]
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: 331 rules are loaded.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: 0 customs are loaded.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: 0 messages are loaded.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: 36 rules are selected from RDL of 331 rules.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] extension: post_rdl: 1 extensions. 36 -> 36 rules. 0 -> 0 customs. 0.002000 sec.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: Inter-procedural mode
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cmi: ProcessManager: Installed: []
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: [352] C:\Users\S&SSLAWKS\BeyondSecurity\beSOURCE developer\beSOURCE 5.0\data\CodePrism\Analyzer\codeprism\usa\windows\sasp.exe.x86_64 cluster -v C:/Users/S&SSLAWKS/Desktop/Project/C/temp/_codemri.init
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: Loading the configuration file: C:/Users/S&SSLAWKS/Desktop/Project/C/temp/_codemri.init
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: session.mode = save
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: Working directory: C:\Users\S&SSLAWKS\Desktop\Project\C\temp\.sasp
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: Loading RDL: [C:\Users\S&SSLAWKS\BeyondSecurity\beSOURCE developer\beSOURCE 5.0\data\CodePrism\analyzer\codeprism\rdl\5111.rdl]
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: 331 rules are loaded.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: 0 customs are loaded.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: 0 messages are loaded.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: 36 rules are selected from RDL of 331 rules.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] extension: post_rdl: 1 extensions. 36 -> 36 rules. 0 -> 0 customs. 0.001000 sec.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Start clustering...
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] extension: pre_clustering: 2 extensions. 0.000000 sec.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Analyzing local call dependencies for 14 files (have_prev=false)...
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Local call dependency analysis in progress... (1/14)
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Local call dependency analysis in progress... (2/14)
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Local call dependency analysis in progress... (3/14)
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Local call dependency analysis in progress... (4/14)
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Local call dependency analysis in progress... (5/14)
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Local call dependency analysis in progress... (6/14)
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Local call dependency analysis in progress... (7/14)
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Local call dependency analysis in progress... (8/14)
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Local call dependency analysis in progress... (9/14)
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Local call dependency analysis in progress... (10/14)
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Local call dependency analysis in progress... (11/14)
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Local call dependency analysis in progress... (12/14)
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Local call dependency analysis in progress... (13/14)
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Local call dependency analysis in progress... (14/14)
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Targets: changed 0 / unchanged 0 / cached 0 / new 14 / skipped 0 / failed 0 / total 14
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: References: changed 0 / unchanged 0 / cached 0 / new 0 / skipped 0 / failed 0 / total 0
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Disappeared methods: 0
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Modified: true
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] extension: post_calldep: 1 extensions. 0 new calls. 0.003011 sec.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: calldep file saved: C:\Users\S&SSLAWKS\Desktop\Project\C\temp\.sasp\sasp.cdmf
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: callers: 22, callees: 20, get/setters: 0, top_callers: 18
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: making clusters: 0.000000(s)
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: clusmap saved
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: clusmap: 46, filetbl: 55
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: Loading RDL: [C:\Users\S&SSLAWKS\BeyondSecurity\beSOURCE developer\beSOURCE 5.0\data\CodePrism\analyzer\codeprism\rdl\5111.rdl]
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: 331 rules are loaded.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: 0 customs are loaded.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: 0 messages are loaded.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: 36 rules are selected from RDL of 331 rules.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] extension: post_rdl: 1 extensions. 36 -> 36 rules. 0 -> 0 customs. 0.001002 sec.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Target methods: 55
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Methods defined in header: 0
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Private methods: 0
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Guessed entries: 55
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: Starting methods: 55
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cluster: finish clustering...: regulars - 18, residuals - 13
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: clustering time : 0.06(s)
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: clustering time: 0.138832(s)
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: 1 cluster files are found.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: 31 cluster are found.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: Analyzing 31 clusters using 1 processes...
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 0 %
+#40,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 3 %
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: [324] C:\Users\S&SSLAWKS\BeyondSecurity\beSOURCE developer\beSOURCE 5.0\data\CodePrism\Analyzer\codeprism\usa\windows\sasp.exe.x86_64 worker --id 1 --tag #1/1 -I temp\_codemri.init
+#41,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 6 %
+#42,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 9 %
+#43,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 12 %
+#44,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 15 %
+#45,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 18 %
+#46,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 21 %
+#47,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 25 %
+#48,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 28 %
+#49,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 31 %
+#50,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 34 %
+#51,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 37 %
+#52,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 40 %
+#52,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 43 %
+#53,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 46 %
+#55,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 50 %
+#55,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 53 %
+#56,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 56 %
+#57,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 59 %
+#58,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 62 %
+#59,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 65 %
+#60,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 68 %
+#61,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 71 %
+#62,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 75 %
+#63,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 78 %
+#64,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 81 %
+#65,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 84 %
+#66,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 87 %
+#67,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 90 %
+#67,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 93 %
+#68,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 96 %
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Waiting for threads: [30]
+#70,100
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] Progress: 100 %
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] cmi: ProcessManager: Uninstalled
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: Total cluster: 31, Reused cluster: 0, Updated cluster: 31
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: Completed: 31 successes, 0 failures, 0 skips
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: # of workers (W): 1
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: Worker utilization: [31]
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: Cumulative time (C): 0.323800 sec.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: Elapsed time (E): 0.380323 sec.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: Total analysis time: 0.541142 sec.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: Total violations: 2
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: Rule 51000676: 2
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] sasp: Finished successfully.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] codeMRI: The number of backup files: 5 (default)
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] codeMRI: Making backup: C:\Users\S&SSLAWKS\Desktop\Project\C\temp\_codemri.out -> C:\Users\S&SSLAWKS\Desktop\Project\C\temp\.backup\_codemri.out.bak_20200813192635
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] codeMRI: Total violations: 2
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] codeMRI: Rule 51000676: 2
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] codeMRI: Making backup: C:\Users\S&SSLAWKS\Desktop\Project\C\temp\.sasp\progress.log -> C:\Users\S&SSLAWKS\Desktop\Project\C\temp\.backup\sasp_progress.log.bak_20200813192635
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-proc> [info] codeMRI: Elapsed time: 0.706697 sec.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-ProcessRunner end. 779ms : null
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-process end : null
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-build result... : null
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-[CodeMriRunner]  : result line count = 2, C:/Users/S&SSLAWKS/Desktop/Project/C/temp/_codemri.out
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-Thread 0 joined.
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-Total violation count is... 2, and dup count is ...0
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-traceback start> mem: 46MB
+[trac] [19:26:35] CP/SP     <TRACE> CodeMriAnalyzer-traceback end> count: 0,time: 0ms, mem: 46MB
+[trac] [19:26:35] CP/SP    <DEBUG> CPStandAlone-END END-JOB...
+[trac] [19:26:35] CP/SP    <DEBUG> CPStandAlone-END ALL JOB...
+[trac] [19:26:35] CP/SP    <DEBUG> Memory-max=494.9375M, total=247.5M, free=200.53226M, used=46.967743M
+[trac] [19:26:35] CP/SP     <TRACE> CPStandAlone-SUMMARY - +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+[trac] [19:26:35] CP/SP     <TRACE> CPStandAlone-SUMMARY - ID :0
+[trac] [19:26:35] CP/SP     <TRACE> CPStandAlone-SUMMARY - ERROR COUNT :0
+[trac] [19:26:35] CP/SP     <TRACE> CPStandAlone-SUMMARY -     * RA ERR COUNT :0
+[trac] [19:26:35] CP/SP     <TRACE> CPStandAlone-SUMMARY -     * USA ERR COUNT :0
+[trac] [19:26:35] CP/SP     <TRACE> CPStandAlone-SUMMARY -     * CP/SP ERR COUNT :0
+[trac] [19:26:35] CP/SP     <TRACE> CPStandAlone-SUMMARY -     * ETC ERR COUNT :0
+[trac] [19:26:35] CP/SP     <TRACE> CPStandAlone-SUMMARY - RESULT :2
+[trac] [19:26:35] CP/SP     <TRACE> CPStandAlone-SUMMARY - Core Analyzer Runtime :0 min 1 sec.
+[trac] [19:26:35] CP/SP     <TRACE> CPStandAlone-SUMMARY - +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#90,100
+[warn] <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_01.c:1:1: error: <stdlib.h>: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_01.c:2:1: error: <stdio.h>: No such file or directory (ENOENT)
+[warn] <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_02.c:1:1: error: <stdio.h>: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_02.c:2:1: error: <stdlib.h>: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_02.c:3:1: error: <string.h>: No such file or directory (ENOENT)
+[warn] <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c:1:1: error: <stdio.h>: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c:2:1: error: <stdlib.h>: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c:3:1: error: <time.h>: No such file or directory (ENOENT)
+[warn] <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_01.c:1:1: error: <stdio.h>: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_01.c:2:1: error: <stdlib.h>: No such file or directory (ENOENT)
+[warn] <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_02.c:1:1: error: <stdio.h>: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/leak_02.c:2:1: error: <stdlib.h>: No such file or directory (ENOENT)
+[warn] <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/ret_stack.c:1:1: error: <stdlib.h>: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/ret_stack.c:2:1: error: <stdio.h>: No such file or directory (ENOENT)
+[warn] <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c:1:1: error: <assert.h>: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/struct.c:2:1: error: <stdio.h>: No such file or directory (ENOENT)
+[warn] <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_01.c:1:1: error: <stdlib.h>: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_01.c:2:1: error: <stdio.h>: No such file or directory (ENOENT)
+[warn] <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_02.c:1:1: error: <stdio.h>: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_02.c:2:1: error: <stdlib.h>: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/bof_02.c:3:1: error: <string.h>: No such file or directory (ENOENT)
+[warn] <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c:1:1: error: <stdio.h>: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c:2:1: error: <stdlib.h>: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c:3:1: error: <time.h>: No such file or directory (ENOENT)
+[warn] <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_01.c:1:1: error: <stdio.h>: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_01.c:2:1: error: <stdlib.h>: No such file or directory (ENOENT)
+[warn] <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c:1:1: error: <stdio.h>: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/leak_02.c:2:1: error: <stdlib.h>: No such file or directory (ENOENT)
+[warn] <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/ret_stack.c:1:1: error: <stdlib.h>: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/ret_stack.c:2:1: error: <stdio.h>: No such file or directory (ENOENT)
+[warn] <command line>:1:1: error: C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/beSOURCE 5.0/data/CodePrism/temp_c_buitin.h: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/struct.c:1:1: error: <assert.h>: No such file or directory (ENOENT)
+[warn] C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/struct.c:2:1: error: <stdio.h>: No such file or directory (ENOENT)
+[trac] [file] start. C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c
+[info] DEFECTKEY>10,51000676,8<>div_by_zero.c#getValue()#51000676#scanf("%d", &n);<>-2827601089614808367
+[trac] [file] end.
+#92,100
+[trac] [file] start. C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/div_by_zero.c
+[info] DEFECTKEY>3,51000676,9<>div_by_zero.c#getValue()#51000676#int r = scanf("%d", &n);<>-851898187439839562
+[trac] [file] end.
+[trac] [file] insert violation : 2
+#95,100
+[info] db-insert end. 41ms
+#95,100
+[trac] [ENDJOB] run project end-job...
+[trac] [ENDJOB] update src_detail.
+[trac] [ENDJOB] skip metric.
+[trac] [ENDJOB] update project analyze data.
+[info] project file changed. (matched=1)
+[trac] [HandlerLoader] run endjob handlers...
+[trac] [HandlerLoader] do not use handlers. (skip)
+#100,100
+[info] working time: 3556ms
+[trac] [19:26:35] CP/SP <INFO> ProcessStopper End.-
+#complete

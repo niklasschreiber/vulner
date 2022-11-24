@@ -1,0 +1,131 @@
+namespace com.ti.oss.common.cdr.evalROP;
+
+use com.ti.oss.common.cdr.util::*;
+use com.ti.oss.common.types::*;
+use com.ti.oss.common.cdr.types::*;
+
+<%
+	my $parallelSQM = 2;
+	my $parallelSQMmod = 16;
+%>
+
+
+public composite RatChargingSplit (input  stream<AggregateSqmSchema> IROP; 
+                              output <%for(my $i = 0; $i < $parallelSQMmod; $i++) {%>
+							  stream<AggregateSqmSchema> ORatCharging<%=$i%>
+							  <%if($i != $parallelSQMmod - 1) {
+							  print ",";
+							  }
+							  }%>,
+							  stream<AggregateSqmSchema> OROP)
+{
+	
+	graph
+	
+		(<%for(my $i = 0; $i < $parallelSQMmod; $i++) {%>
+		stream<AggregateSqmSchema> ORatCharging<%=$i%>
+		<%if($i != $parallelSQMmod - 1) {
+			print ";";
+		}
+		}%>;
+		stream<AggregateSqmSchema> OROP 
+		)
+		= Custom(IROP as I)
+		{
+		logic state:
+			{
+				mutable uint32 countPort = 0;
+				mutable int32 count_endROP = 0;
+				mutable int32 count_write_prev = 0;
+			} 
+		
+			onTuple I : 
+			{      	
+				if (I.endROP)
+				{
+					count_endROP++;
+					if(count_endROP == <%=$parallelSQM%>) 
+					{
+						submit(I,OROP);
+						count_endROP = 0;
+					}			
+				}
+				else if (I.write_prev)
+				{
+					if (I.exclude_node == "")
+					{
+						count_write_prev++;
+						if(count_write_prev == <%=$parallelSQM%>) 
+						{
+							submit(I,OROP);
+							count_write_prev = 0;
+						}
+					}else{
+						submit(I,OROP);
+					}
+												
+				}
+				else
+				{		
+	                uint64 addr = hashCode((rstring)I.cdrSchema.rATType+(rstring)I.cdrSchema.chargingID);
+					uint32 modAddr = (uint32)(addr%(uint64)16);
+					if(modAddr < 0u) {
+						appTrc(Trace.error,"ERROR: the split returned a negative output port!");
+					}
+					else {
+						if (modAddr==(uint32)0)
+						{
+							submit(I, ORatCharging0);
+						}else if (modAddr==(uint32)1)
+						{
+							submit(I, ORatCharging1);
+						}else if (modAddr==(uint32)2)
+						{
+							submit(I, ORatCharging2);
+						}else if (modAddr==(uint32)3)
+						{
+							submit(I, ORatCharging3);
+						}else if (modAddr==(uint32)4)
+						{
+							submit(I, ORatCharging4);
+						}else if (modAddr==(uint32)5)
+						{
+							submit(I, ORatCharging5);
+						}else if (modAddr==(uint32)6)
+						{
+							submit(I, ORatCharging6);
+						}else if (modAddr==(uint32)7)
+						{
+							submit(I, ORatCharging7);
+						}else if (modAddr==(uint32)8)
+						{
+							submit(I, ORatCharging8);
+						}else if (modAddr==(uint32)9)
+						{
+							submit(I, ORatCharging9);
+						}else if (modAddr==(uint32)10)
+						{
+							submit(I, ORatCharging10);
+						}else if (modAddr==(uint32)11)
+						{
+							submit(I, ORatCharging11);
+						}else if (modAddr==(uint32)12)
+						{
+							submit(I, ORatCharging12);
+						}else if (modAddr==(uint32)13)
+						{
+							submit(I, ORatCharging13);
+						}else if (modAddr==(uint32)14)
+						{
+							submit(I, ORatCharging14);
+						}
+						else if (modAddr==(uint32)15)
+						{
+							submit(I, ORatCharging15);
+						}
+
+					}	
+				}
+	        }
+		}
+}

@@ -1,0 +1,31 @@
+<aura:component implements="lightning:availableForFlowScreens" access="global">
+    <aura:attribute name="stageName" type="String" access="global"/>
+    <aura:attribute name="stageIndex" type="Integer" access="global"/>
+    <aura:attribute name="stageCount" type="Integer" access="global"/>
+
+    <aura:attribute name="steps" type="List" access="private"/>
+    <aura:attribute name="isLastStep" type="Boolean" access="private" default="false"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+
+    <div class="slds-m-bottom_medium">
+        <div class="slds-clearfix slds-p-bottom_small">
+            <div class="slds-text-heading_small slds-text-align_center">{!v.stageName}</div>
+            <div class="slds-float_right" style="position:relative;">
+                <aura:if isTrue="{!v.screenHelpText ne null}">
+                    <lightning:helptext content="{!v.screenHelpText}" />
+                </aura:if>
+            </div>
+        </div>
+
+        <div class="slds-p-bottom_small">
+            <lightning:progressIndicator aura:id="progress" type="base" variant="base">
+                <aura:iteration items="{!v.steps}" var="step">
+                    <lightning:progressStep label="{!step.label}" value="{!step.value}"/>
+                </aura:iteration>
+            </lightning:progressIndicator>
+        </div>
+    </div>
+</aura:component>	
+
+

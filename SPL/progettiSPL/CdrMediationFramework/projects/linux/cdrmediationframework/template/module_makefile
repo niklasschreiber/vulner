@@ -1,0 +1,465 @@
+#---------------------------------------------------------------------
+#
+# File:         module_makefile
+# Project:      
+# Component:    
+# Description:  UNIX makefile for the module
+# Version:      1
+#
+# Author:       Antonino Di Guardo
+# Date:         04/10/2013
+# Last Update:  
+# Copyright(c): GFM Integration 2013
+#
+#---------------------------------------------------------------------
+
+
+###############################################################################
+#
+# C compiler parameters
+#
+###############################################################################
+
+#######################################
+# C compiler to be used
+#######################################
+ifeq ($(C),gcc)
+C_FLAGS =$(C_GPP_FLAGS)
+C_DEFINES =$(C_GPP_DEFINES)
+C_COMP =$(C_GPP_COMP)
+C_STATIC_LIB_LINK =$(C_GPP_STATIC_LIB_LINK)
+C_STATIC_LIB_FLAGS =$(C_GPP_STATIC_LIB_FLAGS)
+C_SHARED_LIB_LINK =$(C_GPP_SHARED_LIB_LINK)
+C_SHARED_LIB_FLAGS =$(C_GPP_SHARED_LIB_FLAGS)
+C_BIN_FLAGS =$(C_GPP_BIN_FLAGS)
+C_BIN_LIBS =$(C_GPP_BIN_LIBS)
+else
+ifeq ($(C),aCC)
+C_FLAGS =$(C_ACC_FLAGS)
+C_DEFINES =$(C_ACC_DEFINES)
+C_COMP =$(C_ACC_COMP)
+C_STATIC_LIB_LINK =$(C_ACC_STATIC_LIB_LINK)
+C_STATIC_LIB_FLAGS =$(C_ACC_STATIC_LIB_FLAGS)
+C_SHARED_LIB_LINK =$(C_ACC_SHARED_LIB_LINK)
+C_SHARED_LIB_FLAGS =$(C_ACC_SHARED_LIB_FLAGS)
+C_BIN_FLAGS =$(C_ACC_BIN_FLAGS)
+C_BIN_LIBS =$(C_ACC_BIN_LIBS)
+else
+ifeq ($(C),CC)
+C_FLAGS =$(C_CC_FLAGS)
+C_DEFINES =$(C_CC_DEFINES)
+C_COMP =$(C_CC_COMP)
+C_STATIC_LIB_LINK =$(C_CC_STATIC_LIB_LINK)
+C_STATIC_LIB_FLAGS =$(C_CC_STATIC_LIB_FLAGS)
+C_SHARED_LIB_LINK =$(C_CC_SHARED_LIB_LINK)
+C_SHARED_LIB_FLAGS =$(C_CC_SHARED_LIB_FLAGS)
+C_BIN_FLAGS =$(C_CC_BIN_FLAGS)
+C_BIN_LIBS =$(C_CC_BIN_LIBS)
+else
+$(error No valid C compiler ($(C)))
+endif
+endif
+endif
+
+
+###############################################################################
+#
+# C++ compiler parameters
+#
+###############################################################################
+
+#######################################
+# C++ compiler to be used
+#######################################
+ifeq ($(CCC),g++)
+CCC_FLAGS =$(CCC_GPP_FLAGS)
+CCC_DEFINES =$(CCC_GPP_DEFINES)
+CCC_COMP =$(CCC_GPP_COMP)
+CCC_STATIC_LIB_LINK =$(CCC_GPP_STATIC_LIB_LINK)
+CCC_STATIC_LIB_FLAGS =$(CCC_GPP_STATIC_LIB_FLAGS)
+CCC_SHARED_LIB_LINK =$(CCC_GPP_SHARED_LIB_LINK)
+CCC_SHARED_LIB_FLAGS =$(CCC_GPP_SHARED_LIB_FLAGS)
+CCC_BIN_FLAGS =$(CCC_GPP_BIN_FLAGS)
+CCC_BIN_LIBS =$(CCC_GPP_BIN_LIBS)
+else
+ifeq ($(CCC),aCC)
+CCC_FLAGS =$(CCC_ACC_FLAGS)
+CCC_DEFINES =$(CCC_ACC_DEFINES)
+CCC_COMP =$(CCC_ACC_COMP)
+CCC_STATIC_LIB_LINK =$(CCC_ACC_STATIC_LIB_LINK)
+CCC_STATIC_LIB_FLAGS =$(CCC_ACC_STATIC_LIB_FLAGS)
+CCC_SHARED_LIB_LINK =$(CCC_ACC_SHARED_LIB_LINK)
+CCC_SHARED_LIB_FLAGS =$(CCC_ACC_SHARED_LIB_FLAGS)
+CCC_BIN_FLAGS =$(CCC_ACC_BIN_FLAGS)
+CCC_BIN_LIBS =$(CCC_ACC_BIN_LIBS)
+else
+ifeq ($(CCC),CC)
+CCC_FLAGS =$(CCC_CC_FLAGS)
+CCC_DEFINES =$(CCC_CC_DEFINES)
+CCC_COMP =$(CCC_CC_COMP)
+CCC_STATIC_LIB_LINK =$(CCC_CC_STATIC_LIB_LINK)
+CCC_STATIC_LIB_FLAGS =$(CCC_CC_STATIC_LIB_FLAGS)
+CCC_SHARED_LIB_LINK =$(CCC_CC_SHARED_LIB_LINK)
+CCC_SHARED_LIB_FLAGS =$(CCC_CC_SHARED_LIB_FLAGS)
+CCC_BIN_FLAGS =$(CCC_CC_BIN_FLAGS)
+CCC_BIN_LIBS =$(CCC_CC_BIN_LIBS)
+else
+$(error No valid C++ compiler ($(CCC)))
+endif
+endif
+endif
+
+
+###############################################################################
+#
+# Module building, installation and integration parameters
+#
+###############################################################################
+OUT_DIRS =$(OUT_BIN_DIR) \
+	$(OUT_CFG_DIR) \
+	$(OUT_LIB_DIR) \
+	$(OUT_LOG_DIR)
+
+SHARE_DIRS=$(SHARE_INCLUDE_DIR) \
+	$(SHARE_LIB_DIR)
+
+INSTALL_DIRS =$(INSTALL_BIN_DIR) \
+	$(INSTALL_CFG_DIR) \
+	$(INSTALL_LIB_DIR) \
+	$(INSTALL_LOG_DIR)
+
+INTEGRATE_DIRS =$(INT_MAKE_DIR) \
+	$(INT_BIN_CFG_DIR) \
+	$(INT_BIN_SRC_DIR) \
+	$(INT_BIN_SCRIPT_DIR) \
+	$(INT_LIB_INCLUDE_DIR) \
+	$(INT_LIB_CFG_DIR) \
+	$(INT_LIB_SRC_DIR)
+
+ifneq ($(BUILD_OPTIONS),lib)
+INCLUDE_DIRS =-I$(APP_BIN_SRC_DIR)
+endif
+
+INCLUDE_DIRS +=-I. -I$(APP_LIB_SRC_DIR) \
+	-I$(APP_LIB_INCLUDE_DIR) \
+	-I$(APP_LIB_INCLUDE_DIR)/$(MODULE) \
+	$(SHARE_INCLUDE_DIRS) \
+	$(3RD_PARTY_INCLUDE_DIRS) \
+	-I$(SHARE_INCLUDE_DIR)/$(MODULE)
+
+LIB_DIRS =$(SHARE_LIB_DIRS) \
+	$(3RD_PARTY_LIB_DIRS)
+
+LIBS =$(SHARE_LIBS) \
+	$(3RD_PARTY_LIBS)
+
+
+###############################################################################
+#
+# Application objects and headers
+#
+###############################################################################
+
+LIB_OBJECTS :=$(patsubst %.cpp,%.o,$(wildcard $(APP_LIB_SRC_DIR)/*.cpp))
+LIB_OBJECTS +=$(patsubst %.cxx,%.o,$(wildcard $(APP_LIB_SRC_DIR)/*.cxx))
+LIB_OBJECTS +=$(patsubst %.c,%.o,$(wildcard $(APP_LIB_SRC_DIR)/*.c))
+
+BIN_OBJECTS :=$(patsubst %.cpp,%.o,$(wildcard $(APP_BIN_SRC_DIR)/*.cpp))
+BIN_OBJECTS +=$(patsubst %.cxx,%.o,$(wildcard $(APP_BIN_SRC_DIR)/*.cxx))
+BIN_OBJECTS +=$(patsubst %.c,%.o,$(wildcard $(APP_BIN_SRC_DIR)/*.c))
+
+LIB_OBJECTS :=$(addprefix $(OBJ_DIR)/,$(notdir $(LIB_OBJECTS)))
+
+BIN_OBJECTS :=$(addprefix $(OBJ_DIR)/,$(notdir $(BIN_OBJECTS)))
+
+LIB_HEADERS1 +=$(wildcard $(APP_LIB_SRC_DIR)/*.h)
+LIB_HEADERS1 +=$(wildcard $(APP_LIB_SRC_DIR)/*.hh)
+LIB_HEADERS1 +=$(wildcard $(APP_LIB_SRC_DIR)/*.hpp)
+LIB_HEADERS2 +=$(wildcard $(APP_LIB_INCLUDE_DIR)/*.h)
+LIB_HEADERS2 +=$(wildcard $(APP_LIB_INCLUDE_DIR)/*.hh)
+LIB_HEADERS2 +=$(wildcard $(APP_LIB_INCLUDE_DIR)/*.hpp)
+LIB_HEADERS3 +=$(wildcard $(APP_LIB_INCLUDE_DIR)/$(MODULE)/*.h)
+LIB_HEADERS3 +=$(wildcard $(APP_LIB_INCLUDE_DIR)/$(MODULE)/*.hh)
+LIB_HEADERS3 +=$(wildcard $(APP_LIB_INCLUDE_DIR)/$(MODULE)/*.hpp)
+
+BIN_HEADERS1 +=$(wildcard $(APP_BIN_SRC_DIR)/*.h)
+BIN_HEADERS1 +=$(wildcard $(APP_BIN_SRC_DIR)/*.hh)
+BIN_HEADERS1 +=$(wildcard $(APP_BIN_SRC_DIR)/*.hpp)
+BIN_HEADERS2 +=$(wildcard $(APP_BIN_INCLUDE_DIR)/*.h)
+BIN_HEADERS2 +=$(wildcard $(APP_BIN_INCLUDE_DIR)/*.hh)
+BIN_HEADERS2 +=$(wildcard $(APP_BIN_INCLUDE_DIR)/*.hpp)
+BIN_HEADERS3 +=$(wildcard $(APP_BIN_INCLUDE_DIR)/$(MODULE)/*.h)
+BIN_HEADERS3 +=$(wildcard $(APP_BIN_INCLUDE_DIR)/$(MODULE)/*.hh)
+BIN_HEADERS3 +=$(wildcard $(APP_BIN_INCLUDE_DIR)/$(MODULE)/*.hpp)
+
+
+###############################################################################
+#
+# Implicit rules
+#
+###############################################################################
+
+#######################################
+# Rules to create library object files
+#######################################
+$(OBJ_DIR)/%.o: $(APP_LIB_SRC_DIR)/%.cpp
+	cd $(APP_LIB_SRC_DIR); \
+	$(CCC) -c $(CCC_COMP) $(CCC_FLAGS) $(CCC_DEFINES) $(INCLUDE_DIRS) $(notdir $<) -o $@
+
+$(OBJ_DIR)/%.o: $(APP_LIB_SRC_DIR)/%.cxx
+	cd $(APP_LIB_SRC_DIR); \
+	$(CCC) -c $(CCC_COMP) $(CCC_FLAGS) $(CCC_DEFINES) $(INCLUDE_DIRS) $(notdir $<) -o $@
+
+$(OBJ_DIR)/%.o: $(APP_LIB_SRC_DIR)/%.c
+	cd $(APP_LIB_SRC_DIR); \
+	$(C) -c $(C_COMP) $(C_FLAGS) $(C_DEFINES) $(INCLUDE_DIRS) $(notdir $<) -o $@
+
+#######################################
+# Rules to create binary executable object files
+#######################################
+$(OBJ_DIR)/%.o: $(APP_BIN_SRC_DIR)/%.cpp
+	cd $(APP_BIN_SRC_DIR); \
+	$(CCC) -c $(CCC_COMP) $(CCC_FLAGS) $(CCC_DEFINES) $(INCLUDE_DIRS) $(notdir $<) -o $@
+
+$(OBJ_DIR)/%.o: $(APP_BIN_SRC_DIR)/%.cxx
+	cd $(APP_BIN_SRC_DIR); \
+	$(CCC) -c $(CCC_COMP) $(CCC_FLAGS) $(CCC_DEFINES) $(INCLUDE_DIRS) $(notdir $<) -o $@
+
+$(OBJ_DIR)/%.o: $(APP_BIN_SRC_DIR)/%.c
+	cd $(APP_BIN_SRC_DIR); \
+	$(C) -c $(C_COMP) $(C_FLAGS) $(C_DEFINES) $(INCLUDE_DIRS) $(notdir $<) -o $@
+
+
+###############################################################################
+#
+# Target rules (explicit rules)
+#
+###############################################################################
+
+#######################################
+# Default target
+#######################################
+
+.DEFAULT:
+	@$(MAKE) -f ../../$(MODULE_HELP_FILE)
+
+
+#######################################
+# External target rules
+#
+# Target usable by the users.
+# Targets that the user normally passes
+# as parameter to the 'make' command
+#######################################
+.PHONY: ? all lib bin purify clean dist distclean share unshare install install_lib install_bin install_purify uninstall integrate unintegrate
+
+all: $(BUILD_OPTIONS)
+
+?:
+	@$(MAKE) -f ../../$(MODULE_HELP_FILE)
+
+ifneq ($(LIB_OBJECTS),)
+lib: build_out_dir $(OUT_LIB_DIR)/$(LIB_NAME)
+	-@cp -f $(APP_LIB_CFG_DIR)/* $(OUT_CFG_DIR)/ 2>/dev/null
+	@chmod 755 $(OUT_LIB_DIR)/$(LIB_NAME)
+	@echo 
+	@echo Library \"$(LIB_NAME)\" successfully created on directory \"$(OUT_DIR)\"
+	@echo 
+else
+lib: build_out_dir
+	@echo 
+	@echo No library to build
+	@echo 
+endif
+
+ifneq ($(BIN_OBJECTS),)
+bin: lib build_bin
+	-@cp -f $(APP_BIN_CFG_DIR)/* $(OUT_CFG_DIR)/ 2>/dev/null
+	-@cp -f $(APP_BIN_SCRIPT_DIR)/* $(OUT_BIN_DIR)/ 2>/dev/null
+	@chmod 750 $(OUT_BIN_DIR)/*
+	@echo 
+	@echo Binary executable \"$(BIN_NAME)\" successfully created on  directory \"$(OUT_DIR)\"
+	@echo 
+else
+bin:
+	@echo 
+	@echo No binary executable to build
+	@echo 
+endif
+
+ifneq ($(BIN_OBJECTS),)
+purify: lib build_purify
+	-@cp -f $(APP_BIN_CFG_DIR)/* $(OUT_CFG_DIR)/ 2>/dev/null
+	-@cp -f $(APP_BIN_SCRIPT_DIR)/* $(OUT_BIN_DIR)/ 2>/dev/null
+	@chmod 750 $(OUT_BIN_DIR)/*
+	@echo 
+	@echo Purified binary executable \"$(BIN_NAME_PURE)\" successfully created on directory \"$(OUT_DIR)\"
+	@echo 
+else
+purify:
+	@echo 
+	@echo No purified binary executable to build
+	@echo 
+endif
+
+clean: destroy_obj_dir
+	@echo 
+	@echo Objects directory \"$(OBJ_DIR)\" successfully removed
+	@echo 
+
+dist: all
+	@tar cf $(BUILD_OUT_DIR)/$(DIST_TAR_NAME) $(OUT_DIR)/*
+	@gzip -f $(BUILD_OUT_DIR)/$(DIST_TAR_NAME)
+	@echo 
+	@echo Distribution package \"$(DIST_ZIP_NAME)\" successfully created on directory \"$(BUILD_OUT_DIR)\"
+	@echo 
+
+distclean: destroy_out_dir
+	-@rm -f $(BUILD_OUT_DIR)/$(DIST_TAR_NAME) 2>/dev/null
+	-@rm -f $(BUILD_OUT_DIR)/$(DIST_ZIP_NAME) 2>/dev/null
+	@echo 
+	@echo Distribution package \"$(DIST_ZIP_NAME)\" and building directory \"$(BUILD_OUT_DIR)\" successfully removed
+	@echo 
+
+share: build_share_dir
+ifneq ($(addprefix $(APP_LIB_SRC_DIR)/,$(notdir $(LIB_HEADERS1))),)
+	-@cp -f $(addprefix $(APP_LIB_SRC_DIR)/,$(notdir $(LIB_HEADERS1))) $(SHARE_INCLUDE_DIR)/
+endif
+ifneq ($(addprefix $(APP_LIB_INCLUDE_DIR)/,$(notdir $(LIB_HEADERS2))),)
+	-@cp -f $(addprefix $(APP_LIB_INCLUDE_DIR)/,$(notdir $(LIB_HEADERS2))) $(SHARE_INCLUDE_DIR)/
+endif
+ifneq ($(addprefix $(APP_LIB_INCLUDE_DIR)/$(MODULE)/,$(notdir $(LIB_HEADERS3))),)
+	-@mkdir -p $(SHARE_INCLUDE_DIR)/$(MODULE)
+	-@cp -f $(addprefix $(APP_LIB_INCLUDE_DIR)/$(MODULE)/,$(notdir $(LIB_HEADERS3))) $(SHARE_INCLUDE_DIR)/$(MODULE)/
+	-@cp -f $(addprefix $(APP_LIB_INCLUDE_DIR)/$(MODULE)/,$(notdir $(LIB_HEADERS3))) $(SHARE_INCLUDE_DIR)/
+endif
+	-@cp -f $(OUT_LIB_DIR)/$(LIB_NAME) $(SHARE_LIB_DIR)/ 2>/dev/null
+	@echo 
+	@echo Sharing of module \"$(MODULE)\" successfully completed on directory \"$(SHARE_BASE_DIR)\"
+	@echo 
+
+unshare:
+	@rm -f $(addprefix $(SHARE_INCLUDE_DIR)/,$(notdir $(LIB_HEADERS1)))
+	@rm -f $(addprefix $(SHARE_INCLUDE_DIR)/,$(notdir $(LIB_HEADERS2)))
+	@rm -f $(addprefix $(SHARE_INCLUDE_DIR)/,$(notdir $(LIB_HEADERS3)))
+	@rm -f $(addprefix $(SHARE_INCLUDE_DIR)/$(MODULE)/,$(notdir $(LIB_HEADERS3)))
+	@rm -f $(SHARE_LIB_DIR)/$(LIB_NAME)
+	@echo 
+	@echo Sharing of module \"$(MODULE)\" successfully removed from directory \"$(SHARE_BASE_DIR)\"
+	@echo 
+
+install: $(INSTALL_OPTIONS)
+
+install_lib: lib build_install_dir
+	@$(MAKE) -f $(INSTALL_LIB_FILE)
+	@echo 
+	@echo Library \"$(LIB_NAME)\" successfully installed on directory \"$(INSTALL_BASE_DIR)\"
+	@echo 
+
+install_bin: bin build_install_dir
+	@$(MAKE) -f $(INSTALL_BIN_FILE)
+	@echo 
+	@echo Binary executable \"$(BIN_NAME)\" successfully installed on directory \"$(INSTALL_BASE_DIR)\"
+	@echo 
+
+install_purify: purify build_install_dir
+	@$(MAKE) -f $(INSTALL_PURIFY_FILE)
+	@echo 
+	@echo Purified binary executable \"$(BIN_NAME_PURE)\" successfully installed on directory \"$(INSTALL_BASE_DIR)\"
+	@echo 
+
+uninstall:
+	@echo 
+	@echo \"uninstall\" target not supported
+	@echo 
+
+integrate: build_integrate_dir
+ifeq ($(MAKE_UP_LEVEL_INTEGRATION),)
+	@cd ../../; \
+	$(MAKE) -f $(APPLICATION_INTEGRATE_SCRIPT) integrate
+	cd $(DEVELOP_SRC_DIR)/$(MODULE)
+	@cd ..; \
+	$(MAKE) -f ../$(COMPONENT_INTEGRATE_SCRIPT) integrate DEVELOP_SRC_DIR=$(DEVELOP_SRC_DIR)
+endif
+	cd $(DEVELOP_SRC_DIR)/$(MODULE)
+	@$(MAKE) -f ../../$(MODULE_INTEGRATE_SCRIPT) integrate DEVELOP_SRC_DIR=$(DEVELOP_SRC_DIR)
+	-@cp -f $(APP_BIN_CFG_DIR)/* $(INT_BIN_CFG_DIR)/ 2>/dev/null
+	-@cp -f $(APP_BIN_SRC_DIR)/* $(INT_BIN_SRC_DIR)/ 2>/dev/null
+	-@cp -f $(APP_BIN_SCRIPT_DIR)/* $(INT_BIN_SCRIPT_DIR)/ 2>/dev/null
+	-@cp -f $(APP_LIB_CFG_DIR)/* $(INT_LIB_CFG_DIR)/ 2>/dev/null
+	-@cp -rf $(APP_LIB_INCLUDE_DIR)/* $(INT_LIB_INCLUDE_DIR)/ 2>/dev/null
+	-@cp -f $(APP_LIB_SRC_DIR)/* $(INT_LIB_SRC_DIR)/ 2>/dev/null
+	@echo 
+	@echo Integration of module \"$(MODULE)\" successfully completed on directory \"$(INT_DIR)\"
+	@echo 
+
+unintegrate:
+	@echo 
+	@echo \"unintegrate\" target not supported
+	@echo 
+
+
+#######################################
+# Internal target rules
+#
+# Target usable by external targets.
+# Target that the user doesn't need to
+# pass as parameter to the 'make' command
+#######################################
+.PHONY: destroy_obj_dir build_out_dir destroy_out_dir build_share_dir build_install_dir build_integrate_dir build_bin build_purify
+
+clean_lib_dir:
+	-@rm -rf $(OUT_BASE_DIR)/$(OUT_CFG_DIR)/* 2>/dev/null
+	-@rm -rf $(OUT_BASE_DIR)/$(OUT_LIB_DIR)/* 2>/dev/null
+
+clean_bin_dir:
+	-@rm -rf $(OUT_BASE_DIR)/$(OUT_BIN_DIR)/* 2>/dev/null
+	-@rm -rf $(OUT_BASE_DIR)/$(OUT_LOG_DIR)/* 2>/dev/null
+
+destroy_obj_dir:
+	-rm -rf $(OBJ_DIR)
+
+build_out_dir: $(OBJ_DIR) $(OUT_DIRS)
+
+destroy_out_dir: destroy_obj_dir
+	-rm -rf $(OUT_DIR)
+
+build_share_dir: $(SHARE_DIRS)
+
+build_install_dir: $(INSTALL_DIRS)
+
+build_integrate_dir: $(INTEGRATE_DIRS)
+
+$(OBJ_DIR) $(OUT_DIRS) $(SHARE_DIRS) $(INSTALL_DIRS) $(INTEGRATE_DIRS):
+	mkdir -p $@
+
+
+#######################################
+# Rule to create the library
+#######################################
+$(filter %.a %.A,$(OUT_LIB_DIR)/$(LIB_NAME)): $(LIB_OBJECTS)
+	$(CCC_STATIC_LIB_LINK) $(CCC_STATIC_LIB_FLAGS) $@ $(LIB_OBJECTS) $(LIBS)
+$(filter %.so %.SO %.sl %.SL,$(OUT_LIB_DIR)/$(LIB_NAME)): $(LIB_OBJECTS)
+	$(CCC_SHARED_LIB_LINK) $(CCC_SHARED_LIB_FLAGS) -o $@ $(LIB_OBJECTS) $(LIBS) $(LIB_DIRS) $(CCC_BIN_LIBS)
+
+#######################################
+# Rule to create the binary executable
+#######################################
+ifneq ($(LIB_OBJECTS),)
+build_bin: $(BIN_OBJECTS) $(OUT_LIB_DIR)/$(LIB_NAME)
+	$(CCC) $(CCC_BIN_FLAGS) -o $(OUT_BIN_DIR)/$(BIN_NAME) $(BIN_OBJECTS) $(OUT_LIB_DIR)/$(LIB_NAME) $(LIBS) $(LIB_DIRS) $(CCC_BIN_LIBS)
+else
+build_bin: $(BIN_OBJECTS)
+	$(CCC) $(CCC_BIN_FLAGS) -o $(OUT_BIN_DIR)/$(BIN_NAME) $(BIN_OBJECTS) $(LIBS) $(LIB_DIRS) $(CCC_BIN_LIBS)
+endif
+
+#######################################
+# Rule to create the purified binary executable
+#######################################
+ifneq ($(LIB_OBJECTS),)
+build_purify: $(BIN_OBJECTS) $(OUT_LIB_DIR)/$(LIB_NAME)
+	purify $(CCC) $(CCC_BIN_FLAGS) -o $(OUT_BIN_DIR)/$(BIN_NAME_PURE) $(BIN_OBJECTS) $(OUT_LIB_DIR)/$(LIB_NAME) $(LIBS) $(LIB_DIRS) $(CCC_BIN_LIBS)
+else
+build_purify: $(BIN_OBJECTS)
+	purify $(CCC) $(CCC_BIN_FLAGS) -o $(OUT_BIN_DIR)/$(BIN_NAME_PURE) $(BIN_OBJECTS) $(LIBS) $(LIB_DIRS) $(CCC_BIN_LIBS)
+endif

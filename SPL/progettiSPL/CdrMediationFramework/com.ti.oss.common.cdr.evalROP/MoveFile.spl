@@ -1,0 +1,70 @@
+namespace com.ti.oss.common.cdr.evalROP;
+
+use com.ti.oss.common.cdr.types::*;
+use com.ti.oss.common.types::*;
+use com.ti.oss.common.event::*;
+use com.ibm.streamsx.file::*;
+use com.ti.oss.common.cdr.util::*;
+
+public composite MoveFile (input stream<FileHeader h, FileTrailer t> OJoin; 
+                    output stream<Event e> OutEvent)
+{		
+	graph
+
+	stream<Event e> OutEvent = Custom(OJoin)	
+    {
+       logic
+       
+         state :
+         {
+            mutable FileHeader fHeader = {};					
+         }
+       
+         onTuple OJoin:
+         {
+            if(fHeader != OJoin.h) fHeader = OJoin.h;
+                            
+         	mutable int32 error = 0;
+         	
+         	rstring pathname = getPathFile(OJoin.t.exportFile);
+         	if(!exists(pathname)) 
+         	{
+            	int32 error = createDirectory(pathname);
+                if(error!=0) 
+                {
+                 appTrc(Trace.error, "FileExportCdr - Can not create directory \"" + pathname + 
+			 						 "\". Please, verify user rights - Error is \"" + strerror(error) + "\"");                     
+				}
+			}
+
+			if(!exists(OJoin.t.exportFile))
+			{
+			  error = rename(OJoin.t.outFile, OJoin.t.exportFile);  
+			}
+			
+			if(error!=0) 
+			{
+			   appTrc(Trace.error, "FileExport - Could not rename file \"" + OJoin.t.outFile + "\" into \"" + OJoin.t.exportFile + "\"" + strerror(error));
+			} 
+			else
+			{
+			   // Write event
+			   mutable Event event = {};
+			   event.eventType = 200;
+			   event.resultCode = 0;
+			   event.rawFile = filename(h.fName);
+			   event.eventCorrelationId = h.eventCorrelationId;
+			   event.rop = h.rop;
+			   event.emId = h.emId;
+			   event.neId = h.neId;
+			  
+			   event.eventText = "File exported : "+ OJoin.t.exportFile;
+			       boolean eventEnabled = mkEvent( event, h.sessionBeginTime );
+			       
+			       if(eventEnabled) 
+			       		submit ({e=event}, OutEvent);                                                     
+			 	} 
+			 }
+ 
+	}
+}

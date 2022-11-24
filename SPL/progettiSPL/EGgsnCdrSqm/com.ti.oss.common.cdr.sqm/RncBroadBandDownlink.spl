@@ -1,0 +1,504 @@
+namespace com.ti.oss.common.cdr.sqm ;
+
+use com.ibm.streamsx.file::* ;
+use com.ti.oss.common.cdr.parser.eggsn::* ;
+use com.ti.oss.common.cdr.types::* ;
+use com.ti.oss.common.cdr.util.cfg::* ;
+use com.ti.oss.common.cdr.util::* ;
+use com.ti.oss.common.event::* ;
+use com.ti.oss.common.types::* ;
+use com.ti.oss.common.util.cfg::* ;
+use com.ti.oss.common.util.time::*;
+
+type SqmRncBroadDownlink = map<rstring, RncBroadDownlink>;
+type SqmRncBroadDownlinkNode = map<rstring, SqmRncBroadDownlink>;
+
+public composite RncBroadBandDownlink(input stream<AggregateSqmSchema> eggsn, stream<rstring rnc> R, stream<rstring centrale> E ;
+	output stream<RncBroadDownlink> outKpiRnc, OutEventKpi7, stream<CDRCounters> OutCounters)
+{
+	param
+		expression<rstring> $tmpOutFilePrefix ;
+		expression<rstring> $tmpOutFileSuffix ;
+		expression<rstring> $mediationName ;
+	graph
+		
+		
+		(stream<RncBroadDownlink> outKpiRnc as O; stream<Event e> OutEventKpi7 as OE; stream<CDRCounters> OutCounters) =
+			Custom(R;E;eggsn)
+		{
+			logic
+				state :
+				{
+					rstring tmpOutFilePrefix = $tmpOutFilePrefix;
+					rstring tmpOutFileSuffix = $tmpOutFileSuffix;
+					rstring mediationName = $mediationName;
+					
+					mutable float64 startROPstate = 0 ;
+					mutable float64 endROPstate = 0 ;
+					mutable float64 startROPold = 0 ;
+					mutable float64 endROPold = 0 ;
+					boolean flagMediationCfg = loadMediationCfg(mediationName) ;
+					mutable rstring nameOutputFilestate ;
+					mutable rstring nameOutputFileOld ;
+					mutable rstring path = getCfgParam("COMMON_CFG_DIR", mediationName, "SQM_RNC_DOWNLINK_PATH") ;
+					mutable rstring filePrefix = getCfgParam("COMMON_CFG_DIR", mediationName, "FILE_PREFIX_RNC_BROAD_DOWNLINK") ;
+					mutable rstring fileSuffix = getCfgParam("COMMON_CFG_DIR", mediationName, "FILE_SUFFIX") ;
+					mutable int32 interval = (int32)getCfgParam("COMMON_CFG_DIR",mediationName,"ROP_INTERVAL_SQM");
+					mutable rstring msc_cgi = getCfgParam("COMMON_CFG_DIR", mediationName,	"MSC_CGI") ;
+					mutable boolean flagMscCgi = loadCdrProvCfg("MSCCGI", msc_cgi,(uint32) 0, ",") ; //CGI
+					mutable rstring naming_lookup = getCfgParam("COMMON_CFG_DIR", $mediationName, "NAMING_LOOKUP"); 
+					mutable boolean flagNamingLookup = loadCdrProvCfg("NAMINGLOOKUP", naming_lookup,(uint32) 3, ";") ;
+					mutable SqmRncBroadDownlink CDRforrncBroadDownlink ;
+					mutable SqmRncBroadDownlinkNode SqmRncBroadDownlinkNodeT ;
+					mutable SqmRncBroadDownlinkNode SqmRncBroadDownlinkNodePrec ;
+					mutable FileHeader fh = { } ;
+					
+					mutable set<rstring> listRnc;
+					mutable list<rstring> listCentrale;
+					
+					mutable O emptyEndRopTuple = initEmptyEndRopTupleRnc();
+					mutable OE oetuple = (OE){};
+					
+					mutable SqmRncBroadDownlink cdrApp = {};
+					
+//					// Conta tutti CDR per rATType
+//					mutable uint64 cdrtotrattype = 0ul;
+//					mutable uint64 cdrtotrattypeold = 0ul;
+//					
+					// Conta i CDR corretti per questo KPI
+					mutable uint64 cdrtot = 0ul;
+					mutable uint64 cdrtotold = 0ul;
+					
+					// Conta i CDR scartati per il filtro impostato
+					mutable uint64 cdrexclude1 = 0ul;
+					mutable uint64 cdrexclude1old = 0ul;
+					
+					// Conta i CDR scartati esterni al ROP
+					mutable uint64 cdrexclude2 = 0ul;
+					mutable uint64 cdrexclude2old = 0ul;
+				}
+
+				
+				onTuple R:
+				{
+					if (R.rnc == "RNC")
+					{
+						clearM(listRnc);
+					}else{
+						
+						insertM(listRnc, R.rnc);
+					}
+				}
+				
+				
+				onTuple E:
+				{
+					mutable list<rstring> rete = tokenize(E.centrale, ",", true);
+					mutable rstring centrale = regexReplace(rete[1],"\n","",true);
+					centrale = regexReplace(centrale,"\r","",true);
+					
+					if (centrale == "CENTRALE")
+					{
+						clearM(listCentrale);
+					}else{
+						appendM(listCentrale, centrale);
+					}
+				}
+				
+				onTuple eggsn :
+				{
+				
+					if(eggsn.endROP)
+					{
+						if (isCdrProvCfgChanged("MSCCGI"))
+						{
+							reloadCdrProvCfg("MSCCGI");
+						}
+						if (isCdrProvCfgChanged("NAMINGLOOKUP"))
+						{
+							reloadCdrProvCfg("NAMINGLOOKUP");
+						}
+						
+						interval = checkConfiguration(mediationName,"ROP_INTERVAL_SQM",interval);
+						path = checkConfiguration(mediationName, "SQM_RNC_DOWNLINK_PATH", path) ;
+						filePrefix = checkConfiguration(mediationName, "FILE_PREFIX_RNC_BROAD_DOWNLINK", filePrefix) ;
+						fileSuffix = checkConfiguration(mediationName, "FILE_SUFFIX", fileSuffix) ;
+						
+						swap(SqmRncBroadDownlinkNodeT,SqmRncBroadDownlinkNodePrec);
+						swap(cdrtot, cdrtotold);
+						cdrtot = 0ul;
+						swap(cdrexclude1, cdrexclude1old);
+						cdrexclude1 = 0ul;
+						swap(cdrexclude2, cdrexclude2old);
+						cdrexclude2 = 0ul;
+//						swap(cdrtotrattype, cdrtotrattypeold);
+//						cdrtotrattype = 0ul;
+						
+						clearM(SqmRncBroadDownlinkNodeT);
+						startROPold = startROPstate;
+						endROPold = endROPstate;
+						startROPstate = eggsn.startRopSecs;
+						endROPstate = eggsn.endRopSecs;
+						nameOutputFileOld = nameOutputFilestate;
+						
+						nameOutputFilestate = path + tmpOutFilePrefix +(rstring) eggsn.endRopSecs + tmpOutFileSuffix ;
+						
+						mutable RncBroadDownlink entry = {};
+						entry.nameOutputFile = nameOutputFilestate ;
+						entry.filePrefix = filePrefix ;
+						entry.suffix = fileSuffix ;
+				    	entry.start_time = getUtilConvert((rstring)startROPstate); 
+						entry.end_time = getUtilConvert((rstring)endROPstate);
+						entry.bb_rnc_downlink = (int64)0;
+						
+						for (rstring elem in listRnc)
+						{	
+							entry.rnc = elem;
+							insertM(CDRforrncBroadDownlink,elem,entry);
+							for (int32 k in range(listCentrale))
+							{
+								insertM(SqmRncBroadDownlinkNodeT,listCentrale[k],CDRforrncBroadDownlink);
+							}	 
+						}
+						clearM(CDRforrncBroadDownlink);
+					}
+					
+					if(startROPstate == (float64)0 || endROPstate == (float64)0)
+					{
+						startROPstate = eggsn.startRopSecs;
+						endROPstate = eggsn.endRopSecs;
+					}
+					
+					if(nameOutputFilestate == "")
+					{
+						nameOutputFilestate = path + tmpOutFilePrefix +(rstring) eggsn.endRopSecs + tmpOutFileSuffix ;
+					}
+					
+					if(eggsn.endROP)
+					{
+						nameOutputFilestate = path + tmpOutFilePrefix +(rstring) eggsn.endRopSecs + tmpOutFileSuffix ;
+					}
+
+					if(eggsn.write_prev)
+					{
+						if (eggsn.exclude_node == "")
+						{
+							mutable rstring filename_tmp = "";
+							mutable rstring central_val="";
+							if(size(SqmRncBroadDownlinkNodePrec) != 0)
+							{	
+								aggregateRncDownlink(SqmRncBroadDownlinkNodePrec, CDRforrncBroadDownlink);
+		                		
+		                		for(rstring key in CDRforrncBroadDownlink)
+								{
+									submit(CDRforrncBroadDownlink[key], outKpiRnc);
+									central_val = central_val + key + ";";
+								}
+								
+								clearM(CDRforrncBroadDownlink);
+		                		filename_tmp = nameOutputFileOld;
+								emptyEndRopTuple.nameOutputFile = nameOutputFileOld;
+								submit(emptyEndRopTuple, outKpiRnc);
+							}
+							else
+							{
+								filename_tmp = nameOutputFileOld;
+								emptyEndRopTuple.nameOutputFile = nameOutputFileOld;
+								submit(emptyEndRopTuple, outKpiRnc);
+							}
+							
+							mutable rstring sr = "";
+							mutable rstring er = "";
+							if(startROPold != (float64)0 && endROPold != (float64)0)
+							{
+								sr = getUtilConvert((rstring)startROPold);
+								er = getUtilConvert((rstring)endROPold);
+							}
+							else
+							{
+								sr = "0";
+								er = "0";
+							}
+							submit({kpi = "RncBroadBandDownlink", ROP = sr + "-" + er, cdrtot = cdrtotold, cdrexclude1 = cdrexclude1old, cdrexclude2 = cdrexclude2old}, OutCounters);
+								
+							//clear statistics
+							//cdrtotrattypeold = 0ul;
+							cdrtotold = 0ul;
+							cdrexclude1old = 0ul;
+							cdrexclude2old = 0ul;	
+														
+							clearM(SqmRncBroadDownlinkNodePrec);
+							clearM(CDRforrncBroadDownlink);
+							startROPold = (float64)0;
+							endROPold = (float64)0;
+							nameOutputFileOld = "";
+							
+							oetuple.e.eventType = 190 ;
+							oetuple.e.resultCode = 0 ;
+							oetuple.e.rawFile = filename_tmp ;
+							swap(oetuple.e.eventCorrelationId, fh.eventCorrelationId);
+		                    swap(oetuple.e.rop, fh.rop);
+		                    swap(oetuple.e.emId, fh.emId);
+		                    swap(oetuple.e.neId, fh.neId);
+							oetuple.e.eventText = "End write_prev close file " + filename_tmp + " for node: "+central_val;
+							boolean eventEnabled = mkEvent(oetuple.e, fh.sessionBeginTime) ;
+							if(eventEnabled) submit(oetuple, OutEventKpi7) ;
+						}
+						else
+						{
+							if(has(SqmRncBroadDownlinkNodePrec, eggsn.exclude_node) == true)
+							{
+								removeM (SqmRncBroadDownlinkNodePrec, eggsn.exclude_node);
+							}
+						}
+					}
+
+					else if(!eggsn.endROP)
+					{
+						fh = eggsn.fHeader ;
+						
+						mutable rstring cgi = transformUserLocalInfo(eggsn.cdrSchema.userLocationInformation);	
+						
+						mutable rstring rnc = "";					
+						mutable list<rstring> tmpOutParamMapMSCCGI = [];
+						if ( getCdrProvRecord("MSCCGI", cgi, tmpOutParamMapMSCCGI ) )
+						{   
+							rnc = tmpOutParamMapMSCCGI[7];//RNC
+						}
+						mutable rstring sqmDn = "";
+						if (rnc!="")
+						{
+							sqmDn = getSqmDn(rnc,flagNamingLookup);
+						}
+						
+						mutable rstring datetmp = "20" +(rstring)substring(eggsn.cdrSchema.recordOpeningTime, 0, 12) ;
+						timestamp ts = toTimestamp(Sys.YYYYMMDDhhmmss, datetmp) ;
+						mutable float64 endTimeCDRfloat = getSeconds(ts) +(int64)eggsn.cdrSchema.duration ;
+							
+						if(sqmDn != "" && eggsn.cdrSchema.nodeId != "")
+						{
+							mutable rstring centralName = eggsn.cdrSchema.nodeId;
+							mutable rstring key = sqmDn ;
+							
+							if((endTimeCDRfloat >= eggsn.startRopSecsOld) && (endTimeCDRfloat < eggsn.endRopSecsOld))
+							{
+								cdrtotold++;
+								if(has(SqmRncBroadDownlinkNodePrec, centralName) == true)
+		                		{
+		                			addCdrRBBD(eggsn,SqmRncBroadDownlinkNodePrec[centralName],key,nameOutputFileOld,filePrefix,fileSuffix,eggsn.startRopSecsOld,eggsn.endRopSecsOld);
+		                		}
+		                		else
+		                		{
+		                			addCdrRBBD(eggsn,CDRforrncBroadDownlink,key,nameOutputFileOld,filePrefix,fileSuffix,eggsn.startRopSecsOld,eggsn.endRopSecsOld);
+		                			insertM(SqmRncBroadDownlinkNodePrec, centralName, CDRforrncBroadDownlink) ;
+		                		}
+							}
+							else if((endTimeCDRfloat >= eggsn.startRopSecs) && (endTimeCDRfloat < eggsn.endRopSecs))
+							{
+								cdrtot++;
+								if(has(SqmRncBroadDownlinkNodeT, centralName) == true)
+			                	{
+			                		addCdrRBBD(eggsn,SqmRncBroadDownlinkNodeT[centralName],key,nameOutputFilestate,filePrefix,fileSuffix,eggsn.startRopSecs,eggsn.endRopSecs);
+			                	}
+			                	else
+			                	{
+			                		addCdrRBBD(eggsn,CDRforrncBroadDownlink,key,nameOutputFilestate,filePrefix,fileSuffix,eggsn.startRopSecs,eggsn.endRopSecs);
+			                		insertM(SqmRncBroadDownlinkNodeT, centralName, CDRforrncBroadDownlink) ;
+			                	}
+							}
+							else
+							{
+								//exclude CDR fuori ROP
+								cdrexclude2++;
+							}
+
+							clearM(cdrApp);
+							clearM(CDRforrncBroadDownlink);
+						}
+						else 
+						{
+							if((endTimeCDRfloat >= eggsn.startRopSecs) && (endTimeCDRfloat < eggsn.endRopSecs))
+							{
+								//exclude Filtro CDR in ROP
+								cdrexclude1++;
+							}
+							else
+							{
+								//exclude Filtro CDR fuori ROP
+								cdrexclude1old++;
+							}
+						}	
+												
+					}
+				}
+
+				onPunct eggsn :
+				{
+					if(currentPunct() == Sys.WindowMarker)
+					{
+						oetuple.e.eventType = 200 ;
+						oetuple.e.resultCode = 0 ;
+						oetuple.e.rawFile = filename(fh.fName) ;
+						swap(oetuple.e.eventCorrelationId, fh.eventCorrelationId);
+	                    swap(oetuple.e.rop, fh.rop);
+	                    swap(oetuple.e.emId, fh.emId);
+	                    swap(oetuple.e.neId, fh.neId);
+						oetuple.e.eventText = "End Broadband 3G Rnc SQM";
+						boolean eventEnabled = mkEvent(oetuple.e, fh.sessionBeginTime) ;
+						if(eventEnabled) submit(oetuple, OutEventKpi7) ;
+						
+						submit(Sys.WindowMarker, OutEventKpi7) ;
+					}
+
+				}
+			config
+				threadedPort: queue(eggsn, Sys.Wait, 1000000);
+
+			}
+
+//		stream<CsvWrite> outCsv7 = Custom(outKpiRnc)
+//			{
+//				logic
+//					state:
+//					{
+//						mutable rstring naming_lookup = getCfgParam("COMMON_CFG_DIR", $mediationName, "NAMING_LOOKUP"); 
+//						mutable boolean flagNamingLookup = loadCdrProvCfg("NAMINGLOOKUP", naming_lookup,(uint32) 3, ";") ;
+//					}
+//					
+//					onTuple outKpiRnc :
+//					{
+//						if (outKpiRnc.endROP)
+//						{
+//							if (isCdrProvCfgChanged("NAMINGLOOKUP"))
+//							{
+//								reloadCdrProvCfg("NAMINGLOOKUP");
+//							}
+//						}
+//						
+//						mutable CsvWrite csv = { } ;
+//						csv.nameOutputFile = outKpiRnc.nameOutputFile ;
+//						csv.endROP = outKpiRnc.endROP ;
+//						csv.filePrefix = outKpiRnc.filePrefix ;
+//						csv.suffix = outKpiRnc.suffix ;
+//						
+//						mutable rstring sqmDn = "";
+//						if (outKpiRnc.rnc != "")
+//						{
+//							sqmDn = getSqmDnRnc(outKpiRnc.rnc,flagNamingLookup);
+//						}
+//						if (sqmDn != "")
+//						{
+//							csv.outputContent = sqmDn + ";" + outKpiRnc.start_time + ";" +
+//							outKpiRnc.end_time + ";" +(rstring) outKpiRnc.bb_rnc_downlink ;
+//						}else{
+//							csv.outputContent = "";
+//						}
+//						
+//						submit(csv, outCsv7) ;
+//					}
+//					onPunct outKpiRnc :
+//					{
+//						if(currentPunct() == Sys.WindowMarker) {
+//							submit(Sys.WindowMarker,outCsv7);
+//						}
+//					}
+//
+//			}
+
+	}
+
+rstring getSqmDnRnc(rstring nodeId, boolean flagNamingLookup)
+{
+	mutable list<rstring> tmpOutParamMapNAMINGLOOKUP = [];
+	mutable rstring sqmDn = "";
+	if (flagNamingLookup)
+	{
+		if ( getCdrProvRecord("NAMINGLOOKUP", nodeId, tmpOutParamMapNAMINGLOOKUP ) )
+		{   
+			sqmDn = tmpOutParamMapNAMINGLOOKUP[0];
+		}
+	}
+	else
+	{
+		appTrc(Trace.error, "File NAMING_LOOKUP.csv non caricato correttamente ");
+	}
+	
+	return sqmDn;
+}
+
+void countCdrsRBBD(AggregateSqmSchema eggsn1, mutable RncBroadDownlink aggrSQMtmp) 
+{
+   if(eggsn1.cdrSchema.rATType == 1){
+	
+		for(int32 i in range(eggsn1.cdrSchema.datavolumeFBCDownlink))
+		{
+			aggrSQMtmp.bb_rnc_downlink = aggrSQMtmp.bb_rnc_downlink + (int64)eggsn1.cdrSchema.datavolumeFBCDownlink[i];
+		}	
+	}
+}
+
+void addCdrRBBD(AggregateSqmSchema eggsn, mutable SqmRncBroadDownlink cdr, rstring key, rstring nameOutputFile, rstring filePrefix, rstring fileSuffix, float64 startROP, float64 endROP)
+{
+	mutable RncBroadDownlink firstEntry = {};
+	mutable RncBroadDownlink existEntry = {};
+	
+	if(has(cdr, key) == false) 
+    {   
+    	firstEntry.nameOutputFile = nameOutputFile ;
+		firstEntry.filePrefix = filePrefix ;
+		firstEntry.suffix = fileSuffix ;
+    	firstEntry.rnc = key;
+		firstEntry.start_time = getUtilConvert((rstring)startROP); 
+		firstEntry.end_time = getUtilConvert((rstring)endROP);
+		countCdrsRBBD(eggsn, firstEntry) ;
+		insertM(cdr, key, firstEntry) ;
+    }  
+    else 
+    {     
+     	existEntry = cdr[key];
+     	
+     	countCdrsRBBD(eggsn, existEntry) ;
+ 					
+ 		removeM (cdr, key);
+	    insertM( cdr, key, existEntry);
+    }
+}
+
+RncBroadDownlink initEmptyEndRopTupleRnc() 
+{
+	mutable RncBroadDownlink result = {};
+	
+	result.endROP = true;
+	
+	return result;
+}
+
+void aggregateRncDownlink (mutable SqmRncBroadDownlinkNode sqmRncDownNode, mutable SqmRncBroadDownlink sqmRncDown)
+{
+	mutable SqmRncBroadDownlink cdrApp = {};
+	mutable list<rstring> keysTmp = [];
+	for(rstring key in sqmRncDownNode) 
+	{
+		appendM(keysTmp, key);
+	}
+	for(rstring key in keysTmp)
+	{
+		swap(cdrApp, sqmRncDownNode[key]);
+		for(rstring keyCdr in cdrApp) 
+		{	
+			if(has(sqmRncDown, keyCdr))
+			{
+				if (cdrApp[keyCdr].bb_rnc_downlink!=(int64)-1 && sqmRncDown[keyCdr].bb_rnc_downlink!=(int64)-1)
+				{
+					sqmRncDown[keyCdr].bb_rnc_downlink = sqmRncDown[keyCdr].bb_rnc_downlink + cdrApp[keyCdr].bb_rnc_downlink;
+				}
+    		}
+        	else
+        	{
+        		insertM(sqmRncDown, keyCdr, cdrApp[keyCdr]);
+        	}
+        }
+	}
+	clearM(keysTmp);
+	clearM(cdrApp);
+}

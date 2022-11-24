@@ -1,0 +1,252 @@
+namespace com.ti.oss.common.cdr.evalROP;
+
+use com.ti.oss.common.cdr.util::*;
+use com.ti.oss.common.types::*;
+use com.ti.oss.common.cdr.types::*;
+use com.ti.oss.common.cdr.util.cfg::*;
+use com.ti.oss.common.util.cfg::*;
+
+<%
+	my $parallelSQM = 1;
+	my $parallelSQMmod = 16;
+%>
+
+
+public composite TacSplit (input  stream<AggregateSqmSchema> IROP; 
+                              output <%for(my $i = 0; $i < $parallelSQMmod; $i++) {%>
+							  stream<AggregateSqmSchema> OTac<%=$i%>
+							  <%if($i != $parallelSQMmod - 1) {
+							  print ",";
+							  }
+							  }%>,
+							  stream<AggregateSqmSchema> OROP
+							) 
+{
+	param
+		expression<rstring> $mediationName ;
+	
+	graph
+	
+		(<%for(my $i = 0; $i < $parallelSQMmod; $i++) {%>
+		stream<AggregateSqmSchema> OTac<%=$i%>
+		<%if($i != $parallelSQMmod - 1) {
+			print ";";
+		}
+		}%>;
+		stream<AggregateSqmSchema> OROP  
+		)
+		= Custom(IROP as I)
+		{
+		logic state:
+			{
+				mutable int32 countPort = 0;
+				mutable int32 count_endROP = 0;
+				mutable int32 count_write_prev = 0;
+				rstring mediationName = $mediationName;
+				
+				//mutable rstring ecgi = getCfgParam("COMMON_CFG_DIR", $mediationName, "ECGI");
+				//mutable boolean flagEcgi = loadCdrProvCfg("ECGI",ecgi, (uint32)0,",");//ECGI
+			} 
+		
+			onTuple I : 
+			{      	
+				if (I.endROP)
+				{
+					count_endROP++;
+					if(count_endROP == <%=$parallelSQM%>) 
+					{	
+
+						submit(I,OROP);
+						count_endROP = 0;
+						
+						/*if (isCdrProvCfgChanged("ECGI"))
+						{
+							reloadCdrProvCfg("ECGI");
+						}*/
+					}
+				}
+				else if (I.write_prev)
+				{
+					if (I.exclude_node == "")
+					{
+						count_write_prev++;
+						if(count_write_prev == <%=$parallelSQM%>) 
+						{
+							submit(I,OROP);
+							count_write_prev = 0;
+						}
+					}else{
+						submit(I,OROP);
+					}			
+				}
+				else
+				{
+					if (I.cdrSchema.rATType==6)
+					{
+						/* commentato il 27/02/18
+						* uint64 addr = hashCode(I.cdrSchema.userLocationInformation);
+						uint32 modAddr = (uint32)(addr%(uint64)16);
+						if(modAddr < 0u) {
+							appTrc(Trace.error,"ERROR: the split returned a negative output port!");
+						}
+						else 
+						{
+							<%for(my $i = 0; $i < $parallelSQMmod; $i++) {%>
+								<%if($i > 0) { print "else ";}%>
+								if (modAddr==(uint32)<%=$i%>)
+								{
+									submit(I, OTac<%=$i%>);
+								}
+							<%}%>
+						}
+						* 
+						*/
+						
+						if (countPort==0)
+						{
+							submit(I, OTac0);
+						}else if (countPort==1)
+						{	
+							submit(I, OTac1);
+						}else if (countPort==2)
+						{
+							submit(I, OTac2);
+						}else if (countPort==3)
+						{
+							submit(I, OTac3);
+						}else if (countPort==4)
+						{
+							submit(I, OTac4);
+						}else if (countPort==5)
+						{
+							submit(I, OTac5);
+						}else if (countPort==6)
+						{
+							submit(I, OTac6);
+						}else if (countPort==7)
+						{
+							submit(I, OTac7);
+						}else if (countPort==8)
+						{
+							submit(I, OTac8);
+						}else if (countPort==9)
+						{
+							submit(I, OTac9);
+						}else if (countPort==10)
+						{
+							submit(I, OTac10);
+						}else if (countPort==11)
+						{
+							submit(I, OTac11);
+						}else if (countPort==12)
+						{
+							submit(I, OTac12);
+						}else if (countPort==13)
+						{
+							submit(I, OTac13);
+						}else if (countPort==14)
+						{
+							submit(I, OTac14);
+						}
+						else if (countPort==15)
+						{
+							submit(I, OTac15);
+						}
+						countPort++;
+						if (countPort == <%=$parallelSQMmod%>)
+						{
+							countPort = 0;
+						}
+					}
+//					if (flagEcgi)
+//					{
+//					
+//						mutable list<rstring> tmpOutParamMapECGI = [];
+//						
+//						mutable rstring cgi;
+//						
+//						if (length(I.cdrSchema.userLocationInformation)>16)
+//				    	{
+//				    		cgi = transformUserLocalInfo_4G(I.cdrSchema.userLocationInformation);
+//				    	}
+//				    	else
+//				    	{
+//				    		if (I.cdrSchema.rATType==6)
+//				    		{
+//				    			cgi = transformUserLocalInfo_4Gsmall(I.cdrSchema.userLocationInformation);
+//				    		}
+//				    		else
+//				    		{
+//				    			cgi = transformUserLocalInfo(I.cdrSchema.userLocationInformation);
+//				    		}
+//				    	}
+//						
+//						if ( getCdrProvRecord("ECGI", cgi, tmpOutParamMapECGI ) )
+//						{
+//						
+//							mutable rstring tac = tmpOutParamMapECGI[6];	//TAC
+//							
+//							I.cdrSchema.servedIMEISV = tac;
+//							uint64 addr = hashCode(tac);
+//							uint32 modAddr = (uint32)(addr%(uint64)16);
+//							if(modAddr < 0u) {
+//								appTrc(Trace.error,"ERROR: the split returned a negative output port!");
+//							}
+//							else {
+//								if (modAddr==(uint32)0)
+//								{
+//									submit(I, OTac0);
+//								}else if (modAddr==(uint32)1)
+//								{
+//									submit(I, OTac1);
+//								}else if (modAddr==(uint32)2)
+//								{
+//									submit(I, OTac2);
+//								}else if (modAddr==(uint32)3)
+//								{
+//									submit(I, OTac3);
+//								}else if (modAddr==(uint32)4)
+//								{
+//									submit(I, OTac4);
+//								}else if (modAddr==(uint32)5)
+//								{
+//									submit(I, OTac5);
+//								}else if (modAddr==(uint32)6)
+//								{
+//									submit(I, OTac6);
+//								}else if (modAddr==(uint32)7)
+//								{
+//									submit(I, OTac7);
+//								}else if (modAddr==(uint32)8)
+//								{
+//									submit(I, OTac8);
+//								}else if (modAddr==(uint32)9)
+//								{
+//									submit(I, OTac9);
+//								}else if (modAddr==(uint32)10)
+//								{
+//									submit(I, OTac10);
+//								}else if (modAddr==(uint32)11)
+//								{
+//									submit(I, OTac11);
+//								}else if (modAddr==(uint32)12)
+//								{
+//									submit(I, OTac12);
+//								}else if (modAddr==(uint32)13)
+//								{
+//									submit(I, OTac13);
+//								}else if (modAddr==(uint32)14)
+//								{
+//									submit(I, OTac14);
+//								}
+//								else if (modAddr==(uint32)15)
+//								{
+//									submit(I, OTac15);
+//								}
+//							}
+//						}	
+//					}
+				}
+	        }
+		}
+}

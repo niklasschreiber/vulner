@@ -1,0 +1,129 @@
+namespace com.ti.oss.pm.mediation.ericsson.e3g.utils;
+
+use com.ti.oss.common.types::*;
+
+/**
+  * The RawDataHeader models the header of PM files and its used by the PM parsers to forward the data contained
+  * into PM files header. Usually, header data are not used by the mediations but to generalize the parsers is better
+  * to parse and forward also the data contained into header of PM files. It contains the following attributes:
+  *  - fileHeader: the file header. Mandatory.
+  *  - vName: vendor name, according to 3GPP 32.xxx. Optional.
+  *  - sName: sender name, according to 3GPP 32.xxx. Optional.
+  *  - sType: sender type, according to 3GPP 32.xxx. Optional.
+  *  - cbt: Collection Begin Time, according to 3GPP 32.xxx. Optional.
+  *  
+  */ 
+type RawDataHeader = tuple<FileHeader fileHeader, rstring vName, rstring sName, rstring sType, rstring cbt> ;
+
+
+/**
+ * The RawCounterTableEntry is used to model a an entry in the table of raw counters.
+ *   - cName - counter name
+ *   - cValues - list of counter values. It will contain always one element unless array case.
+ */
+type RawCounterTableEntry = tuple<rstring cName, rstring cValue>;
+
+
+/**
+  * The RawDataBlock is used to model a single block of measurements, and contains the following 
+  * attributes:
+  *  - neUn: This is the user definable name ("userLabel") defined for the NE in 3GPP TS 32.622. 
+  *          The string may be empty (i.e. string size =0) if the "nEUserName" is not configured in 
+  *          the CM applications.
+  *          For the XML schema based XML format, XML attribute specification "userLabel" may be 
+  *          absent in case the "nEUserName" is not configured in the CM applications.
+  
+  *  - neDn: the Distinguished Name (DN) of the Network Element 
+  *          (can be empty if not configured by the vendor). 
+  *          Extracted from:
+  *           - "nedn" block by the DXMLParser;
+  *           - attribute "dnPrefix" of fileHeader + attribute "localDn" of managedElement 
+  *             by the SXMLParser. 
+  *           - NEDistinguishedName by the Asn1Parser.
+  *   
+  *  - measInfoId: this is used by Huawei to give an identifier to a measInfo block; it corresponds to the MeasType
+  *                concept in the OMeS. It can be empty.
+  * 
+  *  - mts: Time stamp referring to the end of the granularity period. Extracted from:
+  *         - "mts" block by the DXMLParser;
+  *         - attribute "endTime" of the "granPeriod" tag by the SXMLParser;
+  *  
+  *  - gp: the Granularity Period (ROP) to which the measurements in the block refer to. Extracted from:
+  *        - "gp" block by the DXMLParser;
+  *        - attribute "duration" of the "granPeriod" tag by the SXMLParser;
+  *        - GranularityPeriod by the Asn1Parser.
+  * 
+  *  - moid: Measurement Object Instance Identifier. According to 3GPP it's the local distinguished name (LDN) of the 
+  *          measured object within the scope defined by the "nEDistinguishedName" (see 3GPP TS 32.300 [10]). 
+  *          The concatenation of the "nEDistinguishedName" and the "measObjInstId" yields the DN of the measured object. 
+  *          The "measObjInstId" is therefore empty if the "nEDistinguishedName" already specifies completely the DN of 
+  *          the measured object, which is the case for all measurements specified on NE level. Extracted from:
+  *           - "moid" block by the DXMLParser;
+  *           - attribute "measObjLdn" of the "measValue" tag by the SXMLParser;
+  *           - MeasObjInstId by the Asn1Parser.
+  * 
+  *  - cTable: table of RawCounterTableEntry objects.
+  */
+type RawDataBlock = tuple<rstring neUn, rstring neDn, rstring measInfoId, rstring mts, rstring gp, rstring moid, list <RawCounterTableEntry> cTable> ; 
+
+
+/*
+ * 
+ * <OMeS version="2.3" adapId="com.nsn.e3g.RBS" adapRelease="W12B">
+ * <PMSetup startTime="2012-11-07T15:15:00+01:00" interval="15">
+ * <PMMOResult>
+ * <MO dimension="network_element">
+ * <DN>Network-TI/SubNetwork-rmjomc_R/SubNetwork-RNA09U/MeContext-NP16U/ManagedElement-1/NodeBFunction-1/Sector-1/Carrier-2/HsDschResources-1</DN>
+ * </MO>
+ * <MO dimension="Index">
+ * <DN>Index-91</DN>
+ * </MO>
+ * <PMTarget measurementType="mHsDschResources">
+ * <pmSumOfHsScchUsedPwrHsFach>0</pmSumOfHsScchUsedPwrHsFach>
+ * <pmSumOfHsScchUsedPwr>0</pmSumOfHsScchUsedPwr>
+ * <pmSumOfHsUsedPwr>0</pmSumOfHsUsedPwr>
+ * <pmSumOfHsUsedPwrHsFach>0</pmSumOfHsUsedPwrHsFach>
+ * </PMTarget>
+ */
+ 
+ /**
+  * The MeasHeader models an OMeS header.
+  */
+ type MeasHeader = tuple<FileHeader fileHeader, rstring startTime, rstring interval, rstring endTime> ;
+ 
+ /**
+  * The Dimension models an OMeS dimension.
+  */
+ type Dimension = tuple<rstring name, rstring value> ;
+ 
+ type MeasType = tuple<rstring msTypeName, map<rstring, rstring> cTable>;
+ 
+ /**
+  * The MeasData models an OMeS measurements block (a </PMMOResult> block) composed by the DN, 
+  * an optional list of dimensions and the table of counters (pairs <cName, CSV list of cValue>).  
+  */
+ type MeasData = tuple<rstring fdn, list<Dimension> dimensions, map<rstring, MeasType> measTypes> ;
+ 
+ /**
+  * Ericsson Raw Data Block. It contains a flag to indicate if the raw block is a potential duplicate.
+  * 
+  * The duplicate flag is set by the DCheckParser operator that pre-scan the raw file to identify the potential
+  * duplicates.  
+  */
+ type ERawDataBlock = RawDataBlock, tuple<boolean duplicate>; 
+
+ /**
+  * Ericsson Measurement Data. It contains a flag to indicate if is a potential duplicate.
+  * 
+  * The duplicate flag is set by the ETransformer operator.
+  */
+ type EMeasData = MeasData, tuple<boolean duplicate>;
+ 
+ 
+ /**
+  * The KpiRecord models an entry in the KPI file. 
+  * The errorMsg is an optional parameter used to write error messages.
+  */
+ type KpiRecord = tuple<rstring fdn, rstring kpiName, float64 kpiVal, rstring errorMsg> ;
+ 
+  

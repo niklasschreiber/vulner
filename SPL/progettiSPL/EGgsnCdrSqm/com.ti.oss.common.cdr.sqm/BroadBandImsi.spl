@@ -1,0 +1,433 @@
+namespace com.ti.oss.common.cdr.sqm ;
+
+use com.ibm.streamsx.file::* ;
+use com.ti.oss.common.cdr.parser.eggsn::* ;
+use com.ti.oss.common.cdr.types::* ;
+use com.ti.oss.common.cdr.util::* ;
+use com.ti.oss.common.cdr.util.cfg::* ;
+use com.ti.oss.common.event::* ;
+use com.ti.oss.common.types::* ;
+use com.ti.oss.common.util.cfg::* ;
+use com.ti.oss.common.util.time::*;
+
+type SqmBroadImsiVip = map<rstring, BroadImsi>;
+type SqmBroadImsiNode = map<rstring, SqmBroadImsiVip>;
+
+public composite BroadBandImsi(input stream<AggregateSqmSchema> eggsn; 
+	output stream<BroadImsi> outKpiImsi, OutEventKpiImsi, stream<CDRCounters> OutCounters)
+{
+	param
+		expression<rstring> $tmpOutFilePrefix ;
+		expression<rstring> $tmpOutFileSuffix ;
+		expression<rstring> $mediationName ;
+	
+	graph
+		(stream<BroadImsi> outKpiImsi as O ; stream<Event e> OutEventKpiImsi as OE; stream<CDRCounters> OutCounters) = Custom(eggsn)
+		{
+			logic
+				state :
+				{
+					rstring tmpOutFilePrefix = $tmpOutFilePrefix;
+					rstring tmpOutFileSuffix = $tmpOutFileSuffix;
+					rstring mediationName = $mediationName;
+					
+					mutable float64 startROPstate = 0 ;
+					mutable float64 endROPstate = 0 ;
+					mutable float64 startROPold = 0 ;
+					mutable float64 endROPold = 0 ;
+					boolean flagMediationCfg = loadMediationCfg(mediationName) ;
+					mutable rstring nameOutputFilestate ;
+					mutable rstring nameOutputFileOld ;
+					mutable rstring path = getCfgParam("COMMON_CFG_DIR",mediationName,"SQM_IMSI_OUTPUT_PATH");
+					mutable rstring filePrefix = getCfgParam("COMMON_CFG_DIR",mediationName,"FILE_PREFIX_IMSI");
+					mutable rstring fileSuffix = getCfgParam("COMMON_CFG_DIR",mediationName,"FILE_SUFFIX");
+					mutable rstring apn = getCfgParam("COMMON_CFG_DIR", mediationName, "APN");
+					mutable int32 interval = (int32)getCfgParam("COMMON_CFG_DIR",mediationName,"ROP_INTERVAL_SQM");
+					mutable SqmBroadImsiVip CDRforBroadImsi ;
+					mutable SqmBroadImsiNode SqmBroadImsi ;
+					mutable SqmBroadImsiNode SqmBroadImsiNodePrec ;
+					mutable FileHeader fh = { } ;
+					
+					mutable O emptyEndRopTuple = initEmptyEndRopTupleImsi();
+					mutable OE oetuple = (OE){};
+					
+					mutable SqmBroadImsiVip cdrApp = {};
+					
+//					// Conta tutti CDR per rATType
+//					mutable uint64 cdrtotrattype = 0ul;
+//					mutable uint64 cdrtotrattypeold = 0ul;
+//					
+					// Conta i CDR corretti per questo KPI
+					mutable uint64 cdrtot = 0ul;
+					mutable uint64 cdrtotold = 0ul;
+					
+					// Conta i CDR scartati per il filtro impostato
+					mutable uint64 cdrexclude1 = 0ul;
+					mutable uint64 cdrexclude1old = 0ul;
+					
+					// Conta i CDR scartati esterni al ROP
+					mutable uint64 cdrexclude2 = 0ul;
+					mutable uint64 cdrexclude2old = 0ul;
+				}
+
+				onTuple eggsn :
+				{
+					if (eggsn.endROP)
+					{
+						interval = checkConfiguration(mediationName,"ROP_INTERVAL_SQM",interval);
+						path = checkConfiguration(mediationName,"SQM_IMSI_OUTPUT_PATH",path);
+						filePrefix = checkConfiguration(mediationName,"FILE_PREFIX_IMSI",filePrefix);
+						fileSuffix = checkConfiguration(mediationName,"FILE_SUFFIX",fileSuffix);
+				
+						swap(SqmBroadImsi,SqmBroadImsiNodePrec);
+						swap(cdrtot, cdrtotold);
+						cdrtot = 0ul;
+						swap(cdrexclude1, cdrexclude1old);
+						cdrexclude1 = 0ul;
+						swap(cdrexclude2, cdrexclude2old);
+						cdrexclude2 = 0ul;
+//						swap(cdrtotrattype, cdrtotrattypeold);
+//						cdrtotrattype = 0ul;
+//						
+						clearM(SqmBroadImsi);
+						startROPold = startROPstate;
+						endROPold = endROPstate;
+						startROPstate = eggsn.startRopSecs;
+						endROPstate = eggsn.endRopSecs;
+						nameOutputFileOld = nameOutputFilestate;
+					}
+					
+					if(startROPstate == (float64)0 || endROPstate == (float64)0)
+					{
+						startROPstate = eggsn.startRopSecs;
+						endROPstate = eggsn.endRopSecs;
+					}
+					
+					if(nameOutputFilestate == "")
+					{
+						nameOutputFilestate = path + tmpOutFilePrefix +(rstring) eggsn.endRopSecs + tmpOutFileSuffix ;
+					}
+					
+					if(eggsn.endROP)
+					{
+						nameOutputFilestate = path + tmpOutFilePrefix +(rstring) eggsn.endRopSecs + tmpOutFileSuffix ;
+					}					
+					
+					if (eggsn.write_prev)
+					{	
+						if (eggsn.exclude_node == "")
+						{
+							mutable rstring filename_tmp = "";
+							mutable rstring central_val="";
+							
+							if(size(SqmBroadImsiNodePrec) != 0)
+							{
+								mutable list<rstring> keysTmp = [];
+                   				for(rstring key in SqmBroadImsiNodePrec) 
+								{
+									appendM(keysTmp, key);
+								}
+								for(rstring key in keysTmp)
+								{
+									swap(cdrApp, SqmBroadImsiNodePrec[key]);
+									for(rstring keyCdr in cdrApp) 
+									{
+										submit(cdrApp[keyCdr], outKpiImsi);
+				                    }
+				                    central_val = central_val + key + ";";	
+								}
+								
+								filename_tmp = nameOutputFileOld;
+								emptyEndRopTuple.nameOutputFile = nameOutputFileOld;
+								submit(emptyEndRopTuple, outKpiImsi);									
+							}
+							else
+							{
+								filename_tmp = nameOutputFileOld;
+								emptyEndRopTuple.nameOutputFile = nameOutputFileOld;
+								submit(emptyEndRopTuple, outKpiImsi);
+							}
+							
+							mutable rstring sr = "";
+							mutable rstring er = "";
+							if(startROPold != (float64)0 && endROPold != (float64)0)
+							{
+								sr = getUtilConvert((rstring)startROPold);
+								er = getUtilConvert((rstring)endROPold);
+							}
+							else
+							{
+								sr = "0";
+								er = "0";
+							}
+							submit({kpi = "BroadBandImsi", ROP = sr + "-" + er, cdrtot = cdrtotold, cdrexclude1 = cdrexclude1old, cdrexclude2 = cdrexclude2old}, OutCounters);
+							
+							//clear statistics
+							//cdrtotrattypeold = 0ul;
+							cdrtotold = 0ul;
+							cdrexclude1old = 0ul;
+							cdrexclude2old = 0ul;
+							
+							clearM(SqmBroadImsiNodePrec);
+							clearM(cdrApp);
+							startROPold = (float64)0;
+							endROPold = (float64)0;
+							nameOutputFileOld = "";
+							oetuple.e.eventType = 190 ;
+							oetuple.e.resultCode = 0 ;
+							oetuple.e.rawFile = filename_tmp ;
+							swap(oetuple.e.eventCorrelationId, fh.eventCorrelationId);
+		                    swap(oetuple.e.rop, fh.rop);
+		                    swap(oetuple.e.emId, fh.emId);
+		                    swap(oetuple.e.neId, fh.neId);
+							oetuple.e.eventText = "End write_prev close file " + filename_tmp + " for node: "+ central_val;
+							boolean eventEnabled = mkEvent(oetuple.e, fh.sessionBeginTime) ;
+							if(eventEnabled) submit(oetuple, OutEventKpiImsi) ;
+						}
+						else
+						{
+							if(has(SqmBroadImsiNodePrec, eggsn.exclude_node) == true)
+							{
+								removeM(SqmBroadImsiNodePrec, eggsn.exclude_node) ;
+							}
+						}
+					}
+					else if(!eggsn.endROP)
+					{
+						fh = eggsn.fHeader;
+						
+						//cdrtotrattype++;							
+						mutable rstring datetmp = "20"+(rstring)substring(eggsn.cdrSchema.recordOpeningTime,0,12);
+			            timestamp ts = toTimestamp(Sys.YYYYMMDDhhmmss,datetmp);
+			            mutable float64 endTimeCDRfloat = getSeconds(ts) + (int64)eggsn.cdrSchema.duration;
+						
+						mutable rstring centralName = eggsn.cdrSchema.nodeId; 
+						mutable rstring key = eggsn.cdrSchema.servedMSISDN;
+						
+						if((endTimeCDRfloat >= eggsn.startRopSecsOld) && (endTimeCDRfloat < eggsn.endRopSecsOld))
+                		{
+                			cdrtotold++;
+	                		if(has(SqmBroadImsiNodePrec, centralName) == true)
+	                		{
+	                			addCdrImsi(eggsn,SqmBroadImsiNodePrec[centralName],key,nameOutputFileOld,filePrefix,fileSuffix,eggsn.startRopSecsOld,eggsn.endRopSecsOld);	
+	                		}
+	                		else
+	                		{
+	                			addCdrImsi(eggsn,CDRforBroadImsi,key,nameOutputFileOld,filePrefix,fileSuffix,eggsn.startRopSecsOld,eggsn.endRopSecsOld);
+	                			insertM(SqmBroadImsiNodePrec, centralName, CDRforBroadImsi) ;
+	                		}
+	                		
+                		}
+                		else if((endTimeCDRfloat >= eggsn.startRopSecs) && (endTimeCDRfloat < eggsn.endRopSecs))
+                		{
+                			cdrtot++;
+                			if(has(SqmBroadImsi, centralName) == true)
+		                	{
+		                		addCdrImsi(eggsn,SqmBroadImsi[centralName],key,nameOutputFilestate,filePrefix,fileSuffix,eggsn.startRopSecs,eggsn.endRopSecs);
+		                	}
+		                	else
+		                	{
+		                		addCdrImsi(eggsn,CDRforBroadImsi,key,nameOutputFilestate,filePrefix,fileSuffix,eggsn.startRopSecs,eggsn.endRopSecs);
+								insertM(SqmBroadImsi, centralName, CDRforBroadImsi) ;
+		                	}
+                		}
+                		else
+						{
+							//exclude CDR fuori ROP
+							cdrexclude2++;
+						}
+						
+						clearM(cdrApp);
+						clearM(CDRforBroadImsi);
+					}
+			}
+								
+			onPunct eggsn :
+			{
+				if(currentPunct() == Sys.WindowMarker)
+				{
+					
+					oetuple.e.eventType = 200 ;
+					oetuple.e.resultCode = 0 ;
+					oetuple.e.rawFile = filename(fh.fName) ;
+					swap(oetuple.e.eventCorrelationId, fh.eventCorrelationId);
+                    swap(oetuple.e.rop, fh.rop);
+                    swap(oetuple.e.emId, fh.emId);
+                    swap(oetuple.e.neId, fh.neId);
+					oetuple.e.eventText = "End Broadband Imsi SQM";
+					boolean eventEnabled = mkEvent(oetuple.e, fh.sessionBeginTime) ;
+					if(eventEnabled) submit(oetuple, OutEventKpiImsi) ;
+					
+					submit(Sys.WindowMarker, OutEventKpiImsi) ;
+				}
+
+			}
+			
+			config
+				threadedPort: queue(eggsn, Sys.Wait, 1000000);
+
+		}
+
+	
+//		(stream<CsvWrite> outCsv) = Custom(outKpiImsi)
+//		{
+//			logic
+//				state:
+//				{
+//					mutable CsvWrite csv = {};
+//				}	
+//				
+//				onTuple outKpiImsi: 
+//				{
+//					swap(csv.nameOutputFile, outKpiImsi.nameOutputFile);
+//					swap(csv.endROP, outKpiImsi.endROP);
+//					swap(csv.filePrefix, outKpiImsi.filePrefix);
+//					swap(csv.suffix, outKpiImsi.suffix);
+//					
+//					if (outKpiImsi.ggsn_dn != "")
+//					{
+//						csv.outputContent = "PLMN-PLMN/IMSI-"+outKpiImsi.ggsn_dn+";"+outKpiImsi.start_time+";"+outKpiImsi.end_time+";"+(rstring)outKpiImsi.imsi_lte_dl_somma_volume+";"+(rstring)outKpiImsi.imsi_lte_ul_somma_volume+";"+(rstring)outKpiImsi.imsi_bb_dl_somma_volume+";"+(rstring)outKpiImsi.imsi_bb_ul_somma_volume;
+//					}else{
+//						csv.outputContent = "";
+//					}
+//					
+//				
+//					submit(csv, outCsv);
+//				} 
+//				
+//				onPunct outKpiImsi :
+//				{
+//					if(currentPunct() == Sys.WindowMarker) {
+//						submit(Sys.WindowMarker,outCsv);
+//					}
+//				}
+//		}
+	}
+
+
+void countCdrsIMSI(AggregateSqmSchema eggsn1, mutable BroadImsi aggrSQMtmp) 
+{
+	
+	if (eggsn1.cdrSchema.rATType == 6)
+	{	
+		for(int32 i in range(eggsn1.cdrSchema.datavolumeFBCDownlink))
+		{
+			if (eggsn1.cdrSchema.datavolumeFBCDownlink[i] != "0")
+			{
+				aggrSQMtmp.lte_utenti_distinti = (int64)1;
+				aggrSQMtmp.lte_utenti_distinti_dl = (int64)1;
+				aggrSQMtmp.imsi_lte_dl_somma_volume = aggrSQMtmp.imsi_lte_dl_somma_volume + (int64)eggsn1.cdrSchema.datavolumeFBCDownlink[i];
+				//aggrSQMtmp.lte_throughput_medio_dl_per_utenti_distinti = aggrSQMtmp.lte_throughput_medio_dl_per_utenti_distinti + (int64)eggsn1.cdrSchema.datavolumeFBCDownlink[i];
+			}
+		}
+		for(int32 i in range(eggsn1.cdrSchema.datavolumeFBCUplink))
+		{
+			if (eggsn1.cdrSchema.datavolumeFBCUplink[i] != "0")
+			{
+				aggrSQMtmp.lte_utenti_distinti = (int64)1;
+				aggrSQMtmp.lte_utenti_distinti_ul = (int64)1;
+				aggrSQMtmp.imsi_lte_ul_somma_volume = aggrSQMtmp.imsi_lte_ul_somma_volume + (int64)eggsn1.cdrSchema.datavolumeFBCUplink[i];
+				//aggrSQMtmp.lte_throughput_medio_ul_per_utenti_distinti = aggrSQMtmp.lte_throughput_medio_ul_per_utenti_distinti + (int64)eggsn1.cdrSchema.datavolumeFBCUplink[i];
+			}
+		}
+	}
+	else if (eggsn1.cdrSchema.rATType == 1 || eggsn1.cdrSchema.rATType == 2)
+	{			
+		for(int32 i in range(eggsn1.cdrSchema.datavolumeFBCDownlink))
+		{
+			if (eggsn1.cdrSchema.datavolumeFBCDownlink[i] != "0")
+			{
+				aggrSQMtmp.imsi_bb_dl_somma_volume = aggrSQMtmp.imsi_bb_dl_somma_volume + (int64)eggsn1.cdrSchema.datavolumeFBCDownlink[i];
+				if (eggsn1.cdrSchema.rATType == 2)
+				{
+					aggrSQMtmp.bb_utenti_distinti = (int64)1;
+					aggrSQMtmp.bb_utenti_distinti_dl = (int64)1;					
+					aggrSQMtmp.bb_throughput_medio_dl_per_utenti_distinti = aggrSQMtmp.bb_throughput_medio_dl_per_utenti_distinti + (int64)eggsn1.cdrSchema.datavolumeFBCDownlink[i];
+				}
+			}
+		}
+		for(int32 i in range(eggsn1.cdrSchema.datavolumeFBCUplink))
+		{
+			if (eggsn1.cdrSchema.datavolumeFBCUplink[i] != "0")
+			{
+				aggrSQMtmp.imsi_bb_ul_somma_volume = aggrSQMtmp.imsi_bb_ul_somma_volume + (int64)eggsn1.cdrSchema.datavolumeFBCUplink[i];
+				if (eggsn1.cdrSchema.rATType == 2)
+				{				
+					aggrSQMtmp.bb_utenti_distinti = (int64)1;
+					aggrSQMtmp.bb_utenti_distinti_ul = (int64)1;				
+					aggrSQMtmp.bb_throughput_medio_ul_per_utenti_distinti = aggrSQMtmp.bb_throughput_medio_ul_per_utenti_distinti + (int64)eggsn1.cdrSchema.datavolumeFBCUplink[i];
+				}
+			}
+		}
+	} 
+}
+
+void addCdrImsi(AggregateSqmSchema eggsn, mutable SqmBroadImsiVip cdr, rstring key, rstring nameOutputFile, rstring filePrefix, rstring fileSuffix, float64 startROP, float64 endROP)
+{
+	mutable BroadImsi firstEntry = {};
+	mutable BroadImsi existEntry = {};
+	
+	if(has(cdr, key) == false) 
+    {   
+    	firstEntry.nameOutputFile = nameOutputFile; 
+		firstEntry.filePrefix = filePrefix;
+		firstEntry.suffix = fileSuffix;									
+										
+    	firstEntry.ggsn_dn = key;
+		firstEntry.start_time = getUtilConvert((rstring)startROP); 
+		firstEntry.end_time = getUtilConvert((rstring)endROP);
+		firstEntry.idGruppo = eggsn.id_gruppo;
+		countCdrsIMSI(eggsn, firstEntry) ;
+		insertM(cdr, key, firstEntry) ;
+    }  
+    else 
+    {     
+     	existEntry = cdr[key];
+     	
+     	countCdrsIMSI(eggsn, existEntry) ;
+ 					
+ 		removeM (cdr, key);
+	    insertM( cdr, key, existEntry);
+    }
+}
+
+
+//void aggregateImsi (mutable SqmBroadImsiNode SqmNode, mutable SqmBroadImsiVip sqm)
+//{
+//	mutable SqmBroadImsiVip cdrApp = {};
+//	mutable list<rstring> keysTmp = [];
+//	for(rstring key in SqmNode) 
+//	{
+//		appendM(keysTmp, key);
+//	}
+//	for(rstring key in keysTmp)
+//	{
+//		swap(cdrApp, SqmNode[key]);
+//		for(rstring keyCdr in cdrApp) 
+//		{	
+//			if(has(sqm, keyCdr))
+//			{
+//				sqm[keyCdr].imsi_lte_dl_somma_volume = sqm[keyCdr].imsi_lte_dl_somma_volume + cdrApp[keyCdr].imsi_lte_dl_somma_volume ;
+//				sqm[keyCdr].imsi_lte_ul_somma_volume = sqm[keyCdr].imsi_lte_ul_somma_volume + cdrApp[keyCdr].imsi_lte_ul_somma_volume ;
+//				sqm[keyCdr].imsi_bb_dl_somma_volume = sqm[keyCdr].imsi_bb_dl_somma_volume + cdrApp[keyCdr].imsi_bb_dl_somma_volume ;
+//				sqm[keyCdr].imsi_bb_ul_somma_volume = sqm[keyCdr].imsi_bb_ul_somma_volume + cdrApp[keyCdr].imsi_bb_ul_somma_volume ;
+//    		}
+//        	else
+//        	{
+//        		insertM(sqm, keyCdr, cdrApp[keyCdr]);
+//        	}
+//        }
+//	}
+//	clearM(keysTmp);
+//	clearM(cdrApp);
+//}
+
+
+BroadImsi initEmptyEndRopTupleImsi() 
+{
+	mutable BroadImsi result = {};
+	
+	result.endROP = true;
+	
+	return result;
+}

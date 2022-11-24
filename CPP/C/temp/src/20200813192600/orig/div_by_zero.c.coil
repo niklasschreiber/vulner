@@ -1,0 +1,80 @@
+{
+   ("encoding", "KSC5601");
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c");
+   ("language", "C");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<time.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c");
+   (!2, "n");
+   (!3, "%d"S);
+   (!4, "m");
+   (!5, "0"N);
+   (!6, "100"N);
+   (!7, "%d\n"S);
+   (!8, "1000"N);
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c",
+   FN([public],(<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c">,"getValue"):int,[],[],
+   {[
+      {VD(!2,int)
+      ,(7#9,7#9,!1)};
+      {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c">,"scanf"),[arr(char),ref(int)],[{!3,arr(char),(8#11,8#11,!1)},{&{V(!2),int,(8#18,8#18,!1)},ref(int),(8#17,8#17,!1)}])
+      ,(8#5,8#5,!1)};
+      {RE({V(!2),int,(9#12,9#12,!1)})
+      ,(9#5,9#5,!1)}
+      ]
+   ,(5#5,10#1,!1)}
+   )
+   ,(5#5,10#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c",
+   FN([public],(<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c">,"test1"):unit,[(!2:int,(12#16,12#16,!1))],[],
+   {[
+      {VD(!4,int,{SC((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c">,"getValue"),[],[]),int,(14#13,14#13,!1)})
+      ,(14#9,14#9,!1)};
+      {IF0({BO(&&,{BO(>,{V(!2),int,(15#9,15#9,!1)},{!5,int,(15#13,15#13,!1)}),bool,(15#9,15#9,!1)},{BO(>,{V(!4),int,(15#18,15#18,!1)},{!6,int,(15#22,15#22,!1)}),bool,(15#18,15#18,!1)}),bool,(15#9,15#9,!1)},
+         {[
+            {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c">,"printf"),[arr(char),int],[{!7,arr(char),(16#16,16#16,!1)},{BO(/,{!8,int,(16#24,16#24,!1)},{V(!4),int,(16#31,16#31,!1)}),int,(16#24,16#24,!1)}])
+            ,(16#9,16#9,!1)}
+            ]
+         ,(15#27,17#5,!1)})
+      ,(15#5,17#5,"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c")};
+      {RE0
+      ,(!)}
+      ]
+   ,(12#6,18#1,!1)}
+   )
+   ,(12#6,18#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c",
+   FN([public],(<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c">,"test2"):unit,[(!2:int,(20#16,20#16,!1))],[],
+   {[
+      {VD(!4,int,{SC((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c">,"getValue"),[],[]),int,(22#13,22#13,!1)})
+      ,(22#9,22#9,!1)};
+      {IF0({BO(&&,{BO(>,{V(!2),int,(23#9,23#9,!1)},{!5,int,(23#13,23#13,!1)}),bool,(23#9,23#9,!1)},{BO(<,{V(!4),int,(23#18,23#18,!1)},{!6,int,(23#22,23#22,!1)}),bool,(23#18,23#18,!1)}),bool,(23#9,23#9,!1)},
+         {[
+            {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c">,"printf"),[arr(char),int],[{!7,arr(char),(24#16,24#16,!1)},{BO(/,{!8,int,(24#24,24#24,!1)},{V(!4),int,(24#31,24#31,!1)}),int,(24#24,24#24,!1)}])
+            ,(24#9,24#9,!1)}
+            ]
+         ,(23#27,25#5,!1)})
+      ,(23#5,25#5,"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c")};
+      {RE0
+      ,(!)}
+      ]
+   ,(20#6,26#1,!1)}
+   )
+   ,(20#6,26#1,!1)},
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/orig/div_by_zero.c",
+   [
+      S("// Local variables:\n",28),
+      S("// compile-command: \"clang -std=c99 -pedantic -Wall -c div_by_zero-01.c \\\n// && c2coil.sh div_by_zero-01.c\"\n",29),
+      S("// End:\n",31)
+   ]
+   }
+]

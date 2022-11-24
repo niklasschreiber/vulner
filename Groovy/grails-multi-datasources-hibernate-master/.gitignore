@@ -1,0 +1,7 @@
+target
+build
+.gradle
+.slcache
+.idea
+*.iml
+.DS_Store

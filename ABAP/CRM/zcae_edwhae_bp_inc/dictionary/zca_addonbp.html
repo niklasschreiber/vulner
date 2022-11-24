@@ -1,0 +1,585 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>Dictionary object- ZCA_ADDONBP</title>
+<style type="text/css">
+  th{text-align:left}
+  .cell{
+     font-family:"Courier New", Courier, monospace;
+     color:#000;
+     font-size:12px;
+     background-color:#F2F4F7;
+  }
+  .cell td { border: thin solid #ccc; }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+  <table class="outerTable">
+    <tr>
+      <td><h2>Table: ZCA_ADDONBP</h2>
+  <h3>Description: </h3></td>
+    </tr>
+    <tr>
+      <td><!--This is where our main table begins  -->
+<table class="innerTable">
+<tr>
+  <th>Row</th>
+  <th>Field name</th>
+  <th>Position</th>
+  <th>Key</th>
+  <th>Data element</th>
+  <th>Domain</th>
+  <th>Datatype</th>
+  <th>Length</th>
+  <th>Lowercase</th>
+  <th>Domain text</th>
+</tr>
+<tr class="cell">
+  <td> 1</td>
+  <td>ASS_CATE</td>
+  <td>5</td>
+  <td>&nbsp;</td>
+  <td>ZCA_ASS_CATE</td>
+  <td>CHAR1</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Flag associazione di categoria</td>
+</tr>
+<tr class="cell">
+  <td> 2</td>
+  <td>CAT_PTB</td>
+  <td>33</td>
+  <td>&nbsp;</td>
+  <td>ZCA_CAT_PTB_ED</td>
+  <td>TEXT10</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>X</td>
+  <td>Categoria PTB</td>
+</tr>
+<tr class="cell">
+  <td> 3</td>
+  <td>COD_FRAZ_CENS</td>
+  <td>9</td>
+  <td>&nbsp;</td>
+  <td>ZCA_CD_FRAZ</td>
+  <td>CHAR010</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Frazionario di censimento</td>
+</tr>
+<tr class="cell">
+  <td> 4</td>
+  <td>DATA_REVOCA</td>
+  <td>32</td>
+  <td>&nbsp;</td>
+  <td>ZDATA_REV_CONS</td>
+  <td>DATUM</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Data Revoca Consenso</td>
+</tr>
+<tr class="cell">
+  <td> 5</td>
+  <td>DATUM</td>
+  <td>37</td>
+  <td>&nbsp;</td>
+  <td>BU_CHDAT</td>
+  <td>DATUM</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Data dell'ultima modifica dell'oggetto</td>
+</tr>
+<tr class="cell">
+  <td> 6</td>
+  <td>DS_ASS_CAT</td>
+  <td>23</td>
+  <td>&nbsp;</td>
+  <td>ZCA_DS_ASS</td>
+  <td>CHAR100</td>
+  <td>CHAR</td>
+  <td>100</td>
+  <td>&nbsp;</td>
+  <td>Associazione di  categoria</td>
+</tr>
+<tr class="cell">
+  <td> 7</td>
+  <td>DS_NOTE</td>
+  <td>11</td>
+  <td>&nbsp;</td>
+  <td>ZCA_DS_NOTE</td>
+  <td>CHAR255</td>
+  <td>CHAR</td>
+  <td>255</td>
+  <td>&nbsp;</td>
+  <td>Note</td>
+</tr>
+<tr class="cell">
+  <td> 8</td>
+  <td>F_COLDIR</td>
+  <td>7</td>
+  <td>&nbsp;</td>
+  <td>ZCA_COLDIR</td>
+  <td>CHAR1</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Flag coltivatore diretto</td>
+</tr>
+<tr class="cell">
+  <td> 9</td>
+  <td>ID_FASCIA_NUM_DI</td>
+  <td>16</td>
+  <td>&nbsp;</td>
+  <td>ZCA_ID_FASC</td>
+  <td>CHAR08</td>
+  <td>CHAR</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Fascia numero dipendenti</td>
+</tr>
+<tr class="cell">
+  <td>10</td>
+  <td>ID_SEGMENTO</td>
+  <td>14</td>
+  <td>&nbsp;</td>
+  <td>ZCA_ID_SEGM</td>
+  <td>CHAR08</td>
+  <td>CHAR</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Segmento</td>
+</tr>
+<tr class="cell">
+  <td>11</td>
+  <td>ID_SETTORE</td>
+  <td>15</td>
+  <td>&nbsp;</td>
+  <td>ZCA_ID_SETT</td>
+  <td>CHAR08</td>
+  <td>CHAR</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Settore</td>
+</tr>
+<tr class="cell">
+  <td>12</td>
+  <td>ID_STATUS</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>ZCAID_STAT</td>
+  <td>CHAR08</td>
+  <td>CHAR</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Stato Cliente</td>
+</tr>
+<tr class="cell">
+  <td>13</td>
+  <td>IS_ATTIVO</td>
+  <td>12</td>
+  <td>&nbsp;</td>
+  <td>ZCA_IS_ATTI</td>
+  <td>CHAR01</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Flag cliente attivo</td>
+</tr>
+<tr class="cell">
+  <td>14</td>
+  <td>IS_CATENA_NEG</td>
+  <td>20</td>
+  <td>&nbsp;</td>
+  <td>ZCA_IS_CAT</td>
+  <td>CHAR01</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Flag Catena negozi</td>
+</tr>
+<tr class="cell">
+  <td>15</td>
+  <td>IS_CORRENTISTA_B</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>ZCA_IS_CORR</td>
+  <td>&nbsp;</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Flag Correntista Banco Posta</td>
+</tr>
+<tr class="cell">
+  <td>16</td>
+  <td>IS_FRANCHISING</td>
+  <td>21</td>
+  <td>&nbsp;</td>
+  <td>ZCA_IS_FRA</td>
+  <td>CHAR01</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Flag Franchising</td>
+</tr>
+<tr class="cell">
+  <td>17</td>
+  <td>IS_MULTISEDE</td>
+  <td>22</td>
+  <td>&nbsp;</td>
+  <td>ZCA_IS_MULTI</td>
+  <td>CHAR01</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Flag multisede</td>
+</tr>
+<tr class="cell">
+  <td>18</td>
+  <td>IS_PAGATORE</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>ZCA_IS_PAGT</td>
+  <td>CHAR01</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Flag pagatore</td>
+</tr>
+<tr class="cell">
+  <td>19</td>
+  <td>KIT</td>
+  <td>35</td>
+  <td>&nbsp;</td>
+  <td>ZCA_KIT_ED</td>
+  <td>TEXT10</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>X</td>
+  <td>Kit</td>
+</tr>
+<tr class="cell">
+  <td>20</td>
+  <td>MANDT</td>
+  <td>1</td>
+  <td>X</td>
+  <td>MANDT</td>
+  <td>MANDT</td>
+  <td>CLNT</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Mandante</td>
+</tr>
+<tr class="cell">
+  <td>21</td>
+  <td>M_CAP_SOCIALE</td>
+  <td>19</td>
+  <td>&nbsp;</td>
+  <td>ZCA_CAPSOC</td>
+  <td>CHAR18</td>
+  <td>CHAR</td>
+  <td>18</td>
+  <td>&nbsp;</td>
+  <td>Capitale sociale</td>
+</tr>
+<tr class="cell">
+  <td>22</td>
+  <td>M_FATTURATO</td>
+  <td>18</td>
+  <td>&nbsp;</td>
+  <td>ZCA_FATT</td>
+  <td>CHAR18</td>
+  <td>CHAR</td>
+  <td>18</td>
+  <td>&nbsp;</td>
+  <td>Fatturato</td>
+</tr>
+<tr class="cell">
+  <td>23</td>
+  <td>NOME_SEDE</td>
+  <td>27</td>
+  <td>&nbsp;</td>
+  <td>ZNOMESEDE</td>
+  <td>ZNOMESEDE</td>
+  <td>CHAR</td>
+  <td>255</td>
+  <td>&nbsp;</td>
+  <td>Nome Sede</td>
+</tr>
+<tr class="cell">
+  <td>24</td>
+  <td>N_SEDI</td>
+  <td>17</td>
+  <td>&nbsp;</td>
+  <td>ZCA_N_SEDI</td>
+  <td>CHAR08</td>
+  <td>CHAR</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Numero sedi</td>
+</tr>
+<tr class="cell">
+  <td>25</td>
+  <td>PARTNER</td>
+  <td>2</td>
+  <td>X</td>
+  <td>BP_PARTNER</td>
+  <td>BU_PARTNER</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Numero business partner</td>
+</tr>
+<tr class="cell">
+  <td>26</td>
+  <td>POT_COMM</td>
+  <td>36</td>
+  <td>&nbsp;</td>
+  <td>ZCA_POT_COMM_DE</td>
+  <td>TEXT10</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>X</td>
+  <td>Potenziale Commerciale</td>
+</tr>
+<tr class="cell">
+  <td>27</td>
+  <td>RAG_SOC_SOGEI</td>
+  <td>6</td>
+  <td>&nbsp;</td>
+  <td>ZCA_SOGEI</td>
+  <td>MWCHAR160</td>
+  <td>CHAR</td>
+  <td>160</td>
+  <td>&nbsp;</td>
+  <td>Ragione sociale SOGEI</td>
+</tr>
+<tr class="cell">
+  <td>28</td>
+  <td>REVOCA_CONSENSO</td>
+  <td>31</td>
+  <td>&nbsp;</td>
+  <td>ZREV_CONSENSO</td>
+  <td>XFELD</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Revoca Consenso Dati personali</td>
+</tr>
+<tr class="cell">
+  <td>29</td>
+  <td>SEGM_CNS</td>
+  <td>25</td>
+  <td>&nbsp;</td>
+  <td>ZCA_SEG_CNS</td>
+  <td>CHAR20</td>
+  <td>CHAR</td>
+  <td>20</td>
+  <td>&nbsp;</td>
+  <td>Segmentazione CNS</td>
+</tr>
+<tr class="cell">
+  <td>30</td>
+  <td>SEGM_UNICA</td>
+  <td>24</td>
+  <td>&nbsp;</td>
+  <td>ZCA_SEG_U</td>
+  <td>CHAR20</td>
+  <td>CHAR</td>
+  <td>20</td>
+  <td>&nbsp;</td>
+  <td>Segmentazione unica</td>
+</tr>
+<tr class="cell">
+  <td>31</td>
+  <td>SIC4</td>
+  <td>34</td>
+  <td>&nbsp;</td>
+  <td>ZCA_SIC_ED</td>
+  <td>TEXT10</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>X</td>
+  <td>SIC</td>
+</tr>
+<tr class="cell">
+  <td>32</td>
+  <td>TIPO_CLIENTE</td>
+  <td>26</td>
+  <td>&nbsp;</td>
+  <td>ZTIPO_CLIENTE</td>
+  <td>CHAR08</td>
+  <td>CHAR</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Tipo Cliente</td>
+</tr>
+<tr class="cell">
+  <td>33</td>
+  <td>TMSTMP</td>
+  <td>40</td>
+  <td>&nbsp;</td>
+  <td>TIMESTAMP</td>
+  <td>TZNTSTMPS</td>
+  <td>DEC</td>
+  <td>15</td>
+  <td>&nbsp;</td>
+  <td>Timestamp UTC in forma breve (AAAAMMGGhhmmss)</td>
+</tr>
+<tr class="cell">
+  <td>34</td>
+  <td>TRATTAMENTODATI1</td>
+  <td>28</td>
+  <td>&nbsp;</td>
+  <td>Z_TRATTAMENTO1</td>
+  <td>CHAR1</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Trattamento 1</td>
+</tr>
+<tr class="cell">
+  <td>35</td>
+  <td>TRATTAMENTODATI2</td>
+  <td>29</td>
+  <td>&nbsp;</td>
+  <td>Z_TRATTAMENTO2</td>
+  <td>CHAR1</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Trattamento 2</td>
+</tr>
+<tr class="cell">
+  <td>36</td>
+  <td>TRATTAMENTODATI3</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>Z_TRATTAMENTO3</td>
+  <td>CHAR1</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Trattamento 3</td>
+</tr>
+<tr class="cell">
+  <td>37</td>
+  <td>TRATT_DATI</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>ZCA_TRATT_DATI</td>
+  <td>CHAR3</td>
+  <td>CHAR</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Tipologica di consenso al trattamento dei dati</td>
+</tr>
+<tr class="cell">
+  <td>38</td>
+  <td>UNAME</td>
+  <td>39</td>
+  <td>&nbsp;</td>
+  <td>BU_CHUSR</td>
+  <td>USNAM</td>
+  <td>CHAR</td>
+  <td>12</td>
+  <td>&nbsp;</td>
+  <td>Autore dell'ultima modifica apportata all'oggetto</td>
+</tr>
+<tr class="cell">
+  <td>39</td>
+  <td>UP_GEO</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>ZCA_UP_GEO</td>
+  <td>CHAR10</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Ufficio postale di georeferenziazione</td>
+</tr>
+<tr class="cell">
+  <td>40</td>
+  <td>UZEIT</td>
+  <td>38</td>
+  <td>&nbsp;</td>
+  <td>BU_CHTIM</td>
+  <td>UZEIT</td>
+  <td>TIMS</td>
+  <td>6</td>
+  <td>&nbsp;</td>
+  <td>Ora dell'ultima modifica dell'oggetto</td>
+</tr>
+      </table>
+     </td>
+   </tr>
+<br/>
+  <table class="outerTable">
+    <tr>
+      <td><h2>Fixed Domain Values </h2>
+    </tr>
+    <tr>
+      <td><!--This is where our main table begins  -->
+<table class="innerTable">
+<tr>
+  <th>Domain Name</th>
+  <th>Value Low</th>
+  <th>Value High</th>
+  <th>Text</th>
+</tr>
+<tr class="cell">
+  <td>XFELD</td>
+  <td>X</td>
+  <td>&nbsp;</td>
+  <td>Yes</td>
+</tr>
+<tr class="cell">
+  <td>XFELD</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>No</td>
+</tr>
+      </table>
+     </td>
+   </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2020. Sap Release 740</td>
+   </tr>
+</table>
+</body>
+</html>

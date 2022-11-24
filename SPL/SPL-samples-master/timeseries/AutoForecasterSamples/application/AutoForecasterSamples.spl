@@ -1,0 +1,52 @@
+namespace application ;
+
+use com.ibm.streams.timeseries.modeling::AutoForecaster2 ;
+
+composite AutoForecasterSamples
+{
+	graph
+		(stream<float64 inputData> NetloadData) as NetloadSource = FileSource()
+		{
+			param
+				file : "netload.out" ;
+		}
+
+		(stream<uint64 t, float64 inputData, uint64 forecastedTimestamp, float64 forecastedResult>
+			ForecastedResults) as ForecastingOperator = AutoForecaster2(NetloadTimeData
+			as inPort0Alias)
+		{
+			param
+				inputTimeSeries : inputData ;
+				initSamples : 100u ;
+				stepAhead : 20u ;
+				algorithm : Dynamic ;
+				inputTimestamp : t ;
+			output
+				ForecastedResults : forecastedResult = forecastedTimeSeriesStep(),
+					forecastedTimestamp = forecastedTimestamp() ;
+		}
+
+		() as FileSinkOp = FileSink(ForecastedResults)
+		{
+			param
+				file : "result.txt" ;
+		}
+
+		(stream<uint64 t, float64 inputData> NetloadTimeData) as AddTimeOp =
+			Custom(NetloadData)
+		{
+			logic
+				state :
+				{
+					mutable uint64 cnt = 1l ;
+				}
+
+				onTuple NetloadData :
+				{
+					submit({ t = cnt ++, inputData = inputData }, NetloadTimeData) ;
+				}
+
+		}
+
+}
+

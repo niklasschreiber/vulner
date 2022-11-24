@@ -1,0 +1,88 @@
+{
+   ("encoding", "KSC5601");
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_01.c");
+   ("language", "C");
+   ("include", "<stdlib.h>");
+   ("include", "<stdio.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_01.c");
+   (!2, "i");
+   (!3, "cb");
+   (!4, "0"N);
+   (!5, "256"N);
+   (!6, "malloc"S);
+   (!7, "1"N);
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_01.c",
+   FN([public],(<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_01.c">,"main"):int,[],[],
+   {[
+      {VD(!2,int)
+      ,(13#20,13#20,!1)};
+      {VD(!3,record((,charbuf)))
+      ,(14#20,14#20,!1)};
+      {{AE({OA({V(!3),record((,charbuf)),(16#5,16#5,!1)},"n"),int,(16#5,16#5,!1)},{!4,int,(16#12,16#12,!1)}),int,(16#5,16#5,!1)}
+      ,(16#5,16#13,!1)};
+      {{AE({OA({V(!3),record((,charbuf)),(17#5,17#5,!1)},"buf"),ref(char),(17#5,17#5,!1)},{SC((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_01.c">,"malloc"),[int],[{BO(*,{SO(char),int,(17#21,17#21,!1)},{!5,int,(17#36,17#36,!1)}),int,(17#21,17#21,!1)}]),top,(17#14,17#14,!1)}),ref(char),(17#5,17#5,!1)}
+      ,(17#5,17#40,!1)};
+      {IF0({BO(==,{OA({V(!3),record((,charbuf)),(19#9,19#9,!1)},"buf"),ref(char),(19#9,19#9,!1)},{!4,int,(19#19,19#19,!1)}),bool,(19#9,19#9,!1)},
+         {[
+            {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_01.c">,"perror"),[arr(char)],[{!6,arr(char),(20#16,20#16,!1)}])
+            ,(20#9,20#9,!1)};
+            {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_01.c">,"exit"),[int],[{!7,int,(21#14,21#14,!1)}])
+            ,(21#9,21#9,!1)}
+            ]
+         ,(19#25,22#5,!1)})
+      ,(19#5,22#5,"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_01.c")};
+      {FL(L0,
+         {[
+            {{AE({V(!2),int,(24#10,24#10,!1)},{!4,int,(24#14,24#14,!1)}),int,(24#10,24#10,!1)}
+            ,(24#10,24#10,!1)}
+         ]
+         ,(24#5,27#5,!1)},{BO(<,{V(!2),int,(24#17,24#17,!1)},{!5,int,(24#21,24#21,!1)}),bool,(24#17,24#17,!1)},
+         {[
+            {{IPO({V(!2),int,(24#26,24#26,!1)}),int,(24#26,24#26,!1)}
+            ,(24#26,24#26,!1)}
+         ]
+         ,(24#5,27#5,!1)},
+         {[
+            {{AE({OA({V(!3),record((,charbuf)),(25#9,25#9,!1)},"n"),int,(25#9,25#9,!1)},{BO(+,{OA({V(!3),record((,charbuf)),(25#9,25#9,!1)},"n"),int,(25#9,25#9,!1)},{V(!2),int,(25#17,25#17,!1)}),int,(25#9,25#9,!1)}),int,(25#9,25#9,!1)}
+            ,(25#9,25#18,!1)};
+            {{AE({AA({OA({V(!3),record((,charbuf)),(26#9,26#9,!1)},"buf"),ref(char),(26#9,26#9,!1)},[{V(!2),int,(26#16,26#16,!1)}]),char,(26#9,26#9,!1)},{OA({V(!3),record((,charbuf)),(26#21,26#21,!1)},"n"),int,(26#21,26#21,!1)}),char,(26#9,26#9,!1)}
+            ,(26#9,26#25,!1)}
+            ]
+         ,(24#31,27#5,!1)})
+      ,(24#5,27#5,!1)};
+      {PC0((<"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_01.c">,"free"),[ref(char)],[{OA({V(!3),record((,charbuf)),(29#10,29#10,!1)},"buf"),ref(char),(29#10,29#10,!1)}])
+      ,(29#5,29#5,!1)};
+      {RE0
+      ,(!)}
+      ]
+   ,(11#5,30#1,!1)}
+   )
+   ,(11#5,30#1,!1)}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_01.c",
+   CL([struct],(,charbuf),[])
+   {
+      ([public],"n":int,(7#11,7#11,!1));
+      ([public],"buf":ref(char),(8#11,8#11,!1))
+   }
+   ,(5#8,5#8,!1)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/C/src/20200813192600/fix/bof_01.c",
+   [
+      S("// FIX: replace <= with <\n",24),
+      S("// ARRAY_INDEX_OUT_OF_BOUND\n",26),
+      S("// Local variables:\n",32),
+      S("// compile-command: \"clang -std=c99 -pedantic -Wall -c bof-01.c && \\\n// c2coil.sh bof-01.c\"\n",33),
+      S("// End:\n",35)
+   ]
+   }
+]

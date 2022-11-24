@@ -1,0 +1,14 @@
+<aura:component implements="lightning:availableForFlowScreens" access="global">
+    <aura:attribute name="message" type="String" access="global"/>
+
+    <div class="slds-m-around_xx-large slds-align_absolute-center">
+        <div class="slds-media slds-media_center">
+            <div class="slds-media__figure">
+                <lightning:icon iconName="utility:success" alternativeText="Success" size="small" class="success"/>
+            </div>
+            <div class="slds-media__body">
+                <p class="slds-text-heading_small slds-text-color_success">{!v.message}</p>
+            </div>
+        </div>
+    </div>
+</aura:component>	

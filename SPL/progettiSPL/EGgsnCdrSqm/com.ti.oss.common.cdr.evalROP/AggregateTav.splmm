@@ -1,0 +1,98 @@
+namespace com.ti.oss.common.cdr.evalROP;
+
+use com.ibm.streamsx.file::* ;
+use com.ti.oss.common.cdr.parser.eggsn::* ;
+use com.ti.oss.common.cdr.types::* ;
+use com.ti.oss.common.cdr.util::* ;
+use com.ti.oss.common.cdr.util.cfg::* ;
+use com.ti.oss.common.event::* ;
+use com.ti.oss.common.types::* ;
+use com.ti.oss.common.util.cfg::* ;
+use com.ti.oss.common.util.time::*;
+
+<%
+	my $parallelSQM = 16;
+%>
+
+type TavGgsnT = map<rstring, TavGgsn>;
+
+public composite AggregateTav (input stream<TavGgsn> ITav; output stream<CsvWrite> OTav)
+{
+	param
+		expression<rstring> $mediationName ;
+			
+	graph
+	
+		(stream<CsvWrite> OTav) = Custom(ITav as I)
+		{
+		logic state:
+			{
+				mutable int32 countAggr = 0;
+				mutable TavGgsnT TavGgsnAggr ;
+				rstring mediationName = $mediationName;
+				mutable CsvWrite csv = {};
+			} 
+		
+			onTuple I : 
+			{   
+				if (I.endROP)
+				{	
+					countAggr++;
+				}
+				else
+				{
+					mutable rstring key = I.tratta_dn;
+					if(has(TavGgsnAggr, key) == true)
+					{
+						TavGgsnAggr[key].tav_bb_downlink_uplink = TavGgsnAggr[key].tav_bb_downlink_uplink + I.tav_bb_downlink_uplink;
+						
+					}
+					else
+					{
+						mutable TavGgsn TavGgsnTmp = {};
+						swap(TavGgsnTmp.tratta_dn,I.tratta_dn);
+						swap(TavGgsnTmp.start_time,I.start_time);
+						swap(TavGgsnTmp.end_time,I.end_time);
+						swap(TavGgsnTmp.tav_bb_downlink_uplink,I.tav_bb_downlink_uplink);
+						swap(TavGgsnTmp.nameOutputFile,I.nameOutputFile);
+						swap(TavGgsnTmp.endROP,I.endROP);
+						swap(TavGgsnTmp.filePrefix,I.filePrefix);
+						swap(TavGgsnTmp.suffix,I.suffix);
+						swap(TavGgsnTmp.endRopSecs,I.endRopSecs);
+						swap(TavGgsnTmp.startRopSecs,I.startRopSecs);
+						
+						insertM(TavGgsnAggr, key, TavGgsnTmp) ;								
+					}
+					
+				}
+				
+				if(countAggr == 16)
+				{
+					for(rstring key in TavGgsnAggr)
+					{
+						csv.nameOutputFile = TavGgsnAggr[key].nameOutputFile;
+						csv.endROP = false;
+						csv.filePrefix = TavGgsnAggr[key].filePrefix;
+						csv.suffix = TavGgsnAggr[key].suffix;
+						
+						if (TavGgsnAggr[key].tratta_dn!="")
+						{
+							csv.outputContent = TavGgsnAggr[key].tratta_dn+";"+TavGgsnAggr[key].start_time+";"+TavGgsnAggr[key].end_time+";"+(rstring)TavGgsnAggr[key].tav_bb_downlink_uplink;
+						}else{
+							csv.outputContent = "";
+						}
+						
+						submit(csv, OTav);
+					}	
+					
+					countAggr = 0;
+					clearM(TavGgsnAggr);
+					
+					csv.nameOutputFile = I.nameOutputFile;
+					csv.outputContent = "";
+					csv.endROP = true;
+					submit(csv, OTav);
+				}		
+	        }	
+	     }	
+}

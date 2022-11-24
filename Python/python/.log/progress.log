@@ -1,0 +1,18 @@
+[info] [SourceCollector] start collect
+#1,100
+[info] [Collector] check remote files...
+[trac] [Collector]    remote dir: /BuggyApp-1.3
+[trac] [Collector]    remote dir: /python
+[trac] [Collector]    remote dir: /python/.data
+[trac] [Collector]    remote dir: /python/.filter
+[trac] [Collector]    remote dir: /python/.log
+[trac] [Collector]    remote dir: /python/lib
+[trac] [Collector]    remote dir: /python/src
+[info] [Collector] id=20210125185700(2001), from=D:/_OpenSource/SRA/CIVETTA/Python, target files=11
+[info] [Collector] new=11, change=0, remove=0
+[info] [Collector] copy new files...
+[info] [Collector] copy end.
+[info] [SourceCollector] end collect (time=351ms)
+#100,100
+[info] working time: 547ms
+#complete

@@ -1,0 +1,616 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp");
+   ("language", "CPP");
+   ("include", "std_testcase.h");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<stddef.h>");
+   ("include", "<time.h>");
+   ("include", "<limits.h>");
+   ("include", "<string.h>");
+   ("include", "<stdint.h>");
+   ("include", "<stdint.h>");
+   ("include", "<ctype.h>");
+   ("include", "<fcntl.h>");
+   ("include", "<sys/types.h>");
+   ("include", "<sys/stat.h>");
+   ("include", "std_testcase_io.h");
+   ("include", "std_testcase.h");
+   ("include", "<sys/types.h>");
+   ("include", "<sys/socket.h>");
+   ("include", "<netinet/in.h>");
+   ("include", "<arpa/inet.h>");
+   ("include", "<unistd.h>");
+}
+{
+   (!3, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase_io.h");
+   (!2, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h");
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp",
+   MD("RAND32()",[],"((rand()<<30) ^ (rand()<<15) ^ rand())")
+   ,(84#0,84#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp",
+   MD("RAND64()",[],"(((int64_t)rand()<<60) ^ ((int64_t)rand()<<45) ^ ((int64_t)rand()<<30) ^ ((int64_t)rand()<<15) ^ (int64_t)rand())")
+   ,(87#0,87#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   SF([extern,const,extern],int,<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"GLOBAL_CONST_TRUE")
+   ,(103#18,103#34,!2)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   SF([extern,const,extern],int,<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"GLOBAL_CONST_FALSE")
+   ,(104#18,104#35,!2)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   SF([extern,const,extern],int,<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"GLOBAL_CONST_FIVE")
+   ,(105#18,105#34,!2)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   SF([extern,extern],int,<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"globalTrue")
+   ,(110#12,110#21,!2)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   SF([extern,extern],int,<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"globalFalse")
+   ,(111#12,111#22,!2)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   SF([extern,extern],int,<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"globalFive")
+   ,(112#12,112#21,!2)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   SF([extern,extern],int,<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"globalArgc")
+   ,(55#12,55#21,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   SF([extern,extern],ref(ref(char)),<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"globalArgv")
+   ,(56#12,56#24,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   SI(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,
+   {[
+      {;
+      ,(1#1,293#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,293#1,!1)}
+   )
+   ,(1#1,293#1,!1)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printLine"):unit,[(mod(ref(char),[const]):"line",(14#16,14#32,!3))],[]
+   )
+   ,(14#1,14#34,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printWLine"):unit,[(mod(ref(wchar),[const]):"line",(16#17,16#36,!3))],[]
+   )
+   ,(16#1,16#38,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printIntLine"):unit,[(int:"intNumber",(18#20,18#32,!3))],[]
+   )
+   ,(18#1,18#34,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printShortLine"):unit,[(short:"shortNumber",(20#22,20#38,!3))],[]
+   )
+   ,(20#1,20#40,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printFloatLine"):unit,[(float:"floatNumber",(22#22,22#38,!3))],[]
+   )
+   ,(22#1,22#40,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printLongLine"):unit,[(long:"longNumber",(24#20,24#34,!3))],[]
+   )
+   ,(24#1,24#36,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printLongLongLine"):unit,[(class((,int64_t)):"longLongIntNumber",(26#24,26#48,!3))],[]
+   )
+   ,(26#1,26#50,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printSizeTLine"):unit,[(class((,size_t)):"sizeTNumber",(28#21,28#38,!3))],[]
+   )
+   ,(28#1,28#40,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printHexCharLine"):unit,[(char:"charHex",(30#23,30#34,!3))],[]
+   )
+   ,(30#1,30#36,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printWcharLine"):unit,[(wchar:"wideChar",(32#21,32#36,!3))],[]
+   )
+   ,(32#1,32#38,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printUnsignedLine"):unit,[(uint:"unsignedNumber",(34#24,34#46,!3))],[]
+   )
+   ,(34#1,34#48,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printHexUnsignedCharLine"):unit,[(uchar:"unsignedCharacter",(36#31,36#61,!3))],[]
+   )
+   ,(36#1,36#63,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printDoubleLine"):unit,[(double:"doubleNumber",(38#22,38#40,!3))],[]
+   )
+   ,(38#1,38#42,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printStructLine"):unit,[(mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]):"structTwoIntsStruct",(40#22,40#62,!3))],[]
+   )
+   ,(40#1,40#64,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printBytesLine"):unit,[(mod(ref(uchar),[const]):"bytes",(42#21,42#47,!3)),(class((,size_t)):"numBytes",(42#50,42#64,!3))],[]
+   )
+   ,(42#1,42#66,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"decodeHexChars"):class((,size_t)),[(ref(uchar):"bytes",(44#23,44#43,!3)),(class((,size_t)):"numBytes",(44#46,44#60,!3)),(mod(ref(char),[const]):"hex",(44#63,44#78,!3))],[]
+   )
+   ,(44#1,44#80,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"decodeHexWChars"):class((,size_t)),[(ref(uchar):"bytes",(46#24,46#44,!3)),(class((,size_t)):"numBytes",(46#47,46#61,!3)),(mod(ref(wchar),[const]):"hex",(46#64,46#82,!3))],[]
+   )
+   ,(46#1,46#84,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"globalReturnsTrue"):int,[],[]
+   )
+   ,(48#1,48#24,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"globalReturnsFalse"):int,[],[]
+   )
+   ,(50#1,50#25,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   PT([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"globalReturnsTrueOrFalse"):int,[],[]
+   )
+   ,(52#1,52#31,!3)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   FN([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01_bad"):unit,[],[],
+   {[
+      {VD("data",int)
+      ,(46#9,46#12,!1)};
+      {{AE({V("data"),int,(48#5,48#8,!1)},{UO(-,{"1"N,int,(48#13,48#13,!1)}),int,(48#12,48#13,!1)}),int,(48#5,48#13,!1)}
+      ,(48#5,48#13,!1)};
+      {[
+         {VD("recvResult",int)
+         ,(54#13,54#22,!1)};
+         {VD("service",mod(class((,sockaddr_in)),[struct]))
+         ,(55#28,55#34,!1)};
+         {VD("connectSocket",int,{UO(-,{"1"N,int,(56#30,56#30,!1)}),int,(56#29,56#30,!1)})
+         ,(56#13,56#25,!1)};
+         {VD("inputBuffer",char,([{BO(+,{BO(*,{"3"N,int,(57#27,57#27,!1)},{SO({V("data"),int,(57#38,57#41,!1)}),int,(57#31,57#42,!1)}),int,(57#27,57#42,!1)},{"2"N,int,(57#46,57#46,!1)}),int,(57#26,57#47,!1)}]))
+         ,(57#14,57#48,!1)};
+         {DW(L39,
+            {[
+               {{AE({V("connectSocket"),int,(68#13,68#25,!1)},{SC((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"socket"),[class((,"%undef")),class((,"%undef")),class((,"%undef"))],[{V("AF_INET"),class((,"%undef")),(68#36,68#42,!1)},{V("SOCK_STREAM"),class((,"%undef")),(68#45,68#55,!1)},{V("IPPROTO_TCP"),class((,"%undef")),(68#58,68#68,!1)}]),class((,"%undef")),(68#29,68#69,!1)}),int,(68#13,68#69,!1)}
+               ,(68#13,68#69,!1)};
+               {IF0({BO(==,{V("connectSocket"),int,(69#17,69#29,!1)},{UO(-,{"1"N,int,(69#35,69#35,!1)}),int,(69#34,69#35,!1)}),bool,(69#17,69#35,!1)},
+                  {[
+                     {BR @ 
+                     ,(71#17,71#22,!1)}
+                     ]
+                  ,(70#13,72#13,!1)})
+               ,(69#13,72#13,!1)};
+               {PC0((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"memset"),[ref(mod(class((,sockaddr_in)),[struct])),int,int],[{&{V("service"),mod(class((,sockaddr_in)),[struct]),(73#21,73#27,!1)},ref(mod(class((,sockaddr_in)),[struct])),(73#20,73#27,!1)},{"0"N,int,(73#30,73#30,!1)},{SO({V("service"),mod(class((,sockaddr_in)),[struct]),(73#40,73#46,!1)}),int,(73#33,73#47,!1)}])
+               ,(73#13,73#48,!1)};
+               {{AE({OA({V("service"),mod(class((,sockaddr_in)),[struct]),(74#13,74#19,!1)},"sin_family"),class((,"%undef")),(74#13,74#30,!1)},{V("AF_INET"),class((,"%undef")),(74#34,74#40,!1)}),class((,"%undef")),(74#13,74#40,!1)}
+               ,(74#13,74#40,!1)};
+               {{AE({OA({OA({V("service"),mod(class((,sockaddr_in)),[struct]),(75#13,75#19,!1)},"sin_addr"),class((,"%undef")),(75#13,75#28,!1)},"s_addr"),class((,"%undef")),(75#13,75#35,!1)},{SC((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"inet_addr"),[string],[{"127.0.0.1"S,string,(75#49,75#59,!1)}]),class((,"%undef")),(75#39,75#60,!1)}),class((,"%undef")),(75#13,75#60,!1)}
+               ,(75#13,75#60,!1)};
+               {{AE({OA({V("service"),mod(class((,sockaddr_in)),[struct]),(76#13,76#19,!1)},"sin_port"),class((,"%undef")),(76#13,76#28,!1)},{SC((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"htons"),[int],[{"27015"N,int,(76#38,76#42,!1)}]),class((,"%undef")),(76#32,76#43,!1)}),class((,"%undef")),(76#13,76#43,!1)}
+               ,(76#13,76#43,!1)};
+               {IF0({BO(==,{SC((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"connect"),[int,ref(mod(class((,sockaddr)),[struct])),int],[{V("connectSocket"),int,(77#25,77#37,!1)},{CS(ref(mod(class((,sockaddr)),[struct])),{&{V("service"),mod(class((,sockaddr_in)),[struct]),(77#59,77#65,!1)},ref(mod(class((,sockaddr_in)),[struct])),(77#58,77#65,!1)}),ref(mod(class((,sockaddr)),[struct])),(77#40,77#65,!1)},{SO({V("service"),mod(class((,sockaddr_in)),[struct]),(77#75,77#81,!1)}),int,(77#68,77#82,!1)}]),class((,"%undef")),(77#17,77#83,!1)},{UO(-,{"1"N,int,(77#89,77#89,!1)}),int,(77#88,77#89,!1)}),bool,(77#17,77#89,!1)},
+                  {[
+                     {BR @ 
+                     ,(79#17,79#22,!1)}
+                     ]
+                  ,(78#13,80#13,!1)})
+               ,(77#13,80#13,!1)};
+               {{AE({V("recvResult"),int,(83#13,83#22,!1)},{SC((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"recv"),[int,arr(char),int,int],[{V("connectSocket"),int,(83#31,83#43,!1)},{V("inputBuffer"),arr(char),(83#46,83#56,!1)},{BO(-,{BO(+,{BO(*,{"3"N,int,(83#60,83#60,!1)},{SO({V("data"),int,(83#71,83#74,!1)}),int,(83#64,83#75,!1)}),int,(83#60,83#75,!1)},{"2"N,int,(83#79,83#79,!1)}),int,(83#59,83#80,!1)},{"1"N,int,(83#84,83#84,!1)}),int,(83#60,83#84,!1)},{"0"N,int,(83#87,83#87,!1)}]),class((,"%undef")),(83#26,83#88,!1)}),int,(83#13,83#88,!1)}
+               ,(83#13,83#88,!1)};
+               {IF0({BO(||,{BO(==,{V("recvResult"),int,(84#17,84#26,!1)},{UO(-,{"1"N,int,(84#32,84#32,!1)}),int,(84#31,84#32,!1)}),bool,(84#17,84#32,!1)},{BO(==,{V("recvResult"),int,(84#37,84#46,!1)},{"0"N,int,(84#51,84#51,!1)}),bool,(84#37,84#51,!1)}),bool,(84#17,84#51,!1)},
+                  {[
+                     {BR @ 
+                     ,(86#17,86#22,!1)}
+                     ]
+                  ,(85#13,87#13,!1)})
+               ,(84#13,87#13,!1)};
+               {{AE({AA({V("inputBuffer"),arr(char),(89#13,89#23,!1)},[{V("recvResult"),int,(89#25,89#34,!1)}]),char,(89#13,89#35,!1)},{"\0"C,char,(89#39,89#42,!1)}),char,(89#13,89#42,!1)}
+               ,(89#13,89#42,!1)};
+               {{AE({V("data"),int,(91#13,91#16,!1)},{SC((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"atoi"),[arr(char)],[{V("inputBuffer"),arr(char),(91#25,91#35,!1)}]),class((,"%undef")),(91#20,91#36,!1)}),int,(91#13,91#36,!1)}
+               ,(91#13,91#36,!1)}
+               ]
+            ,(59#9,92#9,!1)},
+            {"0"N,int,(93#16,93#16,!1)})
+         ,(58#9,93#18,!1)};
+         {IF0({BO(!=,{V("connectSocket"),int,(94#13,94#25,!1)},{UO(-,{"1"N,int,(94#31,94#31,!1)}),int,(94#30,94#31,!1)}),bool,(94#13,94#31,!1)},
+            {[
+               {PC0((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"close"),[int],[{V("connectSocket"),int,(96#19,96#31,!1)}])
+               ,(96#13,96#32,!1)}
+               ]
+            ,(95#9,97#9,!1)})
+         ,(94#9,97#9,!1)}
+         ]
+      ,(49#5,104#5,!1)};
+      {[
+         {VD("i",int)
+         ,(106#13,106#13,!1)};
+         {VD("buffer",ref(int),{CS(ref(int),{SC((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"malloc"),[int],[{BO(*,{"10"N,int,(107#38,107#39,!1)},{SO(int),int,(107#43,107#53,!1)}),int,(107#38,107#53,!1)}]),class((,"%undef")),(107#31,107#54,!1)}),ref(int),(107#24,107#54,!1)})
+         ,(107#13,107#20,!1)};
+         {FL(L40,
+            {[
+               {{AE({V("i"),int,(109#14,109#14,!1)},{"0"N,int,(109#18,109#18,!1)}),int,(109#14,109#18,!1)}
+               ,(109#14,109#18,!1)}
+            ]
+            ,(109#9,112#9,!1)},{BO(<,{V("i"),int,(109#21,109#21,!1)},{"10"N,int,(109#25,109#26,!1)}),bool,(109#21,109#26,!1)},
+            {[
+               {{IPO({V("i"),int,(109#29,109#29,!1)}),int,(109#29,109#31,!1)}
+               ,(109#29,109#31,!1)}
+            ]
+            ,(109#9,112#9,!1)},
+            {[
+               {{AE({AA({V("buffer"),ref(int),(111#13,111#18,!1)},[{V("i"),int,(111#20,111#20,!1)}]),int,(111#13,111#21,!1)},{"0"N,int,(111#25,111#25,!1)}),int,(111#13,111#25,!1)}
+               ,(111#13,111#25,!1)}
+               ]
+            ,(110#9,112#9,!1)})
+         ,(109#9,112#9,!1)};
+         {IF({BO(>=,{V("data"),int,(115#13,115#16,!1)},{"0"N,int,(115#21,115#21,!1)}),bool,(115#13,115#21,!1)},
+            {[
+               {{AE({AA({V("buffer"),ref(int),(117#13,117#18,!1)},[{V("data"),int,(117#20,117#23,!1)}]),int,(117#13,117#24,!1)},{"1"N,int,(117#28,117#28,!1)}),int,(117#13,117#28,!1)}
+               ,(117#13,117#28,!1)};
+               {FL(L41,
+                  {[
+                     {{AE({V("i"),int,(119#17,119#17,!1)},{"0"N,int,(119#21,119#21,!1)}),int,(119#17,119#21,!1)}
+                     ,(119#17,119#21,!1)}
+                  ]
+                  ,(119#13,122#13,!1)},{BO(<,{V("i"),int,(119#24,119#24,!1)},{"10"N,int,(119#28,119#29,!1)}),bool,(119#24,119#29,!1)},
+                  {[
+                     {{IPO({V("i"),int,(119#32,119#32,!1)}),int,(119#32,119#34,!1)}
+                     ,(119#32,119#34,!1)}
+                  ]
+                  ,(119#13,122#13,!1)},
+                  {[
+                     {PC0((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printIntLine"),[int],[{AA({V("buffer"),ref(int),(121#30,121#35,!1)},[{V("i"),int,(121#37,121#37,!1)}]),int,(121#30,121#38,!1)}])
+                     ,(121#17,121#39,!1)}
+                     ]
+                  ,(120#13,122#13,!1)})
+               ,(119#13,122#13,!1)}
+               ]
+            ,(116#9,123#9,!1)},
+            {[
+               {PC0((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printLine"),[mod(ref(char),[const])],[{"ERROR: Array index is negative."S,string,(126#23,126#55,!1)}])
+               ,(126#13,126#56,!1)}
+               ]
+            ,(125#9,127#9,!1)})
+         ,(115#9,127#9,!1)};
+         {PC0((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"free"),[ref(int)],[{V("buffer"),ref(int),(128#14,128#19,!1)}])
+         ,(128#9,128#20,!1)}
+         ]
+      ,(105#5,129#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(44#1,130#1,!1)}
+   )
+   ,(44#1,130#1,!1)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   FN([public,static],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"goodG2B"):mod(unit,[static]),[],[],
+   {[
+      {VD("data",int)
+      ,(139#9,139#12,!1)};
+      {{AE({V("data"),int,(141#5,141#8,!1)},{UO(-,{"1"N,int,(141#13,141#13,!1)}),int,(141#12,141#13,!1)}),int,(141#5,141#13,!1)}
+      ,(141#5,141#13,!1)};
+      {{AE({V("data"),int,(144#5,144#8,!1)},{"7"N,int,(144#12,144#12,!1)}),int,(144#5,144#12,!1)}
+      ,(144#5,144#12,!1)};
+      {[
+         {VD("i",int)
+         ,(146#13,146#13,!1)};
+         {VD("buffer",ref(int),{CS(ref(int),{SC((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"malloc"),[int],[{BO(*,{"10"N,int,(147#38,147#39,!1)},{SO(int),int,(147#43,147#53,!1)}),int,(147#38,147#53,!1)}]),class((,"%undef")),(147#31,147#54,!1)}),ref(int),(147#24,147#54,!1)})
+         ,(147#13,147#20,!1)};
+         {FL(L42,
+            {[
+               {{AE({V("i"),int,(149#14,149#14,!1)},{"0"N,int,(149#18,149#18,!1)}),int,(149#14,149#18,!1)}
+               ,(149#14,149#18,!1)}
+            ]
+            ,(149#9,152#9,!1)},{BO(<,{V("i"),int,(149#21,149#21,!1)},{"10"N,int,(149#25,149#26,!1)}),bool,(149#21,149#26,!1)},
+            {[
+               {{IPO({V("i"),int,(149#29,149#29,!1)}),int,(149#29,149#31,!1)}
+               ,(149#29,149#31,!1)}
+            ]
+            ,(149#9,152#9,!1)},
+            {[
+               {{AE({AA({V("buffer"),ref(int),(151#13,151#18,!1)},[{V("i"),int,(151#20,151#20,!1)}]),int,(151#13,151#21,!1)},{"0"N,int,(151#25,151#25,!1)}),int,(151#13,151#25,!1)}
+               ,(151#13,151#25,!1)}
+               ]
+            ,(150#9,152#9,!1)})
+         ,(149#9,152#9,!1)};
+         {IF({BO(>=,{V("data"),int,(155#13,155#16,!1)},{"0"N,int,(155#21,155#21,!1)}),bool,(155#13,155#21,!1)},
+            {[
+               {{AE({AA({V("buffer"),ref(int),(157#13,157#18,!1)},[{V("data"),int,(157#20,157#23,!1)}]),int,(157#13,157#24,!1)},{"1"N,int,(157#28,157#28,!1)}),int,(157#13,157#28,!1)}
+               ,(157#13,157#28,!1)};
+               {FL(L43,
+                  {[
+                     {{AE({V("i"),int,(159#17,159#17,!1)},{"0"N,int,(159#21,159#21,!1)}),int,(159#17,159#21,!1)}
+                     ,(159#17,159#21,!1)}
+                  ]
+                  ,(159#13,162#13,!1)},{BO(<,{V("i"),int,(159#24,159#24,!1)},{"10"N,int,(159#28,159#29,!1)}),bool,(159#24,159#29,!1)},
+                  {[
+                     {{IPO({V("i"),int,(159#32,159#32,!1)}),int,(159#32,159#34,!1)}
+                     ,(159#32,159#34,!1)}
+                  ]
+                  ,(159#13,162#13,!1)},
+                  {[
+                     {PC0((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printIntLine"),[int],[{AA({V("buffer"),ref(int),(161#30,161#35,!1)},[{V("i"),int,(161#37,161#37,!1)}]),int,(161#30,161#38,!1)}])
+                     ,(161#17,161#39,!1)}
+                     ]
+                  ,(160#13,162#13,!1)})
+               ,(159#13,162#13,!1)}
+               ]
+            ,(156#9,163#9,!1)},
+            {[
+               {PC0((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printLine"),[mod(ref(char),[const])],[{"ERROR: Array index is negative."S,string,(166#23,166#55,!1)}])
+               ,(166#13,166#56,!1)}
+               ]
+            ,(165#9,167#9,!1)})
+         ,(155#9,167#9,!1)};
+         {PC0((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"free"),[ref(int)],[{V("buffer"),ref(int),(168#14,168#19,!1)}])
+         ,(168#9,168#20,!1)}
+         ]
+      ,(145#5,169#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(137#1,170#1,!1)}
+   )
+   ,(137#1,170#1,!1)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   FN([public,static],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"goodB2G"):mod(unit,[static]),[],[],
+   {[
+      {VD("data",int)
+      ,(175#9,175#12,!1)};
+      {{AE({V("data"),int,(177#5,177#8,!1)},{UO(-,{"1"N,int,(177#13,177#13,!1)}),int,(177#12,177#13,!1)}),int,(177#5,177#13,!1)}
+      ,(177#5,177#13,!1)};
+      {[
+         {VD("recvResult",int)
+         ,(183#13,183#22,!1)};
+         {VD("service",mod(class((,sockaddr_in)),[struct]))
+         ,(184#28,184#34,!1)};
+         {VD("connectSocket",int,{UO(-,{"1"N,int,(185#30,185#30,!1)}),int,(185#29,185#30,!1)})
+         ,(185#13,185#25,!1)};
+         {VD("inputBuffer",char,([{BO(+,{BO(*,{"3"N,int,(186#27,186#27,!1)},{SO({V("data"),int,(186#38,186#41,!1)}),int,(186#31,186#42,!1)}),int,(186#27,186#42,!1)},{"2"N,int,(186#46,186#46,!1)}),int,(186#26,186#47,!1)}]))
+         ,(186#14,186#48,!1)};
+         {DW(L44,
+            {[
+               {{AE({V("connectSocket"),int,(197#13,197#25,!1)},{SC((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"socket"),[class((,"%undef")),class((,"%undef")),class((,"%undef"))],[{V("AF_INET"),class((,"%undef")),(197#36,197#42,!1)},{V("SOCK_STREAM"),class((,"%undef")),(197#45,197#55,!1)},{V("IPPROTO_TCP"),class((,"%undef")),(197#58,197#68,!1)}]),class((,"%undef")),(197#29,197#69,!1)}),int,(197#13,197#69,!1)}
+               ,(197#13,197#69,!1)};
+               {IF0({BO(==,{V("connectSocket"),int,(198#17,198#29,!1)},{UO(-,{"1"N,int,(198#35,198#35,!1)}),int,(198#34,198#35,!1)}),bool,(198#17,198#35,!1)},
+                  {[
+                     {BR @ 
+                     ,(200#17,200#22,!1)}
+                     ]
+                  ,(199#13,201#13,!1)})
+               ,(198#13,201#13,!1)};
+               {PC0((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"memset"),[ref(mod(class((,sockaddr_in)),[struct])),int,int],[{&{V("service"),mod(class((,sockaddr_in)),[struct]),(202#21,202#27,!1)},ref(mod(class((,sockaddr_in)),[struct])),(202#20,202#27,!1)},{"0"N,int,(202#30,202#30,!1)},{SO({V("service"),mod(class((,sockaddr_in)),[struct]),(202#40,202#46,!1)}),int,(202#33,202#47,!1)}])
+               ,(202#13,202#48,!1)};
+               {{AE({OA({V("service"),mod(class((,sockaddr_in)),[struct]),(203#13,203#19,!1)},"sin_family"),class((,"%undef")),(203#13,203#30,!1)},{V("AF_INET"),class((,"%undef")),(203#34,203#40,!1)}),class((,"%undef")),(203#13,203#40,!1)}
+               ,(203#13,203#40,!1)};
+               {{AE({OA({OA({V("service"),mod(class((,sockaddr_in)),[struct]),(204#13,204#19,!1)},"sin_addr"),class((,"%undef")),(204#13,204#28,!1)},"s_addr"),class((,"%undef")),(204#13,204#35,!1)},{SC((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"inet_addr"),[string],[{"127.0.0.1"S,string,(204#49,204#59,!1)}]),class((,"%undef")),(204#39,204#60,!1)}),class((,"%undef")),(204#13,204#60,!1)}
+               ,(204#13,204#60,!1)};
+               {{AE({OA({V("service"),mod(class((,sockaddr_in)),[struct]),(205#13,205#19,!1)},"sin_port"),class((,"%undef")),(205#13,205#28,!1)},{SC((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"htons"),[int],[{"27015"N,int,(205#38,205#42,!1)}]),class((,"%undef")),(205#32,205#43,!1)}),class((,"%undef")),(205#13,205#43,!1)}
+               ,(205#13,205#43,!1)};
+               {IF0({BO(==,{SC((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"connect"),[int,ref(mod(class((,sockaddr)),[struct])),int],[{V("connectSocket"),int,(206#25,206#37,!1)},{CS(ref(mod(class((,sockaddr)),[struct])),{&{V("service"),mod(class((,sockaddr_in)),[struct]),(206#59,206#65,!1)},ref(mod(class((,sockaddr_in)),[struct])),(206#58,206#65,!1)}),ref(mod(class((,sockaddr)),[struct])),(206#40,206#65,!1)},{SO({V("service"),mod(class((,sockaddr_in)),[struct]),(206#75,206#81,!1)}),int,(206#68,206#82,!1)}]),class((,"%undef")),(206#17,206#83,!1)},{UO(-,{"1"N,int,(206#89,206#89,!1)}),int,(206#88,206#89,!1)}),bool,(206#17,206#89,!1)},
+                  {[
+                     {BR @ 
+                     ,(208#17,208#22,!1)}
+                     ]
+                  ,(207#13,209#13,!1)})
+               ,(206#13,209#13,!1)};
+               {{AE({V("recvResult"),int,(212#13,212#22,!1)},{SC((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"recv"),[int,arr(char),int,int],[{V("connectSocket"),int,(212#31,212#43,!1)},{V("inputBuffer"),arr(char),(212#46,212#56,!1)},{BO(-,{BO(+,{BO(*,{"3"N,int,(212#60,212#60,!1)},{SO({V("data"),int,(212#71,212#74,!1)}),int,(212#64,212#75,!1)}),int,(212#60,212#75,!1)},{"2"N,int,(212#79,212#79,!1)}),int,(212#59,212#80,!1)},{"1"N,int,(212#84,212#84,!1)}),int,(212#60,212#84,!1)},{"0"N,int,(212#87,212#87,!1)}]),class((,"%undef")),(212#26,212#88,!1)}),int,(212#13,212#88,!1)}
+               ,(212#13,212#88,!1)};
+               {IF0({BO(||,{BO(==,{V("recvResult"),int,(213#17,213#26,!1)},{UO(-,{"1"N,int,(213#32,213#32,!1)}),int,(213#31,213#32,!1)}),bool,(213#17,213#32,!1)},{BO(==,{V("recvResult"),int,(213#37,213#46,!1)},{"0"N,int,(213#51,213#51,!1)}),bool,(213#37,213#51,!1)}),bool,(213#17,213#51,!1)},
+                  {[
+                     {BR @ 
+                     ,(215#17,215#22,!1)}
+                     ]
+                  ,(214#13,216#13,!1)})
+               ,(213#13,216#13,!1)};
+               {{AE({AA({V("inputBuffer"),arr(char),(218#13,218#23,!1)},[{V("recvResult"),int,(218#25,218#34,!1)}]),char,(218#13,218#35,!1)},{"\0"C,char,(218#39,218#42,!1)}),char,(218#13,218#42,!1)}
+               ,(218#13,218#42,!1)};
+               {{AE({V("data"),int,(220#13,220#16,!1)},{SC((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"atoi"),[arr(char)],[{V("inputBuffer"),arr(char),(220#25,220#35,!1)}]),class((,"%undef")),(220#20,220#36,!1)}),int,(220#13,220#36,!1)}
+               ,(220#13,220#36,!1)}
+               ]
+            ,(188#9,221#9,!1)},
+            {"0"N,int,(222#16,222#16,!1)})
+         ,(187#9,222#18,!1)};
+         {IF0({BO(!=,{V("connectSocket"),int,(223#13,223#25,!1)},{UO(-,{"1"N,int,(223#31,223#31,!1)}),int,(223#30,223#31,!1)}),bool,(223#13,223#31,!1)},
+            {[
+               {PC0((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"close"),[int],[{V("connectSocket"),int,(225#19,225#31,!1)}])
+               ,(225#13,225#32,!1)}
+               ]
+            ,(224#9,226#9,!1)})
+         ,(223#9,226#9,!1)}
+         ]
+      ,(178#5,233#5,!1)};
+      {[
+         {VD("i",int)
+         ,(235#13,235#13,!1)};
+         {VD("buffer",ref(int),{CS(ref(int),{SC((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"malloc"),[int],[{BO(*,{"10"N,int,(236#38,236#39,!1)},{SO(int),int,(236#43,236#53,!1)}),int,(236#38,236#53,!1)}]),class((,"%undef")),(236#31,236#54,!1)}),ref(int),(236#24,236#54,!1)})
+         ,(236#13,236#20,!1)};
+         {FL(L45,
+            {[
+               {{AE({V("i"),int,(238#14,238#14,!1)},{"0"N,int,(238#18,238#18,!1)}),int,(238#14,238#18,!1)}
+               ,(238#14,238#18,!1)}
+            ]
+            ,(238#9,241#9,!1)},{BO(<,{V("i"),int,(238#21,238#21,!1)},{"10"N,int,(238#25,238#26,!1)}),bool,(238#21,238#26,!1)},
+            {[
+               {{IPO({V("i"),int,(238#29,238#29,!1)}),int,(238#29,238#31,!1)}
+               ,(238#29,238#31,!1)}
+            ]
+            ,(238#9,241#9,!1)},
+            {[
+               {{AE({AA({V("buffer"),ref(int),(240#13,240#18,!1)},[{V("i"),int,(240#20,240#20,!1)}]),int,(240#13,240#21,!1)},{"0"N,int,(240#25,240#25,!1)}),int,(240#13,240#25,!1)}
+               ,(240#13,240#25,!1)}
+               ]
+            ,(239#9,241#9,!1)})
+         ,(238#9,241#9,!1)};
+         {IF({BO(&&,{BO(>=,{V("data"),int,(243#13,243#16,!1)},{"0"N,int,(243#21,243#21,!1)}),bool,(243#13,243#21,!1)},{BO(<,{V("data"),int,(243#26,243#29,!1)},{"10"N,int,(243#33,243#36,!1)}),bool,(243#26,243#36,!1)}),bool,(243#13,243#36,!1)},
+            {[
+               {{AE({AA({V("buffer"),ref(int),(245#13,245#18,!1)},[{V("data"),int,(245#20,245#23,!1)}]),int,(245#13,245#24,!1)},{"1"N,int,(245#28,245#28,!1)}),int,(245#13,245#28,!1)}
+               ,(245#13,245#28,!1)};
+               {FL(L46,
+                  {[
+                     {{AE({V("i"),int,(247#17,247#17,!1)},{"0"N,int,(247#21,247#21,!1)}),int,(247#17,247#21,!1)}
+                     ,(247#17,247#21,!1)}
+                  ]
+                  ,(247#13,250#13,!1)},{BO(<,{V("i"),int,(247#24,247#24,!1)},{"10"N,int,(247#28,247#29,!1)}),bool,(247#24,247#29,!1)},
+                  {[
+                     {{IPO({V("i"),int,(247#32,247#32,!1)}),int,(247#32,247#34,!1)}
+                     ,(247#32,247#34,!1)}
+                  ]
+                  ,(247#13,250#13,!1)},
+                  {[
+                     {PC0((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printIntLine"),[int],[{AA({V("buffer"),ref(int),(249#30,249#35,!1)},[{V("i"),int,(249#37,249#37,!1)}]),int,(249#30,249#38,!1)}])
+                     ,(249#17,249#39,!1)}
+                     ]
+                  ,(248#13,250#13,!1)})
+               ,(247#13,250#13,!1)}
+               ]
+            ,(244#9,251#9,!1)},
+            {[
+               {PC0((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"printLine"),[mod(ref(char),[const])],[{"ERROR: Array index is out-of-bounds"S,string,(254#23,254#59,!1)}])
+               ,(254#13,254#60,!1)}
+               ]
+            ,(253#9,255#9,!1)})
+         ,(243#9,255#9,!1)};
+         {PC0((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"free"),[ref(int)],[{V("buffer"),ref(int),(256#14,256#19,!1)}])
+         ,(256#9,256#20,!1)}
+         ]
+      ,(234#5,257#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(173#1,258#1,!1)}
+   )
+   ,(173#1,258#1,!1)},
+
+   {"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01",
+   FN([public],(<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01_good"):unit,[],[],
+   {[
+      {PC0((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"goodG2B"),[],[])
+      ,(262#5,262#13,!1)};
+      {PC0((<"CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01">,"goodB2G"),[],[])
+      ,(263#5,263#13,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(260#1,264#1,!1)}
+   )
+   ,(260#1,264#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp",
+   CL([struct],(,_twoIntsStruct),[])
+   {
+      ([public],"intOne":int,(92#9,92#14,!2));
+      ([public],"intTwo":int,(93#9,93#14,!2))
+   }
+   ,(90#1,94#16,!2)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp",
+   [
+      M("/* TEMPLATE GENERATED TESTCASE FILE\nFilename: CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.c\nLabel Definition File: CWE122_Heap_Based_Buffer_Overflow__c_CWE129.label.xml\nTemplate File: sources-sinks-01.tmpl.c\n*/",1,(1#0,1#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/*\n * @description\n * CWE: 122 Heap Based Buffer Overflow\n * BadSource: connect_socket Read data using a connect socket (client side)\n * GoodSource: Larger than zero but less than 10\n * Sinks:\n *    GoodSink: Ensure the array index is valid\n *    BadSink : Improperly check the array index by not checking the upper bound\n * Flow Variant: 01 Baseline\n *\n * */",6,(6#0,6#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* include ws2_32.lib when linking */",24,(24#0,24#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* NOT _WIN32 */",26,(26#0,26#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* Initialize data */",47,(47#0,47#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* POTENTIAL FLAW: Read data using a connect socket */",67,(67#0,67#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* Abort on error or the connection was closed, make sure to recv one\n             * less char than is in the recv_buf in order to append a terminator */",81,(81#0,81#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* NUL-terminate the string */",88,(88#0,88#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* Convert to int */",90,(90#0,90#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* initialize buffer */",108,(108#0,108#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* POTENTIAL FLAW: Attempt to write to an index of the array that is above the upper bound\n         * This code does check to see if the array index is negative */",113,(113#0,113#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* Print the array values */",118,(118#0,118#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* OMITBAD */",132,(132#0,132#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* goodG2B uses the GoodSource with the BadSink */",136,(136#0,136#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* Initialize data */",140,(140#0,140#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* FIX: Use a value greater than 0, but less than 10 to avoid attempting to\n    * access an index of the array in the sink that is out-of-bounds */",142,(142#0,142#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* initialize buffer */",148,(148#0,148#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* POTENTIAL FLAW: Attempt to write to an index of the array that is above the upper bound\n         * This code does check to see if the array index is negative */",153,(153#0,153#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* Print the array values */",158,(158#0,158#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* goodB2G uses the BadSource with the GoodSink */",172,(172#0,172#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* Initialize data */",176,(176#0,176#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* POTENTIAL FLAW: Read data using a connect socket */",196,(196#0,196#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* Abort on error or the connection was closed, make sure to recv one\n             * less char than is in the recv_buf in order to append a terminator */",210,(210#0,210#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* NUL-terminate the string */",217,(217#0,217#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* Convert to int */",219,(219#0,219#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* initialize buffer */",237,(237#0,237#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* FIX: Properly validate the array index and prevent a buffer overflow */",242,(242#0,242#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* Print the array values */",246,(246#0,246#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* OMITGOOD */",266,(266#0,266#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* Below is the main(). It is only used when building this testcase on\n   its own for testing or for building a binary to use in testing binary\n   analysis tools. It is not used when compiling all the testcases as one\n   application, which is how source code analysis tools are tested. */",268,(268#0,268#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* seed randomness */",277,(277#0,277#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* OMITGOOD */",283,(283#0,283#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp")),
+      M("/* OMITBAD */",288,(288#0,288#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/E05.CWE122_Heap_Based_Buffer_Overflow/CWE122_Heap_Based_Buffer_Overflow__c_CWE129_connect_socket_01.cpp"))
+   ]
+   }
+]

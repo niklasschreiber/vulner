@@ -1,0 +1,87 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/16.Improper_Authorization/C16001.cpp");
+   ("language", "CPP");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<ldap.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/16.Improper_Authorization/C16001.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/16.Improper_Authorization/C16001.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/16.Improper_Authorization/C16001.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/16.Improper_Authorization/C16001.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/16.Improper_Authorization/C16001.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/16.Improper_Authorization/C16001.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/16.Improper_Authorization/C16001.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C16001",
+   SI(<"C16001">,
+   {[
+      {;
+      ,(1#1,33#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,33#1,!1)}
+   )
+   ,(1#1,33#1,!1)},
+
+   {"C16001",
+   FN([public],(<"C16001">,"anonyLDAP_bind"):int,[("ld":ref(class((,LDAP))),(24#20,24#27,!1))],[],
+   {[
+      {VD("rc",ulong)
+      ,(26#19,26#20,!1)};
+      {PC0((<"C16001">,"ldap_simple_bind_s"),[ref(class((,LDAP))),ref(unit),ref(unit)],[{V("ld"),ref(class((,LDAP))),(28#24,28#25,!1)},{CS(ref(unit),{"0"N,int,(28#28,28#31,!1)}),ref(unit),(28#28,28#31,!1)},{CS(ref(unit),{"0"N,int,(28#34,28#37,!1)}),ref(unit),(28#34,28#37,!1)}])
+      ,(28#5,28#38,!1)};
+      {IF0({BO(!=,{V("rc"),ulong,(29#9,29#10,!1)},{V("LDAP_SUCCESS"),class((,"%undef")),(29#15,29#26,!1)}),bool,(29#9,29#26,!1)},
+         {[
+            {RE({"0"N,int,(30#15,30#15,!1)})
+            ,(30#8,30#16,!1)}
+            ]
+         ,(29#5,30#16,!1)})
+      ,(29#5,30#16,!1)};
+      {RE({"1"N,int,(31#12,31#12,!1)})
+      ,(31#5,31#13,!1)}
+      ]
+   ,(24#1,32#1,!1)}
+   )
+   ,(24#1,32#1,!1)},
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/16.Improper_Authorization/C16001.cpp",
+   [
+      M("/**\n* \n* \n* \n* \n*\n* \n*\n*\n*\n*\n*\n*\n*\n*\n*\n*\n*/",5,(5#0,5#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/16.Improper_Authorization/C16001.cpp"))
+   ]
+   }
+]

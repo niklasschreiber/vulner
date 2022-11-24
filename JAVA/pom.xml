@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+ <artifactId>JFreechart</artifactId>
+    <packaging>pom</packaging>
+  <groupId>jfree</groupId>
+  <version>1.8</version>
+  <organization>
+    <name>JFree.org</name>
+    <url>http://www.jfree.org/</url>
+  </organization>
+  <inceptionYear>2001</inceptionYear>
+
+  <description>
+    JFreeChart is a class library, written in Java, for generating charts. 
+    Utilising the Java2D APIs, it currently supports bar charts, pie charts, 
+    line charts, XY-plots and time series plots.
+  </description>
+
+
+
+  <url>http://www.jfree.org/jfreechart/</url>
+  <issueManagement>
+        <system>sourceforge</system>
+  <url>http://sourceforge.net/tracker/?group_id=15494</url>
+  </issueManagement>
+  <scm>
+    <connection>
+      scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jfreechart:jfreechart
+    </connection>
+    <url>http://cvs.sourceforge.net/viewcvs.py/jfreechart/jfreechart</url>
+  </scm>
+
+  <mailingLists>
+    <mailingList>
+      <name>JFreeChart Developer List</name>
+      <subscribe>
+        jfreechart-dev-request@lists.sourceforge.net?subject=subscribe
+      </subscribe>
+      <unsubscribe>
+        jfreechart-dev-request@lists.sourceforge.net?subject=unsubscribe
+      </unsubscribe>
+      <archive>
+        http://sourceforge.net/mailarchive/forum.php?forum=jfreechart-dev
+      </archive>
+    </mailingList>
+  </mailingLists>
+
+  <developers>
+    <!--
+    For an up to date list of developers and contributors have a look at
+    the project info implementations.
+    -->
+  </developers>
+
+  <licenses>
+    <license>
+      <name>GNU Lesser General Public Licence</name>
+      <url>http://www.gnu.org/licenses/lgpl.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <dependencies>
+    <dependency>
+      <groupId>jfree</groupId>
+      <artifactId>jcommon</artifactId>
+      <version>1.8</version>
+     
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.7</version>
+      
+    </dependency>
+
+    <dependency>
+      <groupId>gnujaxp</groupId>
+      <artifactId>gnujaxp</artifactId>
+      <version>1.0.0</version>
+      
+    </dependency>
+	<dependency>
+            <groupId>com.google.guava:guava:26.0-jre</groupId>
+            <artifactId>guava</artifactId>
+            <version>26.0-jre</version>
+    </dependency>
+    <dependency>
+            <groupId>javax.servlet:javax.servlet-api:3.1.0</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+    </dependency>
+
+    <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>26.0-jre</version>
+    </dependency>
+    <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava-jdk5</artifactId>
+    </dependency>
+
+    <dependency>
+            <groupId>javax.json</groupId>
+            <artifactId>javax.json-api</artifactId>
+            <version>1.0</version>
+    </dependency>
+    <dependency>
+            <groupId>javax.json</groupId>
+            <artifactId>javax.json-api</artifactId>
+            <version>1.0.4</version>
+    </dependency>
+	<dependency>
+		<groupId>com.google.auto.value</groupId>
+		<artifactId>auto-value-annotations</artifactId>
+		<version>1.6.6</version>
+    </dependency>
+
+	<dependency>
+		<groupId>com.google.auto.value</groupId>
+		<artifactId>auto-value-annotations</artifactId>
+		<version>1.6.6</version>
+		<optional>true</optional> 
+    </dependency>
+
+
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>4.13</version>
+	</dependency>
+
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>4.13</version>
+		<scope>test</scope>
+	</dependency>
+
+    <dependency>
+      <groupId>jfree</groupId>
+      <artifactId>jcommon</artifactId>
+      <version>1.8</version>     
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.7</version>
+    </dependency>
+
+    <dependency>
+      <groupId>gnujaxp</groupId>
+      <artifactId>gnujaxp</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <!-- We don't use Maven as build system. -->
+  </build>
+</project>

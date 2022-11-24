@@ -1,0 +1,59 @@
+namespace com.ti.oss.common.cdr.parser.esgw;
+
+use com.ti.oss.common.types::*;
+
+type EsgwCdr = FileHeader, tuple<			
+			int32         recordType,
+			rstring       servedIMSI,
+			rstring       gsnAddress,
+			uint32        chargingID,
+			list<rstring> servingNodeAddress,
+			rstring       apn,
+			rstring       pdpPDNType,
+			rstring       servedPDPPDNAddress,
+
+			// listOfTrafficVolumes - begin
+
+			list<int32>   dataVolumeGPRSUplink,
+			list<int32>   dataVolumeGPRSDownlink,
+			list<int32>   changeCondition,
+			list<rstring> changeTime,
+			list<rstring> userLocationInformation,
+
+			// listOfTrafficVolumes.qoSInformationNeg - begin
+			list<rstring> qCI,
+			list<rstring> maxRequestedBandwithUL,
+			list<rstring> maxRequestedBandwithDL,
+			list<rstring> guaranteedBitrateUL,
+			list<rstring> guaranteedBitrateDL,
+			list<rstring> aRP,
+			// listOfTrafficVolumes.qoSInformationNeg - end
+
+			// listOfTrafficVolumes - end
+
+			rstring       recordOpeningTime,
+			int32         duration,
+			int32         causeForRecClosing,
+			int32         recordSequenceNumber,
+			rstring       nodeID,
+			uint32        localSequenceNumber,
+			rstring       servedMSISDN,
+			rstring       chargingCharacteristics,
+			rstring       servingNodePLMNIdentifier,
+			rstring	      servedIMEISV,
+			int32         rATType,
+			rstring       mSTimeZone,
+			rstring 	  sgwChange,
+			list<int32>   servingNodeType,
+			rstring		  p_GWAddresUsed,
+			rstring       p_GWPLMNTIdentifier,
+			int32         pDNConnectionID,
+			rstring       iPAddress,
+			rstring       eTSIAddress,
+			boolean		  endOfData
+		>;
+
+type EsgwCdrSchema = EsgwCdr esgwCdr, FileHeader fHeader;
+
+type EsgwCdrWithROP = tuple<EsgwCdr esgwCdr, float64 startROP, float64 endROP, boolean changed, boolean waitEnd>;
+	

@@ -1,0 +1,57 @@
+-- VULN
+copy from ftp 'ftp.myserver.com' user 'paul' pwd '***' dir data/sales/in subdir 
+  files '.*' to /data/sales/raw sessions 3 new
+  
+-- VULN: PLSQL.31 and PLSQL.13
+copy from ftp '4.23.64.30' user 'paul' pwd 'Passw0d2' dir data/sales/in subdir 
+  files '.*' to /data/sales/raw sessions 3 new
+
+-- VULN
+ADD JAR /usr/hdp/3.1.4.0-315/hive/lib/hive-hbase-handler-3.1.0.3.1.4.0-315.jar
+-- OK
+add jar hdfs:///usr/hdp/hive-hbase-handler-3.1.0.3.1.4.0-315.jar  
+ 
+-- VULN: PLSQL.22
+DELETE FROM table-1;
+
+-- VULN: PLSQL.22
+UPDATE table-1 SET fieldx='001';
+
+-- VULN
+COPY FROM LOCAL '/home/data' TO '/user/backup/' || CURRENT_DATE;
+
+-- VULN
+SELECT * FROM temp1;
+
+FOR item IN (
+    SELECT dname, loc as location
+    FROM dept
+    WHERE dname LIKE '%A%'
+    AND deptno > 10
+    ORDER BY location)
+LOOP
+-- VULN: DBMS_OUTPUT.PUT_LINE
+  DBMS_OUTPUT.PUT_LINE('Name = ' || item.dname || ', Location = ' || item.location);
+-- VULN: DBMS_UTILITY.EXEC_DDL_STATEMENT
+  DBMS_UTILITY.EXEC_DDL_STATEMENT ('insert into kevtemp1 values (3)');
+END LOOP;
+
+-- VULN: SQL.06
+FOR i IN 1..10 LOOP
+  -- i will have values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+END LOOP;
+
+-- VULN: GET DIAGNOSTICS ROW_COUNT
+GET DIAGNOSTICS var_name = ROW_COUNT;
+
+-- VULN: JOIN with different bucketing
+create table  join_test_1  (col_1 string, col_2 string) TBLPROPERTIES ('bucketing_version'='1');
+create table  join_test_2  (col_1 string, col_2 string) TBLPROPERTIES ('bucketing_version'='2');  
+SELECT * from (SELECT id from join_test_1) as tbl1 LEFT JOIN (SELECT id from join_test_2) as tbl2 on tbl1.id = tbl2.id;
+
+-- VULN: jceks://
+LOAD DATA LOCAL INPATH jceks://hdfs/pv_2008_us.jceks INTO TABLE page_view PARTITION(date='2008-06-08', country='US')
+
+-- VULN: dangerousLinuxCommand
+! rm -rf "/";
+HOST kill -9 13453

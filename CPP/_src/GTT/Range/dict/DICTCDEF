@@ -1,0 +1,110 @@
+/* SCHEMA PRODUCED DATE - TIME : 2/08/2006 - 16:55:34 */
+#pragma section gtt_impianti_key
+/* Definition GTT-IMPIANTI-KEY created on 02/08/2006 at 16:55 */
+#pragma fieldalign shared2 __gtt_impianti_key
+typedef struct __gtt_impianti_key
+{
+   short                           point_code_format;
+   short                           point_code;
+} gtt_impianti_key_def;
+#define gtt_impianti_key_def_Size 4
+#pragma section gtt_impianti_altkey1
+/* Definition GTT-IMPIANTI-ALTKEY1 created on 02/08/2006 at 16:55 */
+#pragma fieldalign shared2 __gtt_impianti_altkey1
+typedef struct __gtt_impianti_altkey1
+{
+   char                            gt[16];
+} gtt_impianti_altkey1_def;
+#define gtt_impianti_altkey1_def_Size 16
+#pragma section gtt_impianti_rec
+/* Definition GTT-IMPIANTI-REC created on 02/08/2006 at 16:55 */
+#pragma fieldalign shared2 __gtt_impianti_rec
+typedef struct __gtt_impianti_rec
+{
+   gtt_impianti_key_def            primarykey;
+   gtt_impianti_altkey1_def        altkey1;
+   short                           ssn_1;
+   short                           ssn_2;
+   short                           ssn_3;
+   short                           ssn_4;
+   short                           ssn_5;
+   char                            des_short_entity[8];
+   char                            des_entity[30];
+   long long                       last_update;
+   long long                       insert_ts;
+   char                            filler_0[30];
+} gtt_impianti_rec_def;
+#define gtt_impianti_rec_def_Size 114
+#pragma section gtt_mgt_key
+/* Definition GTT-MGT-KEY created on 02/08/2006 at 16:55 */
+#pragma fieldalign shared2 __gtt_mgt_key
+typedef struct __gtt_mgt_key
+{
+   char                            mgt[16];
+} gtt_mgt_key_def;
+#define gtt_mgt_key_def_Size 16
+#pragma section gtt_mgt_altkey1
+/* Definition GTT-MGT-ALTKEY1 created on 02/08/2006 at 16:55 */
+#pragma fieldalign shared2 __gtt_mgt_altkey1
+typedef struct __gtt_mgt_altkey1
+{
+   short                           point_code_format;
+   short                           point_code;
+} gtt_mgt_altkey1_def;
+#define gtt_mgt_altkey1_def_Size 4
+#pragma section gtt_mgt_rec
+/* Definition GTT-MGT-REC created on 02/08/2006 at 16:55 */
+#pragma fieldalign shared2 __gtt_mgt_rec
+typedef struct __gtt_mgt_rec
+{
+   gtt_mgt_key_def                 primarykey;
+   gtt_mgt_altkey1_def             altkey1;
+   long long                       last_update_ts;
+   long long                       insert_ts;
+   char							   c_dualimsi_flag;
+   char                            filler_0[9];
+/*   char                            filler_0[10];*/
+} gtt_mgt_rec_def;
+#define gtt_mgt_rec_def_Size 46
+#pragma section gtt_mgtr_key
+/* Definition GTT-MGTR-KEY created on 02/08/2006 at 16:55 */
+#pragma fieldalign shared2 __gtt_mgtr_key
+typedef struct __gtt_mgtr_key
+{
+   char                            mgt[16];
+} gtt_mgtr_key_def;
+#define gtt_mgtr_key_def_Size 16
+#pragma section gtt_mgtr_altkey1
+/* Definition GTT-MGTR-ALTKEY1 created on 02/08/2006 at 16:55 */
+#pragma fieldalign shared2 __gtt_mgtr_altkey1
+typedef struct __gtt_mgtr_altkey1
+{
+   short                           point_code_format;
+   short                           point_code;
+} gtt_mgtr_altkey1_def;
+#define gtt_mgtr_altkey1_def_Size 4
+#pragma section gtt_mgtr_rec
+/* Definition GTT-MGTR-REC created on 02/08/2006 at 16:55 */
+#pragma fieldalign shared2 __gtt_mgtr_rec
+typedef struct __gtt_mgtr_rec
+{
+   gtt_mgtr_key_def                primarykey;
+   char                            mgt_end[16];
+   short                           mgt_length;
+   gtt_mgtr_altkey1_def            altkey1;
+   long long                       last_update_ts;
+   long long                       insert_ts;
+   char							   c_dualimsi_flag;
+   char                            filler_0[9];
+/*   char                            filler_0[10];*/
+} gtt_mgtr_rec_def;
+#define gtt_mgtr_rec_def_Size 64
+#pragma section gtt_impianti_record
+/* Record GTT-IMPIANTI-RECORD created on 02/08/2006 at 16:55 */
+typedef gtt_impianti_rec_def            gtt_impianti_record_def;
+#pragma section gtt_mgt_record
+/* Record GTT-MGT-RECORD created on 02/08/2006 at 16:55 */
+typedef gtt_mgt_rec_def                 gtt_mgt_record_def;
+#pragma section gtt_mgtr_record
+/* Record GTT-MGTR-RECORD created on 02/08/2006 at 16:55 */
+typedef gtt_mgtr_rec_def                gtt_mgtr_record_def;

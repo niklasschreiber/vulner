@@ -1,0 +1,47 @@
+[info] [SourceCollector] start collect
+[info] [Collector] check remote files...
+[trac] [Collector]    remote dir: /01.SQL_Injection
+[trac] [Collector]    remote dir: /02.Resource_Injection
+[trac] [Collector]    remote dir: /03.XSS
+[trac] [Collector]    remote dir: /04.Command_Injection
+[trac] [Collector]    remote dir: /05.Unrestricted_Upload_of_File_with_Dangerous_Type
+[trac] [Collector]    remote dir: /09.LDAP_Injection
+[trac] [Collector]    remote dir: /11.Path_Traversal
+[trac] [Collector]    remote dir: /13.Integer_Overflow
+[trac] [Collector]    remote dir: /14.Reliance_on_Untrusted_Inputs_in_a_Security_Decision
+[trac] [Collector]    remote dir: /16.Improper_Authorization
+[trac] [Collector]    remote dir: /18.Use_Broken_Crypto
+[trac] [Collector]    remote dir: /19.Plaintext_Tx_Sensitive_Info
+[trac] [Collector]    remote dir: /20.Hard_Coded_Password
+[trac] [Collector]    remote dir: /21.Cryptographic_Issues(Key_Length)
+[trac] [Collector]    remote dir: /22.Insufficiently_Random_Values
+[trac] [Collector]    remote dir: /23.Plaintext_Storage_of_Password
+[trac] [Collector]    remote dir: /24.Hard_Coded_Cryptographic_Key
+[trac] [Collector]    remote dir: /25.Weak_Password_Requirements
+[trac] [Collector]    remote dir: /28.Info_Leak_By_Comment
+[trac] [Collector]    remote dir: /29.Unsalted_One_Way_Hash
+[trac] [Collector]    remote dir: /31.TOC_TOU
+[trac] [Collector]    remote dir: /32.Uncontrolled_Recursion
+[trac] [Collector]    remote dir: /33.Information_Leak_Error
+[trac] [Collector]    remote dir: /34.Error_Without_Action
+[trac] [Collector]    remote dir: /36.NULL_Pointer_Dereference
+[trac] [Collector]    remote dir: /37.Improper_Resource_Shutdown
+[trac] [Collector]    remote dir: /40.Information_Leak_of_System_Data
+[trac] [Collector]    remote dir: /43.Reliance_on_DNS_Lookups_in_a_Security_Decision
+[trac] [Collector]    remote dir: /E04.CWE121_Stack_Based_Buffer_Overflow
+[trac] [Collector]    remote dir: /E05.CWE122_Heap_Based_Buffer_Overflow
+[trac] [Collector]    remote dir: /E06.CWE226_Sensitive_Information_Uncleared_Before_Release
+[trac] [Collector]    remote dir: /E11.CWE359_Privacy_Violation
+[trac] [Collector]    remote dir: /E15.CWE369_Divide_by_Zero
+[trac] [Collector]    remote dir: /E16.CWE401_Memory_Leak
+[trac] [Collector]    remote dir: /E17.CWE415_Double_Free
+[trac] [Collector]    remote dir: /E18.CWE416_Use_After_Free
+[trac] [Collector]    remote dir: /E19.CWE457_Use_of_Uninitialized_Variable
+[trac] [Collector]    remote dir: /testcasesupport
+[info] [Collector] id=20200719142400(2001), from=C:/Users/S&SSLAWKS/BeyondSecurity/beSOURCE developer/Sample/CPP, target files=268
+[info] [Collector] new=268, change=0, remove=0
+[info] [Collector] copy new files...
+[info] [Collector] copy end.
+[info] [SourceCollector] end collect (time=1450ms)
+[info] working time: 1719ms
+[info] CLI end...

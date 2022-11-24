@@ -1,0 +1,17 @@
+[info] [SourceCollector] start collect
+#1,100
+[info] [Collector] check remote files...
+[trac] [Collector]    remote dir: /JAVA
+[trac] [Collector]    remote dir: /JAVA/.data
+[trac] [Collector]    remote dir: /JAVA/.filter
+[trac] [Collector]    remote dir: /JAVA/.log
+[trac] [Collector]    remote dir: /JAVA/lib
+[trac] [Collector]    remote dir: /JAVA/src
+[info] [Collector] id=20210125185300(2001), from=D:/_OpenSource/SRA/CIVETTA/JAVA, target files=9
+[info] [Collector] new=9, change=0, remove=0
+[info] [Collector] copy new files...
+[info] [Collector] copy end.
+[info] [SourceCollector] end collect (time=318ms)
+#100,100
+[info] working time: 500ms
+#complete

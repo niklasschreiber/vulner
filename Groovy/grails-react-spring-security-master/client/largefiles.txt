@@ -1,0 +1,1 @@
+"D:\_SRC\BUGGYCODE\Groovy\grails-react-spring-security-master\client\yarn.lock" 

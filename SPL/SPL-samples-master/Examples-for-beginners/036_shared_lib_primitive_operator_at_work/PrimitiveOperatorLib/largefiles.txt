@@ -1,0 +1,1 @@
+"D:\_SRC\SPL\SPL-samples-master\Examples-for-beginners\036_shared_lib_primitive_operator_at_work\PrimitiveOperatorLib\.cproject" 

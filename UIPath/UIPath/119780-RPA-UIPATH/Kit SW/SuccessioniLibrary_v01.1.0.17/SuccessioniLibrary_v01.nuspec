@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>SuccessioniLibrary_v01</id>
+    <version>1.0.17</version>
+    <title>SuccessioniLibrary_v01</title>
+    <authors>Poste Italiane</authors>
+    <owners>Poste Italiane</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <description>dati successioni</description>
+    <copyright>Copyright 2020</copyright>
+    <dependencies />
+  </metadata>
+</package>

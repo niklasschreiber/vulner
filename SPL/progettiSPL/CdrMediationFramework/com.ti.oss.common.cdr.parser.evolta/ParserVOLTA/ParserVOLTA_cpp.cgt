@@ -1,0 +1,597 @@
+<%
+	use Data::Dumper;
+	my $ParserStatisticsName = "ParserStatistics";
+	my $ParserStatisticsPort; # number of statistics port
+
+	my $pduTypes = $model->getParameterByName("pduTypes");
+	my $streamsCount = 0;
+	my %name2Index;
+
+	# determine output port -> pdu mapping
+	my $o=0;
+	#for(my $o=0; $o < $model->getNumberOfOutputPorts(); ++$o)
+	for(my $o=0; $o < 1; ++$o)
+	{
+		if (!defined($pduTypes->getValueAt($o)))
+		{
+			SPL::CodeGen::exitln("No PDU type defined in parameter \"pduTypes\" for output port: $o");
+		}
+
+		my $pduName = $pduTypes->getValueAt($o)->getSPLExpression();
+		$pduName =~ s/"//g;
+
+		$name2Index{$pduName} = $o;
+#		print STDERR "name2Index: $pduName -> $o \n";
+
+		$ParserStatisticsPort = $o if ($pduName eq $ParserStatisticsName);
+
+		++$streamsCount;
+	}
+	
+#	print STDERR "ParserStatisticsPort: $ParserStatisticsPort\n";
+
+	sub getPduNameByStreamIndex($)
+	{
+		my ($index) = @_;
+
+#		print STDERR "--> getPduNameByStreamIndex(", (defined $index ? $index : "UNDEF"), ")\n";
+
+		my $result;
+		if (defined $index)
+		{
+			my $name;
+			foreach $name(keys%name2Index)
+			{
+				$result = $name if ($index == $name2Index{$name});
+			}			
+		}
+
+#		print STDERR "<-- getPduNameByStreamIndex --> [", (defined $result ? $result : "UNDEF"), "]\n";
+
+		return($result);	
+	}
+
+	sub getStreamIndexByPduName($)
+	{
+		my ($name) = @_;
+
+#		print STDERR "--> getStreamIndexByPduName(", (defined $name ? $name : "UNDEF"), ")\n";
+
+		my $result;
+		if (defined $name)
+		{
+			$result = $name2Index{$name} if (exists $name2Index{$name});
+		}
+
+#		print STDERR "<-- getStreamIndexByPduName --> [", (defined $result ? $result : "UNDEF"), "]\n";
+
+		return($result);
+	}
+	
+	# -------------------------------------------------------------------------
+	# C++ to streams mapping
+	# -------------------------------------------------------------------------
+	my %streams =
+	(
+		"Volta" =>
+		{
+			# SPL                               C++
+			"callModuleType" => "pdu->callModuleType",			
+
+			#listOfCallingPartyAddresses:        
+			"listOfCallingPartyAddresses" => "pdu->listOfCallingPartyAddresses",
+											
+			"callingPartyAddressPresentationStatus"                  => "pdu->callingPartyAddressPresentationStatus",
+			"callingPartyAddressE164"                     => "pdu->callingPartyAddressE164",
+			"callingPartyMSISDN"	                     => "pdu->callingPartyMSISDN",
+			"fromHeader"                  => "pdu->fromHeader",
+			"fromHeaderPresentationStatus"                 => "pdu->fromHeaderPresentationStatus",
+			"callingSubscriberIMPI"                         => "pdu->callingSubscriberIMPI",
+			"callingSubscriberIMSI"                     => "pdu->callingSubscriberIMSI",
+			"calledPartyAddress"            => "pdu->calledPartyAddress",
+			"calledPartyAddressE164"          => "pdu->calledPartyAddressE164",
+			"calledPartyMSISDN"          => "pdu->calledPartyMSISDN",
+
+			"translatedNumber"               => "pdu->translatedNumber",
+			"startTime"        => "pdu->startTime",
+			"chargeableDuration"      => "pdu->chargeableDuration",
+			"callIdentification"             => "pdu->callIdentification",
+			
+			#listOfRelatedCallIdentification:
+			"listOfRelatedCallIdentification"                  => "pdu->listOfRelatedCallIdentification",
+			
+			"partialOutputRecordNumber"           => "pdu->partialOutputRecordNumber",
+			"lastPartialOutput"                    => "pdu->lastPartialOutput",
+			"iMSChargingIdentifier"          => "pdu->iMSChargingIdentifier",
+			"listOfRelatedICID"        => "pdu->listOfRelatedICID",
+			"originatingNetwork"                      => "pdu->originatingNetwork",
+			"terminatingNetwork"                  => "pdu->terminatingNetwork",
+			"callPosition"                => "pdu->callPosition",
+			"causeCode"           => "pdu->causeCode",
+			"accessType"         => "pdu->accessType",
+			
+			"listOfMedia"            => "pdu->listOfMedia",
+			"listOfMedia_listOfMedia"             => "pdu->listOfMedia_listOfMedia",
+			"listOfMedia_timeOfMediaChange"      => "pdu->listOfMedia_timeOfMediaChange",
+			
+			"listOfSupplementaryService_supplementaryServiceIdentity"                    => "pdu->listOfSupplementaryService_supplementaryServiceIdentity",
+			"listOfSupplementaryService_supplementaryServiceAction"           => "pdu->listOfSupplementaryService_supplementaryServiceAction",
+			
+			"firstCallingLocationInformation"         => "pdu->firstCallingLocationInformation",
+			"incompleteCallDataIndicator"            => "pdu->incompleteCallDataIndicator",
+			"conferenceId"              => "pdu->conferenceId",
+			"sRVCCTimeStamp"                    => "pdu->sRVCCTimeStamp",
+			"disconnectingParty"      => "pdu->disconnectingParty",
+			"conferenceTimeStamp"                => "pdu->conferenceTimeStamp",
+			"callingSubscriberIMEI"                => "pdu->callingSubscriberIMEI",
+			"calledSubscriberIMEI"                => "pdu->calledSubscriberIMEI",
+			"destinationRealm"                => "pdu->destinationRealm",
+			"sIPRingingTimestamp"                => "pdu->sIPRingingTimestamp",
+			"freeFormatData"                => "pdu->freeFormatData",
+			"redirectingSubscriberIMPI"                 => "pdu->redirectingSubscriberIMPI",
+			"redirectingSubscriberIMSI"   => "pdu->redirectingSubscriberIMSI",
+			"redirectingPartyAddress"     => "pdu->redirectingPartyAddress",
+			"redirectingPartyAddressE164" => "pdu->redirectingPartyAddressE164",
+			"redirectionCounter"           => "pdu->redirectionCounter",
+			"originalCalledPartyAddress"             => "pdu->originalCalledPartyAddress",
+			"originalCalledPartyAddressE164"               => "pdu->originalCalledPartyAddressE164",
+			"calledSubscriberIMPI"           => "pdu->calledSubscriberIMPI",
+			"calledSubscriberIMSI"  => "pdu->calledSubscriberIMSI",
+			"firstCalledLocationInformation"            => "pdu->firstCalledLocationInformation",
+
+			# listOfServiceData - end
+			"endOfData"					  => "EOD",
+		},
+
+		# ---------------------------------------------------------------------
+		# statistics stream
+		# ---------------------------------------------------------------------
+		"$ParserStatisticsName" =>
+		{
+			"filename"                    => "buffer.getFilename()",
+			"bytesTotal"                  => "buffer.getTotal()",
+			"bytesSkipped"                => "buffer.getSkipped()",
+			"cdrPerSecond"                => "(long) (this->stopWatchProcess.get() > 0.0 ? (double) parser.goodCDR / this->stopWatchProcess.get() : 0.0)",
+			"goodCDR"                     => "parser.goodCDR",
+			"badCDR"                      => "parser.badCDR",
+			"ignoredCDR"                  => "parser.ignoredCDR",
+			"abortedDueToDecodeFailure"   => "parser.abortedDueToDecodeFailure",
+			"timeToParseFile"             => "parser.totalStopWatch.get()",
+			"timeToReadFile"              => "parser.bufferStopWatch.get()",
+			"timeToDecode"                => "parser.decoderStopWatch.get()",
+			"timeToConvert"               => "parser.converterStopWatch.get()",
+			"bytesProcessed"              => "parser.bytesProcessed",
+			"timeToProcessFile"           => "this->stopWatchProcess.get()",
+			"timeToSend"                  => "this->stopWatchSend.get()",
+			"errors"                      => "pdu->errors",
+			# MSC
+			"goodMSC"                     => "pdu->goodMSC",
+			"badMSC"                      => "pdu->badMSC",
+			"timeToConvertMSC"            => "pdu->timeToConvertMSC.get()",
+			"timeToSendMSC"               => "this->stopWatchSendOnPort" . getStreamIndexByPduName("Volta") . ".get()",
+		},
+	);
+
+	my %generics =
+	(
+		"processingStartedAt" => "this->processingStartedAt",
+		"processingStoppedAt" => "this->processingStoppedAt",
+		"EOL" => "\"\"",
+	);
+
+	sub getParserAssignment($$)
+	{
+		my ($pduName,$attrName) = @_;
+
+#		print STDERR "--> getParserAssignment(", (defined $pduName ? $pduName : "UNDEF"), ",", (defined $attrName ? $attrName : "UNDEF"), ")\n";
+
+		# try to get PDU-dependent assignment
+		my $result = $streams{$pduName}{$attrName};
+		if (!defined $result)
+		{
+			# try to get generic assignment
+			$result = $generics{$attrName};
+		}
+
+#		print STDERR "<-- getParserAssignment --> [", (defined $result ? $result : "UNDEF"), "]\n";
+
+		return($result);
+	}
+%>
+
+/* Additional includes go here */
+
+// ASN.1 parser includes
+<%
+	foreach my $type (keys %streams)
+	{
+		if ($type eq $ParserStatisticsName)
+		{ 
+%>
+//#include "<%=$type%>.h"
+<%
+		}
+		else
+		{
+%>
+#include "LionetAsn1Cdr<%=$type%>Plugin/<%=$type%>Pdu.hpp"
+
+using namespace LionetAsn1Cdr<%=$type%>Plugin;
+<%
+		}
+	}
+%>
+<%SPL::CodeGen::implementationPrologue($model);%>
+
+using namespace std;
+
+/**
+ * The parser statistics are stored in a non-PDU class, but to reuse
+ * code, we have the mapping between the both names.
+ */
+#define ParserStatisticsPDU ParserStatistics
+
+// LOCAL INCLUDE FILES
+#include <HashedXmlConfigurationFile/HashedXmlConfigFile.hpp>
+
+using namespace HashedXmlConfigurationFile;
+
+// global includes
+#include <stdlib.h>
+
+
+// Constructor
+MY_OPERATOR::MY_OPERATOR()
+{
+	<%
+		my $configEnvVar = $model->getParameterByName("configEnvVar");
+		$configEnvVar = $configEnvVar->getValueAt(0)->getCppExpression();
+
+		my $mediationName = $model->getParameterByName("mediationName");
+		$mediationName = $mediationName->getValueAt(0)->getCppExpression();
+
+		my $configFileKey = $model->getParameterByName("configFileKey");
+		$configFileKey = $configFileKey->getValueAt(0)->getCppExpression();
+	%>
+	stopWatchProcess.setName("process");
+	stopWatchSend.setName("send");
+
+	char *envVar;
+	string medConfigFile;
+	string configFile;
+
+ 	envVar = getenv(<%=$configEnvVar%>.c_str());
+ 
+	if ( envVar == NULL )
+	{
+		SPLAPPTRC(L_ERROR, "Error retrieving environment variable \"" << <%=$configEnvVar%> << "\"", "dpsop");
+	}
+
+	medConfigFile.append(envVar);
+
+	if (medConfigFile.size() == 0)
+	{
+		medConfigFile = "/";
+	}
+
+	if (medConfigFile[medConfigFile.size() - 1] != '/')
+		 medConfigFile += "/";
+
+	medConfigFile += <%=$mediationName%> + "/" + <%=$mediationName%> + ".xml"; 
+
+	if (!HashedXmlConfigFile::getInstance().load(medConfigFile))
+	{
+		SPLAPPTRC(L_ERROR, "Error loading mediation configuration file \"" << medConfigFile << "\"", "dpsop");
+	}
+
+	if (!HashedXmlConfigFile::getInstance().getParameter(<%=$configFileKey%>, configFile))
+	{
+		SPLAPPTRC(L_ERROR, "Parser configuration file name with key \"" << <%=$configFileKey%> << "\" not found in \"" << medConfigFile << "\"", "dpsop");
+	}
+
+	parserEngine = new Asn1CdrVoltaParserEngine();
+ 
+	if (!parserEngine->init(configFile))
+	{
+		SPLAPPTRC(L_ERROR, "Error initializing Parser Engine with file \"" << configFile << "\"", "dpsop");
+	}
+	<%	
+		my $name;
+		foreach $name(keys%name2Index)
+		{
+			next if ($name eq $ParserStatisticsName);
+	%>
+	STREAM_TO_PORT.insert(pair<std::string,int>("<%=$name%>",<%=$name2Index{$name}%>));
+	<%
+		}
+	%>
+	<%
+		#for(my $o=0; $o < $model->getNumberOfOutputPorts(); ++$o)
+		for(my $o=0; $o < 1; ++$o)
+		{
+	%>
+	stopWatchSendOnPort<%=$o%>.setName("sendOnPort<%=$o%>");
+	<%
+		}
+	%>	    
+}
+
+// Destructor
+MY_OPERATOR::~MY_OPERATOR() 
+{
+	delete parserEngine;
+}
+
+// Notify port readiness
+void MY_OPERATOR::allPortsReady() 
+{
+}
+
+// Notify pending shutdown
+void MY_OPERATOR::prepareToShutdown() 
+{
+}
+
+// Processing for source and threaded operators   
+void MY_OPERATOR::process(uint32_t idx)
+{
+}
+
+// Tuple processing for mutating ports 
+void MY_OPERATOR::process(Tuple & tuple, uint32_t port)
+{
+	IPort0Type const & ituple = static_cast<IPort0Type const&>(tuple);	
+
+ 	// reset statistics, parser, buffer, etc.
+//	ParserStatistics::initialize();
+
+	// get timestamp
+	const char* timeStringFormat = "%Y-%m-%d %H:%M:%S";
+	const int timeStringLength = 20;
+	char timeString[timeStringLength];
+	
+	time_t t = time(0);
+	tm *curTime = localtime(&t);
+	strftime(timeString, timeStringLength, timeStringFormat, curTime);	
+
+	processingStartedAt.assign(timeString, timeStringLength);
+
+	// start processing FileHeader
+	std::string filename(ituple.get_fName());
+
+	stopWatchProcess.reset().start();
+	stopWatchSend.reset();
+	<%
+		#for(my $o=0; $o < $model->getNumberOfOutputPorts(); ++$o)
+		for(my $o=0; $o < 1; ++$o)
+		{
+	%>
+	stopWatchSendOnPort<%=$o%>.reset();
+	sentOnPort<%=$o%> = 0L;
+	<%
+		}
+	%>
+	// ASN.1 decoder and converter (to PDU format)
+
+	SPLAPPTRC(L_INFO, "Parsing file \"" << filename << "\" with " << parserEngine->getName() << "...", "dpsop");
+	
+	if (!parserEngine->start(filename, "50"))
+	{
+		SPLAPPTRC(L_ERROR, "Error parsing file \"" << filename << "\"", "dpsop");
+	}
+	else
+	{
+		Pdu *pdu;
+
+		while ((pdu = parserEngine->getNextPdu()) != NULL)
+		{
+			stopWatchSend.start();
+
+			StreamToPortIterator_t iterator = STREAM_TO_PORT.find(pdu->getType());
+			int oport = (STREAM_TO_PORT.end() == iterator ? -1 : iterator->second);
+
+			switch (oport)
+			{
+				<%
+					#for(my $o=0; $o < $model->getNumberOfOutputPorts(); ++$o)
+					for(my $o=0; $o < 1; ++$o)
+					{
+						next if (defined($ParserStatisticsPort) && ($o == $ParserStatisticsPort));
+				%>
+				case <%=$o%>:
+				{
+					sendPdu(pdu, tuple, port, outputTuple<%=$o%>);
+
+					break;
+				}
+				<%
+					}
+				%>
+				default:
+				{
+					SPLAPPTRC(L_ERROR, "Invalid PDU type \"" << pdu->getType() << "\"", "dpsop");
+
+					break;
+				}
+			}
+
+			pdu->reuse();
+
+			stopWatchSend.stop();
+		}
+
+		SPLAPPTRC(L_INFO, "File \"" << filename << "\" parsed with " << parserEngine->getName(), "dpsop");
+	}
+	<%
+		#for(my $o=0; $o < $model->getNumberOfOutputPorts(); ++$o)
+		for(my $o=0; $o < 1; ++$o)
+		{
+			#next if ($o == $ParserStatisticsPort);
+
+			next if (defined($ParserStatisticsPort) && ($o == $ParserStatisticsPort));			
+	%>
+	if (0 != sentOnPort<%=$o%>)
+	{
+		EOD = true;
+		
+		// set FileHeader
+		outputTuple<%=$o%>.set_endOfData(EOD);
+		
+		submit(outputTuple<%=$o%>, <%=$o%>); // submit to output port <%=$o%>
+		submit(Punctuation::WindowMarker, <%=$o%>);
+		//Submit the punct on the output port 1
+		submit(Punctuation::WindowMarker, 1);
+		
+	}
+	<%
+		}
+	%>
+	// get timestamp
+	t = time(0);
+	curTime = localtime(&t);
+	strftime(timeString, timeStringLength, timeStringFormat, curTime);
+
+	processingStoppedAt.assign(timeString, timeStringLength);
+
+	stopWatchProcess.stop();
+	<%
+		if (defined $ParserStatisticsPort)
+		{
+	%>
+	// send statistics
+	sendPdu(ParserStatistics::getInstance(), tuple, port, outputTuple<%=$ParserStatisticsPort%>);
+	<%
+		}
+	%>
+}
+
+// Tuple processing for non-mutating ports
+void MY_OPERATOR::process(Tuple const & tuple, uint32_t port)
+{
+}
+
+// Punctuation processing
+void MY_OPERATOR::process(Punctuation const & punct, uint32_t port)
+{
+	submit(punct,port);
+}
+
+/*
+ * ----------------------------------------------------------------------------
+ * sendPdu
+ * ----------------------------------------------------------------------------
+ */
+<%	
+	#for(my $o=0; $o < $model->getNumberOfOutputPorts(); ++$o)
+	for(my $o=0; $o < 1; ++$o)
+	{
+		my $ostream = $model->getOutputPortAt($o);
+		my $pdu = getPduNameByStreamIndex($o);
+		
+		if (!defined $pdu)
+		{
+			SPL::CodeGen::exitln("No PDU name for stream index: $o");
+		}
+%>
+void MY_OPERATOR::sendPdu(const Pdu* genericPdu, Tuple& tuple, uint32_t port, OPort<%=$o%>Type& otuple)
+{ 
+	IPort0Type const & ituple = static_cast<IPort0Type const&>(tuple);
+	<%
+		my $istream = $model->getInputPortAt(0);
+	%>
+	// cast generic PDU to concrete type
+	const <%=$pdu%>Pdu *pdu = (<%=$pdu%>Pdu *) genericPdu;
+
+	// Determine time being used to send the tuple.
+	stopWatchSendOnPort<%=$o%>.start();
+
+	// Reset output tuple.
+	otuple.reset();
+
+	// Iterate through the output tuple attributes. If a output tuple attribute
+	// has a corresponding PDU attribute, then generate the conversion code,
+	// else try to get the output tuple attribute value from the input tuple.
+	<%
+		foreach my $attr (@{$ostream->getAttributes()})
+		{
+			my $oname = $attr->getName();
+			my $otype = $attr->getSPLType();
+			my $assignment;
+
+			# -----------------------------------------------------------------
+			# The intention of this commented code snippet is that assignments
+			# within the InfoSphere Streams UBOP take precedence over any
+			# automatic assignment. Unfortunately, this is not working as
+			# expected.
+			# -----------------------------------------------------------------
+			# if ($attr->hasAssignment())
+			#{
+			#	$assignment = $attr->getAssignment();
+			#	print STDERR "    sendPdu: [0] $oname := $assignment", "\n";
+			#	print STDERR Dumper($assignment);
+			#}
+			#else
+			{
+				$assignment = getParserAssignment($pdu, $oname);
+				if (defined $assignment)
+				{
+#					print STDERR "    sendPdu: [1] $oname := $assignment", "\n";
+				}
+				else
+				{
+					$assignment = "ituple.get_$oname()" if (defined $istream->getAttributeByName($oname));
+					if (defined $assignment)
+					{
+#						print STDERR "    sendPdu: [2] $oname := $assignment", "\n";
+					}
+					else
+					{					  
+						SPL::CodeGen::exitln("no assignment rule for " . $pdu . " " . $oname);
+					}
+				}
+			}
+			if ($otype =~ m/(list)/)
+			{
+				my $cppType = $attr->getCppType();
+	%>
+	{
+		<%=$cppType%> tmp;
+		tmp.assign(<%=$assignment%>.begin(), <%=$assignment%>.end());
+		otuple.set_<%=$oname%> (tmp);
+	}
+	<%
+			}
+			else
+			{
+	%>
+	{
+		otuple.set_<%=$oname%> (<%=$assignment%>);
+	}
+	<%
+			}
+		}
+	%>
+	EOD = false;
+	
+	// set FileHeader
+	otuple.set_eventCorrelationId(ituple.get_eventCorrelationId());
+	otuple.set_sessionBeginTime(ituple.get_sessionBeginTime());
+	otuple.set_rop(ituple.get_rop());
+	otuple.set_fName(ituple.get_fName());
+	otuple.set_emId(ituple.get_emId());
+	otuple.set_neId(ituple.get_neId());
+	otuple.set_endOfData(EOD);
+
+	// Count the number of sent tuples on this port. Needed information to
+	// decide whether a punctuation needs to be sent on a port.
+	submit(outputTuple<%=$o%>, <%=$o%>); // submit to output port <%=$o%>
+	
+	++sentOnPort<%=$o%>;
+	// Determine time being used to send the tuple.
+	
+	stopWatchSendOnPort<%=$o%>.stop();
+}
+<%	
+	}
+%>
+<%SPL::CodeGen::implementationEpilogue($model);%>

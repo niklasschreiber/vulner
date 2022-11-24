@@ -1,0 +1,80 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/20.Hard_Coded_Password/C20001.cpp");
+   ("language", "CPP");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<string.h>");
+   ("include", "<sqlext.h>");
+}
+{
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/20.Hard_Coded_Password/C20001.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/20.Hard_Coded_Password/C20001.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/20.Hard_Coded_Password/C20001.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/20.Hard_Coded_Password/C20001.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/20.Hard_Coded_Password/C20001.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/20.Hard_Coded_Password/C20001.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/20.Hard_Coded_Password/C20001.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C20001",
+   SI(<"C20001">,
+   {[
+      {;
+      ,(1#1,25#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,25#1,!1)}
+   )
+   ,(1#1,25#1,!1)},
+
+   {"C20001",
+   FN([public],(<"C20001">,"dbaccess"):int,[("server":ref(char),(6#14,6#25,!1)),("user":ref(char),(6#28,6#37,!1))],[],
+   {[
+      {VD("henv",class((,SQLHENV)))
+      ,(8#13,8#16,!1)};
+      {VD("hdbc",class((,SQLHDBC)))
+      ,(9#13,9#16,!1)};
+      {PC0((<"C20001">,"SQLAllocHandle"),[class((,"%undef")),class((,"%undef")),ref(class((,SQLHENV)))],[{V("SQL_HANDLE_ENV"),class((,"%undef")),(11#20,11#33,!1)},{V("SQL_NULL_HANDLE"),class((,"%undef")),(11#36,11#50,!1)},{&{V("henv"),class((,SQLHENV)),(11#54,11#57,!1)},ref(class((,SQLHENV))),(11#53,11#57,!1)}])
+      ,(11#5,11#58,!1)};
+      {PC0((<"C20001">,"SQLAllocHandle"),[class((,"%undef")),class((,SQLHENV)),ref(class((,SQLHDBC)))],[{V("SQL_HANDLE_DBC"),class((,"%undef")),(12#20,12#33,!1)},{V("henv"),class((,SQLHENV)),(12#36,12#39,!1)},{&{V("hdbc"),class((,SQLHDBC)),(12#43,12#46,!1)},ref(class((,SQLHDBC))),(12#42,12#46,!1)}])
+      ,(12#5,12#47,!1)};
+      {PC0((<"C20001">,"SQLConnect"),[class((,SQLHDBC)),ref(class((,SQLCHAR))),class((,"%undef")),ref(char),class((,"%undef")),string,int],[{V("hdbc"),class((,SQLHDBC)),(14#16,14#19,!1)},{CS(ref(class((,SQLCHAR))),{V("server"),ref(char),(15#27,15#32,!1)}),ref(class((,SQLCHAR))),(15#16,15#32,!1)},{SC((<"C20001">,"strlen"),[ref(char)],[{V("server"),ref(char),(16#23,16#28,!1)}]),class((,"%undef")),(16#16,16#29,!1)},{V("user"),ref(char),(17#16,17#19,!1)},{SC((<"C20001">,"strlen"),[ref(char)],[{V("user"),ref(char),(18#23,18#26,!1)}]),class((,"%undef")),(18#16,18#27,!1)},{"asdf"S,string,(19#16,19#21,!1)},{"4"N,int,(20#16,20#16,!1)}])
+      ,(14#5,20#19,!1)};
+      {RE({"0"N,int,(21#12,21#12,!1)})
+      ,(21#5,21#13,!1)}
+      ]
+   ,(6#1,22#1,!1)}
+   )
+   ,(6#1,22#1,!1)}
+]

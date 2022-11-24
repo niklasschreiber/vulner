@@ -1,0 +1,701 @@
+namespace com.ti.oss.common.cdr.util;
+
+//use com.ti.oss.common.pm.util.time::*;
+
+// MediationUtils
+use com.ti.oss.common.util.time::*;
+
+use com.ti.oss.common.cdr.util.cfg::* ;
+
+
+// (gas): I added this utility function to remove a suffix from
+//        the input file, if it exists.
+public rstring rmSuffixFromFn(rstring fileName, rstring suffix) 
+{
+   // Make the output file name
+   mutable rstring fname;
+   mutable int32 end, len, begin ;
+   
+   len = length(fileName) ;
+   begin = findLast(fileName, "/", len) + 1;
+
+   len = len - begin ;
+   fname = substring(fileName, begin, len) ; // fname contains the filename without path
+
+   end = findLast(fname, suffix, length(fname)) ;
+  
+   if(end > 0)  
+     fname = substring(fname, 0, end);
+
+   return fname;
+}
+
+public rstring cleanPlmnid(rstring plmnid) 
+{
+   // Make the output file name
+   mutable rstring plmnid_out;
+   mutable int32 len, begin ;
+   
+   len = length(plmnid) ;
+   begin = findLast(plmnid, "F", len);
+   
+   plmnid_out = substring(plmnid, 0, begin)+substring(plmnid, begin+1, len-begin-1) ;   
+   	
+   return plmnid_out;
+}
+
+public rstring getNodeIdFromPath(rstring fileName) 
+{
+   mutable rstring nodeId;
+   mutable int32 endFile, endNodeId, len;
+   
+   len = length(fileName) ;
+   endFile = findLast(fileName, "/", len);
+   
+   nodeId = substring(fileName, 0, endFile) ; // fname contains the filename without path
+   
+   endNodeId = findLast(nodeId, "/", length(nodeId));
+   
+   nodeId = substring(nodeId, endNodeId+1, length(nodeId));
+
+   return nodeId;
+}
+
+public rstring getPathFile(rstring fileName) 
+{
+   mutable rstring fname;
+   mutable int32 endFile, len;
+   
+   len = length(fileName);
+   endFile = findLast(fileName, "/", len);
+   
+   fname = substring(fileName, 0, endFile);
+
+   return fname;
+}
+
+//clean the APN string
+public rstring cleanApn(rstring val)
+{
+	mutable rstring txt = makeRStringLiteral(val);
+	
+	txt = regexReplace(txt,"\\\\u[0-9]{4}",".",true);
+	txt = regexReplace(txt,"\\\\a",".",false);
+	txt = regexReplace(txt,"\\\\b",".",true);
+	txt = regexReplace(txt,"\\\\f",".",false);
+	txt = regexReplace(txt,"\\\\n",".",false);
+	txt = regexReplace(txt,"\\\\t",".",false);
+	txt = regexReplace(txt,"\\\\[a-zA-Z]","",true);
+	txt = regexReplace(txt,"\"","",true);
+	txt = regexReplace(txt,"^\\.","",false);
+	txt = regexReplace(txt,"^000e","",false);
+	txt = regexReplace(txt,"000f","",false);
+	txt = regexReplace(txt,"000e",".",false);
+		
+	return txt;
+}
+
+//add a padding of 0s if the size of val is minor than string_size
+public rstring addPadding(rstring val, int32 string_size)
+{
+	mutable rstring tmp = "";
+	mutable int32 len = length(val);
+	mutable int32 i = 0;
+	if(len < string_size){
+		while(i < (string_size - len)) {
+			tmp+="0";
+			i++;
+		}
+		tmp+=val;
+		
+		return tmp;
+	}
+	
+	return val;
+}
+
+//convert an HEX string to an int32
+public int32 hexstring2int(rstring hex)
+{
+	mutable int32 intval=0;
+	mutable int32 len = length(hex);
+	mutable int32 i = 0;
+	while(i < len) {
+		if(hex[i]=='0' || hex[i]=='1' || hex[i]=='2' || hex[i]=='3' || hex[i]=='4' || hex[i]=='5' 
+			|| hex[i]=='6' || hex[i]=='7' || hex[i]=='8' || hex[i]=='9') {
+			
+			intval = (intval << 4) + ((int32)hex[i] - (int32)'0');
+			
+		}
+		else if(hex[i]=='A' || hex[i]=='B' || hex[i]=='C' || hex[i]=='D' || hex[i]=='E' || hex[i]=='F' || 
+				hex[i]=='a' || hex[i]=='b' || hex[i]=='c' || hex[i]=='d' || hex[i]=='e' || hex[i]=='f') {
+			mutable int32 tmp = 0;
+			if(hex[i]=='A' || hex[i]=='a')
+				tmp = 10;
+			else if(hex[i]=='B' || hex[i]=='b')
+				tmp = 11;
+			else if(hex[i]=='C' || hex[i]=='c')
+				tmp = 12;
+			else if(hex[i]=='D' || hex[i]=='d')
+				tmp = 13;
+			else if(hex[i]=='E' || hex[i]=='e')
+				tmp = 14;
+			else if(hex[i]=='F' || hex[i]=='f')
+				tmp = 15;
+			//printStringLn("HEX: " + hex[i] + "; TMP: " + (rstring)tmp);
+			intval = (intval << 4 ) + tmp;
+		}
+		i++;
+	}
+	
+	return intval;
+}
+
+
+public rstring hexstring2bin(rstring hex)
+{
+	mutable rstring intval="";
+	mutable int32 len = length(hex);
+	mutable int32 i = 0;
+	while(i < len) {
+		mutable rstring tmp = "";
+		if(hex[i]=='0')
+			tmp = "0000";
+		else if(hex[i]=='1')
+			tmp = "0001";
+		else if(hex[i]=='2')
+			tmp = "0010";
+		else if(hex[i]=='3')
+			tmp = "0011";
+		else if(hex[i]=='4')
+			tmp = "0100";
+		else if(hex[i]=='5')
+			tmp = "0101";
+		else if(hex[i]=='6')
+			tmp = "0110";
+		else if(hex[i]=='7')
+			tmp = "0111";
+		else if(hex[i]=='8')
+			tmp = "1000";
+		else if(hex[i]=='9')
+			tmp = "1001";
+		else if(hex[i]=='A')
+			tmp = "1010";
+		else if(hex[i]=='B')
+			tmp = "1011";
+		else if(hex[i]=='C')
+			tmp = "1100";
+		else if(hex[i]=='D')
+			tmp = "1101";
+		else if(hex[i]=='E')
+			tmp = "1110";
+		else if(hex[i]=='F')
+			tmp = "1111";									
+		//printStringLn("HEX: " + hex[i] + "; TMP: " + (rstring)tmp);
+		intval = intval + tmp;
+		
+		i++;
+	}
+	
+	return intval;
+}
+
+
+public int32 bin2dec(rstring bin)
+{
+	mutable int32 intval=0;
+	mutable int32 len = length(bin);
+	if (len == 20)
+	{
+		intval = intval + ((int32)bin[0]*524288) + ((int32)bin[1]*262144) + ((int32)bin[2]*131072) + ((int32)bin[3]*65536) + ((int32)bin[4]*32768) 
+		+ ((int32)bin[5]*16384) + ((int32)bin[6]*8192) + ((int32)bin[7]*4096) + ((int32)bin[8]*2048) + ((int32)bin[9]*1024) + ((int32)bin[10]*512) 
+		+ ((int32)bin[11]*256) + ((int32)bin[12]*128) + ((int32)bin[13]*64) + ((int32)bin[14]*32) + ((int32)bin[15]*16)
+		+ ((int32)bin[16]*8) + ((int32)bin[17]*4) + ((int32)bin[18]*2);
+		if (bin[19]=="1") 
+		{
+			intval = intval + 1;	
+		}
+	}
+	else
+	{
+		intval = intval + ((int32)bin[0]*128) + ((int32)bin[1]*64) + ((int32)bin[2]*32) + ((int32)bin[3]*16) + ((int32)bin[4]*8) + ((int32)bin[5]*4) + ((int32)bin[6]*2);
+		if (bin[7]=="1") 
+		{
+			intval = intval + 1;	
+		}
+	}
+	return intval;
+}
+
+//transform the UserLocationInformation attribute to its decimal version
+public rstring transformUserLocalInfo(rstring ulc)
+{
+	if ( length( ulc ) < 16 )
+	{
+		appTrc( Trace.info, "User Location Information size below 16 chars: " + (rstring) length( ulc ) );
+
+		return "";
+	}
+	
+	/* MCC */
+	mutable rstring tmpmcc_str = substring(ulc,3,1) + substring(ulc,2,1) + substring(ulc,5,1);
+	mutable rstring mcc_str = "";
+	mcc_str = (rstring)hexstring2int(tmpmcc_str[0]);
+	mcc_str += (rstring)hexstring2int(tmpmcc_str[1]);
+	mcc_str += (rstring)hexstring2int(tmpmcc_str[2]);
+	//printStringLn("MCC_hex_str: " + tmpmcc_str);
+	//printStringLn("MCC: " + tmpmcc_str);
+		
+	/* MNC */
+	mutable rstring tmpmnc_str = "";
+	mutable rstring mnc_str = "";
+	if(substring(ulc,4,1) == "F") {
+		tmpmnc_str = substring(ulc,7,1) + substring(ulc,6,1);
+		mnc_str = (rstring)hexstring2int(tmpmnc_str[0]);
+		mnc_str += (rstring)hexstring2int(tmpmnc_str[1]);
+	}
+	else
+	{
+		tmpmnc_str = substring(ulc,7,1) + substring(ulc,6,1) + substring(ulc,4,1);
+		mnc_str = (rstring)hexstring2int(tmpmnc_str[0]);
+		mnc_str += (rstring)hexstring2int(tmpmnc_str[1]);
+		mnc_str += (rstring)hexstring2int(tmpmnc_str[2]);
+	}
+	//printStringLn("MNC_hex_str: " + mnc_str);
+	//printStringLn("MNC: " + mnc_str);
+	
+	/* LAC */
+	mutable rstring lac_str = substring(ulc,8,4);
+	//printStringLn("LAC_hex_str: " + lac_str);
+	lac_str = addPadding((rstring)hexstring2int(lac_str),5);
+	//printStringLn("LAC: " + lac_str);
+	
+	/* SAC/CI  */
+	mutable rstring sac_str = substring(ulc,12,4);
+	//printStringLn("SAC_hex_str: " + sac_str);
+	sac_str = addPadding((rstring)hexstring2int(sac_str),5);
+	//printStringLn("SAC: " + sac_str);
+	
+	return mcc_str + mnc_str + lac_str + sac_str;
+}
+
+//transform the UserLocationInformation attribute to its decimal version
+public rstring transformUserLocalInfo_4G(rstring ulc)
+{
+	if ( length( ulc ) < 26 )
+	{
+		appTrc( Trace.info, "User Location Information size below 26 chars: " + (rstring) length( ulc ) );
+
+		return "";
+	}
+
+	/* MCC */
+	mutable rstring tmpmcc_str = substring( ulc, 3, 1 ) + substring( ulc, 2, 1 ) + substring( ulc, 5, 1 );
+	mutable rstring mcc_str = "";
+
+	mcc_str = (rstring) hexstring2int( tmpmcc_str[0] );
+	mcc_str += (rstring) hexstring2int( tmpmcc_str[1] );
+	mcc_str += (rstring) hexstring2int( tmpmcc_str[2] );
+
+	/* MNC */
+	mutable rstring tmpmnc_str = "";
+	mutable rstring mnc_str = "";
+
+	if ( substring( ulc, 4, 1 ) == "F" )
+	{
+		tmpmnc_str = substring( ulc, 7, 1 ) + substring( ulc, 6, 1 );
+
+		mnc_str = (rstring) hexstring2int( tmpmnc_str[0] );
+		mnc_str += (rstring) hexstring2int( tmpmnc_str[1] );
+	}
+	else
+	{
+		tmpmnc_str = substring( ulc, 7, 1 ) + substring( ulc, 6, 1 ) + substring( ulc, 4, 1 );
+
+		mnc_str = (rstring) hexstring2int( tmpmnc_str[0] );
+		mnc_str += (rstring) hexstring2int( tmpmnc_str[1] );
+		mnc_str += (rstring) hexstring2int( tmpmnc_str[2] );
+	}
+
+	/* ECI - E_NODE_B */
+	mutable rstring eci_str = substring( ulc, 19, 5 );
+
+	eci_str = addPadding( (rstring) hexstring2int( eci_str ), 7 );
+
+	/* ECI - CELL_ID */
+	mutable rstring cid_str = substring( ulc, 24, 2 );
+
+	cid_str = addPadding( (rstring) hexstring2int( cid_str ), 3 );
+
+	return mcc_str + mnc_str + eci_str + cid_str;
+}
+
+
+public rstring transformUserLocalInfo_4Gsmall(rstring ulc)
+{
+	if ( length( ulc ) < 16 )
+	{
+		appTrc( Trace.info, "User Location Information size below 26 chars: " + (rstring) length( ulc ) );
+
+		return "";
+	}
+
+	/* MCC */
+	mutable rstring tmpmcc_str = substring( ulc, 3, 1 ) + substring( ulc, 2, 1 ) + substring( ulc, 5, 1 );
+	mutable rstring mcc_str = "";
+
+	mcc_str = (rstring) hexstring2int( tmpmcc_str[0] );
+	mcc_str += (rstring) hexstring2int( tmpmcc_str[1] );
+	mcc_str += (rstring) hexstring2int( tmpmcc_str[2] );
+
+	/* MNC */
+	mutable rstring tmpmnc_str = "";
+	mutable rstring mnc_str = "";
+
+	if ( substring( ulc, 4, 1 ) == "F" )
+	{
+		tmpmnc_str = substring( ulc, 7, 1 ) + substring( ulc, 6, 1 );
+
+		mnc_str = (rstring) hexstring2int( tmpmnc_str[0] );
+		mnc_str += (rstring) hexstring2int( tmpmnc_str[1] );
+	}
+	else
+	{
+		tmpmnc_str = substring( ulc, 7, 1 ) + substring( ulc, 6, 1 ) + substring( ulc, 4, 1 );
+
+		mnc_str = (rstring) hexstring2int( tmpmnc_str[0] );
+		mnc_str += (rstring) hexstring2int( tmpmnc_str[1] );
+		mnc_str += (rstring) hexstring2int( tmpmnc_str[2] );
+	}
+
+	/* ECI - E_NODE_B */
+	mutable rstring eci_str = substring( ulc, 9, 5 );
+
+	eci_str = addPadding( (rstring) hexstring2int( eci_str ), 7 );
+
+	/* ECI - CELL_ID */
+	mutable rstring cid_str = substring( ulc, 14, 2 );
+
+	cid_str = addPadding( (rstring) hexstring2int( cid_str ), 3 );
+
+	return mcc_str + mnc_str + eci_str + cid_str;
+}
+
+//transform the UserLocationInformation attribute to its decimal version
+public rstring transformUserLocalInfoMsc(rstring ulc)
+{
+	if ( length( ulc ) < 14 )
+	{
+		appTrc( Trace.info, "User Location Information size below 14 chars: " + (rstring) length( ulc ) );
+
+		return "";
+	}
+
+	/* MCC */
+	mutable rstring tmpmcc_str = substring(ulc,1,1) + substring(ulc,0,1) + substring(ulc,3,1);
+	mutable rstring mcc_str = "";
+	mcc_str = (rstring)hexstring2int(tmpmcc_str[0]);
+	mcc_str += (rstring)hexstring2int(tmpmcc_str[1]);
+	mcc_str += (rstring)hexstring2int(tmpmcc_str[2]);
+	//printStringLn("MCC_hex_str: " + tmpmcc_str);
+	//printStringLn("MCC: " + tmpmcc_str);
+		
+	/* MNC */
+	mutable rstring tmpmnc_str = "";
+	mutable rstring mnc_str = "";
+	if(substring(ulc,2,1) == "F") {
+		tmpmnc_str = substring(ulc,5,1) + substring(ulc,4,1);
+		mnc_str = (rstring)hexstring2int(tmpmnc_str[0]);
+		mnc_str += (rstring)hexstring2int(tmpmnc_str[1]);
+	}
+	else
+	{
+		tmpmnc_str = substring(ulc,5,1) + substring(ulc,4,1) + substring(ulc,2,1);
+		mnc_str = (rstring)hexstring2int(tmpmnc_str[0]);
+		mnc_str += (rstring)hexstring2int(tmpmnc_str[1]);
+		mnc_str += (rstring)hexstring2int(tmpmnc_str[2]);
+	}
+	
+	/* LAC */
+	mutable rstring lac_str = substring(ulc,6,4);
+	//printStringLn("LAC_hex_str: " + lac_str);
+	lac_str = addPadding((rstring)hexstring2int(lac_str),5);
+	//printStringLn("LAC: " + lac_str);
+	
+	/* SAC/CI  */
+	mutable rstring sac_str = substring(ulc,10,4);
+	//printStringLn("SAC_hex_str: " + sac_str);
+	sac_str = addPadding((rstring)hexstring2int(sac_str),5);
+	//printStringLn("SAC: " + sac_str);
+	
+	return mcc_str + mnc_str + lac_str + sac_str;
+}
+
+public boolean getUserLocationInfoMsc( rstring uli, mutable rstring mcc, mutable rstring mnc, mutable rstring lac, mutable rstring ci )
+{
+	if ( length( uli ) == 0 )
+	{
+		mcc = "";
+		mnc = "";
+		lac = "";
+		ci = "";
+
+		return false;
+	}
+	else if ( length( uli ) < 14 )
+	{
+		appTrc( Trace.info, "User Location Information size below 14 chars: " + (rstring) length( uli ) );
+
+		mcc = "";
+		mnc = "";
+		lac = "";
+		ci = "";
+
+		return false;
+	}
+
+	// MCC
+	mutable rstring tmpmcc_str = substring( uli, 1, 1 ) + substring( uli, 0, 1 ) + substring( uli, 3, 1 );
+
+	mcc = (rstring) hexstring2int( tmpmcc_str[0] );
+	mcc += (rstring) hexstring2int( tmpmcc_str[1] );
+	mcc += (rstring) hexstring2int( tmpmcc_str[2] );
+
+	// MNC
+	mutable rstring tmpmnc_str = "";
+
+	if ( substring( uli, 2, 1 ) == "F" )
+	{
+		tmpmnc_str = substring( uli, 5, 1 ) + substring( uli, 4, 1 );
+
+		mnc = (rstring) hexstring2int( tmpmnc_str[0] );
+		mnc += (rstring) hexstring2int( tmpmnc_str[1] );
+	}
+	else
+	{
+		tmpmnc_str = substring( uli, 5, 1 ) + substring( uli, 4, 1 ) + substring( uli, 2, 1 );
+
+		mnc = (rstring) hexstring2int( tmpmnc_str[0] );
+		mnc += (rstring) hexstring2int( tmpmnc_str[1] );
+		mnc += (rstring) hexstring2int( tmpmnc_str[2] );
+	}
+
+	// LAC
+	lac = substring( uli, 6, 4 );
+	lac = addPadding( (rstring) hexstring2int( lac ), 5 );
+
+	// CI
+	ci = substring( uli, 10, 4 );
+	ci = addPadding( (rstring) hexstring2int( ci ), 5 );
+
+	return true;
+}
+
+public boolean getUserLocationInfoExtensionMsc( rstring uli, mutable rstring eci )
+{
+	if ( length( uli ) == 0 )
+	{
+		eci = "";
+
+		return false;
+	}
+	else if ( length( uli ) < 4 )
+	{
+		appTrc( Trace.info, "User Location Information Extension size below 4 chars: " + (rstring) length( uli ) );
+
+		eci = "";
+
+		return false;
+	}
+
+	// ECI
+	eci = substring( uli, 1, 3 );
+	eci = (rstring) hexstring2int( eci );
+
+	return true;
+}
+
+//Generate END ROP
+public float64 generateENDROP(float64 timeStampInSec, int32 durationROP)
+{
+	rstring time = getUtilTime();
+	//appTrc(Trace.info, "TIME: " + time);
+	rstring minute = substring(time, 2, 2);
+	int32 rop = ((int32)minute/durationROP) + (int32)1;
+	int32 endMinuteRop = durationROP*rop;
+	int32 m = (endMinuteRop-(int32)minute)*60;
+	float64 endROP = timeStampInSec + (float64)m;
+	
+	return endROP;
+}
+
+//Check if CDR is in ROP
+public boolean checkCDRinROP(float64 endROP, rstring endtimeCDR)
+{
+	mutable boolean checkCDRinROP = false;
+	
+	rstring date = getUtilTimeStamp();
+	//date format: 13-12-2013 10:30:00
+	rstring year = substring(date, 2, 3);
+	rstring month = substring(date, 5, 6);
+	rstring day = substring(date, 8, 9);	
+	
+	//endtimeCDR format: 131010074619+0200
+	rstring yearCDR = substring(endtimeCDR, 0, 1);
+	rstring monthCDR = substring(endtimeCDR, 2, 3);
+	rstring dayCDR = substring(endtimeCDR, 4, 5);
+	
+	if ((float64)yearCDR <= (float64)year || (float64)monthCDR <= (float64)month || (float64)dayCDR <= (float64)day)
+	{
+		float64 endtimeCDRinSecs = getUtilConvertTimeStampInSecs(endtimeCDR);
+		if (endtimeCDRinSecs <= endROP)
+		{
+			checkCDRinROP = true;
+		}
+	}
+	
+	return checkCDRinROP;	
+}
+
+public rstring getEndTimeCDR(rstring time, int32 duration)
+{
+	timestamp ts = toTimestamp(Sys.YYYYMMDDhhmmss,"20"+substring(time,0,12));
+	
+	float64 endDateinSecs = (float64)getSeconds(ts)+(float64)duration;
+	
+	return getCdrTime((rstring)endDateinSecs);
+	//return getUtilConcertSecsInDate((rstring)endDateinSecs)+"+0"+(rstring)tz+"00";
+}
+
+public rstring formatCdrTime(rstring date)
+{
+	//input 2014-02-24 13:40:48
+	//output 140224134048+0100
+	mutable rstring dateFormat = substring(date, 2, 2)+substring(date, 5, 2)+substring(date, 8, 2)+substring(date, 11, 2)+substring(date, 14, 2)+substring(date, 17, 2);
+	timestamp ts = toTimestamp(Sys.YYYYMMDDhhmmss, "20"+dateFormat) ;
+	mutable float64 seconds = (float64)getSeconds(ts);
+										
+	return dateFormat+getUtilTimezone((rstring)seconds);
+}
+
+public float64 getEndTimeCDRfloat(rstring time, int32 duration)
+{
+	float64 endDateinSecs = getUtilConvertTimeStampInSecs(time); //+(float64)duration;
+	
+	return endDateinSecs;
+}
+
+
+public rstring getRecordOpeningTime(rstring date)
+{
+	//131010074619
+	return "20"+substring(date, 0, 2)+"/"+substring(date, 2, 2)+"/"+substring(date, 4, 2)+" "+substring(date, 6, 2)+":"+substring(date, 8, 2)+":"+substring(date, 10, 2);	
+}
+
+public rstring getRecordOpeningTimeBigData(rstring date)
+{
+	//131010074619
+	if (date != "")
+	{
+		return "20"+substring(date, 0, 2)+"-"+substring(date, 2, 2)+"-"+substring(date, 4, 2)+" "+substring(date, 6, 2)+":"+substring(date, 8, 2)+":"+substring(date, 10, 2);
+	}else{
+		return date;
+	}
+		
+}
+
+public rstring getStartTimeVolte(rstring date)
+{
+	if (date != "")
+	{
+		return substring(date, 0, 4)+"-"+substring(date, 4, 2)+"-"+substring(date, 6, 2)+" "+substring(date, 8, 2)+":"+substring(date, 10, 2)+":"+substring(date, 12, 2);
+	}else{
+		return date;
+	}
+		
+}
+
+public int64 getChargeableDurationInSecs(rstring date)
+{
+	mutable int64 secs = (int64)0;
+	//10:30:00
+	if (date != "")
+	{
+		if(length(date) >= 8)
+		{
+			int64 hour = (int64)substring(date, 0, 2)*(int64)60*(int64)60;
+			int64 minute = (int64)substring(date, 3, 2)*(int64)60;
+		
+			secs = hour+minute+(int64)substring(date, 6, 2);
+		}	
+	}
+	
+	return secs;
+}
+
+public list<rstring> prepareHostPools(rstring par)
+{
+	list<rstring> tmp = tokenize(par,",",false);
+	
+	return tmp;
+}
+
+public rstring getOperatorByIP( rstring key, rstring operatorIP, int32 maxSubnetworkMask  )
+{
+	mutable rstring countryRoamingOperator = operatorIP ;
+	mutable boolean found = false ;
+	
+	//list<rstring> mask = [ 0x00, 0x80, 0xc0, 0xe0, 0xf0, 0xf8, 0xfc, 0xfe, 0xff ] ;
+	list<uint32> maskA = [ 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xfe, 0xfc, 0xf8, 0xf0, 0xe0, 0xc0, 0x80, 0x00 ] ;
+	list<uint32> maskB = [ 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xfe, 0xfc, 0xf8, 0xf0, 0xe0, 0xc0, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 ] ;
+	list<uint32> maskC = [ 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xfe, 0xfc, 0xf8, 0xf0, 0xe0, 0xc0, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 ] ;
+	list<uint32> maskD = [ 0xff, 0xfe, 0xfc, 0xf8, 0xf0, 0xe0, 0xc0, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 ] ;
+	
+	mutable uint32 byteA, byteB, byteC, byteD ;
+	
+	list<rstring> ipBytes = tokenize( operatorIP, ".", false) ;
+	if ( size( ipBytes ) == 4 )
+	{
+		byteA = (uint32) ipBytes[ 0 ] ;
+		byteB = (uint32) ipBytes[ 1 ] ;
+		byteC = (uint32) ipBytes[ 2 ] ;
+		byteD = (uint32) ipBytes[ 3 ] ;
+
+		// Match for subnet at max 16 bits depth	
+		for ( int32 m in range( maxSubnetworkMask ) )
+		{
+			countryRoamingOperator = (rstring) ( byteA & maskA[ m ] ) + "." +
+										(rstring) ( byteB & maskB[ m ] ) + "." +
+										(rstring) ( byteC & maskC[ m ] ) + "." +
+										(rstring) ( byteD & maskD[ m ] ) + "/" +
+										(rstring) (32 - m) ;
+			
+			//appTrc(Trace.error, "Matching for '" + countryRoamingOperator + "'...") ;
+						
+			if ( fillOperatorName( key, countryRoamingOperator ) )
+			{
+				found = true ;
+				break ;
+			}
+		}		
+	} else
+	{
+		appTrc(Trace.error, "Malformed IP address '" + operatorIP + "'...") ;
+	}
+
+	return found == true ? countryRoamingOperator : "" ;
+}
+
+public boolean fillOperatorName( rstring key, mutable rstring countryRoamingOperator )
+{
+	mutable list<rstring> tmpOutParamMap = [ ] ;
+	
+	if(getCdrProvRecord( key, countryRoamingOperator, tmpOutParamMap))
+	{
+		countryRoamingOperator = tmpOutParamMap [ 1 ] ;
+		
+		return true ;
+	}
+		
+	return false ;
+}

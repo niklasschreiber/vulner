@@ -1,0 +1,92 @@
+namespace com.ti.oss.common.cdr.evalROP;
+
+use com.ibm.streamsx.file::* ;
+use com.ti.oss.common.cdr.parser.eggsn::* ;
+use com.ti.oss.common.cdr.types::* ;
+use com.ti.oss.common.cdr.util::* ;
+use com.ti.oss.common.cdr.util.cfg::* ;
+use com.ti.oss.common.event::* ;
+use com.ti.oss.common.types::* ;
+use com.ti.oss.common.util.cfg::* ;
+use com.ti.oss.common.util.time::*;
+
+<%
+	my $parallelSQM = 16;
+%>
+
+type RncBroadDownlinkT = map<rstring, RncBroadDownlink>;
+
+public composite AggregateRnc (input stream<RncBroadDownlink> IRnc; output stream<CsvWrite> ORnc)
+{
+	param
+		expression<rstring> $mediationName ;
+			
+	graph
+	
+		(stream<CsvWrite> ORnc) = Custom(IRnc as I)
+		{
+		logic state:
+			{
+				mutable int32 countAggr = 0;
+				mutable RncBroadDownlinkT RncBroadDownlinkAggr ;
+				rstring mediationName = $mediationName;
+				mutable CsvWrite csv = {};
+			} 
+		
+			onTuple I : 
+			{   
+				if (I.endROP)
+				{	
+					countAggr++;
+				}
+				else
+				{
+					mutable rstring key = I.rnc;
+					if(has(RncBroadDownlinkAggr, key) == true)
+					{
+						RncBroadDownlinkAggr[key].bb_rnc_downlink = RncBroadDownlinkAggr[key].bb_rnc_downlink + I.bb_rnc_downlink;
+					}
+					else
+					{
+						mutable RncBroadDownlink RncBroadDownlinkTmp = {};
+						swap(RncBroadDownlinkTmp.rnc,I.rnc);
+						swap(RncBroadDownlinkTmp.start_time,I.start_time);
+						swap(RncBroadDownlinkTmp.end_time,I.end_time);
+						swap(RncBroadDownlinkTmp.bb_rnc_downlink,I.bb_rnc_downlink);
+						swap(RncBroadDownlinkTmp.nameOutputFile,I.nameOutputFile);
+						swap(RncBroadDownlinkTmp.endROP,I.endROP);
+						swap(RncBroadDownlinkTmp.filePrefix,I.filePrefix);
+						swap(RncBroadDownlinkTmp.suffix,I.suffix);
+						swap(RncBroadDownlinkTmp.endRopSecs,I.endRopSecs);
+						swap(RncBroadDownlinkTmp.startRopSecs,I.startRopSecs);
+						
+						insertM(RncBroadDownlinkAggr, key, RncBroadDownlinkTmp) ;								
+					}
+					
+				}
+				
+				if(countAggr == 16)
+				{
+					for(rstring key in RncBroadDownlinkAggr)
+					{
+						csv.nameOutputFile = RncBroadDownlinkAggr[key].nameOutputFile;
+						csv.endROP = false;
+						csv.filePrefix = RncBroadDownlinkAggr[key].filePrefix;
+						csv.suffix = RncBroadDownlinkAggr[key].suffix;
+						
+						csv.outputContent = RncBroadDownlinkAggr[key].rnc+";"+RncBroadDownlinkAggr[key].start_time+";"+RncBroadDownlinkAggr[key].end_time+";"+(rstring)RncBroadDownlinkAggr[key].bb_rnc_downlink;
+						
+						submit(csv, ORnc);
+					}	
+					
+					countAggr = 0;
+					clearM(RncBroadDownlinkAggr);
+					
+					csv.nameOutputFile = I.nameOutputFile;
+					csv.outputContent = "";
+					csv.endROP = true;
+					submit(csv, ORnc);
+				}		
+	        }	
+	     }	
+}

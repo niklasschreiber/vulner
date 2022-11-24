@@ -1,0 +1,481 @@
+namespace com.ti.oss.common.cdr.evalROP;
+
+use com.ti.oss.common.cdr.util::*;
+use com.ti.oss.common.types::*;
+use com.ti.oss.common.cdr.types::*;
+use com.ti.oss.common.cdr.util.cfg::* ;
+use com.ti.oss.common.util.cfg::* ;
+
+
+
+public composite UserLocInfoSplit (input  stream<AggregateSqmSchema> IROP; 
+	                              output 
+								  stream<AggregateSqmSchema> OUser0
+								  ,
+								  stream<AggregateSqmSchema> OUser1
+								  ,
+								  stream<AggregateSqmSchema> OUser2
+								  ,
+								  stream<AggregateSqmSchema> OUser3
+								  ,
+								  stream<AggregateSqmSchema> OUser4
+								  ,
+								  stream<AggregateSqmSchema> OUser5
+								  ,
+								  stream<AggregateSqmSchema> OUser6
+								  ,
+								  stream<AggregateSqmSchema> OUser7
+								  ,
+								  stream<AggregateSqmSchema> OUser8
+								  ,
+								  stream<AggregateSqmSchema> OUser9
+								  ,
+								  stream<AggregateSqmSchema> OUser10
+								  ,
+								  stream<AggregateSqmSchema> OUser11
+								  ,
+								  stream<AggregateSqmSchema> OUser12
+								  ,
+								  stream<AggregateSqmSchema> OUser13
+								  ,
+								  stream<AggregateSqmSchema> OUser14
+								  ,
+								  stream<AggregateSqmSchema> OUser15
+								  ,
+								  stream<AggregateSqmSchema> OROP
+								  )
+{
+	param
+		expression<rstring> $mediationName ;
+	
+	type AddrTable = map<rstring, uint32>;
+	
+	graph	
+		
+		(
+		stream<AggregateSqmSchema> OUser0
+		;
+		stream<AggregateSqmSchema> OUser1
+		;
+		stream<AggregateSqmSchema> OUser2
+		;
+		stream<AggregateSqmSchema> OUser3
+		;
+		stream<AggregateSqmSchema> OUser4
+		;
+		stream<AggregateSqmSchema> OUser5
+		;
+		stream<AggregateSqmSchema> OUser6
+		;
+		stream<AggregateSqmSchema> OUser7
+		;
+		stream<AggregateSqmSchema> OUser8
+		;
+		stream<AggregateSqmSchema> OUser9
+		;
+		stream<AggregateSqmSchema> OUser10
+		;
+		stream<AggregateSqmSchema> OUser11
+		;
+		stream<AggregateSqmSchema> OUser12
+		;
+		stream<AggregateSqmSchema> OUser13
+		;
+		stream<AggregateSqmSchema> OUser14
+		;
+		stream<AggregateSqmSchema> OUser15
+		;
+		stream<AggregateSqmSchema> OROP 
+		)
+		= Custom(IROP as I)
+		{
+		logic state:
+			{
+				mutable uint32 countPort = 0;
+				mutable AddrTable addrTable;
+				rstring mediationName = $mediationName;
+				mutable rstring msc_cgi = getCfgParam("COMMON_CFG_DIR",mediationName,"MSC_CGI");
+				mutable boolean flagMscCgi = loadCdrProvCfg("MSCCGI",msc_cgi, (uint32)0, ",");//CGI
+				mutable int32 count_endROP = 0;
+				mutable int32 count_write_prev = 0;
+			} 
+		
+			onTuple I : 
+			{      	
+				if (I.endROP)
+				{
+					count_endROP++;
+					if(count_endROP == 1) 
+					{
+						submit(I,OROP);
+						count_endROP = 0;
+						
+						if (isCdrProvCfgChanged("MSCCGI"))
+						{
+							reloadCdrProvCfg("MSCCGI");
+						}
+					}
+				}
+				else if (I.write_prev)
+				{
+					if (I.exclude_node == "")
+					{
+						count_write_prev++;
+						if(count_write_prev == 1) 
+						{
+							submit(I,OROP);
+							count_write_prev = 0;
+						}
+					}else{
+						submit(I,OROP);
+					}			
+				}
+				else
+				{
+					if(flagMscCgi && I.cdrSchema.userLocationInformation!="")
+					{
+						mutable rstring cgi = transformUserLocalInfo(I.cdrSchema.userLocationInformation);	
+						
+						if (I.cdrSchema.rATType == 2)
+						{
+							mutable rstring bsc = "";					
+							mutable list<rstring> tmpOutParamMapMSCCGI = [];
+							if ( getCdrProvRecord("MSCCGI", cgi, tmpOutParamMapMSCCGI ) )
+							{   
+								bsc = tmpOutParamMapMSCCGI[8];//BSC
+							}
+							
+							if(bsc!="")
+							{
+								I.cdrSchema.userLocationInformation = bsc;
+								
+								uint64 addr = hashCode((rstring)bsc);
+								uint32 modAddr = (uint32)(addr%(uint64)16);
+								if(modAddr < 0u) {
+									appTrc(Trace.error,"ERROR: the split returned a negative output port!");
+								}
+								else {
+									
+										
+										if (modAddr==(uint32)0)
+										{
+											submit(I, OUser0);
+										}
+									
+										else 
+										if (modAddr==(uint32)1)
+										{
+											submit(I, OUser1);
+										}
+									
+										else 
+										if (modAddr==(uint32)2)
+										{
+											submit(I, OUser2);
+										}
+									
+										else 
+										if (modAddr==(uint32)3)
+										{
+											submit(I, OUser3);
+										}
+									
+										else 
+										if (modAddr==(uint32)4)
+										{
+											submit(I, OUser4);
+										}
+									
+										else 
+										if (modAddr==(uint32)5)
+										{
+											submit(I, OUser5);
+										}
+									
+										else 
+										if (modAddr==(uint32)6)
+										{
+											submit(I, OUser6);
+										}
+									
+										else 
+										if (modAddr==(uint32)7)
+										{
+											submit(I, OUser7);
+										}
+									
+										else 
+										if (modAddr==(uint32)8)
+										{
+											submit(I, OUser8);
+										}
+									
+										else 
+										if (modAddr==(uint32)9)
+										{
+											submit(I, OUser9);
+										}
+									
+										else 
+										if (modAddr==(uint32)10)
+										{
+											submit(I, OUser10);
+										}
+									
+										else 
+										if (modAddr==(uint32)11)
+										{
+											submit(I, OUser11);
+										}
+									
+										else 
+										if (modAddr==(uint32)12)
+										{
+											submit(I, OUser12);
+										}
+									
+										else 
+										if (modAddr==(uint32)13)
+										{
+											submit(I, OUser13);
+										}
+									
+										else 
+										if (modAddr==(uint32)14)
+										{
+											submit(I, OUser14);
+										}
+									
+										else 
+										if (modAddr==(uint32)15)
+										{
+											submit(I, OUser15);
+										}
+									
+//									if (modAddr==(uint32)0)
+//									{
+//										submit(I, OUser0);
+//									}else if (modAddr==(uint32)1)
+//									{
+//										submit(I, OUser1);
+//									}else if (modAddr==(uint32)2)
+//									{
+//										submit(I, OUser2);
+//									}else if (modAddr==(uint32)3)
+//									{
+//										submit(I, OUser3);
+//									}else if (modAddr==(uint32)4)
+//									{
+//										submit(I, OUser4);
+//									}else if (modAddr==(uint32)5)
+//									{
+//										submit(I, OUser5);
+//									}else if (modAddr==(uint32)6)
+//									{
+//										submit(I, OUser6);
+//									}else if (modAddr==(uint32)7)
+//									{
+//										submit(I, OUser7);
+//									}else if (modAddr==(uint32)8)
+//									{
+//										submit(I, OUser8);
+//									}else if (modAddr==(uint32)9)
+//									{
+//										submit(I, OUser9);
+//									}else if (modAddr==(uint32)10)
+//									{
+//										submit(I, OUser10);
+//									}else if (modAddr==(uint32)11)
+//									{
+//										submit(I, OUser11);
+//									}else if (modAddr==(uint32)12)
+//									{
+//										submit(I, OUser12);
+//									}else if (modAddr==(uint32)13)
+//									{
+//										submit(I, OUser13);
+//									}else if (modAddr==(uint32)14)
+//									{
+//										submit(I, OUser14);
+//									}
+//									else if (modAddr==(uint32)15)
+//									{
+//										submit(I, OUser15);
+//									}
+								}
+							}
+						}
+						else if (I.cdrSchema.rATType == 1)
+						{
+							mutable rstring rnc = "";						
+							mutable list<rstring> tmpOutParamMapMSCCGI = [];
+							if ( getCdrProvRecord("MSCCGI", cgi, tmpOutParamMapMSCCGI ) )
+							{   
+								rnc = tmpOutParamMapMSCCGI[7];//RNC
+							}
+							
+							if(rnc!="")
+							{
+								I.cdrSchema.userLocationInformation = rnc;							
+								
+								uint64 addr = hashCode((rstring)rnc);
+								uint32 modAddr = (uint32)(addr%(uint64)16);
+								if(modAddr < 0u) {
+									appTrc(Trace.error,"ERROR: the split returned a negative output port!");
+								}
+								else {
+									
+										
+										if (modAddr==(uint32)0)
+										{
+											submit(I, OUser0);
+										}
+									
+										else 
+										if (modAddr==(uint32)1)
+										{
+											submit(I, OUser1);
+										}
+									
+										else 
+										if (modAddr==(uint32)2)
+										{
+											submit(I, OUser2);
+										}
+									
+										else 
+										if (modAddr==(uint32)3)
+										{
+											submit(I, OUser3);
+										}
+									
+										else 
+										if (modAddr==(uint32)4)
+										{
+											submit(I, OUser4);
+										}
+									
+										else 
+										if (modAddr==(uint32)5)
+										{
+											submit(I, OUser5);
+										}
+									
+										else 
+										if (modAddr==(uint32)6)
+										{
+											submit(I, OUser6);
+										}
+									
+										else 
+										if (modAddr==(uint32)7)
+										{
+											submit(I, OUser7);
+										}
+									
+										else 
+										if (modAddr==(uint32)8)
+										{
+											submit(I, OUser8);
+										}
+									
+										else 
+										if (modAddr==(uint32)9)
+										{
+											submit(I, OUser9);
+										}
+									
+										else 
+										if (modAddr==(uint32)10)
+										{
+											submit(I, OUser10);
+										}
+									
+										else 
+										if (modAddr==(uint32)11)
+										{
+											submit(I, OUser11);
+										}
+									
+										else 
+										if (modAddr==(uint32)12)
+										{
+											submit(I, OUser12);
+										}
+									
+										else 
+										if (modAddr==(uint32)13)
+										{
+											submit(I, OUser13);
+										}
+									
+										else 
+										if (modAddr==(uint32)14)
+										{
+											submit(I, OUser14);
+										}
+									
+										else 
+										if (modAddr==(uint32)15)
+										{
+											submit(I, OUser15);
+										}
+									
+//									if (modAddr==(uint32)0)
+//									{
+//										submit(I, OUser0);
+//									}else if (modAddr==(uint32)1)
+//									{
+//										submit(I, OUser1);
+//									}else if (modAddr==(uint32)2)
+//									{
+//										submit(I, OUser2);
+//									}else if (modAddr==(uint32)3)
+//									{
+//										submit(I, OUser3);
+//									}else if (modAddr==(uint32)4)
+//									{
+//										submit(I, OUser4);
+//									}else if (modAddr==(uint32)5)
+//									{
+//										submit(I, OUser5);
+//									}else if (modAddr==(uint32)6)
+//									{
+//										submit(I, OUser6);
+//									}else if (modAddr==(uint32)7)
+//									{
+//										submit(I, OUser7);
+//									}else if (modAddr==(uint32)8)
+//									{
+//										submit(I, OUser8);
+//									}else if (modAddr==(uint32)9)
+//									{
+//										submit(I, OUser9);
+//									}else if (modAddr==(uint32)10)
+//									{
+//										submit(I, OUser10);
+//									}else if (modAddr==(uint32)11)
+//									{
+//										submit(I, OUser11);
+//									}else if (modAddr==(uint32)12)
+//									{
+//										submit(I, OUser12);
+//									}else if (modAddr==(uint32)13)
+//									{
+//										submit(I, OUser13);
+//									}else if (modAddr==(uint32)14)
+//									{
+//										submit(I, OUser14);
+//									}
+//									else if (modAddr==(uint32)15)
+//									{
+//										submit(I, OUser15);
+//									}
+								}
+							}						
+						}
+					}
+				}
+			}
+		}
+}

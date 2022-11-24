@@ -1,0 +1,1 @@
+"D:\_SRC\SPL\SPL-samples-master\Examples-for-beginners\090_consistent_region_spl_01\data\loremIpsum.txt" 

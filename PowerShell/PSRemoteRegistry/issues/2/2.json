@@ -1,0 +1,45 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 1,
+    "Custom": null,
+    "Description": "There is a message executing this PS script:\r\n\r\nGet-RegString -ComputerName PC-WIN81 -Key \"Registry::HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" -Value \"ProxyServer\"\r\n\r\nThe result is:\r\nException calling \"OpenRemoteBaseKey\" with \"2\" argument(s): \"The network path was not found.\r\n\r\nMay be this is not the right way to execute?\r\n\r\nThanks for your help.\r\n\r\nAlex O.\r\n",
+    "LastUpdatedDate": "2015-10-01T01:43:09.837-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "PSRemoteRegistry",
+    "ReportedDate": "2015-09-30T13:21:04.99-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Get-RegString problem",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 2
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Can you ping the PC-WIN81, is it up and running?\nAlso, the reg key path should contain just the relative path of the hive:\n\n\"Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\"\n\nAnd you specify the hive via the -Hive parameter (default value is LocalMachine). Press the TAB key to get the argument completion.\n",
+      "PostedDate": "2015-10-01T01:43:09.837-07:00",
+      "Id": 190967
+    }
+  ]
+}

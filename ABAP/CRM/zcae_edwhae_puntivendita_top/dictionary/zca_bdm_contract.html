@@ -1,0 +1,1233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=ISO-8859-1" />
+<title>Dictionary object- ZCA_BDM_CONTRACT</title>
+<style type="text/css">
+  th{text-align:left}
+  .cell{
+     font-family:"Courier New", Courier, monospace;
+     color:#000;
+     font-size:12px;
+     background-color:#F2F4F7;
+  }
+  .cell td { border: thin solid #ccc; }
+</style>
+<style type="text/css">
+  .normal{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px }
+  .footer{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:12px; text-align: center }
+  h2{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:16px; font-weight:800 }
+  h3{ font-family:Arial, Helvetica, sans-serif; color:#000; font-size:14px; font-weight:800 }
+  .outerTable{
+   background-color:#E0E7ED;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-right-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+  .innerTable{
+   background-color:#F2F4F7;
+   width:100%;
+   border-top-width: thin;
+   border-right-width: thin;
+   border-bottom-width: thin;
+   border-left-width: thin;
+   border-top-style: solid;
+   border-right-style: solid;
+   border-bottom-style: solid;
+   border-left-style: solid;
+  }
+</style>
+</head>
+<body>
+  <table class="outerTable">
+    <tr>
+      <td><h2>Table: ZCA_BDM_CONTRACT</h2>
+  <h3>Description: </h3></td>
+    </tr>
+    <tr>
+      <td><!--This is where our main table begins  -->
+<table class="innerTable">
+<tr>
+  <th>Row</th>
+  <th>Field name</th>
+  <th>Position</th>
+  <th>Key</th>
+  <th>Data element</th>
+  <th>Domain</th>
+  <th>Datatype</th>
+  <th>Length</th>
+  <th>Lowercase</th>
+  <th>Domain text</th>
+</tr>
+<tr class="cell">
+  <td> 1</td>
+  <td>.INCLUDE</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>ZST_DATI_CONTRATTO</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>0</td>
+  <td>&nbsp;</td>
+  <td>Dati contratto</td>
+</tr>
+<tr class="cell">
+  <td> 2</td>
+  <td>.INCLUDE</td>
+  <td>54</td>
+  <td>&nbsp;</td>
+  <td>ZST_DATI_PRODOTTO</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>0</td>
+  <td>&nbsp;</td>
+  <td>Dati prodotto</td>
+</tr>
+<tr class="cell">
+  <td> 3</td>
+  <td>.INCLUDE</td>
+  <td>83</td>
+  <td>&nbsp;</td>
+  <td>ZST_DATI_IPOTECA</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>0</td>
+  <td>&nbsp;</td>
+  <td>Dati bene da ipotecare</td>
+</tr>
+<tr class="cell">
+  <td> 4</td>
+  <td>.INCLUDE</td>
+  <td>60</td>
+  <td>&nbsp;</td>
+  <td>ZST_DATI_PREVENTIVO</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>0</td>
+  <td>&nbsp;</td>
+  <td>Dati preventivo</td>
+</tr>
+<tr class="cell">
+  <td> 5</td>
+  <td>APERTURACC</td>
+  <td>38</td>
+  <td>&nbsp;</td>
+  <td>ZAPERTURACC</td>
+  <td>CHAR1</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>ap. C/C BP in corso</td>
+</tr>
+<tr class="cell">
+  <td> 6</td>
+  <td>ATT_INTESTATARIO</td>
+  <td>89</td>
+  <td>&nbsp;</td>
+  <td>ZATT_INTEST</td>
+  <td>CHAR4</td>
+  <td>CHAR</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>Intestatario Bene da Ipotecare</td>
+</tr>
+<tr class="cell">
+  <td> 7</td>
+  <td>CAP_BENE</td>
+  <td>86</td>
+  <td>&nbsp;</td>
+  <td>AD_PSTCD1</td>
+  <td>CHAR10</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Codice di avviamento postale della città</td>
+</tr>
+<tr class="cell">
+  <td> 8</td>
+  <td>CCBANCARIO</td>
+  <td>39</td>
+  <td>&nbsp;</td>
+  <td>ZCCBANCARIO</td>
+  <td>CHAR1</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>C/C bancario</td>
+</tr>
+<tr class="cell">
+  <td> 9</td>
+  <td>CITTA_BENE</td>
+  <td>84</td>
+  <td>&nbsp;</td>
+  <td>AD_CITY1</td>
+  <td>TEXT40</td>
+  <td>CHAR</td>
+  <td>40</td>
+  <td>X</td>
+  <td>Località</td>
+</tr>
+<tr class="cell">
+  <td>10</td>
+  <td>COD_SETTORE</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>ZCOD_SETTORE</td>
+  <td>CHAR3</td>
+  <td>CHAR</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Codice Settore</td>
+</tr>
+<tr class="cell">
+  <td>11</td>
+  <td>CONTRACT_GUID</td>
+  <td>2</td>
+  <td>X</td>
+  <td>CRMT_OBJECT_GUID</td>
+  <td>SYSUUID</td>
+  <td>RAW</td>
+  <td>16</td>
+  <td>&nbsp;</td>
+  <td>GUID di un oggetto ordine CRM</td>
+</tr>
+<tr class="cell">
+  <td>12</td>
+  <td>CONVENZIONE</td>
+  <td>59</td>
+  <td>&nbsp;</td>
+  <td>ZCONVENZIONE</td>
+  <td>ZCONVENZIONE</td>
+  <td>CHAR</td>
+  <td>2</td>
+  <td>&nbsp;</td>
+  <td>Convenzione</td>
+</tr>
+<tr class="cell">
+  <td>13</td>
+  <td>CORRENTISTA</td>
+  <td>37</td>
+  <td>&nbsp;</td>
+  <td>ZCORRENTISTA</td>
+  <td>FLAG</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Correntista?</td>
+</tr>
+<tr class="cell">
+  <td>14</td>
+  <td>COSTO_GARANZIA</td>
+  <td>65</td>
+  <td>&nbsp;</td>
+  <td>ZCOSTO_GARANZIA</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Costo garanzia</td>
+</tr>
+<tr class="cell">
+  <td>15</td>
+  <td>COSTO_GAR_CONF</td>
+  <td>78</td>
+  <td>&nbsp;</td>
+  <td>ZZCOSTO_GAR_CONFIDI</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Costo garanzia confidi</td>
+</tr>
+<tr class="cell">
+  <td>16</td>
+  <td>DATAAPERTURACC</td>
+  <td>40</td>
+  <td>&nbsp;</td>
+  <td>ZDATAAPERCC</td>
+  <td>DATS</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Data Apertura CC</td>
+</tr>
+<tr class="cell">
+  <td>17</td>
+  <td>DATA_DELIBERA</td>
+  <td>11</td>
+  <td>&nbsp;</td>
+  <td>ZDATA_DELIBERA</td>
+  <td>&nbsp;</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Data delibera</td>
+</tr>
+<tr class="cell">
+  <td>18</td>
+  <td>DATA_EROGAZIONE</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>ZDATA_EROGAZIONE</td>
+  <td>&nbsp;</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Data erogazione</td>
+</tr>
+<tr class="cell">
+  <td>19</td>
+  <td>DATA_MODIFICA</td>
+  <td>53</td>
+  <td>&nbsp;</td>
+  <td>DATS</td>
+  <td>DATS</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Campo del tipo DATS</td>
+</tr>
+<tr class="cell">
+  <td>20</td>
+  <td>DATA_RICHIESTA</td>
+  <td>42</td>
+  <td>&nbsp;</td>
+  <td>ZDATA_RICHIESTA</td>
+  <td>DATS</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Data Richiesta</td>
+</tr>
+<tr class="cell">
+  <td>21</td>
+  <td>DATA_SCAD_FIN</td>
+  <td>16</td>
+  <td>&nbsp;</td>
+  <td>ZDATA_SCAD_FIN</td>
+  <td>&nbsp;</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Data scadenza finanziamento</td>
+</tr>
+<tr class="cell">
+  <td>22</td>
+  <td>DATA_SOTTOSCRIZI</td>
+  <td>41</td>
+  <td>&nbsp;</td>
+  <td>ZDATA_SOTTOSCRIZIONE</td>
+  <td>DATS</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Data Sottoscrizione</td>
+</tr>
+<tr class="cell">
+  <td>23</td>
+  <td>DATA_STIP_CONTR</td>
+  <td>17</td>
+  <td>&nbsp;</td>
+  <td>ZDATA_STIP_CONTR</td>
+  <td>&nbsp;</td>
+  <td>DATS</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>Data stipula contratto</td>
+</tr>
+<tr class="cell">
+  <td>24</td>
+  <td>DEBRES</td>
+  <td>25</td>
+  <td>&nbsp;</td>
+  <td>ZDEBRES</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Debito residuo</td>
+</tr>
+<tr class="cell">
+  <td>25</td>
+  <td>DENOM_GAR1</td>
+  <td>21</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>CHAR</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>Denominazione Garante 1</td>
+</tr>
+<tr class="cell">
+  <td>26</td>
+  <td>DENOM_GAR2</td>
+  <td>22</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>CHAR</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>Denominazione Garante 2</td>
+</tr>
+<tr class="cell">
+  <td>27</td>
+  <td>DENOM_GAR3</td>
+  <td>23</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>CHAR</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>Denominazione Garante 3</td>
+</tr>
+<tr class="cell">
+  <td>28</td>
+  <td>DEN_CONFIDI</td>
+  <td>76</td>
+  <td>&nbsp;</td>
+  <td>ZZDEN_CONFIDI</td>
+  <td>CHAR40</td>
+  <td>CHAR</td>
+  <td>40</td>
+  <td>&nbsp;</td>
+  <td>Denominazione Confidi</td>
+</tr>
+<tr class="cell">
+  <td>29</td>
+  <td>DESCR_FINALITA</td>
+  <td>34</td>
+  <td>&nbsp;</td>
+  <td>ZDESCR_FINALITA</td>
+  <td>CHAR60</td>
+  <td>CHAR</td>
+  <td>60</td>
+  <td>&nbsp;</td>
+  <td>Descrizione Altro ex Finalità (finalità3)</td>
+</tr>
+<tr class="cell">
+  <td>30</td>
+  <td>DESCR_GARANZIA</td>
+  <td>8</td>
+  <td>&nbsp;</td>
+  <td>ZCA_DESCR_GARANZIA</td>
+  <td>CHAR60</td>
+  <td>CHAR</td>
+  <td>60</td>
+  <td>&nbsp;</td>
+  <td>Tipo Dati per descrizione garanzia prodotti</td>
+</tr>
+<tr class="cell">
+  <td>31</td>
+  <td>DESC_SETTORE</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>ZBDM_DESCR_ATTRIB</td>
+  <td>CHAR40</td>
+  <td>CHAR</td>
+  <td>40</td>
+  <td>&nbsp;</td>
+  <td>Settore BDM</td>
+</tr>
+<tr class="cell">
+  <td>32</td>
+  <td>DURATA_FIN_RIC</td>
+  <td>57</td>
+  <td>&nbsp;</td>
+  <td>ZBDM_VALUE_ATTR</td>
+  <td>CHAR40</td>
+  <td>CHAR</td>
+  <td>40</td>
+  <td>&nbsp;</td>
+  <td>Valore attributo preventivo BDM</td>
+</tr>
+<tr class="cell">
+  <td>33</td>
+  <td>DURATA_PREAMM</td>
+  <td>74</td>
+  <td>&nbsp;</td>
+  <td>ZZDURATA_PREAMM</td>
+  <td>CHAR4</td>
+  <td>CHAR</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>Durata preammortamento</td>
+</tr>
+<tr class="cell">
+  <td>34</td>
+  <td>DURFINDEL</td>
+  <td>27</td>
+  <td>&nbsp;</td>
+  <td>ZDURFINDEL</td>
+  <td>INT2</td>
+  <td>INT2</td>
+  <td>5</td>
+  <td>&nbsp;</td>
+  <td>Durata Finanziamento Dliberato</td>
+</tr>
+<tr class="cell">
+  <td>35</td>
+  <td>FLAG_FIDEIUSSION</td>
+  <td>43</td>
+  <td>&nbsp;</td>
+  <td>ZFLAG_FIDEIUSSIONE</td>
+  <td>FLAG</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Flag Fideiussione (V si / blank no)</td>
+</tr>
+<tr class="cell">
+  <td>36</td>
+  <td>ID_CONTRATTO_GLM</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>CHAR</td>
+  <td>18</td>
+  <td>&nbsp;</td>
+  <td>ID Contratto GLM</td>
+</tr>
+<tr class="cell">
+  <td>37</td>
+  <td>ID_EROGAZIONE</td>
+  <td>35</td>
+  <td>&nbsp;</td>
+  <td>ZID_EROGAZIONE</td>
+  <td>CHAR3</td>
+  <td>CHAR</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>ID Erogazione</td>
+</tr>
+<tr class="cell">
+  <td>38</td>
+  <td>ID_FINALITA1</td>
+  <td>31</td>
+  <td>&nbsp;</td>
+  <td>ZFINALITA</td>
+  <td>ZFINALITA</td>
+  <td>CHAR</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Finalità</td>
+</tr>
+<tr class="cell">
+  <td>39</td>
+  <td>ID_FINALITA2</td>
+  <td>32</td>
+  <td>&nbsp;</td>
+  <td>ZFINALITA</td>
+  <td>ZFINALITA</td>
+  <td>CHAR</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Finalità</td>
+</tr>
+<tr class="cell">
+  <td>40</td>
+  <td>ID_FINALITA3</td>
+  <td>33</td>
+  <td>&nbsp;</td>
+  <td>ZFINALITA</td>
+  <td>ZFINALITA</td>
+  <td>CHAR</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Finalità</td>
+</tr>
+<tr class="cell">
+  <td>41</td>
+  <td>ID_GARANZIA</td>
+  <td>7</td>
+  <td>&nbsp;</td>
+  <td>CHAR30</td>
+  <td>CHAR30</td>
+  <td>CHAR</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>30 caratteri</td>
+</tr>
+<tr class="cell">
+  <td>42</td>
+  <td>ID_PREVENTIVO</td>
+  <td>61</td>
+  <td>&nbsp;</td>
+  <td>ZBDM_PREV_ID</td>
+  <td>CHAR10</td>
+  <td>CHAR</td>
+  <td>10</td>
+  <td>&nbsp;</td>
+  <td>Codice preventivo BDM</td>
+</tr>
+<tr class="cell">
+  <td>43</td>
+  <td>ID_RIMBORSO</td>
+  <td>36</td>
+  <td>&nbsp;</td>
+  <td>ZID_RIMBORSO</td>
+  <td>CHAR3</td>
+  <td>CHAR</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>ID Rimborso</td>
+</tr>
+<tr class="cell">
+  <td>44</td>
+  <td>IMPORTO_CPI</td>
+  <td>67</td>
+  <td>&nbsp;</td>
+  <td>ZIMP_PREMIO_CPI</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Importo Premio CPI</td>
+</tr>
+<tr class="cell">
+  <td>45</td>
+  <td>IMPORTO_DELIB</td>
+  <td>47</td>
+  <td>&nbsp;</td>
+  <td>ZIMPDEL</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Importo Deliberato</td>
+</tr>
+<tr class="cell">
+  <td>46</td>
+  <td>IMPORTO_GARANZIA</td>
+  <td>9</td>
+  <td>&nbsp;</td>
+  <td>ZIMP_GARANZIA</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Importo garanzia</td>
+</tr>
+<tr class="cell">
+  <td>47</td>
+  <td>IMPORTO_PREMIO</td>
+  <td>48</td>
+  <td>&nbsp;</td>
+  <td>ZIMPPREMIO</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Importo Premio</td>
+</tr>
+<tr class="cell">
+  <td>48</td>
+  <td>IMPORTO_PRESCIN</td>
+  <td>51</td>
+  <td>&nbsp;</td>
+  <td>ZIMPORTO_PRESCIN</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Importo Premio Scoppio Incendio EROGATO</td>
+</tr>
+<tr class="cell">
+  <td>49</td>
+  <td>IMPORTO_RICH</td>
+  <td>56</td>
+  <td>&nbsp;</td>
+  <td>ZBDM_DEC_VALUE</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Valore decimale attributo preventivo BDM</td>
+</tr>
+<tr class="cell">
+  <td>50</td>
+  <td>IMPORTO_SCIN</td>
+  <td>52</td>
+  <td>&nbsp;</td>
+  <td>ZIMPORTO_SCIN</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Importo Scoppio Incendio</td>
+</tr>
+<tr class="cell">
+  <td>51</td>
+  <td>IMP_CPI_EROG</td>
+  <td>68</td>
+  <td>&nbsp;</td>
+  <td>ZIMP_CPI_EROG</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Importo Premio CPI Erogato</td>
+</tr>
+<tr class="cell">
+  <td>52</td>
+  <td>IMP_DELIBERATO</td>
+  <td>12</td>
+  <td>&nbsp;</td>
+  <td>ZIMP_DELIBERATO</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Importo STIPULATO</td>
+</tr>
+<tr class="cell">
+  <td>53</td>
+  <td>IMP_DELIBERA_1</td>
+  <td>44</td>
+  <td>&nbsp;</td>
+  <td>ZIMPDEL</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Importo Deliberato</td>
+</tr>
+<tr class="cell">
+  <td>54</td>
+  <td>IMP_DELIBERA_2</td>
+  <td>45</td>
+  <td>&nbsp;</td>
+  <td>ZIMPDEL</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Importo Deliberato</td>
+</tr>
+<tr class="cell">
+  <td>55</td>
+  <td>IMP_DELIBERA_3</td>
+  <td>46</td>
+  <td>&nbsp;</td>
+  <td>ZIMPDEL</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Importo Deliberato</td>
+</tr>
+<tr class="cell">
+  <td>56</td>
+  <td>IMP_EROGATO</td>
+  <td>14</td>
+  <td>&nbsp;</td>
+  <td>ZIMP_EROGATO</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Importo erogato</td>
+</tr>
+<tr class="cell">
+  <td>57</td>
+  <td>IMP_FINANZIATO</td>
+  <td>82</td>
+  <td>&nbsp;</td>
+  <td>ZZIMP_FINANZIATO</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Importo finanziato</td>
+</tr>
+<tr class="cell">
+  <td>58</td>
+  <td>IMP_GAR_CONFIDI</td>
+  <td>77</td>
+  <td>&nbsp;</td>
+  <td>ZZIMP_GAR_CONFIDI</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Importo garanzia confidi</td>
+</tr>
+<tr class="cell">
+  <td>59</td>
+  <td>IMP_POL_SCOP_INC</td>
+  <td>72</td>
+  <td>&nbsp;</td>
+  <td>ZIMP_POL_SCOP_INC</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>OBSOLETO - scoppio incendio</td>
+</tr>
+<tr class="cell">
+  <td>60</td>
+  <td>IMP_PR_SCOP_INC</td>
+  <td>73</td>
+  <td>&nbsp;</td>
+  <td>ZIMP_PR_SCOP_INC</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>OBSOLETO - scoppio incendio</td>
+</tr>
+<tr class="cell">
+  <td>61</td>
+  <td>INDIRIZZO_BENE</td>
+  <td>87</td>
+  <td>&nbsp;</td>
+  <td>AD_STREET</td>
+  <td>TEXT60</td>
+  <td>CHAR</td>
+  <td>60</td>
+  <td>X</td>
+  <td>Via</td>
+</tr>
+<tr class="cell">
+  <td>62</td>
+  <td>LTV</td>
+  <td>92</td>
+  <td>&nbsp;</td>
+  <td>ZBDMDECIMAL13_2</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Decimal 13 2 BDM</td>
+</tr>
+<tr class="cell">
+  <td>63</td>
+  <td>MANDT</td>
+  <td>1</td>
+  <td>X</td>
+  <td>MANDT</td>
+  <td>MANDT</td>
+  <td>CLNT</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Mandante</td>
+</tr>
+<tr class="cell">
+  <td>64</td>
+  <td>MOD_EROGAZIONE</td>
+  <td>5</td>
+  <td>&nbsp;</td>
+  <td>ZMOD_EROGAZIONE</td>
+  <td>ZMOD_EROGAZIONE</td>
+  <td>CHAR</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Modalità di erogazione</td>
+</tr>
+<tr class="cell">
+  <td>65</td>
+  <td>MOD_RIMBORSO</td>
+  <td>6</td>
+  <td>&nbsp;</td>
+  <td>ZMOD_RIMBORSO</td>
+  <td>ZMOD_RIMBORSO</td>
+  <td>CHAR</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Modalità di rimborso</td>
+</tr>
+<tr class="cell">
+  <td>66</td>
+  <td>N_RATE_PREAMM</td>
+  <td>75</td>
+  <td>&nbsp;</td>
+  <td>ZZN_RATE_PREAMM</td>
+  <td>CHAR4</td>
+  <td>CHAR</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>Rate preammortamento</td>
+</tr>
+<tr class="cell">
+  <td>67</td>
+  <td>N_RATE_RIC</td>
+  <td>49</td>
+  <td>&nbsp;</td>
+  <td>ZBDM_VALUE_ATTR</td>
+  <td>CHAR40</td>
+  <td>CHAR</td>
+  <td>40</td>
+  <td>&nbsp;</td>
+  <td>Valore attributo preventivo BDM</td>
+</tr>
+<tr class="cell">
+  <td>68</td>
+  <td>PERIODDELIBER</td>
+  <td>50</td>
+  <td>&nbsp;</td>
+  <td>ZPERIODDELIBER</td>
+  <td>CHAR30</td>
+  <td>CHAR</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>Periodo STIPULATO</td>
+</tr>
+<tr class="cell">
+  <td>69</td>
+  <td>PERIODICITA_RIC</td>
+  <td>58</td>
+  <td>&nbsp;</td>
+  <td>ZBDM_VALUE_ATTR</td>
+  <td>CHAR40</td>
+  <td>CHAR</td>
+  <td>40</td>
+  <td>&nbsp;</td>
+  <td>Valore attributo preventivo BDM</td>
+</tr>
+<tr class="cell">
+  <td>70</td>
+  <td>PERRATADEL</td>
+  <td>26</td>
+  <td>&nbsp;</td>
+  <td>ZPERRATADEL</td>
+  <td>CHAR30</td>
+  <td>CHAR</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>Periodo rata deliberata</td>
+</tr>
+<tr class="cell">
+  <td>71</td>
+  <td>POLIZZA_SCOP_INC</td>
+  <td>71</td>
+  <td>&nbsp;</td>
+  <td>ZPOLIZZA_SCOP_INC</td>
+  <td>CHAR01</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Polizza Scoppio e Incendio</td>
+</tr>
+<tr class="cell">
+  <td>72</td>
+  <td>PRESENZA_CPI</td>
+  <td>66</td>
+  <td>&nbsp;</td>
+  <td>ZPRESENZA_CPI</td>
+  <td>CHAR1</td>
+  <td>CHAR</td>
+  <td>1</td>
+  <td>&nbsp;</td>
+  <td>Presenza CPI</td>
+</tr>
+<tr class="cell">
+  <td>73</td>
+  <td>PRODOTTO</td>
+  <td>55</td>
+  <td>&nbsp;</td>
+  <td>ZBDM_VALUE_ATTR</td>
+  <td>CHAR40</td>
+  <td>CHAR</td>
+  <td>40</td>
+  <td>&nbsp;</td>
+  <td>Valore attributo preventivo BDM</td>
+</tr>
+<tr class="cell">
+  <td>74</td>
+  <td>PROVINCIA_BENE</td>
+  <td>85</td>
+  <td>&nbsp;</td>
+  <td>REGIO</td>
+  <td>REGIO</td>
+  <td>CHAR</td>
+  <td>3</td>
+  <td>&nbsp;</td>
+  <td>Regione (stato federale, stato federato, provincia, contea)</td>
+</tr>
+<tr class="cell">
+  <td>75</td>
+  <td>RATA</td>
+  <td>62</td>
+  <td>&nbsp;</td>
+  <td>ZRATA</td>
+  <td>INT2</td>
+  <td>INT2</td>
+  <td>5</td>
+  <td>&nbsp;</td>
+  <td>Rata</td>
+</tr>
+<tr class="cell">
+  <td>76</td>
+  <td>SPESE_ISTRUTTORI</td>
+  <td>64</td>
+  <td>&nbsp;</td>
+  <td>ZSPESE_ISTRUTTORIA</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Spese istruttoria</td>
+</tr>
+<tr class="cell">
+  <td>77</td>
+  <td>SPESE_PERIZIA</td>
+  <td>81</td>
+  <td>&nbsp;</td>
+  <td>ZZSPESE_PERIZIA</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Spese Perizia</td>
+</tr>
+<tr class="cell">
+  <td>78</td>
+  <td>SPREADAPPL</td>
+  <td>29</td>
+  <td>&nbsp;</td>
+  <td>ZSPREADAPPL</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Spread Applicato</td>
+</tr>
+<tr class="cell">
+  <td>79</td>
+  <td>STATO_IMMOBILE</td>
+  <td>88</td>
+  <td>&nbsp;</td>
+  <td>ZSTATO_IMM</td>
+  <td>CHAR4</td>
+  <td>CHAR</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>Stato bene da ipotecare</td>
+</tr>
+<tr class="cell">
+  <td>80</td>
+  <td>TAEG</td>
+  <td>63</td>
+  <td>&nbsp;</td>
+  <td>ZTAEG</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Taeg</td>
+</tr>
+<tr class="cell">
+  <td>81</td>
+  <td>TASSAPPL</td>
+  <td>28</td>
+  <td>&nbsp;</td>
+  <td>ZTASSAPPL</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Tasso Applicato</td>
+</tr>
+<tr class="cell">
+  <td>82</td>
+  <td>TASSO_APPL_ER</td>
+  <td>15</td>
+  <td>&nbsp;</td>
+  <td>ZTASSO_APPL_ER</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Tasso Applicato Erogato</td>
+</tr>
+<tr class="cell">
+  <td>83</td>
+  <td>TIPOLOGIA_TASSO</td>
+  <td>69</td>
+  <td>&nbsp;</td>
+  <td>ZBDM_VALUE_ATTR</td>
+  <td>CHAR40</td>
+  <td>CHAR</td>
+  <td>40</td>
+  <td>&nbsp;</td>
+  <td>Valore attributo preventivo BDM</td>
+</tr>
+<tr class="cell">
+  <td>84</td>
+  <td>TIPO_BENE</td>
+  <td>91</td>
+  <td>&nbsp;</td>
+  <td>CHAR4</td>
+  <td>CHAR4</td>
+  <td>CHAR</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>Area non def. in dett., utilizz. event. per livello Patch</td>
+</tr>
+<tr class="cell">
+  <td>85</td>
+  <td>TIPO_CPI</td>
+  <td>79</td>
+  <td>&nbsp;</td>
+  <td>ZZTIPO_CPI</td>
+  <td>CHAR4</td>
+  <td>CHAR</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>Tipo CPI</td>
+</tr>
+<tr class="cell">
+  <td>86</td>
+  <td>TIPO_GAR_DEL_1</td>
+  <td>18</td>
+  <td>&nbsp;</td>
+  <td>ZTIPO_GAR_DEL</td>
+  <td>CHAR30</td>
+  <td>CHAR</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>Tipo garanzia deliberata</td>
+</tr>
+<tr class="cell">
+  <td>87</td>
+  <td>TIPO_GAR_DEL_2</td>
+  <td>19</td>
+  <td>&nbsp;</td>
+  <td>ZTIPO_GAR_DEL</td>
+  <td>CHAR30</td>
+  <td>CHAR</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>Tipo garanzia deliberata</td>
+</tr>
+<tr class="cell">
+  <td>88</td>
+  <td>TIPO_GAR_DEL_3</td>
+  <td>20</td>
+  <td>&nbsp;</td>
+  <td>ZTIPO_GAR_DEL</td>
+  <td>CHAR30</td>
+  <td>CHAR</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>Tipo garanzia deliberata</td>
+</tr>
+<tr class="cell">
+  <td>89</td>
+  <td>TIPO_PIANO_AMM</td>
+  <td>70</td>
+  <td>&nbsp;</td>
+  <td>ZTIPO_PIANO_AMM</td>
+  <td>CHAR30</td>
+  <td>CHAR</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>Tipo piano ammortamento</td>
+</tr>
+<tr class="cell">
+  <td>90</td>
+  <td>TIPO_POL_SI</td>
+  <td>80</td>
+  <td>&nbsp;</td>
+  <td>ZZTIPO_POL_SI</td>
+  <td>CHAR4</td>
+  <td>CHAR</td>
+  <td>4</td>
+  <td>&nbsp;</td>
+  <td>Tipo polizza scoppio incendio</td>
+</tr>
+<tr class="cell">
+  <td>91</td>
+  <td>TIPO_TASSO_EROG</td>
+  <td>24</td>
+  <td>&nbsp;</td>
+  <td>ZTIPO_TASSO_EROG</td>
+  <td>CHAR30</td>
+  <td>CHAR</td>
+  <td>30</td>
+  <td>&nbsp;</td>
+  <td>Tipo tasso erogato</td>
+</tr>
+<tr class="cell">
+  <td>92</td>
+  <td>VALORE_BENE</td>
+  <td>90</td>
+  <td>&nbsp;</td>
+  <td>ZBDMDECIMAL13_2</td>
+  <td>&nbsp;</td>
+  <td>DEC</td>
+  <td>13</td>
+  <td>&nbsp;</td>
+  <td>Decimal 13 2 BDM</td>
+</tr>
+      </table>
+     </td>
+   </tr>
+<br/>
+  <table class="outerTable">
+    <tr>
+      <td><h2>Fixed Domain Values </h2>
+    </tr>
+    <tr>
+      <td><!--This is where our main table begins  -->
+<table class="innerTable">
+<tr>
+  <th>Domain Name</th>
+  <th>Value Low</th>
+  <th>Value High</th>
+  <th>Text</th>
+</tr>
+<tr class="cell">
+  <td>ZCONVENZIONE</td>
+  <td>S</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>ZCONVENZIONE</td>
+  <td>N</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr class="cell">
+  <td>FLAG</td>
+  <td>X</td>
+  <td>&nbsp;</td>
+  <td>Flag set. Event has occurred.</td>
+</tr>
+<tr class="cell">
+  <td>FLAG</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>Flag is Not Set</td>
+</tr>
+<tr class="cell">
+  <td>FLAG</td>
+  <td>X</td>
+  <td>&nbsp;</td>
+  <td>Flag set. Event has occurred.</td>
+</tr>
+<tr class="cell">
+  <td>FLAG</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>Flag is Not Set</td>
+</tr>
+      </table>
+     </td>
+   </tr>
+   <tr>
+<td class="footer">Extracted by Mass Download version 1.5.5 - E.G.Mellodew. 1998-2020. Sap Release 740</td>
+   </tr>
+</table>
+</body>
+</html>

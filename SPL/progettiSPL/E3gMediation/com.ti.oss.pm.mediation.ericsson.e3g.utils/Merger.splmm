@@ -1,0 +1,127 @@
+namespace com.ti.oss.pm.mediation.ericsson.e3g.utils;
+
+use com.ti.oss.pm.mediation.ericsson.e3g.utils::*;
+
+<%
+	use Cwd;
+	
+	my $paralNormLe;
+	my $paralEnrich;
+	my $paralArNormLe;
+	
+	my $cfgFile = cwd($0) . "/perl_params.cfg";
+	open my $cfgFh, "<", $cfgFile or die "Could not open the input file: " . $cfgFile;
+	
+	while(my $line = <$cfgFh>) {
+		my @ar = split("=", $line);
+		if($ar[0] =~ "paralArNormLe") {
+			$paralArNormLe = $ar[1];
+		}
+		elsif($ar[0] =~ "paralNormLe") {
+			$paralNormLe = $ar[1];
+		}
+		elsif($ar[0] =~ "paralEnrich") {
+			$paralEnrich = $ar[1];
+		}
+	}
+	close $cfgFh;
+%>
+
+public composite Merger(input In0;
+ 						output 
+ 						<%for(my $i=0; $i<$paralEnrich; $i++) {%>
+ 						Out<%=$i%>
+ 						<%if($i<$paralEnrich - 1) {print ",";}%>
+ 						<%}%>)
+{
+	type 
+		TmpMeasureDataType = MeasHeader mHeader, MeasData mData, boolean eof;
+		
+	graph
+		(
+			<%for(my $i = 0; $i < $paralEnrich; $i++) {%>
+			stream<list<I> measures> EofMerger<%=$i%>
+			<%if($i < $paralEnrich - 1) {print ";";}%>
+			<%}%>
+		) as MergeByEof = Custom(In0 as I)
+		{
+			logic state :
+			{
+				mutable map<rstring, uint32> eofCounterByFile = {};
+				mutable map<rstring, list<I>> cache = {};
+				mutable uint32 portIdx = 0u;
+				mutable list<I> tmpList = [];
+			}
+			onTuple I :
+			{
+				
+				if(I.eof)
+				{
+					if(has(eofCounterByFile, I.mHeader.fileHeader.fName))
+					{
+						eofCounterByFile[I.mHeader.fileHeader.fName]++;
+						appTrc(Trace.debug, "Merger: EOF : " + I.mHeader.fileHeader.fName + " - COUNT: " + (rstring)eofCounterByFile[I.mHeader.fileHeader.fName]);
+						
+					}				
+					else
+					{
+						insertM(eofCounterByFile, I.mHeader.fileHeader.fName, (uint32)1);
+						//appTrc(Trace.debug, "Merger: " + I.mHeader.fileHeader.fName + " - COUNT: " + (rstring)eofCounterByFile[I.mHeader.fileHeader.fName]);
+						
+					}
+					<% my $paralTotal = $paralArNormLe * $paralNormLe; %>
+					if(eofCounterByFile[I.mHeader.fileHeader.fName] == (uint32)<%=$paralTotal%>) 
+					{
+						//appTrc(Trace.debug, "Merger: " + I.mHeader.fileHeader.fName + " - COUNT: " + (rstring)eofCounterByFile[I.mHeader.fileHeader.fName] + ". ParalTotal: " + (rstring)<%=$paralTotal%>);
+					
+						submit({measures = cache[I.mHeader.fileHeader.fName]}, portIdx);
+						submit(Sys.WindowMarker, portIdx);
+	       				portIdx++;
+	       				if(portIdx == (uint32)<%=$paralEnrich%>) portIdx = 0u;
+						//submit({measures = cache[I.mHeader.fileHeader.fName]}, EofMerger);
+						//submit(Sys.WindowMarker, EofMerger);
+						removeM(eofCounterByFile, I.mHeader.fileHeader.fName);
+						removeM(cache, I.mHeader.fileHeader.fName);
+					}
+					
+				}
+				else
+				{
+					if(has(cache, I.mHeader.fileHeader.fName))
+					{
+						//appTrc(Trace.trace, "Merger: appending tuple " + (rstring)I);
+						appendM(cache[I.mHeader.fileHeader.fName], I);
+						//insertM(cache, I.mHeader.fileHeader.fName, tmpList);
+					}				
+					else
+					{
+						appendM(tmpList, I);
+						//appTrc(Trace.trace, "Merger: appending tuple List " + (rstring)tmpList);
+						insertM(cache, I.mHeader.fileHeader.fName, tmpList);
+						clearM(tmpList);
+					}
+				
+				}
+			}
+			config
+				threadedPort: queue(I, Sys.Wait, 1000000);
+		}
+		
+		<%for(my $i=0; $i<$paralEnrich; $i++) {%>
+		stream<MeasHeader mHeader, MeasData mData> Out<%=$i%> = Custom(EofMerger<%=$i%> as I)
+		{
+			logic onTuple I :
+			{
+
+				for(TmpMeasureDataType x in I.measures)
+				{
+					//appTrc(Trace.trace, "Merger: submitting tuple " + (rstring)x.mData);
+					submit({mHeader = x.mHeader, mData = x.mData}, Out<%=$i%>);
+				}
+				submit(Sys.WindowMarker, Out<%=$i%>);
+			}
+			config
+				threadedPort: queue(I, Sys.Wait, 1000);
+		}
+		<%}%>
+}

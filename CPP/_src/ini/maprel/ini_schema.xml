@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+   <body>
+
+      <section type="common" name="EVT">
+         Event Management System parameters
+         <parameter name="SSID-OWNER" mandatory="1" default="TIM" type="char" maxlength="8">
+            EMS Owner
+         </parameter>
+         <parameter name="SSID-VERSION" mandatory="1" default="A09" type="char" maxlength="3">
+            EMS Version
+         </parameter>
+         <parameter name="NBR-ALERT-MSG" mandatory="0" default="1" type="numeric" minvalue="1" maxvalue="1024">
+            EMS Alert Messages for time interval
+         </parameter>
+         <parameter name="INTERVAL-ALERT-MSG-TIME" mandatory="0" default="300" type="numeric" minvalue="1" maxvalue="86400">
+            EMS Time Interval (seconds) for same event
+         </parameter>
+         <parameter name="SSID-NUMBER" mandatory="1" default="760" type="numeric" minvalue="0" maxvalue="32767">
+            EMS Subsystem
+         </parameter>
+      </section>
+      <section type="common" name="LOG">
+         Log parameters
+         <parameter name="PATH-LOG" mandatory="1" type="folder">
+            LOG Guardian directory
+         </parameter>
+         <parameter name="NUM-DAYS-OF-LOG" mandatory="0" default="3" type="numeric" minvalue="0" maxvalue="30">
+            LOG Days
+         </parameter>
+         <parameter name="TRACE-STRING" mandatory="0" type="char" maxlength="128">
+            LOG Trace string
+         </parameter>
+         <parameter name="TRACE-LEVEL" mandatory="0" default="1" type="select">
+            LOG Level
+            <option value="1">
+               ERROR
+            </option>
+            <option value="5">
+               WARNING
+            </option>
+            <option value="9">
+               INFO
+            </option>
+            <option value="10">
+               DEBUG
+            </option>
+            <option value="11">
+               DEBUG2
+            </option>
+         </parameter>
+      </section>
+      <section type="common" name="STAT">
+         Statistics parameters
+         <parameter name="TIMEOUT-BUMP" mandatory="0" default="5" type="numeric" minvalue="1" maxvalue="15">
+            STAT Interval (minutes)
+         </parameter>
+         <parameter name="NBR-MAX-REG" mandatory="1" type="numeric" minvalue="1" maxvalue="1024">
+            STAT Register max number
+         </parameter>
+         <parameter name="GROUP" mandatory="1" default="39" type="numeric" minvalue="1" maxvalue="32767">
+            STAT Group
+         </parameter>
+         <parameter name="FW-GROUP" mandatory="1" default="37" type="numeric" minvalue="1" maxvalue="32767">
+            STAT Framework Group
+         </parameter>
+      </section>
+      <section type="common" name="COMMON">
+         Common parameters
+         <parameter name="TIMEOUT-RELOAD-PARAM" mandatory="0" default="15" type="numeric" minvalue="1" maxvalue="60">
+            Reload parameters interval (minutes)
+         </parameter>
+         <parameter name="MGT-TEST-CONTROL" mandatory="0" default="0" type="select">
+            Enable test MGT  for which relay is done using point code list
+            <option value="0">
+               TEST-MGT-OFF
+            </option>
+            <option value="1">
+               TEST-MGT-ON
+            </option>
+         </parameter>
+         <parameter name="MGT-TEST" mandatory="0" type="char" maxlength="32">
+            Test MGT value
+         </parameter>
+      </section>
+      <section type="common" name="PC">
+         Point Code parameters
+         <parameter name="TFS-NET-ID" mandatory="1" default="0" type="numeric" minvalue="0" maxvalue="65535">
+            Local network identifier
+         </parameter>
+         <parameter name="TFS-NET-NAME" mandatory="1" default="NETWORK1" type="char" maxlength="9">
+            Local network name
+         </parameter>
+         <parameter name="TFS-INTERNAL-ROUTING-STRATEGY" mandatory="0" default="0" type="select">
+            Internal Routing Strategy
+            <option value="0">
+               INTERNAL-ROUTING-OFF
+            </option>
+            <option value="1">
+               INTERNAL-ROUTING-ON
+            </option>
+         </parameter>
+         <parameter name="TFS-VPC" mandatory="1" default="0" type="numeric" minvalue="0" maxvalue="32767">
+            Local Virtual Point Code
+         </parameter>
+         <parameter name="AUTO-ALLOW-VPC" mandatory="0" default="0" type="select">
+            Auto enable VPC after inhibition
+            <option value="0">
+               MANUAL
+            </option>
+            <option value="1">
+               AUTO
+            </option>
+         </parameter>
+         <parameter name="VPC-ALLOW-TIMEOUT" mandatory="0" default="5" type="numeric" minvalue="1" maxvalue="60">
+            Time interval (minutes) before enabling VPC
+         </parameter>
+         <parameter name="FAULT-MNGT-STRATEGY" mandatory="0" default="0" type="select">
+            Strategy when GTT server returns an error
+            <option value="0">
+               CONTINUE
+            </option>
+            <option value="1">
+               VPC-DOWN
+            </option>
+            <option value="2">
+               USE-PC-LIST
+            </option>
+         </parameter>
+         <parameter name="POINT-CODE-LIST" mandatory="1" type="char" maxlength="254">
+            STP Point Code list
+         </parameter>
+         <parameter name="TSC-PC-LIST" mandatory="1" default="0" type="char" maxlength="254">
+            Dual IMSI Point Code list (used in Italy)
+         </parameter>
+         <parameter name="HLR-SSN" mandatory="0" default="0" type="numeric" minvalue="0" maxvalue="32767">
+            Used for relaying if defined and GTT server returns 0
+         </parameter>
+      </section>
+   </body>

@@ -1,0 +1,107 @@
+namespace com.ti.oss.common.cdr.parser.esgsn;
+
+use com.ti.oss.common.types::*;
+
+type EOD = tuple<boolean endOfData>;
+
+type EsgsnCdr = FileHeader, EOD, tuple<
+			int32   recordType,
+			rstring networkInitiation,
+			rstring servedIMSI,
+			rstring servedIMEI,
+			rstring sgsnAddress,
+			rstring msNetworkCapability,
+			rstring routingArea,
+			rstring locationArea,
+			rstring cellIdentifier,
+			uint32  chargingID,
+			rstring ggsnAddressUsed,
+			rstring accessPointNameNI,
+			rstring pdpType,
+			rstring servedPDPAddress,
+
+			// listOfTrafficVolumes
+			list<rstring> qosRequested,
+			list<rstring> qosNegotiated,
+			list<int32>   dataVolumeGPRSUplink,
+			list<int32>   dataVolumeGPRSDownlink,
+			list<int32>   changeCondition,
+			list<rstring> changeTime,
+			list<rstring> userLocationInformation,
+
+			rstring recordOpeningTime,
+			int32   duration,
+			rstring sgsnChange,
+			int32   causeForRecClosing,
+			int32   diagnostics,
+			int32   recordSequenceNumber,
+			rstring nodeID,
+
+			// recordExtensions
+			list<rstring> identifier,
+			list<rstring> significance,
+			// information
+			list<int32>   extendedDiagnostics,
+			// information.extendedDiagnosticsBssgp
+			list<int32>   extendedDiagnosticsBssgp_indexes,
+			list<int32>   extendedDiagnosticsBssgp_sizes,
+			list<int32>   extendedDiagnosticsBssgp_tsBssgpRanapCause,
+			list<int32>   extendedDiagnosticsBssgp_tsBssgpRanaPMessageType,
+			list<int32>   extendedDiagnosticsBssgp_tsBssgpRanapMessageSource,
+			list<rstring> extendedDiagnosticsBssgp_tsBssgpRanapCauseTimeStamp,
+			// information.extendedDiagnosticsRanap
+			list<int32>   extendedDiagnosticsRanap_indexes,
+			list<int32>   extendedDiagnosticsRanap_sizes,
+			list<int32>   extendedDiagnosticsRanap_tsBssgpRanapCause,
+			list<int32>   extendedDiagnosticsRanap_tsBssgpRanaPMessageType,
+			list<int32>   extendedDiagnosticsRanap_tsBssgpRanapMessageSource,
+			list<rstring> extendedDiagnosticsRanap_tsBssgpRanapCauseTimeStamp,
+
+			uint32  localSequenceNumber,
+			int32   apnSelectionMode,
+			rstring accessPointNameOI,
+			rstring servedMSISDN,
+			rstring chargingCharacteristics,
+			int32   rATType,
+
+			// cAMELInformationPDP
+			rstring       cAMELInformationPDP_sCFAddress,
+			int32         cAMELInformationPDP_serviceKey,
+			int32         cAMELInformationPDP_defaultTransactionHandling,
+			rstring       cAMELInformationPDP_cAMELAccessPointNameNI,
+			rstring       cAMELInformationPDP_cAMELAccessPointNameOI,
+			int32         cAMELInformationPDP_numberOfDPEncountered,
+			list<rstring> cAMELInformationPDP_levelOfCAMELService,
+			rstring       cAMELInformationPDP_freeFormatData,
+			rstring       cAMELInformationPDP_fFDAppendIndicator,
+
+			int32   chChSelectionMode,
+			rstring dynamicAddressFlag,
+			rstring pLMNIdentifier,
+			rstring mSTimeZone,
+
+			rstring serviceCentre,
+			rstring recordingEntity,
+			rstring messageReference,
+			rstring eventTimeStamp,
+			int32   smsResult,
+			rstring destinationNumber,
+
+			// cAMELInformationSMS
+			rstring cAMELInformationSMS_sCFAddress,
+			int32   cAMELInformationSMS_serviceKey,
+			int32   cAMELInformationSMS_defaultSMSHandling,
+			rstring cAMELInformationSMS_cAMELCallingPartyNumber,
+			rstring cAMELInformationSMS_cAMELDestinationSubscriberNumber,
+			rstring cAMELInformationSMS_cAMELSMSCAddress,
+			rstring cAMELInformationSMS_freeFormatData,
+			rstring cAMELInformationSMS_smsReferenceNumber,
+
+			int32 numberOfSM,
+			rstring locationAreaLastSM,
+			rstring routingAreaLastSM,
+			rstring cellIdentifierLastSM,
+			rstring pLMNIdentifierLastSM
+		>;
+	
+	type EsgsnCdrWithROP = tuple<EsgsnCdr esgsnCdr, float64 startROP, float64 endROP, boolean changed, boolean waitEnd>;

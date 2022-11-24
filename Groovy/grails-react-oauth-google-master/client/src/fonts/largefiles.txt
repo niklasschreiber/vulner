@@ -1,0 +1,1 @@
+"D:\_SRC\BUGGYCODE\Groovy\grails-react-oauth-google-master\client\src\fonts\FontAwesome.otf" 

@@ -1,0 +1,962 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="Gestione_searchBPF"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:nj="clr-namespace:Newtonsoft.Json;assembly=Newtonsoft.Json"
+ xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json"
+ xmlns:s="clr-namespace:SuccessioniLibrary_v01;assembly=SuccessioniLibrary_v01"
+ xmlns:s1="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
+    <x:Property Name="serializerSettings" Type="InArgument(nj:JsonSerializerSettings)" />
+    <x:Property Name="messagePesOutput" Type="OutArgument(s:MessagePes)" />
+    <x:Property Name="ProdottiDaGestireDeserializzato" Type="InArgument(njl:JObject)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>Gestione_searchBPF_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>SuccessioniLibrary_v01</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+      <x:String>System.Globalization</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>SuccessioniLibrary_v01</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Flowchart DisplayName="Gestione_searchBPF" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+    <Flowchart.Variables>
+      <Variable x:TypeArguments="s:SearchBPFOutput" Name="searchBPFOutput" />
+      <Variable x:TypeArguments="x:String" Name="TipoChiamata" />
+      <Variable x:TypeArguments="scg:IEnumerable(ui:QueueItem)" Name="listaItems" />
+      <Variable x:TypeArguments="s:MessagePes" Name="messagePes" />
+      <Variable x:TypeArguments="x:Boolean" Name="RapportoDaAggiungere" />
+      <Variable x:TypeArguments="x:Boolean" Name="RapportoChiuso" />
+      <Variable x:TypeArguments="s:Rapporto" Name="RapportoAppoggio" />
+      <Variable x:TypeArguments="s:Rapporto" Name="BPFContenitore" />
+      <Variable x:TypeArguments="x:String" Name="numeroEconomale" />
+      <Variable x:TypeArguments="x:String" Name="ProdottiDaGestire" />
+      <Variable x:TypeArguments="s1:DateTime" Name="DataFineRecupero" />
+      <Variable x:TypeArguments="x:Boolean" Name="DaBloccare" />
+      <Variable x:TypeArguments="scg:IEnumerable(ui:QueueItem)" Name="ItemsOnDemand" />
+      <Variable x:TypeArguments="ui:QueueItem" Name="ItemOnDemand" />
+      <Variable x:TypeArguments="s:BloccoRapporti" Name="BloccoRapportiInput" />
+      <Variable x:TypeArguments="x:String" Name="GuidUnivoco" />
+    </Flowchart.Variables>
+    <Flowchart.StartNode>
+      <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_2">
+        <Sequence DisplayName="Inizializza variabili" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
+            <Assign.To>
+              <OutArgument x:TypeArguments="s:SearchBPFOutput">[searchBPFOutput]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="s:SearchBPFOutput">[JsonConvert.DeserializeObject(Of SearchBPFOutput)(in_TransactionItem.SpecificContent("BodyJSON").ToString.Replace("""||null||""","null"), serializerSettings)]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[TipoChiamata]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("TipoChiamata").ToString]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:GetQueueItems Duration="{x:Null}" From="{x:Null}" Priority="{x:Null}" Skip="{x:Null}" TimeoutMS="{x:Null}" To="{x:Null}" DisplayName="Get Item Anag" FilterStrategy="StartsWith" sap2010:WorkflowViewState.IdRef="GetQueueItems_1" QueueItemStates="Successful" QueueName="q_Successioni_Esiti3270" Reference="[in_TransactionItem.Reference.Substring(0,36) + &quot;_searchAnag_&quot;]" Result="[listaItems]" Top="1" />
+          <ui:ForEach x:TypeArguments="ui:QueueItem" CurrentIndex="{x:Null}" DisplayName="For Each - set MessagePes" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[listaItems]">
+            <ui:ForEach.Body>
+              <ActivityAction x:TypeArguments="ui:QueueItem">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="ui:QueueItem" Name="queueItem" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_1">
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_3">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s:MessagePes">[messagePes]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s:MessagePes">[JsonConvert.DeserializeObject(Of messagePes)(queueItem.Output("Json").ToString, serializerSettings)]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEach.Body>
+          </ui:ForEach>
+        </Sequence>
+        <FlowStep.Next>
+          <FlowDecision x:Name="__ReferenceID1" Condition="[searchBPFOutput.CodiceErrore = 0]" DisplayName="Codice Errore = 0?" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
+            <FlowDecision.True>
+              <FlowStep x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowStep_1">
+                <Assign sap2010:WorkflowViewState.IdRef="Assign_4">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="s:MessagePes">[messagePesOutput]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="s:MessagePes">[New MessagePes]</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <FlowStep.Next>
+                  <FlowStep x:Name="__ReferenceID4" sap2010:WorkflowViewState.IdRef="FlowStep_4">
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_34">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="s:Rapporto">[BPFContenitore]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="s:Rapporto">[messagePes.GetRapporto(searchBPFOutput.NumeroProdotto,"BPF")]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <FlowStep.Next>
+                      <FlowDecision x:Name="__ReferenceID5" Condition="[TipoChiamata.Equals(&quot;bloccoSbloccoRapporti&quot;)]" DisplayName="bloccoSbloccoRapporti?" sap2010:WorkflowViewState.IdRef="FlowDecision_2">
+                        <FlowDecision.True>
+                          <FlowStep x:Name="__ReferenceID6" sap2010:WorkflowViewState.IdRef="FlowStep_5">
+                            <ui:GetQueueItems Duration="{x:Null}" From="{x:Null}" Priority="{x:Null}" Skip="{x:Null}" TimeoutMS="{x:Null}" To="{x:Null}" DisplayName="Get Queue items OnDemand" FilterStrategy="StartsWith" sap2010:WorkflowViewState.IdRef="GetQueueItems_2" QueueItemStates="All" QueueName="q_Successioni_OnDemand" Reference="[&quot;Case_GUID:&quot; + in_TransactionItem.Reference.Substring(0,36)]" Result="[ItemsOnDemand]" Top="1" />
+                            <FlowStep.Next>
+                              <FlowStep x:Name="__ReferenceID7" sap2010:WorkflowViewState.IdRef="FlowStep_6">
+                                <Assign sap2010:WorkflowViewState.IdRef="Assign_51">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="ui:QueueItem">[ItemOnDemand]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="ui:QueueItem">[ItemsOnDemand.First]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                                <FlowStep.Next>
+                                  <FlowStep x:Name="__ReferenceID8" sap2010:WorkflowViewState.IdRef="FlowStep_7">
+                                    <Assign sap2010:WorkflowViewState.IdRef="Assign_52">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="s:BloccoRapporti">[BloccoRapportiInput]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="s:BloccoRapporti">[JsonConvert.DeserializeObject(Of BloccoRapporti)(in_TransactionItem.SpecificContent("datiSuccessioni").ToString, serializerSettings)]</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                    <FlowStep.Next>
+                                      <FlowStep x:Name="__ReferenceID9" sap2010:WorkflowViewState.IdRef="FlowStep_8">
+                                        <ui:ForEach x:TypeArguments="s:BPF" CurrentIndex="{x:Null}" DisplayName="For Each BPF" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[searchBPFOutput.BPF]">
+                                          <ui:ForEach.Body>
+                                            <ActivityAction x:TypeArguments="s:BPF">
+                                              <ActivityAction.Argument>
+                                                <DelegateInArgument x:TypeArguments="s:BPF" Name="BPFItem" />
+                                              </ActivityAction.Argument>
+                                              <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                                                <If Condition="[BPFItem.NumeroBuono.Equals(BPFContenitore.NumeroRapporto)]" sap2010:WorkflowViewState.IdRef="If_11">
+                                                  <If.Then>
+                                                    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_15">
+                                                      <Assign sap2010:WorkflowViewState.IdRef="Assign_53">
+                                                        <Assign.To>
+                                                          <OutArgument x:TypeArguments="x:String">[numeroEconomale]</OutArgument>
+                                                        </Assign.To>
+                                                        <Assign.Value>
+                                                          <InArgument x:TypeArguments="x:String">[BPFItem.NumeroEconomale]</InArgument>
+                                                        </Assign.Value>
+                                                      </Assign>
+                                                      <ui:Break sap2010:WorkflowViewState.IdRef="Break_1" />
+                                                    </Sequence>
+                                                  </If.Then>
+                                                </If>
+                                              </Sequence>
+                                            </ActivityAction>
+                                          </ui:ForEach.Body>
+                                        </ui:ForEach>
+                                        <FlowStep.Next>
+                                          <FlowStep x:Name="__ReferenceID10" sap2010:WorkflowViewState.IdRef="FlowStep_9">
+                                            <Sequence DisplayName="Blocco BPF" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                                              <Assign sap2010:WorkflowViewState.IdRef="Assign_54">
+                                                <Assign.To>
+                                                  <OutArgument x:TypeArguments="x:String">[GuidUnivoco]</OutArgument>
+                                                </Assign.To>
+                                                <Assign.Value>
+                                                  <InArgument x:TypeArguments="x:String">[Guid.NewGuid.ToString]</InArgument>
+                                                </Assign.Value>
+                                              </Assign>
+                                              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreaJson_Blocco_BPF workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Json_3270Framework\CreaJson_Blocco_BPF.xaml">
+                                                <ui:InvokeWorkflowFile.Arguments>
+                                                  <OutArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</OutArgument>
+                                                  <InArgument x:TypeArguments="x:String" x:Key="NumeroProdotto">[BPFContenitore.NumeroRapporto]</InArgument>
+                                                  <InArgument x:TypeArguments="x:String" x:Key="GuidUnivoco">[GuidUnivoco]</InArgument>
+                                                  <InArgument x:TypeArguments="x:String" x:Key="NumeroEconomale">[numeroEconomale]</InArgument>
+                                                  <InArgument x:TypeArguments="x:String" x:Key="CodiceFiscale">[BloccoRapportiInput.CodiceFiscale]</InArgument>
+                                                </ui:InvokeWorkflowFile.Arguments>
+                                              </ui:InvokeWorkflowFile>
+                                              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke AddRecuperoDati3270 workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddRecuperoDati3270.xaml">
+                                                <ui:InvokeWorkflowFile.Arguments>
+                                                  <InArgument x:TypeArguments="x:String" x:Key="TipologiaQuery">queryBlocco</InArgument>
+                                                  <InArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</InArgument>
+                                                  <InArgument x:TypeArguments="x:String" x:Key="itemReference">[in_TransactionItem.Reference.Substring(0,36) +"_queryBlocco_" + GuidUnivoco]</InArgument>
+                                                  <InArgument x:TypeArguments="x:String" x:Key="Priority">[in_TransactionItem.Priority.ToString]</InArgument>
+                                                  <InArgument x:TypeArguments="x:String" x:Key="TipoChiamata">[TipoChiamata]</InArgument>
+                                                </ui:InvokeWorkflowFile.Arguments>
+                                              </ui:InvokeWorkflowFile>
+                                            </Sequence>
+                                          </FlowStep>
+                                        </FlowStep.Next>
+                                      </FlowStep>
+                                    </FlowStep.Next>
+                                  </FlowStep>
+                                </FlowStep.Next>
+                              </FlowStep>
+                            </FlowStep.Next>
+                          </FlowStep>
+                        </FlowDecision.True>
+                        <FlowDecision.False>
+                          <FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_3">
+                            <ui:ForEach x:TypeArguments="s:BPF" CurrentIndex="{x:Null}" DisplayName="Set BPF e Blocco" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[searchBPFOutput.BPF]">
+                              <ui:ForEach.Body>
+                                <ActivityAction x:TypeArguments="s:BPF">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="s:BPF" Name="Buono" />
+                                  </ActivityAction.Argument>
+                                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_8">
+                                    <If Condition="[Buono.DataEstinzione.Year &gt; 1]" DisplayName="If data estionzione valorizzata?" sap2010:WorkflowViewState.IdRef="If_2">
+                                      <If.Then>
+                                        <If Condition="[Buono.DataEstinzione &lt; messagePes.DeCuius.DataDelDecesso]" DisplayName="If carta estinta ante data decesso?" sap2010:WorkflowViewState.IdRef="If_1">
+                                          <If.Then>
+                                            <Assign sap2010:WorkflowViewState.IdRef="Assign_5">
+                                              <Assign.To>
+                                                <OutArgument x:TypeArguments="x:Boolean">[RapportoDaAggiungere]</OutArgument>
+                                              </Assign.To>
+                                              <Assign.Value>
+                                                <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                              </Assign.Value>
+                                            </Assign>
+                                          </If.Then>
+                                          <If.Else>
+                                            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_3">
+                                              <Assign sap2010:WorkflowViewState.IdRef="Assign_6">
+                                                <Assign.To>
+                                                  <OutArgument x:TypeArguments="x:Boolean">[RapportoDaAggiungere]</OutArgument>
+                                                </Assign.To>
+                                                <Assign.Value>
+                                                  <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                                </Assign.Value>
+                                              </Assign>
+                                              <Assign sap2010:WorkflowViewState.IdRef="Assign_7">
+                                                <Assign.To>
+                                                  <OutArgument x:TypeArguments="x:Boolean">[RapportoChiuso]</OutArgument>
+                                                </Assign.To>
+                                                <Assign.Value>
+                                                  <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                                </Assign.Value>
+                                              </Assign>
+                                            </Sequence>
+                                          </If.Else>
+                                        </If>
+                                      </If.Then>
+                                      <If.Else>
+                                        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_4">
+                                          <Assign sap2010:WorkflowViewState.IdRef="Assign_8">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:Boolean">[RapportoDaAggiungere]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign sap2010:WorkflowViewState.IdRef="Assign_9">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:Boolean">[RapportoChiuso]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                        </Sequence>
+                                      </If.Else>
+                                    </If>
+                                    <If Condition="[RapportoDaAggiungere]" DisplayName="If rapporto da Aggiungere?" sap2010:WorkflowViewState.IdRef="If_5">
+                                      <If.Then>
+                                        <Sequence DisplayName="Set BPF" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                                          <Assign sap2010:WorkflowViewState.IdRef="Assign_22">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="s:Rapporto">[RapportoAppoggio]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="s:Rapporto">[New Rapporto]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign sap2010:WorkflowViewState.IdRef="Assign_23">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:String">[RapportoAppoggio.NumeroRapporto]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:String">[Buono.NumeroBuono]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign sap2010:WorkflowViewState.IdRef="Assign_24">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:String">[RapportoAppoggio.TipologiaRapporto]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:String">BPF</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign sap2010:WorkflowViewState.IdRef="Assign_25">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:String">[RapportoAppoggio.NDGIntestazioneRapporto]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:String">[BPFContenitore.NDGIntestazioneRapporto]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign sap2010:WorkflowViewState.IdRef="Assign_35">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:String">[RapportoAppoggio.NDGDeCuius]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:String">[BPFContenitore.NDGDeCuius]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign sap2010:WorkflowViewState.IdRef="Assign_48">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:Boolean">[RapportoAppoggio.Cointestato]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:Boolean">[BPFContenitore.Cointestato]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign sap2010:WorkflowViewState.IdRef="Assign_26">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="s:Rapporto">[RapportoAppoggio]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="s:Rapporto">[RapportoAppoggio.AddEsito(New Errore(0,"3270",""))]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign sap2010:WorkflowViewState.IdRef="Assign_27">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:String">[RapportoAppoggio.Descrizione]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:String">[Buono.TipoStrumento]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign sap2010:WorkflowViewState.IdRef="Assign_28">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:String">[RapportoAppoggio.UPEmissione.Frazionario]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:String">[Buono.FrazionarioEmittente]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign sap2010:WorkflowViewState.IdRef="Assign_29">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="s:Rapporto">[RapportoAppoggio]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="s:Rapporto">[RapportoAppoggio.AddDettaglioStato(New DettaglioStato( Buono.StatoBuono))]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign sap2010:WorkflowViewState.IdRef="Assign_36">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:Decimal">[RapportoAppoggio.Valore]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:Decimal">[Buono.ValoreNominale]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign sap2010:WorkflowViewState.IdRef="Assign_41">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="s1:DateTime">[DataFineRecupero]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="s1:DateTime">[Date.ParseExact(ProdottiDaGestireDeserializzato("DataFineRecupero").ToString, "d/M/yyyy H:mm", System.Globalization.DateTimeFormatInfo.InvariantInfo)]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign sap2010:WorkflowViewState.IdRef="Assign_42">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="s1:DateTime">[RapportoAppoggio.TimestampInterrogazioneCapienzaAttuale]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="s1:DateTime">[DataFineRecupero]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign sap2010:WorkflowViewState.IdRef="Assign_47">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="s1:DateTime">[RapportoAppoggio.TimestampVerificaStatoRapporto]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="s1:DateTime">[DataFineRecupero]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign sap2010:WorkflowViewState.IdRef="Assign_37">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:Boolean">[RapportoAppoggio.PariFacoltaDiRimborso]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:Boolean">[Buono.CPFR]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <Assign>
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="s1:DateTime">[RapportoAppoggio.DataEmissione]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="s1:DateTime">[Buono.DataEmissione]</InArgument>
+                                            </Assign.Value>
+                                            <sap2010:WorkflowViewState.IdRef>Assign_55</sap2010:WorkflowViewState.IdRef>
+                                          </Assign>
+                                          <If Condition="[RapportoChiuso]" DisplayName="If rapporto chiuso?" sap2010:WorkflowViewState.IdRef="If_6">
+                                            <If.Then>
+                                              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_9">
+                                                <Assign sap2010:WorkflowViewState.IdRef="Assign_30">
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="s1:DateTime">[RapportoAppoggio.DataScadenzaOChiusura]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="s1:DateTime">[Buono.DataEstinzione]</InArgument>
+                                                  </Assign.Value>
+                                                </Assign>
+                                                <Assign sap2010:WorkflowViewState.IdRef="Assign_31">
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="x:String">[RapportoAppoggio.StatoRapporto]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="x:String">CHIUSO</InArgument>
+                                                  </Assign.Value>
+                                                </Assign>
+                                              </Sequence>
+                                            </If.Then>
+                                            <If.Else>
+                                              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_12">
+                                                <Assign sap2010:WorkflowViewState.IdRef="Assign_32">
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="s1:DateTime">[RapportoAppoggio.DataScadenzaOChiusura]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="s1:DateTime">[Buono.DataScadenza]</InArgument>
+                                                  </Assign.Value>
+                                                </Assign>
+                                                <Assign sap2010:WorkflowViewState.IdRef="Assign_43">
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="x:String">[RapportoAppoggio.StatoRapporto]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="x:String">SBLOCCATO</InArgument>
+                                                  </Assign.Value>
+                                                </Assign>
+                                              </Sequence>
+                                            </If.Else>
+                                          </If>
+                                          <Assign sap2010:WorkflowViewState.IdRef="Assign_33">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="s:MessagePes">[messagePesOutput]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="s:MessagePes">[messagePesOutput.AddRapporto(RapportoAppoggio)]</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <If Condition="[BPFContenitore.Cointestato]" DisplayName="If cointestato" sap2010:WorkflowViewState.IdRef="If_9">
+                                            <If.Then>
+                                              <If Condition="[Buono.CPFR]" DisplayName="If pari facolta di rimborso?" sap2010:WorkflowViewState.IdRef="If_8">
+                                                <If.Then>
+                                                  <Assign sap2010:WorkflowViewState.IdRef="Assign_44">
+                                                    <Assign.To>
+                                                      <OutArgument x:TypeArguments="x:Boolean">[DaBloccare]</OutArgument>
+                                                    </Assign.To>
+                                                    <Assign.Value>
+                                                      <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                                    </Assign.Value>
+                                                  </Assign>
+                                                </If.Then>
+                                                <If.Else>
+                                                  <Assign sap2010:WorkflowViewState.IdRef="Assign_45">
+                                                    <Assign.To>
+                                                      <OutArgument x:TypeArguments="x:Boolean">[DaBloccare]</OutArgument>
+                                                    </Assign.To>
+                                                    <Assign.Value>
+                                                      <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                                    </Assign.Value>
+                                                  </Assign>
+                                                </If.Else>
+                                              </If>
+                                            </If.Then>
+                                            <If.Else>
+                                              <Assign sap2010:WorkflowViewState.IdRef="Assign_46">
+                                                <Assign.To>
+                                                  <OutArgument x:TypeArguments="x:Boolean">[DaBloccare]</OutArgument>
+                                                </Assign.To>
+                                                <Assign.Value>
+                                                  <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                                </Assign.Value>
+                                              </Assign>
+                                            </If.Else>
+                                          </If>
+                                          <If Condition="[((TipoChiamata.Equals(&quot;bloccoPerCF&quot;) Or&#xA;TipoChiamata.Equals(&quot;InsertPes&quot;)) And&#xA;DaBloccare)]" DisplayName="If da bloccare?" sap2010:WorkflowViewState.IdRef="If_7">
+                                            <If.Then>
+                                              <Sequence DisplayName="Inserisci Blocco" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                                                <Sequence.Variables>
+                                                  <Variable x:TypeArguments="x:String" Name="GuidUnivoco" />
+                                                </Sequence.Variables>
+                                                <Assign sap2010:WorkflowViewState.IdRef="Assign_38">
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="x:String">[numeroEconomale]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="x:String">[Buono.NumeroEconomale]</InArgument>
+                                                  </Assign.Value>
+                                                </Assign>
+                                                <Assign sap2010:WorkflowViewState.IdRef="Assign_39">
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="x:String">[GuidUnivoco]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="x:String">[Guid.NewGuid.ToString]</InArgument>
+                                                  </Assign.Value>
+                                                </Assign>
+                                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreaJson_Blocco_BPF workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Json_3270Framework\CreaJson_Blocco_BPF.xaml">
+                                                  <ui:InvokeWorkflowFile.Arguments>
+                                                    <OutArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</OutArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="NumeroProdotto">[Buono.NumeroBuono]</InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="GuidUnivoco">[GuidUnivoco]</InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="NumeroEconomale">[numeroEconomale]</InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="CodiceFiscale">[messagePes.DeCuius.CodiceFiscale]</InArgument>
+                                                  </ui:InvokeWorkflowFile.Arguments>
+                                                </ui:InvokeWorkflowFile>
+                                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke AddRecuperoDati3270 workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddRecuperoDati3270.xaml">
+                                                  <ui:InvokeWorkflowFile.Arguments>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="TipologiaQuery">queryBlocco</InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="itemReference">[messagePes.GUID +"_queryBlocco_" + GuidUnivoco]</InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="Priority">[in_TransactionItem.Priority.ToString]</InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="TipoChiamata">[TipoChiamata]</InArgument>
+                                                  </ui:InvokeWorkflowFile.Arguments>
+                                                </ui:InvokeWorkflowFile>
+                                              </Sequence>
+                                            </If.Then>
+                                          </If>
+                                          <If Condition="[((TipoChiamata.Equals(&quot;sbloccoPerCF&quot;)) And&#xA;DaBloccare)]" DisplayName="If da sbloccare?" sap2010:WorkflowViewState.IdRef="If_10">
+                                            <If.Then>
+                                              <Sequence DisplayName="Inserisci Blocco" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                                                <Assign sap2010:WorkflowViewState.IdRef="Assign_50">
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="x:String">[GuidUnivoco]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="x:String">[Guid.NewGuid.ToString]</InArgument>
+                                                  </Assign.Value>
+                                                </Assign>
+                                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreaJson_Sblocco_BPF workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Json_3270Framework\CreaJson_Sblocco_BPF.xaml">
+                                                  <ui:InvokeWorkflowFile.Arguments>
+                                                    <OutArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</OutArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="NumeroProdotto">[Buono.NumeroBuono]</InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="GuidUnivoco">[GuidUnivoco]</InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="CodiceFiscale">[messagePes.DeCuius.CodiceFiscale]</InArgument>
+                                                  </ui:InvokeWorkflowFile.Arguments>
+                                                </ui:InvokeWorkflowFile>
+                                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke AddRecuperoDati3270 workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Processi_Accodanti\AddRecuperoDati3270.xaml">
+                                                  <ui:InvokeWorkflowFile.Arguments>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="TipologiaQuery">querySblocco</InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="ProdottiDaGestire">[ProdottiDaGestire]</InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="itemReference">[messagePes.GUID +"_querySblocco_" + GuidUnivoco]</InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="Priority">[in_TransactionItem.Priority.ToString]</InArgument>
+                                                    <InArgument x:TypeArguments="x:String" x:Key="TipoChiamata">[TipoChiamata]</InArgument>
+                                                  </ui:InvokeWorkflowFile.Arguments>
+                                                </ui:InvokeWorkflowFile>
+                                              </Sequence>
+                                            </If.Then>
+                                          </If>
+                                        </Sequence>
+                                      </If.Then>
+                                    </If>
+                                  </Sequence>
+                                </ActivityAction>
+                              </ui:ForEach.Body>
+                            </ui:ForEach>
+                          </FlowStep>
+                        </FlowDecision.False>
+                      </FlowDecision>
+                    </FlowStep.Next>
+                  </FlowStep>
+                </FlowStep.Next>
+              </FlowStep>
+            </FlowDecision.True>
+          </FlowDecision>
+        </FlowStep.Next>
+      </FlowStep>
+    </Flowchart.StartNode>
+    <x:Reference>__ReferenceID0</x:Reference>
+    <x:Reference>__ReferenceID1</x:Reference>
+    <x:Reference>__ReferenceID2</x:Reference>
+    <x:Reference>__ReferenceID3</x:Reference>
+    <x:Reference>__ReferenceID4</x:Reference>
+    <x:Reference>__ReferenceID5</x:Reference>
+    <x:Reference>__ReferenceID6</x:Reference>
+    <x:Reference>__ReferenceID7</x:Reference>
+    <x:Reference>__ReferenceID8</x:Reference>
+    <x:Reference>__ReferenceID9</x:Reference>
+    <x:Reference>__ReferenceID10</x:Reference>
+    <sads:DebugSymbol.Symbol>d3tDOlxVc2Vyc1xUU1RfQ09MTFJQQTI4XERlc2t0b3BcU3VjY2Vzc2lvbmkgUmVsZWFzZVxSZWxlYXNlXFVpUGF0aFxTdWNjZXNzaW9uaU1haW5cR2VzdGlvbmVFc2l0aTMyNzBcR2VzdGlvbmVfc2VhcmNoQlBGLnhhbWzXAVUDhwUPAgEBagmPARQDAfgBkQE7kQFfAwH3AZQBEZsBGgMB8wGeARWlAR4DAe0BpwFHpwGBAQMB6wGFAh3uBCoCATKqAR2qAb8DAgEtrQEhtAEqAgEptwElvgEuAgElwQEp2gE2AgEa3QEt+AE4AgECawtyFAMBiQJzC3oUAwGFAnsLe6kDAwGAAnwLjgEYAwH5AZkBQJkBUAMB9gGWAUGWAVMDAfQBowFCowGAAQMB8AGgAUOgAVMDAe4BhQKtAYUCxAEDAeoBiwIj6wQuAgEzqgHSAqoBmwMCATGqAbkDqgG8AwIBMKoBrwKqAccCAgEvqgGjA6oBtAMCAS6yAVCyAWUCASyvAVGvAV8CASq8AVi8Ad4BAgEouQFZuQFuAgEmwQG1AcEBzAECASTHAS/XAToCARveAS/lATgCARbmAS/uAUcCAQzvAS/3AUcCAQNwP3DeAQMBjAJtQG1RAwGKAng2eHMDAYgCdTd1RQMBhgJ7vQJ7iAMDAYQCe6MDe6YDAwGDAnuZAnuyAgMBggJ7kAN7ngMDAYECfKsBfLkBAwH/AYIBEYsBHAMB+gGMAiXDAioDAdABxAIl6gQqAgE0yAEx1gE2AgEc4wFa4wFxAgEZ4AFb4AFoAgEX6AF16AGIAQIBFOwBcOwBkwECARPqAW7qAXsCARHpAXHpAZABAgEQ5gHqAeYBlwICAQ/rAXLrAYMBAgEN9AFr9AGRAQIBC/MBcPMBvQECAQryAXTyAYcBAgEI8QFx8QF8AgEH9QFv9QF9AgEF7wHqAe8BlwICAQSDAROKARwDAfsBjAIzjAJXAwHRAY4CKa0CLgMB2wGwAinBAjQDAdIBxAIzxAJLAgE1xgIp6AQ0AgE3yAE/yAF8AgEdygE11AFAAgEeiAFCiAGnAQMB/gGFAUOFAU8DAfwBjgI3jgJ2AwHcAZACLZcCNgMB5gGaAi2rAjgDAd0BsQIruAI0AwHXAbkCK8ACNAMB0wHHAivOAjQDAcwBzwIr1gI0AwHJAdcCK94CNAMBxgHfAivmAjQDAcMB5wIr7gI0AwHAAe8CK/YCNAMBvQH3Aiv+AjQDAbkB/wIrhgM0AwG2AYcDK44DNAMBswGPAyuWAzQDAa8BlwMrngM0AwGsAZ8DK6YDNAMBqAGnAyuuAzQDAaQBrwMrtgM0AwGgAbcDK74DNAMBnQG/AyvHAzQDAZoByAMr8QMwAwGJAfIDK/kDNAMBgwH6AyudBDACAXOeBCvIBDACAVLJBCvnBDACATjLATfSAUACASDTATfTAW0CAR+VAlmVAl4DAekBkgJakgJwAwHnAZsCL6ICOAMB4gGjAi+qAjgDAd4BtgJXtgJbAwHaAbMCWLMCbgMB2AG+Ale+AlwDAdYBuwJYuwJoAwHUAcwCWMwCZgMBzwHJAlnJAmsDAc0B1AJW1AJpAwHLAdECV9ECeAMBygHcAlbcAlkDAcgB2QJX2QJ7AwHHAeQCVuQCfgMBxQHhAlfhAoEBAwHEAewCVuwCcQMBwgHpAlfpAnQDAcEB9AJX9AJzAwG/AfECWPECdgMBvgH8Alj8AowBAwG8AfkCWfkCawMBugGEA1aEA2sDAbgBgQNXgQN1AwG3AYwDVowDcgMBtQGJA1eJA4EBAwG0AZQDWJQDowEDAbIBkQNZkQNrAwGwAZwDV5wDbQMBrgGZA1iZA3EDAa0BpANZpAPwAQMBqwGhA1qhA2wDAakBrANZrANrAwGmAakDWqkDkwEDAaUBtANZtANrAwGiAbEDWrEDiwEDAaEBvANXvANjAwGfAbkDWLkDgAEDAZ4BxANZxANuAwGcAcEDWsEDegMBmwHIAznIA0sDAYoBygMv2wM6AwGTAd4DL+8DOgMBjAH3A1r3A4oBAwGGAfQDW/QDbQMBhAH6Azn6A1cCAXT8Ay+RBDQCAXmUBC+bBDgCAXWeBDmeBLIBAgFToAQvxgQ6AgFXyQQ5yQSBAQIBOcsEL+UEOgIBPNABYtABewIBI80BY80BdAIBIaACW6ACXwMB5QGdAlydAnIDAeMBqAJbqAJfAwHhAaUCXKUCbAMB3wHLAzHSAzoDAZcB0wMx2gM6AwGUAd8DMeYDOgMBkAHnAzHuAzoDAY0B/AM9/ANLAgF6/gMzhQQ8AgF/iAQzjwQ8AgF7mQRbmQRfAgF4lgRclgRoAgF2pAQxqwQ6AgFvrAQxswQ6AgFrtAQxvARJAgFhvQQxxQRJAgFYzAQx0wQ6AgFO1AQx2wRJAgFG3AQx5ARJAgE90ANf0AN1AwGZAc0DYM0DiAEDAZgB2ANc2ANiAwGWAdUDXdUDfQMBlQHkA1/kA3MDAZIB4QNg4QOIAQMBkQHsA1zsA2UDAY8B6QNd6QN9AwGOAYMEX4MEZAMBggGABGCABGwDAYABjQRfjQRjAgF+igRgigRsAgF8qQRcqQRzAgFypgRdpgRuAgFwsQRcsQRzAgFurgRdrgRqAgFstgR3tgSKAQIBaboEcroElAECAWi4BHC4BH0CAWa3BHO3BIYBAgFltATsAbQEmQICAWS5BHS5BIUBAgFiwgRtwgSTAQIBYMEEcsEEogECAV/ABHbABIkBAgFdvwRzvwR+AgFcwwRxwwR/AgFavQTsAb0EmQICAVnRBFzRBHMCAVHOBF3OBGoCAU/WBHfWBIoBAgFM2QRy2QSUAQIBS9gEcNgEfQIBSdcEc9cEhgECAUjUBO0B1ASbAgIBR+EEbeEEkwECAUXgBHLgBKMBAgFE3wR23wSJAQIBQt4Ec94EfwIBQeIEceIEfwIBP9wE7AHcBJkCAgE+</sads:DebugSymbol.Symbol>
+  </Flowchart>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="242,60">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="242,60">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GetQueueItems_1" sap:VirtualizedContainerService.HintSize="242,22" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="264,184">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="287,318">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="242,60">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_34" sap:VirtualizedContainerService.HintSize="242,60">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GetQueueItems_2" sap:VirtualizedContainerService.HintSize="200,22">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_51" sap:VirtualizedContainerService.HintSize="242,60">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_52" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_53" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Break_1" sap:VirtualizedContainerService.HintSize="242,22" />
+      <sap2010:ViewStateData Id="Sequence_15" sap:VirtualizedContainerService.HintSize="264,246">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_11" sap:VirtualizedContainerService.HintSize="464,394" />
+      <sap2010:ViewStateData Id="Sequence_14" sap:VirtualizedContainerService.HintSize="486,518">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_4" sap:VirtualizedContainerService.HintSize="502,652" />
+      <sap2010:ViewStateData Id="Assign_54" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_6" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_7" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Sequence_16" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_9">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">90,954.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">90,860</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">190,911 190,954.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_7">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">69,750</av:Point>
+            <av:Size x:Key="ShapeSize">242,60</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">190,810 190,860</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_6">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">68.895,641</av:Point>
+            <av:Size x:Key="ShapeSize">242,60</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">189.895,701 189.895,731 190,731 190,750</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_5">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">90,569</av:Point>
+            <av:Size x:Key="ShapeSize">200,22</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">190,591 190,621 189.895,621 189.895,641</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="264,284">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="531,432" />
+      <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="264,284">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="923,580" />
+      <sap2010:ViewStateData Id="Assign_22" sap:VirtualizedContainerService.HintSize="776,60" />
+      <sap2010:ViewStateData Id="Assign_23" sap:VirtualizedContainerService.HintSize="776,60" />
+      <sap2010:ViewStateData Id="Assign_24" sap:VirtualizedContainerService.HintSize="776,60" />
+      <sap2010:ViewStateData Id="Assign_25" sap:VirtualizedContainerService.HintSize="776,60" />
+      <sap2010:ViewStateData Id="Assign_35" sap:VirtualizedContainerService.HintSize="776,60" />
+      <sap2010:ViewStateData Id="Assign_48" sap:VirtualizedContainerService.HintSize="776,60" />
+      <sap2010:ViewStateData Id="Assign_26" sap:VirtualizedContainerService.HintSize="776,60" />
+      <sap2010:ViewStateData Id="Assign_27" sap:VirtualizedContainerService.HintSize="776,60" />
+      <sap2010:ViewStateData Id="Assign_28" sap:VirtualizedContainerService.HintSize="776,60" />
+      <sap2010:ViewStateData Id="Assign_29" sap:VirtualizedContainerService.HintSize="776,60" />
+      <sap2010:ViewStateData Id="Assign_36" sap:VirtualizedContainerService.HintSize="776,60" />
+      <sap2010:ViewStateData Id="Assign_41" sap:VirtualizedContainerService.HintSize="776,60" />
+      <sap2010:ViewStateData Id="Assign_42" sap:VirtualizedContainerService.HintSize="776,60" />
+      <sap2010:ViewStateData Id="Assign_47" sap:VirtualizedContainerService.HintSize="776,60" />
+      <sap2010:ViewStateData Id="Assign_37" sap:VirtualizedContainerService.HintSize="776,60" />
+      <sap2010:ViewStateData Id="Assign_55" sap:VirtualizedContainerService.HintSize="776,60" />
+      <sap2010:ViewStateData Id="Assign_30" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_31" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_9" sap:VirtualizedContainerService.HintSize="264,284">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_32" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_43" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_12" sap:VirtualizedContainerService.HintSize="264,284">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="776,432" />
+      <sap2010:ViewStateData Id="Assign_33" sap:VirtualizedContainerService.HintSize="776,60" />
+      <sap2010:ViewStateData Id="Assign_44" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_45" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_8" sap:VirtualizedContainerService.HintSize="509,208" />
+      <sap2010:ViewStateData Id="Assign_46" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_9" sap:VirtualizedContainerService.HintSize="776,356" />
+      <sap2010:ViewStateData Id="Assign_38" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_39" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_1" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_2" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Sequence_11" sap:VirtualizedContainerService.HintSize="336,538">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_7" sap:VirtualizedContainerService.HintSize="776,690" />
+      <sap2010:ViewStateData Id="Assign_50" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_5" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_4" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Sequence_13" sap:VirtualizedContainerService.HintSize="336,438">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_10" sap:VirtualizedContainerService.HintSize="776,590" />
+      <sap2010:ViewStateData Id="Sequence_10" sap:VirtualizedContainerService.HintSize="798,4012">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="923,4160" />
+      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="945,4904">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_3" sap:VirtualizedContainerService.HintSize="961,5038" />
+      <sap2010:ViewStateData Id="FlowStep_3">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">560,484.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">130,485.5 130,544.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowDecision_2" sap:VirtualizedContainerService.HintSize="134,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <av:Point x:Key="ShapeLocation">350.5,466.5</av:Point>
+            <av:Size x:Key="ShapeSize">134,87</av:Size>
+            <av:PointCollection x:Key="FalseConnector">484.5,510 560,510</av:PointCollection>
+            <av:PointCollection x:Key="TrueConnector">350.5,510 190,510 190,569</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_4">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">8.895,410</av:Point>
+            <av:Size x:Key="ShapeSize">242,60</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">250.895,440 384,440 384,466.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">9,320</av:Point>
+            <av:Size x:Key="ShapeSize">242,60</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">130,380 129.895,380 129.895,410</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowDecision_1" sap:VirtualizedContainerService.HintSize="102,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <av:Point x:Key="ShapeLocation">260.641666666667,216.5</av:Point>
+            <av:Size x:Key="ShapeSize">102,87</av:Size>
+            <av:PointCollection x:Key="TrueConnector">260.641666666667,260 130,260 130,320</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">210,114.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">310,165.5 310,195.5 311.641666666667,195.5 311.641666666667,216.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Flowchart_1" sap:VirtualizedContainerService.HintSize="840,1142">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <av:Point x:Key="ShapeLocation">280,2.5</av:Point>
+            <av:Size x:Key="ShapeSize">60,75</av:Size>
+            <x:Double x:Key="Width">826</x:Double>
+            <av:PointCollection x:Key="ConnectorLocation">310,77.5 310,114.5</av:PointCollection>
+            <x:Double x:Key="Height">1106</x:Double>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Gestione_searchBPF_1" sap:VirtualizedContainerService.HintSize="880,1222" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

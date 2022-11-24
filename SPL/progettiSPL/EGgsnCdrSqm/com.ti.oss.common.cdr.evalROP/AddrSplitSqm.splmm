@@ -1,0 +1,188 @@
+namespace com.ti.oss.common.cdr.evalROP;
+
+use com.ti.oss.common.cdr.util::*;
+use com.ti.oss.common.types::*;
+use com.ti.oss.common.cdr.types::*;
+
+<%
+	my $parallelSQM = 16;
+%>
+
+
+public composite AddrSplitSqm (input stream<CdrSchemaForAggrSQM> IROP, stream<rstring centrale> E; 
+                            output <%for(my $i = 0; $i < $parallelSQM; $i++) {%>
+							stream<CdrSchemaForAggrSQM> OROP<%=$i%>,
+							stream<rstring centrale> Oemm<%=$i%>
+							<%if($i != $parallelSQM - 1) {
+							print ",";
+							}
+							}%>
+							)
+{
+	type AddrTable = map<rstring, uint32>;
+	
+	graph
+	
+		(<%for(my $i = 0; $i < $parallelSQM; $i++) {%>
+		stream<CdrSchemaForAggrSQM> OROP<%=$i%>;
+		stream<rstring centrale> Oemm<%=$i%>
+		<%if($i != $parallelSQM - 1) {
+			print ";";
+		}
+		}%>
+		) = Custom(IROP as I; E)
+		{
+		logic state:
+			{
+				mutable uint32 countPort = 0;
+				mutable AddrTable addrTable;
+			} 
+		
+			
+			onTuple E :
+			{
+				mutable list<rstring> rete = tokenize(E.centrale, ",", true);
+				mutable rstring centrale = regexReplace(rete[1],"\n","",true);
+				centrale = regexReplace(centrale,"\r","",true);
+				
+				if (rete[0] == "FOLDER")
+				{
+					<%for(my $i = 0; $i < $parallelSQM; $i++) {%>
+						submit({centrale=centrale},Oemm<%=$i%>);
+					<%}%>			
+				}else{
+					
+					if(has(addrTable, centrale) == false)
+					{	
+						insertM( addrTable, centrale, countPort);
+						
+						<%for(my $i = 0; $i < $parallelSQM; $i++) {%>
+							<%if($i > 0) { print "else ";}%>
+							if (countPort==(uint32)<%=$i%>)
+							{
+								submit({centrale=centrale},Oemm<%=$i%>);	
+							}
+						<%}%>
+						
+						countPort ++;
+						if (countPort == ((uint32)<%=$parallelSQM%>-(uint32)1))
+						{
+							countPort = (uint32)0;
+						}
+					}
+					else
+					{
+						<%for(my $i = 0; $i < $parallelSQM; $i++) {%>
+							<%if($i > 0) { print "else ";}%>
+							if (addrTable[centrale]==(uint32)<%=$i%>)
+							{
+								submit({centrale=centrale},Oemm<%=$i%>);
+							}
+						<%}%>
+					}
+				}
+			}
+			
+			
+			onTuple I : 
+			{	
+				if(has(addrTable, I.cdrSchema.nodeId) == false)
+				{	
+					insertM( addrTable, I.cdrSchema.nodeId, countPort);
+					
+					<%for(my $i = 0; $i < $parallelSQM; $i++) {%>
+						<%if($i > 0) { print "else ";}%>
+						if (countPort==(uint32)<%=$i%>)
+						{
+							submit(I,OROP<%=$i%>);	
+						}
+					<%}%>
+					
+					countPort ++;
+					if (countPort == ((uint32)<%=$parallelSQM%>-(uint32)1))
+					{
+						countPort = (uint32)0;
+					}
+				}
+				else
+				{
+					<%for(my $i = 0; $i < $parallelSQM; $i++) {%>
+						<%if($i > 0) { print "else ";}%>
+						if (addrTable[I.cdrSchema.nodeId]==(uint32)<%=$i%>)
+						{
+							submit(I,OROP<%=$i%>);	
+						}
+					<%}%>
+				}
+	        }
+	        
+	        config
+	        	threadedPort: queue(I, Sys.Wait, 100000);
+		}
+}
+
+
+
+public composite AddrSplitSqmSgw (input stream<CdrSchemaForAggrSGWSQM> IROPSGW; 
+                            output <%for(my $i = 0; $i < 2; $i++) {%>
+							stream<CdrSchemaForAggrSGWSQM> OROPSGW<%=$i%>
+							<%if($i != 2 - 1) {
+							print ",";
+							}
+							}%>
+							)
+{
+	type AddrTable = map<rstring, uint32>;
+	
+	graph
+	
+		(<%for(my $i = 0; $i < 2; $i++) {%>
+		stream<CdrSchemaForAggrSGWSQM> OROPSGW<%=$i%>
+		<%if($i != 2 - 1) {
+			print ";";
+		}
+		}%>
+		) = Custom(IROPSGW as ISGW)
+		{
+		logic state:
+			{
+				mutable uint32 countPort = 0;
+				mutable AddrTable addrTable;
+			} 
+		    
+	        onTuple ISGW : 
+			{	
+				if(has(addrTable, ISGW.cdrSchema.nodeId) == false)
+				{	
+					insertM( addrTable, ISGW.cdrSchema.nodeId, countPort);
+					
+					<%for(my $i = 0; $i < 2; $i++) {%>
+						<%if($i > 0) { print "else ";}%>
+						if (countPort==(uint32)<%=$i%>)
+						{
+							submit(ISGW,OROPSGW<%=$i%>);	
+						}
+					<%}%>
+					
+					countPort ++;
+					if (countPort == ((uint32)2-(uint32)1))
+					{
+						countPort = (uint32)0;
+					}
+				}
+				else
+				{
+					<%for(my $i = 0; $i < 2; $i++) {%>
+						<%if($i > 0) { print "else ";}%>
+						if (addrTable[ISGW.cdrSchema.nodeId]==(uint32)<%=$i%>)
+						{
+							submit(ISGW,OROPSGW<%=$i%>);	
+						}
+					<%}%>
+				}
+	        }
+	        
+	        config
+	        	threadedPort: queue(ISGW, Sys.Wait, 100000);
+		}
+}

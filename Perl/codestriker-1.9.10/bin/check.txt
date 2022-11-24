@@ -1,0 +1,4890 @@
+Index: data/src/java/com/nuix/swing/filechooser/JFileChooserFactory.java
+===================================================================
+--- data/src/java/com/nuix/swing/filechooser/JFileChooserFactory.java	(revision 2561)
++++ data/src/java/com/nuix/swing/filechooser/JFileChooserFactory.java	(working copy)
+@@ -36,6 +36,20 @@
+     // Methods
+ 
+     /**
++     * Convenience method to get the last directory for a given state key,
++     * without wasting time creating the file chooser itself.
++     *
++     * @param stateKey the key to use for storing the state.
++     * @return the last directory.
++     */
++    public static File getLastDirectory(String stateKey)
++    {
++        String value = prefs.get(stateKey, null);
++        return value == null ? null : new File(value);
++    }
++
++
++    /**
+      * Gets a reference to the file chooser, preconfigured to the appropriate
+      * state.
+      * 
+@@ -61,10 +75,10 @@
+         });
+ 
+         // Reset some of the chooser's properties to the defaults.
+-        String lastDirectory = prefs.get(stateKey, null);
++        File lastDirectory = getLastDirectory(stateKey);
+         if (lastDirectory != null)
+         {
+-            chooser.setCurrentDirectory(new File(lastDirectory));
++            chooser.setCurrentDirectory(lastDirectory);
+         }
+         
+         return chooser;
+Index: data/src/java/com/nuix/swing/widgets/FileChooserField.java
+===================================================================
+--- data/src/java/com/nuix/swing/widgets/FileChooserField.java	(revision 2561)
++++ data/src/java/com/nuix/swing/widgets/FileChooserField.java	(working copy)
+@@ -150,6 +150,7 @@
+         int buttonHeight = fileTextField.getPreferredSize().height +
+                            (textFieldInsets.top + textFieldInsets.bottom) / 2;
+         browseButton.setMargin(textFieldInsets);
++        //noinspection SuspiciousNameCombination
+         browseButton.setPreferredSize(new Dimension(buttonHeight, buttonHeight));
+         browseButton.addActionListener(new ActionListener()
+         {
+@@ -179,6 +180,16 @@
+     // Methods
+ 
+     /**
++     * Gets the initial directory.
++     *
++     * @return the initial directory.
++     */
++    public File getInitialDirectory()
++    {
++        return JFileChooserFactory.getLastDirectory(directoryStateKey);
++    }
++
++    /**
+      * Tests if the input for this field is valid.  The input is valid if the file
+      * passes the checks put in place by the file checker.
+      *
+Index: data/src/java/com/nuix/data/EvidenceInfo.java
+===================================================================
+--- data/src/java/com/nuix/data/EvidenceInfo.java	(revision 2561)
++++ data/src/java/com/nuix/data/EvidenceInfo.java	(working copy)
+@@ -1,31 +1,31 @@
+ package com.nuix.data;
+ 
+-import com.nuix.investigator.cases.CaseEvidence;
+-import com.nuix.investigator.cases.CaseUtils;
+-import com.nuix.util.FileUtils;
+-import com.nuix.log.Channel;
+-import com.nuix.log.ChannelManager;
+-import com.nuix.product.LicencingException;
+-import com.nuix.product.Licence;
+-import com.nuix.data.email.PstFileData;
+-import com.nuix.data.email.DbxEmailFileData;
+-import com.nuix.data.email.MbxEmailFileData;
+-import com.nuix.data.email.NsfFileData;
+-import com.nuix.data.email.MboxFileData;
+-import com.nuix.data.email.EmlFileData;
+-import com.nuix.data.email.ImapPopAccountData;
+-
++import java.io.File;
++import java.io.IOException;
+ import java.net.URI;
+ import java.net.URISyntaxException;
++import java.util.ArrayList;
+ import java.util.List;
+-import java.util.ArrayList;
+-import java.io.File;
+-import java.io.IOException;
+ 
+ import org.jdom.Document;
++import org.jdom.Element;
+ import org.jdom.Namespace;
+-import org.jdom.Element;
+ 
++import com.nuix.data.email.DbxEmailFileData;
++import com.nuix.data.email.EmlFileData;
++import com.nuix.data.email.ImapPopAccountData;
++import com.nuix.data.email.MboxFileData;
++import com.nuix.data.email.MbxEmailFileData;
++import com.nuix.data.email.NsfFileData;
++import com.nuix.data.email.PstFileData;
++import com.nuix.investigator.cases.CaseEvidence;
++import com.nuix.investigator.cases.CaseUtils;
++import com.nuix.log.Channel;
++import com.nuix.log.ChannelManager;
++import com.nuix.product.Licence;
++import com.nuix.product.LicencingException;
++import com.nuix.util.FileUtils;
++
+ /**
+  * Container class to hold the data required for a evidence group.
+  */
+@@ -57,6 +57,11 @@
+         ChannelManager.getChannel("INVESTIGATOR.EvidenceGroup");
+ 
+     /**
++     * Will be set to {@code true} later when the evidence is saved to disk.
++     */
++    private boolean saved;
++
++    /**
+      * The {@link URI} instance encapsulated in this evidence group.
+      */
+     private List<URI> contents;
+@@ -93,9 +98,15 @@
+      * if it already existed in the set and hence wasn't added.
+      * @throws LicencingException if the licence for the application does not
+      *         permit the data to be processed.
++     * @throws IllegalStateException if this evidence is already saved to disk.
+      */
+     public boolean addURI(URI dataURI)
+     {
++        if (saved)
++        {
++            throw new IllegalStateException("Cannot add URI to a saved evidence folder");
++        }
++
+         // If general data is not enabled, we will potentially need to check
+         // the type of the data.
+         if (!Licence.getInstance().isEnabled(GENERAL_DATA_FEATURE_NAME))
+@@ -136,11 +147,18 @@
+     }
+ 
+     /**
+-     * Remove an {@link URI} from the set.
++     * Remove a {@link URI} from the set.
++     *
+      * @param dataURIToRemove The {@link URI} to remove. 
++     * @throws IllegalStateException if this evidence is already saved to disk.
+      */
+     public void removeURI(URI dataURIToRemove)
+     {
++        if (saved)
++        {
++            throw new IllegalStateException("Cannot remove URI from a saved evidence folder");
++        }
++
+         contents.remove(dataURIToRemove);
+     }
+ 
+@@ -156,9 +174,16 @@
+ 
+     /**
+      * Clear out the contents of this EvidenceInfo instance.
++     *
++     * @throws IllegalStateException if this evidence is already saved to disk.
+      */
+     public void clearContents()
+     {
++        if (saved)
++        {
++            throw new IllegalStateException("Cannot clear a saved evidence folder");
++        }
++
+         contents.clear();
+     }
+ 
+@@ -174,6 +199,7 @@
+ 
+     /**
+      * Get the name of this set of evidence.
++     *
+      * @return String The name of the evidence.
+      */
+     public String getName()
+@@ -183,15 +209,23 @@
+ 
+     /**
+      * Set the name of the evidence.
++     *
+      * @param name The name of the evidence.
++     * @throws IllegalStateException if this evidence is already saved to disk.
+      */
+     public void setName(String name)
+     {
++        if (saved)
++        {
++            throw new IllegalStateException("Cannot set name on a saved evidence folder");
++        }
++
+         this.name = name;
+     }
+ 
+     /**
+      * Get the description associated with this set of evidence.
++     *
+      * @return String the description.
+      */
+     public String getDescription()
+@@ -201,14 +235,32 @@
+ 
+     /**
+      * Set the description of this evidence set.
++     *
+      * @param description The description.
++     * @throws IllegalStateException if this evidence is already saved to disk.
+      */
+     public void setDescription(String description)
+     {
++        if (saved)
++        {
++            throw new IllegalStateException("Cannot set description on a saved evidence folder");
++        }
++
+         this.description = description;
+     }
+ 
+     /**
++     * Checks if this evidence has already been saved to disk.  If it is saved to disk
++     * already then attempts to modify it will fail.
++     *
++     * @return {@code true} if this evidence has been saved to disk, {@code false} otherwise.
++     */
++    public boolean isSaved()
++    {
++        return saved;
++    }
++
++    /**
+      * Indicates whether some other object is "equal to" this one.
+      *
+      * @param obj the reference object with which to compare.
+@@ -290,6 +342,8 @@
+         try
+         {
+             CaseUtils.saveXml(xmlDoc, xmlFile);
++
++            saved = true;
+         }
+         catch (IOException e)
+         {
+@@ -341,6 +395,8 @@
+                     contents.add(new URI(uriStr));
+                 }
+             }
++
++            saved = true;
+         }
+         catch (URISyntaxException e)
+         {
+Index: data/src/java/com/nuix/investigator/MainWindow.java
+===================================================================
+--- data/src/java/com/nuix/investigator/MainWindow.java	(revision 2561)
++++ data/src/java/com/nuix/investigator/MainWindow.java	(working copy)
+@@ -9,7 +9,6 @@
+ import java.awt.event.WindowEvent;
+ import java.beans.PropertyChangeEvent;
+ import java.beans.PropertyChangeListener;
+-import java.util.List;
+ 
+ import javax.swing.BorderFactory;
+ import javax.swing.JFrame;
+@@ -19,26 +18,24 @@
+ import com.nuix.investigator.actions.file.ExitAction;
+ import com.nuix.investigator.browser.BrowserPanel;
+ import com.nuix.investigator.cases.Case;
+-import com.nuix.investigator.cases.CaseEvidence;
+ import com.nuix.investigator.cases.CaseHistoryDetail;
++import com.nuix.investigator.cases.CommonMetadata;
+ import com.nuix.investigator.cases.ModifyCaseEvidencePane;
+-import com.nuix.investigator.cases.CaseFactory;
+-import com.nuix.investigator.cases.CommonMetadata;
+-import com.nuix.investigator.cases.event.StatusBarLoadingAdapter;
++import com.nuix.investigator.cases.creation.AddLoadableEvidencePane;
+ import com.nuix.investigator.history.HistoryRecord;
+ import com.nuix.investigator.images.ImageFactory;
++import com.nuix.investigator.options.global.GlobalPreferences;
+ import com.nuix.investigator.processing.ProcessingRunner;
+ import com.nuix.investigator.search.SearchPanel;
+-import com.nuix.investigator.options.global.GlobalPreferences;
+ import com.nuix.log.Channel;
+ import com.nuix.log.ChannelManager;
++import com.nuix.resources.ResourceFactory;
+ import com.nuix.resources.ResourceGroup;
+-import com.nuix.resources.ResourceFactory;
++import com.nuix.swing.context.ContextContainer;
++import com.nuix.swing.context.ContextTracker;
++import com.nuix.swing.context.JTabbedPaneContextHelper;
+ import com.nuix.swing.widgets.JAutotitleTabbedPane;
+ import com.nuix.swing.widgets.JStatusBar;
+-import com.nuix.swing.context.ContextTracker;
+-import com.nuix.swing.context.ContextContainer;
+-import com.nuix.swing.context.JTabbedPaneContextHelper;
+ 
+ /**
+  * The main window of the application.
+@@ -210,31 +207,26 @@
+                         HistoryRecord.Type.SESSION, HistoryRecord.Point.START,
+                         new CaseHistoryDetail(this.currentCase.getLocation())));
+ 
+-                // Start with the processing if the previous run was not completed.
+-                // Otherwise, start with a search panel.
+-                // XXX: Come up with a better idea for detecting that there's work to be done.
+-                ProcessingRunner runner = null;
+-                List<CaseEvidence> evidenceSet = this.currentCase.getEvidenceSet();
+-                if (evidenceSet.isEmpty())
++                if (this.currentCase.isCompound())
+                 {
+-                    new ModifyCaseEvidencePane(getCurrentCase()).showDialog(this);
++                    // If a compound case has no simple cases added to it, we prompt the
++                    // user to choose some simple cases to add.
++                    if (this.currentCase.isEmpty())
++                    {
++                        new ModifyCaseEvidencePane(this.currentCase).showDialog(this);
++                    }
++
++                    loadingCompleted();
+                 }
+-                else if (evidenceSet.size() == 1)
++                else
+                 {
+-                    runner = new ProcessingRunner(this, evidenceSet.get(0));
+-                    if (runner.hasWork())
++                    // If a simple case has no evidence loaded in it, we prompt the user to load some.
++                    if (this.currentCase.isEmpty())
+                     {
+-                        runner.run();
++                        new AddLoadableEvidencePane(this.currentCase).showDialog(this);
+                     }
+-                    else
+-                    {
+-                        runner = null;
+-                    }
+-                }
+ 
+-                if (runner == null)
+-                {
+-                    loadingCompleted();
++                    maybeLoadEvidence();
+                 }
+             }
+ 
+@@ -244,6 +236,26 @@
+     }
+ 
+     /**
++     * Checks if there is any evidence yet to be loaded in the current case,
++     * and loads it if there is.
++     */
++    public void maybeLoadEvidence()
++    {
++        // Either the user just added evidence, or there was already evidence.
++        // Now complete any processing work that has to be done.
++        // XXX: Come up with a better idea for detecting that there's work to be done.
++        ProcessingRunner runner = new ProcessingRunner(this, this.currentCase.getEvidenceSet().get(0));
++        if (runner.hasWork())
++        {
++            runner.run();
++        }
++        else
++        {
++            loadingCompleted();
++        }
++    }
++
++    /**
+      * Called when loading completes.
+      * <p>
+      * Populates the initial tabs in the main window and refreshes the case in case
+Index: data/src/java/com/nuix/investigator/cases/CaseContentTreeModel.java
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/CaseContentTreeModel.java	(revision 2561)
++++ data/src/java/com/nuix/investigator/cases/CaseContentTreeModel.java	(working copy)
+@@ -1,18 +1,19 @@
+ package com.nuix.investigator.cases;
+ 
++import java.net.URI;
++import java.util.ArrayList;
++import java.util.List;
++
++import javax.swing.event.EventListenerList;
++import javax.swing.event.TreeModelEvent;
++import javax.swing.event.TreeModelListener;
++import javax.swing.tree.TreeModel;
++import javax.swing.tree.TreePath;
++
+ import com.nuix.data.EvidenceInfo;
+ import com.nuix.log.Channel;
+ import com.nuix.log.ChannelManager;
+ 
+-import javax.swing.tree.TreeModel;
+-import javax.swing.tree.TreePath;
+-import javax.swing.event.TreeModelListener;
+-import javax.swing.event.TreeModelEvent;
+-import javax.swing.event.EventListenerList;
+-import java.util.List;
+-import java.util.ArrayList;
+-import java.net.URI;
+-
+ /**
+  * An implementation of TreeModel to capture the evidence structure for a case.
+  */ 
+@@ -148,14 +149,30 @@
+     {
+         if (parent == ROOT_NODE)
+         {
+-            return roots.indexOf(child);
++            if (child instanceof EvidenceInfo)
++            {
++                //noinspection SuspiciousMethodCalls
++                return roots.indexOf(child);
++            }
++            else
++            {
++                return -1;
++            }
+         }
+         else if (parent instanceof EvidenceInfo)
+         {
+-            EvidenceInfo evidenceInfo = (EvidenceInfo) parent;
+-            // Get the child.
+-            List<URI> contents = evidenceInfo.getContents();
+-            return contents.indexOf(child);
++            if (child instanceof URI)
++            {
++                EvidenceInfo evidenceInfo = (EvidenceInfo) parent;
++                // Get the child.
++                List<URI> contents = evidenceInfo.getContents();
++                //noinspection SuspiciousMethodCalls
++                return contents.indexOf(child);
++            }
++            else
++            {
++                return -1;
++            }
+         }
+         
+         return -1;
+@@ -258,6 +275,8 @@
+     
+     /**
+      * Get all the EvidenceInfo instances in the tree.
++     *
++     * @return the list of evidence roots.
+      */ 
+     public List<EvidenceInfo> getEvidence()
+     {
+Index: data/src/java/com/nuix/investigator/cases/Case.java
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/Case.java	(revision 2561)
++++ data/src/java/com/nuix/investigator/cases/Case.java	(working copy)
+@@ -33,7 +33,6 @@
+ import com.nuix.store.user.DefaultSession;
+ import com.nuix.store.user.Session;
+ import com.nuix.util.FileUtils;
+-import com.nuix.util.WrappedIOException;
+ 
+ /**
+  * A case, which has a number of properties as well as a number of loaded files.
+@@ -163,6 +162,32 @@
+     }
+ 
+     /**
++     * <p>Convenience method for detecting whether this case is empty.  In the case of a simple
++     * case this means no evidence is loaded.  In the case of a compound case, this means no
++     * simple cases are added to it.</p>
++     *
++     * <p>The situation of a compound case composed of multiple empty simple cases is considered
++     * to not be empty.</p>
++     *
++     * @return {@code true} if the case is empty, {@code false} otherwise.
++     */
++    public boolean isEmpty()
++    {
++        if (isCompound())
++        {
++            return evidenceSet.isEmpty();
++        }
++        else
++        {
++            // TODO: Do we consider it to have data if there is work on the queue?
++            // We might want a more convenient way to determine that there is work on the queue.
++            // e.g., can we make it so if the directory exists, there is definitely work to be done?
++
++            return getEvidenceSet().get(0).getItemCount() == 0;
++        }
++    }
++
++    /**
+      * Gets the count of the total number of items in the case.
+      *
+      * @return the number of items in the case.
+@@ -402,7 +427,7 @@
+         }
+         catch (SQLException e)
+         {
+-            throw new WrappedIOException("Error creating initial schema for analysis database", e);
++            throw new IOException("Error creating initial schema for analysis database", e);
+         }
+ 
+         container.registerComponentInstance(Database.class, database);
+@@ -413,7 +438,7 @@
+         }
+         catch (MigrationException e)
+         {
+-            throw new WrappedIOException("Error initialising stores", e);
++            throw new IOException("Error initialising stores", e);
+         }
+ 
+         save();
+Index: data/src/java/com/nuix/investigator/cases/cases.xml
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/cases.xml	(revision 2561)
++++ data/src/java/com/nuix/investigator/cases/cases.xml	(working copy)
+@@ -5,6 +5,142 @@
+ - Resources for the wizards.
+ -->
+ <Resources>
++    <Group name="AddLoadableEvidencePane">
++        <String name="Title" value="Add Case Evidence"/>
++
++        <String name="Text" value="Please choose the files and directories you wish to load into this case."/>
++
++        <String name="Add" value="Add..."/>
++        <String name="Remove" value="Remove"/>
++        <String name="Edit" value="Edit..."/>
++        <String name="EvidencePrefix" value="Evidence {0}"/>
++        <String name="EvidenceNameFormat" value="{0} ({1})"/>
++        <String name="EvidenceNameFormatNoDescription" value="{0}"/>
++
++        <Group name="MustSpecifyUniqueName">
++            <String name="Title" value="Evidence Name Already Exists"/>
++            <String name="Text" value="&lt;html&gt;
++                You must specify a unique evidence name.
++                &lt;/html&gt;"/>
++        </Group>
++
++        <Group name="MustAddContent">
++            <String name="Title" value="Missing User Input"/>
++            <String name="Text" value="&lt;html&gt;
++                You must add at least one file or directory before progressing&lt;br&gt;
++                to the next page.
++                &lt;/html&gt;"/>
++        </Group>
++    </Group>
++
++    <Group name="EvidenceInputPane">
++        <String name="Add" value="Add..."/>
++        <String name="AddFile" value="Add File..."/>
++        <String name="AddDirectory" value="Add Directory..."/>
++        <String name="AddMailStore" value="Add Mail Store..."/>
++        <String name="Remove" value="Remove"/>
++        <String name="EvidenceInput" value="Add/Edit Evidence"/>
++        <String name="Content" value="Content:"/>
++        <String name="EvidenceName" value="Evidence name:"/>
++        <String name="EvidenceComments" value="Comments:"/>
++        <String name="DirectoryTitle" value="Add Directory(s)"/>
++        <String name="FileTitle" value="Add File(s)"/>
++
++        <Group name="NonexistentFile">
++            <String name="Title" value="Nonexistent File"/>
++            <String name="Text" value="&lt;html&gt;
++                The file you have chosen does not exist:&lt;br&gt;
++                {0}
++                &lt;/html&gt;"/>
++        </Group>
++
++        <Group name="NonexistentDirectory">
++            <String name="Title" value="Nonexistent Directory"/>
++            <String name="Text" value="&lt;html&gt;
++                The directory you have chosen does not exist:&lt;br&gt;
++                {0}
++                &lt;/html&gt;"/>
++        </Group>
++
++        <Group name="MustAddEvidence">
++            <String name="Title" value="Missing User Input"/>
++            <String name="Text" value="&lt;html&gt;
++                You must add at least one file or directory before progressing.
++                &lt;/html&gt;"/>
++        </Group>
++
++        <Group name="MustSpecifyName">
++            <String name="Title" value="Missing Evidence Name"/>
++            <String name="Text" value="&lt;html&gt;
++                You must specify the evidence name before progressing.
++                &lt;/html&gt;"/>
++        </Group>
++
++        <Group name="RestrictedFile">
++            <String name="Title" value="Restricted File"/>
++            <String name="Text" value="&lt;html&gt;
++                The file you have chosen cannot be loaded due to restrictions&lt;br&gt;
++                in your software licence:&lt;br&gt;
++                {0}
++                &lt;p&gt;
++                To remove this restriction, please contact &CompanyNameShort; to obtain a full licence.
++                &lt;/html&gt;"/>
++        </Group>
++
++        <Group name="SomeItemsNotAddedDueToLimit">
++            <String name="Title" value="Some Items Not Added"/>
++            <String name="Text" value="&lt;html&gt;
++                Some items were not added due to the file limit of {0} permitted by your licence.
++                &lt;p&gt;
++                To remove this limit, please contact &CompanyNameShort; to obtain a full licence.
++                &lt;/html&gt;"/>
++        </Group>
++
++        <Group name="Duplicate">
++            <String name="Title" value="Duplicate entry"/>
++            <String name="Text" value="&lt;html&gt;
++                The item you selected was already in the list.
++                &lt;/html&gt;"/>
++        </Group>
++
++        <Group name="Duplicates">
++            <String name="Title" value="Duplicate entries"/>
++            <String name="Text" value="&lt;html&gt;
++                {0} of the items you selected {0,choice,1#was|1&lt;were} already in the list.
++                &lt;/html&gt;"/>
++        </Group>
++    </Group>
++
++    <Group name="MailStoreInputPane">
++        <String name="Title" value="Add Mail Store"/>
++
++        <!-- Fields -->
++        <String name="Protocol" value="Mail Store Type:"/>
++        <String name="Host" value="Server Hostname:"/>
++        <String name="Port" value="Server Port:"/>
++        <String name="Username" value="Username:"/>
++        <String name="Password" value="Password:"/>
++
++        <!-- Protocols -->
++        <String name="PleaseSelect" value="Please select:"/>
++        <String name="pop" value="POP"/>
++        <String name="imap" value="IMAP"/>
++
++        <!-- Errors -->
++        <Group name="FieldsNotComplete">
++            <String name="Title" value="Missing User Input"/>
++            <String name="Text" value="&lt;html&gt;
++                You must fill in all fields.
++                &lt;/html&gt;"/>
++        </Group>
++        <Group name="FieldsInvalid">
++            <String name="Title" value="Invalid User Input"/>
++            <String name="Text" value="&lt;html&gt;
++                Some of the fields you entered are invalid.
++                &lt;/html&gt;"/>
++        </Group>
++    </Group>
++    
+     <Group name="ModifyCaseEvidencePane">
+         <String name="Title" value="Add Case Evidence"/>
+         <String name="Text" value="&lt;html&gt;
+@@ -102,4 +238,142 @@
+         <String name="Evidence.DatabaseReadOnly"
+                 value="Database is read-only.  Annotations will be viewable but not editable, and history will not be recorded."/>
+     </Group>
++
++    <Group name="NewCasePane">
++        <String name="Title" value="New Case"/>
++
++        <String name="CaseSettings" value="Case settings"/>
++        <String name="TextProcessingSettings" value="Text processing settings"/>
++        <String name="OtherProcessingSettings" value="Other processing settings"/>
++    </Group>
++
++    <Group name="CaseSettingsPanel">
++        <String name="Name" value="Name:"/>
++        <String name="DefaultNameFormat" value="Case {0}"/>
++        <String name="Directory" value="Directory:"/>
++        <String name="Investigator" value="Investigator:"/>
++        <String name="Description" value="Description:"/>
++        <String name="Type" value="Case type:"/>
++        <String name="SimpleCase" value="Simple (contains loaded evidence)"/>
++        <String name="CompoundCase" value="Compound (contains other cases)"/>
++
++
++        <Group name="MustEnterDirectory">
++            <String name="Title" value="Missing user input"/>
++            <String name="Text" value="&lt;html&gt;
++                You must enter a directory.
++                &lt;/html&gt;"/>
++        </Group>
++
++        <Group name="RootNotPossible">
++            <String name="Title" value="Invalid user input"/>
++            <String name="Text" value="&lt;html&gt;
++                Case files cannot reside in the root of a hard drive.
++                &lt;p&gt;
++                Please choose a subdirectory.
++                &lt;/html&gt;"/>
++        </Group>
++
++        <Group name="NoParentDirectory">
++            <String name="Title" value="Invalid user input"/>
++            <String name="Text" value="&lt;html&gt;
++                The directory you have entered is invalid because the parent&lt;br&gt;
++                directory does not exist.
++                &lt;/html&gt;"/>
++        </Group>
++
++        <Group name="NotADirectory">
++            <String name="Title" value="Invalid user input"/>
++            <String name="Text" value="&lt;html&gt;
++                Ths file you have chosen is not a directory.
++                &lt;/html&gt;"/>
++        </Group>
++
++        <Group name="DirectoryNotEmpty">
++            <String name="Title" value="Invalid user input"/>
++            <String name="Text" value="&lt;html&gt;
++                The directory you have entered contains files already.
++                &lt;p&gt;
++                Please choose an empty directory.
++                &lt;/html&gt;"/>
++        </Group>
++
++        <Group name="FieldsNotComplete">
++            <String name="Title" value="Missing User Input"/>
++            <String name="Text" value="&lt;html&gt;
++                You must fill in the name and investigator fields.
++                &lt;/html&gt;"/>
++        </Group>
++    </Group>
++
++    <Group name="TextProcessingSettingsPanel">
++        <String name="ProcessTextOption" value="Store and index text of data items"/>
++        <String name="ProcessTextOptionToolTip"
++                value="&lt;html&gt;
++                       Selecting this option will make the system store and index&lt;br&gt;
++                       text for each data item processed.  This will increase&lt;br&gt;
++                       processing time, and thus might be disabled if you know&lt;br&gt;
++                       in advance that you won't need to perform any text searching.
++                       &lt;/html&gt;"/>
++        <String name="StopWordsPolicyLabel" value="Use Stop Words:"/>
++        <String name="StemmingPolicyLabel" value="Use Stemming:"/>
++    </Group>
++
++    <Group name="OtherProcessingSettingsPanel">
++        <String name="DeletedEmailsOption" value="Extract from slack space of email boxes"/>
++        <String name="DeletedEmailsOptionToolTip"
++                value="&lt;html&gt;
++                       Attempt to retrieve deleted emails located in the slack
++                       space of a mail box file. &lt;br&gt;This is applicable only with PST,
++                       OST, DBX and EDB/STM files.
++                       &lt;/html&gt;"/>
++        <String name="StoreBinaryOption" value="Store binary of data items"/>
++        <String name="StoreBinaryOptionToolTip"
++                value="&lt;html&gt;
++                       Selecting this option will make the system store binary data&lt;br&gt;
++                       for each item processed.  This will speed up exports but increase&lt;br&gt;
++                       processing time and storage.
++                       &lt;/html&gt;"/>
++        <String name="DirectAccessOption" value="Enable direct access to NSF email boxes"/>
++        <String name="DirectAccessOptionToolTip"
++                value="&lt;html&gt;
++                       Directly accessing NSF files results in access records&lt;br&gt;
++                       within the file being updated, which in turn modifies the file.&lt;br&gt;
++                       The internal data itself is unchanged.  Selecting this option&lt;br&gt;
++                       will ensure a copy of the mailbox is performed and processing&lt;br&gt;
++                       is done only on the copy, rather than the source data, at the&lt;br&gt;
++                       expense of more processing time.  If an NSF file is read-only,&lt;br&gt;
++                       a copy will be made irrespective of this setting.&lt;br&gt;
++                       &lt;/html&gt;"/>
++        <String name="ExtractEmbeddedImagesOption" value="Extract embedded images"/>
++        <String name="ExtractEmbeddedImagesOptionToolTip"
++                value="&lt;html&gt;
++                      Extract images embedded in items such as Office documents.
++                      &lt;/html&gt;"/>
++        <String name="CreateThumbnailsOption" value="Create thumbnails for image data items"/>
++        <String name="CreateThumbnailsOptionToolTip"
++                value="&lt;html&gt;
++                      Selecting this option will generate a thumbnail&lt;br&gt;
++                      image for each image data item detected.  This&lt;br&gt;
++                      will increase processing time, but will enable the&lt;br&gt;
++                      &quot;Thumbnail&quot; tabs within the analysis interface,&lt;br&gt;
++                      for quickly inspecting image data.&lt;br&gt;
++                      &lt;/html&gt;"/>
++        <String name="DeduplicateDataOption" value="De-duplicate data"/>
++        <String name="DeduplicateDataOptionToolTip"
++                value="&lt;html&gt;
++                      Selecting this option will prevent duplicate data&lt;br&gt;
++                      items being processed more than once.&lt;br&gt;
++                      Instead their properties and content will be blank&lt;br&gt;
++                      and they will be marked as duplicates.&lt;br&gt;
++                      &lt;/html&gt;"/>
++        <String name="SkinToneAnalysisOption" value="Skin tone analysis"/>
++        <String name="SkinToneAnalysisOptionToolTip"
++                value="&lt;html&gt;
++                      Selecting this option will perform skin-tone analysis&lt;br&gt;
++                      over all detected images.  Once the case evidence has&lt;br&gt;
++                      been loaded, the skin tone filter can be used to display&lt;br&gt;
++                      images with significant amount of skin tones present.&lt;br&gt;
++                      &lt;/html&gt;"/>
++    </Group>
+ </Resources>
+Index: data/src/java/com/nuix/investigator/cases/creation/OtherProcessingSettingsPanel.java
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/creation/OtherProcessingSettingsPanel.java	(revision 2511)
++++ data/src/java/com/nuix/investigator/cases/creation/OtherProcessingSettingsPanel.java	(working copy)
+@@ -1,70 +1,40 @@
+-package com.nuix.investigator.wizard.panels;
++package com.nuix.investigator.cases.creation;
+ 
+-import com.nuix.resources.ResourceGroup;
+-import com.nuix.swing.wizard.AbstractWizardPanel;
+-import com.nuix.swing.wizard.AbstractWizardModel;
+-import com.nuix.investigator.images.ImageFactory;
+-import com.nuix.investigator.wizard.NewCaseWizardModel;
+-import com.nuix.data.DataProcessingSettings;
+-import com.nuix.store.index.settings.StopWordsPolicy;
+-import com.nuix.store.index.settings.StemmingPolicy;
+-import com.nuix.store.index.settings.TextIndexSettings;
+-import com.nuix.store.index.settings.AbstractPolicy;
++import java.awt.GridBagConstraints;
++import java.awt.GridBagLayout;
++import java.awt.Insets;
++import java.awt.event.ActionEvent;
++import java.awt.event.ActionListener;
+ 
+ import javax.swing.JCheckBox;
+-import javax.swing.JLabel;
+ import javax.swing.JPanel;
+-import javax.swing.BoxLayout;
+-import javax.swing.Box;
+ import javax.swing.SwingUtilities;
+-import javax.swing.BorderFactory;
+-import javax.swing.JComboBox;
+-import javax.swing.DefaultComboBoxModel;
+ 
+-import java.awt.GridBagLayout;
+-import java.awt.GridBagConstraints;
+-import java.awt.Insets;
+-import java.awt.Container;
+-import java.awt.event.ActionListener;
+-import java.awt.event.ActionEvent;
++import com.nuix.data.DataProcessingSettings;
++import com.nuix.resources.ResourceFactory;
++import com.nuix.resources.ResourceGroup;
+ 
+ /**
+- * Wizard step for specifying the data processing settings for each case.
++ * Panel for specifying other data processing settings.
+  */
+-public class CaseContentPropertiesPanel extends AbstractWizardPanel
++public class OtherProcessingSettingsPanel extends JPanel
+ {
+     ///////////////////////////////////////////////////////////////////////////
+-    // Constants
+-
+-    ///////////////////////////////////////////////////////////////////////////
+     // Fields
+ 
+     /**
+      * The resources for the panel.
+      */
+-    private ResourceGroup resources;
++    private ResourceGroup resources =
++        ResourceFactory.get("/com/nuix/investigator/cases/cases.xml")
++            .getSubgroup("OtherProcessingSettingsPanel");
+ 
+     /**
+-     * The "process text" checkbox.
+-     */
+-    private JCheckBox processTextCheckBox;
+-
+-    /**
+      * The "store binary" checkbox.
+      */
+     private JCheckBox storeBinaryCheckBox;
+ 
+     /**
+-     * The stop words policy combobox.
+-     */
+-    private JComboBox stopWordsPolicyComboBox;
+-
+-    /**
+-     * The stemming policy combo box.
+-     */
+-    private JComboBox stemmingPolicyComboBox;
+-
+-    /**
+      * A reference to the "extract from slack space" checkbox.
+      */
+     private JCheckBox extractFromSlackSpaceCheckBox = null;
+@@ -98,21 +68,48 @@
+     // Constructors
+ 
+     /**
+-     * Constructor initialising resources.
+-     * @param resources The {@link ResourceGroup} to initialise with.
++     * Constructs the panel.
+      */
+-    public CaseContentPropertiesPanel(ResourceGroup resources)
++    public OtherProcessingSettingsPanel()
+     {
+-        super("CaseContentPropertiesPanel");
+-        setLogo(ImageFactory.createIcon("WizardLeft.png"));
+-        this.resources = resources;
++        super(new GridBagLayout());
++
++        GridBagConstraints c1 = new GridBagConstraints();
++        c1.insets = new Insets(4, 4, 4, 4);
++        c1.anchor = GridBagConstraints.LINE_START;
++        GridBagConstraints c2 = (GridBagConstraints) c1.clone();
++        c2.weightx = 1.0;
++        c2.gridwidth = GridBagConstraints.REMAINDER;
++
++        // Remaining options.
++        storeBinaryCheckBox = addJCheckbox("StoreBinaryOption", c2);
++        extractFromSlackSpaceCheckBox = addJCheckbox("DeletedEmailsOption", c2);
++        directAccessCheckBox = addJCheckbox("DirectAccessOption", c2);
++        extractEmbeddedImagesCheckBox = addJCheckbox("ExtractEmbeddedImagesOption", c2);
++        createThumbnailsCheckBox = addJCheckbox("CreateThumbnailsOption", c2);
++        deduplicateDataCheckBox = addJCheckbox("DeduplicateDataOption", c2);
++        skinToneAnalysisCheckBox = addJCheckbox("SkinToneAnalysisOption", c2);
++
++        // If skinToneAnalysisCheckbox is selected, then the createThumbnailsCheckbox
++        // must be enabled.
++        skinToneAnalysisCheckBox.addActionListener(new ActionListener()
++        {
++            public void actionPerformed(ActionEvent e)
++            {
++                updateState();
++            }
++        });
++
++        // Load default state from a dummy model.
++        importModel(new NewCaseModel());
++        updateState();
+     }
+ 
+     ///////////////////////////////////////////////////////////////////////////
+     // Methods
+ 
+     /**
+-     * Validates the data entered by the user. This is always true since 
++     * Validates the data entered by the user. This is always true since
+      * we're simply altering the boolean state of checkboxes.
+      *
+      * @return <code>true</code> if the data in this panel is valid,
+@@ -128,12 +125,9 @@
+      *
+      * @param model the wizard model.
+      */
+-    public void importModel(AbstractWizardModel model)
++    private void importModel(NewCaseModel model)
+     {
+-        NewCaseWizardModel m = (NewCaseWizardModel) model;
+-
+-        DataProcessingSettings processingSettings = m.getProcessingSettings();
+-        processTextCheckBox.setSelected(processingSettings.getProcessText());
++        DataProcessingSettings processingSettings = model.getProcessingSettings();
+         storeBinaryCheckBox.setSelected(processingSettings.getStoreBinary());
+         extractFromSlackSpaceCheckBox.setSelected(processingSettings.getExtractFromSlackSpace());
+         directAccessCheckBox.setSelected(processingSettings.getDirectAccessToMailboxes());
+@@ -141,12 +135,6 @@
+         createThumbnailsCheckBox.setSelected(processingSettings.getCreateThumbnails());
+         deduplicateDataCheckBox.setSelected(processingSettings.getDeduplicateData());
+         skinToneAnalysisCheckBox.setSelected(processingSettings.getSkinToneAnalysis());
+-
+-        TextIndexSettings textIndexSettings = m.getCaseEvidenceSettings().getTextIndexSettings();
+-        stopWordsPolicyComboBox.setSelectedItem(new PolicyContainer(textIndexSettings.getStopWordsPolicy()));
+-        stemmingPolicyComboBox.setSelectedItem(new PolicyContainer(textIndexSettings.getStemmingPolicy()));
+-
+-        wireCheckboxes();
+     }
+ 
+     /**
+@@ -154,12 +142,9 @@
+      *
+      * @param model the wizard model.
+      */
+-    public void exportModel(AbstractWizardModel model)
++    public void exportModel(NewCaseModel model)
+     {
+-        NewCaseWizardModel m = (NewCaseWizardModel) model;
+-
+-        DataProcessingSettings processingSettings = m.getProcessingSettings();
+-        processingSettings.setProcessText(processTextCheckBox.isSelected());
++        DataProcessingSettings processingSettings = model.getProcessingSettings();
+         processingSettings.setStoreBinary(storeBinaryCheckBox.isSelected());
+         processingSettings.setExtractFromSlackSpace(extractFromSlackSpaceCheckBox.isSelected());
+         processingSettings.setDirectAccessToMailboxes(directAccessCheckBox.isSelected());
+@@ -167,83 +152,41 @@
+         processingSettings.setCreateThumbnails(createThumbnailsCheckBox.isSelected());
+         processingSettings.setDeduplicateData(deduplicateDataCheckBox.isSelected());
+         processingSettings.setSkinToneAnalysis(skinToneAnalysisCheckBox.isSelected());
+-
+-        TextIndexSettings textIndexSettings = m.getCaseEvidenceSettings().getTextIndexSettings();
+-        PolicyContainer policyContainer = (PolicyContainer) stopWordsPolicyComboBox.getSelectedItem();
+-        textIndexSettings.setStopWordsPolicy((StopWordsPolicy) policyContainer.policy);
+-        policyContainer = (PolicyContainer) stemmingPolicyComboBox.getSelectedItem();
+-        textIndexSettings.setStemmingPolicy((StemmingPolicy) policyContainer.policy);
+     }
+ 
+     /**
+-     * Called at the appropriate time, to initialise the contents of the panel.
++     * Updates the enabled state of the individual components.
+      */
+-    protected void initialise()
++    private void updateState()
+     {
+-        getContentPane().setLayout(new GridBagLayout());
+-
+-        GridBagConstraints c1 = new GridBagConstraints();
+-        c1.insets = new Insets(2, 4, 2, 4);
+-        c1.anchor = GridBagConstraints.FIRST_LINE_START;
+-        GridBagConstraints c2 = (GridBagConstraints) c1.clone();
+-        c2.weightx = 1.0;
+-        c2.gridwidth = GridBagConstraints.REMAINDER;
+-
+-        // Text processing options.
+-        JPanel textPanel = new JPanel(new GridBagLayout());
+-        textPanel.setBorder(BorderFactory.createTitledBorder(
+-            resources.getString("TextProcessingSettingsHeader")));
+-        processTextCheckBox = addJCheckbox("ProcessTextOption", textPanel, c2);
+-        stopWordsPolicyComboBox = addJComboBox("StopWordsPolicy", textPanel, c1, c1,
+-                                               StopWordsPolicy.getAll());
+-        stemmingPolicyComboBox = addJComboBox("StemmingPolicy", textPanel, c1, c2,
+-                                              StemmingPolicy.getAll());
+-
+-        // Remaining options.
+-        Box otherPanel = new Box(BoxLayout.Y_AXIS);
+-        otherPanel.setBorder(BorderFactory.createTitledBorder(
+-            resources.getString("OtherSettingsHeader")));
+-        storeBinaryCheckBox = addJCheckbox("StoreBinaryOption", otherPanel, c2);
+-        extractFromSlackSpaceCheckBox = addJCheckbox("DeletedEmailsOption", otherPanel, c2);
+-        directAccessCheckBox = addJCheckbox("DirectAccessOption", otherPanel, c2);
+-        extractEmbeddedImagesCheckBox = addJCheckbox("ExtractEmbeddedImagesOption", otherPanel, c2);
+-        createThumbnailsCheckBox = addJCheckbox("CreateThumbnailsOption", otherPanel, c2);
+-        deduplicateDataCheckBox = addJCheckbox("DeduplicateDataOption", otherPanel, c2);
+-        skinToneAnalysisCheckBox = addJCheckbox("SkinToneAnalysisOption", otherPanel, c2);
+-
+-        // If skinToneAnalysisCheckbox is selected, then the createThumbnailsCheckbox
+-        // must be enabled.
+-        skinToneAnalysisCheckBox.addActionListener(new ActionListener()
++        if (isEnabled())
+         {
+-            public void actionPerformed(ActionEvent e)
++            storeBinaryCheckBox.setEnabled(true);
++            extractFromSlackSpaceCheckBox.setEnabled(true);
++            directAccessCheckBox.setEnabled(true);
++            extractEmbeddedImagesCheckBox.setEnabled(true);
++            deduplicateDataCheckBox.setEnabled(true);
++            skinToneAnalysisCheckBox.setEnabled(true);
++
++            if (skinToneAnalysisCheckBox.isSelected())
+             {
+-                wireCheckboxes();
++                createThumbnailsCheckBox.setSelected(true);
++                createThumbnailsCheckBox.setEnabled(false);
+             }
+-        });
+-
+-        // Put the whole thing together.
+-        c2.fill = GridBagConstraints.BOTH;
+-        getContentPane().add(new JLabel(resources.getString("Text")), c2);
+-        getContentPane().add(textPanel, c2);
+-        getContentPane().add(otherPanel, c2);
+-        c2.weighty = 1.0;
+-        getContentPane().add(new JPanel(), c2); // Filler
+-    }
+-
+-    /**
+-     * Make sure that any dependencies between checkboxes are handled.  Currently, if
+-     * the skin-tone analysis checkbox is enabled, then so must the thumbnails checkbox.
+-     */
+-    private void wireCheckboxes()
+-    {
+-        if (skinToneAnalysisCheckBox.isSelected())
+-        {
+-            createThumbnailsCheckBox.setSelected(true);
+-            createThumbnailsCheckBox.setEnabled(false);
++            else
++            {
++                createThumbnailsCheckBox.setEnabled(true);
++            }
+         }
+         else
+         {
+-            createThumbnailsCheckBox.setEnabled(true);
++            storeBinaryCheckBox.setEnabled(false);
++            extractFromSlackSpaceCheckBox.setEnabled(false);
++            directAccessCheckBox.setEnabled(false);
++            extractEmbeddedImagesCheckBox.setEnabled(false);
++            createThumbnailsCheckBox.setEnabled(false);
++            deduplicateDataCheckBox.setEnabled(false);
++            skinToneAnalysisCheckBox.setEnabled(false);
+         }
+     }
+ 
+@@ -263,74 +206,26 @@
+      * Adds a checkbox, handling resources and so forth so that the caller doesn't need to.
+      *
+      * @param key the base key for looking up the resources.
+-     * @param container the container to add the component to.
+      * @param constraints layout constraints for the checkbox.
+      * @return the checkbox.
+      */
+-    public JCheckBox addJCheckbox(String key, Container container, Object constraints)
++    public JCheckBox addJCheckbox(String key, Object constraints)
+     {
+         JCheckBox checkBox = new JCheckBox(resources.getString(key));
+         checkBox.setToolTipText(resources.getString(key + "ToolTip"));
+-        container.add(checkBox, constraints);
++        add(checkBox, constraints);
+         return checkBox;
+     }
+ 
+     /**
+-     * Adds a combo box and its label, handling resources and so forth so that
+-     * the caller doesn't need to.
++     * Overridden to enable/disable the individual fields.
+      *
+-     * @param key the base key for looking up the resources.
+-     * @param container the container to add the component to.
+-     * @param labelConstraints layout constraints for the label.
+-     * @param comboBoxConstraints layout constraints for the combo box.
+-     * @param values the values to put in the combo box.
++     * @param enabled true if this component should be enabled, false otherwise
+      */
+-    private JComboBox addJComboBox(String key, Container container,
+-                                   Object labelConstraints, Object comboBoxConstraints,
+-                                   AbstractPolicy[] values)
++    public void setEnabled(boolean enabled)
+     {
+-        DefaultComboBoxModel model = new DefaultComboBoxModel();
+-        for (AbstractPolicy value : values)
+-        {
+-            model.addElement(new PolicyContainer(value));
+-        }
+-
+-        JComboBox comboBox = new JComboBox(model);
+-        comboBox.setPrototypeDisplayValue("English    "); // Long enough for now.
+-        container.add(new JLabel(resources.getString(key + "Label")), labelConstraints);
+-        container.add(comboBox, comboBoxConstraints);
+-        return comboBox;
++        super.setEnabled(enabled);
++        updateState();
+     }
+ 
+-    ///////////////////////////////////////////////////////////////////////////
+-    // Inner Classes
+-
+-    /**
+-     * A container for a policy to make <code>toString()</code> return a human-readable
+-     * value instead of the system one.
+-     */
+-    private static class PolicyContainer
+-    {
+-        private AbstractPolicy policy;
+-
+-        private PolicyContainer(AbstractPolicy policy)
+-        {
+-            this.policy = policy;
+-        }
+-
+-        public String toString()
+-        {
+-            return policy.toDisplayString();
+-        }
+-
+-        public boolean equals(Object other)
+-        {
+-            return (other instanceof PolicyContainer) && policy.equals(((PolicyContainer) other).policy);
+-        }
+-
+-        public int hashCode()
+-        {
+-            return policy.hashCode();
+-        }
+-    }
+ }
+
+Property changes on: data/src/java/com/nuix/investigator/cases/creation/OtherProcessingSettingsPanel.java
+___________________________________________________________________
+Name: svn:executable
+   + *
+Name: svn:keywords
+   + Author Date Id Revision
+Name: svn:eol-style
+   + native
+
+Index: data/src/java/com/nuix/investigator/cases/creation/AddLoadableEvidenceModel.java
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/creation/AddLoadableEvidenceModel.java	(revision 0)
++++ data/src/java/com/nuix/investigator/cases/creation/AddLoadableEvidenceModel.java	(revision 0)
+@@ -0,0 +1,41 @@
++package com.nuix.investigator.cases.creation;
++
++import java.util.List;
++
++import com.nuix.data.EvidenceInfo;
++
++/**
++ * Model class created by the {@link AddLoadableEvidencePane}.
++ */
++public class AddLoadableEvidenceModel
++{
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Fields
++
++    /**
++     * The content which will be added to the case.
++     */
++    private List<EvidenceInfo> caseContents;
++
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Methods
++
++    /**
++     * Gets the content which will be added to the case.
++     * @return the content which will be added to the case.
++     */
++    public List<EvidenceInfo> getCaseContents()
++    {
++        return caseContents;
++    }
++
++    /**
++     * Sets the content which will be added to the case.
++     * @param caseContents the content which will be added to the case.
++     */
++    public void setCaseContents(List<EvidenceInfo> caseContents)
++    {
++        this.caseContents = caseContents;
++    }
++   
++}
+Index: data/src/java/com/nuix/investigator/cases/creation/TextProcessingSettingsPanel.java
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/creation/TextProcessingSettingsPanel.java	(revision 0)
++++ data/src/java/com/nuix/investigator/cases/creation/TextProcessingSettingsPanel.java	(revision 0)
+@@ -0,0 +1,228 @@
++package com.nuix.investigator.cases.creation;
++
++import java.awt.GridBagConstraints;
++import java.awt.GridBagLayout;
++import java.awt.Insets;
++import java.awt.event.ActionListener;
++import java.awt.event.ActionEvent;
++
++import javax.swing.DefaultComboBoxModel;
++import javax.swing.JCheckBox;
++import javax.swing.JComboBox;
++import javax.swing.JLabel;
++import javax.swing.JPanel;
++
++import com.nuix.data.DataProcessingSettings;
++import com.nuix.resources.ResourceFactory;
++import com.nuix.resources.ResourceGroup;
++import com.nuix.store.index.settings.AbstractPolicy;
++import com.nuix.store.index.settings.StemmingPolicy;
++import com.nuix.store.index.settings.StopWordsPolicy;
++import com.nuix.store.index.settings.TextIndexSettings;
++
++/**
++ * Panel for specifying text data processing settings.
++ */
++public class TextProcessingSettingsPanel extends JPanel
++{
++    ///////////////////////////////////////////////////////////////////////////
++    // Fields
++
++    /**
++     * The resources for the panel.
++     */
++    private ResourceGroup resources =
++        ResourceFactory.get("/com/nuix/investigator/cases/cases.xml")
++            .getSubgroup("TextProcessingSettingsPanel");
++
++    /**
++     * The "process text" checkbox.
++     */
++    private JCheckBox processTextCheckBox;
++
++    /**
++     * The stop words policy combobox.
++     */
++    private JComboBox stopWordsPolicyComboBox;
++
++    /**
++     * The stemming policy combo box.
++     */
++    private JComboBox stemmingPolicyComboBox;
++
++    ///////////////////////////////////////////////////////////////////////////
++    // Constructors
++
++    /**
++     * Create a new buffered JPanel with the specified layout manager
++     */
++    public TextProcessingSettingsPanel()
++    {
++        super(new GridBagLayout());
++
++        GridBagConstraints c1 = new GridBagConstraints();
++        c1.insets = new Insets(4, 4, 4, 4);
++        c1.anchor = GridBagConstraints.LINE_START;
++        GridBagConstraints c2 = (GridBagConstraints) c1.clone();
++        c2.weightx = 1.0;
++        c2.gridwidth = GridBagConstraints.REMAINDER;
++
++        processTextCheckBox = addJCheckbox("ProcessTextOption", c2);
++        stopWordsPolicyComboBox = addJComboBox("StopWordsPolicy", c1, c2,
++                                               StopWordsPolicy.getAll());
++        stemmingPolicyComboBox = addJComboBox("StemmingPolicy", c1, c2,
++                                              StemmingPolicy.getAll());
++
++        processTextCheckBox.addActionListener(new ActionListener()
++        {
++            public void actionPerformed(ActionEvent e)
++            {
++                updateState();
++            }
++        });
++
++        // Load default state from a dummy model.
++        importModel(new NewCaseModel());
++        updateState();
++    }
++
++    ///////////////////////////////////////////////////////////////////////////
++    // Methods
++
++    /**
++     * Copies data from the model into the user interface.
++     *
++     * @param model the wizard model.
++     */
++    private void importModel(NewCaseModel model)
++    {
++        DataProcessingSettings processingSettings = model.getProcessingSettings();
++        processTextCheckBox.setSelected(processingSettings.getProcessText());
++
++        TextIndexSettings textIndexSettings = model.getCaseEvidenceSettings().getTextIndexSettings();
++        stopWordsPolicyComboBox.setSelectedItem(new PolicyContainer(textIndexSettings.getStopWordsPolicy()));
++        stemmingPolicyComboBox.setSelectedItem(new PolicyContainer(textIndexSettings.getStemmingPolicy()));
++    }
++
++    /**
++     * Copies data from the user interface into the model.
++     *
++     * @param model the wizard model.
++     */
++    public void exportModel(NewCaseModel model)
++    {
++        DataProcessingSettings processingSettings = model.getProcessingSettings();
++        processingSettings.setProcessText(processTextCheckBox.isSelected());
++        TextIndexSettings textIndexSettings = model.getCaseEvidenceSettings().getTextIndexSettings();
++
++        PolicyContainer policyContainer = (PolicyContainer) stopWordsPolicyComboBox.getSelectedItem();
++        textIndexSettings.setStopWordsPolicy((StopWordsPolicy) policyContainer.policy);
++        policyContainer = (PolicyContainer) stemmingPolicyComboBox.getSelectedItem();
++        textIndexSettings.setStemmingPolicy((StemmingPolicy) policyContainer.policy);
++    }
++
++    /**
++     * Updates the enabled state of the individual components.
++     */
++    private void updateState()
++    {
++        if (isEnabled())
++        {
++            processTextCheckBox.setEnabled(true);
++            boolean enable = processTextCheckBox.isSelected();
++            stopWordsPolicyComboBox.setEnabled(enable);
++            stemmingPolicyComboBox.setEnabled(enable);
++        }
++        else
++        {
++            processTextCheckBox.setEnabled(false);
++            stopWordsPolicyComboBox.setEnabled(false);
++            stemmingPolicyComboBox.setEnabled(false);
++        }
++    }
++
++    /**
++     * Adds a checkbox, handling resources and so forth so that the caller doesn't need to.
++     *
++     * @param key the base key for looking up the resources.
++     * @param constraints layout constraints for the checkbox.
++     * @return the checkbox.
++     */
++    public JCheckBox addJCheckbox(String key, Object constraints)
++    {
++        JCheckBox checkBox = new JCheckBox(resources.getString(key));
++        checkBox.setToolTipText(resources.getString(key + "ToolTip"));
++        add(checkBox, constraints);
++        return checkBox;
++    }
++
++    /**
++     * Adds a combo box and its label, handling resources and so forth so that
++     * the caller doesn't need to.
++     *
++     * @param key the base key for looking up the resources.
++     * @param labelConstraints layout constraints for the label.
++     * @param comboBoxConstraints layout constraints for the combo box.
++     * @param values the values to put in the combo box.
++     * @return the created combo box.
++     */
++    private JComboBox addJComboBox(String key,
++                                   Object labelConstraints, Object comboBoxConstraints,
++                                   AbstractPolicy[] values)
++    {
++        DefaultComboBoxModel model = new DefaultComboBoxModel();
++        for (AbstractPolicy value : values)
++        {
++            model.addElement(new PolicyContainer(value));
++        }
++
++        JComboBox comboBox = new JComboBox(model);
++        comboBox.setPrototypeDisplayValue("English    "); // Long enough for now.
++        add(new JLabel(resources.getString(key + "Label")), labelConstraints);
++        add(comboBox, comboBoxConstraints);
++        return comboBox;
++    }
++
++    /**
++     * Overridden to enable/disable the individual fields.
++     *
++     * @param enabled true if this component should be enabled, false otherwise
++     */
++    public void setEnabled(boolean enabled)
++    {
++        super.setEnabled(enabled);
++        updateState();
++    }
++
++    ///////////////////////////////////////////////////////////////////////////
++    // Inner Classes
++
++    /**
++     * A container for a policy to make <code>toString()</code> return a human-readable
++     * value instead of the system one.
++     */
++    private static class PolicyContainer
++    {
++        private AbstractPolicy policy;
++
++        private PolicyContainer(AbstractPolicy policy)
++        {
++            this.policy = policy;
++        }
++
++        public String toString()
++        {
++            return policy.toDisplayString();
++        }
++
++        public boolean equals(Object other)
++        {
++            return (other instanceof PolicyContainer) && policy.equals(((PolicyContainer) other).policy);
++        }
++
++        public int hashCode()
++        {
++            return policy.hashCode();
++        }
++    }
++}
+Index: data/src/java/com/nuix/investigator/cases/creation/AddLoadableEvidencePane.java
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/creation/AddLoadableEvidencePane.java	(revision 0)
++++ data/src/java/com/nuix/investigator/cases/creation/AddLoadableEvidencePane.java	(revision 0)
+@@ -0,0 +1,577 @@
++package com.nuix.investigator.cases.creation;
++
++import java.awt.Component;
++import java.awt.FlowLayout;
++import java.awt.GridBagConstraints;
++import java.awt.GridBagLayout;
++import java.awt.Insets;
++import java.awt.SystemColor;
++import java.io.File;
++import java.io.IOException;
++import java.net.URI;
++
++import javax.swing.Action;
++import javax.swing.JButton;
++import javax.swing.JComponent;
++import javax.swing.JLabel;
++import javax.swing.JPanel;
++import javax.swing.JScrollPane;
++import javax.swing.JTree;
++import javax.swing.event.TreeModelEvent;
++import javax.swing.event.TreeModelListener;
++import javax.swing.event.TreeSelectionEvent;
++import javax.swing.event.TreeSelectionListener;
++import javax.swing.tree.DefaultTreeCellRenderer;
++import javax.swing.tree.TreePath;
++import javax.swing.tree.TreeSelectionModel;
++
++import com.nuix.data.DefaultDataFactory;
++import com.nuix.data.Environment;
++import com.nuix.data.EvidenceInfo;
++import com.nuix.investigator.cases.Case;
++import com.nuix.investigator.cases.CaseContentTreeModel;
++import com.nuix.investigator.cases.CaseEvidence;
++import com.nuix.processor.PersistentProcessingQueue;
++import com.nuix.product.Licence;
++import com.nuix.resources.ResourceFactory;
++import com.nuix.resources.ResourceGroup;
++import com.nuix.swing.actions.BaseAction;
++import com.nuix.swing.builders.DialogBuilder;
++import com.nuix.swing.errors.ExpandableErrorPane;
++import com.nuix.swing.widgets.ValidatingOptionPane;
++import com.nuix.util.StringUtils;
++
++/**
++ * Pane allowing the user to add loadable evidence to a simple case.
++ */
++public class AddLoadableEvidencePane extends ValidatingOptionPane
++{
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Fields
++
++    /**
++     * Resources for the pane.
++     */
++    private static final ResourceGroup resources = ResourceFactory.get("/com/nuix/investigator/cases/cases.xml")
++            .getSubgroup("AddLoadableEvidencePane");
++
++    /**
++     * The current case.
++     */
++    private Case currentCase;
++
++    /**
++     * The tree containing a view of the contents which will be indexed in the case.
++     */
++    private JTree caseContentTree = null;
++
++    /**
++     * The model for the tree.
++     */
++    private CaseContentTreeModel caseContentTreeModel = null;
++
++    /**
++     * A reference to the Add button.
++     */
++    private JButton addButton;
++
++    /**
++     * A reference to the Remove button.
++     */
++    private JButton removeButton;
++
++    /**
++     * A reference to the Edit button.
++     */
++    private JButton editButton;
++
++    /**
++     * Default EvidenceInfo to use.
++     */
++    private EvidenceInfo lastEvidence = null;
++
++    /**
++     * The maximum number of items the user can add to the evidence.
++     */
++    private int limit;
++
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Constructors
++
++    /**
++     * Constructs the pane.
++     *
++     * @param currentCase the case being manipulated.
++     */
++    public AddLoadableEvidencePane(Case currentCase)
++    {
++        this.currentCase = currentCase;
++
++        // Is there a licence limit in place?
++        String limitString = Licence.getInstance().getProperty("limit.toplevel-items");
++        if (limitString != null)
++        {
++            limit = Integer.parseInt(limitString);
++        }
++
++        caseContentTreeModel = new CaseContentTreeModel();
++
++        // Add the evidence which already exists in the case.
++        // We're doing this in the constructor so that it can fail faster and bomb out
++        // the action which is displaying the
++        try
++        {
++            File evidenceLocation = currentCase.getEvidenceSet().get(0).getEvidenceLocation();
++            for (File file : evidenceLocation.listFiles())
++            {
++                EvidenceInfo info = new EvidenceInfo();
++                info.loadFromFile(file);
++                caseContentTreeModel.addEvidence(info);
++            }
++        }
++        catch (IOException e)
++        {
++            // Not expected to ever happen, show generic error message and throw illegal state.
++            ExpandableErrorPane.showDialog(getRootPane(), e);
++            throw new IllegalStateException("Error determining existing case evidence", e);
++        }
++    }
++
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Methods
++
++    /**
++     * Gets the title of the dialog which will be displayed.
++     *
++     * @return the title.
++     */
++    protected String getTitle()
++    {
++        return resources.getString("Title");
++    }
++
++    /**
++     * Builds the components where the user can input data.
++     *
++     * @return the input panel.
++     */
++    protected JComponent buildInputPanel()
++    {
++        JPanel inputPanel = new JPanel(new GridBagLayout());
++        GridBagConstraints c = new GridBagConstraints();
++        c.insets = new Insets(0, 0, 8, 0);
++        c.gridwidth = GridBagConstraints.REMAINDER;
++        c.anchor = GridBagConstraints.FIRST_LINE_START;
++        c.weightx = 1.0;
++        c.fill = GridBagConstraints.HORIZONTAL;
++
++        // Top label.
++        inputPanel.add(new JLabel(resources.getString("Text")), c);
++
++        // Case content tree.
++        caseContentTree =  new JTree(caseContentTreeModel);
++        caseContentTree.setRootVisible(false);
++        caseContentTree.setShowsRootHandles(true);
++        caseContentTree.putClientProperty("JTree.lineStyle", "Angled");
++        caseContentTree.setCellRenderer(new EvidenceNameRenderer());
++        caseContentTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
++
++        c.weighty = 1.0;
++        c.fill = GridBagConstraints.BOTH;
++        inputPanel.add(new JScrollPane(caseContentTree), c);
++
++        // Actions.
++        Action addAction = new AddAction();
++        Action removeAction = new RemoveAction();
++        Action editAction = new EditAction();
++
++        // Button panel.
++        addButton = new JButton(addAction);
++        addButton.setDefaultCapable(false);
++        removeButton = new JButton(removeAction);
++        removeButton.setDefaultCapable(false);
++        editButton = new JButton(editAction);
++        editButton.setDefaultCapable(false);
++        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
++        buttonPanel.add(addButton);
++        buttonPanel.add(removeButton);
++        buttonPanel.add(editButton);
++        c.weighty = 0.0;
++        c.fill = GridBagConstraints.HORIZONTAL;
++        inputPanel.add(buttonPanel, c);
++
++        // Wire the list events to enable the buttons as appropriate.
++        TreeChangeListener treeChangeListener = new TreeChangeListener();
++        caseContentTreeModel.addTreeModelListener(treeChangeListener);
++        caseContentTree.getSelectionModel().addTreeSelectionListener(treeChangeListener);
++
++        return inputPanel;
++    }
++
++    /**
++     * Requests that the initial value be selected, which will set
++     * focus to the initial value. This method
++     * should be invoked after the window containing the option pane
++     * is made visible.
++     */
++    public void selectInitialValue()
++    {
++        addButton.requestFocusInWindow();
++    }
++
++    /**
++     * Validates the input and performs the result of the dialog.
++     *
++     * @return <code>true</code> on success.
++     */
++    protected boolean validateAndPerform()
++    {
++        // We know the evidence sets themselves are valid, beacuse we've
++        // checked them on creation.
++        if (caseContentTreeModel.getChildCount(CaseContentTreeModel.ROOT_NODE) == 0)
++        {
++            new DialogBuilder(getRootPane(), resources).error("MustAddContent");
++            return false;
++        }
++        else
++        {
++            // We already know it's a simple case.
++            CaseEvidence evidence = currentCase.getEvidenceSet().get(0);
++
++            File persistentDir = new File(evidence.getLocation(), "Stores/PersistentQueue");
++            try
++            {
++                // Initialise the queue first.  The factory here doesn't matter because we're
++                // just using this to serialise the queue to disk.
++                PersistentProcessingQueue queue = new PersistentProcessingQueue(
++                        persistentDir, new DefaultDataFactory(new Environment()));
++
++                for (EvidenceInfo evidenceInfo : caseContentTreeModel.getEvidence())
++                {
++                    // Don't add it to the queue if the file is already saved.
++                    if (!evidenceInfo.isSaved())
++                    {
++                        queue.addDataRoot(evidenceInfo.saveToFile(evidence));
++                    }
++                }
++
++                // Saves state as a side-effect.
++                queue.cleanup();
++                return true;
++            }
++            catch (IOException e)
++            {
++                // Not expected to ever happen, show generic error message.
++                ExpandableErrorPane.showDialog(getRootPane(), e);
++                return false;
++            }
++        }
++    }
++
++    /**
++     * To be performed after the Add and Edit actions.
++     */
++    private void doPostAction()
++    {
++        // Select the last modified EvidenceInfo instance.
++        if (lastEvidence != null)
++        {
++            TreePath lastEvidencePath =
++                new TreePath(new Object[] {CaseContentTreeModel.ROOT_NODE, lastEvidence});
++            caseContentTree.expandPath(lastEvidencePath);
++        }
++    }
++
++    /**
++     * Counts the number of items already added.
++     *
++     * @return the number of items already added.
++     */
++    private int countAddedItems()
++    {
++        int count = 0;
++        for (EvidenceInfo info : caseContentTreeModel.getEvidence())
++        {
++            count += info.getContents().size();
++        }
++        return count;
++    }
++
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Inner Classes
++
++    /**
++     * Action on the Add button, which just pops up the real menu.
++     */
++    private class AddAction extends BaseAction
++    {
++        public AddAction()
++        {
++            super(AddLoadableEvidencePane.this, resources.getString("Add"));
++        }
++
++        public void execute()
++        {
++            EvidenceInfo defaultData = new EvidenceInfo();
++            defaultData.setName(generateDefaultName());
++            EvidenceInputPane pane = new EvidenceInputPane(defaultData, limit, countAddedItems());
++            if (pane.showDialog(getRootPane()))
++            {
++                EvidenceInfo choice = pane.getEvidenceInfo();
++
++                // Set this choice as the default.
++                lastEvidence = choice;
++                while (choice != null && caseContentTreeModel.containsEvidence(choice))
++                {
++                    // We need to prompt them to enter in another name.
++                    new DialogBuilder(AddLoadableEvidencePane.this, resources).error("MustSpecifyUniqueName");
++
++                    // Send them back.
++                    choice = null;
++                    if (pane.showDialog(getRootPane()))
++                    {
++                        choice = pane.getEvidenceInfo();
++                    }
++                }
++
++                if (choice != null)
++                {
++                    caseContentTreeModel.addEvidence(choice);
++                }
++
++                doPostAction();
++            }
++        }
++
++        /**
++         * Generates a sensible default name for the evidence.
++         *
++         * @return the name.
++         */
++        private String generateDefaultName()
++        {
++            int counter = 1;
++            boolean clash = true;
++            String name = null;
++            while (clash)
++            {
++                name = resources.getString("EvidencePrefix", counter++);
++
++                clash = false;
++                for (EvidenceInfo info : caseContentTreeModel.getEvidence())
++                {
++                    if (name.equals(info.getName()))
++                    {
++                        clash = true;
++                    }
++                }
++            }
++            return name;
++        }
++    }
++
++    /**
++     * Action on the Add button, which just pops up the real menu.
++     */
++    private class EditAction extends BaseAction
++    {
++        public EditAction()
++        {
++            super(AddLoadableEvidencePane.this, resources.getString("Edit"));
++        }
++
++        public void execute()
++        {
++            // Get the EvidenceInfo instance selected.
++            TreePath selectedPath = caseContentTree.getSelectionPath();
++            // The EvidenceInfo instance is always the 2nd element.
++            if (selectedPath != null)
++            {
++                EvidenceInfo evidenceToEdit =
++                    (EvidenceInfo) selectedPath.getPath()[1];
++
++                // The folder we're editing isn't included in the count.
++                int alreadyAdded = countAddedItems() - evidenceToEdit.getContents().size();
++                EvidenceInputPane pane = new EvidenceInputPane(evidenceToEdit, limit, alreadyAdded);
++                if (pane.showDialog(getRootPane()))
++                {
++                    // Set this choice as the default.
++                    lastEvidence = pane.getEvidenceInfo();
++
++                    caseContentTreeModel.fireTreeStructureChanged();
++                    doPostAction();
++                }
++            }
++        }
++    }
++
++    /**
++     * Action to remove an item or items from the list.
++     */
++    private class RemoveAction extends BaseAction
++    {
++        public RemoveAction()
++        {
++            super(AddLoadableEvidencePane.this, resources.getString("Remove"));
++        }
++
++        public void execute()
++        {
++            TreePath[] selectedPaths = caseContentTree.getSelectionPaths();
++            if (selectedPaths == null)
++            {
++                return;
++            }
++
++            for (TreePath selectedPath : selectedPaths)
++            {
++                // Get the EvidenceInfo object.
++                Object[] path = selectedPath.getPath();
++                // Object 0 is always CaseContentTreeModel.ROOT_NODE.
++                Object evidenceItem = path[1];
++                if (evidenceItem instanceof EvidenceInfo)
++                {
++                    // Now check if we are removing the whole EvidenceInfo
++                    // or just a child.
++                    if (path.length > 2)
++                    {
++                        // Remove the item.
++                        Object item = path[2];
++                        ((EvidenceInfo) evidenceItem).removeURI((URI) item);
++                    }
++                    else
++                    {
++                        // Remove the whole evidence group.
++                        caseContentTreeModel.removeEvidence((EvidenceInfo) evidenceItem);
++                    }
++                }
++            }
++        }
++    }
++
++    /**
++     * A custom tree cell renderer which renders the name of the evidence items
++     * instead of using <code>toString()</code>.
++     */
++    private class EvidenceNameRenderer extends DefaultTreeCellRenderer
++    {
++        public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel,
++                                                      boolean expanded, boolean leaf,
++                                                      int row, boolean hasFocus)
++        {
++            super.getTreeCellRendererComponent(tree, value, sel, expanded,
++                                               leaf, row, hasFocus);
++
++            if (value != CaseContentTreeModel.ROOT_NODE)
++            {
++                if (value instanceof EvidenceInfo)
++                {
++                    EvidenceInfo evidence = (EvidenceInfo) value;
++                    if (StringUtils.isEmpty(evidence.getDescription()))
++                    {
++                        setText(resources.getString("EvidenceNameFormatNoDescription",
++                                                    evidence.getName()));
++                    }
++                    else
++                    {
++                        setText(resources.getString("EvidenceNameFormat",
++                                                    evidence.getName(),
++                                                    evidence.getDescription()));
++                    }
++
++                    if (evidence.isSaved())
++                    {
++                        setForeground(SystemColor.textInactiveText);
++                    }
++                }
++                else
++                {
++                    setIcon(null);
++
++                    // Disable if the path contains a saved EvidenceInfo somewhere in it.
++                    TreePath path = tree.getPathForRow(row);
++                    while (path != null)
++                    {
++                        Object element = path.getLastPathComponent();
++                        if (element instanceof EvidenceInfo && ((EvidenceInfo) element).isSaved())
++                        {
++                            setForeground(SystemColor.textInactiveText);
++                            break;
++                        }
++                        path = path.getParentPath();
++                    }
++                }
++            }
++
++            return this;
++        }
++    }
++
++
++    /**
++     * Updates the state of the buttons when the contents or the selections on the tree change.
++     */
++    private class TreeChangeListener implements TreeModelListener, TreeSelectionListener
++    {
++        private TreeChangeListener()
++        {
++            updateButtons();
++        }
++
++        public void treeNodesChanged(TreeModelEvent event)
++        {
++            updateButtons();
++        }
++
++        public void treeNodesInserted(TreeModelEvent event)
++        {
++            updateButtons();
++        }
++
++        public void treeNodesRemoved(TreeModelEvent event)
++        {
++            updateButtons();
++        }
++
++        public void treeStructureChanged(TreeModelEvent event)
++        {
++            updateButtons();
++        }
++
++        public void valueChanged(TreeSelectionEvent event)
++        {
++            updateButtons();
++        }
++
++        private void updateButtons()
++        {
++            boolean atLimit = limit > 0 && countAddedItems() >= limit;
++
++            int selectedEvidenceCount = 0;
++            TreePath[] paths = caseContentTree.getSelectionPaths();
++            if (paths != null)
++            {
++                for (TreePath path : paths)
++                {
++                    Object last = path.getLastPathComponent();
++                    if (last instanceof EvidenceInfo && !((EvidenceInfo) last).isSaved())
++                    {
++                        selectedEvidenceCount++;
++                    }
++                    else
++                    {
++                        // Not evidence, treat this as having selected nothing.
++                        selectedEvidenceCount = 0;
++                        break;
++                    }
++                }
++            }
++
++            // The old code used to check that there was at least one evidence present, but actually
++            // it's impossible for there to be selected evidence without there being evidence to select.
++            addButton.setEnabled(!atLimit);
++            removeButton.setEnabled(selectedEvidenceCount > 0);
++            editButton.setEnabled(selectedEvidenceCount == 1);
++        }
++    }
++}
+Index: data/src/java/com/nuix/investigator/cases/creation/MailStoreInputPane.java
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/creation/MailStoreInputPane.java	(revision 0)
++++ data/src/java/com/nuix/investigator/cases/creation/MailStoreInputPane.java	(working copy)
+@@ -1,4 +1,4 @@
+-package com.nuix.investigator.wizard.dialogs;
++package com.nuix.investigator.cases.creation;
+ 
+ import java.awt.GridBagConstraints;
+ import java.awt.GridBagLayout;
+@@ -52,11 +52,7 @@
+      * Resources for the pane.
+      */
+     private static ResourceGroup resources =
+-            ResourceFactory.get("/com/nuix/investigator/wizard/wizard.xml")
+-                    .getSubgroup("NewCaseWizard")
+-                    .getSubgroup("AddCaseContent")
+-                    .getSubgroup("EvidenceInputPane")
+-                    .getSubgroup("MailStoreInputPane");
++            ResourceFactory.get("/com/nuix/investigator/cases/cases.xml").getSubgroup("MailStoreInputPane");
+ 
+     /**
+      * The combo box for choosing the type of mail store.
+@@ -195,7 +191,7 @@
+         }
+ 
+         // POP3 requires a password.
+-        if ("pop3".equals(protocol) && StringUtils.isEmpty(password))
++        if ("pop3".equals(protocol.protocolName) && StringUtils.isEmpty(password))
+         {
+             // USABILITY: Different error message for this?
+             new DialogBuilder(this, resources).error("FieldsNotComplete");
+
+Property changes on: data/src/java/com/nuix/investigator/cases/creation/MailStoreInputPane.java
+___________________________________________________________________
+Name: svn:executable
+   + *
+Name: svn:keywords
+   + Author Date Id Revision
+Name: svn:eol-style
+   + native
+
+Index: data/src/java/com/nuix/investigator/cases/creation/EvidenceInputPane.java
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/creation/EvidenceInputPane.java	(revision 0)
++++ data/src/java/com/nuix/investigator/cases/creation/EvidenceInputPane.java	(working copy)
+@@ -1,4 +1,4 @@
+-package com.nuix.investigator.wizard.dialogs;
++package com.nuix.investigator.cases.creation;
+ 
+ import java.awt.Dimension;
+ import java.awt.FlowLayout;
+@@ -11,6 +11,7 @@
+ 
+ import javax.swing.DefaultListModel;
+ import javax.swing.JButton;
++import javax.swing.JComponent;
+ import javax.swing.JFileChooser;
+ import javax.swing.JLabel;
+ import javax.swing.JList;
+@@ -20,30 +21,29 @@
+ import javax.swing.JTextArea;
+ import javax.swing.JTextField;
+ import javax.swing.JToggleButton;
+-import javax.swing.JComponent;
+ import javax.swing.SwingUtilities;
++import javax.swing.event.ListDataEvent;
++import javax.swing.event.ListDataListener;
+ import javax.swing.event.ListSelectionEvent;
+ import javax.swing.event.ListSelectionListener;
+ import javax.swing.event.PopupMenuEvent;
+ import javax.swing.event.PopupMenuListener;
+-import javax.swing.event.ListDataListener;
+-import javax.swing.event.ListDataEvent;
+ 
+ import com.nuix.data.EvidenceInfo;
+ import com.nuix.data.email.DefaultImapPopDataFactory;
++import com.nuix.investigator.options.global.GlobalPreferences;
++import com.nuix.log.Channel;
++import com.nuix.log.ChannelManager;
+ import com.nuix.product.Licence;
+ import com.nuix.product.LicencingException;
+-import com.nuix.resources.ResourceGroup;
+ import com.nuix.resources.ResourceFactory;
++import com.nuix.resources.ResourceGroup;
+ import com.nuix.swing.actions.BaseAction;
+-import com.nuix.swing.builders.JPopupMenuBuilder;
+ import com.nuix.swing.builders.DialogBuilder;
++import com.nuix.swing.builders.JPopupMenuBuilder;
+ import com.nuix.swing.filechooser.JFileChooserFactory;
+ import com.nuix.swing.widgets.ValidatingOptionPane;
+ import com.nuix.util.StringUtils;
+-import com.nuix.investigator.options.global.GlobalPreferences;
+-import com.nuix.log.Channel;
+-import com.nuix.log.ChannelManager;
+ 
+ /**
+  * {@link JPanel} that shows a dialog box for the selection 
+@@ -72,9 +72,7 @@
+      * Resources for the pane.
+      */
+     private static ResourceGroup resources =
+-            ResourceFactory.get("/com/nuix/investigator/wizard/wizard.xml")
+-                    .getSubgroup("NewCaseWizard")
+-                    .getSubgroup("AddCaseContent")
++            ResourceFactory.get("/com/nuix/investigator/cases/cases.xml")
+                     .getSubgroup("EvidenceInputPane");
+ 
+     /**
+
+Property changes on: data/src/java/com/nuix/investigator/cases/creation/EvidenceInputPane.java
+___________________________________________________________________
+Name: svn:executable
+   + *
+Name: svn:keywords
+   + Author Date Id Revision
+Name: svn:eol-style
+   + native
+
+Index: data/src/java/com/nuix/investigator/cases/creation/NewCaseModel.java
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/creation/NewCaseModel.java	(revision 2511)
++++ data/src/java/com/nuix/investigator/cases/creation/NewCaseModel.java	(working copy)
+@@ -1,23 +1,17 @@
+-package com.nuix.investigator.wizard;
++package com.nuix.investigator.cases.creation;
+ 
+ import java.io.File;
+ import java.util.prefs.Preferences;
+-import java.util.List;
+ 
+-import com.nuix.swing.wizard.AbstractWizardModel;
+-import com.nuix.data.EvidenceInfo;
+ import com.nuix.data.DataProcessingSettings;
+ import com.nuix.investigator.cases.CaseEvidenceSettings;
+ 
+ /**
+- * A model for the New Case wizard.
++ * A model for creating a new case, created by a {@link NewCasePane}.
+  */
+-public class NewCaseWizardModel extends AbstractWizardModel
++public class NewCaseModel
+ {
+     //////////////////////////////////////////////////////////////////////////////////////
+-    // Constants
+-
+-    //////////////////////////////////////////////////////////////////////////////////////
+     // Fields
+ 
+     /**
+@@ -46,11 +40,6 @@
+     private String caseInvestigator;
+ 
+     /**
+-     * The content which will be added to the case.
+-     */
+-    private List<EvidenceInfo> caseContents;
+-
+-    /**
+      * Settings for creating the case evidence.
+      */
+     private CaseEvidenceSettings caseEvidenceSettings;
+@@ -71,7 +60,7 @@
+     /**
+      * Creates the wizard model.
+      */
+-    public NewCaseWizardModel()
++    public NewCaseModel()
+     {
+         // Set from preferences.
+         prefs = Preferences.userRoot().node("/com/nuix/investigator/wizard");
+@@ -179,24 +168,6 @@
+     }
+ 
+     /**
+-     * Gets the content which will be added to the case.
+-     * @return the content which will be added to the case.
+-     */
+-    public List<EvidenceInfo> getCaseContents()
+-    {
+-        return caseContents;
+-    }
+-
+-    /**
+-     * Sets the content which will be added to the case.
+-     * @param caseContents the content which will be added to the case.
+-     */
+-    public void setCaseContents(List<EvidenceInfo> caseContents)
+-    {
+-        this.caseContents = caseContents;
+-    }
+-
+-    /**
+      * Gets the case evidence settings.
+      *
+      * @return the case evidence settings.
+@@ -217,14 +188,11 @@
+     }
+ 
+     /**
+-     * Sets if the wizard was completed.
+-     *
+-     * @param completed <code>true</code> if the wizard was completed, <code>false</code> otherwise.
++     * Saves the preferences in the model which are useful for the next time the user
++     * creates a case.
+      */
+-    public void setCompleted(boolean completed)
++    public void savePrefs()
+     {
+-        super.setCompleted(completed);
+-
+         caseEvidenceSettings.storeToPreferences(prefs.node("caseEvidenceSettings"));
+         processingSettings.storeToPreferences(prefs.node("processingSettings"));
+     }
+
+Property changes on: data/src/java/com/nuix/investigator/cases/creation/NewCaseModel.java
+___________________________________________________________________
+Name: svn:executable
+   + *
+Name: svn:keywords
+   + Author Date Id Revision
+Name: svn:eol-style
+   + native
+
+Index: data/src/java/com/nuix/investigator/cases/creation/NewCasePane.java
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/creation/NewCasePane.java	(revision 0)
++++ data/src/java/com/nuix/investigator/cases/creation/NewCasePane.java	(revision 0)
+@@ -0,0 +1,145 @@
++package com.nuix.investigator.cases.creation;
++
++import java.awt.GridBagConstraints;
++import java.awt.GridBagLayout;
++import java.beans.PropertyChangeListener;
++import java.beans.PropertyChangeEvent;
++
++import javax.swing.BorderFactory;
++import javax.swing.JComponent;
++import javax.swing.JPanel;
++
++import com.nuix.resources.ResourceFactory;
++import com.nuix.resources.ResourceGroup;
++import com.nuix.swing.widgets.ValidatingOptionPane;
++
++/**
++ * Pane for creating a new case.
++ */
++public class NewCasePane extends ValidatingOptionPane
++{
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Fields
++
++    /**
++     * The resources for the panel.
++     */
++    private ResourceGroup resources =
++        ResourceFactory.get("/com/nuix/investigator/cases/cases.xml").
++                getSubgroup("NewCasePane");
++
++    /**
++     * Panel for entering settings for the case itself.
++     */
++    private CaseSettingsPanel caseSettingsPanel;
++
++    /**
++     * Panel for entering text processing settings.
++     */
++    private TextProcessingSettingsPanel textProcessingSettingsPanel;
++
++    /**
++     * Panel for entering other processing settings.
++     */
++    private OtherProcessingSettingsPanel otherProcessingSettingsPanel;
++
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Methods
++
++    /**
++     * Gets the title of the dialog which will be displayed.
++     *
++     * @return the title.
++     */
++    protected String getTitle()
++    {
++        return resources.getString("Title");
++    }
++
++    /**
++     * Builds the components where the user can input data.
++     *
++     * @return the input panel.
++     */
++    protected JComponent buildInputPanel()
++    {
++        JPanel inputPanel = new JPanel(new GridBagLayout());
++
++        caseSettingsPanel = new CaseSettingsPanel();
++        caseSettingsPanel.setBorder(
++                BorderFactory.createTitledBorder(resources.getString("CaseSettings")));
++
++        textProcessingSettingsPanel = new TextProcessingSettingsPanel();
++        textProcessingSettingsPanel.setBorder(
++                BorderFactory.createTitledBorder(resources.getString("TextProcessingSettings")));
++
++        otherProcessingSettingsPanel = new OtherProcessingSettingsPanel();
++        otherProcessingSettingsPanel.setBorder(
++                BorderFactory.createTitledBorder(resources.getString("OtherProcessingSettings")));
++
++        // Disable the processing settings panels if the case is not a simple case.
++        caseSettingsPanel.addPropertyChangeListener(
++                CaseSettingsPanel.COMPOUND_PROPERTY,
++                new PropertyChangeListener()
++                {
++                    public void propertyChange(PropertyChangeEvent event)
++                    {
++                        boolean simpleCase = !((Boolean) event.getNewValue());
++                        textProcessingSettingsPanel.setEnabled(simpleCase);
++                        otherProcessingSettingsPanel.setEnabled(simpleCase);
++                    }
++                });
++
++        GridBagConstraints c = new GridBagConstraints();
++        c.anchor = GridBagConstraints.PAGE_START;
++        c.weightx = 1.0;
++        c.fill = GridBagConstraints.BOTH;
++        c.gridheight = 2;
++        inputPanel.add(caseSettingsPanel, c);
++        c.gridheight = 1;
++        c.gridwidth = GridBagConstraints.REMAINDER;
++        inputPanel.add(textProcessingSettingsPanel, c);
++        inputPanel.add(otherProcessingSettingsPanel, c);
++        return inputPanel;
++    }
++
++
++    /**
++     * Requests that the initial value be selected, which will set
++     * focus to the initial value.
++     */
++    public void selectInitialValue()
++    {
++        caseSettingsPanel.selectInitialValue();
++    }
++
++    /**
++     * Validates the input and performs the result of the dialog.
++     *
++     * @return <code>true</code> on success.
++     */
++    protected boolean validateAndPerform()
++    {
++        return caseSettingsPanel.validateInput();
++    }
++
++    /**
++     * Creates a model holding the settings in the pane.  The result of calling
++     * this method will only be defined if the user has confirmed the dialog and their
++     * input was determined to be valid.
++     *
++     * @return the new case model.
++     */
++    public NewCaseModel createModel()
++    {
++        NewCaseModel model = new NewCaseModel();
++        caseSettingsPanel.exportModel(model);
++        textProcessingSettingsPanel.exportModel(model);
++        otherProcessingSettingsPanel.exportModel(model);
++
++        // Safe to save the preferences at this point.
++        model.savePrefs();
++
++        return model;
++    }
++}
+Index: data/src/java/com/nuix/investigator/cases/creation/CaseSettingsPanel.java
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/creation/CaseSettingsPanel.java	(revision 0)
++++ data/src/java/com/nuix/investigator/cases/creation/CaseSettingsPanel.java	(revision 0)
+@@ -0,0 +1,291 @@
++package com.nuix.investigator.cases.creation;
++
++import java.awt.GridBagConstraints;
++import java.awt.GridBagLayout;
++import java.awt.GridLayout;
++import java.awt.Insets;
++import java.awt.event.ItemListener;
++import java.awt.event.ItemEvent;
++import java.io.File;
++import java.text.MessageFormat;
++
++import javax.swing.ButtonGroup;
++import javax.swing.JLabel;
++import javax.swing.JPanel;
++import javax.swing.JRadioButton;
++import javax.swing.JTextField;
++import javax.swing.event.DocumentEvent;
++import javax.swing.event.DocumentListener;
++import javax.swing.text.JTextComponent;
++
++import com.nuix.investigator.cases.CaseFileView;
++import com.nuix.investigator.options.global.GlobalPreferences;
++import com.nuix.os.user.NativeUserUtils;
++import com.nuix.product.Licence;
++import com.nuix.resources.ResourceFactory;
++import com.nuix.resources.ResourceGroup;
++import com.nuix.swing.builders.DialogBuilder;
++import com.nuix.swing.widgets.FileChooserField;
++import com.nuix.util.FileUtils;
++import com.nuix.util.StringUtils;
++
++/**
++ * Panel for entering the case settings.
++ */
++public class CaseSettingsPanel extends JPanel
++{
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Constants
++
++    /**
++     * The property to listen for changes in, to track the compound case checkbox.
++     */
++    static final String COMPOUND_PROPERTY = "compound";
++
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Fields
++
++    /**
++     * The resources for the panel.
++     */
++    private ResourceGroup resources =
++        ResourceFactory.get("/com/nuix/investigator/cases/cases.xml").
++                getSubgroup("CaseSettingsPanel");
++
++    /**
++     * The field which will contain the selected directory.
++     */
++    private FileChooserField directoryField;
++
++    /**
++     * The field containing the case name.
++     */
++    private JTextComponent nameField;
++
++    /**
++     * The field containing the case investigator.
++     */
++    private JTextComponent investigatorField;
++
++    /**
++     * The field containing the case description.
++     */
++    private JTextComponent descriptionField;
++
++    /**
++     * Radio button indicating that the case will be compound.
++     */
++    private JRadioButton compoundButton;
++
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Constructors
++
++    /**
++     * Constructs the panel.
++     */
++    public CaseSettingsPanel()
++    {
++        JPanel panel = new JPanel(new GridBagLayout());
++
++        GridBagConstraints c1 = new GridBagConstraints();
++        c1.insets = new Insets(4, 4, 4, 4);
++        c1.anchor = GridBagConstraints.LINE_START;
++        GridBagConstraints c2 = (GridBagConstraints) c1.clone();
++        c2.weightx = 1.0;
++        c2.fill = GridBagConstraints.HORIZONTAL;
++        c2.gridwidth = GridBagConstraints.REMAINDER;
++
++        // Case name
++        panel.add(new JLabel(resources.getString("Name")), c1);
++        nameField = new JTextField(20);
++        panel.add(nameField, c2);
++
++        // Case directory
++        panel.add(new JLabel(resources.getString("Directory")), c1);
++        directoryField = new FileChooserField(GlobalPreferences.CASE_DIRECTORY_KEY,
++                                              FileChooserField.FILES_ONLY);
++        //directoryField.setFileChecker(new NewDirectoryChecker(false));
++        directoryField.setFileView(new CaseFileView());
++        panel.add(directoryField, c2);
++        syncDirectoryFromName();
++
++        // Case investigator
++        panel.add(new JLabel(resources.getString("Investigator")), c1);
++        investigatorField = new JTextField();
++        panel.add(investigatorField, c2);
++
++        // Set the investigator's name automatically.
++        // XXX: Later, get this from the user manager in the case?
++        String investigator = NativeUserUtils.getInstance().getLongUserName();
++        if (StringUtils.isEmpty(investigator))
++        {
++            investigator = NativeUserUtils.getInstance().getShortUserName();
++        }
++        investigatorField.setText(investigator);
++
++        // Case description
++        panel.add(new JLabel(resources.getString("Description")), c1);
++        descriptionField = new JTextField();
++        panel.add(descriptionField, c2);
++
++        // Case type.  Disable compound case creation if the licence says so.
++        if (Licence.getInstance().isEnabled("compound-cases"))
++        {
++            panel.add(new JLabel(resources.getString("Type")), c1);
++            JRadioButton simpleButton = new JRadioButton(resources.getString("SimpleCase"), true);
++            compoundButton = new JRadioButton(resources.getString("CompoundCase"));
++            JPanel typeButtonPanel = new JPanel(new GridLayout(2, 1));
++            ButtonGroup typeButtonGroup = new ButtonGroup();
++            typeButtonPanel.add(simpleButton);
++            typeButtonGroup.add(simpleButton);
++            typeButtonPanel.add(compoundButton);
++            typeButtonGroup.add(compoundButton);
++            panel.add(typeButtonPanel, c2);
++
++            // Changes to the compound button get exposed as a property change event for the
++            // property "compound".
++            compoundButton.addItemListener(new ItemListener()
++            {
++                public void itemStateChanged(ItemEvent event)
++                {
++                    boolean newValue = event.getStateChange() == ItemEvent.SELECTED;
++                    firePropertyChange(COMPOUND_PROPERTY, !newValue, newValue);
++                }
++            });
++        }
++
++        // Auto update the name when the user specifies the directory.
++        nameField.getDocument().addDocumentListener(new DocumentListener()
++        {
++            public void insertUpdate(DocumentEvent event)
++            {
++                syncDirectoryFromName();
++            }
++
++            public void removeUpdate(DocumentEvent event)
++            {
++                syncDirectoryFromName();
++            }
++
++            public void changedUpdate(DocumentEvent event)
++            {
++                syncDirectoryFromName();
++            }
++        });
++
++        // Set the default name.
++        nameField.setText(createDefaultName());
++
++        // XXX: Turn off the automatic name updating if the user changes the file themselves?
++        //      But how do we know it was the user?
++
++        // I know there is only one component here, but this helps it keep the same
++        // proportions as the ProcessingSettingsPanel, which does the same layout.
++        c2.fill = GridBagConstraints.BOTH;
++        add(panel, c2);
++        c2.weighty = 1.0;
++        add(new JPanel(), c2); // Filler
++    }
++
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Methods
++
++    /**
++     * Copies data from the user interface into the model.
++     *
++     * @param model the model.
++     */
++    public void exportModel(NewCaseModel model)
++    {
++        model.setCaseDirectory(directoryField.getFile());
++        model.setCaseName(nameField.getText());
++        model.setCaseInvestigator(investigatorField.getText());
++        model.setCaseDescription(descriptionField.getText());
++        model.setCompound(compoundButton != null && compoundButton.isSelected());
++    }
++
++    /**
++     * Creates the default name to use for the case.  Will increment until it finds
++     * a name which isn't already in the case directory.
++     *
++     * @return the default name.
++     */
++    private String createDefaultName()
++    {
++        MessageFormat format = new MessageFormat(resources.getString("DefaultNameFormat"));
++        for (int i = 1; ; i++)
++        {
++            String name = format.format(new Object[] { i });
++            if (!new File(directoryField.getInitialDirectory(), name).exists())
++            {
++                return name;
++            }
++        }
++    }
++
++    /**
++     * Copies the name into the directory field, with the appropriate parent directory.
++     */
++    private void syncDirectoryFromName()
++    {
++        directoryField.setFile(new File(directoryField.getInitialDirectory(),
++                                        FileUtils.safeFileName(nameField.getText())));
++    }
++
++    /**
++     * Requests that the initial value be selected, which will set
++     * focus to the initial value.
++     */
++    public void selectInitialValue()
++    {
++        nameField.requestFocusInWindow();
++        nameField.selectAll();
++    }
++
++    /**
++     * Validates the input.
++     *
++     * @return <code>true</code> on success.
++     */
++    protected boolean validateInput()
++    {
++        if (directoryField.getFile() == null)
++        {
++            new DialogBuilder(getRootPane(), resources).error("MustEnterDirectory");
++            return false;
++        }
++        else if (directoryField.getFile().getParentFile() == null)
++        {
++            new DialogBuilder(getRootPane(), resources).error("RootNotPossible");
++            return false;
++        }
++        else if (!directoryField.getFile().getParentFile().exists())
++        {
++            new DialogBuilder(getRootPane(), resources).error("NoParentDirectory");
++            return false;
++        }
++        else if (!directoryField.getFile().exists())
++        {
++            return true;
++        }
++        else if (!directoryField.getFile().isDirectory())
++        {
++            new DialogBuilder(getRootPane(), resources).error("NotADirectory");
++            return false;
++        }
++        else if (directoryField.getFile().list().length > 0)
++        {
++            new DialogBuilder(getRootPane(), resources).error("DirectoryNotEmpty");
++            return false;
++        }
++
++        if (StringUtils.isEmpty(nameField.getText()) ||
++            StringUtils.isEmpty(investigatorField.getText()))
++        {
++            new DialogBuilder(getRootPane(), resources).error("FieldsNotComplete");
++            return false;
++        }
++
++        return true;
++    }
++}
+Index: data/src/java/com/nuix/investigator/cases/creation/OtherProcessingSettingsPanel.java
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/creation/OtherProcessingSettingsPanel.java	(revision 2511)
++++ data/src/java/com/nuix/investigator/cases/creation/OtherProcessingSettingsPanel.java	(working copy)
+@@ -1,70 +1,40 @@
+-package com.nuix.investigator.wizard.panels;
++package com.nuix.investigator.cases.creation;
+ 
+-import com.nuix.resources.ResourceGroup;
+-import com.nuix.swing.wizard.AbstractWizardPanel;
+-import com.nuix.swing.wizard.AbstractWizardModel;
+-import com.nuix.investigator.images.ImageFactory;
+-import com.nuix.investigator.wizard.NewCaseWizardModel;
+-import com.nuix.data.DataProcessingSettings;
+-import com.nuix.store.index.settings.StopWordsPolicy;
+-import com.nuix.store.index.settings.StemmingPolicy;
+-import com.nuix.store.index.settings.TextIndexSettings;
+-import com.nuix.store.index.settings.AbstractPolicy;
++import java.awt.GridBagConstraints;
++import java.awt.GridBagLayout;
++import java.awt.Insets;
++import java.awt.event.ActionEvent;
++import java.awt.event.ActionListener;
+ 
+ import javax.swing.JCheckBox;
+-import javax.swing.JLabel;
+ import javax.swing.JPanel;
+-import javax.swing.BoxLayout;
+-import javax.swing.Box;
+ import javax.swing.SwingUtilities;
+-import javax.swing.BorderFactory;
+-import javax.swing.JComboBox;
+-import javax.swing.DefaultComboBoxModel;
+ 
+-import java.awt.GridBagLayout;
+-import java.awt.GridBagConstraints;
+-import java.awt.Insets;
+-import java.awt.Container;
+-import java.awt.event.ActionListener;
+-import java.awt.event.ActionEvent;
++import com.nuix.data.DataProcessingSettings;
++import com.nuix.resources.ResourceFactory;
++import com.nuix.resources.ResourceGroup;
+ 
+ /**
+- * Wizard step for specifying the data processing settings for each case.
++ * Panel for specifying other data processing settings.
+  */
+-public class CaseContentPropertiesPanel extends AbstractWizardPanel
++public class OtherProcessingSettingsPanel extends JPanel
+ {
+     ///////////////////////////////////////////////////////////////////////////
+-    // Constants
+-
+-    ///////////////////////////////////////////////////////////////////////////
+     // Fields
+ 
+     /**
+      * The resources for the panel.
+      */
+-    private ResourceGroup resources;
++    private ResourceGroup resources =
++        ResourceFactory.get("/com/nuix/investigator/cases/cases.xml")
++            .getSubgroup("OtherProcessingSettingsPanel");
+ 
+     /**
+-     * The "process text" checkbox.
+-     */
+-    private JCheckBox processTextCheckBox;
+-
+-    /**
+      * The "store binary" checkbox.
+      */
+     private JCheckBox storeBinaryCheckBox;
+ 
+     /**
+-     * The stop words policy combobox.
+-     */
+-    private JComboBox stopWordsPolicyComboBox;
+-
+-    /**
+-     * The stemming policy combo box.
+-     */
+-    private JComboBox stemmingPolicyComboBox;
+-
+-    /**
+      * A reference to the "extract from slack space" checkbox.
+      */
+     private JCheckBox extractFromSlackSpaceCheckBox = null;
+@@ -98,21 +68,48 @@
+     // Constructors
+ 
+     /**
+-     * Constructor initialising resources.
+-     * @param resources The {@link ResourceGroup} to initialise with.
++     * Constructs the panel.
+      */
+-    public CaseContentPropertiesPanel(ResourceGroup resources)
++    public OtherProcessingSettingsPanel()
+     {
+-        super("CaseContentPropertiesPanel");
+-        setLogo(ImageFactory.createIcon("WizardLeft.png"));
+-        this.resources = resources;
++        super(new GridBagLayout());
++
++        GridBagConstraints c1 = new GridBagConstraints();
++        c1.insets = new Insets(4, 4, 4, 4);
++        c1.anchor = GridBagConstraints.LINE_START;
++        GridBagConstraints c2 = (GridBagConstraints) c1.clone();
++        c2.weightx = 1.0;
++        c2.gridwidth = GridBagConstraints.REMAINDER;
++
++        // Remaining options.
++        storeBinaryCheckBox = addJCheckbox("StoreBinaryOption", c2);
++        extractFromSlackSpaceCheckBox = addJCheckbox("DeletedEmailsOption", c2);
++        directAccessCheckBox = addJCheckbox("DirectAccessOption", c2);
++        extractEmbeddedImagesCheckBox = addJCheckbox("ExtractEmbeddedImagesOption", c2);
++        createThumbnailsCheckBox = addJCheckbox("CreateThumbnailsOption", c2);
++        deduplicateDataCheckBox = addJCheckbox("DeduplicateDataOption", c2);
++        skinToneAnalysisCheckBox = addJCheckbox("SkinToneAnalysisOption", c2);
++
++        // If skinToneAnalysisCheckbox is selected, then the createThumbnailsCheckbox
++        // must be enabled.
++        skinToneAnalysisCheckBox.addActionListener(new ActionListener()
++        {
++            public void actionPerformed(ActionEvent e)
++            {
++                updateState();
++            }
++        });
++
++        // Load default state from a dummy model.
++        importModel(new NewCaseModel());
++        updateState();
+     }
+ 
+     ///////////////////////////////////////////////////////////////////////////
+     // Methods
+ 
+     /**
+-     * Validates the data entered by the user. This is always true since 
++     * Validates the data entered by the user. This is always true since
+      * we're simply altering the boolean state of checkboxes.
+      *
+      * @return <code>true</code> if the data in this panel is valid,
+@@ -128,12 +125,9 @@
+      *
+      * @param model the wizard model.
+      */
+-    public void importModel(AbstractWizardModel model)
++    private void importModel(NewCaseModel model)
+     {
+-        NewCaseWizardModel m = (NewCaseWizardModel) model;
+-
+-        DataProcessingSettings processingSettings = m.getProcessingSettings();
+-        processTextCheckBox.setSelected(processingSettings.getProcessText());
++        DataProcessingSettings processingSettings = model.getProcessingSettings();
+         storeBinaryCheckBox.setSelected(processingSettings.getStoreBinary());
+         extractFromSlackSpaceCheckBox.setSelected(processingSettings.getExtractFromSlackSpace());
+         directAccessCheckBox.setSelected(processingSettings.getDirectAccessToMailboxes());
+@@ -141,12 +135,6 @@
+         createThumbnailsCheckBox.setSelected(processingSettings.getCreateThumbnails());
+         deduplicateDataCheckBox.setSelected(processingSettings.getDeduplicateData());
+         skinToneAnalysisCheckBox.setSelected(processingSettings.getSkinToneAnalysis());
+-
+-        TextIndexSettings textIndexSettings = m.getCaseEvidenceSettings().getTextIndexSettings();
+-        stopWordsPolicyComboBox.setSelectedItem(new PolicyContainer(textIndexSettings.getStopWordsPolicy()));
+-        stemmingPolicyComboBox.setSelectedItem(new PolicyContainer(textIndexSettings.getStemmingPolicy()));
+-
+-        wireCheckboxes();
+     }
+ 
+     /**
+@@ -154,12 +142,9 @@
+      *
+      * @param model the wizard model.
+      */
+-    public void exportModel(AbstractWizardModel model)
++    public void exportModel(NewCaseModel model)
+     {
+-        NewCaseWizardModel m = (NewCaseWizardModel) model;
+-
+-        DataProcessingSettings processingSettings = m.getProcessingSettings();
+-        processingSettings.setProcessText(processTextCheckBox.isSelected());
++        DataProcessingSettings processingSettings = model.getProcessingSettings();
+         processingSettings.setStoreBinary(storeBinaryCheckBox.isSelected());
+         processingSettings.setExtractFromSlackSpace(extractFromSlackSpaceCheckBox.isSelected());
+         processingSettings.setDirectAccessToMailboxes(directAccessCheckBox.isSelected());
+@@ -167,83 +152,41 @@
+         processingSettings.setCreateThumbnails(createThumbnailsCheckBox.isSelected());
+         processingSettings.setDeduplicateData(deduplicateDataCheckBox.isSelected());
+         processingSettings.setSkinToneAnalysis(skinToneAnalysisCheckBox.isSelected());
+-
+-        TextIndexSettings textIndexSettings = m.getCaseEvidenceSettings().getTextIndexSettings();
+-        PolicyContainer policyContainer = (PolicyContainer) stopWordsPolicyComboBox.getSelectedItem();
+-        textIndexSettings.setStopWordsPolicy((StopWordsPolicy) policyContainer.policy);
+-        policyContainer = (PolicyContainer) stemmingPolicyComboBox.getSelectedItem();
+-        textIndexSettings.setStemmingPolicy((StemmingPolicy) policyContainer.policy);
+     }
+ 
+     /**
+-     * Called at the appropriate time, to initialise the contents of the panel.
++     * Updates the enabled state of the individual components.
+      */
+-    protected void initialise()
++    private void updateState()
+     {
+-        getContentPane().setLayout(new GridBagLayout());
+-
+-        GridBagConstraints c1 = new GridBagConstraints();
+-        c1.insets = new Insets(2, 4, 2, 4);
+-        c1.anchor = GridBagConstraints.FIRST_LINE_START;
+-        GridBagConstraints c2 = (GridBagConstraints) c1.clone();
+-        c2.weightx = 1.0;
+-        c2.gridwidth = GridBagConstraints.REMAINDER;
+-
+-        // Text processing options.
+-        JPanel textPanel = new JPanel(new GridBagLayout());
+-        textPanel.setBorder(BorderFactory.createTitledBorder(
+-            resources.getString("TextProcessingSettingsHeader")));
+-        processTextCheckBox = addJCheckbox("ProcessTextOption", textPanel, c2);
+-        stopWordsPolicyComboBox = addJComboBox("StopWordsPolicy", textPanel, c1, c1,
+-                                               StopWordsPolicy.getAll());
+-        stemmingPolicyComboBox = addJComboBox("StemmingPolicy", textPanel, c1, c2,
+-                                              StemmingPolicy.getAll());
+-
+-        // Remaining options.
+-        Box otherPanel = new Box(BoxLayout.Y_AXIS);
+-        otherPanel.setBorder(BorderFactory.createTitledBorder(
+-            resources.getString("OtherSettingsHeader")));
+-        storeBinaryCheckBox = addJCheckbox("StoreBinaryOption", otherPanel, c2);
+-        extractFromSlackSpaceCheckBox = addJCheckbox("DeletedEmailsOption", otherPanel, c2);
+-        directAccessCheckBox = addJCheckbox("DirectAccessOption", otherPanel, c2);
+-        extractEmbeddedImagesCheckBox = addJCheckbox("ExtractEmbeddedImagesOption", otherPanel, c2);
+-        createThumbnailsCheckBox = addJCheckbox("CreateThumbnailsOption", otherPanel, c2);
+-        deduplicateDataCheckBox = addJCheckbox("DeduplicateDataOption", otherPanel, c2);
+-        skinToneAnalysisCheckBox = addJCheckbox("SkinToneAnalysisOption", otherPanel, c2);
+-
+-        // If skinToneAnalysisCheckbox is selected, then the createThumbnailsCheckbox
+-        // must be enabled.
+-        skinToneAnalysisCheckBox.addActionListener(new ActionListener()
++        if (isEnabled())
+         {
+-            public void actionPerformed(ActionEvent e)
++            storeBinaryCheckBox.setEnabled(true);
++            extractFromSlackSpaceCheckBox.setEnabled(true);
++            directAccessCheckBox.setEnabled(true);
++            extractEmbeddedImagesCheckBox.setEnabled(true);
++            deduplicateDataCheckBox.setEnabled(true);
++            skinToneAnalysisCheckBox.setEnabled(true);
++
++            if (skinToneAnalysisCheckBox.isSelected())
+             {
+-                wireCheckboxes();
++                createThumbnailsCheckBox.setSelected(true);
++                createThumbnailsCheckBox.setEnabled(false);
+             }
+-        });
+-
+-        // Put the whole thing together.
+-        c2.fill = GridBagConstraints.BOTH;
+-        getContentPane().add(new JLabel(resources.getString("Text")), c2);
+-        getContentPane().add(textPanel, c2);
+-        getContentPane().add(otherPanel, c2);
+-        c2.weighty = 1.0;
+-        getContentPane().add(new JPanel(), c2); // Filler
+-    }
+-
+-    /**
+-     * Make sure that any dependencies between checkboxes are handled.  Currently, if
+-     * the skin-tone analysis checkbox is enabled, then so must the thumbnails checkbox.
+-     */
+-    private void wireCheckboxes()
+-    {
+-        if (skinToneAnalysisCheckBox.isSelected())
+-        {
+-            createThumbnailsCheckBox.setSelected(true);
+-            createThumbnailsCheckBox.setEnabled(false);
++            else
++            {
++                createThumbnailsCheckBox.setEnabled(true);
++            }
+         }
+         else
+         {
+-            createThumbnailsCheckBox.setEnabled(true);
++            storeBinaryCheckBox.setEnabled(false);
++            extractFromSlackSpaceCheckBox.setEnabled(false);
++            directAccessCheckBox.setEnabled(false);
++            extractEmbeddedImagesCheckBox.setEnabled(false);
++            createThumbnailsCheckBox.setEnabled(false);
++            deduplicateDataCheckBox.setEnabled(false);
++            skinToneAnalysisCheckBox.setEnabled(false);
+         }
+     }
+ 
+@@ -263,74 +206,26 @@
+      * Adds a checkbox, handling resources and so forth so that the caller doesn't need to.
+      *
+      * @param key the base key for looking up the resources.
+-     * @param container the container to add the component to.
+      * @param constraints layout constraints for the checkbox.
+      * @return the checkbox.
+      */
+-    public JCheckBox addJCheckbox(String key, Container container, Object constraints)
++    public JCheckBox addJCheckbox(String key, Object constraints)
+     {
+         JCheckBox checkBox = new JCheckBox(resources.getString(key));
+         checkBox.setToolTipText(resources.getString(key + "ToolTip"));
+-        container.add(checkBox, constraints);
++        add(checkBox, constraints);
+         return checkBox;
+     }
+ 
+     /**
+-     * Adds a combo box and its label, handling resources and so forth so that
+-     * the caller doesn't need to.
++     * Overridden to enable/disable the individual fields.
+      *
+-     * @param key the base key for looking up the resources.
+-     * @param container the container to add the component to.
+-     * @param labelConstraints layout constraints for the label.
+-     * @param comboBoxConstraints layout constraints for the combo box.
+-     * @param values the values to put in the combo box.
++     * @param enabled true if this component should be enabled, false otherwise
+      */
+-    private JComboBox addJComboBox(String key, Container container,
+-                                   Object labelConstraints, Object comboBoxConstraints,
+-                                   AbstractPolicy[] values)
++    public void setEnabled(boolean enabled)
+     {
+-        DefaultComboBoxModel model = new DefaultComboBoxModel();
+-        for (AbstractPolicy value : values)
+-        {
+-            model.addElement(new PolicyContainer(value));
+-        }
+-
+-        JComboBox comboBox = new JComboBox(model);
+-        comboBox.setPrototypeDisplayValue("English    "); // Long enough for now.
+-        container.add(new JLabel(resources.getString(key + "Label")), labelConstraints);
+-        container.add(comboBox, comboBoxConstraints);
+-        return comboBox;
++        super.setEnabled(enabled);
++        updateState();
+     }
+ 
+-    ///////////////////////////////////////////////////////////////////////////
+-    // Inner Classes
+-
+-    /**
+-     * A container for a policy to make <code>toString()</code> return a human-readable
+-     * value instead of the system one.
+-     */
+-    private static class PolicyContainer
+-    {
+-        private AbstractPolicy policy;
+-
+-        private PolicyContainer(AbstractPolicy policy)
+-        {
+-            this.policy = policy;
+-        }
+-
+-        public String toString()
+-        {
+-            return policy.toDisplayString();
+-        }
+-
+-        public boolean equals(Object other)
+-        {
+-            return (other instanceof PolicyContainer) && policy.equals(((PolicyContainer) other).policy);
+-        }
+-
+-        public int hashCode()
+-        {
+-            return policy.hashCode();
+-        }
+-    }
+ }
+
+Property changes on: data/src/java/com/nuix/investigator/cases/creation/OtherProcessingSettingsPanel.java
+___________________________________________________________________
+Name: svn:executable
+   + *
+Name: svn:keywords
+   + Author Date Id Revision
+Name: svn:eol-style
+   + native
+
+Index: data/src/java/com/nuix/investigator/cases/creation/AddLoadableEvidenceModel.java
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/creation/AddLoadableEvidenceModel.java	(revision 0)
++++ data/src/java/com/nuix/investigator/cases/creation/AddLoadableEvidenceModel.java	(revision 0)
+@@ -0,0 +1,41 @@
++package com.nuix.investigator.cases.creation;
++
++import java.util.List;
++
++import com.nuix.data.EvidenceInfo;
++
++/**
++ * Model class created by the {@link AddLoadableEvidencePane}.
++ */
++public class AddLoadableEvidenceModel
++{
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Fields
++
++    /**
++     * The content which will be added to the case.
++     */
++    private List<EvidenceInfo> caseContents;
++
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Methods
++
++    /**
++     * Gets the content which will be added to the case.
++     * @return the content which will be added to the case.
++     */
++    public List<EvidenceInfo> getCaseContents()
++    {
++        return caseContents;
++    }
++
++    /**
++     * Sets the content which will be added to the case.
++     * @param caseContents the content which will be added to the case.
++     */
++    public void setCaseContents(List<EvidenceInfo> caseContents)
++    {
++        this.caseContents = caseContents;
++    }
++   
++}
+Index: data/src/java/com/nuix/investigator/cases/creation/TextProcessingSettingsPanel.java
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/creation/TextProcessingSettingsPanel.java	(revision 0)
++++ data/src/java/com/nuix/investigator/cases/creation/TextProcessingSettingsPanel.java	(revision 0)
+@@ -0,0 +1,228 @@
++package com.nuix.investigator.cases.creation;
++
++import java.awt.GridBagConstraints;
++import java.awt.GridBagLayout;
++import java.awt.Insets;
++import java.awt.event.ActionListener;
++import java.awt.event.ActionEvent;
++
++import javax.swing.DefaultComboBoxModel;
++import javax.swing.JCheckBox;
++import javax.swing.JComboBox;
++import javax.swing.JLabel;
++import javax.swing.JPanel;
++
++import com.nuix.data.DataProcessingSettings;
++import com.nuix.resources.ResourceFactory;
++import com.nuix.resources.ResourceGroup;
++import com.nuix.store.index.settings.AbstractPolicy;
++import com.nuix.store.index.settings.StemmingPolicy;
++import com.nuix.store.index.settings.StopWordsPolicy;
++import com.nuix.store.index.settings.TextIndexSettings;
++
++/**
++ * Panel for specifying text data processing settings.
++ */
++public class TextProcessingSettingsPanel extends JPanel
++{
++    ///////////////////////////////////////////////////////////////////////////
++    // Fields
++
++    /**
++     * The resources for the panel.
++     */
++    private ResourceGroup resources =
++        ResourceFactory.get("/com/nuix/investigator/cases/cases.xml")
++            .getSubgroup("TextProcessingSettingsPanel");
++
++    /**
++     * The "process text" checkbox.
++     */
++    private JCheckBox processTextCheckBox;
++
++    /**
++     * The stop words policy combobox.
++     */
++    private JComboBox stopWordsPolicyComboBox;
++
++    /**
++     * The stemming policy combo box.
++     */
++    private JComboBox stemmingPolicyComboBox;
++
++    ///////////////////////////////////////////////////////////////////////////
++    // Constructors
++
++    /**
++     * Create a new buffered JPanel with the specified layout manager
++     */
++    public TextProcessingSettingsPanel()
++    {
++        super(new GridBagLayout());
++
++        GridBagConstraints c1 = new GridBagConstraints();
++        c1.insets = new Insets(4, 4, 4, 4);
++        c1.anchor = GridBagConstraints.LINE_START;
++        GridBagConstraints c2 = (GridBagConstraints) c1.clone();
++        c2.weightx = 1.0;
++        c2.gridwidth = GridBagConstraints.REMAINDER;
++
++        processTextCheckBox = addJCheckbox("ProcessTextOption", c2);
++        stopWordsPolicyComboBox = addJComboBox("StopWordsPolicy", c1, c2,
++                                               StopWordsPolicy.getAll());
++        stemmingPolicyComboBox = addJComboBox("StemmingPolicy", c1, c2,
++                                              StemmingPolicy.getAll());
++
++        processTextCheckBox.addActionListener(new ActionListener()
++        {
++            public void actionPerformed(ActionEvent e)
++            {
++                updateState();
++            }
++        });
++
++        // Load default state from a dummy model.
++        importModel(new NewCaseModel());
++        updateState();
++    }
++
++    ///////////////////////////////////////////////////////////////////////////
++    // Methods
++
++    /**
++     * Copies data from the model into the user interface.
++     *
++     * @param model the wizard model.
++     */
++    private void importModel(NewCaseModel model)
++    {
++        DataProcessingSettings processingSettings = model.getProcessingSettings();
++        processTextCheckBox.setSelected(processingSettings.getProcessText());
++
++        TextIndexSettings textIndexSettings = model.getCaseEvidenceSettings().getTextIndexSettings();
++        stopWordsPolicyComboBox.setSelectedItem(new PolicyContainer(textIndexSettings.getStopWordsPolicy()));
++        stemmingPolicyComboBox.setSelectedItem(new PolicyContainer(textIndexSettings.getStemmingPolicy()));
++    }
++
++    /**
++     * Copies data from the user interface into the model.
++     *
++     * @param model the wizard model.
++     */
++    public void exportModel(NewCaseModel model)
++    {
++        DataProcessingSettings processingSettings = model.getProcessingSettings();
++        processingSettings.setProcessText(processTextCheckBox.isSelected());
++        TextIndexSettings textIndexSettings = model.getCaseEvidenceSettings().getTextIndexSettings();
++
++        PolicyContainer policyContainer = (PolicyContainer) stopWordsPolicyComboBox.getSelectedItem();
++        textIndexSettings.setStopWordsPolicy((StopWordsPolicy) policyContainer.policy);
++        policyContainer = (PolicyContainer) stemmingPolicyComboBox.getSelectedItem();
++        textIndexSettings.setStemmingPolicy((StemmingPolicy) policyContainer.policy);
++    }
++
++    /**
++     * Updates the enabled state of the individual components.
++     */
++    private void updateState()
++    {
++        if (isEnabled())
++        {
++            processTextCheckBox.setEnabled(true);
++            boolean enable = processTextCheckBox.isSelected();
++            stopWordsPolicyComboBox.setEnabled(enable);
++            stemmingPolicyComboBox.setEnabled(enable);
++        }
++        else
++        {
++            processTextCheckBox.setEnabled(false);
++            stopWordsPolicyComboBox.setEnabled(false);
++            stemmingPolicyComboBox.setEnabled(false);
++        }
++    }
++
++    /**
++     * Adds a checkbox, handling resources and so forth so that the caller doesn't need to.
++     *
++     * @param key the base key for looking up the resources.
++     * @param constraints layout constraints for the checkbox.
++     * @return the checkbox.
++     */
++    public JCheckBox addJCheckbox(String key, Object constraints)
++    {
++        JCheckBox checkBox = new JCheckBox(resources.getString(key));
++        checkBox.setToolTipText(resources.getString(key + "ToolTip"));
++        add(checkBox, constraints);
++        return checkBox;
++    }
++
++    /**
++     * Adds a combo box and its label, handling resources and so forth so that
++     * the caller doesn't need to.
++     *
++     * @param key the base key for looking up the resources.
++     * @param labelConstraints layout constraints for the label.
++     * @param comboBoxConstraints layout constraints for the combo box.
++     * @param values the values to put in the combo box.
++     * @return the created combo box.
++     */
++    private JComboBox addJComboBox(String key,
++                                   Object labelConstraints, Object comboBoxConstraints,
++                                   AbstractPolicy[] values)
++    {
++        DefaultComboBoxModel model = new DefaultComboBoxModel();
++        for (AbstractPolicy value : values)
++        {
++            model.addElement(new PolicyContainer(value));
++        }
++
++        JComboBox comboBox = new JComboBox(model);
++        comboBox.setPrototypeDisplayValue("English    "); // Long enough for now.
++        add(new JLabel(resources.getString(key + "Label")), labelConstraints);
++        add(comboBox, comboBoxConstraints);
++        return comboBox;
++    }
++
++    /**
++     * Overridden to enable/disable the individual fields.
++     *
++     * @param enabled true if this component should be enabled, false otherwise
++     */
++    public void setEnabled(boolean enabled)
++    {
++        super.setEnabled(enabled);
++        updateState();
++    }
++
++    ///////////////////////////////////////////////////////////////////////////
++    // Inner Classes
++
++    /**
++     * A container for a policy to make <code>toString()</code> return a human-readable
++     * value instead of the system one.
++     */
++    private static class PolicyContainer
++    {
++        private AbstractPolicy policy;
++
++        private PolicyContainer(AbstractPolicy policy)
++        {
++            this.policy = policy;
++        }
++
++        public String toString()
++        {
++            return policy.toDisplayString();
++        }
++
++        public boolean equals(Object other)
++        {
++            return (other instanceof PolicyContainer) && policy.equals(((PolicyContainer) other).policy);
++        }
++
++        public int hashCode()
++        {
++            return policy.hashCode();
++        }
++    }
++}
+Index: data/src/java/com/nuix/investigator/cases/creation/AddLoadableEvidencePane.java
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/creation/AddLoadableEvidencePane.java	(revision 0)
++++ data/src/java/com/nuix/investigator/cases/creation/AddLoadableEvidencePane.java	(revision 0)
+@@ -0,0 +1,577 @@
++package com.nuix.investigator.cases.creation;
++
++import java.awt.Component;
++import java.awt.FlowLayout;
++import java.awt.GridBagConstraints;
++import java.awt.GridBagLayout;
++import java.awt.Insets;
++import java.awt.SystemColor;
++import java.io.File;
++import java.io.IOException;
++import java.net.URI;
++
++import javax.swing.Action;
++import javax.swing.JButton;
++import javax.swing.JComponent;
++import javax.swing.JLabel;
++import javax.swing.JPanel;
++import javax.swing.JScrollPane;
++import javax.swing.JTree;
++import javax.swing.event.TreeModelEvent;
++import javax.swing.event.TreeModelListener;
++import javax.swing.event.TreeSelectionEvent;
++import javax.swing.event.TreeSelectionListener;
++import javax.swing.tree.DefaultTreeCellRenderer;
++import javax.swing.tree.TreePath;
++import javax.swing.tree.TreeSelectionModel;
++
++import com.nuix.data.DefaultDataFactory;
++import com.nuix.data.Environment;
++import com.nuix.data.EvidenceInfo;
++import com.nuix.investigator.cases.Case;
++import com.nuix.investigator.cases.CaseContentTreeModel;
++import com.nuix.investigator.cases.CaseEvidence;
++import com.nuix.processor.PersistentProcessingQueue;
++import com.nuix.product.Licence;
++import com.nuix.resources.ResourceFactory;
++import com.nuix.resources.ResourceGroup;
++import com.nuix.swing.actions.BaseAction;
++import com.nuix.swing.builders.DialogBuilder;
++import com.nuix.swing.errors.ExpandableErrorPane;
++import com.nuix.swing.widgets.ValidatingOptionPane;
++import com.nuix.util.StringUtils;
++
++/**
++ * Pane allowing the user to add loadable evidence to a simple case.
++ */
++public class AddLoadableEvidencePane extends ValidatingOptionPane
++{
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Fields
++
++    /**
++     * Resources for the pane.
++     */
++    private static final ResourceGroup resources = ResourceFactory.get("/com/nuix/investigator/cases/cases.xml")
++            .getSubgroup("AddLoadableEvidencePane");
++
++    /**
++     * The current case.
++     */
++    private Case currentCase;
++
++    /**
++     * The tree containing a view of the contents which will be indexed in the case.
++     */
++    private JTree caseContentTree = null;
++
++    /**
++     * The model for the tree.
++     */
++    private CaseContentTreeModel caseContentTreeModel = null;
++
++    /**
++     * A reference to the Add button.
++     */
++    private JButton addButton;
++
++    /**
++     * A reference to the Remove button.
++     */
++    private JButton removeButton;
++
++    /**
++     * A reference to the Edit button.
++     */
++    private JButton editButton;
++
++    /**
++     * Default EvidenceInfo to use.
++     */
++    private EvidenceInfo lastEvidence = null;
++
++    /**
++     * The maximum number of items the user can add to the evidence.
++     */
++    private int limit;
++
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Constructors
++
++    /**
++     * Constructs the pane.
++     *
++     * @param currentCase the case being manipulated.
++     */
++    public AddLoadableEvidencePane(Case currentCase)
++    {
++        this.currentCase = currentCase;
++
++        // Is there a licence limit in place?
++        String limitString = Licence.getInstance().getProperty("limit.toplevel-items");
++        if (limitString != null)
++        {
++            limit = Integer.parseInt(limitString);
++        }
++
++        caseContentTreeModel = new CaseContentTreeModel();
++
++        // Add the evidence which already exists in the case.
++        // We're doing this in the constructor so that it can fail faster and bomb out
++        // the action which is displaying the
++        try
++        {
++            File evidenceLocation = currentCase.getEvidenceSet().get(0).getEvidenceLocation();
++            for (File file : evidenceLocation.listFiles())
++            {
++                EvidenceInfo info = new EvidenceInfo();
++                info.loadFromFile(file);
++                caseContentTreeModel.addEvidence(info);
++            }
++        }
++        catch (IOException e)
++        {
++            // Not expected to ever happen, show generic error message and throw illegal state.
++            ExpandableErrorPane.showDialog(getRootPane(), e);
++            throw new IllegalStateException("Error determining existing case evidence", e);
++        }
++    }
++
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Methods
++
++    /**
++     * Gets the title of the dialog which will be displayed.
++     *
++     * @return the title.
++     */
++    protected String getTitle()
++    {
++        return resources.getString("Title");
++    }
++
++    /**
++     * Builds the components where the user can input data.
++     *
++     * @return the input panel.
++     */
++    protected JComponent buildInputPanel()
++    {
++        JPanel inputPanel = new JPanel(new GridBagLayout());
++        GridBagConstraints c = new GridBagConstraints();
++        c.insets = new Insets(0, 0, 8, 0);
++        c.gridwidth = GridBagConstraints.REMAINDER;
++        c.anchor = GridBagConstraints.FIRST_LINE_START;
++        c.weightx = 1.0;
++        c.fill = GridBagConstraints.HORIZONTAL;
++
++        // Top label.
++        inputPanel.add(new JLabel(resources.getString("Text")), c);
++
++        // Case content tree.
++        caseContentTree =  new JTree(caseContentTreeModel);
++        caseContentTree.setRootVisible(false);
++        caseContentTree.setShowsRootHandles(true);
++        caseContentTree.putClientProperty("JTree.lineStyle", "Angled");
++        caseContentTree.setCellRenderer(new EvidenceNameRenderer());
++        caseContentTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
++
++        c.weighty = 1.0;
++        c.fill = GridBagConstraints.BOTH;
++        inputPanel.add(new JScrollPane(caseContentTree), c);
++
++        // Actions.
++        Action addAction = new AddAction();
++        Action removeAction = new RemoveAction();
++        Action editAction = new EditAction();
++
++        // Button panel.
++        addButton = new JButton(addAction);
++        addButton.setDefaultCapable(false);
++        removeButton = new JButton(removeAction);
++        removeButton.setDefaultCapable(false);
++        editButton = new JButton(editAction);
++        editButton.setDefaultCapable(false);
++        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
++        buttonPanel.add(addButton);
++        buttonPanel.add(removeButton);
++        buttonPanel.add(editButton);
++        c.weighty = 0.0;
++        c.fill = GridBagConstraints.HORIZONTAL;
++        inputPanel.add(buttonPanel, c);
++
++        // Wire the list events to enable the buttons as appropriate.
++        TreeChangeListener treeChangeListener = new TreeChangeListener();
++        caseContentTreeModel.addTreeModelListener(treeChangeListener);
++        caseContentTree.getSelectionModel().addTreeSelectionListener(treeChangeListener);
++
++        return inputPanel;
++    }
++
++    /**
++     * Requests that the initial value be selected, which will set
++     * focus to the initial value. This method
++     * should be invoked after the window containing the option pane
++     * is made visible.
++     */
++    public void selectInitialValue()
++    {
++        addButton.requestFocusInWindow();
++    }
++
++    /**
++     * Validates the input and performs the result of the dialog.
++     *
++     * @return <code>true</code> on success.
++     */
++    protected boolean validateAndPerform()
++    {
++        // We know the evidence sets themselves are valid, beacuse we've
++        // checked them on creation.
++        if (caseContentTreeModel.getChildCount(CaseContentTreeModel.ROOT_NODE) == 0)
++        {
++            new DialogBuilder(getRootPane(), resources).error("MustAddContent");
++            return false;
++        }
++        else
++        {
++            // We already know it's a simple case.
++            CaseEvidence evidence = currentCase.getEvidenceSet().get(0);
++
++            File persistentDir = new File(evidence.getLocation(), "Stores/PersistentQueue");
++            try
++            {
++                // Initialise the queue first.  The factory here doesn't matter because we're
++                // just using this to serialise the queue to disk.
++                PersistentProcessingQueue queue = new PersistentProcessingQueue(
++                        persistentDir, new DefaultDataFactory(new Environment()));
++
++                for (EvidenceInfo evidenceInfo : caseContentTreeModel.getEvidence())
++                {
++                    // Don't add it to the queue if the file is already saved.
++                    if (!evidenceInfo.isSaved())
++                    {
++                        queue.addDataRoot(evidenceInfo.saveToFile(evidence));
++                    }
++                }
++
++                // Saves state as a side-effect.
++                queue.cleanup();
++                return true;
++            }
++            catch (IOException e)
++            {
++                // Not expected to ever happen, show generic error message.
++                ExpandableErrorPane.showDialog(getRootPane(), e);
++                return false;
++            }
++        }
++    }
++
++    /**
++     * To be performed after the Add and Edit actions.
++     */
++    private void doPostAction()
++    {
++        // Select the last modified EvidenceInfo instance.
++        if (lastEvidence != null)
++        {
++            TreePath lastEvidencePath =
++                new TreePath(new Object[] {CaseContentTreeModel.ROOT_NODE, lastEvidence});
++            caseContentTree.expandPath(lastEvidencePath);
++        }
++    }
++
++    /**
++     * Counts the number of items already added.
++     *
++     * @return the number of items already added.
++     */
++    private int countAddedItems()
++    {
++        int count = 0;
++        for (EvidenceInfo info : caseContentTreeModel.getEvidence())
++        {
++            count += info.getContents().size();
++        }
++        return count;
++    }
++
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Inner Classes
++
++    /**
++     * Action on the Add button, which just pops up the real menu.
++     */
++    private class AddAction extends BaseAction
++    {
++        public AddAction()
++        {
++            super(AddLoadableEvidencePane.this, resources.getString("Add"));
++        }
++
++        public void execute()
++        {
++            EvidenceInfo defaultData = new EvidenceInfo();
++            defaultData.setName(generateDefaultName());
++            EvidenceInputPane pane = new EvidenceInputPane(defaultData, limit, countAddedItems());
++            if (pane.showDialog(getRootPane()))
++            {
++                EvidenceInfo choice = pane.getEvidenceInfo();
++
++                // Set this choice as the default.
++                lastEvidence = choice;
++                while (choice != null && caseContentTreeModel.containsEvidence(choice))
++                {
++                    // We need to prompt them to enter in another name.
++                    new DialogBuilder(AddLoadableEvidencePane.this, resources).error("MustSpecifyUniqueName");
++
++                    // Send them back.
++                    choice = null;
++                    if (pane.showDialog(getRootPane()))
++                    {
++                        choice = pane.getEvidenceInfo();
++                    }
++                }
++
++                if (choice != null)
++                {
++                    caseContentTreeModel.addEvidence(choice);
++                }
++
++                doPostAction();
++            }
++        }
++
++        /**
++         * Generates a sensible default name for the evidence.
++         *
++         * @return the name.
++         */
++        private String generateDefaultName()
++        {
++            int counter = 1;
++            boolean clash = true;
++            String name = null;
++            while (clash)
++            {
++                name = resources.getString("EvidencePrefix", counter++);
++
++                clash = false;
++                for (EvidenceInfo info : caseContentTreeModel.getEvidence())
++                {
++                    if (name.equals(info.getName()))
++                    {
++                        clash = true;
++                    }
++                }
++            }
++            return name;
++        }
++    }
++
++    /**
++     * Action on the Add button, which just pops up the real menu.
++     */
++    private class EditAction extends BaseAction
++    {
++        public EditAction()
++        {
++            super(AddLoadableEvidencePane.this, resources.getString("Edit"));
++        }
++
++        public void execute()
++        {
++            // Get the EvidenceInfo instance selected.
++            TreePath selectedPath = caseContentTree.getSelectionPath();
++            // The EvidenceInfo instance is always the 2nd element.
++            if (selectedPath != null)
++            {
++                EvidenceInfo evidenceToEdit =
++                    (EvidenceInfo) selectedPath.getPath()[1];
++
++                // The folder we're editing isn't included in the count.
++                int alreadyAdded = countAddedItems() - evidenceToEdit.getContents().size();
++                EvidenceInputPane pane = new EvidenceInputPane(evidenceToEdit, limit, alreadyAdded);
++                if (pane.showDialog(getRootPane()))
++                {
++                    // Set this choice as the default.
++                    lastEvidence = pane.getEvidenceInfo();
++
++                    caseContentTreeModel.fireTreeStructureChanged();
++                    doPostAction();
++                }
++            }
++        }
++    }
++
++    /**
++     * Action to remove an item or items from the list.
++     */
++    private class RemoveAction extends BaseAction
++    {
++        public RemoveAction()
++        {
++            super(AddLoadableEvidencePane.this, resources.getString("Remove"));
++        }
++
++        public void execute()
++        {
++            TreePath[] selectedPaths = caseContentTree.getSelectionPaths();
++            if (selectedPaths == null)
++            {
++                return;
++            }
++
++            for (TreePath selectedPath : selectedPaths)
++            {
++                // Get the EvidenceInfo object.
++                Object[] path = selectedPath.getPath();
++                // Object 0 is always CaseContentTreeModel.ROOT_NODE.
++                Object evidenceItem = path[1];
++                if (evidenceItem instanceof EvidenceInfo)
++                {
++                    // Now check if we are removing the whole EvidenceInfo
++                    // or just a child.
++                    if (path.length > 2)
++                    {
++                        // Remove the item.
++                        Object item = path[2];
++                        ((EvidenceInfo) evidenceItem).removeURI((URI) item);
++                    }
++                    else
++                    {
++                        // Remove the whole evidence group.
++                        caseContentTreeModel.removeEvidence((EvidenceInfo) evidenceItem);
++                    }
++                }
++            }
++        }
++    }
++
++    /**
++     * A custom tree cell renderer which renders the name of the evidence items
++     * instead of using <code>toString()</code>.
++     */
++    private class EvidenceNameRenderer extends DefaultTreeCellRenderer
++    {
++        public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel,
++                                                      boolean expanded, boolean leaf,
++                                                      int row, boolean hasFocus)
++        {
++            super.getTreeCellRendererComponent(tree, value, sel, expanded,
++                                               leaf, row, hasFocus);
++
++            if (value != CaseContentTreeModel.ROOT_NODE)
++            {
++                if (value instanceof EvidenceInfo)
++                {
++                    EvidenceInfo evidence = (EvidenceInfo) value;
++                    if (StringUtils.isEmpty(evidence.getDescription()))
++                    {
++                        setText(resources.getString("EvidenceNameFormatNoDescription",
++                                                    evidence.getName()));
++                    }
++                    else
++                    {
++                        setText(resources.getString("EvidenceNameFormat",
++                                                    evidence.getName(),
++                                                    evidence.getDescription()));
++                    }
++
++                    if (evidence.isSaved())
++                    {
++                        setForeground(SystemColor.textInactiveText);
++                    }
++                }
++                else
++                {
++                    setIcon(null);
++
++                    // Disable if the path contains a saved EvidenceInfo somewhere in it.
++                    TreePath path = tree.getPathForRow(row);
++                    while (path != null)
++                    {
++                        Object element = path.getLastPathComponent();
++                        if (element instanceof EvidenceInfo && ((EvidenceInfo) element).isSaved())
++                        {
++                            setForeground(SystemColor.textInactiveText);
++                            break;
++                        }
++                        path = path.getParentPath();
++                    }
++                }
++            }
++
++            return this;
++        }
++    }
++
++
++    /**
++     * Updates the state of the buttons when the contents or the selections on the tree change.
++     */
++    private class TreeChangeListener implements TreeModelListener, TreeSelectionListener
++    {
++        private TreeChangeListener()
++        {
++            updateButtons();
++        }
++
++        public void treeNodesChanged(TreeModelEvent event)
++        {
++            updateButtons();
++        }
++
++        public void treeNodesInserted(TreeModelEvent event)
++        {
++            updateButtons();
++        }
++
++        public void treeNodesRemoved(TreeModelEvent event)
++        {
++            updateButtons();
++        }
++
++        public void treeStructureChanged(TreeModelEvent event)
++        {
++            updateButtons();
++        }
++
++        public void valueChanged(TreeSelectionEvent event)
++        {
++            updateButtons();
++        }
++
++        private void updateButtons()
++        {
++            boolean atLimit = limit > 0 && countAddedItems() >= limit;
++
++            int selectedEvidenceCount = 0;
++            TreePath[] paths = caseContentTree.getSelectionPaths();
++            if (paths != null)
++            {
++                for (TreePath path : paths)
++                {
++                    Object last = path.getLastPathComponent();
++                    if (last instanceof EvidenceInfo && !((EvidenceInfo) last).isSaved())
++                    {
++                        selectedEvidenceCount++;
++                    }
++                    else
++                    {
++                        // Not evidence, treat this as having selected nothing.
++                        selectedEvidenceCount = 0;
++                        break;
++                    }
++                }
++            }
++
++            // The old code used to check that there was at least one evidence present, but actually
++            // it's impossible for there to be selected evidence without there being evidence to select.
++            addButton.setEnabled(!atLimit);
++            removeButton.setEnabled(selectedEvidenceCount > 0);
++            editButton.setEnabled(selectedEvidenceCount == 1);
++        }
++    }
++}
+Index: data/src/java/com/nuix/investigator/cases/creation/MailStoreInputPane.java
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/creation/MailStoreInputPane.java	(revision 0)
++++ data/src/java/com/nuix/investigator/cases/creation/MailStoreInputPane.java	(working copy)
+@@ -1,4 +1,4 @@
+-package com.nuix.investigator.wizard.dialogs;
++package com.nuix.investigator.cases.creation;
+ 
+ import java.awt.GridBagConstraints;
+ import java.awt.GridBagLayout;
+@@ -52,11 +52,7 @@
+      * Resources for the pane.
+      */
+     private static ResourceGroup resources =
+-            ResourceFactory.get("/com/nuix/investigator/wizard/wizard.xml")
+-                    .getSubgroup("NewCaseWizard")
+-                    .getSubgroup("AddCaseContent")
+-                    .getSubgroup("EvidenceInputPane")
+-                    .getSubgroup("MailStoreInputPane");
++            ResourceFactory.get("/com/nuix/investigator/cases/cases.xml").getSubgroup("MailStoreInputPane");
+ 
+     /**
+      * The combo box for choosing the type of mail store.
+@@ -195,7 +191,7 @@
+         }
+ 
+         // POP3 requires a password.
+-        if ("pop3".equals(protocol) && StringUtils.isEmpty(password))
++        if ("pop3".equals(protocol.protocolName) && StringUtils.isEmpty(password))
+         {
+             // USABILITY: Different error message for this?
+             new DialogBuilder(this, resources).error("FieldsNotComplete");
+
+Property changes on: data/src/java/com/nuix/investigator/cases/creation/MailStoreInputPane.java
+___________________________________________________________________
+Name: svn:executable
+   + *
+Name: svn:keywords
+   + Author Date Id Revision
+Name: svn:eol-style
+   + native
+
+Index: data/src/java/com/nuix/investigator/cases/creation/EvidenceInputPane.java
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/creation/EvidenceInputPane.java	(revision 0)
++++ data/src/java/com/nuix/investigator/cases/creation/EvidenceInputPane.java	(working copy)
+@@ -1,4 +1,4 @@
+-package com.nuix.investigator.wizard.dialogs;
++package com.nuix.investigator.cases.creation;
+ 
+ import java.awt.Dimension;
+ import java.awt.FlowLayout;
+@@ -11,6 +11,7 @@
+ 
+ import javax.swing.DefaultListModel;
+ import javax.swing.JButton;
++import javax.swing.JComponent;
+ import javax.swing.JFileChooser;
+ import javax.swing.JLabel;
+ import javax.swing.JList;
+@@ -20,30 +21,29 @@
+ import javax.swing.JTextArea;
+ import javax.swing.JTextField;
+ import javax.swing.JToggleButton;
+-import javax.swing.JComponent;
+ import javax.swing.SwingUtilities;
++import javax.swing.event.ListDataEvent;
++import javax.swing.event.ListDataListener;
+ import javax.swing.event.ListSelectionEvent;
+ import javax.swing.event.ListSelectionListener;
+ import javax.swing.event.PopupMenuEvent;
+ import javax.swing.event.PopupMenuListener;
+-import javax.swing.event.ListDataListener;
+-import javax.swing.event.ListDataEvent;
+ 
+ import com.nuix.data.EvidenceInfo;
+ import com.nuix.data.email.DefaultImapPopDataFactory;
++import com.nuix.investigator.options.global.GlobalPreferences;
++import com.nuix.log.Channel;
++import com.nuix.log.ChannelManager;
+ import com.nuix.product.Licence;
+ import com.nuix.product.LicencingException;
+-import com.nuix.resources.ResourceGroup;
+ import com.nuix.resources.ResourceFactory;
++import com.nuix.resources.ResourceGroup;
+ import com.nuix.swing.actions.BaseAction;
+-import com.nuix.swing.builders.JPopupMenuBuilder;
+ import com.nuix.swing.builders.DialogBuilder;
++import com.nuix.swing.builders.JPopupMenuBuilder;
+ import com.nuix.swing.filechooser.JFileChooserFactory;
+ import com.nuix.swing.widgets.ValidatingOptionPane;
+ import com.nuix.util.StringUtils;
+-import com.nuix.investigator.options.global.GlobalPreferences;
+-import com.nuix.log.Channel;
+-import com.nuix.log.ChannelManager;
+ 
+ /**
+  * {@link JPanel} that shows a dialog box for the selection 
+@@ -72,9 +72,7 @@
+      * Resources for the pane.
+      */
+     private static ResourceGroup resources =
+-            ResourceFactory.get("/com/nuix/investigator/wizard/wizard.xml")
+-                    .getSubgroup("NewCaseWizard")
+-                    .getSubgroup("AddCaseContent")
++            ResourceFactory.get("/com/nuix/investigator/cases/cases.xml")
+                     .getSubgroup("EvidenceInputPane");
+ 
+     /**
+
+Property changes on: data/src/java/com/nuix/investigator/cases/creation/EvidenceInputPane.java
+___________________________________________________________________
+Name: svn:executable
+   + *
+Name: svn:keywords
+   + Author Date Id Revision
+Name: svn:eol-style
+   + native
+
+Index: data/src/java/com/nuix/investigator/cases/creation/NewCaseModel.java
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/creation/NewCaseModel.java	(revision 2511)
++++ data/src/java/com/nuix/investigator/cases/creation/NewCaseModel.java	(working copy)
+@@ -1,23 +1,17 @@
+-package com.nuix.investigator.wizard;
++package com.nuix.investigator.cases.creation;
+ 
+ import java.io.File;
+ import java.util.prefs.Preferences;
+-import java.util.List;
+ 
+-import com.nuix.swing.wizard.AbstractWizardModel;
+-import com.nuix.data.EvidenceInfo;
+ import com.nuix.data.DataProcessingSettings;
+ import com.nuix.investigator.cases.CaseEvidenceSettings;
+ 
+ /**
+- * A model for the New Case wizard.
++ * A model for creating a new case, created by a {@link NewCasePane}.
+  */
+-public class NewCaseWizardModel extends AbstractWizardModel
++public class NewCaseModel
+ {
+     //////////////////////////////////////////////////////////////////////////////////////
+-    // Constants
+-
+-    //////////////////////////////////////////////////////////////////////////////////////
+     // Fields
+ 
+     /**
+@@ -46,11 +40,6 @@
+     private String caseInvestigator;
+ 
+     /**
+-     * The content which will be added to the case.
+-     */
+-    private List<EvidenceInfo> caseContents;
+-
+-    /**
+      * Settings for creating the case evidence.
+      */
+     private CaseEvidenceSettings caseEvidenceSettings;
+@@ -71,7 +60,7 @@
+     /**
+      * Creates the wizard model.
+      */
+-    public NewCaseWizardModel()
++    public NewCaseModel()
+     {
+         // Set from preferences.
+         prefs = Preferences.userRoot().node("/com/nuix/investigator/wizard");
+@@ -179,24 +168,6 @@
+     }
+ 
+     /**
+-     * Gets the content which will be added to the case.
+-     * @return the content which will be added to the case.
+-     */
+-    public List<EvidenceInfo> getCaseContents()
+-    {
+-        return caseContents;
+-    }
+-
+-    /**
+-     * Sets the content which will be added to the case.
+-     * @param caseContents the content which will be added to the case.
+-     */
+-    public void setCaseContents(List<EvidenceInfo> caseContents)
+-    {
+-        this.caseContents = caseContents;
+-    }
+-
+-    /**
+      * Gets the case evidence settings.
+      *
+      * @return the case evidence settings.
+@@ -217,14 +188,11 @@
+     }
+ 
+     /**
+-     * Sets if the wizard was completed.
+-     *
+-     * @param completed <code>true</code> if the wizard was completed, <code>false</code> otherwise.
++     * Saves the preferences in the model which are useful for the next time the user
++     * creates a case.
+      */
+-    public void setCompleted(boolean completed)
++    public void savePrefs()
+     {
+-        super.setCompleted(completed);
+-
+         caseEvidenceSettings.storeToPreferences(prefs.node("caseEvidenceSettings"));
+         processingSettings.storeToPreferences(prefs.node("processingSettings"));
+     }
+
+Property changes on: data/src/java/com/nuix/investigator/cases/creation/NewCaseModel.java
+___________________________________________________________________
+Name: svn:executable
+   + *
+Name: svn:keywords
+   + Author Date Id Revision
+Name: svn:eol-style
+   + native
+
+Index: data/src/java/com/nuix/investigator/cases/creation/NewCasePane.java
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/creation/NewCasePane.java	(revision 0)
++++ data/src/java/com/nuix/investigator/cases/creation/NewCasePane.java	(revision 0)
+@@ -0,0 +1,145 @@
++package com.nuix.investigator.cases.creation;
++
++import java.awt.GridBagConstraints;
++import java.awt.GridBagLayout;
++import java.beans.PropertyChangeListener;
++import java.beans.PropertyChangeEvent;
++
++import javax.swing.BorderFactory;
++import javax.swing.JComponent;
++import javax.swing.JPanel;
++
++import com.nuix.resources.ResourceFactory;
++import com.nuix.resources.ResourceGroup;
++import com.nuix.swing.widgets.ValidatingOptionPane;
++
++/**
++ * Pane for creating a new case.
++ */
++public class NewCasePane extends ValidatingOptionPane
++{
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Fields
++
++    /**
++     * The resources for the panel.
++     */
++    private ResourceGroup resources =
++        ResourceFactory.get("/com/nuix/investigator/cases/cases.xml").
++                getSubgroup("NewCasePane");
++
++    /**
++     * Panel for entering settings for the case itself.
++     */
++    private CaseSettingsPanel caseSettingsPanel;
++
++    /**
++     * Panel for entering text processing settings.
++     */
++    private TextProcessingSettingsPanel textProcessingSettingsPanel;
++
++    /**
++     * Panel for entering other processing settings.
++     */
++    private OtherProcessingSettingsPanel otherProcessingSettingsPanel;
++
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Methods
++
++    /**
++     * Gets the title of the dialog which will be displayed.
++     *
++     * @return the title.
++     */
++    protected String getTitle()
++    {
++        return resources.getString("Title");
++    }
++
++    /**
++     * Builds the components where the user can input data.
++     *
++     * @return the input panel.
++     */
++    protected JComponent buildInputPanel()
++    {
++        JPanel inputPanel = new JPanel(new GridBagLayout());
++
++        caseSettingsPanel = new CaseSettingsPanel();
++        caseSettingsPanel.setBorder(
++                BorderFactory.createTitledBorder(resources.getString("CaseSettings")));
++
++        textProcessingSettingsPanel = new TextProcessingSettingsPanel();
++        textProcessingSettingsPanel.setBorder(
++                BorderFactory.createTitledBorder(resources.getString("TextProcessingSettings")));
++
++        otherProcessingSettingsPanel = new OtherProcessingSettingsPanel();
++        otherProcessingSettingsPanel.setBorder(
++                BorderFactory.createTitledBorder(resources.getString("OtherProcessingSettings")));
++
++        // Disable the processing settings panels if the case is not a simple case.
++        caseSettingsPanel.addPropertyChangeListener(
++                CaseSettingsPanel.COMPOUND_PROPERTY,
++                new PropertyChangeListener()
++                {
++                    public void propertyChange(PropertyChangeEvent event)
++                    {
++                        boolean simpleCase = !((Boolean) event.getNewValue());
++                        textProcessingSettingsPanel.setEnabled(simpleCase);
++                        otherProcessingSettingsPanel.setEnabled(simpleCase);
++                    }
++                });
++
++        GridBagConstraints c = new GridBagConstraints();
++        c.anchor = GridBagConstraints.PAGE_START;
++        c.weightx = 1.0;
++        c.fill = GridBagConstraints.BOTH;
++        c.gridheight = 2;
++        inputPanel.add(caseSettingsPanel, c);
++        c.gridheight = 1;
++        c.gridwidth = GridBagConstraints.REMAINDER;
++        inputPanel.add(textProcessingSettingsPanel, c);
++        inputPanel.add(otherProcessingSettingsPanel, c);
++        return inputPanel;
++    }
++
++
++    /**
++     * Requests that the initial value be selected, which will set
++     * focus to the initial value.
++     */
++    public void selectInitialValue()
++    {
++        caseSettingsPanel.selectInitialValue();
++    }
++
++    /**
++     * Validates the input and performs the result of the dialog.
++     *
++     * @return <code>true</code> on success.
++     */
++    protected boolean validateAndPerform()
++    {
++        return caseSettingsPanel.validateInput();
++    }
++
++    /**
++     * Creates a model holding the settings in the pane.  The result of calling
++     * this method will only be defined if the user has confirmed the dialog and their
++     * input was determined to be valid.
++     *
++     * @return the new case model.
++     */
++    public NewCaseModel createModel()
++    {
++        NewCaseModel model = new NewCaseModel();
++        caseSettingsPanel.exportModel(model);
++        textProcessingSettingsPanel.exportModel(model);
++        otherProcessingSettingsPanel.exportModel(model);
++
++        // Safe to save the preferences at this point.
++        model.savePrefs();
++
++        return model;
++    }
++}
+Index: data/src/java/com/nuix/investigator/cases/creation/CaseSettingsPanel.java
+===================================================================
+--- data/src/java/com/nuix/investigator/cases/creation/CaseSettingsPanel.java	(revision 0)
++++ data/src/java/com/nuix/investigator/cases/creation/CaseSettingsPanel.java	(revision 0)
+@@ -0,0 +1,291 @@
++package com.nuix.investigator.cases.creation;
++
++import java.awt.GridBagConstraints;
++import java.awt.GridBagLayout;
++import java.awt.GridLayout;
++import java.awt.Insets;
++import java.awt.event.ItemListener;
++import java.awt.event.ItemEvent;
++import java.io.File;
++import java.text.MessageFormat;
++
++import javax.swing.ButtonGroup;
++import javax.swing.JLabel;
++import javax.swing.JPanel;
++import javax.swing.JRadioButton;
++import javax.swing.JTextField;
++import javax.swing.event.DocumentEvent;
++import javax.swing.event.DocumentListener;
++import javax.swing.text.JTextComponent;
++
++import com.nuix.investigator.cases.CaseFileView;
++import com.nuix.investigator.options.global.GlobalPreferences;
++import com.nuix.os.user.NativeUserUtils;
++import com.nuix.product.Licence;
++import com.nuix.resources.ResourceFactory;
++import com.nuix.resources.ResourceGroup;
++import com.nuix.swing.builders.DialogBuilder;
++import com.nuix.swing.widgets.FileChooserField;
++import com.nuix.util.FileUtils;
++import com.nuix.util.StringUtils;
++
++/**
++ * Panel for entering the case settings.
++ */
++public class CaseSettingsPanel extends JPanel
++{
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Constants
++
++    /**
++     * The property to listen for changes in, to track the compound case checkbox.
++     */
++    static final String COMPOUND_PROPERTY = "compound";
++
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Fields
++
++    /**
++     * The resources for the panel.
++     */
++    private ResourceGroup resources =
++        ResourceFactory.get("/com/nuix/investigator/cases/cases.xml").
++                getSubgroup("CaseSettingsPanel");
++
++    /**
++     * The field which will contain the selected directory.
++     */
++    private FileChooserField directoryField;
++
++    /**
++     * The field containing the case name.
++     */
++    private JTextComponent nameField;
++
++    /**
++     * The field containing the case investigator.
++     */
++    private JTextComponent investigatorField;
++
++    /**
++     * The field containing the case description.
++     */
++    private JTextComponent descriptionField;
++
++    /**
++     * Radio button indicating that the case will be compound.
++     */
++    private JRadioButton compoundButton;
++
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Constructors
++
++    /**
++     * Constructs the panel.
++     */
++    public CaseSettingsPanel()
++    {
++        JPanel panel = new JPanel(new GridBagLayout());
++
++        GridBagConstraints c1 = new GridBagConstraints();
++        c1.insets = new Insets(4, 4, 4, 4);
++        c1.anchor = GridBagConstraints.LINE_START;
++        GridBagConstraints c2 = (GridBagConstraints) c1.clone();
++        c2.weightx = 1.0;
++        c2.fill = GridBagConstraints.HORIZONTAL;
++        c2.gridwidth = GridBagConstraints.REMAINDER;
++
++        // Case name
++        panel.add(new JLabel(resources.getString("Name")), c1);
++        nameField = new JTextField(20);
++        panel.add(nameField, c2);
++
++        // Case directory
++        panel.add(new JLabel(resources.getString("Directory")), c1);
++        directoryField = new FileChooserField(GlobalPreferences.CASE_DIRECTORY_KEY,
++                                              FileChooserField.FILES_ONLY);
++        //directoryField.setFileChecker(new NewDirectoryChecker(false));
++        directoryField.setFileView(new CaseFileView());
++        panel.add(directoryField, c2);
++        syncDirectoryFromName();
++
++        // Case investigator
++        panel.add(new JLabel(resources.getString("Investigator")), c1);
++        investigatorField = new JTextField();
++        panel.add(investigatorField, c2);
++
++        // Set the investigator's name automatically.
++        // XXX: Later, get this from the user manager in the case?
++        String investigator = NativeUserUtils.getInstance().getLongUserName();
++        if (StringUtils.isEmpty(investigator))
++        {
++            investigator = NativeUserUtils.getInstance().getShortUserName();
++        }
++        investigatorField.setText(investigator);
++
++        // Case description
++        panel.add(new JLabel(resources.getString("Description")), c1);
++        descriptionField = new JTextField();
++        panel.add(descriptionField, c2);
++
++        // Case type.  Disable compound case creation if the licence says so.
++        if (Licence.getInstance().isEnabled("compound-cases"))
++        {
++            panel.add(new JLabel(resources.getString("Type")), c1);
++            JRadioButton simpleButton = new JRadioButton(resources.getString("SimpleCase"), true);
++            compoundButton = new JRadioButton(resources.getString("CompoundCase"));
++            JPanel typeButtonPanel = new JPanel(new GridLayout(2, 1));
++            ButtonGroup typeButtonGroup = new ButtonGroup();
++            typeButtonPanel.add(simpleButton);
++            typeButtonGroup.add(simpleButton);
++            typeButtonPanel.add(compoundButton);
++            typeButtonGroup.add(compoundButton);
++            panel.add(typeButtonPanel, c2);
++
++            // Changes to the compound button get exposed as a property change event for the
++            // property "compound".
++            compoundButton.addItemListener(new ItemListener()
++            {
++                public void itemStateChanged(ItemEvent event)
++                {
++                    boolean newValue = event.getStateChange() == ItemEvent.SELECTED;
++                    firePropertyChange(COMPOUND_PROPERTY, !newValue, newValue);
++                }
++            });
++        }
++
++        // Auto update the name when the user specifies the directory.
++        nameField.getDocument().addDocumentListener(new DocumentListener()
++        {
++            public void insertUpdate(DocumentEvent event)
++            {
++                syncDirectoryFromName();
++            }
++
++            public void removeUpdate(DocumentEvent event)
++            {
++                syncDirectoryFromName();
++            }
++
++            public void changedUpdate(DocumentEvent event)
++            {
++                syncDirectoryFromName();
++            }
++        });
++
++        // Set the default name.
++        nameField.setText(createDefaultName());
++
++        // XXX: Turn off the automatic name updating if the user changes the file themselves?
++        //      But how do we know it was the user?
++
++        // I know there is only one component here, but this helps it keep the same
++        // proportions as the ProcessingSettingsPanel, which does the same layout.
++        c2.fill = GridBagConstraints.BOTH;
++        add(panel, c2);
++        c2.weighty = 1.0;
++        add(new JPanel(), c2); // Filler
++    }
++
++    //////////////////////////////////////////////////////////////////////////////////////
++    // Methods
++
++    /**
++     * Copies data from the user interface into the model.
++     *
++     * @param model the model.
++     */
++    public void exportModel(NewCaseModel model)
++    {
++        model.setCaseDirectory(directoryField.getFile());
++        model.setCaseName(nameField.getText());
++        model.setCaseInvestigator(investigatorField.getText());
++        model.setCaseDescription(descriptionField.getText());
++        model.setCompound(compoundButton != null && compoundButton.isSelected());
++    }
++
++    /**
++     * Creates the default name to use for the case.  Will increment until it finds
++     * a name which isn't already in the case directory.
++     *
++     * @return the default name.
++     */
++    private String createDefaultName()
++    {
++        MessageFormat format = new MessageFormat(resources.getString("DefaultNameFormat"));
++        for (int i = 1; ; i++)
++        {
++            String name = format.format(new Object[] { i });
++            if (!new File(directoryField.getInitialDirectory(), name).exists())
++            {
++                return name;
++            }
++        }
++    }
++
++    /**
++     * Copies the name into the directory field, with the appropriate parent directory.
++     */
++    private void syncDirectoryFromName()
++    {
++        directoryField.setFile(new File(directoryField.getInitialDirectory(),
++                                        FileUtils.safeFileName(nameField.getText())));
++    }
++
++    /**
++     * Requests that the initial value be selected, which will set
++     * focus to the initial value.
++     */
++    public void selectInitialValue()
++    {
++        nameField.requestFocusInWindow();
++        nameField.selectAll();
++    }
++
++    /**
++     * Validates the input.
++     *
++     * @return <code>true</code> on success.
++     */
++    protected boolean validateInput()
++    {
++        if (directoryField.getFile() == null)
++        {
++            new DialogBuilder(getRootPane(), resources).error("MustEnterDirectory");
++            return false;
++        }
++        else if (directoryField.getFile().getParentFile() == null)
++        {
++            new DialogBuilder(getRootPane(), resources).error("RootNotPossible");
++            return false;
++        }
++        else if (!directoryField.getFile().getParentFile().exists())
++        {
++            new DialogBuilder(getRootPane(), resources).error("NoParentDirectory");
++            return false;
++        }
++        else if (!directoryField.getFile().exists())
++        {
++            return true;
++        }
++        else if (!directoryField.getFile().isDirectory())
++        {
++            new DialogBuilder(getRootPane(), resources).error("NotADirectory");
++            return false;
++        }
++        else if (directoryField.getFile().list().length > 0)
++        {
++            new DialogBuilder(getRootPane(), resources).error("DirectoryNotEmpty");
++            return false;
++        }
++
++        if (StringUtils.isEmpty(nameField.getText()) ||
++            StringUtils.isEmpty(investigatorField.getText()))
++        {
++            new DialogBuilder(getRootPane(), resources).error("FieldsNotComplete");
++            return false;
++        }
++
++        return true;
++    }
++}
+Index: data/src/java/com/nuix/investigator/actions/actions.xml
+===================================================================
+--- data/src/java/com/nuix/investigator/actions/actions.xml	(revision 2561)
++++ data/src/java/com/nuix/investigator/actions/actions.xml	(working copy)
+@@ -111,6 +111,13 @@
+         <Group name="AddCaseEvidence">
+             <String name="name" value="Add Case Evidence..."/>
+             <String name="mnemonic" value="a"/>
++
++            <String name="TabsWillBeClosed.Title" value="Tabs will be closed"/>
++            <String name="TabsWillBeClosed.Text" value="&lt;html&gt;
++                Before adding new evidence, all open tabs need to be closed.
++                &lt;br&gt;
++                Is it okay to proceed?
++                &lt;/html&gt;"/>
+         </Group>
+ 
+         <Group name="ClearRecentCases">
+Index: data/src/java/com/nuix/investigator/actions/file/NewCaseAction.java
+===================================================================
+--- data/src/java/com/nuix/investigator/actions/file/NewCaseAction.java	(revision 2561)
++++ data/src/java/com/nuix/investigator/actions/file/NewCaseAction.java	(working copy)
+@@ -2,29 +2,24 @@
+ 
+ import java.io.File;
+ import java.io.IOException;
+-import java.util.List;
+ 
+ import javax.swing.JOptionPane;
+ 
+ import com.nuix.investigator.MainWindow;
+-import com.nuix.investigator.images.ImageFactory;
+ import com.nuix.investigator.actions.MainWindowAction;
+-import com.nuix.investigator.cases.RecentCaseModel;
+ import com.nuix.investigator.cases.Case;
+-import com.nuix.investigator.cases.CaseFactory;
+ import com.nuix.investigator.cases.CaseEvidence;
+-import com.nuix.investigator.wizard.NewCaseWizard;
+-import com.nuix.investigator.wizard.NewCaseWizardModel;
++import com.nuix.investigator.cases.CaseFactory;
++import com.nuix.investigator.cases.RecentCaseModel;
++import com.nuix.investigator.images.ImageFactory;
++import com.nuix.investigator.cases.creation.NewCaseModel;
++import com.nuix.investigator.cases.creation.NewCasePane;
++import com.nuix.log.Channel;
++import com.nuix.log.ChannelManager;
+ import com.nuix.resources.ResourceGroup;
+-import com.nuix.processor.PersistentProcessingQueue;
+-import com.nuix.data.EvidenceInfo;
+-import com.nuix.data.DefaultDataFactory;
+-import com.nuix.data.Environment;
+ import com.nuix.swing.actions.BaseRunnable;
+ import com.nuix.swing.actions.ExecutionStrategy;
+ import com.nuix.swing.builders.DialogBuilder;
+-import com.nuix.log.Channel;
+-import com.nuix.log.ChannelManager;
+ 
+ /**
+  * Action to create a new case.
+@@ -96,16 +91,10 @@
+             }
+         }
+ 
+-        NewCaseWizard wizard = new NewCaseWizard(mainWindow);
+-        wizard.pack();
+-        wizard.setLocationRelativeTo(mainWindow);
+-
+-        // This will block until the wizard is completed or cancelled.
+-        wizard.setVisible(true);
+-
+-        NewCaseWizardModel model = (NewCaseWizardModel) wizard.getModel();
+-        if (model.isCompleted())
++        NewCasePane newCasePane = new NewCasePane();
++        if (newCasePane.showDialog(mainWindow))
+         {
++            NewCaseModel model = newCasePane.createModel();
+             new CaseCreatingRunner(model).run();
+         }
+     }
+@@ -121,14 +110,14 @@
+         /**
+          * The new case wizard model.
+          */
+-        private NewCaseWizardModel model;
++        private NewCaseModel model;
+ 
+         /**
+          * Constructs the runner.
+          *
+          * @param model the new case wizard model.
+          */
+-        private CaseCreatingRunner(NewCaseWizardModel model)
++        private CaseCreatingRunner(NewCaseModel model)
+         {
+             super(NewCaseAction.this.getOwner());
+             setExecutionStrategy(ExecutionStrategy.NEW_THREAD_ASYNCHRONOUS);
+@@ -153,30 +142,18 @@
+                 newCase.getMetadata().setDescription(model.getCaseDescription());
+                 newCase.getMetadata().setInvestigator(model.getCaseInvestigator());
+ 
+-                // If this is a simple case we have to set up the queue which will
+-                // load evidence in the same directory as the case.
++                // If this is a simple case we have to set up the processing settings and also
++                // create the empty evidence.
+                 if (!model.isCompound())
+                 {
+                     CaseEvidence evidence = CaseFactory.getInstance()
+                         .createEvidence(newCase.getLocation(), model.getCaseEvidenceSettings());
+                     newCase.addEvidence(evidence);
+ 
+-                    String persistentDirName = "Stores/PersistentQueue";
+-                    File persistentDir = new File(evidence.getLocation(), persistentDirName);
++                    File persistentDir = new File(evidence.getLocation(), "Stores/PersistentQueue");
++
+                     // Initialise the processing settings.
+                     model.getProcessingSettings().saveToDirectory(persistentDir);
+-
+-                    // Initialise the queue first.  The factory here doesn't matter because we're
+-                    // just using this to drop the queue to disk.
+-                    PersistentProcessingQueue queue =
+-                        new PersistentProcessingQueue(persistentDir,
+-                                                      new DefaultDataFactory(new Environment()));
+-                    List<EvidenceInfo> caseContents = model.getCaseContents();
+-                    for (final EvidenceInfo newVar : caseContents)
+-                    {
+-                        queue.addDataRoot(newVar.saveToFile(evidence));
+-                    }
+-                    queue.cleanup();
+                 }
+ 
+                 // Write the initial case file.
+Index: data/src/java/com/nuix/investigator/actions/file/AddCaseEvidenceAction.java
+===================================================================
+--- data/src/java/com/nuix/investigator/actions/file/AddCaseEvidenceAction.java	(revision 2561)
++++ data/src/java/com/nuix/investigator/actions/file/AddCaseEvidenceAction.java	(working copy)
+@@ -1,12 +1,17 @@
+ package com.nuix.investigator.actions.file;
+ 
++import java.beans.PropertyChangeEvent;
+ import java.beans.PropertyChangeListener;
+-import java.beans.PropertyChangeEvent;
+ 
++import javax.swing.JOptionPane;
++
++import com.nuix.investigator.MainWindow;
+ import com.nuix.investigator.actions.MainWindowAction;
+-import com.nuix.investigator.MainWindow;
++import com.nuix.investigator.cases.Case;
+ import com.nuix.investigator.cases.ModifyCaseEvidencePane;
+-import com.nuix.investigator.cases.Case;
++import com.nuix.investigator.cases.creation.AddLoadableEvidencePane;
++import com.nuix.product.Licence;
++import com.nuix.resources.ResourceGroup;
+ 
+ /**
+  * Adds evidence to a case.
+@@ -24,6 +29,11 @@
+     //////////////////////////////////////////////////////////////////////////////////////
+     // Fields
+ 
++    /**
++     * The resources for the action.
++     */
++    private ResourceGroup resources = getResourceSubgroup("AddCaseEvidence");
++
+     //////////////////////////////////////////////////////////////////////////////////////
+     // Constructors
+ 
+@@ -57,7 +67,36 @@
+     public void execute() throws Exception
+     {
+         MainWindow mainWindow = getMainWindow();
+-        new ModifyCaseEvidencePane(mainWindow.getCurrentCase()).showDialog(mainWindow);
++        Case currentCase = mainWindow.getCurrentCase();
++        if (currentCase.isCompound())
++        {
++            new ModifyCaseEvidencePane(mainWindow.getCurrentCase()).showDialog(mainWindow);
++        }
++        else
++        {
++            boolean ok = true;
++
++            if (mainWindow.getTabPanel().getTabCount() > 0)
++            {
++                if (JOptionPane.showConfirmDialog(mainWindow,
++                                                  resources.getString("TabsWillBeClosed.Text"),
++                                                  resources.getString("TabsWillBeClosed.Title"),
++                                                  JOptionPane.OK_CANCEL_OPTION,
++                                                  JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION)
++                {
++                    mainWindow.getTabPanel().removeAll();
++                }
++                else
++                {
++                    ok = false;
++                }
++            }
++
++            if (ok && new AddLoadableEvidencePane(mainWindow.getCurrentCase()).showDialog(mainWindow))
++            {
++                mainWindow.maybeLoadEvidence();
++            }
++        }
+     }
+ 
+     /**
+@@ -66,6 +105,10 @@
+     private void updateState()
+     {
+         Case theCase = getMainWindow().getCurrentCase();
+-        setEnabled(theCase != null && !theCase.isReadOnly());
++
++        // Enabled if there is a case loaded, it is not read-only, and the case is either simple,
++        // or compound cases are enabled on the user's licence.
++        setEnabled(theCase != null && !theCase.isReadOnly() &&
++                   (!theCase.isCompound() || Licence.getInstance().isEnabled("compound-cases")));
+     }
+ }
+Index: data/src/java/com/nuix/investigator/actions/MainWindowActions.java
+===================================================================
+--- data/src/java/com/nuix/investigator/actions/MainWindowActions.java	(revision 2561)
++++ data/src/java/com/nuix/investigator/actions/MainWindowActions.java	(working copy)
+@@ -197,8 +197,7 @@
+         fileMenuBuilder
+             .append(new ActionBuilder(actionResources.getSubgroup("OpenCase"), openCaseAction))
+             .append(reopenCaseMenu);
+-        if (Licence.getInstance().isEnabled("case-creation") &&
+-            Licence.getInstance().isEnabled("compound-cases"))
++        if (Licence.getInstance().isEnabled("case-creation"))
+         {
+             fileMenuBuilder
+                 .append(new ActionBuilder(actionResources.getSubgroup("AddCaseEvidence"),

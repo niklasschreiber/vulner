@@ -1,0 +1,5 @@
+Includere nel setup di SR i files 
+Codenarc-1.0.jar scaricato da https://sourceforge.net/projects/codenarc/files/
+groovy-2.4.10.zip scaricato da http://apache.mirror.ba/groovy/2.4.10/distribution/ e scompattato in una <dir groovy di SR>
+gmetrics scaricato da https://github.com/dx42/gmetrics
+e scompattato in una <dir gmetrics di SR>

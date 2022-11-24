@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+   <body>
+
+      <section type="common" name="EVT">
+         Event Management System parameters
+         <parameter name="SSID-OWNER" mandatory="1" default="TIM" type="char" maxlength="8">
+            EMS Owner
+         </parameter>
+         <parameter name="NBR-ALERT-MSG" mandatory="0" default="1" type="numeric" minvalue="1" maxvalue="1024">
+            EMS Alert Messages for time interval
+         </parameter>
+         <parameter name="INTERVAL-ALERT-MSG-TIME" mandatory="0" default="300" type="numeric" minvalue="1" maxvalue="86400">
+            EMS Time Interval (seconds) for same event
+         </parameter>
+         <parameter name="SSID-NUMBER" mandatory="1" default="760" type="numeric" minvalue="0" maxvalue="32767">
+            EMS Subsystem
+         </parameter>
+         <parameter name="SSID-VERSION" mandatory="1" default="A09" type="char" maxlength="3">
+            EMS Version
+         </parameter>
+      </section>
+      <section type="common" name="LOG">
+         Log parameters
+         <parameter name="PATH-LOG" mandatory="1" type="folder">
+            LOG Guardian directory
+         </parameter>
+         <parameter name="NUM-DAYS-OF-LOG" mandatory="0" default="3" type="numeric" minvalue="0" maxvalue="30">
+            LOG Days
+         </parameter>
+         <parameter name="TRACE-STRING" mandatory="0" type="char" maxlength="128">
+            LOG Trace string
+         </parameter>
+         <parameter name="TRACE-LEVEL" mandatory="0" default="1" type="select">
+            LOG Level
+            <option value="1">
+               ERROR
+            </option>
+            <option value="5">
+               WARNING
+            </option>
+            <option value="9">
+               INFO
+            </option>
+            <option value="10">
+               DEBUG
+            </option>
+            <option value="11">
+               DEBUG2
+            </option>
+         </parameter>
+      </section>
+      <section type="common" name="STAT">
+         Statistics parameters
+         <parameter name="TIMEOUT-BUMP" mandatory="0" default="5" type="numeric" minvalue="1" maxvalue="15">
+            STAT Interval (minutes)
+         </parameter>
+         <parameter name="NBR-MAX-REG" mandatory="1" type="numeric" minvalue="1" maxvalue="1024">
+            STAT Register max number
+         </parameter>
+         <parameter name="GROUP" mandatory="1" default="39" type="numeric" minvalue="1" maxvalue="32767">
+            STAT Group
+         </parameter>
+         <parameter name="FW-GROUP" mandatory="1" default="37" type="numeric" minvalue="1" maxvalue="32767">
+            STAT Framework Group
+         </parameter>
+      </section>
+      <section type="common" name="COMMON">
+         Common parameters
+         <parameter name="TIMEOUT-RELOAD-PARAM" mandatory="0" default="15" type="numeric" minvalue="1" maxvalue="60">
+            Reload parameters interval (minutes)
+         </parameter>
+         <parameter name="MANAGE-GPRS-UPDATE-LOCATION" mandatory="0" default="0" type="select">
+            GPRS Location Update management
+            <option value="0">
+               RELAY
+            </option>
+            <option value="1">
+               STEERING-FORWARD-WHITELIST
+            </option>
+            <option value="2">
+               STEERING-FORWARD-ALWAYS
+            </option>
+         </parameter>
+      </section>
+      <section type="common" name="PC">
+         Point Code parameters
+         <parameter name="TFS-NET-ID" mandatory="1" default="0" type="numeric" minvalue="0" maxvalue="65535">
+            Local network identifier
+         </parameter>
+         <parameter name="TFS-NET-NAME" mandatory="1" default="NETWORK1" type="char" maxlength="9">
+            Local network name
+         </parameter>
+         <parameter name="TFS-INTERNAL-ROUTING-STRATEGY" mandatory="0" default="0" type="select">
+            Internal Routing Strategy
+            <option value="0">
+               INTERNAL-ROUTING-OFF
+            </option>
+            <option value="1">
+               INTERNAL-ROUTING-ON
+            </option>
+         </parameter>
+         <parameter name="TFS-VPC" mandatory="1" default="0" type="numeric" minvalue="0" maxvalue="32767">
+            Local Virtual Point Code
+         </parameter>
+         <parameter name="AUTO-ALLOW-VPC" mandatory="0" default="0" type="select">
+            Auto enable VPC after inhibition
+            <option value="0">
+               MANUAL
+            </option>
+            <option value="1">
+               AUTO
+            </option>
+         </parameter>
+         <parameter name="VPC-ALLOW-TIMEOUT" mandatory="0" default="5" type="numeric" minvalue="1" maxvalue="60">
+            Time interval (minutes) before enabling VPC
+         </parameter>
+         <parameter name="HRL-SSN" mandatory="0" type="numeric" minvalue="0" maxvalue="32767">
+            Used for relaying if defined and GTT server returns 0
+         </parameter>
+      </section>
+      <section type="common" name="IPC">
+         Interprocess Communication parameters
+         <parameter name="MTS-TID-SVRC-TFS-MANAGER" mandatory="1" type="char" maxlength="11">
+            Steering layer INS task id and server class
+         </parameter>
+         <parameter name="MTS-TID-SVRC-GTTS" mandatory="1" type="char" maxlength="11">
+            GTT Server INS task id and server class
+         </parameter>
+         <parameter name="MTS-TID-SVRC-MAPRELAY" mandatory="1" type="char" maxlength="11">
+            MAP Relay INS task id and server class
+         </parameter>
+         <parameter name="MTS-TID-SVRC-MAPOUT" mandatory="1" type="char" maxlength="11">
+            MAP Outbound INS task id and server class
+         </parameter>
+      </section>
+      <section type="common" name="PREFIX-ADDR-LIST">
+         Prefix Address List parameters
+         <parameter name="SCCP-CALLING-PREFIX-LIST-OWNER-TFS" mandatory="1" type="path">
+            Text file with unexpected GT prefixes for the calling party
+         </parameter>
+         <parameter name="SCCP-CALLED-PREFIX-LIST-OWNER-TFS" mandatory="1" type="path">
+            Text file with allowed MGT prefixes for the called party
+         </parameter>
+         <parameter name="SCCP-CALLING-LU-GPRS-WHITELIST" mandatory="1" type="path">
+            GPRS Whitelist file path (used when MANAGE-GPRS-UPDATE-LOCATION=1)
+         </parameter>
+      </section>
+   </body>

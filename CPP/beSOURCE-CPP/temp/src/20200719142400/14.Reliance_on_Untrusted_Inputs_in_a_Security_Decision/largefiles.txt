@@ -1,0 +1,1 @@
+"D:\_SRC\BESource-samples\beSOURCE-CPP\temp\src\20200719142400\14.Reliance_on_Untrusted_Inputs_in_a_Security_Decision\CWE247_Reliance_on_DNS_Lookups_in_Security_Decision__w32_01.cpp.coil" 

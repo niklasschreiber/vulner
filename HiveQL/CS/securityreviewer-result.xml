@@ -1,0 +1,912 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+<cppcheck version="4.00"/>
+<errors>
+    <error id="ThreadMethods" severity="Blocker" msg="Injection" verbose="" FP="No" cwe="366" OWASP="A3" >
+        <location file0="\ActionExecutionFilter.cs" file="\ActionExecutionFilter.cs" line="136" />
+    </error>
+    <error id="ThreadMethods" severity="Blocker" msg="Injection" verbose="" FP="No" cwe="366" OWASP="A3" >
+        <location file0="\ActionExecutionFilter.cs" file="\ActionExecutionFilter.cs" line="137" />
+    </error>
+    <error id="ExceptionTypes" severity="Blocker" msg="Security Logging and Monitoring Failures" verbose="" FP="No" cwe="388" OWASP="A9" >
+        <location file0="\ActionExecutionFilter.cs" file="\ActionExecutionFilter.cs" line="94" />
+    </error>
+    <error id="SerializationNET" severity="Major" msg="Injection" verbose="" FP="No" cwe="573" OWASP="A3" >
+        <location file0="\ActionExecutionFilter.cs" file="\ActionExecutionFilter.cs" line="28" />
+    </error>
+    <error id="GCSuppressFinalize" severity="Major" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\ActionExecutionFilter.cs" file="\ActionExecutionFilter.cs" line="52" />
+    </error>
+    <error id="IncorrectAssemply" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\ActionExecutionFilter.cs" file="\ActionExecutionFilter.cs" line="49" />
+    </error>
+    <error id="IncorrectAssemply" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\ActionExecutionFilter.cs" file="\ActionExecutionFilter.cs" line="50" />
+    </error>
+    <error id="IncorrectAssemply" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\ActionExecutionFilter.cs" file="\ActionExecutionFilter.cs" line="51" />
+    </error>
+    <error id="AnonymousLDAP" severity="Blocker" msg="Broken Access Control" verbose="" FP="No" cwe="285" OWASP="A1" >
+        <location file0="\ActionExecutionFilter.cs" file="\ActionExecutionFilter.cs" line="53" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Authentication\AuthenticationManagerFactory.cs" file="\BPLG\Authentication\AuthenticationManagerFactory.cs" line="18" />
+    </error>
+    <error id="WCNET" severity="Critical" msg="Cryptographic Failures" verbose="" FP="No" cwe="327" OWASP="A2" >
+        <location file0="\BPLG\CryptoService\CryptoUtilities.cs" file="\BPLG\CryptoService\CryptoUtilities.cs" line="38" />
+    </error>
+    <error id="WCNET" severity="Critical" msg="Cryptographic Failures" verbose="" FP="No" cwe="327" OWASP="A2" >
+        <location file0="\BPLG\CryptoService\CryptoUtilities.cs" file="\BPLG\CryptoService\CryptoUtilities.cs" line="68" />
+    </error>
+    <error id="Injection15" severity="Critical" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\BPLG\Data\DBHelper.cs" file="\BPLG\Data\DBHelper.cs" line="77" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Data\Pager.cs" file="\BPLG\Data\Pager.cs" line="96" />
+    </error>
+    <error id="Injection15" severity="Critical" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\BPLG\Database\DBHelper.cs" file="\BPLG\Database\DBHelper.cs" line="106" />
+    </error>
+    <error id="Injection15" severity="Critical" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\BPLG\DataTrasformationServices\DTSXPackageAgent.cs" file="\BPLG\DataTrasformationServices\DTSXPackageAgent.cs" line="62" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\DataTrasformationServices\PackageParameter.cs" file="\BPLG\DataTrasformationServices\PackageParameter.cs" line="428" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\DataTrasformationServices\PackageParameter.cs" file="\BPLG\DataTrasformationServices\PackageParameter.cs" line="521" />
+    </error>
+    <error id="ExceptionTypes" severity="Blocker" msg="Security Logging and Monitoring Failures" verbose="" FP="No" cwe="388" OWASP="A9" >
+        <location file0="\BPLG\DataTrasformationServices\PackageParameter.cs" file="\BPLG\DataTrasformationServices\PackageParameter.cs" line="1641" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Formatting\Format.cs" file="\BPLG\Formatting\Format.cs" line="59" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Formatting\Format.cs" file="\BPLG\Formatting\Format.cs" line="83" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\FTP\FTPclient.cs" file="\BPLG\FTP\FTPclient.cs" line="176" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\FTP\FTPclient.cs" file="\BPLG\FTP\FTPclient.cs" line="280" />
+    </error>
+    <error id="Unreleased" severity="Blocker" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\BPLG\FTP\FTPclient.cs" file="\BPLG\FTP\FTPclient.cs" line="568" />
+    </error>
+    <error id="Securitymisc03" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="388" OWASP="A5" >
+        <location file0="\BPLG\FTPS\FTPSClient.cs" file="\BPLG\FTPS\FTPSClient.cs" line="76" />
+    </error>
+    <error id="Securitymisc05" severity="Critical" msg="Security Logging and Monitoring Failures" verbose="" FP="No" cwe="532" OWASP="A9" >
+        <location file0="\BPLG\FTPS\FTPSClient.cs" file="\BPLG\FTPS\FTPSClient.cs" line="78" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\FTPS\FTPSClient.cs" file="\BPLG\FTPS\FTPSClient.cs" line="78" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\FTPS\FTPSClient.cs" file="\BPLG\FTPS\FTPSClient.cs" line="69" />
+    </error>
+    <error id="AvoidSSL" severity="Blocker" msg="Identification and Authentication Failures" verbose="" FP="No" cwe="798" OWASP="A7" >
+        <location file0="\BPLG\FTPS\FTPSClient.cs" file="\BPLG\FTPS\FTPSClient.cs" line="50" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Logging\ConsoleLogger.cs" file="\BPLG\Logging\ConsoleLogger.cs" line="40" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Logging\ConsoleLogger.cs" file="\BPLG\Logging\ConsoleLogger.cs" line="24" />
+    </error>
+    <error id="Injection15" severity="Critical" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\BPLG\Logging\DatabaseLogger.cs" file="\BPLG\Logging\DatabaseLogger.cs" line="53" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Logging\DatabaseLogger.cs" file="\BPLG\Logging\DatabaseLogger.cs" line="32" />
+    </error>
+    <error id="Securitymisc03" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="388" OWASP="A5" >
+        <location file0="\BPLG\Logging\EmailLogger.cs" file="\BPLG\Logging\EmailLogger.cs" line="131" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Logging\EmailLogger.cs" file="\BPLG\Logging\EmailLogger.cs" line="73" />
+    </error>
+    <error id="ITM" severity="Blocker" msg="Cryptographic Failures" verbose="" FP="No" cwe="319" OWASP="A2" >
+        <location file0="\BPLG\Logging\EmailLogger.cs" file="\BPLG\Logging\EmailLogger.cs" line="129" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Logging\EventViewerLogger.cs" file="\BPLG\Logging\EventViewerLogger.cs" line="22" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Logging\FileSystemLogger.cs" file="\BPLG\Logging\FileSystemLogger.cs" line="23" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Logging\LoggerFactory.cs" file="\BPLG\Logging\LoggerFactory.cs" line="59" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Reporting\SSRSReport.cs" file="\BPLG\Reporting\SSRSReport.cs" line="145" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Reporting\SSRSReport.cs" file="\BPLG\Reporting\SSRSReport.cs" line="237" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Reporting\SSRSReport.cs" file="\BPLG\Reporting\SSRSReport.cs" line="297" />
+    </error>
+    <error id="Securitymisc03" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="388" OWASP="A5" >
+        <location file0="\BPLG\Security\AuthenticationPolicy.cs" file="\BPLG\Security\AuthenticationPolicy.cs" line="189" />
+    </error>
+    <error id="ITM" severity="Blocker" msg="Cryptographic Failures" verbose="" FP="No" cwe="319" OWASP="A2" >
+        <location file0="\BPLG\Security\AuthenticationPolicy.cs" file="\BPLG\Security\AuthenticationPolicy.cs" line="187" />
+    </error>
+    <error id="WCNET" severity="Critical" msg="Cryptographic Failures" verbose="" FP="No" cwe="327" OWASP="A2" >
+        <location file0="\BPLG\Security\HashUtil.cs" file="\BPLG\Security\HashUtil.cs" line="21" />
+    </error>
+    <error id="WCNET" severity="Critical" msg="Cryptographic Failures" verbose="" FP="No" cwe="327" OWASP="A2" >
+        <location file0="\BPLG\Security\HashUtil.cs" file="\BPLG\Security\HashUtil.cs" line="31" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Security\SecurityManagerFactory.cs" file="\BPLG\Security\SecurityManagerFactory.cs" line="24" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Security\SecurityManagerFactory.cs" file="\BPLG\Security\SecurityManagerFactory.cs" line="80" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Security\SecurityManagerFactory.cs" file="\BPLG\Security\SecurityManagerFactory.cs" line="114" />
+    </error>
+    <error id="WCNET" severity="Critical" msg="Cryptographic Failures" verbose="" FP="No" cwe="327" OWASP="A2" >
+        <location file0="\BPLG\Utility\HashUtility.cs" file="\BPLG\Utility\HashUtility.cs" line="19" />
+    </error>
+    <error id="WCNET" severity="Critical" msg="Cryptographic Failures" verbose="" FP="No" cwe="327" OWASP="A2" >
+        <location file0="\BPLG\Utility\HashUtility.cs" file="\BPLG\Utility\HashUtility.cs" line="29" />
+    </error>
+    <error id="Securitymisc03" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="388" OWASP="A5" >
+        <location file0="\BPLG\ViewState\Compression.cs" file="\BPLG\ViewState\Compression.cs" line="165" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\ViewState\Compression.cs" file="\BPLG\ViewState\Compression.cs" line="193" />
+    </error>
+    <error id="Sr_NullPointerException" severity="Blocker" msg="Injection" verbose="" FP="No" cwe="395" OWASP="A3" >
+        <location file0="\BPLG\ViewState\Compression.cs" file="\BPLG\ViewState\Compression.cs" line="165" />
+    </error>
+    <error id="Injection15" severity="Critical" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\BPLG\ViewState\SqlViewStateProvider.cs" file="\BPLG\ViewState\SqlViewStateProvider.cs" line="38" />
+    </error>
+    <error id="Injection15" severity="Critical" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\BPLG\ViewState\SqlViewStateProvider.cs" file="\BPLG\ViewState\SqlViewStateProvider.cs" line="99" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\ViewState\ViewStateConfiguration.cs" file="\BPLG\ViewState\ViewStateConfiguration.cs" line="62" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\Crc32.cs" file="\BPLG\Zip\Crc32.cs" line="67" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\Crc32.cs" file="\BPLG\Zip\Crc32.cs" line="76" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\Shared.cs" file="\BPLG\Zip\Shared.cs" line="102" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\Shared.cs" file="\BPLG\Zip\Shared.cs" line="103" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\Shared.cs" file="\BPLG\Zip\Shared.cs" line="104" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\Shared.cs" file="\BPLG\Zip\Shared.cs" line="105" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\Shared.cs" file="\BPLG\Zip\Shared.cs" line="34" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\Shared.cs" file="\BPLG\Zip\Shared.cs" line="55" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\Zip.cs" file="\BPLG\Zip\Zip.cs" line="190" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipDirEntry.cs" file="\BPLG\Zip\ZipDirEntry.cs" line="105" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipDirEntry.cs" file="\BPLG\Zip\ZipDirEntry.cs" line="110" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipDirEntry.cs" file="\BPLG\Zip\ZipDirEntry.cs" line="137" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipDirEntry.cs" file="\BPLG\Zip\ZipDirEntry.cs" line="141" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipDirEntry.cs" file="\BPLG\Zip\ZipDirEntry.cs" line="144" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="137" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="350" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="351" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="356" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="358" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="362" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="363" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="366" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="372" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="374" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="377" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="512" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="517" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="519" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="581" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="618" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="619" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="624" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="626" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="639" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="640" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="642" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="649" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="669" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="670" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="677" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="679" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="683" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="684" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="687" />
+    </error>
+    <error id="Securitymisc09" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="248" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="311" />
+    </error>
+    <error id="Securitymisc09" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="248" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="337" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="142" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="172" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="176" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="190" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="227" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="672" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="672" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipFile.cs" file="\BPLG\Zip\ZipFile.cs" line="155" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipFile.cs" file="\BPLG\Zip\ZipFile.cs" line="169" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipFile.cs" file="\BPLG\Zip\ZipFile.cs" line="283" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipFile.cs" file="\BPLG\Zip\ZipFile.cs" line="293" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipFile.cs" file="\BPLG\Zip\ZipFile.cs" line="325" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipFile.cs" file="\BPLG\Zip\ZipFile.cs" line="327" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipFile.cs" file="\BPLG\Zip\ZipFile.cs" line="330" />
+    </error>
+    <error id="GCSuppressFinalize" severity="Major" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\BPLG\Zip\ZipFile.cs" file="\BPLG\Zip\ZipFile.cs" line="387" />
+    </error>
+    <error id="ThreadMethods" severity="Blocker" msg="Injection" verbose="" FP="No" cwe="366" OWASP="A3" >
+        <location file0="\CS\src\20210125185200\ActionExecutionFilter.cs" file="\CS\src\20210125185200\ActionExecutionFilter.cs" line="136" />
+    </error>
+    <error id="ThreadMethods" severity="Blocker" msg="Injection" verbose="" FP="No" cwe="366" OWASP="A3" >
+        <location file0="\CS\src\20210125185200\ActionExecutionFilter.cs" file="\CS\src\20210125185200\ActionExecutionFilter.cs" line="137" />
+    </error>
+    <error id="ExceptionTypes" severity="Blocker" msg="Security Logging and Monitoring Failures" verbose="" FP="No" cwe="388" OWASP="A9" >
+        <location file0="\CS\src\20210125185200\ActionExecutionFilter.cs" file="\CS\src\20210125185200\ActionExecutionFilter.cs" line="94" />
+    </error>
+    <error id="SerializationNET" severity="Major" msg="Injection" verbose="" FP="No" cwe="573" OWASP="A3" >
+        <location file0="\CS\src\20210125185200\ActionExecutionFilter.cs" file="\CS\src\20210125185200\ActionExecutionFilter.cs" line="28" />
+    </error>
+    <error id="GCSuppressFinalize" severity="Major" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\CS\src\20210125185200\ActionExecutionFilter.cs" file="\CS\src\20210125185200\ActionExecutionFilter.cs" line="52" />
+    </error>
+    <error id="IncorrectAssemply" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\CS\src\20210125185200\ActionExecutionFilter.cs" file="\CS\src\20210125185200\ActionExecutionFilter.cs" line="49" />
+    </error>
+    <error id="IncorrectAssemply" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\CS\src\20210125185200\ActionExecutionFilter.cs" file="\CS\src\20210125185200\ActionExecutionFilter.cs" line="50" />
+    </error>
+    <error id="IncorrectAssemply" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\CS\src\20210125185200\ActionExecutionFilter.cs" file="\CS\src\20210125185200\ActionExecutionFilter.cs" line="51" />
+    </error>
+    <error id="AnonymousLDAP" severity="Blocker" msg="Broken Access Control" verbose="" FP="No" cwe="285" OWASP="A1" >
+        <location file0="\CS\src\20210125185200\ActionExecutionFilter.cs" file="\CS\src\20210125185200\ActionExecutionFilter.cs" line="53" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\CS\src\20210125185200\BPLG\Authentication\AuthenticationManagerFactory.cs" file="\CS\src\20210125185200\BPLG\Authentication\AuthenticationManagerFactory.cs" line="18" />
+    </error>
+    <error id="WCNET" severity="Critical" msg="Cryptographic Failures" verbose="" FP="No" cwe="327" OWASP="A2" >
+        <location file0="\CS\src\20210125185200\BPLG\CryptoService\CryptoUtilities.cs" file="\CS\src\20210125185200\BPLG\CryptoService\CryptoUtilities.cs" line="38" />
+    </error>
+    <error id="WCNET" severity="Critical" msg="Cryptographic Failures" verbose="" FP="No" cwe="327" OWASP="A2" >
+        <location file0="\CS\src\20210125185200\BPLG\CryptoService\CryptoUtilities.cs" file="\CS\src\20210125185200\BPLG\CryptoService\CryptoUtilities.cs" line="68" />
+    </error>
+    <error id="Injection15" severity="Critical" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\CS\src\20210125185200\BPLG\Database\DBHelper.cs" file="\CS\src\20210125185200\BPLG\Database\DBHelper.cs" line="106" />
+    </error>
+    <error id="WCNET" severity="Critical" msg="Cryptographic Failures" verbose="" FP="No" cwe="327" OWASP="A2" >
+        <location file0="\CS\src\20210125185200\BPLG\Utility\HashUtility.cs" file="\CS\src\20210125185200\BPLG\Utility\HashUtility.cs" line="19" />
+    </error>
+    <error id="WCNET" severity="Critical" msg="Cryptographic Failures" verbose="" FP="No" cwe="327" OWASP="A2" >
+        <location file0="\CS\src\20210125185200\BPLG\Utility\HashUtility.cs" file="\CS\src\20210125185200\BPLG\Utility\HashUtility.cs" line="29" />
+    </error>
+    <error id="Securitymisc02" severity="Critical" msg="Software and Data Integrity Failures" verbose="" FP="No" cwe="829" OWASP="A8" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="15" />
+    </error>
+    <error id="Securitymisc02" severity="Critical" msg="Software and Data Integrity Failures" verbose="" FP="No" cwe="829" OWASP="A8" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="59" />
+    </error>
+    <error id="Securitymisc02" severity="Critical" msg="Software and Data Integrity Failures" verbose="" FP="No" cwe="829" OWASP="A8" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="65" />
+    </error>
+    <error id="Securitymisc02" severity="Critical" msg="Software and Data Integrity Failures" verbose="" FP="No" cwe="829" OWASP="A8" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="70" />
+    </error>
+    <error id="Securitymisc02" severity="Critical" msg="Software and Data Integrity Failures" verbose="" FP="No" cwe="829" OWASP="A8" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="75" />
+    </error>
+    <error id="Securitymisc02" severity="Critical" msg="Software and Data Integrity Failures" verbose="" FP="No" cwe="829" OWASP="A8" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="80" />
+    </error>
+    <error id="Securitymisc02" severity="Critical" msg="Software and Data Integrity Failures" verbose="" FP="No" cwe="829" OWASP="A8" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="86" />
+    </error>
+    <error id="Securitymisc02" severity="Critical" msg="Software and Data Integrity Failures" verbose="" FP="No" cwe="829" OWASP="A8" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="90" />
+    </error>
+    <error id="Securitymisc02" severity="Critical" msg="Software and Data Integrity Failures" verbose="" FP="No" cwe="829" OWASP="A8" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="115" />
+    </error>
+    <error id="usingUnmanagedWin32" severity="Blocker" msg="Security Misconfiguration " verbose="" FP="No" cwe="671" OWASP="A5" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="92" />
+    </error>
+    <error id="usingUnmanagedWin32" severity="Blocker" msg="Security Misconfiguration " verbose="" FP="No" cwe="671" OWASP="A5" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="93" />
+    </error>
+    <error id="ThreadMethods" severity="Blocker" msg="Injection" verbose="" FP="No" cwe="366" OWASP="A3" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="97" />
+    </error>
+    <error id="ThreadMethods" severity="Blocker" msg="Injection" verbose="" FP="No" cwe="366" OWASP="A3" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="98" />
+    </error>
+    <error id="SerializationNET" severity="Major" msg="Injection" verbose="" FP="No" cwe="573" OWASP="A3" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="38" />
+    </error>
+    <error id="IncorrectAssemply" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="31" />
+    </error>
+    <error id="IncorrectAssemply" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="32" />
+    </error>
+    <error id="IncorrectAssemply" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="33" />
+    </error>
+    <error id="FormAuthenticationBypass" severity="Blocker" msg="Broken Access Control" verbose="" FP="No" cwe="863" OWASP="A1" >
+        <location file0="\Accordion.aspx" file="\Accordion.aspx" line="18" />
+    </error>
+    <error id="ThreadMethods" severity="Blocker" msg="Injection" verbose="" FP="No" cwe="366" OWASP="A3" >
+        <location file0="\ActionExecutionFilter.cs" file="\ActionExecutionFilter.cs" line="136" />
+    </error>
+    <error id="ThreadMethods" severity="Blocker" msg="Injection" verbose="" FP="No" cwe="366" OWASP="A3" >
+        <location file0="\ActionExecutionFilter.cs" file="\ActionExecutionFilter.cs" line="137" />
+    </error>
+    <error id="ExceptionTypes" severity="Blocker" msg="Security Logging and Monitoring Failures" verbose="" FP="No" cwe="388" OWASP="A9" >
+        <location file0="\ActionExecutionFilter.cs" file="\ActionExecutionFilter.cs" line="94" />
+    </error>
+    <error id="SerializationNET" severity="Major" msg="Injection" verbose="" FP="No" cwe="573" OWASP="A3" >
+        <location file0="\ActionExecutionFilter.cs" file="\ActionExecutionFilter.cs" line="28" />
+    </error>
+    <error id="GCSuppressFinalize" severity="Major" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\ActionExecutionFilter.cs" file="\ActionExecutionFilter.cs" line="52" />
+    </error>
+    <error id="IncorrectAssemply" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\ActionExecutionFilter.cs" file="\ActionExecutionFilter.cs" line="49" />
+    </error>
+    <error id="IncorrectAssemply" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\ActionExecutionFilter.cs" file="\ActionExecutionFilter.cs" line="50" />
+    </error>
+    <error id="IncorrectAssemply" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\ActionExecutionFilter.cs" file="\ActionExecutionFilter.cs" line="51" />
+    </error>
+    <error id="AnonymousLDAP" severity="Blocker" msg="Broken Access Control" verbose="" FP="No" cwe="285" OWASP="A1" >
+        <location file0="\ActionExecutionFilter.cs" file="\ActionExecutionFilter.cs" line="53" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Authentication\AuthenticationManagerFactory.cs" file="\BPLG\Authentication\AuthenticationManagerFactory.cs" line="18" />
+    </error>
+    <error id="WCNET" severity="Critical" msg="Cryptographic Failures" verbose="" FP="No" cwe="327" OWASP="A2" >
+        <location file0="\BPLG\CryptoService\CryptoUtilities.cs" file="\BPLG\CryptoService\CryptoUtilities.cs" line="38" />
+    </error>
+    <error id="WCNET" severity="Critical" msg="Cryptographic Failures" verbose="" FP="No" cwe="327" OWASP="A2" >
+        <location file0="\BPLG\CryptoService\CryptoUtilities.cs" file="\BPLG\CryptoService\CryptoUtilities.cs" line="68" />
+    </error>
+    <error id="Injection15" severity="Critical" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\BPLG\Data\DBHelper.cs" file="\BPLG\Data\DBHelper.cs" line="77" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Data\Pager.cs" file="\BPLG\Data\Pager.cs" line="96" />
+    </error>
+    <error id="Injection15" severity="Critical" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\BPLG\Database\DBHelper.cs" file="\BPLG\Database\DBHelper.cs" line="106" />
+    </error>
+    <error id="Injection15" severity="Critical" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\BPLG\DataTrasformationServices\DTSXPackageAgent.cs" file="\BPLG\DataTrasformationServices\DTSXPackageAgent.cs" line="62" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\DataTrasformationServices\PackageParameter.cs" file="\BPLG\DataTrasformationServices\PackageParameter.cs" line="428" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\DataTrasformationServices\PackageParameter.cs" file="\BPLG\DataTrasformationServices\PackageParameter.cs" line="521" />
+    </error>
+    <error id="ExceptionTypes" severity="Blocker" msg="Security Logging and Monitoring Failures" verbose="" FP="No" cwe="388" OWASP="A9" >
+        <location file0="\BPLG\DataTrasformationServices\PackageParameter.cs" file="\BPLG\DataTrasformationServices\PackageParameter.cs" line="1641" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Formatting\Format.cs" file="\BPLG\Formatting\Format.cs" line="59" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Formatting\Format.cs" file="\BPLG\Formatting\Format.cs" line="83" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\FTP\FTPclient.cs" file="\BPLG\FTP\FTPclient.cs" line="176" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\FTP\FTPclient.cs" file="\BPLG\FTP\FTPclient.cs" line="280" />
+    </error>
+    <error id="Unreleased" severity="Blocker" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\BPLG\FTP\FTPclient.cs" file="\BPLG\FTP\FTPclient.cs" line="568" />
+    </error>
+    <error id="Securitymisc03" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="388" OWASP="A5" >
+        <location file0="\BPLG\FTPS\FTPSClient.cs" file="\BPLG\FTPS\FTPSClient.cs" line="76" />
+    </error>
+    <error id="Securitymisc05" severity="Critical" msg="Security Logging and Monitoring Failures" verbose="" FP="No" cwe="532" OWASP="A9" >
+        <location file0="\BPLG\FTPS\FTPSClient.cs" file="\BPLG\FTPS\FTPSClient.cs" line="78" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\FTPS\FTPSClient.cs" file="\BPLG\FTPS\FTPSClient.cs" line="78" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\FTPS\FTPSClient.cs" file="\BPLG\FTPS\FTPSClient.cs" line="69" />
+    </error>
+    <error id="AvoidSSL" severity="Blocker" msg="Identification and Authentication Failures" verbose="" FP="No" cwe="798" OWASP="A7" >
+        <location file0="\BPLG\FTPS\FTPSClient.cs" file="\BPLG\FTPS\FTPSClient.cs" line="50" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Logging\ConsoleLogger.cs" file="\BPLG\Logging\ConsoleLogger.cs" line="40" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Logging\ConsoleLogger.cs" file="\BPLG\Logging\ConsoleLogger.cs" line="24" />
+    </error>
+    <error id="Injection15" severity="Critical" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\BPLG\Logging\DatabaseLogger.cs" file="\BPLG\Logging\DatabaseLogger.cs" line="53" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Logging\DatabaseLogger.cs" file="\BPLG\Logging\DatabaseLogger.cs" line="32" />
+    </error>
+    <error id="Securitymisc03" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="388" OWASP="A5" >
+        <location file0="\BPLG\Logging\EmailLogger.cs" file="\BPLG\Logging\EmailLogger.cs" line="131" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Logging\EmailLogger.cs" file="\BPLG\Logging\EmailLogger.cs" line="73" />
+    </error>
+    <error id="ITM" severity="Blocker" msg="Cryptographic Failures" verbose="" FP="No" cwe="319" OWASP="A2" >
+        <location file0="\BPLG\Logging\EmailLogger.cs" file="\BPLG\Logging\EmailLogger.cs" line="129" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Logging\EventViewerLogger.cs" file="\BPLG\Logging\EventViewerLogger.cs" line="22" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Logging\FileSystemLogger.cs" file="\BPLG\Logging\FileSystemLogger.cs" line="23" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Logging\LoggerFactory.cs" file="\BPLG\Logging\LoggerFactory.cs" line="59" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Reporting\SSRSReport.cs" file="\BPLG\Reporting\SSRSReport.cs" line="145" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Reporting\SSRSReport.cs" file="\BPLG\Reporting\SSRSReport.cs" line="237" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Reporting\SSRSReport.cs" file="\BPLG\Reporting\SSRSReport.cs" line="297" />
+    </error>
+    <error id="Securitymisc03" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="388" OWASP="A5" >
+        <location file0="\BPLG\Security\AuthenticationPolicy.cs" file="\BPLG\Security\AuthenticationPolicy.cs" line="189" />
+    </error>
+    <error id="ITM" severity="Blocker" msg="Cryptographic Failures" verbose="" FP="No" cwe="319" OWASP="A2" >
+        <location file0="\BPLG\Security\AuthenticationPolicy.cs" file="\BPLG\Security\AuthenticationPolicy.cs" line="187" />
+    </error>
+    <error id="WCNET" severity="Critical" msg="Cryptographic Failures" verbose="" FP="No" cwe="327" OWASP="A2" >
+        <location file0="\BPLG\Security\HashUtil.cs" file="\BPLG\Security\HashUtil.cs" line="21" />
+    </error>
+    <error id="WCNET" severity="Critical" msg="Cryptographic Failures" verbose="" FP="No" cwe="327" OWASP="A2" >
+        <location file0="\BPLG\Security\HashUtil.cs" file="\BPLG\Security\HashUtil.cs" line="31" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Security\SecurityManagerFactory.cs" file="\BPLG\Security\SecurityManagerFactory.cs" line="24" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Security\SecurityManagerFactory.cs" file="\BPLG\Security\SecurityManagerFactory.cs" line="80" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\Security\SecurityManagerFactory.cs" file="\BPLG\Security\SecurityManagerFactory.cs" line="114" />
+    </error>
+    <error id="WCNET" severity="Critical" msg="Cryptographic Failures" verbose="" FP="No" cwe="327" OWASP="A2" >
+        <location file0="\BPLG\Utility\HashUtility.cs" file="\BPLG\Utility\HashUtility.cs" line="19" />
+    </error>
+    <error id="WCNET" severity="Critical" msg="Cryptographic Failures" verbose="" FP="No" cwe="327" OWASP="A2" >
+        <location file0="\BPLG\Utility\HashUtility.cs" file="\BPLG\Utility\HashUtility.cs" line="29" />
+    </error>
+    <error id="Securitymisc03" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="388" OWASP="A5" >
+        <location file0="\BPLG\ViewState\Compression.cs" file="\BPLG\ViewState\Compression.cs" line="165" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\ViewState\Compression.cs" file="\BPLG\ViewState\Compression.cs" line="193" />
+    </error>
+    <error id="Sr_NullPointerException" severity="Blocker" msg="Injection" verbose="" FP="No" cwe="395" OWASP="A3" >
+        <location file0="\BPLG\ViewState\Compression.cs" file="\BPLG\ViewState\Compression.cs" line="165" />
+    </error>
+    <error id="Injection15" severity="Critical" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\BPLG\ViewState\SqlViewStateProvider.cs" file="\BPLG\ViewState\SqlViewStateProvider.cs" line="38" />
+    </error>
+    <error id="Injection15" severity="Critical" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\BPLG\ViewState\SqlViewStateProvider.cs" file="\BPLG\ViewState\SqlViewStateProvider.cs" line="99" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\BPLG\ViewState\ViewStateConfiguration.cs" file="\BPLG\ViewState\ViewStateConfiguration.cs" line="62" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\Crc32.cs" file="\BPLG\Zip\Crc32.cs" line="67" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\Crc32.cs" file="\BPLG\Zip\Crc32.cs" line="76" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\Shared.cs" file="\BPLG\Zip\Shared.cs" line="102" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\Shared.cs" file="\BPLG\Zip\Shared.cs" line="103" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\Shared.cs" file="\BPLG\Zip\Shared.cs" line="104" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\Shared.cs" file="\BPLG\Zip\Shared.cs" line="105" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\Shared.cs" file="\BPLG\Zip\Shared.cs" line="34" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\Shared.cs" file="\BPLG\Zip\Shared.cs" line="55" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\Zip.cs" file="\BPLG\Zip\Zip.cs" line="190" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipDirEntry.cs" file="\BPLG\Zip\ZipDirEntry.cs" line="105" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipDirEntry.cs" file="\BPLG\Zip\ZipDirEntry.cs" line="110" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipDirEntry.cs" file="\BPLG\Zip\ZipDirEntry.cs" line="137" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipDirEntry.cs" file="\BPLG\Zip\ZipDirEntry.cs" line="141" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipDirEntry.cs" file="\BPLG\Zip\ZipDirEntry.cs" line="144" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="137" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="350" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="351" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="356" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="358" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="362" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="363" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="366" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="372" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="374" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="377" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="512" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="517" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="519" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="581" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="618" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="619" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="624" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="626" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="639" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="640" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="642" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="649" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="669" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="670" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="677" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="679" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="683" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="684" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="687" />
+    </error>
+    <error id="Securitymisc09" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="248" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="311" />
+    </error>
+    <error id="Securitymisc09" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="248" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="337" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="142" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="172" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="176" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="190" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="227" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="672" />
+    </error>
+    <error id="Securitymisc13" severity="Major" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\BPLG\Zip\ZipEntry.cs" file="\BPLG\Zip\ZipEntry.cs" line="672" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipFile.cs" file="\BPLG\Zip\ZipFile.cs" line="155" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipFile.cs" file="\BPLG\Zip\ZipFile.cs" line="169" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipFile.cs" file="\BPLG\Zip\ZipFile.cs" line="283" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipFile.cs" file="\BPLG\Zip\ZipFile.cs" line="293" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipFile.cs" file="\BPLG\Zip\ZipFile.cs" line="325" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipFile.cs" file="\BPLG\Zip\ZipFile.cs" line="327" />
+    </error>
+    <error id="Securitymisc07" severity="Major" msg="Broken Access Control" verbose="" FP="No" cwe="200" OWASP="A1" >
+        <location file0="\BPLG\Zip\ZipFile.cs" file="\BPLG\Zip\ZipFile.cs" line="330" />
+    </error>
+    <error id="GCSuppressFinalize" severity="Major" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\BPLG\Zip\ZipFile.cs" file="\BPLG\Zip\ZipFile.cs" line="387" />
+    </error>
+    <error id="ThreadMethods" severity="Blocker" msg="Injection" verbose="" FP="No" cwe="366" OWASP="A3" >
+        <location file0="\CS\src\20210125185200\ActionExecutionFilter.cs" file="\CS\src\20210125185200\ActionExecutionFilter.cs" line="136" />
+    </error>
+    <error id="ThreadMethods" severity="Blocker" msg="Injection" verbose="" FP="No" cwe="366" OWASP="A3" >
+        <location file0="\CS\src\20210125185200\ActionExecutionFilter.cs" file="\CS\src\20210125185200\ActionExecutionFilter.cs" line="137" />
+    </error>
+    <error id="ExceptionTypes" severity="Blocker" msg="Security Logging and Monitoring Failures" verbose="" FP="No" cwe="388" OWASP="A9" >
+        <location file0="\CS\src\20210125185200\ActionExecutionFilter.cs" file="\CS\src\20210125185200\ActionExecutionFilter.cs" line="94" />
+    </error>
+    <error id="SerializationNET" severity="Major" msg="Injection" verbose="" FP="No" cwe="573" OWASP="A3" >
+        <location file0="\CS\src\20210125185200\ActionExecutionFilter.cs" file="\CS\src\20210125185200\ActionExecutionFilter.cs" line="28" />
+    </error>
+    <error id="GCSuppressFinalize" severity="Major" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\CS\src\20210125185200\ActionExecutionFilter.cs" file="\CS\src\20210125185200\ActionExecutionFilter.cs" line="52" />
+    </error>
+    <error id="IncorrectAssemply" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\CS\src\20210125185200\ActionExecutionFilter.cs" file="\CS\src\20210125185200\ActionExecutionFilter.cs" line="49" />
+    </error>
+    <error id="IncorrectAssemply" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\CS\src\20210125185200\ActionExecutionFilter.cs" file="\CS\src\20210125185200\ActionExecutionFilter.cs" line="50" />
+    </error>
+    <error id="IncorrectAssemply" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\CS\src\20210125185200\ActionExecutionFilter.cs" file="\CS\src\20210125185200\ActionExecutionFilter.cs" line="51" />
+    </error>
+    <error id="AnonymousLDAP" severity="Blocker" msg="Broken Access Control" verbose="" FP="No" cwe="285" OWASP="A1" >
+        <location file0="\CS\src\20210125185200\ActionExecutionFilter.cs" file="\CS\src\20210125185200\ActionExecutionFilter.cs" line="53" />
+    </error>
+    <error id="CWE200SC" severity="Minor" msg="Security Misconfiguration " verbose="" FP="No" cwe="478" OWASP="A5" >
+        <location file0="\CS\src\20210125185200\BPLG\Authentication\AuthenticationManagerFactory.cs" file="\CS\src\20210125185200\BPLG\Authentication\AuthenticationManagerFactory.cs" line="18" />
+    </error>
+    <error id="WCNET" severity="Critical" msg="Cryptographic Failures" verbose="" FP="No" cwe="327" OWASP="A2" >
+        <location file0="\CS\src\20210125185200\BPLG\CryptoService\CryptoUtilities.cs" file="\CS\src\20210125185200\BPLG\CryptoService\CryptoUtilities.cs" line="38" />
+    </error>
+    <error id="WCNET" severity="Critical" msg="Cryptographic Failures" verbose="" FP="No" cwe="327" OWASP="A2" >
+        <location file0="\CS\src\20210125185200\BPLG\CryptoService\CryptoUtilities.cs" file="\CS\src\20210125185200\BPLG\CryptoService\CryptoUtilities.cs" line="68" />
+    </error>
+    <error id="Injection15" severity="Critical" msg="Injection" verbose="" FP="No" cwe="404" OWASP="A3" >
+        <location file0="\CS\src\20210125185200\BPLG\Database\DBHelper.cs" file="\CS\src\20210125185200\BPLG\Database\DBHelper.cs" line="106" />
+    </error>
+    <error id="WCNET" severity="Critical" msg="Cryptographic Failures" verbose="" FP="No" cwe="327" OWASP="A2" >
+        <location file0="\CS\src\20210125185200\BPLG\Utility\HashUtility.cs" file="\CS\src\20210125185200\BPLG\Utility\HashUtility.cs" line="19" />
+    </error>
+    <error id="WCNET" severity="Critical" msg="Cryptographic Failures" verbose="" FP="No" cwe="327" OWASP="A2" >
+        <location file0="\CS\src\20210125185200\BPLG\Utility\HashUtility.cs" file="\CS\src\20210125185200\BPLG\Utility\HashUtility.cs" line="29" />
+    </error>
+    <error id="Securitymisc02" severity="Critical" msg="Software and Data Integrity Failures" verbose="" FP="No" cwe="829" OWASP="A8" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="15" />
+    </error>
+    <error id="Securitymisc02" severity="Critical" msg="Software and Data Integrity Failures" verbose="" FP="No" cwe="829" OWASP="A8" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="59" />
+    </error>
+    <error id="Securitymisc02" severity="Critical" msg="Software and Data Integrity Failures" verbose="" FP="No" cwe="829" OWASP="A8" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="65" />
+    </error>
+    <error id="Securitymisc02" severity="Critical" msg="Software and Data Integrity Failures" verbose="" FP="No" cwe="829" OWASP="A8" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="70" />
+    </error>
+    <error id="Securitymisc02" severity="Critical" msg="Software and Data Integrity Failures" verbose="" FP="No" cwe="829" OWASP="A8" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="75" />
+    </error>
+    <error id="Securitymisc02" severity="Critical" msg="Software and Data Integrity Failures" verbose="" FP="No" cwe="829" OWASP="A8" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="80" />
+    </error>
+    <error id="Securitymisc02" severity="Critical" msg="Software and Data Integrity Failures" verbose="" FP="No" cwe="829" OWASP="A8" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="86" />
+    </error>
+    <error id="Securitymisc02" severity="Critical" msg="Software and Data Integrity Failures" verbose="" FP="No" cwe="829" OWASP="A8" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="90" />
+    </error>
+    <error id="Securitymisc02" severity="Critical" msg="Software and Data Integrity Failures" verbose="" FP="No" cwe="829" OWASP="A8" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="115" />
+    </error>
+    <error id="usingUnmanagedWin32" severity="Blocker" msg="Security Misconfiguration " verbose="" FP="No" cwe="671" OWASP="A5" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="92" />
+    </error>
+    <error id="usingUnmanagedWin32" severity="Blocker" msg="Security Misconfiguration " verbose="" FP="No" cwe="671" OWASP="A5" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="93" />
+    </error>
+    <error id="ThreadMethods" severity="Blocker" msg="Injection" verbose="" FP="No" cwe="366" OWASP="A3" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="97" />
+    </error>
+    <error id="ThreadMethods" severity="Blocker" msg="Injection" verbose="" FP="No" cwe="366" OWASP="A3" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="98" />
+    </error>
+    <error id="SerializationNET" severity="Major" msg="Injection" verbose="" FP="No" cwe="573" OWASP="A3" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="38" />
+    </error>
+    <error id="IncorrectAssemply" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="31" />
+    </error>
+    <error id="IncorrectAssemply" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="32" />
+    </error>
+    <error id="IncorrectAssemply" severity="Critical" msg="Security Misconfiguration " verbose="" FP="No" cwe="676" OWASP="A5" >
+        <location file0="\ActionExecutionFilter.vb" file="\ActionExecutionFilter.vb" line="33" />
+    </error>
+    <error id="FormAuthenticationBypass" severity="Blocker" msg="Broken Access Control" verbose="" FP="No" cwe="863" OWASP="A1" >
+        <location file0="\Accordion.aspx" file="\Accordion.aspx" line="18" />
+    </error>
+</errors>
+</results>

@@ -1,0 +1,684 @@
+{
+   ("filename", "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp");
+   ("language", "CPP");
+   ("include", "std_testcase.h");
+   ("include", "<stdio.h>");
+   ("include", "<stdlib.h>");
+   ("include", "<stddef.h>");
+   ("include", "<time.h>");
+   ("include", "<limits.h>");
+   ("include", "<string.h>");
+   ("include", "<stdint.h>");
+   ("include", "<stdint.h>");
+   ("include", "<ctype.h>");
+   ("include", "<fcntl.h>");
+   ("include", "<sys/types.h>");
+   ("include", "<sys/stat.h>");
+   ("include", "std_testcase_io.h");
+   ("include", "std_testcase.h");
+   ("include", "<winsock2.h>");
+   ("include", "<windows.h>");
+   ("include", "<direct.h>");
+}
+{
+   (!3, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase_io.h");
+   (!2, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h");
+   (!1, "C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp");
+}
+[
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp",
+   MD("__asm__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp",
+   MD("__attribute__(x)",["x"],"")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp",
+   MD("va_start(list)",["list"],"list = (char *) &va_alist")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp",
+   MD("va_end(list)",["list"],"va_end(list)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp",
+   MD("va_arg(list,mode)",["list","mode"],"va_arg(list,(mode)null)")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp",
+   MD("offsetof(st,m)",["st","m"],"((size_t)(&((st *)0)->m))")
+   ,(1#0,1#0,"<built-in>")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp",
+   MD("RAND32()",[],"((rand()<<30) ^ (rand()<<15) ^ rand())")
+   ,(84#0,84#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp",
+   MD("RAND64()",[],"(((int64_t)rand()<<60) ^ ((int64_t)rand()<<45) ^ ((int64_t)rand()<<30) ^ ((int64_t)rand()<<15) ^ (int64_t)rand())")
+   ,(87#0,87#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/testcasesupport/std_testcase.h")}
+
+
+
+,   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   SF([extern,const,extern],int,<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"GLOBAL_CONST_TRUE")
+   ,(103#18,103#34,!2)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   SF([extern,const,extern],int,<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"GLOBAL_CONST_FALSE")
+   ,(104#18,104#35,!2)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   SF([extern,const,extern],int,<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"GLOBAL_CONST_FIVE")
+   ,(105#18,105#34,!2)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   SF([extern,extern],int,<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"globalTrue")
+   ,(110#12,110#21,!2)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   SF([extern,extern],int,<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"globalFalse")
+   ,(111#12,111#22,!2)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   SF([extern,extern],int,<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"globalFive")
+   ,(112#12,112#21,!2)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   SF([extern,extern],int,<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"globalArgc")
+   ,(55#12,55#21,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   SF([extern,extern],ref(ref(char)),<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"globalArgv")
+   ,(56#12,56#24,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   SI(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,
+   {[
+      {;
+      ,(1#1,337#1,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(1#1,337#1,!1)}
+   )
+   ,(1#1,337#1,!1)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   PT([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printLine"):unit,[(mod(ref(char),[const]):"line",(14#16,14#32,!3))],[]
+   )
+   ,(14#1,14#34,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   PT([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printWLine"):unit,[(mod(ref(wchar),[const]):"line",(16#17,16#36,!3))],[]
+   )
+   ,(16#1,16#38,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   PT([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printIntLine"):unit,[(int:"intNumber",(18#20,18#32,!3))],[]
+   )
+   ,(18#1,18#34,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   PT([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printShortLine"):unit,[(short:"shortNumber",(20#22,20#38,!3))],[]
+   )
+   ,(20#1,20#40,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   PT([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printFloatLine"):unit,[(float:"floatNumber",(22#22,22#38,!3))],[]
+   )
+   ,(22#1,22#40,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   PT([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printLongLine"):unit,[(long:"longNumber",(24#20,24#34,!3))],[]
+   )
+   ,(24#1,24#36,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   PT([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printLongLongLine"):unit,[(class((,int64_t)):"longLongIntNumber",(26#24,26#48,!3))],[]
+   )
+   ,(26#1,26#50,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   PT([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printSizeTLine"):unit,[(class((,size_t)):"sizeTNumber",(28#21,28#38,!3))],[]
+   )
+   ,(28#1,28#40,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   PT([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printHexCharLine"):unit,[(char:"charHex",(30#23,30#34,!3))],[]
+   )
+   ,(30#1,30#36,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   PT([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printWcharLine"):unit,[(wchar:"wideChar",(32#21,32#36,!3))],[]
+   )
+   ,(32#1,32#38,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   PT([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printUnsignedLine"):unit,[(uint:"unsignedNumber",(34#24,34#46,!3))],[]
+   )
+   ,(34#1,34#48,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   PT([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printHexUnsignedCharLine"):unit,[(uchar:"unsignedCharacter",(36#31,36#61,!3))],[]
+   )
+   ,(36#1,36#63,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   PT([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printDoubleLine"):unit,[(double:"doubleNumber",(38#22,38#40,!3))],[]
+   )
+   ,(38#1,38#42,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   PT([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printStructLine"):unit,[(mod(ref(alias("twoIntsStruct",mod(record((,_twoIntsStruct)),[struct]))),[const]):"structTwoIntsStruct",(40#22,40#62,!3))],[]
+   )
+   ,(40#1,40#64,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   PT([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printBytesLine"):unit,[(mod(ref(uchar),[const]):"bytes",(42#21,42#47,!3)),(class((,size_t)):"numBytes",(42#50,42#64,!3))],[]
+   )
+   ,(42#1,42#66,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   PT([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"decodeHexChars"):class((,size_t)),[(ref(uchar):"bytes",(44#23,44#43,!3)),(class((,size_t)):"numBytes",(44#46,44#60,!3)),(mod(ref(char),[const]):"hex",(44#63,44#78,!3))],[]
+   )
+   ,(44#1,44#80,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   PT([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"decodeHexWChars"):class((,size_t)),[(ref(uchar):"bytes",(46#24,46#44,!3)),(class((,size_t)):"numBytes",(46#47,46#61,!3)),(mod(ref(wchar),[const]):"hex",(46#64,46#82,!3))],[]
+   )
+   ,(46#1,46#84,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   PT([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"globalReturnsTrue"):int,[],[]
+   )
+   ,(48#1,48#24,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   PT([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"globalReturnsFalse"):int,[],[]
+   )
+   ,(50#1,50#25,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   PT([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"globalReturnsTrueOrFalse"):int,[],[]
+   )
+   ,(52#1,52#31,!3)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   FN([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01_bad"):unit,[],[],
+   {[
+      {VD("password",ref(char))
+      ,(36#10,36#19,!1)};
+      {VD("passwordBuffer",char,([{"100"N,int,(37#25,37#27,!1)}],[{""S,string,(37#32,37#33,!1)}]))
+      ,(37#10,37#28,!1)};
+      {{AE({V("password"),ref(char),(38#5,38#12,!1)},{V("passwordBuffer"),arr(char),(38#16,38#29,!1)}),ref(char),(38#5,38#29,!1)}
+      ,(38#5,38#29,!1)};
+      {[
+         {VD("wsaData",class((,WSADATA)))
+         ,(40#17,40#23,!1)};
+         {VD("wsaDataInit",int,{"0"N,int,(41#27,41#27,!1)})
+         ,(41#13,41#23,!1)};
+         {VD("recvResult",int)
+         ,(42#13,42#22,!1)};
+         {VD("service",mod(class((,sockaddr_in)),[struct]))
+         ,(43#28,43#34,!1)};
+         {VD("replace",ref(char))
+         ,(44#14,44#21,!1)};
+         {VD("connectSocket",class((,SOCKET)),{V("INVALID_SOCKET"),class((,"%undef")),(45#32,45#45,!1)})
+         ,(45#16,45#28,!1)};
+         {VD("passwordLen",class((,size_t)),{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"strlen"),[ref(char)],[{V("password"),ref(char),(46#37,46#44,!1)}]),class((,"%undef")),(46#30,46#45,!1)})
+         ,(46#16,46#26,!1)};
+         {DW(L4,
+            {[
+               {IF0({BO(!=,{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"WSAStartup"),[class((,"%undef")),ref(class((,WSADATA)))],[{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"MAKEWORD"),[int,int],[{"2"N,int,(49#37,49#37,!1)},{"2"N,int,(49#39,49#39,!1)}]),class((,"%undef")),(49#28,49#40,!1)},{&{V("wsaData"),class((,WSADATA)),(49#44,49#50,!1)},ref(class((,WSADATA))),(49#43,49#50,!1)}]),class((,"%undef")),(49#17,49#51,!1)},{V("NO_ERROR"),class((,"%undef")),(49#56,49#63,!1)}),bool,(49#17,49#63,!1)},
+                  {[
+                     {BR @ 
+                     ,(51#17,51#22,!1)}
+                     ]
+                  ,(50#13,52#13,!1)})
+               ,(49#13,52#13,!1)};
+               {{AE({V("wsaDataInit"),int,(53#13,53#23,!1)},{"1"N,int,(53#27,53#27,!1)}),int,(53#13,53#27,!1)}
+               ,(53#13,53#27,!1)};
+               {{AE({V("connectSocket"),class((,SOCKET)),(54#13,54#25,!1)},{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"socket"),[class((,"%undef")),class((,"%undef")),class((,"%undef"))],[{V("AF_INET"),class((,"%undef")),(54#36,54#42,!1)},{V("SOCK_STREAM"),class((,"%undef")),(54#45,54#55,!1)},{V("IPPROTO_TCP"),class((,"%undef")),(54#58,54#68,!1)}]),class((,"%undef")),(54#29,54#69,!1)}),class((,SOCKET)),(54#13,54#69,!1)}
+               ,(54#13,54#69,!1)};
+               {IF0({BO(==,{V("connectSocket"),class((,SOCKET)),(55#17,55#29,!1)},{V("INVALID_SOCKET"),class((,"%undef")),(55#34,55#47,!1)}),bool,(55#17,55#47,!1)},
+                  {[
+                     {BR @ 
+                     ,(57#17,57#22,!1)}
+                     ]
+                  ,(56#13,58#13,!1)})
+               ,(55#13,58#13,!1)};
+               {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"memset"),[ref(mod(class((,sockaddr_in)),[struct])),int,int],[{&{V("service"),mod(class((,sockaddr_in)),[struct]),(59#21,59#27,!1)},ref(mod(class((,sockaddr_in)),[struct])),(59#20,59#27,!1)},{"0"N,int,(59#30,59#30,!1)},{SO({V("service"),mod(class((,sockaddr_in)),[struct]),(59#40,59#46,!1)}),int,(59#33,59#47,!1)}])
+               ,(59#13,59#48,!1)};
+               {{AE({OA({V("service"),mod(class((,sockaddr_in)),[struct]),(60#13,60#19,!1)},"sin_family"),class((,"%undef")),(60#13,60#30,!1)},{V("AF_INET"),class((,"%undef")),(60#34,60#40,!1)}),class((,"%undef")),(60#13,60#40,!1)}
+               ,(60#13,60#40,!1)};
+               {{AE({OA({OA({V("service"),mod(class((,sockaddr_in)),[struct]),(61#13,61#19,!1)},"sin_addr"),class((,"%undef")),(61#13,61#28,!1)},"s_addr"),class((,"%undef")),(61#13,61#35,!1)},{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"inet_addr"),[string],[{"127.0.0.1"S,string,(61#49,61#59,!1)}]),class((,"%undef")),(61#39,61#60,!1)}),class((,"%undef")),(61#13,61#60,!1)}
+               ,(61#13,61#60,!1)};
+               {{AE({OA({V("service"),mod(class((,sockaddr_in)),[struct]),(62#13,62#19,!1)},"sin_port"),class((,"%undef")),(62#13,62#28,!1)},{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"htons"),[int],[{"27015"N,int,(62#38,62#42,!1)}]),class((,"%undef")),(62#32,62#43,!1)}),class((,"%undef")),(62#13,62#43,!1)}
+               ,(62#13,62#43,!1)};
+               {IF0({BO(==,{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"connect"),[class((,SOCKET)),ref(mod(class((,sockaddr)),[struct])),int],[{V("connectSocket"),class((,SOCKET)),(63#25,63#37,!1)},{CS(ref(mod(class((,sockaddr)),[struct])),{&{V("service"),mod(class((,sockaddr_in)),[struct]),(63#59,63#65,!1)},ref(mod(class((,sockaddr_in)),[struct])),(63#58,63#65,!1)}),ref(mod(class((,sockaddr)),[struct])),(63#40,63#65,!1)},{SO({V("service"),mod(class((,sockaddr_in)),[struct]),(63#75,63#81,!1)}),int,(63#68,63#82,!1)}]),class((,"%undef")),(63#17,63#83,!1)},{V("SOCKET_ERROR"),class((,"%undef")),(63#88,63#99,!1)}),bool,(63#17,63#99,!1)},
+                  {[
+                     {BR @ 
+                     ,(65#17,65#22,!1)}
+                     ]
+                  ,(64#13,66#13,!1)})
+               ,(63#13,66#13,!1)};
+               {{AE({V("recvResult"),int,(70#13,70#22,!1)},{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"recv"),[class((,SOCKET)),ref(char),int,int],[{V("connectSocket"),class((,SOCKET)),(70#31,70#43,!1)},{CS(ref(char),{BO(+,{V("password"),ref(char),(70#54,70#61,!1)},{V("passwordLen"),class((,size_t)),(70#65,70#75,!1)}),char,(70#53,70#76,!1)}),ref(char),(70#46,70#76,!1)},{BO(*,{BO(-,{BO(-,{"100"N,int,(70#80,70#82,!1)},{V("passwordLen"),class((,size_t)),(70#86,70#96,!1)}),int,(70#80,70#96,!1)},{"1"N,int,(70#100,70#100,!1)}),int,(70#79,70#101,!1)},{SO(char),int,(70#105,70#116,!1)}),int,(70#80,70#116,!1)},{"0"N,int,(70#119,70#119,!1)}]),class((,"%undef")),(70#26,70#120,!1)}),int,(70#13,70#120,!1)}
+               ,(70#13,70#120,!1)};
+               {IF0({BO(||,{BO(==,{V("recvResult"),int,(71#17,71#26,!1)},{V("SOCKET_ERROR"),class((,"%undef")),(71#31,71#42,!1)}),bool,(71#17,71#42,!1)},{BO(==,{V("recvResult"),int,(71#47,71#56,!1)},{"0"N,int,(71#61,71#61,!1)}),bool,(71#47,71#61,!1)}),bool,(71#17,71#61,!1)},
+                  {[
+                     {BR @ 
+                     ,(73#17,73#22,!1)}
+                     ]
+                  ,(72#13,74#13,!1)})
+               ,(71#13,74#13,!1)};
+               {{AE({AA({V("password"),ref(char),(76#13,76#20,!1)},[{BO(+,{V("passwordLen"),class((,size_t)),(76#22,76#32,!1)},{BO(/,{V("recvResult"),int,(76#36,76#45,!1)},{SO(char),int,(76#49,76#60,!1)}),int,(76#36,76#60,!1)}),class((,size_t)),(76#22,76#60,!1)}]),char,(76#13,76#61,!1)},{"\0"C,char,(76#65,76#68,!1)}),char,(76#13,76#68,!1)}
+               ,(76#13,76#68,!1)};
+               {{AE({V("replace"),ref(char),(78#13,78#19,!1)},{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"strchr"),[ref(char),char],[{V("password"),ref(char),(78#30,78#37,!1)},{"\r"C,char,(78#40,78#43,!1)}]),class((,"%undef")),(78#23,78#44,!1)}),ref(char),(78#13,78#44,!1)}
+               ,(78#13,78#44,!1)};
+               {IF0({V("replace"),ref(char),(79#17,79#23,!1)},
+                  {[
+                     {{AE({*{V("replace"),ref(char),(81#18,81#24,!1)},char,(81#17,81#24,!1)},{"\0"C,char,(81#28,81#31,!1)}),char,(81#17,81#31,!1)}
+                     ,(81#17,81#31,!1)}
+                     ]
+                  ,(80#13,82#13,!1)})
+               ,(79#13,82#13,!1)};
+               {{AE({V("replace"),ref(char),(83#13,83#19,!1)},{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"strchr"),[ref(char),char],[{V("password"),ref(char),(83#30,83#37,!1)},{"\n"C,char,(83#40,83#43,!1)}]),class((,"%undef")),(83#23,83#44,!1)}),ref(char),(83#13,83#44,!1)}
+               ,(83#13,83#44,!1)};
+               {IF0({V("replace"),ref(char),(84#17,84#23,!1)},
+                  {[
+                     {{AE({*{V("replace"),ref(char),(86#18,86#24,!1)},char,(86#17,86#24,!1)},{"\0"C,char,(86#28,86#31,!1)}),char,(86#17,86#31,!1)}
+                     ,(86#17,86#31,!1)}
+                     ]
+                  ,(85#13,87#13,!1)})
+               ,(84#13,87#13,!1)}
+               ]
+            ,(48#9,88#9,!1)},
+            {"0"N,int,(89#16,89#16,!1)})
+         ,(47#9,89#18,!1)};
+         {IF0({BO(!=,{V("connectSocket"),class((,SOCKET)),(90#13,90#25,!1)},{V("INVALID_SOCKET"),class((,"%undef")),(90#30,90#43,!1)}),bool,(90#13,90#43,!1)},
+            {[
+               {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"closesocket"),[class((,SOCKET))],[{V("connectSocket"),class((,SOCKET)),(92#25,92#37,!1)}])
+               ,(92#13,92#38,!1)}
+               ]
+            ,(91#9,93#9,!1)})
+         ,(90#9,93#9,!1)};
+         {IF0({V("wsaDataInit"),int,(94#13,94#23,!1)},
+            {[
+               {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"WSACleanup"),[],[])
+               ,(96#13,96#24,!1)}
+               ]
+            ,(95#9,97#9,!1)})
+         ,(94#9,97#9,!1)}
+         ]
+      ,(39#5,98#5,!1)};
+      {[
+         {VD("pHandle",class((,HANDLE)))
+         ,(100#16,100#22,!1)};
+         {VD("username",ref(char),{"User"S,string,(101#27,101#32,!1)})
+         ,(101#14,101#23,!1)};
+         {VD("domain",ref(char),{"Domain"S,string,(102#25,102#32,!1)})
+         ,(102#14,102#21,!1)};
+         {IF({BO(!=,{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"LogonUserA"),[ref(char),ref(char),ref(char),class((,"%undef")),class((,"%undef")),ref(class((,HANDLE)))],[{V("username"),ref(char),(106#21,106#28,!1)},{V("domain"),ref(char),(107#21,107#26,!1)},{V("password"),ref(char),(108#21,108#28,!1)},{V("LOGON32_LOGON_NETWORK"),class((,"%undef")),(109#21,109#41,!1)},{V("LOGON32_PROVIDER_DEFAULT"),class((,"%undef")),(110#21,110#44,!1)},{&{V("pHandle"),class((,HANDLE)),(111#22,111#28,!1)},ref(class((,HANDLE))),(111#21,111#28,!1)}]),class((,"%undef")),(105#13,111#29,!1)},{"0"N,int,(111#34,111#34,!1)}),bool,(105#13,111#34,!1)},
+            {[
+               {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printLine"),[mod(ref(char),[const])],[{"User logged in successfully."S,string,(113#23,113#52,!1)}])
+               ,(113#13,113#53,!1)};
+               {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"CloseHandle"),[class((,HANDLE))],[{V("pHandle"),class((,HANDLE)),(114#25,114#31,!1)}])
+               ,(114#13,114#32,!1)}
+               ]
+            ,(112#9,115#9,!1)},
+            {[
+               {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printLine"),[mod(ref(char),[const])],[{"Unable to login."S,string,(118#23,118#40,!1)}])
+               ,(118#13,118#41,!1)}
+               ]
+            ,(117#9,119#9,!1)})
+         ,(105#9,119#9,!1)}
+         ]
+      ,(99#5,120#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(34#1,121#1,!1)}
+   )
+   ,(34#1,121#1,!1)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   FN([public,static],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"goodG2B"):mod(unit,[static]),[],[],
+   {[
+      {VD("password",ref(char))
+      ,(130#10,130#19,!1)};
+      {VD("passwordBuffer",char,([{"100"N,int,(131#25,131#27,!1)}],[{""S,string,(131#32,131#33,!1)}]))
+      ,(131#10,131#28,!1)};
+      {{AE({V("password"),ref(char),(132#5,132#12,!1)},{V("passwordBuffer"),arr(char),(132#16,132#29,!1)}),ref(char),(132#5,132#29,!1)}
+      ,(132#5,132#29,!1)};
+      {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"strcpy"),[ref(char),string],[{V("password"),ref(char),(135#12,135#19,!1)},{"Password1234!"S,string,(135#22,135#36,!1)}])
+      ,(135#5,135#37,!1)};
+      {[
+         {VD("pHandle",class((,HANDLE)))
+         ,(137#16,137#22,!1)};
+         {VD("username",ref(char),{"User"S,string,(138#27,138#32,!1)})
+         ,(138#14,138#23,!1)};
+         {VD("domain",ref(char),{"Domain"S,string,(139#25,139#32,!1)})
+         ,(139#14,139#21,!1)};
+         {IF({BO(!=,{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"LogonUserA"),[ref(char),ref(char),ref(char),class((,"%undef")),class((,"%undef")),ref(class((,HANDLE)))],[{V("username"),ref(char),(143#21,143#28,!1)},{V("domain"),ref(char),(144#21,144#26,!1)},{V("password"),ref(char),(145#21,145#28,!1)},{V("LOGON32_LOGON_NETWORK"),class((,"%undef")),(146#21,146#41,!1)},{V("LOGON32_PROVIDER_DEFAULT"),class((,"%undef")),(147#21,147#44,!1)},{&{V("pHandle"),class((,HANDLE)),(148#22,148#28,!1)},ref(class((,HANDLE))),(148#21,148#28,!1)}]),class((,"%undef")),(142#13,148#29,!1)},{"0"N,int,(148#34,148#34,!1)}),bool,(142#13,148#34,!1)},
+            {[
+               {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printLine"),[mod(ref(char),[const])],[{"User logged in successfully."S,string,(150#23,150#52,!1)}])
+               ,(150#13,150#53,!1)};
+               {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"CloseHandle"),[class((,HANDLE))],[{V("pHandle"),class((,HANDLE)),(151#25,151#31,!1)}])
+               ,(151#13,151#32,!1)}
+               ]
+            ,(149#9,152#9,!1)},
+            {[
+               {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printLine"),[mod(ref(char),[const])],[{"Unable to login."S,string,(155#23,155#40,!1)}])
+               ,(155#13,155#41,!1)}
+               ]
+            ,(154#9,156#9,!1)})
+         ,(142#9,156#9,!1)}
+         ]
+      ,(136#5,157#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(128#1,158#1,!1)}
+   )
+   ,(128#1,158#1,!1)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   FN([public,static],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"goodB2G"):mod(unit,[static]),[],[],
+   {[
+      {VD("password",ref(char))
+      ,(163#10,163#19,!1)};
+      {VD("passwordBuffer",char,([{"100"N,int,(164#25,164#27,!1)}],[{""S,string,(164#32,164#33,!1)}]))
+      ,(164#10,164#28,!1)};
+      {{AE({V("password"),ref(char),(165#5,165#12,!1)},{V("passwordBuffer"),arr(char),(165#16,165#29,!1)}),ref(char),(165#5,165#29,!1)}
+      ,(165#5,165#29,!1)};
+      {[
+         {VD("wsaData",class((,WSADATA)))
+         ,(167#17,167#23,!1)};
+         {VD("wsaDataInit",int,{"0"N,int,(168#27,168#27,!1)})
+         ,(168#13,168#23,!1)};
+         {VD("recvResult",int)
+         ,(169#13,169#22,!1)};
+         {VD("service",mod(class((,sockaddr_in)),[struct]))
+         ,(170#28,170#34,!1)};
+         {VD("replace",ref(char))
+         ,(171#14,171#21,!1)};
+         {VD("connectSocket",class((,SOCKET)),{V("INVALID_SOCKET"),class((,"%undef")),(172#32,172#45,!1)})
+         ,(172#16,172#28,!1)};
+         {VD("passwordLen",class((,size_t)),{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"strlen"),[ref(char)],[{V("password"),ref(char),(173#37,173#44,!1)}]),class((,"%undef")),(173#30,173#45,!1)})
+         ,(173#16,173#26,!1)};
+         {DW(L5,
+            {[
+               {IF0({BO(!=,{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"WSAStartup"),[class((,"%undef")),ref(class((,WSADATA)))],[{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"MAKEWORD"),[int,int],[{"2"N,int,(176#37,176#37,!1)},{"2"N,int,(176#39,176#39,!1)}]),class((,"%undef")),(176#28,176#40,!1)},{&{V("wsaData"),class((,WSADATA)),(176#44,176#50,!1)},ref(class((,WSADATA))),(176#43,176#50,!1)}]),class((,"%undef")),(176#17,176#51,!1)},{V("NO_ERROR"),class((,"%undef")),(176#56,176#63,!1)}),bool,(176#17,176#63,!1)},
+                  {[
+                     {BR @ 
+                     ,(178#17,178#22,!1)}
+                     ]
+                  ,(177#13,179#13,!1)})
+               ,(176#13,179#13,!1)};
+               {{AE({V("wsaDataInit"),int,(180#13,180#23,!1)},{"1"N,int,(180#27,180#27,!1)}),int,(180#13,180#27,!1)}
+               ,(180#13,180#27,!1)};
+               {{AE({V("connectSocket"),class((,SOCKET)),(181#13,181#25,!1)},{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"socket"),[class((,"%undef")),class((,"%undef")),class((,"%undef"))],[{V("AF_INET"),class((,"%undef")),(181#36,181#42,!1)},{V("SOCK_STREAM"),class((,"%undef")),(181#45,181#55,!1)},{V("IPPROTO_TCP"),class((,"%undef")),(181#58,181#68,!1)}]),class((,"%undef")),(181#29,181#69,!1)}),class((,SOCKET)),(181#13,181#69,!1)}
+               ,(181#13,181#69,!1)};
+               {IF0({BO(==,{V("connectSocket"),class((,SOCKET)),(182#17,182#29,!1)},{V("INVALID_SOCKET"),class((,"%undef")),(182#34,182#47,!1)}),bool,(182#17,182#47,!1)},
+                  {[
+                     {BR @ 
+                     ,(184#17,184#22,!1)}
+                     ]
+                  ,(183#13,185#13,!1)})
+               ,(182#13,185#13,!1)};
+               {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"memset"),[ref(mod(class((,sockaddr_in)),[struct])),int,int],[{&{V("service"),mod(class((,sockaddr_in)),[struct]),(186#21,186#27,!1)},ref(mod(class((,sockaddr_in)),[struct])),(186#20,186#27,!1)},{"0"N,int,(186#30,186#30,!1)},{SO({V("service"),mod(class((,sockaddr_in)),[struct]),(186#40,186#46,!1)}),int,(186#33,186#47,!1)}])
+               ,(186#13,186#48,!1)};
+               {{AE({OA({V("service"),mod(class((,sockaddr_in)),[struct]),(187#13,187#19,!1)},"sin_family"),class((,"%undef")),(187#13,187#30,!1)},{V("AF_INET"),class((,"%undef")),(187#34,187#40,!1)}),class((,"%undef")),(187#13,187#40,!1)}
+               ,(187#13,187#40,!1)};
+               {{AE({OA({OA({V("service"),mod(class((,sockaddr_in)),[struct]),(188#13,188#19,!1)},"sin_addr"),class((,"%undef")),(188#13,188#28,!1)},"s_addr"),class((,"%undef")),(188#13,188#35,!1)},{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"inet_addr"),[string],[{"127.0.0.1"S,string,(188#49,188#59,!1)}]),class((,"%undef")),(188#39,188#60,!1)}),class((,"%undef")),(188#13,188#60,!1)}
+               ,(188#13,188#60,!1)};
+               {{AE({OA({V("service"),mod(class((,sockaddr_in)),[struct]),(189#13,189#19,!1)},"sin_port"),class((,"%undef")),(189#13,189#28,!1)},{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"htons"),[int],[{"27015"N,int,(189#38,189#42,!1)}]),class((,"%undef")),(189#32,189#43,!1)}),class((,"%undef")),(189#13,189#43,!1)}
+               ,(189#13,189#43,!1)};
+               {IF0({BO(==,{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"connect"),[class((,SOCKET)),ref(mod(class((,sockaddr)),[struct])),int],[{V("connectSocket"),class((,SOCKET)),(190#25,190#37,!1)},{CS(ref(mod(class((,sockaddr)),[struct])),{&{V("service"),mod(class((,sockaddr_in)),[struct]),(190#59,190#65,!1)},ref(mod(class((,sockaddr_in)),[struct])),(190#58,190#65,!1)}),ref(mod(class((,sockaddr)),[struct])),(190#40,190#65,!1)},{SO({V("service"),mod(class((,sockaddr_in)),[struct]),(190#75,190#81,!1)}),int,(190#68,190#82,!1)}]),class((,"%undef")),(190#17,190#83,!1)},{V("SOCKET_ERROR"),class((,"%undef")),(190#88,190#99,!1)}),bool,(190#17,190#99,!1)},
+                  {[
+                     {BR @ 
+                     ,(192#17,192#22,!1)}
+                     ]
+                  ,(191#13,193#13,!1)})
+               ,(190#13,193#13,!1)};
+               {{AE({V("recvResult"),int,(197#13,197#22,!1)},{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"recv"),[class((,SOCKET)),ref(char),int,int],[{V("connectSocket"),class((,SOCKET)),(197#31,197#43,!1)},{CS(ref(char),{BO(+,{V("password"),ref(char),(197#54,197#61,!1)},{V("passwordLen"),class((,size_t)),(197#65,197#75,!1)}),char,(197#53,197#76,!1)}),ref(char),(197#46,197#76,!1)},{BO(*,{BO(-,{BO(-,{"100"N,int,(197#80,197#82,!1)},{V("passwordLen"),class((,size_t)),(197#86,197#96,!1)}),int,(197#80,197#96,!1)},{"1"N,int,(197#100,197#100,!1)}),int,(197#79,197#101,!1)},{SO(char),int,(197#105,197#116,!1)}),int,(197#80,197#116,!1)},{"0"N,int,(197#119,197#119,!1)}]),class((,"%undef")),(197#26,197#120,!1)}),int,(197#13,197#120,!1)}
+               ,(197#13,197#120,!1)};
+               {IF0({BO(||,{BO(==,{V("recvResult"),int,(198#17,198#26,!1)},{V("SOCKET_ERROR"),class((,"%undef")),(198#31,198#42,!1)}),bool,(198#17,198#42,!1)},{BO(==,{V("recvResult"),int,(198#47,198#56,!1)},{"0"N,int,(198#61,198#61,!1)}),bool,(198#47,198#61,!1)}),bool,(198#17,198#61,!1)},
+                  {[
+                     {BR @ 
+                     ,(200#17,200#22,!1)}
+                     ]
+                  ,(199#13,201#13,!1)})
+               ,(198#13,201#13,!1)};
+               {{AE({AA({V("password"),ref(char),(203#13,203#20,!1)},[{BO(+,{V("passwordLen"),class((,size_t)),(203#22,203#32,!1)},{BO(/,{V("recvResult"),int,(203#36,203#45,!1)},{SO(char),int,(203#49,203#60,!1)}),int,(203#36,203#60,!1)}),class((,size_t)),(203#22,203#60,!1)}]),char,(203#13,203#61,!1)},{"\0"C,char,(203#65,203#68,!1)}),char,(203#13,203#68,!1)}
+               ,(203#13,203#68,!1)};
+               {{AE({V("replace"),ref(char),(205#13,205#19,!1)},{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"strchr"),[ref(char),char],[{V("password"),ref(char),(205#30,205#37,!1)},{"\r"C,char,(205#40,205#43,!1)}]),class((,"%undef")),(205#23,205#44,!1)}),ref(char),(205#13,205#44,!1)}
+               ,(205#13,205#44,!1)};
+               {IF0({V("replace"),ref(char),(206#17,206#23,!1)},
+                  {[
+                     {{AE({*{V("replace"),ref(char),(208#18,208#24,!1)},char,(208#17,208#24,!1)},{"\0"C,char,(208#28,208#31,!1)}),char,(208#17,208#31,!1)}
+                     ,(208#17,208#31,!1)}
+                     ]
+                  ,(207#13,209#13,!1)})
+               ,(206#13,209#13,!1)};
+               {{AE({V("replace"),ref(char),(210#13,210#19,!1)},{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"strchr"),[ref(char),char],[{V("password"),ref(char),(210#30,210#37,!1)},{"\n"C,char,(210#40,210#43,!1)}]),class((,"%undef")),(210#23,210#44,!1)}),ref(char),(210#13,210#44,!1)}
+               ,(210#13,210#44,!1)};
+               {IF0({V("replace"),ref(char),(211#17,211#23,!1)},
+                  {[
+                     {{AE({*{V("replace"),ref(char),(213#18,213#24,!1)},char,(213#17,213#24,!1)},{"\0"C,char,(213#28,213#31,!1)}),char,(213#17,213#31,!1)}
+                     ,(213#17,213#31,!1)}
+                     ]
+                  ,(212#13,214#13,!1)})
+               ,(211#13,214#13,!1)}
+               ]
+            ,(175#9,215#9,!1)},
+            {"0"N,int,(216#16,216#16,!1)})
+         ,(174#9,216#18,!1)};
+         {IF0({BO(!=,{V("connectSocket"),class((,SOCKET)),(217#13,217#25,!1)},{V("INVALID_SOCKET"),class((,"%undef")),(217#30,217#43,!1)}),bool,(217#13,217#43,!1)},
+            {[
+               {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"closesocket"),[class((,SOCKET))],[{V("connectSocket"),class((,SOCKET)),(219#25,219#37,!1)}])
+               ,(219#13,219#38,!1)}
+               ]
+            ,(218#9,220#9,!1)})
+         ,(217#9,220#9,!1)};
+         {IF0({V("wsaDataInit"),int,(221#13,221#23,!1)},
+            {[
+               {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"WSACleanup"),[],[])
+               ,(223#13,223#24,!1)}
+               ]
+            ,(222#9,224#9,!1)})
+         ,(221#9,224#9,!1)}
+         ]
+      ,(166#5,225#5,!1)};
+      {[
+         {VD("hCryptProv",class((,HCRYPTPROV)),{"0"N,int,(227#33,227#33,!1)})
+         ,(227#20,227#29,!1)};
+         {VD("hHash",class((,HCRYPTHASH)),{"0"N,int,(228#28,228#28,!1)})
+         ,(228#20,228#24,!1)};
+         {VD("hKey",class((,HCRYPTKEY)),{"0"N,int,(229#26,229#26,!1)})
+         ,(229#19,229#22,!1)};
+         {VD("hashData",char,([{"100"N,int,(230#23,230#25,!1)}],[{"ABCDEFG123456"S,string,(230#30,230#44,!1)}]))
+         ,(230#14,230#26,!1)};
+         {VD("pHandle",class((,HANDLE)))
+         ,(231#16,231#22,!1)};
+         {VD("username",ref(char),{"User"S,string,(232#27,232#32,!1)})
+         ,(232#14,232#23,!1)};
+         {VD("domain",ref(char),{"Domain"S,string,(233#25,233#32,!1)})
+         ,(233#14,233#21,!1)};
+         {DW(L6,
+            {[
+               {VD("payload",class((,BYTE)),([{BO(*,{BO(-,{"100"N,int,(236#27,236#29,!1)},{"1"N,int,(236#33,236#33,!1)}),int,(236#26,236#34,!1)},{SO(char),int,(236#38,236#49,!1)}),int,(236#27,236#49,!1)}]))
+               ,(236#18,236#50,!1)};
+               {VD("payloadBytes",class((,DWORD)))
+               ,(237#19,237#30,!1)};
+               {{AE({V("payloadBytes"),class((,DWORD)),(239#13,239#24,!1)},{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"decodeHexChars"),[arr(class((,BYTE))),int,ref(char)],[{V("payload"),arr(class((,BYTE))),(239#43,239#49,!1)},{SO({V("payload"),arr(class((,BYTE))),(239#59,239#65,!1)}),int,(239#52,239#66,!1)},{V("password"),ref(char),(239#69,239#76,!1)}]),class((,size_t)),(239#28,239#77,!1)}),class((,DWORD)),(239#13,239#77,!1)}
+               ,(239#13,239#77,!1)};
+               {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"SecureZeroMemory"),[ref(char),int],[{V("password"),ref(char),(242#30,242#37,!1)},{BO(*,{"100"N,int,(242#40,242#42,!1)},{SO(char),int,(242#46,242#57,!1)}),int,(242#40,242#57,!1)}])
+               ,(242#13,242#58,!1)};
+               {IF0({UO(!,{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"CryptAcquireContext"),[ref(class((,HCRYPTPROV))),ref(unit),class((,"%undef")),class((,"%undef")),int],[{&{V("hCryptProv"),class((,HCRYPTPROV)),(244#38,244#47,!1)},ref(class((,HCRYPTPROV))),(244#37,244#47,!1)},{CS(ref(unit),{"0"N,int,(244#50,244#53,!1)}),ref(unit),(244#50,244#53,!1)},{V("MS_ENH_RSA_AES_PROV"),class((,"%undef")),(244#56,244#74,!1)},{V("PROV_RSA_AES"),class((,"%undef")),(244#77,244#88,!1)},{"0"N,int,(244#91,244#91,!1)}]),class((,"%undef")),(244#17,244#92,!1)}),class((,"%undef")),(244#16,244#92,!1)},
+                  {[
+                     {BR @ 
+                     ,(246#17,246#22,!1)}
+                     ]
+                  ,(245#13,247#13,!1)})
+               ,(244#13,247#13,!1)};
+               {IF0({UO(!,{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"CryptCreateHash"),[class((,HCRYPTPROV)),class((,"%undef")),int,int,ref(class((,HCRYPTHASH)))],[{V("hCryptProv"),class((,HCRYPTPROV)),(249#33,249#42,!1)},{V("CALG_SHA_256"),class((,"%undef")),(249#45,249#56,!1)},{"0"N,int,(249#59,249#59,!1)},{"0"N,int,(249#62,249#62,!1)},{&{V("hHash"),class((,HCRYPTHASH)),(249#66,249#70,!1)},ref(class((,HCRYPTHASH))),(249#65,249#70,!1)}]),class((,"%undef")),(249#17,249#71,!1)}),class((,"%undef")),(249#16,249#71,!1)},
+                  {[
+                     {BR @ 
+                     ,(251#17,251#22,!1)}
+                     ]
+                  ,(250#13,252#13,!1)})
+               ,(249#13,252#13,!1)};
+               {IF0({UO(!,{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"CryptHashData"),[class((,HCRYPTHASH)),ref(class((,BYTE))),class((,"%undef")),int],[{V("hHash"),class((,HCRYPTHASH)),(254#31,254#35,!1)},{CS(ref(class((,BYTE))),{V("hashData"),arr(char),(254#45,254#52,!1)}),ref(class((,BYTE))),(254#38,254#52,!1)},{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"strlen"),[arr(char)],[{V("hashData"),arr(char),(254#62,254#69,!1)}]),class((,"%undef")),(254#55,254#70,!1)},{"0"N,int,(254#73,254#73,!1)}]),class((,"%undef")),(254#17,254#74,!1)}),class((,"%undef")),(254#16,254#74,!1)},
+                  {[
+                     {BR @ 
+                     ,(256#17,256#22,!1)}
+                     ]
+                  ,(255#13,257#13,!1)})
+               ,(254#13,257#13,!1)};
+               {IF0({UO(!,{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"CryptDeriveKey"),[class((,HCRYPTPROV)),class((,"%undef")),class((,HCRYPTHASH)),int,ref(class((,HCRYPTKEY)))],[{V("hCryptProv"),class((,HCRYPTPROV)),(259#32,259#41,!1)},{V("CALG_AES_256"),class((,"%undef")),(259#44,259#55,!1)},{V("hHash"),class((,HCRYPTHASH)),(259#58,259#62,!1)},{"0"N,int,(259#65,259#65,!1)},{&{V("hKey"),class((,HCRYPTKEY)),(259#69,259#72,!1)},ref(class((,HCRYPTKEY))),(259#68,259#72,!1)}]),class((,"%undef")),(259#17,259#73,!1)}),class((,"%undef")),(259#16,259#73,!1)},
+                  {[
+                     {BR @ 
+                     ,(261#17,261#22,!1)}
+                     ]
+                  ,(260#13,262#13,!1)})
+               ,(259#13,262#13,!1)};
+               {IF0({UO(!,{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"CryptDecrypt"),[class((,HCRYPTKEY)),int,int,int,arr(class((,BYTE))),ref(class((,DWORD)))],[{V("hKey"),class((,HCRYPTKEY)),(264#30,264#33,!1)},{"0"N,int,(264#36,264#36,!1)},{"1"N,int,(264#39,264#39,!1)},{"0"N,int,(264#42,264#42,!1)},{V("payload"),arr(class((,BYTE))),(264#45,264#51,!1)},{&{V("payloadBytes"),class((,DWORD)),(264#55,264#66,!1)},ref(class((,DWORD))),(264#54,264#66,!1)}]),class((,"%undef")),(264#17,264#67,!1)}),class((,"%undef")),(264#16,264#67,!1)},
+                  {[
+                     {BR @ 
+                     ,(266#17,266#22,!1)}
+                     ]
+                  ,(265#13,267#13,!1)})
+               ,(264#13,267#13,!1)};
+               {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"memcpy"),[ref(char),arr(class((,BYTE))),class((,DWORD))],[{V("password"),ref(char),(269#20,269#27,!1)},{V("payload"),arr(class((,BYTE))),(269#30,269#36,!1)},{V("payloadBytes"),class((,DWORD)),(269#39,269#50,!1)}])
+               ,(269#13,269#51,!1)};
+               {{AE({AA({V("password"),ref(char),(270#13,270#20,!1)},[{BO(/,{V("payloadBytes"),class((,DWORD)),(270#22,270#33,!1)},{SO(char),int,(270#37,270#48,!1)}),class((,DWORD)),(270#22,270#48,!1)}]),char,(270#13,270#49,!1)},{"\0"C,char,(270#53,270#56,!1)}),char,(270#13,270#56,!1)}
+               ,(270#13,270#56,!1)}
+               ]
+            ,(235#9,271#9,!1)},
+            {"0"N,int,(272#16,272#16,!1)})
+         ,(234#9,272#18,!1)};
+         {IF0({V("hKey"),class((,HCRYPTKEY)),(273#13,273#16,!1)},
+            {[
+               {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"CryptDestroyKey"),[class((,HCRYPTKEY))],[{V("hKey"),class((,HCRYPTKEY)),(275#29,275#32,!1)}])
+               ,(275#13,275#33,!1)}
+               ]
+            ,(274#9,276#9,!1)})
+         ,(273#9,276#9,!1)};
+         {IF0({V("hHash"),class((,HCRYPTHASH)),(277#13,277#17,!1)},
+            {[
+               {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"CryptDestroyHash"),[class((,HCRYPTHASH))],[{V("hHash"),class((,HCRYPTHASH)),(279#30,279#34,!1)}])
+               ,(279#13,279#35,!1)}
+               ]
+            ,(278#9,280#9,!1)})
+         ,(277#9,280#9,!1)};
+         {IF0({V("hCryptProv"),class((,HCRYPTPROV)),(281#13,281#22,!1)},
+            {[
+               {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"CryptReleaseContext"),[class((,HCRYPTPROV)),int],[{V("hCryptProv"),class((,HCRYPTPROV)),(283#33,283#42,!1)},{"0"N,int,(283#45,283#45,!1)}])
+               ,(283#13,283#46,!1)}
+               ]
+            ,(282#9,284#9,!1)})
+         ,(281#9,284#9,!1)};
+         {IF({BO(!=,{SC((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"LogonUserA"),[ref(char),ref(char),ref(char),class((,"%undef")),class((,"%undef")),ref(class((,HANDLE)))],[{V("username"),ref(char),(287#21,287#28,!1)},{V("domain"),ref(char),(288#21,288#26,!1)},{V("password"),ref(char),(289#21,289#28,!1)},{V("LOGON32_LOGON_NETWORK"),class((,"%undef")),(290#21,290#41,!1)},{V("LOGON32_PROVIDER_DEFAULT"),class((,"%undef")),(291#21,291#44,!1)},{&{V("pHandle"),class((,HANDLE)),(292#22,292#28,!1)},ref(class((,HANDLE))),(292#21,292#28,!1)}]),class((,"%undef")),(286#13,292#29,!1)},{"0"N,int,(292#34,292#34,!1)}),bool,(286#13,292#34,!1)},
+            {[
+               {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printLine"),[mod(ref(char),[const])],[{"User logged in successfully."S,string,(294#23,294#52,!1)}])
+               ,(294#13,294#53,!1)};
+               {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"CloseHandle"),[class((,HANDLE))],[{V("pHandle"),class((,HANDLE)),(295#25,295#31,!1)}])
+               ,(295#13,295#32,!1)}
+               ]
+            ,(293#9,296#9,!1)},
+            {[
+               {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"printLine"),[mod(ref(char),[const])],[{"Unable to login."S,string,(299#23,299#40,!1)}])
+               ,(299#13,299#41,!1)}
+               ]
+            ,(298#9,300#9,!1)})
+         ,(286#9,300#9,!1)}
+         ]
+      ,(226#5,301#5,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(161#1,302#1,!1)}
+   )
+   ,(161#1,302#1,!1)},
+
+   {"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01",
+   FN([public],(<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01_good"):unit,[],[],
+   {[
+      {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"goodG2B"),[],[])
+      ,(306#5,306#13,!1)};
+      {PC0((<"CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01">,"goodB2G"),[],[])
+      ,(307#5,307#13,!1)};
+      {RE0
+      ,(?)}
+      ]
+   ,(304#1,308#1,!1)}
+   )
+   ,(304#1,308#1,!1)},
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp",
+   CL([struct],(,_twoIntsStruct),[])
+   {
+      ([public],"intOne":int,(92#9,92#14,!2));
+      ([public],"intTwo":int,(93#9,93#14,!2))
+   }
+   ,(90#1,94#16,!2)}
+
+,
+
+
+   {"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp",
+   [
+      M("/* \n\n\n\n*/",1,(1#0,1#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*\n * \n * \n * \n * \n * \n * \n * \n * \n *\n * */",6,(6#0,6#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/* include ws2_32.lib when linking */",23,(23#0,23#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",30,(30#0,30#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/* \n              */",67,(67#0,67#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",69,(69#0,69#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",75,(75#0,75#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",77,(77#0,77#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",103,(103#0,103#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",104,(104#0,104#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/* OMITBAD */",123,(123#0,123#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",127,(127#0,127#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/* \n     */",133,(133#0,133#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",140,(140#0,140#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",141,(141#0,141#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",160,(160#0,160#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/* \n             *  */",194,(194#0,194#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",196,(196#0,196#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",202,(202#0,202#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",204,(204#0,204#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",236,(236#0,236#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",238,(238#0,238#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/* \n              */",240,(240#0,240#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",243,(243#0,243#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",248,(248#0,248#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",253,(253#0,253#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",258,(258#0,258#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",263,(263#0,263#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",268,(268#0,268#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",285,(285#0,285#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/* OMITGOOD */",310,(310#0,310#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/* \n   \n   \n    */",312,(312#0,312#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/*  */",321,(321#0,321#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/* OMITGOOD */",327,(327#0,327#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp")),
+      M("/* OMITBAD */",332,(332#0,332#0,"C:/Users/S&SSLAWKS/Desktop/Project/beSOURCE-CPP/src/20200719142400/19.Plaintext_Tx_Sensitive_Info/CWE319_Cleartext_Tx_Sensitive_Info__w32_char_connect_socket_01.cpp"))
+   ]
+   }
+]
