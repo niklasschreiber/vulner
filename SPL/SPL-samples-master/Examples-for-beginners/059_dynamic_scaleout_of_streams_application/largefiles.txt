@@ -1,1 +1,0 @@
-"D:\_SRC\SPL\SPL-samples-master\Examples-for-beginners\059_dynamic_scaleout_of_streams_application\README.md" 

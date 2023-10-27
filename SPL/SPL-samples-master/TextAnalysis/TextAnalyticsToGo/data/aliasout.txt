@@ -1,4 +1,0 @@
-[{normalizedName="Lionel Messi",aliases=["Messi"]}]
-[{normalizedName="Lionel Messi",aliases=["Lionel Messi"]}]
-[{normalizedName="Lionel Messi",aliases=["Lionel"]}]
-[{normalizedName="Lionel Messi",aliases=["Lionel Messi","Messi"]}]

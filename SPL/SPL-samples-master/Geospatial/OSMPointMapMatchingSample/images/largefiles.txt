@@ -1,1 +1,0 @@
-"D:\_SRC\SPL\SPL-samples-master\Geospatial\OSMPointMapMatchingSample\images\pe-host.png" 

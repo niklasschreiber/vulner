@@ -1,5 +1,0 @@
-namespace com.ti.oss.common.cdr.checkPduType;
-
-use com.ti.oss.common.types::*;
-
-type PduType = FileHeader, tuple<rstring pduType>;

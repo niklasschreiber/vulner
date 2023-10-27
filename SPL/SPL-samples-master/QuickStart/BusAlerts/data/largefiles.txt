@@ -1,1 +1,0 @@
-"D:\_SRC\SPL\SPL-samples-master\QuickStart\BusAlerts\data\saved_BusLocations.txt" 
